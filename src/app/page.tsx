@@ -5,9 +5,7 @@ import { ChevronRight } from "lucide-react";
 import KalkulatorPenghematan from "./components/calculator/calculator";
 import Product from "./components/products/product";
 
-type Props = {};
-
-export default function Page({}: Props) {
+export default function Page() {
   return (
     <div>
       <Navbar />

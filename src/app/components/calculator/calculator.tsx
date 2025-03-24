@@ -887,6 +887,7 @@ export default function KalkulatorPenghematan() {
         ]
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jarak, duaBaterai, getJarakTerdekat]);
 
   // Format angka dengan titik sebagai pemisah ribuan
@@ -1184,7 +1185,7 @@ export default function KalkulatorPenghematan() {
               </div>
 
               {/* Matic 110cc, 125cc, 150cc */}
-              {["matic110", "matic125", "matic150"].map((matic) => (
+              {(["matic110", "matic125", "matic150"] as const).map((matic) => (
                 <div
                   key={matic}
                   className="col-span-1 bg-gray-50 rounded-lg px-2 sm:px-4"

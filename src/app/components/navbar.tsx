@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronRight, MenuIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type Props = {};
 
 export default function Navbar({}: Props) {
@@ -42,7 +42,6 @@ export default function Navbar({}: Props) {
         <div className=" min-sm:hidden">
           <MenuIcon />
         </div>
-        <Button>EKI FIKRIL</Button>
       </div>
     </div>
   );
