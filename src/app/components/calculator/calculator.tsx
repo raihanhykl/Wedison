@@ -15,8 +15,11 @@ import {
 } from "lucide-react";
 import { cn } from "@/app/lib/utils";
 import Image from "next/image";
+// import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/app/lib/language-context";
 
 export default function KalkulatorPenghematan() {
+  const { t } = useLanguage();
   const [jarak, setJarak] = useState(10);
   const [duaBaterai, setDuaBaterai] = useState(false);
   const dataBaterai = {
@@ -932,38 +935,62 @@ export default function KalkulatorPenghematan() {
   }, [handleScroll]);
 
   return (
-    <div className=" bg-gray-50 w-full border-b-[1px] border-black">
-      <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+    <div className=" bg-gray-50 w-full">
+      <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+        {/* <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8"> */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 lg:mb-10">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 lg:mb-0">
+          {/* <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 lg:mb-0">
             Kalkulator Penghematan
-          </h1>
-          <div className="flex items-center space-x-2">
-            <Label
-              htmlFor="mode-baterai"
-              className={duaBaterai ? "text-gray-500" : "font-medium"}
-            >
-              1 Baterai
-            </Label>
-            <Switch
-              id="mode-baterai"
-              checked={duaBaterai}
-              onCheckedChange={setDuaBaterai}
-              className="data-[state=checked]:bg-[#05AB6D]"
-            />
-            <Label
-              htmlFor="mode-baterai"
-              className={duaBaterai ? "font-medium" : "text-gray-500"}
-            >
-              2 Baterai
-            </Label>
+          </h1> */}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 md:mb-16">
+              <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+                <span className="text-sm font-medium">
+                  {t("calculator.page.tag")}
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+                {t("calculator.page.title")}
+                <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+                  {t("calculator.page.titleHighlight")}
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                </span>
+              </h2>
+
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                {t("calculator.page.description")}
+              </p>
+            </div>
           </div>
+
+          {/* batas */}
+        </div>
+        <div className=" flex items-center justify-end pb-8 space-x-2">
+          <Label
+            htmlFor="mode-baterai"
+            className={duaBaterai ? "text-gray-500" : "font-medium"}
+          >
+            1 {t("calculator.page.battery")}
+          </Label>
+          <Switch
+            id="mode-baterai"
+            checked={duaBaterai}
+            onCheckedChange={setDuaBaterai}
+            className="data-[state=checked]:bg-[var(--primary)]"
+          />
+          <Label
+            htmlFor="mode-baterai"
+            className={duaBaterai ? "font-medium" : "text-gray-500"}
+          >
+            2 {t("calculator.page.battery")}
+          </Label>
         </div>
 
         {/* Container untuk card yang bisa di-scroll pada mobile dan tablet */}
         <div className="lg:hidden">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
-            Pengeluaran Bulanan
+            {t("calculator.page.monthlyTitle")}{" "}
           </h2>
 
           <div className="relative">
@@ -981,14 +1008,16 @@ export default function KalkulatorPenghematan() {
                     <Card
                       className={cn(
                         "p-6",
-                        vehicle === "Wedison" ? "bg-[#05AB6D]/10" : "bg-white"
+                        // vehicle === "Wedison" ? "bg-[#05AB6D]/10" : "bg-white"
+                        vehicle === "Wedison" ? "bg-teal-200" : "bg-white"
                       )}
                     >
                       <h3
                         className={cn(
                           "font-bold text-xl",
                           vehicle === "Wedison"
-                            ? "text-[#05AB6D]"
+                            ? // ? "text-[#05AB6D]"
+                              "text-teal-600"
                             : "text-gray-800 mb-7"
                         )}
                       >
@@ -1005,27 +1034,33 @@ export default function KalkulatorPenghematan() {
                       </h3>
                       <div className="space-y-6">
                         <div>
-                          <p className="text-gray-600 mb-1">Electricity cost</p>
+                          <p className="text-gray-600 mb-1">
+                            {t("calculator.page.monthlyElectricityCost")}
+                          </p>
                           <p className="text-2xl font-semibold">
                             {formatAngka(dataSaatIni[vehicle].listrik)}
                           </p>
                         </div>
                         <div>
                           <p className="text-gray-600 mb-1">
-                            Maintenance cost*
+                            {t("calculator.page.monthlyMaintenanceCost")}*{" "}
                           </p>
                           <p className="text-2xl font-semibold">
                             {formatAngka(dataSaatIni[vehicle].perawatan)}
                           </p>
                         </div>
                         <div>
-                          <p className="text-gray-600 mb-1">Fuel cost**</p>
+                          <p className="text-gray-600 mb-1">
+                            {t("calculator.page.monthlyFuelCost")}**
+                          </p>
                           <p className="text-2xl font-semibold">
                             {formatAngka(dataSaatIni[vehicle].bahan_bakar)}
                           </p>
                         </div>
                         <div className="pt-4 border-t">
-                          <p className="text-gray-600 mb-1">Total expenses</p>
+                          <p className="text-gray-600 mb-1">
+                            {t("calculator.page.monthlyTotalExpenses")}
+                          </p>
                           <p className="text-2xl font-bold">
                             Rp {formatAngka(dataSaatIni[vehicle].total)}
                           </p>
@@ -1065,7 +1100,7 @@ export default function KalkulatorPenghematan() {
                   onClick={() => scrollToCard(index)}
                   className={cn(
                     "h-2 w-2 rounded-full transition-all",
-                    activeCard === index ? "bg-[#05AB6D] w-4" : "bg-gray-300"
+                    activeCard === index ? "bg-teal-500 w-4" : "bg-gray-300"
                   )}
                 />
               ))}
@@ -1075,7 +1110,7 @@ export default function KalkulatorPenghematan() {
           {/* Bagian penghematan untuk mobile */}
           <div className="mt-8">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">
-              Penghematan dengan Wedison
+              {t("calculator.page.savingTitle")}{" "}
             </h2>
             <div className="space-y-4">
               {(["matic110", "matic125", "matic150"] as const).map(
@@ -1089,15 +1124,15 @@ export default function KalkulatorPenghematan() {
                         : "vs Matic 150cc"}
                     </p>
                     <div className="space-y-2">
-                      <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
+                      <div className="bg-teal-500 text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
                         <p className="text-sm md:text-lg font-semibold">
-                          Monthly: Rp{" "}
+                          {t("calculator.page.savingMonthlySavings")}: Rp{" "}
                           {formatAngka(dataSaatIni.penghematan.bulanan[matic])}
                         </p>
                       </div>
-                      <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
+                      <div className="bg-teal-500 text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
                         <p className="text-sm md:text-lg font-semibold">
-                          Yearly: Rp{" "}
+                          {t("calculator.page.savingAnnualSavings")}: Rp{" "}
                           {formatAngka(dataSaatIni.penghematan.tahunan[matic])}
                         </p>
                       </div>
@@ -1109,48 +1144,51 @@ export default function KalkulatorPenghematan() {
           </div>
         </div>
 
-        {/* Tampilan desktop tetap sama seperti sebelumnya */}
+        {/* Tampilan desktop */}
         <div className="hidden lg:block">
           {/* Bagian pengeluaran bulanan */}
           <Card className="mb-6 sm:mb-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl overflow-x-auto">
             <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">
-              Pengeluaran Bulanan
+              {t("calculator.page.monthlyTitle")}
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 min-w-[600px]">
               {/* Label kolom */}
               <div className="col-span-1">
                 <div className="h-14 flex items-center">
-                  <h3 className="font-semibold text-gray-800">Jenis Biaya</h3>
+                  <h3 className="font-semibold text-gray-800">
+                    {t("calculator.page.monthlyCostType")}
+                  </h3>
                 </div>
                 <div className="h-12 flex items-center">
                   <p className="text-gray-600 flex items-center text-sm sm:text-base">
                     <BatteryCharging className="mr-2" size={16} />
-                    Biaya Listrik
+                    {t("calculator.page.monthlyElectricityCost")}
                   </p>
                 </div>
                 <div className="h-12 flex items-center">
                   <p className="text-gray-600 flex items-center text-sm sm:text-base">
                     <Bike className="mr-2 " size={16} />
-                    Biaya Perawatan
+                    {t("calculator.page.monthlyMaintenanceCost")}
                   </p>
                 </div>
                 <div className="h-12 flex items-center">
                   <p className="text-gray-600 flex items-center text-sm sm:text-base">
                     <DollarSign className="mr-2 " size={16} />
-                    Biaya Bahan Bakar
+                    {t("calculator.page.monthlyFuelCost")}
                   </p>
                 </div>
                 <div className="h-12 flex items-center border-t border-gray-200 mt-2 pt-2">
                   <p className="font-medium text-gray-800 flex items-center text-sm sm:text-base">
                     <Battery className="mr-2 " size={16} />
-                    Total Pengeluaran
+                    {t("calculator.page.monthlyTotalExpenses")}
                   </p>
                 </div>
               </div>
 
               {/* Wedison */}
-              <div className="col-span-1 bg-[#05AB6D]/10 rounded-lg px-2 sm:px-4">
+              {/* <div className="col-span-1 bg-[#05AB6D]/10 rounded-lg px-2 sm:px-4"> */}
+              <div className="col-span-1 bg-[var(--primary-light)]/20 rounded-lg px-2 sm:px-4">
                 <div className="h-14 flex items-center">
                   {/* <h3 className="font-bold text-[#05AB6D] text-sm sm:text-base">
                     Wedison
@@ -1221,19 +1259,19 @@ export default function KalkulatorPenghematan() {
           </Card>
 
           {/* Bagian penghematan */}
-          <Card className="mb-6 sm:mb-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl overflow-x-auto">
+          <Card className="mb-6 sm:mb-10 p-4 sm:p-6 bg-white shadow-lg border-teal-500 rounded-xl overflow-x-auto">
             <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">
-              Penghematan dengan Wedison
+              {t("calculator.page.savingTitle")}
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 min-w-[600px]">
               {/* Label penghematan */}
               <div className="space-y-4 sm:space-y-12">
                 <p className="text-gray-600 text-sm sm:text-base">
-                  Penghematan Bulanan
+                  {t("calculator.page.savingMonthlySavings")}
                 </p>
                 <p className="text-gray-600 text-sm sm:text-base">
-                  Penghematan Tahunan
+                  {t("calculator.page.savingAnnualSavings")}
                 </p>
               </div>
 
@@ -1250,7 +1288,9 @@ export default function KalkulatorPenghematan() {
               {/* Penghematan untuk matic 110cc, 125cc, 150cc */}
               {["matic110", "matic125", "matic150"].map((matic) => (
                 <div key={matic} className="space-y-4">
-                  <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-2 sm:px-4 text-center">
+                  <div className="bg-teal-500 text-white rounded-lg py-3 px-2 sm:px-4 text-center">
+                    {/* <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-2 sm:px-4 text-center"> */}
+
                     <p className="font-medium text-sm sm:text-base">
                       Rp{" "}
                       {formatAngka(
@@ -1260,7 +1300,8 @@ export default function KalkulatorPenghematan() {
                       )}
                     </p>
                   </div>
-                  <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-2 sm:px-4 text-center">
+                  <div className="bg-teal-500 text-white rounded-lg py-3 px-2 sm:px-4 text-center">
+                    {/* <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-2 sm:px-4 text-center"> */}
                     <p className="font-medium text-sm sm:text-base">
                       Rp{" "}
                       {formatAngka(
@@ -1279,7 +1320,8 @@ export default function KalkulatorPenghematan() {
         {/* Bagian slider */}
         <Card className="mt-8 p-6 bg-white shadow-lg rounded-xl">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-            <p className="text-gray-600 mb-2 sm:mb-0">Jarak harian Anda</p>
+            {t("calculator.page.distance")}
+            <p className="text-gray-600 mb-2 sm:mb-0"></p>
             <p className="font-medium text-gray-800">{jarakTerdekat} km</p>
           </div>
           <div className="px-2 sm:px-4">
@@ -1300,22 +1342,16 @@ export default function KalkulatorPenghematan() {
 
         {/* Catatan kaki */}
         <div className="text-xs text-gray-500 mt-6">
-          <p>
-            *Biaya perawatan termasuk servis rutin, tidak termasuk penggantian
-            ban depan dan belakang
-          </p>
-          <p>
-            **Biaya bahan bakar (BBM) Pertalite berdasarkan harga per Desember
-            2024
-          </p>
+          <p>{t("calculator.page.tnc1")}</p>
+          <p>{t("calculator.page.tnc2")}</p>
         </div>
 
         {/* Tombol CTA */}
-        <div className="flex justify-center mt-8">
-          <button className="bg-[#05AB6D] hover:bg-[#048f5b] text-white font-medium py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
-            Buktikan Sendiri
-          </button>
-        </div>
+        {/* <div className="flex justify-center mt-8">
+          <Button className=" text-white font-medium py-6 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+            {t("calculator.page.cta")}
+          </Button>
+        </div> */}
       </div>
     </div>
   );
