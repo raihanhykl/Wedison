@@ -18,6 +18,10 @@ type LanguageContextType = {
 
 const translations = {
   en: {
+    //SEO Landing
+    "landing.title": "Wedison - The Future of Electric Mobility",
+    "landing.description":
+      "Wedison is an eco-friendly electric motorcycle brand with the latest Super Charge technology.",
     // Navbar
     "nav.products": "Products",
     "nav.experienceCenter": "Experience Center",
@@ -241,6 +245,10 @@ const translations = {
     "calculator.page.cta": "Prove Yourself",
 
     //edmax
+    "edmax.title": "Edmax – Powerful & Smart Electric Motorcycle from Wedison",
+    "edmax.description":
+      "Edmax is Wedison's flagship electric motorcycle with 86km/h top speed, advanced headunit (CarPlay & Android Auto), and Super Charge support.",
+
     "edmax.hero.tag": "Flagship Model",
     "edmax.hero.title": "Ride the Future with",
     "edmax.hero.titleHighlight": "EdPower",
@@ -249,16 +257,19 @@ const translations = {
     "edmax.hero.orderNow": "Order Now",
     "edmax.hero.downloadBrochure": "Download Brochure",
 
-    "edmax.feature1.title": "Go Farther. Fear Less.",
-    "edmax.feature1.subtitle": "Long Range up to 120km",
+    "edmax.feature1.tag": "Smart Display",
+    "edmax.feature1.title": "Smart Connectivity at Your Fingertips",
+    "edmax.feature1.subtitle":
+      "Wireless Apple CarPlay & Android Auto, Full Touchscreen Display",
     "edmax.feature1.description":
-      "Commute, explore, or cruise through the city – one full charge takes you further than ever before.",
+      "Connect without the hassle. Access navigation, music and communications directly from the full-color touchscreen with wireless Apple CarPlay and Android Auto support.",
     "edmax.feature1.range": "Range",
     "edmax.feature1.efficient": "Efficient",
     "edmax.feature1.energyUse": "Energy Use",
     "edmax.feature1.realtime": "Real-time",
     "edmax.feature1.rangeIndicator": "Range Indicator",
 
+    "edmax.feature2.tag": "Super Charge",
     "edmax.feature2.title": "Power Up in Minutes",
     "edmax.feature2.subtitle": "Super Charge Technology",
     "edmax.feature2.description":
@@ -296,6 +307,10 @@ const translations = {
     "edmax.specs.suspension": "Suspension",
 
     // Dash Page
+    "dash.title": "Dash – Electric Delivery Bike with Flexible Cargo Mounting",
+    "dash.description":
+      "Dash is an electric motorcycle built for delivery. Equipped with rear cargo mount, front basket, and ideal for logistics, food delivery, and courier business.",
+
     "dash.hero.tag": "Delivery Bike",
     "dash.hero.title": "Maximum Efficiency for ",
     "dash.hero.titleHighlight": "Every Delivery",
@@ -422,6 +437,11 @@ const translations = {
     switchLanguage: "Bahasa Indonesia",
   },
   id: {
+    //SEO Landing
+    "landing.title": "Wedison - Masa Depan Mobilitas Listrik",
+    "landing.description":
+      "Wedison adalah brand motor listrik yang ramah lingkungan dengan teknologi Super Charge terkini.",
+
     // Navbar
     "nav.products": "Produk",
     "nav.experienceCenter": "Pusat Pengalaman",
@@ -650,6 +670,10 @@ const translations = {
     "calculator.page.cta": "Buktikan Sendiri",
 
     //edmax
+    "edmax.title": "Edmax – Motor Listrik Canggih dan Bertenaga dari Wedison",
+    "edmax.description":
+      "Edmax adalah motor listrik flagship dari Wedison dengan top speed 86km/jam, headunit canggih (CarPlay & Android Auto), dan mendukung Super Charge.",
+
     "edmax.hero.tag": "Model Unggulan",
     "edmax.hero.title": "Melaju ke Masa Depan dengan",
     "edmax.hero.titleHighlight": "EdPower",
@@ -658,16 +682,19 @@ const translations = {
     "edmax.hero.orderNow": "Pesan Sekarang",
     "edmax.hero.downloadBrochure": "Unduh Brosur",
 
-    "edmax.feature1.title": "Jelajahi Lebih Jauh. Tanpa Rasa Takut.",
-    "edmax.feature1.subtitle": "Jarak Tempuh hingga 120km",
+    "edmax.feature1.tag": "Smart Display",
+    "edmax.feature1.title": "Konektivitas Cerdas di Ujung Jari Anda",
+    "edmax.feature1.subtitle":
+      "Wireless Apple CarPlay & Android Auto, Full Layar Touch Screen",
     "edmax.feature1.description":
-      "Perjalanan ke kantor, jelajahi, atau berkeliling kota – satu kali pengisian penuh membawa Anda lebih jauh dari sebelumnya.",
+      "Terhubung tanpa repot. Akses navigasi, musik, dan komunikasi langsung dari layar sentuh penuh warna dengan dukungan Apple CarPlay dan Android Auto nirkabel.",
     "edmax.feature1.range": "Jarak Tempuh",
     "edmax.feature1.efficient": "Efisien",
     "edmax.feature1.energyUse": "Penggunaan Energi",
     "edmax.feature1.realtime": "Waktu Nyata",
     "edmax.feature1.rangeIndicator": "Indikator Jarak",
 
+    "edmax.feature2.tag": "Pengisian Super Cepat",
     "edmax.feature2.title": "Isi Daya dalam Hitungan Menit",
     "edmax.feature2.subtitle": "Teknologi Pengisian Super Cepat",
     "edmax.feature2.description":
@@ -705,6 +732,11 @@ const translations = {
     "edmax.specs.suspension": "Suspensi",
 
     //dash
+    "dash.title":
+      "Dash – Motor Listrik Pengiriman dengan Rak & Ruang Kargo Fleksibel",
+    "dash.description":
+      "Dash adalah motor listrik yang dirancang untuk pengiriman. Dilengkapi dudukan box belakang, keranjang depan, dan cocok untuk usaha logistik, makanan, hingga kurir",
+
     "dash.hero.tag": "Motor Delivery",
     "dash.hero.title": "Efisiensi Maksimal untuk",
     "dash.hero.titleHighlight": "Setiap Pengantaran",
@@ -836,7 +868,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>("id");
 
   // Load language preference from localStorage on initial render
   useEffect(() => {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { ProductColor } from "../products/edmax/components/product-pick";
+import { ProductColor } from "../edmax/components/product-pick";
 
 type Props = {
   name: string;
@@ -19,7 +19,7 @@ export default function ColorPicker({ name, product, descColor }: Props) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative h-[300px] sm:h-[400px] md:h-[450px] w-full max-w-3xl mx-auto mb-8 rounded-xl overflow-hidden shadow-soft-lg">
+      <div className=" relative h-[300px] sm:h-[400px] md:h-[450px] w-full max-w-3xl mx-auto mb-8 rounded-xl overflow-hidden shadow-soft-lg">
         {/* <img
           src="/placeholder.svg?height=450&width=800"
           alt={`Edmax in ${selectedColor.name}`}
@@ -29,9 +29,9 @@ export default function ColorPicker({ name, product, descColor }: Props) {
           src={`/${name}-${selectedColor?.name}.webp`}
           alt={`${name} in ${selectedColor?.name}`}
           // className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          className="w-full h-full object-cover object-[20%_70%]"
-          height={450}
-          width={800}
+          className=" object-contain h-full object-[50%_50%] rounded-2xl"
+          height={1000}
+          width={1000}
         />
         <div
         //   className={`absolute inset-0 ${selectedColor.bgClass} opacity-10`}

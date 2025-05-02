@@ -5,6 +5,11 @@ import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropworn-menu";
 
 export default function LanguageToggle({ className }: { className?: string }) {
   const { language, setLanguage, t } = useLanguage();
@@ -14,15 +19,15 @@ export default function LanguageToggle({ className }: { className?: string }) {
   let tone: string | null = null;
 
   const pageTone = () => {
-    if (route == "/products/edmax") {
+    if (route == "/edmax") {
       tone = " text-[var(--primary-light)]";
-    } else if (route == "/products/dash") {
+    } else if (route == "/dash") {
       tone = " text-[#fdc600] hover:text-[#fdc600]/80";
-    } else if (route == "/products/victory") {
+    } else if (route == "/victory") {
       tone = " text-white hover:text-white/80";
-    } else if (route == "/products/mini") {
+    } else if (route == "/mini") {
       tone = " text-[#7fa3a4] hover:text-[#7fa3a4]/80";
-    } else if (route == "/products/athena") {
+    } else if (route == "/athena") {
       tone = " text-[#ff7db6] hover:text-[#ff7db6]/80";
     }
   };
@@ -34,21 +39,45 @@ export default function LanguageToggle({ className }: { className?: string }) {
   };
 
   return (
-    <div className={cn("relative", className)}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          "flex items-center gap-1.5 text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium",
-          tone && tone
-        )}
-        aria-label="Toggle language"
-      >
-        <Globe className="h-4 w-4" />
-        <span className="hidden md:inline">{t("language")}</span>
-      </button>
+    // <div className={cn("relative", className)}>
+    //   <button
+    //     onClick={() => setIsOpen(!isOpen)}
+    //     className={cn(
+    //       "flex items-center gap-1.5 text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium",
+    //       tone && tone
+    //     )}
+    //     aria-label="Toggle language"
+    //   >
+    //     <Globe className="h-4 w-4" />
+    //     <span className="hidden md:inline">{t("language")}</span>
+    //   </button>
 
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-soft bg-white ring-1 ring-black ring-opacity-5 z-50">
+    //   {isOpen && (
+    //     <div className="absolute right-0 mt-2 w-40 rounded-md shadow-soft bg-white ring-1 ring-black ring-opacity-5 z-50">
+    //       <button
+    //         onClick={toggleLanguage}
+    //         className={cn(
+    //           "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-500 hover:rounded-md"
+    //         )}
+    //       >
+    //         {t("switchLanguage")}
+    //       </button>
+    //     </div>
+    //   )}
+    // </div>
+    <div className={cn("relative", className)}>
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+        <DropdownMenuTrigger
+          onClick={() => setIsOpen(!isOpen)}
+          className={cn(
+            "flex items-center gap-1.5 text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium ring-0 outline-none",
+            tone && tone
+          )}
+        >
+          <Globe className="h-4 w-4" />
+          <span className="hidden md:inline">{t("language")}</span>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="absolute right-0 mt-2 w-40 rounded-md shadow-soft bg-white ring-1 ring-black ring-opacity-5 z-50 border-none">
           <button
             onClick={toggleLanguage}
             className={cn(
@@ -57,8 +86,8 @@ export default function LanguageToggle({ className }: { className?: string }) {
           >
             {t("switchLanguage")}
           </button>
-        </div>
-      )}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }

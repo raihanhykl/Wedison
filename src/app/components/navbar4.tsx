@@ -28,23 +28,25 @@ export default function Navbar() {
   let bgAccent: string | null = null;
 
   const pageTone = () => {
-    if (route == "/products/edmax") {
+    if (route == "/edmax") {
       tone = " text-[var(--primary-light)] hover:bg-black";
       bgTone = "bg-black";
       bgAccent = "bg-[var(--primary-light)]";
-    } else if (route == "/products/dash") {
+    } else if (route == "/dash") {
       tone = " text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black";
+      // bgTone = " bg-white";
       bgTone = " bg-black";
+      // bgTone = " bg-gradient-to-l from-black from-50% to-[#fdeecb]";
       bgAccent = "bg-[#fdc600]";
-    } else if (route == "/products/victory") {
+    } else if (route == "/victory") {
       tone = " text-white hover:text-white/80 hover:bg-black";
       bgTone = "bg-black";
       bgAccent = "bg-white";
-    } else if (route == "/products/mini") {
+    } else if (route == "/mini") {
       tone = " text-[#7fa3a4] hover:text-[#7fa3a4]/80 hover:bg-black";
       bgTone = "bg-black";
       bgAccent = "bg-[#7fa3a4]";
-    } else if (route == "/products/athena") {
+    } else if (route == "/athena") {
       tone = " text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black";
       bgTone = "bg-black";
       bgAccent = "bg-[#ff7db6]";
@@ -68,11 +70,11 @@ export default function Navbar() {
       name: t("nav.products"),
       href: "#",
       subMenu: [
-        { name: "Mini", href: "/products/mini" },
-        { name: "Athena", href: "/products/athena" },
-        { name: "Victory", href: "/products/victory" },
-        { name: "Dash", href: "/products/dash" },
-        { name: "EdPower", href: "/products/edmax" },
+        { name: "Mini", href: "/mini" },
+        { name: "Athena", href: "/athena" },
+        { name: "Victory", href: "/victory" },
+        { name: "Dash", href: "/dash" },
+        { name: "EdPower", href: "/edmax" },
       ],
     },
     {
@@ -134,17 +136,26 @@ export default function Navbar() {
         // scrolled ? "bg-white/50 backdrop-blur-md shadow-soft" : ""
       )}
     >
+      {/* <div className="container mx-auto"> */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center cursor-pointer">
+        {/* <div className="flex items-center justify-between"> */}
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20 overflow-hidden">
+          <div className="flex-shrink-0 h-fit inset-0 p-0 ">
+            <Link
+              href="/"
+              className="flex items-center cursor-pointer shadow-xs h-full"
+            >
               {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
                 Wedison Motors
-              </span> */}
+                </span> */}
               <Image
-                src={"/wedison-sidebyside.png"}
+                src={
+                  bgTone
+                    ? "/wedison-sidebyside-white.png"
+                    : "/wedison-sidebyside.png"
+                }
                 alt="Wedison Logo"
-                width={200}
+                width={150}
                 height={100}
               />
             </Link>

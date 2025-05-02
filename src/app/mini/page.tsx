@@ -1,0 +1,93 @@
+import FeatureSection2 from "../components/feature-section";
+import HeroSection from "../components/hero-section";
+import SpecificationsSection from "../components/specifications-section";
+import ProductPicker, { ProductColor } from "../edmax/components/product-pick";
+import { generateSeoMetadata } from "../lib/seo";
+
+const { metadata, jsonLd } = generateSeoMetadata({
+  title: "Mini - Affordable Mobility for Every Ride",
+  description: "Mini is the most agile bike from wedison. it's ",
+  path: "/athena",
+  image: "/athena-hero.webp",
+  type: "website",
+  jsonLdType: "product",
+});
+
+export { metadata };
+
+export default function MiniPage() {
+  const product: ProductColor[] = [
+    {
+      name: "black",
+      hex: "#000000",
+      alt: "black",
+    },
+    {
+      name: "grey",
+      hex: "#808080",
+      alt: "grey",
+    },
+    {
+      name: "red",
+      hex: "#FF0000",
+      alt: "red",
+    },
+    {
+      name: "smoke",
+      hex: "#a0a0a0",
+      alt: "smoke",
+    },
+    {
+      name: "white",
+      hex: "#FFFFFF",
+      alt: "white",
+    },
+  ];
+  return (
+    <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd }}
+        />
+      )}
+      <main className="min-h-screen bg-white">
+        <HeroSection
+          name="mini"
+          imageAlt="Mini Side Look"
+          theme="light"
+          imageStyle=" lg:object-[0%_100%]"
+        />
+
+        <FeatureSection2
+          page="mini"
+          feature={1}
+          alt="man riding dash electric motorcycle"
+          image="/mini-feature1.webp"
+          style="bg-gradient-to-r from-black from-0% via-[#151517] to-[#234445]"
+          // style="bg-gradient-to-bl  from-[#1E1F22] from-60% to-[#3A3B3F]"
+          titleColor="text-white"
+          descColor="text-gray-300"
+        />
+        <FeatureSection2
+          page="mini"
+          feature={2}
+          alt="Victory in the golden hour"
+          image="/mini-feature2.webp"
+          style="bg-gradient-to-l from-black from-10% via-[#151517] to-[#234445]"
+          titleColor="text-white"
+          descColor="text-gray-300"
+        />
+        <ProductPicker
+          productName="mini"
+          productColor={product}
+          // style="bg-gradient-to-b from-[#1E1F22] from-0% to-black"
+          style="bg-whitek"
+          titleColor="text-blac"
+          descColor="text-gray-800"
+        />
+        <SpecificationsSection name="mini" />
+      </main>
+    </>
+  );
+}

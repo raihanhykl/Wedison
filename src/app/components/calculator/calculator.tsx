@@ -971,7 +971,8 @@ export default function KalkulatorPenghematan() {
             htmlFor="mode-baterai"
             className={duaBaterai ? "text-gray-500" : "font-medium"}
           >
-            1 {t("calculator.page.battery")}
+            {/* {t("calculator.page.battery")} */}
+            Long Range
           </Label>
           <Switch
             id="mode-baterai"
@@ -983,7 +984,8 @@ export default function KalkulatorPenghematan() {
             htmlFor="mode-baterai"
             className={duaBaterai ? "font-medium" : "text-gray-500"}
           >
-            2 {t("calculator.page.battery")}
+            {/* {t("calculator.page.battery")} */}
+            Extended Long Range
           </Label>
         </div>
 
@@ -1327,7 +1329,7 @@ export default function KalkulatorPenghematan() {
           <div className="px-2 sm:px-4">
             <Slider
               defaultValue={[10]}
-              max={duaBaterai ? 120 : 100}
+              max={duaBaterai ? 100 : 80}
               step={10}
               value={[jarakTerdekat]}
               onValueChange={handlePerubahanSlider}
@@ -1336,7 +1338,7 @@ export default function KalkulatorPenghematan() {
           </div>
           <div className="flex justify-between mt-2 text-gray-600">
             <span>0 km</span>
-            <span>{duaBaterai ? "120" : "100"} km</span>
+            <span>{duaBaterai ? "100" : "80"} km</span>
           </div>
         </Card>
 
