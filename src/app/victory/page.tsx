@@ -29,7 +29,7 @@ export default function EdmaxPage() {
       alt: "Grey Edmax Electric Motorcycle",
     },
     {
-      name: "Red",
+      name: "red",
       hex: "#FF0000",
       alt: "Red Edmax Electric Motorcycle",
     },

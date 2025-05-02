@@ -79,7 +79,7 @@ export default function EdmaxPage() {
         />
         <ProductPicker
           productColor={product}
-          productName="Athena"
+          productName="athena"
           style="bg-white"
           titleColor="text-black"
           descColor="text-gray-800"

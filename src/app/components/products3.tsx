@@ -224,7 +224,7 @@ export default function Products() {
                     variant="outline"
                     className="text-[var(--outline-foreground)] transition-all duration-300 text-sm sm:text-base px-3 sm:px-4"
                   >
-                    <Link href={`/products/${product.name.toLowerCase()}`}>
+                    <Link href={`/${product.name.toLowerCase()}`}>
                       {t("products.learnMore")}
                     </Link>
                   </Button>

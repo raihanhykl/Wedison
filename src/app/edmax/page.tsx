@@ -20,7 +20,7 @@ export { metadata };
 export default function EdmaxPage() {
   const product: ProductColor[] = [
     {
-      name: "Black",
+      name: "black",
       hex: "#000000",
       alt: "Black",
     },
@@ -30,12 +30,12 @@ export default function EdmaxPage() {
       alt: "White",
     },
     {
-      name: "Red",
+      name: "red",
       hex: "#FF0000",
       alt: "Red",
     },
     {
-      name: "Slate",
+      name: "slate",
       hex: "#6c788f",
       alt: "Blue",
     },

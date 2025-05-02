@@ -24,7 +24,7 @@ export default function Footer() {
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="/mini"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Mini
@@ -40,7 +40,7 @@ export default function Footer() {
               </li> */}
               <li>
                 <a
-                  href="#"
+                  href="/athena"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Athena
@@ -48,7 +48,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/victory"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Victory
@@ -56,7 +56,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/dash"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Dash
@@ -64,7 +64,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/edmax"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   EdPower
