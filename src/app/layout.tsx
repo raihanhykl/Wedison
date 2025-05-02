@@ -4,6 +4,8 @@ import "./globals.css";
 import { LanguageProvider } from "./lib/language-context";
 import Navbar from "./components/navbar4";
 import Footer from "./components/footer";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +35,7 @@ export default function RootLayout({
         <LanguageProvider>
           <Navbar />
           {children}
+          <SpeedInsights />
           <Footer />
         </LanguageProvider>
       </body>
