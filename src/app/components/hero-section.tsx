@@ -43,7 +43,7 @@ export default function HeroSection({
         width={9000}
         height={1000}
         className={cn(
-          "object-cover inset-0 h-[100vh] lg:object-[0%_100%] object-[75%_100%]",
+          "object-cover inset-0 h-[100vh] 2xl:object-[80%_100%] object-[75%_75%]",
           imageStyle
         )}
       />
@@ -53,10 +53,10 @@ export default function HeroSection({
       {/* Hero content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 absolute z-20 left-0 md:left-15">
         {/* <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> */}
-        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center pb-20">
+        <div className=" grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-2 gap-8 md:gap-12 items-center pb-20">
           <div
             className={cn(
-              "transition-all duration-1000 transform order-1 lg:order-0",
+              "transition-all duration-1000 transform order-1 lg:order-0 ",
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-16"
@@ -75,12 +75,13 @@ export default function HeroSection({
 
             <h1
               className={cn(
-                "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-4 md:mb-6",
+                "text-3xl sm:text-4xl md:text-4xl lg:text-4xl 2xl:text-6xl font-bold leading-tight text-white mb-4 md:mb-6",
+                // "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-4 md:mb-6",
                 theme === "dark" ? dark.titleStyle : light.titleStyle
               )}
             >
               {t(`${name}.hero.title`)}{" "}
-              <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+              <span className="bg-gradient-to-r from-teal-400 to-teal-300 bg-clip-text text-transparent relative">
                 {t(`${name}.hero.titleHighlight`)}
                 <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
               </span>
@@ -88,7 +89,8 @@ export default function HeroSection({
 
             <p
               className={cn(
-                "text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-lg",
+                "text-base sm:text-md md:text-lg 2xl:text-xl text-gray-300 mb-6 md:mb-8 max-w-lg",
+                // "text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-lg",
                 theme === "dark"
                   ? dark.descriptionStyle
                   : light.descriptionStyle

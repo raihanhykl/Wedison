@@ -49,16 +49,16 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section with Image */}
-      <section className="pt-0 md:pt-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+      <section className="pt-0 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <div className="text-center mb-8 md:mb-12">
+              <div className="text-center mb-8 md:mb-0">
                 <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
                   <span className="text-sm font-medium">{t("about.tag")}</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                <h1 className="text-3xl sm:text-4xl md:text-4xl 2xl:text-6xl font-bold text-gray-900 mb-6">
                   {t("about.title")}{" "}
                   <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
                     {t("about.titleHighlight")}
@@ -67,14 +67,14 @@ export default function AboutPage() {
                 </h1>
               </div>
 
-              <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text">
+              <div className="bg-white rounded-xl shadow-soft p-6 2xl:p-8">
+                <h2 className="text-xl 2xl:text-3xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text">
                   {t("about.overview.title")}
                 </h2>
-                <p className="text-gray-700 mb-4 text-base md:text-lg leading-relaxed">
+                <p className="text-gray-700 mb-4 text-base 2xl:text-lg leading-relaxed">
                   {t("about.overview.p1")}
                 </p>
-                <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+                <p className="text-gray-700 text-base 2xl:text-lg leading-relaxed">
                   {t("about.overview.p2")}
                 </p>
               </div>
@@ -86,7 +86,7 @@ export default function AboutPage() {
               <Image
                 src={"/wedison-factory.webp"}
                 alt=" Wedison Factory"
-                className="w-full h-full object-fill object-center z-50"
+                className="w-full h-full object-cover object-center z-50"
                 width={9000}
                 height={1000}
               />

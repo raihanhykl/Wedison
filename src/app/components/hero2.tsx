@@ -45,7 +45,7 @@ export default function Hero() {
               <span className="text-sm font-medium">{t("hero.tag")}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-4 md:mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold leading-tight text-gray-900 mb-4 md:mb-6">
               {t("hero.title")}{" "}
               {/* <span className="bg-gradient-to-r text-shadow-lg from-teal-500 to-teal-400 bg-clip-text text-transparent relative"> */}
               <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
@@ -54,7 +54,7 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-lg">
+            <p className="text-base sm:text-lg 2xl:text-xl text-gray-600 mb-6 md:mb-8 max-w-lg">
               {t("hero.description")}
             </p>
 
@@ -88,7 +88,8 @@ export default function Hero() {
             )}
           >
             {/* Motorcycle image */}
-            <div className="relative h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] w-full mb-5 lg:mt-0">
+            <div className="relative h-[250px] sm:h-[350px] md:h-[400px] 2xl:h-[450px] w-full mb-5 2xl:mt-0">
+              {/* <div className="relative h-[250px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full mb-5 lg:mt-0"> */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-xl">
                 {/* <div> */}
                 <Image
@@ -112,7 +113,7 @@ export default function Hero() {
 
       {/* Decorative shapes */}
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
-      <div className="hidden md:absolute bottom-6 left-1/2 transform -translate-x-1/2 md:flex flex-col items-center">
+      <div className="hidden md:absolute bottom-6 left-1/2 transform -translate-x-1/2 2xl:flex flex-col items-center">
         <span className="text-sm text-gray-400 mb-2">Scroll to explore</span>
         <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
           <div className="w-1.5 h-3 bg-gray-400 rounded-full mt-2 animate-bounce" />
