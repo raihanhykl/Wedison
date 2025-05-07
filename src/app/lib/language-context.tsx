@@ -237,7 +237,7 @@ const translations = {
     "calculator.page.savingTitle": "Savings With Wedison",
     "calculator.page.savingMonthlySavings": "Monthly Savings",
     "calculator.page.savingAnnualSavings": "Annual Savings",
-    "calculator.page.distance": "Your Dialy Distances",
+    "calculator.page.distance": "Your Daily Distances",
     "calculator.page.tnc1":
       "*Maintenance cost include routine service. excluding front and rear tire replacement",
     "calculator.page.tnc2":
@@ -245,7 +245,8 @@ const translations = {
     "calculator.page.cta": "Prove Yourself",
 
     //edmax
-    "edmax.title": "Edmax – Powerful & Smart Electric Motorcycle from Wedison",
+    "edmax.title":
+      "EdPower – Powerful & Smart Electric Motorcycle from Wedison",
     "edmax.description":
       "Edmax is Wedison's flagship electric motorcycle with 86km/h top speed, advanced headunit (CarPlay & Android Auto), and Super Charge support.",
 
@@ -431,6 +432,12 @@ const translations = {
     "supercharge.feature2.subtitle": "Wherever you ride, we’ve got your charge",
     "supercharge.feature2.description":
       "With over 100 Super Charge stations across strategic locations in Indonesia, you’ll always stay powered — no matter where the road takes you.",
+
+    "supercharge.feature3.tag": "Reliable. Safe. Compliant.",
+    "supercharge.feature3.title": "Built to Last",
+    "supercharge.feature3.subtitle": "Safety and reliability first",
+    "supercharge.feature3.description":
+      "Our DC charging station is designed to work in perfect harmony with your Wedison EV motorcycle, ensuring fast charging while enhancing battery longevity. Fully certified to IEC safety standards and compliant with EU Directives, it provides safe, efficient, and reliable power for your motorcycle—every time.",
 
     // Language
     language: "English",
@@ -857,6 +864,13 @@ const translations = {
       "Dimanapun kamu berkendara, kami siap isi daya",
     "supercharge.feature2.description":
       "Super Charge tersedia di lebih dari 100 titik strategis di Indonesia, memudahkan kamu untuk tetap bergerak tanpa harus khawatir kehabisan daya.",
+
+    "supercharge.feature3.tag": "Andal. Aman. Patuh Regulasi.",
+    "supercharge.feature3.title": "Dirancang untuk Tahan Lama",
+    "supercharge.feature3.subtitle":
+      "Keselamatan dan keandalan adalah prioritas",
+    "supercharge.feature3.description":
+      "Stasiun pengisian daya DC kami dirancang untuk bekerja secara sempurna dengan motor listrik Wedison Anda, memastikan pengisian daya cepat sekaligus menjaga umur baterai. Telah tersertifikasi penuh sesuai standar keselamatan IEC dan mematuhi Direktif Uni Eropa, memberikan daya yang aman, efisien, dan andal untuk motor Anda—setiap saat.",
     // Language
     language: "Bahasa Indonesia",
     switchLanguage: "English",

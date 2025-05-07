@@ -1,179 +1,4 @@
-// "use client"
-
-// import { useInView } from "react-intersection-observer"
-// import { Button } from "@/components/ui/button"
-// import { Input } from "@/components/ui/input"
-// import { Textarea } from "@/components/ui/textarea"
-// import { cn } from "@/lib/utils"
-// import { MapPin, Phone, Mail, Send } from "lucide-react"
-// import { useLanguage } from "@/lib/language-context"
-
-// export default function Contact() {
-//   const { t } = useLanguage()
-//   const { ref, inView } = useInView({
-//     threshold: 0.1,
-//     triggerOnce: true,
-//   })
-
-//   return (
-//     <section ref={ref} className="py-16 md:py-20 lg:py-24 bg-gray-50" id="contact">
-//       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-//         <div className="text-center mb-10 md:mb-16">
-//           <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
-//             <span className="text-sm font-medium">{t("contact.tag")}</span>
-//           </div>
-
-//           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-//             {t("contact.title")}{" "}
-//             <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
-//               {t("contact.titleHighlight")}
-//               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
-//             </span>
-//           </h2>
-
-//           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-//             {t("contact.description")}
-//           </p>
-//         </div>
-
-//         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-//           <div
-//             className={cn(
-//               "bg-white rounded-xl shadow-soft p-5 md:p-8 transition-all duration-700 transform",
-//               inView ? "opacity-100 animate-slide-in-left" : "opacity-0",
-//             )}
-//             style={{ animationFillMode: "both" }}
-//           >
-//             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">
-//               <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
-//                 {t("contact.sendMessage")}
-//               </span>
-//             </h3>
-
-//             <form className="space-y-6">
-//               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-//                 <div>
-//                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-//                     {t("contact.name")}
-//                   </label>
-//                   <Input id="name" placeholder={t("contact.name")} className="w-full" />
-//                 </div>
-//                 <div>
-//                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-//                     {t("contact.email")}
-//                   </label>
-//                   <Input id="email" type="email" placeholder={t("contact.email")} className="w-full" />
-//                 </div>
-//               </div>
-//               <div>
-//                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-//                   {t("contact.subject")}
-//                 </label>
-//                 <Input id="subject" placeholder={t("contact.subjectPlaceholder")} className="w-full" />
-//               </div>
-//               <div>
-//                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-//                   {t("contact.message")}
-//                 </label>
-//                 <Textarea id="message" placeholder={t("contact.messagePlaceholder")} className="w-full min-h-[120px]" />
-//               </div>
-//               <Button className="w-full bg-teal-500 hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1">
-//                 {t("contact.send")}
-//                 <Send className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-//               </Button>
-//             </form>
-//           </div>
-
-//           <div
-//             className={cn(
-//               "bg-white rounded-xl shadow-soft p-8 transition-all duration-700 transform",
-//               inView ? "opacity-100 animate-slide-in-right" : "opacity-0",
-//             )}
-//             style={{ animationDelay: "200ms", animationFillMode: "both" }}
-//           >
-//             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-//               <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
-//                 {t("contact.contactInfo")}
-//               </span>
-//             </h3>
-
-//             <div className="space-y-6">
-//               <div className="flex items-start group">
-//                 <div className="flex-shrink-0 mt-1">
-//                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors duration-300">
-//                     <MapPin className="h-5 w-5 text-teal-500" />
-//                   </div>
-//                 </div>
-//                 <div className="ml-4">
-//                   <h4 className="text-lg font-semibold text-gray-900 group-hover:text-teal-600 transition-colors duration-300">
-//                     {t("contact.headquarters")}
-//                   </h4>
-//                   <p className="text-gray-600 mt-1">
-//                     123 Electric Avenue, Innovation District
-//                     <br />
-//                     San Francisco, CA 94102
-//                   </p>
-//                 </div>
-//               </div>
-
-//               <div className="flex items-start group">
-//                 <div className="flex-shrink-0 mt-1">
-//                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors duration-300">
-//                     <Phone className="h-5 w-5 text-teal-500" />
-//                   </div>
-//                 </div>
-//                 <div className="ml-4">
-//                   <h4 className="text-lg font-semibold text-gray-900 group-hover:text-teal-600 transition-colors duration-300">
-//                     {t("contact.phone")}
-//                   </h4>
-//                   <p className="text-gray-600 mt-1">+1 (555) 123-4567</p>
-//                   <p className="text-gray-500 text-sm">{t("contact.phoneHours")}</p>
-//                 </div>
-//               </div>
-
-//               <div className="flex items-start group">
-//                 <div className="flex-shrink-0 mt-1">
-//                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors duration-300">
-//                     <Mail className="h-5 w-5 text-teal-500" />
-//                   </div>
-//                 </div>
-//                 <div className="ml-4">
-//                   <h4 className="text-lg font-semibold text-gray-900 group-hover:text-teal-600 transition-colors duration-300">
-//                     {t("contact.emailLabel")}
-//                   </h4>
-//                   <p className="text-gray-600 mt-1">info@wedisonmotors.com</p>
-//                   <p className="text-gray-500 text-sm">{t("contact.emailResponse")}</p>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="mt-6 md:mt-8">
-//               <h4 className="text-lg font-semibold text-gray-900 mb-4">{t("contact.followUs")}</h4>
-//               <div className="flex flex-wrap gap-3 md:gap-4">
-//                 <a
-//                   href="#"
-//                   className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-teal-500 transition-colors duration-300"
-//                 >
-//                   <span className="sr-only">Facebook</span>
-//                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-//                     <path
-//                       fillRule="evenodd"
-//                       d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-//                       clipRule="evenodd"
-//                     />
-//                   </svg>
-//                 </a>
-//                 <a
-//                   href="#"
-//                   className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-teal-500 transition-colors duration-300"
-//                 >
-//                   <span className="sr-only">Instagram</span>
-//                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-//                     <path
-//                       fillRule="evenodd"
-//                       d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416\
 "use client";
-
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -182,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
+import { FormEvent, useRef, useState } from "react";
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -189,6 +16,36 @@ export default function Contact() {
     threshold: 0.1,
     triggerOnce: true,
   });
+  const [sending, setSending] = useState(false);
+
+  const form = useRef<HTMLFormElement | null>(null);
+
+  const sendEmail = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+    setSending(true);
+    emailjs
+      .sendForm(
+        "service_35o1hsl", // Ganti dengan ID dari EmailJS
+        "template_1hpwz9j", // Ganti dengan ID dari EmailJS
+        form.current,
+        "9jljMROO6YYwm1088" // Ganti dengan Public Key dari EmailJS
+      )
+      .then(
+        (result) => {
+          console.log("Email sent:", result.text);
+          alert("Pesan berhasil dikirim!");
+        },
+        (error) => {
+          console.error("Email error:", error.text);
+          alert("Gagal mengirim pesan.");
+        }
+      )
+      .finally(() => {
+        setSending(false);
+      });
+  };
 
   return (
     <section
@@ -231,7 +88,7 @@ export default function Contact() {
               </span>
             </h3>
 
-            <form className="space-y-6">
+            <form ref={form} onSubmit={sendEmail} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <div>
                   <label
@@ -241,6 +98,7 @@ export default function Contact() {
                     {t("contact.name")}
                   </label>
                   <Input
+                    name="name"
                     id="name"
                     placeholder={t("contact.name")}
                     className="w-full"
@@ -254,6 +112,7 @@ export default function Contact() {
                     {t("contact.email")}
                   </label>
                   <Input
+                    name="email"
                     id="email"
                     type="email"
                     placeholder={t("contact.email")}
@@ -263,13 +122,14 @@ export default function Contact() {
               </div>
               <div>
                 <label
-                  htmlFor="subject"
+                  htmlFor="title"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
                   {t("contact.subject")}
                 </label>
                 <Input
-                  id="subject"
+                  name="title"
+                  id="title"
                   placeholder={t("contact.subjectPlaceholder")}
                   className="w-full"
                 />
@@ -282,13 +142,18 @@ export default function Contact() {
                   {t("contact.message")}
                 </label>
                 <Textarea
+                  name="message"
                   id="message"
                   placeholder={t("contact.messagePlaceholder")}
                   className="w-full min-h-[120px]"
                 />
               </div>
-              <Button className="w-full bg-teal-500 hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1">
-                {t("contact.send")}
+              <Button
+                type="submit"
+                disabled={sending}
+                className="w-full bg-teal-500 hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1"
+              >
+                {sending ? "Sending..." : t("contact.send")}
                 <Send className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </form>

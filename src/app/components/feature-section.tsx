@@ -52,7 +52,7 @@ export default function FeatureSection2({
               feature2InView
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-16",
-              feature == 1 ? "order-0" : "order-2"
+              feature % 2 != 0 ? "order-0" : "order-2"
             )}
           >
             <div

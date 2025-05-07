@@ -7,8 +7,8 @@ import { generateSeoMetadata } from "../lib/seo";
 const { metadata, jsonLd } = generateSeoMetadata({
   title: "Mini - Affordable Mobility for Every Ride",
   description: "Mini is the most agile bike from wedison. it's ",
-  path: "/athena",
-  image: "/athena-hero.webp",
+  path: "/mini",
+  image: "/mini-hero.webp",
   type: "website",
   jsonLdType: "product",
 });
