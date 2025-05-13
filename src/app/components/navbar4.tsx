@@ -28,7 +28,7 @@ export default function Navbar() {
   let bgAccent: string | null = null;
 
   const pageTone = () => {
-    if (route == "/edmax") {
+    if (route == "/edpower") {
       tone = " text-[var(--primary-light)] hover:bg-black";
       bgTone = "bg-black";
       bgAccent = "bg-[var(--primary-light)]";
@@ -74,7 +74,7 @@ export default function Navbar() {
         { name: "Athena", href: "/athena" },
         { name: "Victory", href: "/victory" },
         { name: "Dash", href: "/dash" },
-        { name: "EdPower", href: "/edmax" },
+        { name: "EdPower", href: "/edpower" },
       ],
     },
     {

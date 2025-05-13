@@ -20,6 +20,7 @@ export default function HeroSection({
   theme,
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const { t } = useLanguage();
   const light = {
     titleStyle: "text-black",
@@ -31,6 +32,24 @@ export default function HeroSection({
     descriptionStyle: "text-gray-200",
     tagStyle: "border-teal-700 bg-teal-900/50 text-teal-400",
   };
+
+  useEffect(() => {
+    const mediaQuery: MediaQueryList = window.matchMedia("(max-width: 767px)");
+
+    const handleMediaChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    // Set nilai awal
+    setIsMobile(mediaQuery.matches);
+
+    // Tambahkan event listener
+    mediaQuery.addEventListener("change", handleMediaChange);
+
+    // Cleanup
+    return () => mediaQuery.removeEventListener("change", handleMediaChange);
+  }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsVisible(true);
@@ -65,7 +84,11 @@ export default function HeroSection({
             <div
               className={cn(
                 "hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-teal-400",
-                theme === "dark" ? dark.tagStyle : light.tagStyle
+                isMobile
+                  ? dark.tagStyle
+                  : theme === "dark"
+                  ? dark.tagStyle
+                  : light.tagStyle
               )}
             >
               <span className="text-sm font-medium">
@@ -77,7 +100,11 @@ export default function HeroSection({
               className={cn(
                 "text-3xl sm:text-4xl md:text-4xl lg:text-4xl 2xl:text-6xl font-bold leading-tight text-white mb-4 md:mb-6",
                 // "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-4 md:mb-6",
-                theme === "dark" ? dark.titleStyle : light.titleStyle
+                isMobile
+                  ? dark.titleStyle
+                  : theme === "dark"
+                  ? dark.titleStyle
+                  : light.titleStyle
               )}
             >
               {t(`${name}.hero.title`)}{" "}
@@ -91,7 +118,9 @@ export default function HeroSection({
               className={cn(
                 "text-base sm:text-md md:text-lg 2xl:text-xl text-gray-300 mb-6 md:mb-8 max-w-lg",
                 // "text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-lg",
-                theme === "dark"
+                isMobile
+                  ? dark.descriptionStyle
+                  : theme === "dark"
                   ? dark.descriptionStyle
                   : light.descriptionStyle
               )}

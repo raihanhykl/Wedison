@@ -4,12 +4,13 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import HeadunitCarousel from "../edmax/components/headunit-carousel";
+import HeadunitCarousel from "../edpower/components/headunit-carousel";
 
 type Props = {
   page: string;
   feature: number;
   image: string;
+  imageStyle?: string;
   alt: string;
   style?: string;
   titleColor?: string;
@@ -22,6 +23,7 @@ export default function FeatureSection2({
   page,
   feature,
   image,
+  imageStyle,
   alt,
   style,
   titleColor,
@@ -105,7 +107,7 @@ export default function FeatureSection2({
                 <Image
                   src={image}
                   alt={alt}
-                  className="w-full h-full object-cover"
+                  className={cn("w-full h-full object-cover", imageStyle)}
                   width={800}
                   height={450}
                 />

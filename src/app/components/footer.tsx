@@ -81,7 +81,7 @@ export default function Footer() {
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="/showroom"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Showroom
@@ -97,7 +97,7 @@ export default function Footer() {
               </li> */}
               <li>
                 <a
-                  href="#"
+                  href="/super-charge"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Super Charge
@@ -122,7 +122,7 @@ export default function Footer() {
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="/corporate/about"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   About Us
@@ -138,7 +138,7 @@ export default function Footer() {
               </li> */}
               <li>
                 <a
-                  href="#"
+                  href="/corporate/contact"
                   className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
                 >
                   Contact Us

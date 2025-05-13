@@ -1,4 +1,4 @@
-import ProductPicker, { ProductColor } from "../edmax/components/product-pick";
+import ProductPicker, { ProductColor } from "../components/product-pick";
 import FeatureSection2 from "../components/feature-section";
 import HeroSection from "../components/hero-section";
 import SpecificationsSection from "../components/specifications-section";

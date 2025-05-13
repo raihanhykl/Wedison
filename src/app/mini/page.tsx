@@ -1,7 +1,7 @@
 import FeatureSection2 from "../components/feature-section";
 import HeroSection from "../components/hero-section";
 import SpecificationsSection from "../components/specifications-section";
-import ProductPicker, { ProductColor } from "../edmax/components/product-pick";
+import ProductPicker, { ProductColor } from "../components/product-pick";
 import { generateSeoMetadata } from "../lib/seo";
 
 const { metadata, jsonLd } = generateSeoMetadata({
@@ -55,14 +55,14 @@ export default function MiniPage() {
         <HeroSection
           name="mini"
           imageAlt="Mini Side Look"
-          theme="light"
-          imageStyle=" lg:object-[0%_100%]"
+          theme="dark"
+          imageStyle=" lg:object-[0%_100%] object-[65%_0%] "
         />
 
         <FeatureSection2
           page="mini"
           feature={1}
-          alt="man riding dash electric motorcycle"
+          alt="mini in street"
           image="/mini-feature1.webp"
           style="bg-gradient-to-r from-black from-0% via-[#151517] to-[#234445]"
           // style="bg-gradient-to-bl  from-[#1E1F22] from-60% to-[#3A3B3F]"
@@ -72,7 +72,7 @@ export default function MiniPage() {
         <FeatureSection2
           page="mini"
           feature={2}
-          alt="Victory in the golden hour"
+          alt="mini in street"
           image="/mini-feature2.webp"
           style="bg-gradient-to-l from-black from-10% via-[#151517] to-[#234445]"
           titleColor="text-white"

@@ -1,4 +1,4 @@
-import ProductPicker, { ProductColor } from "./components/product-pick";
+import ProductPicker, { ProductColor } from "../components/product-pick";
 import HeroSection from "../components/hero-section";
 import FeatureSection2 from "../components/feature-section";
 import SpecificationsSection from "../components/specifications-section";

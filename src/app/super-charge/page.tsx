@@ -27,7 +27,7 @@ export default function EdmaxPage() {
           name="supercharge"
           imageAlt="Super Charge Charging Station"
           theme="light"
-          imageStyle=" md:object-[0%_40%] 2xl:object-[0%_60%] "
+          imageStyle="object-[70%_40%] md:object-[0%_40%] 2xl:object-[0%_60%] "
         />
         <FeatureSection2
           page="supercharge"
@@ -55,6 +55,7 @@ export default function EdmaxPage() {
           feature={3}
           alt="Victory in the golden hour"
           image="/edmax-charging.webp"
+          imageStyle="object-[10%_100%]"
           style="bg-gray-100"
           titleColor="text-black"
           descColor="text-gray-600"

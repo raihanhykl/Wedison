@@ -1,4 +1,4 @@
-import ProductPicker, { ProductColor } from "../edmax/components/product-pick";
+import ProductPicker, { ProductColor } from "../components/product-pick";
 import HeroSection from "../components/hero-section";
 import SpecificationsSection from "../components/specifications-section";
 import FeatureSection2 from "../components/feature-section";
@@ -64,7 +64,7 @@ export default function EdmaxPage() {
           feature={1}
           alt="man riding dash electric motorcycle"
           image="/athena-feature1.webp"
-          style="bg-gradient-to-r from-black from-0% via-[#151517] to-[#f73399]"
+          style="md:bg-gradient-to-r md:from-black md:from-0% md:via-[#151517] md:to-[#f73399]/30 bg-black"
           titleColor="text-white"
           descColor="text-gray-300"
         />
@@ -73,7 +73,8 @@ export default function EdmaxPage() {
           feature={2}
           alt="Victory in the golden hour"
           image="/athena-feature2.webp"
-          style="bg-gradient-to-l from-black from-10% via-[#151517] to-[#f73399]"
+          // style="md:bg-gradient-to-l from-black from-10% via-[#151517] to-[#f73399]/30"
+          style="md:bg-gradient-to-l md:from-black md:from-0% md:via-[#151517] md:to-[#f73399]/30 bg-black"
           titleColor="text-white"
           descColor="text-gray-300"
         />

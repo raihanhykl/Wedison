@@ -19,7 +19,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
   let tone: string | null = null;
 
   const pageTone = () => {
-    if (route == "/edmax") {
+    if (route == "/edpower") {
       tone = " text-[var(--primary-light)]";
     } else if (route == "/dash") {
       tone = " text-[#fdc600] hover:text-[#fdc600]/80";

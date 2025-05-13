@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { ProductColor } from "../edmax/components/product-pick";
+import { ProductColor } from "./product-pick";
 
 type Props = {
   name: string;
