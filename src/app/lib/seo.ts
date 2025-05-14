@@ -93,6 +93,13 @@ export function generateSeoMetadata({
         "@type": "Brand",
         name: "Wedison",
       },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "IDR",
+        price: "0",
+        availability: "https://schema.org/PreOrder",
+        url: `${fullUrl}`,
+      },
       url: fullUrl,
     };
   }

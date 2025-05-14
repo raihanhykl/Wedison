@@ -12,6 +12,7 @@ const { metadata, jsonLd } = generateSeoMetadata({
   image: "/victory-hero.webp",
   type: "website",
   jsonLdType: "product",
+  productName: "Victory",
 });
 
 export { metadata };

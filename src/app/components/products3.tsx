@@ -176,66 +176,68 @@ export default function Products() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {products.map((product, index) => (
-            <div
-              key={index}
-              className={cn(
-                "bg-white rounded-xl overflow-hidden shadow-soft transition-all duration-700 transform group hover:shadow-soft-lg hover:-translate-y-1",
-                inView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-12"
-              )}
-              style={{
-                transitionDelay: `${index * 100}ms`,
-              }}
-            >
-              <div className="h-auto  aspect-auto bg-gray-100 relative overflow-hidden">
-                <Image
-                  src={product.image}
-                  alt={`Wedison ${product.name}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  height={1000}
-                  width={1500}
-                />
+            <Link key={index} href={`/${product.name.toLowerCase()}`}>
+              <div
+                key={index}
+                className={cn(
+                  "bg-white rounded-xl overflow-hidden shadow-soft transition-all duration-700 transform group hover:shadow-soft-lg hover:-translate-y-1",
+                  inView
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-12"
+                )}
+                style={{
+                  transitionDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className="h-auto  aspect-auto bg-gray-100 relative overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={`Wedison ${product.name}`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    height={1000}
+                    width={1500}
+                  />
 
-                {/* Product name overlay */}
-                <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent">
-                  <h3 className="text-xl font-bold text-white">
-                    {product.name}
-                  </h3>
+                  {/* Product name overlay */}
+                  <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent">
+                    <h3 className="text-xl font-bold text-white">
+                      {product.name}
+                    </h3>
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-4 sm:p-5 md:p-6">
-                <p className="text-gray-600 mb-4">{product.description}</p>
+                <div className="p-4 sm:p-5 md:p-6">
+                  <p className="text-gray-600 mb-4">{product.description}</p>
 
-                <div className="flex flex-col space-y-2 mb-6">
-                  {product.specs.map((spec, i) => (
-                    <div key={i} className="flex items-center text-gray-700">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-teal-50 mr-2 text-teal-500">
-                        {spec.icon}
+                  <div className="flex flex-col space-y-2 mb-6">
+                    {product.specs.map((spec, i) => (
+                      <div key={i} className="flex items-center text-gray-700">
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-teal-50 mr-2 text-teal-500">
+                          {spec.icon}
+                        </div>
+                        <span className="text-sm">{spec.text}</span>
                       </div>
-                      <span className="text-sm">{spec.text}</span>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                <div className="flex flex-wrap gap-2 justify-between items-center">
-                  <Button
-                    variant="outline"
-                    className="text-[var(--outline-foreground)] transition-all duration-300 text-sm sm:text-base px-3 sm:px-4"
-                  >
-                    <Link href={`/${product.name.toLowerCase()}`}>
+                  <div className="flex flex-wrap gap-2 justify-between items-center">
+                    <Button
+                      variant="outline"
+                      className="text-[var(--outline-foreground)] transition-all duration-300 text-sm sm:text-base px-3 sm:px-4"
+                    >
+                      {/* <Link href={`/${product.name.toLowerCase()}`}> */}
                       {t("products.learnMore")}
-                    </Link>
-                  </Button>
+                      {/* </Link> */}
+                    </Button>
 
-                  {/* <Button className=" text-white group transition-all duration-300 text-sm sm:text-base px-3 sm:px-4">
+                    {/* <Button className=" text-white group transition-all duration-300 text-sm sm:text-base px-3 sm:px-4">
                     {t("products.orderNow")}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button> */}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

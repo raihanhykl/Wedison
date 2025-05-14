@@ -478,7 +478,7 @@ const translations = {
       "Sepeda motor listrik kami menggabungkan teknologi canggih dengan desain berkelanjutan untuk memberikan pengalaman berkendara yang tak tertandingi.",
     "features.longRangeBattery": "Baterai Jarak Jauh",
     "features.longRangeBatteryDesc":
-      "Jelajahi hingga 120 kilometer dengan sekali pengisian menggunakan teknologi baterai lithium-ion canggih kami.",
+      "Jelajahi hingga 100 kilometer dengan sekali pengisian menggunakan teknologi baterai lithium-ion canggih kami.",
     "features.rapidCharging": "Pengisian Cepat: Super Charge",
     "features.rapidChargingDesc":
       "Isi daya dari 10% hingga 80% hanya dalam 20 menit dengan jaringan SuperCharge kami.",

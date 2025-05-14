@@ -11,6 +11,7 @@ const { metadata, jsonLd } = generateSeoMetadata({
   image: "/dash-hero.webp",
   type: "website",
   jsonLdType: "product",
+  productName: "Dash",
 });
 
 export { metadata };
