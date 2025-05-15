@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://wedison.vercel.app
+Host: https://wedison.co
 
 # Sitemaps
-Sitemap: https://wedison.vercel.app/sitemap.xml
+Sitemap: https://wedison.co/sitemap.xml

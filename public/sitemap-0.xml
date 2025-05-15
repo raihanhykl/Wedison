@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://wedison.vercel.app/edmax</loc><lastmod>2025-05-02T09:02:05.558Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/corporate/about</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/showroom</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/athena</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/super-charge</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/victory</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/dash</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/mini</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://wedison.vercel.app/corporate/contact</loc><lastmod>2025-05-02T09:02:05.561Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/corporate/about</loc><lastmod>2025-05-15T06:13:52.039Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/mini</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/corporate/contact</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/super-charge</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/victory</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/showroom</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/dash</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/edpower</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://wedison.co/athena</loc><lastmod>2025-05-15T06:13:52.042Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

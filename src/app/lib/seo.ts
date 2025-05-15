@@ -23,8 +23,7 @@ export function generateSeoMetadata({
   metadata: Metadata;
   jsonLd: string | null;
 } {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://wedison.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wedison.co";
   const fullUrl = `${siteUrl}${path}`;
 
   const metadata: Metadata = {

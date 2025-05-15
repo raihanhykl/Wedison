@@ -9,7 +9,7 @@ const { metadata, jsonLd } = generateSeoMetadata({
   title: "EdPower - Ride The Future With EdPower",
   description:
     "Edmax is the Flagship Electric Bike from Wedison. Edmax offers Ultimate Driving Experience with its cutting-edge Super Charge Technology, Smart Display, and Advanced Safety Features. Experience the future of transportation with Edmax.",
-  path: "/edmax",
+  path: "/edpower",
   image: "/edmax-charging.webp",
   type: "website",
   jsonLdType: "product",
