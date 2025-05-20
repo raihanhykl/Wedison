@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   output: "export",
+  trailingSlash: true, // <== ini penting
 };
 
 export default nextConfig;

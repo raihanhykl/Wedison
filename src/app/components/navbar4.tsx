@@ -23,47 +23,69 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const route = usePathname();
 
-  let tone: string | null = null;
-  let bgTone: string | null = null;
-  let bgAccent: string | null = null;
+  // let tone: string | null = null;
+  // let bgTone: string | null = null;
+  // let bgAccent: string | null = null;
 
-  const pageTone = () => {
-    if (route == "/edpower") {
-      tone = " text-[var(--primary-light)] hover:bg-black";
-      bgTone = "bg-black";
-      bgAccent = "bg-[var(--primary-light)]";
-    } else if (route == "/dash") {
-      tone = " text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black";
-      // bgTone = " bg-white";
-      bgTone = " bg-black";
-      // bgTone = " bg-gradient-to-l from-black from-50% to-[#fdeecb]";
-      bgAccent = "bg-[#fdc600]";
-    } else if (route == "/victory") {
-      tone = " text-white hover:text-white/80 hover:bg-black";
-      bgTone = "bg-black";
-      bgAccent = "bg-white";
-    } else if (route == "/mini") {
-      tone = " text-[#7fa3a4] hover:text-[#7fa3a4]/80 hover:bg-black";
-      bgTone = "bg-black";
-      bgAccent = "bg-[#7fa3a4]";
-    } else if (route == "/athena") {
-      tone = " text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black";
-      bgTone = "bg-black";
-      bgAccent = "bg-[#ff7db6]";
-    }
-  };
-
-  pageTone();
-
-  // const pageTone2 = () => {
-  //   if (route.startsWith("/products/")) {
+  // const pageTone = () => {
+  //   if (route == "/edpower") {
+  //     tone = " text-[var(--primary-light)] hover:bg-black";
+  //     bgTone = "bg-black";
+  //     bgAccent = "bg-[var(--primary-light)]";
+  //   } else if (route == "/dash") {
+  //     tone = " text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black";
+  //     // bgTone = " bg-white";
+  //     bgTone = " bg-black";
+  //     // bgTone = " bg-gradient-to-l from-black from-50% to-[#fdeecb]";
+  //     bgAccent = "bg-[#fdc600]";
+  //   } else if (route == "/victory") {
   //     tone = " text-white hover:text-white/80 hover:bg-black";
   //     bgTone = "bg-black";
   //     bgAccent = "bg-white";
+  //   } else if (route == "/mini") {
+  //     tone = " text-[#7fa3a4] hover:text-[#7fa3a4]/80 hover:bg-black";
+  //     bgTone = "bg-black";
+  //     bgAccent = "bg-[#7fa3a4]";
+  //   } else if (route == "/athena") {
+  //     tone = " text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black";
+  //     bgTone = "bg-black";
+  //     bgAccent = "bg-[#ff7db6]";
   //   }
   // };
 
-  // pageTone2();
+  // pageTone();
+
+  const [tone, setTone] = useState("");
+  const [bgTone, setBgTone] = useState("");
+  const [bgAccent, setBgAccent] = useState("");
+
+  useEffect(() => {
+    if (route === "/edpower/" || route === "/edpower") {
+      setTone("text-[var(--primary-light)] hover:bg-black");
+      setBgTone("bg-black");
+      setBgAccent("bg-[var(--primary-light)]");
+    } else if (route === "/dash/" || route === "/dash") {
+      setTone("text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black");
+      setBgTone("bg-black");
+      setBgAccent("bg-[#fdc600]");
+    } else if (route === "/victory/" || route === "/victory") {
+      setTone("text-white hover:text-white/80 hover:bg-black");
+      setBgTone("bg-black");
+      setBgAccent("bg-white");
+    } else if (route === "/mini/" || route === "/mini") {
+      setTone("text-[#7fa3a4] hover:text-[#7fa3a4]/80 hover:bg-black");
+      setBgTone("bg-black");
+      setBgAccent("bg-[#7fa3a4]");
+    } else if (route === "/athena/" || route === "/athena") {
+      setTone("text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black");
+      setBgTone("bg-black");
+      setBgAccent("bg-[#ff7db6]");
+    } else {
+      setTone("");
+      setBgTone("");
+      setBgAccent("");
+    }
+  }, [route]);
 
   const navItems = [
     {
@@ -175,7 +197,7 @@ export default function Navbar() {
                     >
                       <button
                         className={cn(
-                          "flex items-center text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
+                          "flex items-center text-gray-800 hover:text-teal-500 px-3 py-2 rounded-md text-sm font-medium relative",
                           activeDropdown === item.name && "text-teal-500",
                           // route == "/products/edmax" &&
                           //   "text-[var(--primary-light)]"

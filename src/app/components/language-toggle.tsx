@@ -3,7 +3,7 @@
 import { useLanguage } from "@/app/lib/language-context";
 import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
@@ -16,22 +16,39 @@ export default function LanguageToggle({ className }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const route = usePathname();
 
-  let tone: string | null = null;
+  // let tone: string | null = null;
+  const [tone, setTone] = useState<string | null>(null);
 
-  const pageTone = () => {
-    if (route == "/edpower") {
-      tone = " text-[var(--primary-light)]";
-    } else if (route == "/dash") {
-      tone = " text-[#fdc600] hover:text-[#fdc600]/80";
-    } else if (route == "/victory") {
-      tone = " text-white hover:text-white/80";
-    } else if (route == "/mini") {
-      tone = " text-[#7fa3a4] hover:text-[#7fa3a4]/80";
-    } else if (route == "/athena") {
-      tone = " text-[#ff7db6] hover:text-[#ff7db6]/80";
+  // const pageTone = () => {
+  //   if (route == "/edpower") {
+  //     tone = " text-[var(--primary-light)]";
+  //   } else if (route == "/dash") {
+  //     tone = " text-[#fdc600] hover:text-[#fdc600]/80";
+  //   } else if (route == "/victory") {
+  //     tone = " text-white hover:text-white/80";
+  //   } else if (route == "/mini") {
+  //     tone = " text-[#7fa3a4] hover:text-[#7fa3a4]/80";
+  //   } else if (route == "/athena") {
+  //     tone = " text-[#ff7db6] hover:text-[#ff7db6]/80";
+  //   }
+  // };
+  // pageTone();
+
+  useEffect(() => {
+    if (route == "/edpower/" || route == "/edpower") {
+      setTone(" text-[var(--primary-light)]");
+    } else if (route == "/dash/" || route == "/dash") {
+      setTone(" text-[#fdc600] hover:text-[#fdc600]/80");
+    } else if (route == "/victory/" || route == "/victory") {
+      setTone(" text-white hover:text-white/80");
+    } else if (route == "/mini/" || route == "/mini") {
+      setTone(" text-[#7fa3a4] hover:text-[#7fa3a4]/80");
+    } else if (route == "/athena/" || route == "/athena") {
+      setTone(" text-[#ff7db6] hover:text-[#ff7db6]/80");
+    } else {
+      setTone("");
     }
-  };
-  pageTone();
+  }, [route]);
 
   const toggleLanguage = () => {
     setLanguage(language === "en" ? "id" : "en");
