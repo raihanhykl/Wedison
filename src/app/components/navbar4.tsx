@@ -226,7 +226,7 @@ export default function Navbar() {
                         <DropdownMenuItem key={subItem.name} asChild>
                           <Link
                             href={subItem.href}
-                            className="block w-full px-0 py-2 text-sm text-black hover:bg-gray-900 hover:text-red-500"
+                            className="block w-full px-0 py-2 text-sm text-black hover:bg-red-500 hover:text-red-500"
                           >
                             {subItem.name}
                           </Link>

@@ -944,7 +944,7 @@ export default function KalkulatorPenghematan() {
           </h1> */}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10 md:mb-16">
-              <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+              <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
                 <span className="text-sm font-medium">
                   {t("calculator.page.tag")}
                 </span>
@@ -952,9 +952,9 @@ export default function KalkulatorPenghematan() {
 
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
                 {t("calculator.page.title")}
-                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                   {t("calculator.page.titleHighlight")}
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
                 </span>
               </h2>
 
@@ -1011,7 +1011,9 @@ export default function KalkulatorPenghematan() {
                       className={cn(
                         "p-6",
                         // vehicle === "Wedison" ? "bg-[#05AB6D]/10" : "bg-white"
-                        vehicle === "Wedison" ? "bg-teal-200" : "bg-white"
+                        vehicle === "Wedison"
+                          ? "bg-[var(--primary-lighter)]"
+                          : "bg-white"
                       )}
                     >
                       <h3
@@ -1019,7 +1021,7 @@ export default function KalkulatorPenghematan() {
                           "font-bold text-xl",
                           vehicle === "Wedison"
                             ? // ? "text-[#05AB6D]"
-                              "text-teal-600"
+                              "text-[var(--primary-dark)]"
                             : "text-gray-800 mb-7"
                         )}
                       >

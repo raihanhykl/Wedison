@@ -54,21 +54,21 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               <div className="text-center mb-8 md:mb-0">
-                <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+                <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
                   <span className="text-sm font-medium">{t("about.tag")}</span>
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-4xl 2xl:text-6xl font-bold text-gray-900 mb-6">
                   {t("about.title")}{" "}
-                  <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+                  <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                     {t("about.titleHighlight")}
-                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
                   </span>
                 </h1>
               </div>
 
               <div className="bg-white rounded-xl shadow-soft p-6 2xl:p-8">
-                <h2 className="text-xl 2xl:text-3xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text">
+                <h2 className="text-xl 2xl:text-3xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text">
                   {t("about.overview.title")}
                 </h2>
                 <p className="text-gray-700 mb-4 text-base 2xl:text-lg leading-relaxed">
@@ -92,8 +92,8 @@ export default function AboutPage() {
               />
 
               {/* Decorative elements */}
-              {/* <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-teal-100 rounded-full opacity-50 blur-2xl"></div> */}
-              {/* <div className="absolute -top-10 -right-10 w-60 h-60 bg-teal-200 rounded-full opacity-40 blur-3xl"></div> */}
+              {/* <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--secondary)] rounded-full opacity-50 blur-2xl"></div> */}
+              {/* <div className="absolute -top-10 -right-10 w-60 h-60 bg-[var(--primary-lighter)] rounded-full opacity-40 blur-3xl"></div> */}
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function AboutPage() {
                   : "opacity-0 translate-y-10"
               )}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
                 {t("about.mission.title")}
               </h2>
 
@@ -131,7 +131,7 @@ export default function AboutPage() {
       {/* Core Values Section */}
       <section ref={valuesRef} className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
             {t("about.values.title")}
           </h2>
 
@@ -146,7 +146,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "100ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <Zap className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -168,7 +168,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "200ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <Users className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -190,7 +190,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "300ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <Lightbulb className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -208,7 +208,7 @@ export default function AboutPage() {
       {/* Projects Section */}
       <section ref={projectsRef} className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
             {t("about.projects.title")}
           </h2>
 
@@ -223,7 +223,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "100ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <Leaf className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -245,7 +245,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "200ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <BatteryCharging className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -263,7 +263,7 @@ export default function AboutPage() {
       {/* What We Offer Section */}
       <section ref={offersRef} className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
             {t("about.offers.title")}
           </h2>
 
@@ -278,7 +278,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "100ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <Bike className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -300,7 +300,7 @@ export default function AboutPage() {
               style={{ transitionDelay: "200ms" }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center mr-4">
                   <BatteryCharging className="h-6 w-6 text-[var(--primary)]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -319,14 +319,14 @@ export default function AboutPage() {
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
               {t("about.joinUs")}
             </h2>
             <p className="text-gray-700 mb-8 text-base md:text-lg">
               {t("about.joinUsDescription")}
             </p>
             <Link href={"/#contact"}>
-              <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1 px-6 py-3 text-base">
+              <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1 px-6 py-3 text-base">
                 {t("about.contactUs")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>

@@ -39,7 +39,7 @@ export default function EdmaxPage() {
           // style="bg-gradient-to-bl  from-[#1E1F22] from-60% to-[#3A3B3F]"
           titleColor="text-black"
           descColor="text-gray-600"
-          tagStyle="border-teal-200 bg-teal-50 text-teal-600"
+          tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
         />
         <FeatureSection2
           page="supercharge"
@@ -49,7 +49,7 @@ export default function EdmaxPage() {
           style="bg-white object-[100%_0%] object-cover"
           titleColor="text-black"
           descColor="text-gray-600"
-          tagStyle="border-teal-200 bg-teal-50 text-teal-600"
+          tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
         />
         <FeatureSection2
           page="supercharge"
@@ -60,7 +60,7 @@ export default function EdmaxPage() {
           style="bg-gray-100"
           titleColor="text-black"
           descColor="text-gray-600"
-          tagStyle="border-teal-200 bg-teal-50 text-teal-600"
+          tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
         />
       </main>
     </>

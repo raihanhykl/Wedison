@@ -58,19 +58,41 @@
   --popover-foreground: oklch(0.145 0 0);
 
   /* 🎯 Warna utama */
-  --primary: oklch(0.7 0.14 182.503); /* teal-500 */
-  --primary-light: oklch(0.78 0.15 182.5); /* sedikit lebih terang teal-400 */
-  --primary-lighter: oklch(91% 0.096 180.426); /* lebih terang, teal-200 */
-  --primary-dark: oklch(0.58 0.13 182.5); /* sedikit lebih gelap, teal-600 */
+
+  /* --primary: oklch(0.7 0.14 182.503); teal-500 */
+  --primary: oklch(69.6% 0.17 162.48); /* emerald-500 */
+
+  /* --primary-light: oklch(0.78 0.15 182.5); sedikit lebih terang teal-400 */
+  --primary-light: oklch(
+    76.5% 0.177 163.223
+  ); /* sedikit lebih terang emerald-400 */
+
+  /* --primary-lighter: oklch(91% 0.096 180.426); lebih terang, teal-200 */
+  --primary-lighter: oklch(90.5% 0.093 164.15); /* lebih terang, emerald-200 */
+
+  /* --primary-dark: oklch(0.58 0.13 182.5); sedikit lebih gelap, teal-600 */
+  --primary-dark: oklch(
+    59.6% 0.145 163.225
+  ); /* sedikit lebih gelap, emerald-600 */
+
   --primary-foreground: oklch(0.98 0 0); /* tetap putih agar kontras */
 
   /* 🧩 Warna pendukung */
-  --secondary: oklch(
+
+  /* --secondary: oklch(
     0.953 0.051 180.801
-  ); /* soft companion ke primary, teal-100 */
-  --secondary-light: oklch(
+  ); soft companion ke primary, teal-100 */
+  --secondary: oklch(
+    95% 0.052 163.051
+  ); /* soft companion ke primary, emerald-100 */
+
+  /* --secondary-light: oklch(
     0.984 0.014 180.72
-  ); /* sedikit lebih terang, teal-50 */
+  ); sedikit lebih terang, teal-50 */
+  --secondary-light: oklch(
+    97.9% 0.021 166.113
+  ); /* sedikit lebih terang, emerald-50 */
+
   --secondary-foreground: oklch(0.18 0 0);
 
   --muted: oklch(0.95 0.01 182.5);

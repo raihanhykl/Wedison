@@ -71,15 +71,15 @@ export default function ShowroomPageStructure() {
       <section className="pt-6 md:pt-3">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
-            <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+            <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
               <span className="text-sm font-medium">{t("showroom.tag")}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               {t("showroom.title")}{" "}
-              <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+              <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                 {t("showroom.titleHighlight")}
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
               </span>
             </h1>
 
@@ -98,7 +98,7 @@ export default function ShowroomPageStructure() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
                   {t("showroom.location")}
                 </span>
               </h2>
@@ -106,7 +106,7 @@ export default function ShowroomPageStructure() {
               <div className="bg-white p-6 rounded-xl shadow-soft mb-8">
                 <div className="flex items-start mb-4">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
                       <MapPin className="h-5 w-5 text-[var(--primary)]" />
                     </div>
                   </div>
@@ -120,7 +120,7 @@ export default function ShowroomPageStructure() {
 
                 <div className="flex items-start">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
                       <Clock className="h-5 w-5 text-[var(--primary)]" />
                     </div>
                   </div>
@@ -136,7 +136,7 @@ export default function ShowroomPageStructure() {
 
               <div className="flex flex-wrap gap-4">
                 <Link href={"/#contact"}>
-                  <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1">
+                  <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1">
                     {t("showroom.bookVisit")}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
@@ -149,7 +149,7 @@ export default function ShowroomPageStructure() {
                 >
                   <Button
                     variant="outline"
-                    className="border-[var(--primary)] text-[var(--primary)] hover:bg-teal-50 transition-all duration-300 hover:-translate-y-1"
+                    className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1"
                   >
                     {t("showroom.viewModels")}
                   </Button>
@@ -168,7 +168,7 @@ export default function ShowroomPageStructure() {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
               {t("showroom.whatYouCanDo")}
             </span>
           </h2>
@@ -181,7 +181,7 @@ export default function ShowroomPageStructure() {
               >
                 <div className="flex items-start">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
                       {activity.icon}
                     </div>
                   </div>

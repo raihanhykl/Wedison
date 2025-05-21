@@ -54,9 +54,9 @@ export default function ProductPicker({
             )}
           >
             Choose Your{" "}
-            <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
               Style
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
             </span>
           </h2>
           <p
@@ -94,14 +94,14 @@ export default function ProductPicker({
           )}
           style={{ transitionDelay: "400ms" }}
         >
-          <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+          <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
             {t("edmax.hero.orderNow")}
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Button>
 
           <Button
             variant="outline"
-            className="border-[var(--primary)] text-[var(--primary)] hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+            className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
           >
             <Download className="mr-2 h-5 w-5" />
             {t("edmax.hero.downloadBrochure")}
