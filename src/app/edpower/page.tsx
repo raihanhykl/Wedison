@@ -89,7 +89,7 @@ export default function EdmaxPage() {
                     : "opacity-0 translate-y-16"
                 )}
               >
-                <div className="hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-teal-400">
+                <div className="hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-[var(--primary-light)]">
                   <span className="text-sm font-medium">
                     {t("edmax.hero.tag")}
                   </span>
@@ -97,9 +97,9 @@ export default function EdmaxPage() {
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-4 md:mb-6">
                   {t("edmax.hero.title")}{" "}
-                  <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+                  <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                     {t("edmax.hero.titleHighlight")}
-                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
                   </span>
                 </h1>
 
@@ -108,14 +108,14 @@ export default function EdmaxPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-3 sm:gap-4">
-                  <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+                  <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                     {t("edmax.hero.orderNow")}
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
 
                   <Button
                     variant="outline"
-                    className="border-[var(--primary)] text-teal-400 hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                    className="border-[var(--primary)] text-[var(--primary-light)] hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
                   >
                     <Download className="mr-2 h-5 w-5" />
                     {t("edmax.hero.downloadBrochure")}
@@ -138,7 +138,7 @@ export default function EdmaxPage() {
                   </div>
 
                   <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--primary)]/20 rounded-full opacity-50 blur-2xl"></div>
-                  <div className="absolute -top-10 -right-10 w-60 h-60 bg-teal-400/20 rounded-full opacity-40 blur-3xl"></div>
+                  <div className="absolute -top-10 -right-10 w-60 h-60 bg-[var(--primary-light)]/20 rounded-full opacity-40 blur-3xl"></div>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function EdmaxPage() {
                     : "opacity-0 translate-x-16"
                 )}
               >
-                <div className="hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-teal-400">
+                <div className="hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-[var(--primary-light)]">
                   <span className="text-sm font-medium">
                     {t("edmax.feature1.tag")}
                   </span>
@@ -183,7 +183,7 @@ export default function EdmaxPage() {
                   {t("edmax.feature1.title")}
 
                 </h2>
-                <h3 className="text-xl sm:text-2xl font-semibold text-teal-600 mb-4">
+                <h3 className="text-xl sm:text-2xl font-semibold text-[var(--primary-dark)] mb-4">
 
                   {t("edmax.feature1.subtitle")}
 
@@ -223,14 +223,14 @@ export default function EdmaxPage() {
                     : "opacity-0 translate-x-16"
                 )}
               >
-                <div className="hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-teal-400">
+                <div className="hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-[var(--primary-light)]">
                   <span className="text-sm font-medium">Super Charge</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
 
                   {t("edmax.feature2.title")}
                 </h2>
-                <h3 className="text-xl sm:text-2xl font-semibold text-teal-600 mb-4">
+                <h3 className="text-xl sm:text-2xl font-semibold text-[var(--primary-dark)] mb-4">
 
                   {t("edmax.feature2.subtitle")}
                 </h3>
@@ -282,9 +282,9 @@ export default function EdmaxPage() {
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
                 {t("edmax.color.title")}{" "}
-                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                   {t("edmax.color.titleHighlight")}
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
                 </span>
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -313,14 +313,14 @@ export default function EdmaxPage() {
               )}
               style={{ transitionDelay: "400ms" }}
             >
-              <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+              <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                 {t("edmax.hero.orderNow")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
 
               <Button
                 variant="outline"
-                className="border-[var(--primary)] text-[var(--primary)] hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <Download className="mr-2 h-5 w-5" />
                 {t("edmax.hero.downloadBrochure")}
@@ -348,9 +348,9 @@ export default function EdmaxPage() {
               )}
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                   {t("edmax.specs.title")}
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
                 </span>
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">

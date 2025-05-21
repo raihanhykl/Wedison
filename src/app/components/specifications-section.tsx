@@ -27,10 +27,10 @@ export default function SpecificationsSection({}: Props) {
           )}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-            <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
               {t(`dash.specs.title`)}
               {/* {t(`${name}.specs.title`)} */}
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
             </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">

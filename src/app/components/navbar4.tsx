@@ -167,7 +167,7 @@ export default function Navbar() {
               href="/"
               className="flex items-center cursor-pointer shadow-xs h-full"
             >
-              {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+              {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
                 Wedison Motors
                 </span> */}
               <Image

@@ -91,15 +91,15 @@ export default function ContactPage() {
       <section className="pt-8 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-0 2xl:py-20">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+            <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
               <span className="text-sm font-medium">{t("contact.tag")}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               {t("contact.title")}{" "}
-              <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
+              <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                 {t("contact.titleHighlight")}
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
               </span>
             </h1>
 
@@ -127,7 +127,7 @@ export default function ContactPage() {
               >
                 <div className="flex items-start">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
                       {item.icon}
                     </div>
                   </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
               <a
                 href="https://www.facebook.com/profile.php?id=61562726390879"
                 target="_blank"
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
+                className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
               >
                 <span className="sr-only">Facebook</span>
                 <svg
@@ -184,7 +184,7 @@ export default function ContactPage() {
               <a
                 href="https://www.instagram.com/wedison.id/"
                 target="_blank"
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
+                className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
               >
                 <span className="sr-only">Instagram</span>
                 <svg
@@ -206,7 +206,7 @@ export default function ContactPage() {
                   alt="tiktok"
                   width={80}
                   height={80}
-                  className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
+                  className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
                 />
               </a>
             </div>
@@ -230,7 +230,7 @@ export default function ContactPage() {
             >
               <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
                     {t("contact.sendMessage")}
                   </span>
                 </h2>
@@ -251,7 +251,7 @@ export default function ContactPage() {
             >
               <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
                     {t("contact.page.findUs")}
                   </span>
                 </h2>
@@ -283,7 +283,7 @@ export default function ContactPage() {
       <section ref={faqRef} className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
               {t("contact.page.faqTitle")}
             </h2>
 

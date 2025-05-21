@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           <div>
-            <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-teal-400 to-teal-300 bg-clip-text text-transparent">
+            <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent">
               Wedison Motors
             </h3>
             <p className="text-sm md:text-base text-gray-400 mb-3 md:mb-4">
@@ -19,13 +19,13 @@ export default function Footer() {
           <div>
             <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
               Products
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-teal-400"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
                   href="/mini"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Mini
                 </a>
@@ -33,7 +33,7 @@ export default function Footer() {
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Mini-Pro
                 </a>
@@ -41,7 +41,7 @@ export default function Footer() {
               <li>
                 <a
                   href="/athena"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Athena
                 </a>
@@ -49,7 +49,7 @@ export default function Footer() {
               <li>
                 <a
                   href="/victory"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Victory
                 </a>
@@ -57,7 +57,7 @@ export default function Footer() {
               <li>
                 <a
                   href="/dash"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Dash
                 </a>
@@ -65,7 +65,7 @@ export default function Footer() {
               <li>
                 <a
                   href="/edmax"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   EdPower
                 </a>
@@ -76,13 +76,13 @@ export default function Footer() {
           <div>
             <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
               Experience
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-teal-400"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
                   href="/showroom"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Showroom
                 </a>
@@ -90,7 +90,7 @@ export default function Footer() {
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Service Locations
                 </a>
@@ -98,7 +98,7 @@ export default function Footer() {
               <li>
                 <a
                   href="/super-charge"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Super Charge
                 </a>
@@ -106,7 +106,7 @@ export default function Footer() {
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Test Ride
                 </a>
@@ -117,13 +117,13 @@ export default function Footer() {
           <div>
             <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
               Corporate
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-teal-400"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
                   href="/corporate/about"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   About Us
                 </a>
@@ -131,7 +131,7 @@ export default function Footer() {
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Careers
                 </a>
@@ -139,7 +139,7 @@ export default function Footer() {
               <li>
                 <a
                   href="/corporate/contact"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Contact Us
                 </a>
@@ -147,7 +147,7 @@ export default function Footer() {
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-teal-400 transition-colors duration-300"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   Help Center
                 </a>
@@ -163,19 +163,19 @@ export default function Footer() {
           <div className="flex space-x-6">
             <a
               href="#"
-              className="text-xs md:text-sm text-gray-400 hover:text-teal-400 transition-colors duration-300"
+              className="text-xs md:text-sm text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
             >
               Privacy
             </a>
             <a
               href="#"
-              className="text-xs md:text-sm text-gray-400 hover:text-teal-400 transition-colors duration-300"
+              className="text-xs md:text-sm text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
             >
               Terms
             </a>
             <a
               href="#"
-              className="text-xs md:text-sm text-gray-400 hover:text-teal-400 transition-colors duration-300"
+              className="text-xs md:text-sm text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
             >
               Cookies
             </a>

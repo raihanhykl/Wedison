@@ -59,7 +59,7 @@ export default function FeatureSection2({
           >
             <div
               className={cn(
-                "hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-teal-400",
+                "hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-[var(--primary-light)]",
                 tagStyle
               )}
             >
@@ -77,8 +77,8 @@ export default function FeatureSection2({
               {/* <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2"> */}
               {t(`${page}.feature${feature}.title`)}
             </h2>
-            <h3 className="text-xl sm:text-2xl font-semibold text-teal-600 mb-4">
-              {/* <h3 className="text-xl sm:text-2xl font-semibold text-teal-600 mb-4"> */}
+            <h3 className="text-xl sm:text-2xl font-semibold text-[var(--primary-dark)] mb-4">
+              {/* <h3 className="text-xl sm:text-2xl font-semibold text-[var(--primary-dark)] mb-4"> */}
               {t(`${page}.feature${feature}.subtitle`)}
             </h3>
             <p
