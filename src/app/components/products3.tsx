@@ -9,22 +9,23 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Products() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
+  // const { t, language } = useLanguage();
 
   // Convert miles to kilometers for Indonesian language
   const convertDistance = (miles: number) => {
-    if (language === "id") {
-      return Math.round(miles * 1.60934);
-    }
-    return miles;
+    // if (language === "id") {
+    return Math.round(miles * 1.60934);
+    // }
+    // return miles;
   };
 
   // Convert mph to km/h for Indonesian language
   const convertSpeed = (mph: number) => {
-    if (language === "id") {
-      return Math.round(mph * 1.60934);
-    }
-    return mph;
+    // if (language === "id") {
+    return Math.round(mph * 1.60934);
+    // }
+    // return mph;
   };
 
   const products = [

@@ -51,13 +51,13 @@ const translations = {
       "Our electric motorcycles combine cutting-edge technology with sustainable design to deliver an unparalleled riding experience.",
     "features.longRangeBattery": "Long-Range Battery",
     "features.longRangeBatteryDesc":
-      "Travel up to 80 miles on a single charge with our advanced lithium-ion battery technology.",
+      "Travel up to 100 km on a single charge with our advanced lithium-ion battery technology.",
     "features.rapidCharging": "Fast Charging: Super Charge",
     "features.rapidChargingDesc":
       "Charge from 10% to 80% in just 20 minutes with our SuperCharge network.",
     "features.impressivePerformance": "Impressive Performance",
     "features.impressivePerformanceDesc":
-      "Experience 0-60 mph in under 3 seconds with instant torque delivery.",
+      "Experience 0-95 km/h in under 3 seconds with instant torque delivery.",
     "features.zeroEmissions": "Zero Emissions",
     "features.zeroEmissionsDesc":
       "Ride with a clear conscience knowing you're contributing to a cleaner planet.",
@@ -78,8 +78,8 @@ const translations = {
     "products.orderNow": "Order Now",
     "products.range": "Range",
     "products.topSpeed": "Top Speed",
-    "products.miles": "miles",
-    "products.mph": "mph",
+    "products.miles": "Kilometers",
+    "products.mph": "km/h",
 
     // Testimonials
     "testimonials.tag": "Testimonials",

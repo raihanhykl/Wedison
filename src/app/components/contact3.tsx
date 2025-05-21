@@ -175,7 +175,7 @@ export default function ContactForm() {
 
         <Button
           type="submit"
-          className="w-full bg-teal-500 hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1"
+          className="w-full bg- hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? (

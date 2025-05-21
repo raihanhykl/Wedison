@@ -197,8 +197,9 @@ export default function Navbar() {
                     >
                       <button
                         className={cn(
-                          "flex items-center text-gray-800 hover:text-teal-500 px-3 py-2 rounded-md text-sm font-medium relative",
-                          activeDropdown === item.name && "text-teal-500",
+                          "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
+                          activeDropdown === item.name &&
+                            "text-[var(--primary)]",
                           // route == "/products/edmax" &&
                           //   "text-[var(--primary-light)]"
                           tone
@@ -214,18 +215,18 @@ export default function Navbar() {
                         />
                         <span
                           className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full",
+                            "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
                             bgAccent
                           )}
                         />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className=" mt-2  rounded-md shadow-soft bg-white border border-[var(--primary-light)]">
+                    <DropdownMenuContent className=" mt-2 rounded-md shadow-soft bg-white border border-[var(--primary-light)]">
                       {item.subMenu.map((subItem) => (
                         <DropdownMenuItem key={subItem.name} asChild>
                           <Link
                             href={subItem.href}
-                            className="block w-full px-0 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-500"
+                            className="block w-full px-0 py-2 text-sm text-black hover:bg-gray-900 hover:text-red-500"
                           >
                             {subItem.name}
                           </Link>
@@ -237,7 +238,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "flex items-center text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
+                      "flex items-center text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
                       // route == "/products/edmax" &&
                       //   "text-[var(--primary-light)]"
                       tone
@@ -246,7 +247,7 @@ export default function Navbar() {
                     {item.name}
                     <span
                       className={cn(
-                        "absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full",
+                        "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
                         bgAccent
                       )}
                     />
@@ -264,7 +265,7 @@ export default function Navbar() {
             <button
               type="button"
               className={cn(
-                "inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-teal-500 hover:bg-gray-100 focus:outline-none",
+                "inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100 focus:outline-none",
                 tone
               )}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -327,7 +328,7 @@ export default function Navbar() {
                 }}
               >
                 <button
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-teal-500 hover:bg-gray-100"
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100"
                   onClick={() => toggleDropdown(item.name)}
                 >
                   {item.name}

@@ -58,7 +58,7 @@
   --popover-foreground: oklch(0.145 0 0);
 
   /* 🎯 Warna utama */
-  --primary: oklch(0.7 0.14 182.503);
+  --primary: oklch(0.7 0.14 182.503); /* teal-500 */
   --primary-light: oklch(0.78 0.15 182.5); /* sedikit lebih terang */
   --primary-dark: oklch(0.58 0.13 182.5); /* sedikit lebih gelap */
   --primary-foreground: oklch(0.98 0 0); /* tetap putih agar kontras */
