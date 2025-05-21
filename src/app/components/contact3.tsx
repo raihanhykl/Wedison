@@ -68,7 +68,7 @@ export default function ContactForm() {
     return (
       <div className="flex flex-col items-center justify-center py-8">
         <div className="w-16 h-16 bg-teal-50 rounded-full flex items-center justify-center mb-4">
-          <CheckCircle2 className="h-10 w-10 text-teal-500" />
+          <CheckCircle2 className="h-10 w-10 text-[var(--primary)]" />
         </div>
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           {t("contact.page.thankYou")}
@@ -78,7 +78,7 @@ export default function ContactForm() {
         </p>
         <Button
           variant="outline"
-          className="border-teal-500 text-teal-500 hover:bg-teal-50"
+          className="border-[var(--primary)] text-[var(--primary)] hover:bg-teal-50"
           onClick={() => setIsSubmitted(false)}
         >
           {t("contact.page.sendAnother")}

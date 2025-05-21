@@ -164,7 +164,7 @@ export default function Products() {
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
             {t("products.title")}{" "}
-            <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
               {t("products.titleHighlight")}
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
             </span>
@@ -213,7 +213,7 @@ export default function Products() {
                   <div className="flex flex-col space-y-2 mb-6">
                     {product.specs.map((spec, i) => (
                       <div key={i} className="flex items-center text-gray-700">
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-teal-50 mr-2 text-teal-500">
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-teal-50 mr-2 text-[var(--primary)]">
                           {spec.icon}
                         </div>
                         <span className="text-sm">{spec.text}</span>

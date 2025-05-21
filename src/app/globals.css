@@ -59,12 +59,18 @@
 
   /* 🎯 Warna utama */
   --primary: oklch(0.7 0.14 182.503); /* teal-500 */
-  --primary-light: oklch(0.78 0.15 182.5); /* sedikit lebih terang */
-  --primary-dark: oklch(0.58 0.13 182.5); /* sedikit lebih gelap */
+  --primary-light: oklch(0.78 0.15 182.5); /* sedikit lebih terang teal-400 */
+  --primary-lighter: oklch(91% 0.096 180.426); /* lebih terang, teal-200 */
+  --primary-dark: oklch(0.58 0.13 182.5); /* sedikit lebih gelap, teal-600 */
   --primary-foreground: oklch(0.98 0 0); /* tetap putih agar kontras */
 
   /* 🧩 Warna pendukung */
-  --secondary: oklch(0.92 0.03 182.5); /* soft companion ke primary */
+  --secondary: oklch(
+    0.953 0.051 180.801
+  ); /* soft companion ke primary, teal-100 */
+  --secondary-light: oklch(
+    0.984 0.014 180.72
+  ); /* sedikit lebih terang, teal-50 */
   --secondary-foreground: oklch(0.18 0 0);
 
   --muted: oklch(0.95 0.01 182.5);

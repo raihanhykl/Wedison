@@ -129,14 +129,14 @@ export default function HeroSection({
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Button className="bg-teal-500 hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+              <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                 {t("edmax.hero.orderNow")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
 
               <Button
                 variant="outline"
-                className="border-teal-500 text-teal-400 hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                className="border-[var(--primary)] text-teal-400 hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <Download className="mr-2 h-5 w-5" />
                 {t("edmax.hero.downloadBrochure")}
@@ -163,7 +163,7 @@ export default function HeroSection({
               </div>
 
               {/* Decorative elements */}
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-teal-500/20 rounded-full opacity-50 blur-2xl"></div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--primary)]/20 rounded-full opacity-50 blur-2xl"></div>
               <div className="absolute -top-10 -right-10 w-60 h-60 bg-teal-400/20 rounded-full opacity-40 blur-3xl"></div>
             </div>
           </div>

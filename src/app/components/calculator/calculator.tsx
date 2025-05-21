@@ -952,7 +952,7 @@ export default function KalkulatorPenghematan() {
 
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
                 {t("calculator.page.title")}
-                <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
                   {t("calculator.page.titleHighlight")}
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
                 </span>
@@ -1102,7 +1102,9 @@ export default function KalkulatorPenghematan() {
                   onClick={() => scrollToCard(index)}
                   className={cn(
                     "h-2 w-2 rounded-full transition-all",
-                    activeCard === index ? "bg-teal-500 w-4" : "bg-gray-300"
+                    activeCard === index
+                      ? "bg-[var(--primary)] w-4"
+                      : "bg-gray-300"
                   )}
                 />
               ))}
@@ -1126,13 +1128,13 @@ export default function KalkulatorPenghematan() {
                         : "vs Matic 150cc"}
                     </p>
                     <div className="space-y-2">
-                      <div className="bg-teal-500 text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
+                      <div className="bg-[var(--primary)] text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
                         <p className="text-sm md:text-lg font-semibold">
                           {t("calculator.page.savingMonthlySavings")}: Rp{" "}
                           {formatAngka(dataSaatIni.penghematan.bulanan[matic])}
                         </p>
                       </div>
-                      <div className="bg-teal-500 text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
+                      <div className="bg-[var(--primary)] text-white rounded-lg py-3 px-4 md:py-4 md:px-6 text-center">
                         <p className="text-sm md:text-lg font-semibold">
                           {t("calculator.page.savingAnnualSavings")}: Rp{" "}
                           {formatAngka(dataSaatIni.penghematan.tahunan[matic])}
@@ -1261,7 +1263,7 @@ export default function KalkulatorPenghematan() {
           </Card>
 
           {/* Bagian penghematan */}
-          <Card className="mb-6 sm:mb-10 p-4 sm:p-6 bg-white shadow-lg border-teal-500 rounded-xl overflow-x-auto">
+          <Card className="mb-6 sm:mb-10 p-4 sm:p-6 bg-white shadow-lg border-[var(--primary)] rounded-xl overflow-x-auto">
             <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">
               {t("calculator.page.savingTitle")}
             </h2>
@@ -1290,7 +1292,7 @@ export default function KalkulatorPenghematan() {
               {/* Penghematan untuk matic 110cc, 125cc, 150cc */}
               {["matic110", "matic125", "matic150"].map((matic) => (
                 <div key={matic} className="space-y-4">
-                  <div className="bg-teal-500 text-white rounded-lg py-3 px-2 sm:px-4 text-center">
+                  <div className="bg-[var(--primary)] text-white rounded-lg py-3 px-2 sm:px-4 text-center">
                     {/* <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-2 sm:px-4 text-center"> */}
 
                     <p className="font-medium text-sm sm:text-base">
@@ -1302,7 +1304,7 @@ export default function KalkulatorPenghematan() {
                       )}
                     </p>
                   </div>
-                  <div className="bg-teal-500 text-white rounded-lg py-3 px-2 sm:px-4 text-center">
+                  <div className="bg-[var(--primary)] text-white rounded-lg py-3 px-2 sm:px-4 text-center">
                     {/* <div className="bg-[#05AB6D] text-white rounded-lg py-3 px-2 sm:px-4 text-center"> */}
                     <p className="font-medium text-sm sm:text-base">
                       Rp{" "}

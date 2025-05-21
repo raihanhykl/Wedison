@@ -54,7 +54,7 @@ export default function MapComponent({
 
           // Create a custom icon
           const customIcon = L.divIcon({
-            html: `<div class="flex items-center justify-center w-8 h-8 bg-teal-500 text-white rounded-full shadow-lg">
+            html: `<div class="flex items-center justify-center w-8 h-8 bg-[var(--primary)] text-white rounded-full shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                       <circle cx="12" cy="10" r="3"></circle>
@@ -100,7 +100,7 @@ export default function MapComponent({
       {/* Fallback while map is loading */}
       <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-0">
         <div className="flex flex-col items-center text-gray-500">
-          <MapPin className="h-8 w-8 mb-2 text-teal-500 animate-bounce" />
+          <MapPin className="h-8 w-8 mb-2 text-[var(--primary)] animate-bounce" />
           <p>Loading map...</p>
         </div>
       </div>

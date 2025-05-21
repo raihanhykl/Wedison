@@ -97,7 +97,7 @@ export default function EdmaxPage() {
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-4 md:mb-6">
                   {t("edmax.hero.title")}{" "}
-                  <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+                  <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
                     {t("edmax.hero.titleHighlight")}
                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
                   </span>
@@ -108,14 +108,14 @@ export default function EdmaxPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-3 sm:gap-4">
-                  <Button className="bg-teal-500 hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+                  <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                     {t("edmax.hero.orderNow")}
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
 
                   <Button
                     variant="outline"
-                    className="border-teal-500 text-teal-400 hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                    className="border-[var(--primary)] text-teal-400 hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
                   >
                     <Download className="mr-2 h-5 w-5" />
                     {t("edmax.hero.downloadBrochure")}
@@ -137,7 +137,7 @@ export default function EdmaxPage() {
       
                   </div>
 
-                  <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-teal-500/20 rounded-full opacity-50 blur-2xl"></div>
+                  <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[var(--primary)]/20 rounded-full opacity-50 blur-2xl"></div>
                   <div className="absolute -top-10 -right-10 w-60 h-60 bg-teal-400/20 rounded-full opacity-40 blur-3xl"></div>
                 </div>
               </div>
@@ -282,7 +282,7 @@ export default function EdmaxPage() {
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
                 {t("edmax.color.title")}{" "}
-                <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
                   {t("edmax.color.titleHighlight")}
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
                 </span>
@@ -313,14 +313,14 @@ export default function EdmaxPage() {
               )}
               style={{ transitionDelay: "400ms" }}
             >
-              <Button className="bg-teal-500 hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+              <Button className="bg-[var(--primary)] hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                 {t("edmax.hero.orderNow")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
 
               <Button
                 variant="outline"
-                className="border-teal-500 text-teal-500 hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                className="border-[var(--primary)] text-[var(--primary)] hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <Download className="mr-2 h-5 w-5" />
                 {t("edmax.hero.downloadBrochure")}
@@ -348,7 +348,7 @@ export default function EdmaxPage() {
               )}
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-                <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+                <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
                   {t("edmax.specs.title")}
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
                 </span>

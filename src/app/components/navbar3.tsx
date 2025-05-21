@@ -103,7 +103,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
+              {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
                 Wedison Motors
               </span> */}
               <Image
@@ -121,8 +121,8 @@ export default function Navbar() {
               <div key={item.name} className="relative group">
                 <button
                   className={cn(
-                    "flex items-center text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
-                    activeDropdown === item.name && "text-teal-500"
+                    "flex items-center text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
+                    activeDropdown === item.name && "text-[var(--primary)]"
                   )}
                   onClick={() => item.subMenu && toggleDropdown(item.name)}
                 >
@@ -137,7 +137,7 @@ export default function Navbar() {
                       )}
                     />
                   )}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full"></span>
                 </button>
 
                 {item.subMenu && (
@@ -157,7 +157,7 @@ export default function Navbar() {
                           key={subItem.name}
                           href={subItem.href}
                           onClick={() => console.log("klik submenu")}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-500"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[var(--primary)]"
                         >
                           {subItem.name}
                         </Link>
@@ -176,7 +176,7 @@ export default function Navbar() {
             <LanguageToggle className="mr-2" />
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-teal-500 hover:bg-gray-100 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100 focus:outline-none"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
@@ -225,7 +225,7 @@ export default function Navbar() {
           {navItems.map((item) => (
             <div key={item.name}>
               <button
-                className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-teal-500 hover:bg-gray-100"
+                className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100"
                 onClick={() => toggleDropdown(item.name)}
               >
                 {item.name}
@@ -245,7 +245,7 @@ export default function Navbar() {
                     <Link
                       key={subItem.name}
                       href={subItem.href}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-teal-500 hover:bg-gray-50"
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
                     >
                       {subItem.name}
                     </Link>

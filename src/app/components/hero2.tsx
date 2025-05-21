@@ -41,13 +41,13 @@ export default function Hero() {
                 : "opacity-0 translate-y-16"
             )}
           >
-            <div className="inline-block px-4 py-1 mb-6 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+            <div className="inline-block px-4 py-1 mb-6 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
+              {/* <div className="inline-block px-4 py-1 mb-6 border border-teal-200 rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]"> */}
               <span className="text-sm font-medium">{t("hero.tag")}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold leading-tight text-gray-900 mb-4 md:mb-6">
               {t("hero.title")}{" "}
-              {/* <span className="bg-gradient-to-r text-shadow-lg from-teal-500 to-teal-400 bg-clip-text text-transparent relative"> */}
               <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
                 {t("hero.titleHighlight")}
                 <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
@@ -60,7 +60,7 @@ export default function Hero() {
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Link href={"#products"} scroll={true}>
-                <Button className="bg-teal-500 hover:bg-teal-600 text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+                <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                   {/* <Button className="bg-[#2db475] hover:bg-[#2db475cb] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1"> */}
                   {t("hero.exploreModels")}
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -71,7 +71,8 @@ export default function Hero() {
                 <Button
                   variant="outline"
                   // className="border-[#2db475] text-[#2db475] hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
-                  className=" text-teal-500 hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                  className=" text-[var(--primary)] hover:bg-[var(--secondary-light)] px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                  // className=" text-[var(--primary)] hover:bg-teal-50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   {t("hero.bookTestRide")}
                 </Button>

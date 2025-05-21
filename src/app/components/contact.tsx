@@ -62,7 +62,7 @@ export default function Contact() {
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
             {t("contact.title")}{" "}
-            <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent relative">
               {t("contact.titleHighlight")}
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
             </span>
@@ -83,7 +83,7 @@ export default function Contact() {
             style={{ animationFillMode: "both" }}
           >
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">
-              <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
                 {t("contact.sendMessage")}
               </span>
             </h3>
@@ -151,7 +151,7 @@ export default function Contact() {
               <Button
                 type="submit"
                 disabled={sending}
-                className="w-full bg-teal-500 hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1"
+                className="w-full bg-[var(--primary)] hover:bg-teal-600 text-white group transition-all duration-300 hover:-translate-y-1"
               >
                 {sending ? "Sending..." : t("contact.send")}
                 <Send className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -168,7 +168,7 @@ export default function Contact() {
             style={{ animationDelay: "200ms", animationFillMode: "both" }}
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
                 {t("contact.contactInfo")}
               </span>
             </h3>
@@ -178,7 +178,7 @@ export default function Contact() {
               <div className="flex items-start group">
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors duration-300">
-                    <MapPin className="h-5 w-5 text-teal-500" />
+                    <MapPin className="h-5 w-5 text-[var(--primary)]" />
                   </div>
                 </div>
                 <div className="ml-4">
@@ -197,7 +197,7 @@ export default function Contact() {
               <div className="flex items-start group">
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors duration-300">
-                    <Phone className="h-5 w-5 text-teal-500" />
+                    <Phone className="h-5 w-5 text-[var(--primary)]" />
                   </div>
                 </div>
                 <div className="ml-4">
@@ -215,7 +215,7 @@ export default function Contact() {
               <div className="flex items-start group">
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors duration-300">
-                    <Mail className="h-5 w-5 text-teal-500" />
+                    <Mail className="h-5 w-5 text-[var(--primary)]" />
                   </div>
                 </div>
                 <div className="ml-4">
@@ -240,7 +240,7 @@ export default function Contact() {
                 <a
                   href="https://www.facebook.com/profile.php?id=61562726390879"
                   target="_blank"
-                  className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-teal-500 transition-colors duration-300"
+                  className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
                 >
                   <span className="sr-only">Facebook</span>
                   <svg
@@ -260,7 +260,7 @@ export default function Contact() {
                 <a
                   href="https://www.instagram.com/wedison.id/"
                   target="_blank"
-                  className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-teal-500 transition-colors duration-300"
+                  className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
                 >
                   <span className="sr-only">Instagram</span>
                   <svg
@@ -283,7 +283,7 @@ export default function Contact() {
                     alt="tiktok"
                     width={80}
                     height={80}
-                    className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-teal-500 transition-colors duration-300"
+                    className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-gray-100 hover:bg-teal-50 text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
                   />
                 </a>
               </div>

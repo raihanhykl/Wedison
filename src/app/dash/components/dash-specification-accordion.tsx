@@ -85,7 +85,7 @@ export default function DashSpecificationsAccordion() {
           value={`item-${index}`}
           className="border-b border-gray-200"
         >
-          <AccordionTrigger className="text-lg font-medium py-4 hover:text-teal-500 transition-colors">
+          <AccordionTrigger className="text-lg font-medium py-4 hover:text-[var(--primary)] transition-colors">
             {spec.category}
           </AccordionTrigger>
           <AccordionContent className="pb-4">

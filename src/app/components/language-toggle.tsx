@@ -60,7 +60,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
     //   <button
     //     onClick={() => setIsOpen(!isOpen)}
     //     className={cn(
-    //       "flex items-center gap-1.5 text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium",
+    //       "flex items-center gap-1.5 text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium",
     //       tone && tone
     //     )}
     //     aria-label="Toggle language"
@@ -74,7 +74,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
     //       <button
     //         onClick={toggleLanguage}
     //         className={cn(
-    //           "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-500 hover:rounded-md"
+    //           "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[var(--primary)] hover:rounded-md"
     //         )}
     //       >
     //         {t("switchLanguage")}
@@ -87,7 +87,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
         <DropdownMenuTrigger
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            "flex items-center gap-1.5 text-gray-800 hover:text-teal-500 transition-colors px-3 py-2 rounded-md text-sm font-medium ring-0 outline-none",
+            "flex items-center gap-1.5 text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium ring-0 outline-none",
             tone && tone
           )}
         >
@@ -98,7 +98,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
           <button
             onClick={toggleLanguage}
             className={cn(
-              "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-500 hover:rounded-md"
+              "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[var(--primary)] hover:rounded-md"
             )}
           >
             {t("switchLanguage")}

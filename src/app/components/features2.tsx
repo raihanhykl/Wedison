@@ -10,32 +10,32 @@ export default function Features() {
 
   const features = [
     {
-      icon: <Battery className="h-10 w-10 text-teal-500" />,
+      icon: <Battery className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.longRangeBattery"),
       description: t("features.longRangeBatteryDesc"),
     },
     {
-      icon: <Zap className="h-10 w-10 text-teal-500" />,
+      icon: <Zap className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.rapidCharging"),
       description: t("features.rapidChargingDesc"),
     },
     {
-      icon: <Gauge className="h-10 w-10 text-teal-500" />,
+      icon: <Gauge className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.impressivePerformance"),
       description: t("features.impressivePerformanceDesc"),
     },
     {
-      icon: <Leaf className="h-10 w-10 text-teal-500" />,
+      icon: <Leaf className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.zeroEmissions"),
       description: t("features.zeroEmissionsDesc"),
     },
     {
-      icon: <Clock className="h-10 w-10 text-teal-500" />,
+      icon: <Clock className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.lowMaintenance"),
       description: t("features.lowMaintenanceDesc"),
     },
     {
-      icon: <Shield className="h-10 w-10 text-teal-500" />,
+      icon: <Shield className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.advancedSafety"),
       description: t("features.advancedSafetyDesc"),
     },
@@ -54,15 +54,15 @@ export default function Features() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-16">
-          <div className="inline-block px-4 py-1 mb-4 border border-teal-200 rounded-full bg-teal-50 text-teal-600">
+          <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
             <span className="text-sm font-medium">{t("features.tag")}</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
             {t("features.title")}{" "}
-            <span className="bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
               {t("features.titleHighlight")}
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-400"></span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
             </span>
           </h2>
 
@@ -85,11 +85,11 @@ export default function Features() {
                 transitionDelay: `${index * 100}ms`,
               }}
             >
-              <div className="mb-5 inline-block p-3 bg-teal-50 rounded-lg group-hover:bg-teal-100 transition-colors duration-300">
+              <div className="mb-5 inline-block p-3 bg-[var(--secondary-light)] rounded-lg group-hover:bg-[var(--secondary)] transition-colors duration-300">
                 {feature.icon}
               </div>
 
-              <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3 group-hover:text-teal-600 transition-colors duration-300">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3 group-hover:text-[var(--primary-dark)] transition-colors duration-300">
                 {feature.title}
               </h3>
 

@@ -46,7 +46,7 @@ export default function ColorPicker({ name, product, descColor }: Props) {
             className={cn(
               "w-12 h-12 rounded-full border-2 transition-all duration-300 flex items-center justify-center",
               selectedColor.name === color.name
-                ? "border-teal-500 scale-110 shadow-md"
+                ? "border-[var(--primary)] scale-110 shadow-md"
                 : "border-gray-200 hover:border-teal-300"
             )}
             aria-label={`Select ${color.name}`}

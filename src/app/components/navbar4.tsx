@@ -167,7 +167,7 @@ export default function Navbar() {
               href="/"
               className="flex items-center cursor-pointer shadow-xs h-full"
             >
-              {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent">
+              {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[var(--primary)] to-teal-400 bg-clip-text text-transparent">
                 Wedison Motors
                 </span> */}
               <Image
@@ -350,7 +350,7 @@ export default function Navbar() {
                       key={subItem.name}
                       href={subItem.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-teal-500 hover:bg-gray-50"
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
                     >
                       {subItem.name}
                     </Link>
