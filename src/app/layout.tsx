@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <Navbar />
-          {children}
+          <div className=" pt-14 md:pt-20">{children}</div>
           <SpeedInsights />
           <Footer />
         </LanguageProvider>

@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropworn-menu";
 import { usePathname } from "next/navigation";
+import NavbarProduct from "./navbar-product";
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -22,6 +23,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const route = usePathname();
+  const [open, setOpen] = useState(false);
 
   // let tone: string | null = null;
   // let bgTone: string | null = null;
@@ -85,6 +87,7 @@ export default function Navbar() {
       setBgTone("");
       setBgAccent("");
     }
+    setOpen(false);
   }, [route]);
 
   const navItems = [
@@ -92,11 +95,11 @@ export default function Navbar() {
       name: t("nav.products"),
       href: "#",
       subMenu: [
-        { name: "Mini", href: "/mini" },
-        { name: "Athena", href: "/athena" },
-        { name: "Victory", href: "/victory" },
-        { name: "Dash", href: "/dash" },
-        { name: "EdPower", href: "/edpower" },
+        { name: "Mini", href: "/mini/", image: "/mini-grey.webp" },
+        { name: "Athena", href: "/athena/", image: "/athena-beige.webp" },
+        { name: "Victory", href: "/victory/", image: "/victory-grey.webp" },
+        // { name: "Dash", href: "/dash" },
+        { name: "EdPower", href: "/edpower/", image: "/edpower-black.webp" },
       ],
     },
     {
@@ -122,8 +125,8 @@ export default function Navbar() {
       name: t("nav.corporate"),
       href: "#",
       subMenu: [
-        { name: t("nav.aboutUs"), href: "/corporate/about" },
-        { name: t("nav.contactUs"), href: "/corporate/contact" },
+        { name: t("nav.aboutUs"), href: "/corporate/about", image: "" },
+        { name: t("nav.contactUs"), href: "/corporate/contact", image: "" },
       ],
     },
   ];
@@ -148,9 +151,11 @@ export default function Navbar() {
   };
 
   return (
+    // <div className="relative">
     <header
       className={cn(
-        "sticky top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
+        // "sticky top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white ",
         bgTone
         // route == "/products/edmax" ? "bg-black text-[var(--primary-light)]" : ""
         // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent",
@@ -190,50 +195,74 @@ export default function Navbar() {
               <div key={item.name} className="relative group">
                 {/* <div key={item.name} className="relative group"> */}
                 {item.subMenu ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      asChild
-                      className=" border-none outline-none ring-0"
+                  item.name === t("nav.products") ? (
+                    <button
+                      className={cn(
+                        "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
+                        activeDropdown === item.name && "text-[var(--primary)]",
+                        tone
+                      )}
+                      onClick={() => setOpen(!open)}
                     >
-                      <button
+                      {item.name}
+                      <ChevronDown
                         className={cn(
-                          "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
-                          activeDropdown === item.name &&
-                            "text-[var(--primary)]",
-                          // route == "/products/edmax" &&
-                          //   "text-[var(--primary-light)]"
-                          tone
+                          "ml-1 h-4 w-4 transition-transform duration-200",
+                          open && "rotate-180"
                         )}
+                      />
+                      <span
+                        className={cn(
+                          "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
+                          bgAccent
+                        )}
+                      />
+                    </button>
+                  ) : (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        asChild
+                        className=" border-none outline-none ring-0"
                       >
-                        {item.name}
-
-                        <ChevronDown
+                        <button
                           className={cn(
-                            "ml-1 h-4 w-4 transition-transform duration-200",
-                            activeDropdown === item.name && "rotate-180"
+                            "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
+                            activeDropdown === item.name &&
+                              "text-[var(--primary)]",
+                            // route == "/products/edmax" &&
+                            //   "text-[var(--primary-light)]"
+                            tone
                           )}
-                        />
-                        <span
-                          className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
-                            bgAccent
-                          )}
-                        />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className=" mt-2 rounded-md shadow-soft bg-white border border-[var(--primary-light)]">
-                      {item.subMenu.map((subItem) => (
-                        <DropdownMenuItem key={subItem.name} asChild>
-                          <Link
-                            href={subItem.href}
-                            className="block w-full px-0 py-2 text-sm text-black hover:bg-red-500 hover:text-red-500"
-                          >
-                            {subItem.name}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                        >
+                          {item.name}
+                          <ChevronDown
+                            className={cn(
+                              "ml-1 h-4 w-4 transition-transform duration-200",
+                              activeDropdown === item.name && "rotate-180"
+                            )}
+                          />
+                          <span
+                            className={cn(
+                              "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
+                              bgAccent
+                            )}
+                          />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className=" mt-2 rounded-md shadow-soft bg-white border border-[var(--primary-light)]">
+                        {item.subMenu.map((subItem) => (
+                          <DropdownMenuItem key={subItem.name} asChild>
+                            <Link
+                              href={subItem.href}
+                              className="block w-full px-0 py-2 text-sm text-black hover:bg-red-500 hover:text-red-500"
+                            >
+                              {subItem.name}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )
                 ) : (
                   <Link
                     href={item.href}
@@ -344,23 +373,67 @@ export default function Navbar() {
               </Link>
 
               {item.subMenu && activeDropdown === item.name && (
-                <div className="pl-4 py-2 space-y-1 animate-slide-down bg-gray-50 rounded-md my-1">
-                  {item.subMenu.map((subItem) => (
-                    <Link
-                      key={subItem.name}
-                      href={subItem.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
-                    >
-                      {subItem.name}
-                    </Link>
-                  ))}
+                // <div className="pl-4 py-2 space-y-1 animate-slide-down bg-gray-50 rounded-md my-1">
+                //   {item.subMenu.map((subItem) => (
+                //     <Link
+                //       key={subItem.name}
+                //       href={subItem.href}
+                //       onClick={() => setMobileMenuOpen(false)}
+                //       className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
+                //     >
+                //       {subItem.name}
+                //     </Link>
+                //   ))}
+                // </div>
+                <div
+                  className={` md:hidden ${
+                    item.subMenu[0].image != "" && "grid grid-cols-2 gap-7 p-4"
+                  } p-4 bg-white shadow-sm`}
+                >
+                  {item.subMenu.map((item, index) =>
+                    item.image != "" ? (
+                      <div
+                        key={index}
+                        className="flex flex-col items-center justify-center hover:scale-105 h-14 w-14 mx-auto"
+                      >
+                        <Link
+                          href={item.href}
+                          className="flex flex-col items-center justify-center "
+                        >
+                          <p className=" w-full text-center text-sm font-bold tracking-widest">
+                            {/* {item.name} */}
+                            {item.name.toUpperCase()}
+                          </p>
+
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            width={10}
+                            height={10}
+                            className="lg:h-32 lg:w-32 h-14 w-14"
+                            loading="eager"
+                          />
+                        </Link>
+                      </div>
+                    ) : (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
+                      >
+                        {item.name}
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
             </div>
           ))}
         </div>
       </div>
+      <NavbarProduct open={open} />
     </header>
+    // {/* </div> */}
   );
 }

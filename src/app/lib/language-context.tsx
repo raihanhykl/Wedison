@@ -58,15 +58,15 @@ const translations = {
     "features.impressivePerformance": "Impressive Performance",
     "features.impressivePerformanceDesc":
       "Experience 0-95 km/h in under 3 seconds with instant torque delivery.",
-    "features.zeroEmissions": "Zero Emissions",
+    "features.zeroEmissions": "Cut the Carbon, Ride Electric",
     "features.zeroEmissionsDesc":
-      "Ride with a clear conscience knowing you're contributing to a cleaner planet.",
-    "features.lowMaintenance": "Low Maintenance",
-    "features.lowMaintenanceDesc":
-      "Fewer moving parts means less maintenance and more time on the road.",
-    "features.advancedSafety": "Advanced Safety",
-    "features.advancedSafetyDesc":
-      "Cutting-edge safety features like Short circuit protection, Overcurrent protection, and Overvoltage protection ensure a safe ride.",
+      "Switching to electric bikes helps reduce daily CO₂ emissions significantly—making every ride a step towards a cleaner, healthier, and more sustainable world.",
+    "features.healthBenefits": "Cleaner Air, Healthier Life",
+    "features.healthBenefitsDesc":
+      "Electric vehicles reduce air toxins, helping prevent cancer, breathing problems, and skin issues—giving you and your family a healthier living environment.",
+    "features.noiseFree": "Say Goodbye to Noise & Air Pollution",
+    "features.noiseFreeDesc":
+      "No engine noise or smoky exhaust—just quiet, eco-friendly rides that help cut air and noise pollution in your city every single day.",
 
     // Products
     "products.tag": "Our Fleet",
@@ -485,15 +485,15 @@ const translations = {
     "features.impressivePerformance": "Performa Mengesankan",
     "features.impressivePerformanceDesc":
       "Rasakan akselerasi 0-100 km/jam dalam waktu kurang dari 3 detik dengan torsi instan.",
-    "features.zeroEmissions": "Nol Emisi",
+    "features.zeroEmissions": "Nol Karbon, Lebih Ramah Lingkungan",
     "features.zeroEmissionsDesc":
-      "Berkendara dengan hati tenang karena Anda berkontribusi pada planet yang lebih bersih.",
-    "features.lowMaintenance": "Perawatan Minimal",
-    "features.lowMaintenanceDesc":
-      "Komponen yang lebih sedikit berarti perawatan lebih sedikit dan waktu di jalan lebih banyak.",
-    "features.advancedSafety": "Keamanan Canggih",
-    "features.advancedSafetyDesc":
-      "Fitur keamanan canggih termasuk sirkuit pendek, perlindungan arus lebih, dan perlindungan tegangan lebih memastikan perjalanan yang aman.",
+      "Beralih ke motor listrik bantu kurangi emisi CO₂ setiap hari—mewujudkan lingkungan lebih sehat, bersih, dan layak untuk generasi mendatang.",
+    "features.healthBenefits": "Udara Bersih, Hidup Lebih Sehat",
+    "features.healthBenefitsDesc":
+      "Lebih sedikit asap beracun artinya risiko kanker, sesak napas, dan masalah kulit bisa berkurang. Udara segar, tubuh pun lebih sehat.",
+    "features.noiseFree": "Bebas Polusi dan Suara Berisik",
+    "features.noiseFreeDesc":
+      "Motor listrik bantu kurangi kebisingan dan polusi udara di jalanan, bikin kota jadi tempat tinggal yang lebih nyaman dan tenang.",
 
     // Products
     "products.tag": "Armada Kami",

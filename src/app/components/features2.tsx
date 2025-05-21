@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { Battery, Zap, Gauge, Leaf, Clock, Shield } from "lucide-react";
+import { Battery, Zap, Gauge, Leaf, HeartPulse, Wind } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/app/lib/language-context";
 
@@ -30,14 +30,14 @@ export default function Features() {
       description: t("features.zeroEmissionsDesc"),
     },
     {
-      icon: <Clock className="h-10 w-10 text-[var(--primary)]" />,
-      title: t("features.lowMaintenance"),
-      description: t("features.lowMaintenanceDesc"),
+      icon: <HeartPulse className="h-10 w-10 text-[var(--primary)]" />,
+      title: t("features.healthBenefits"),
+      description: t("features.healthBenefitsDesc"),
     },
     {
-      icon: <Shield className="h-10 w-10 text-[var(--primary)]" />,
-      title: t("features.advancedSafety"),
-      description: t("features.advancedSafetyDesc"),
+      icon: <Wind className="h-10 w-10 text-[var(--primary)]" />,
+      title: t("features.noiseFree"),
+      description: t("features.noiseFreeDesc"),
     },
   ];
 
