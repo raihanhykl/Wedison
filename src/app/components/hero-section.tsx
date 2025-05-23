@@ -11,6 +11,7 @@ type Props = {
   imageAlt: string;
   imageStyle?: string;
   theme: "dark" | "light";
+  noButton?: boolean;
 };
 
 export default function HeroSection({
@@ -18,6 +19,7 @@ export default function HeroSection({
   imageStyle,
   imageAlt,
   theme,
+  noButton = false,
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -129,20 +131,22 @@ export default function HeroSection({
               {t(`${name}.hero.description`)}
             </p>
 
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
-                {t("edmax.hero.orderNow")}
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
+            {!noButton && (
+              <div className="flex flex-wrap gap-3 sm:gap-4">
+                <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+                  {t("edmax.hero.orderNow")}
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
 
-              <Button
-                variant="outline"
-                className="border-[var(--primary)] text-[var(--primary-light)] hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
-              >
-                <Download className="mr-2 h-5 w-5" />
-                {t("edmax.hero.downloadBrochure")}
-              </Button>
-            </div>
+                <Button
+                  variant="outline"
+                  className="border-[var(--primary)] text-[var(--primary-light)] hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  {t("edmax.hero.downloadBrochure")}
+                </Button>
+              </div>
+            )}
           </div>
 
           <div

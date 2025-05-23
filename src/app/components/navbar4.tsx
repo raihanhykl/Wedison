@@ -394,7 +394,10 @@ export default function Navbar() {
                     item.image != "" ? (
                       <div
                         key={index}
-                        className="flex flex-col items-center justify-center hover:scale-105 h-14 w-14 mx-auto"
+                        className={cn(
+                          "flex flex-col items-center justify-center hover:scale-105 h-16 w-16 mx-auto",
+                          item.name === "Victory" && ""
+                        )}
                       >
                         <Link
                           href={item.href}
@@ -404,15 +407,21 @@ export default function Navbar() {
                             {/* {item.name} */}
                             {item.name.toUpperCase()}
                           </p>
-
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            width={10}
-                            height={10}
-                            className="lg:h-32 lg:w-32 h-14 w-14"
-                            loading="eager"
-                          />
+                          <div className="overflow-hidden w-16 h-16 items-center justify-center flex">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              width={10}
+                              height={10}
+                              className={cn(
+                                "lg:h-32 lg:w-32 h-16 w-16",
+                                item.name === "Victory" &&
+                                  "lg:h-36 lg:w-36 h-20 w-20 object-contain scale-[1.16] object-[100%_40%]"
+                                // "scale-125"
+                              )}
+                              loading="eager"
+                            />
+                          </div>
                         </Link>
                       </div>
                     ) : (

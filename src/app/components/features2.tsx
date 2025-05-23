@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Battery, Zap, Gauge, Leaf, HeartPulse, Wind } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/app/lib/language-context";
+// import Link from "next/link";
 
 export default function Features() {
   const { t } = useLanguage();
@@ -28,16 +29,19 @@ export default function Features() {
       icon: <Leaf className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.zeroEmissions"),
       description: t("features.zeroEmissionsDesc"),
+      link: t("features.zeroEmissionsLink"),
     },
     {
       icon: <HeartPulse className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.healthBenefits"),
       description: t("features.healthBenefitsDesc"),
+      link: t("features.healthBenefitsLink"),
     },
     {
       icon: <Wind className="h-10 w-10 text-[var(--primary)]" />,
       title: t("features.noiseFree"),
       description: t("features.noiseFreeDesc"),
+      link: t("features.noiseFreeLink"),
     },
   ];
 
@@ -93,7 +97,17 @@ export default function Features() {
                 {feature.title}
               </h3>
 
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-gray-600">
+                {feature.description}{" "}
+                {/* {feature.link && (
+                  <span className=" bg-[var(--secondary-light)] text-[var(--primary-dark)] text-nowrap px-3 pt-1 pb-1 rounded-full text-xs font-medium underline">
+                    <Link href={feature.link} target="_blank">
+                      {" "}
+                      See Source
+                    </Link>
+                  </span>
+                )} */}
+              </p>
             </div>
           ))}
         </div>

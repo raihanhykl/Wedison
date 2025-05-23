@@ -29,6 +29,7 @@ export default function EdmaxPage() {
           imageAlt="Super Charge Charging Station"
           theme="light"
           imageStyle="object-[70%_40%] md:object-[0%_40%] 2xl:object-[0%_60%] "
+          noButton={true}
         />
         <FeatureSection2
           page="supercharge"

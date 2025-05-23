@@ -33,10 +33,10 @@ export default function SpecificationsSection({}: Props) {
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
             </span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            {t(`dash.specs.description`)}
-            {/* {t(`${name}.specs.description`)} */}
-          </p>
+          {/* <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"> */}
+          {/* {t(`dash.specs.description`)} */}
+          {/* {t(`${name}.specs.description`)} */}
+          {/* </p> */}
         </div>
 
         <div

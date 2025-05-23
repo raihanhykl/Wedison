@@ -53,9 +53,9 @@ export default function ProductPicker({
               titleColor
             )}
           >
-            Choose Your{" "}
+            {t("edmax.color.title")}{" "}
             <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
-              Style
+              {t("edmax.color.titleHighlight")}
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
             </span>
           </h2>
@@ -65,7 +65,7 @@ export default function ProductPicker({
               descColor
             )}
           >
-            Pick your favorite {productName} color and see it in action.
+            {t(`${productName}.color.description`)}
           </p>
         </div>
 

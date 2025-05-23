@@ -49,24 +49,35 @@ const translations = {
     "features.titleHighlight": "Wedison Motors",
     "features.description":
       "Our electric motorcycles combine cutting-edge technology with sustainable design to deliver an unparalleled riding experience.",
-    "features.longRangeBattery": "Long-Range Battery",
+    "features.longRangeBattery": "120km Long-Range Battery",
     "features.longRangeBatteryDesc":
       "Travel up to 100 km on a single charge with our advanced lithium-ion battery technology.",
-    "features.rapidCharging": "Fast Charging: Super Charge",
+    "features.rapidCharging": "Super Charge in 15 Minutes",
     "features.rapidChargingDesc":
-      "Charge from 10% to 80% in just 20 minutes with our SuperCharge network.",
-    "features.impressivePerformance": "Impressive Performance",
+      "Charge from 10% to 80% in just 15 minutes with our SuperCharge network.",
+    "features.impressivePerformance": "0-95km/h in 3 Seconds",
     "features.impressivePerformanceDesc":
       "Experience 0-95 km/h in under 3 seconds with instant torque delivery.",
-    "features.zeroEmissions": "Cut the Carbon, Ride Electric",
+    // "features.zeroEmissions": "Cut the Carbon, Ride Electric",
+    "features.zeroEmissions": "Ride Electric, Cut Emissions by 54%",
     "features.zeroEmissionsDesc":
-      "Switching to electric bikes helps reduce daily CO₂ emissions significantly—making every ride a step towards a cleaner, healthier, and more sustainable world.",
-    "features.healthBenefits": "Cleaner Air, Healthier Life",
+      "Battery electric motorcycles emit 53.8% less CO₂ and cut lifecycle emissions by up to 80%, saving riders as much as 0.8 tonnes of CO₂ annually.",
+    "features.zeroEmissionsLink":
+      "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
+    // "features.healthBenefits": "Cleaner Air, Healthier Life",
+    "features.healthBenefits":
+      "14% Cleaner Air, 11% Lower Lung Disease Risk, 3.2% Fewer Asthma ER Visits",
     "features.healthBenefitsDesc":
-      "Electric vehicles reduce air toxins, helping prevent cancer, breathing problems, and skin issues—giving you and your family a healthier living environment.",
-    "features.noiseFree": "Say Goodbye to Noise & Air Pollution",
+      "Riding an electric motorcycle cuts city air pollution by 14%, lowers your risk of lung disease by 11%, and reduces asthma-related ER visits by 3.2%, helping you breathe easier and stay healthier.",
+    // "Riding an electric motorcycle cuts city fine particulate pollution by 14% on average, reduces asthma-related ER visits by 3.2%, helping you and your loved ones breathe easier every day.",
+    "features.healthBenefitsLink":
+      "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
+    // "features.noiseFree": "Say Goodbye to Noise & Air Pollution",
+    "features.noiseFree": "Enjoy 23% Quieter, Zero-Exhaust Rides",
     "features.noiseFreeDesc":
-      "No engine noise or smoky exhaust—just quiet, eco-friendly rides that help cut air and noise pollution in your city every single day.",
+      "Electric motorcycle rides are up to 23% quieter and emit no exhaust, saving about 46.5 g of CO₂ and 1.95 g of CO per kilometer.",
+    "features.noiseFreeLink":
+      "https://www.sciencedirect.com/science/article/pii/S0160412023003896",
 
     // Products
     "products.tag": "Our Fleet",
@@ -216,7 +227,7 @@ const translations = {
     "contact.page.faq.q3":
       "How long does it take to charge a Wedison motorcycle?",
     "contact.page.faq.a3":
-      "Charging times vary by model, but with our SuperCharge network, most models can charge from 0% to 80% in just 30 minutes. A full charge using a standard home outlet typically takes 3-4 hours.",
+      "Charging times vary by model, but with our SuperCharge network, most models can charge from 10% to 80% in just 15 minutes. A full charge using a standard home outlet typically takes 3-4 hours.",
     "contact.page.faq.q4": "Do you offer financing options?",
     "contact.page.faq.a4":
       "Yes, we offer flexible financing options to make owning a Wedison motorcycle more accessible. Our team can help you explore payment plans that fit your budget and needs.",
@@ -274,8 +285,8 @@ const translations = {
     "edmax.feature2.title": "Power Up in Minutes",
     "edmax.feature2.subtitle": "Super Charge Technology",
     "edmax.feature2.description":
-      "From 10% to 80% in just 20 minutes. Because your time is too valuable to waste.",
-    "edmax.feature2.charge": "0-80% Charge",
+      "From 10% to 80% in just 15 minutes. Because your time is too valuable to waste.",
+    "edmax.feature2.charge": "10% to 80% Charge",
     "edmax.feature2.universal": "Universal",
     "edmax.feature2.chargingPort": "Charging Port",
     "edmax.feature2.smart": "Smart",
@@ -369,6 +380,11 @@ const translations = {
     "victory.feature2.description":
       "Victory's sporty silhouette is made to stand out, offering a stylish ride without sacrificing everyday practicality.",
 
+    "victory.color.title": "Choose Your",
+    "victory.color.titleHighlight": "Style",
+    "victory.color.description":
+      "Pick your favorite Victory color and see it in action.",
+
     //athena
 
     "athena.hero.tag": "Retro Electric Scooter",
@@ -390,6 +406,8 @@ const translations = {
     "athena.feature2.subtitle": "Classic look, electric performance",
     "athena.feature2.description":
       "Combining vintage appeal with powerful EV tech, Athena gives you a fun, efficient, and future-ready ride without sacrificing style.",
+    "athena.color.description":
+      "Pick your favorite Athena color and see it in action.",
 
     //mini
     "mini.hero.tag": "Entry-Level EV",
@@ -412,10 +430,13 @@ const translations = {
     "mini.feature2.description":
       "Mini qualifies for government EV subsidy. It’s wallet-friendly, can be charged at home, and perfect for all kinds of daily users.",
 
+    "mini.color.description":
+      "Pick your favorite Mini color and see it in action.",
+
     //super charge
     "supercharge.hero.tag": "Fast Charging",
     "supercharge.hero.title": "Charge from 10% to 80% in",
-    "supercharge.hero.titleHighlight": "Just 20 Minutes",
+    "supercharge.hero.titleHighlight": "Just 15 Minutes",
     "supercharge.hero.description":
       "Super Charge is Wedison’s exclusive fast-charging solution. Designed specifically for EdPower, Athena, and Victory — experience efficiency with no compromise.",
     "supercharge.hero.ctaPrimary": "Find a Station",
@@ -425,7 +446,7 @@ const translations = {
     "supercharge.feature1.title": "Next-Gen Charging Technology",
     "supercharge.feature1.subtitle": "Less time, maximum performance",
     "supercharge.feature1.description":
-      "With cutting-edge fast charging, Super Charge powers your battery from 10% to 80% in just 20 minutes. Save time without sacrificing quality.",
+      "With cutting-edge fast charging, Super Charge powers your battery from 10% to 80% in just 15 minutes. Save time without sacrificing quality.",
 
     "supercharge.feature2.tag": "Nationwide Coverage",
     "supercharge.feature2.title": "100+ Super Charge Stations Across Indonesia",
@@ -476,24 +497,32 @@ const translations = {
     "features.titleHighlight": "Wedison Motors",
     "features.description":
       "Sepeda motor listrik kami menggabungkan teknologi canggih dengan desain berkelanjutan untuk memberikan pengalaman berkendara yang tak tertandingi.",
-    "features.longRangeBattery": "Baterai Jarak Jauh",
+    "features.longRangeBattery": "Baterai Jarak Jauh sampai 120km",
     "features.longRangeBatteryDesc":
       "Jelajahi hingga 100 kilometer dengan sekali pengisian menggunakan teknologi baterai lithium-ion canggih kami.",
-    "features.rapidCharging": "Pengisian Cepat: Super Charge",
+    "features.rapidCharging": "Super Charge dalam 15 Menit",
     "features.rapidChargingDesc":
-      "Isi daya dari 10% hingga 80% hanya dalam 20 menit dengan jaringan SuperCharge kami.",
-    "features.impressivePerformance": "Performa Mengesankan",
+      "Isi daya dari 10% hingga 80% hanya dalam 15 menit dengan jaringan SuperCharge kami.",
+    "features.impressivePerformance": "0-95km/jam dalam 3 Detik",
     "features.impressivePerformanceDesc":
       "Rasakan akselerasi 0-100 km/jam dalam waktu kurang dari 3 detik dengan torsi instan.",
-    "features.zeroEmissions": "Nol Karbon, Lebih Ramah Lingkungan",
+    "features.zeroEmissions": "Berkendara Listrik, Kurangi Emisi hingga 54%",
     "features.zeroEmissionsDesc":
-      "Beralih ke motor listrik bantu kurangi emisi CO₂ setiap hari—mewujudkan lingkungan lebih sehat, bersih, dan layak untuk generasi mendatang.",
-    "features.healthBenefits": "Udara Bersih, Hidup Lebih Sehat",
+      "Motor listrik bertenaga baterai menghasilkan emisi CO₂ 53,8% lebih sedikit dan dapat mengurangi emisi sepanjang siklus hidupnya hingga 80%, menghemat hingga 0,8 ton CO₂ per tahun bagi pengendara.",
+    "features.zeroEmissionsLink":
+      "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
+    "features.healthBenefits":
+      "Udara 14% Lebih Bersih, Risiko Penyakit Paru-Paru 11% Lebih Rendah, 3,2% Lebih Sedikit Kunjungan IGD karena Asma",
     "features.healthBenefitsDesc":
-      "Lebih sedikit asap beracun artinya risiko kanker, sesak napas, dan masalah kulit bisa berkurang. Udara segar, tubuh pun lebih sehat.",
-    "features.noiseFree": "Bebas Polusi dan Suara Berisik",
+      "Mengendarai motor listrik mengurangi polusi udara kota hingga 14%, menurunkan risiko penyakit paru-paru sebesar 11%, dan mengurangi kunjungan IGD terkait asma sebesar 3,2%, membantu Anda bernapas lebih lega dan tetap sehat.",
+    "features.healthBenefitsLink":
+      "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
+    "features.noiseFree":
+      "Nikmati Perjalanan 23% Lebih Senyap, Tanpa Emisi Knalpot",
     "features.noiseFreeDesc":
-      "Motor listrik bantu kurangi kebisingan dan polusi udara di jalanan, bikin kota jadi tempat tinggal yang lebih nyaman dan tenang.",
+      "Perjalanan dengan motor listrik hingga 23% lebih senyap dan tidak menghasilkan emisi knalpot, menghemat sekitar 46,5 gram CO₂ dan 1,95 gram CO per kilometer.",
+    "features.noiseFreeLink":
+      "https://www.sciencedirect.com/science/article/pii/S0160412023003896",
 
     // Products
     "products.tag": "Armada Kami",
@@ -648,7 +677,7 @@ const translations = {
     "contact.page.faq.q3":
       "Berapa lama waktu yang dibutuhkan untuk mengisi daya sepeda motor Wedison?",
     "contact.page.faq.a3":
-      "Waktu pengisian bervariasi menurut model, tetapi dengan jaringan SuperCharge kami, sebagian besar model dapat mengisi daya dari 0% hingga 80% hanya dalam 30 menit. Pengisian penuh menggunakan stopkontak rumah standar biasanya membutuhkan waktu 3-4 jam.",
+      "Waktu pengisian bervariasi menurut model, tetapi dengan jaringan SuperCharge kami, sebagian besar model dapat mengisi daya dari 10% hingga 80% hanya dalam 15 menit. Pengisian penuh menggunakan stopkontak rumah standar biasanya membutuhkan waktu 3-4 jam.",
     "contact.page.faq.q4": "Apakah Anda menawarkan opsi pembiayaan?",
     "contact.page.faq.a4":
       "Ya, kami menawarkan opsi pembiayaan yang fleksibel untuk membuat kepemilikan sepeda motor Wedison lebih terjangkau. Tim kami dapat membantu Anda menjelajahi rencana pembayaran yang sesuai dengan anggaran dan kebutuhan Anda.",
@@ -705,8 +734,8 @@ const translations = {
     "edmax.feature2.title": "Isi Daya dalam Hitungan Menit",
     "edmax.feature2.subtitle": "Teknologi Pengisian Super Cepat",
     "edmax.feature2.description":
-      "Dari 0 hingga 80% hanya dalam 20 menit. Karena waktu Anda terlalu berharga untuk disia-siakan.",
-    "edmax.feature2.charge": "Pengisian 0-80%",
+      "Dari 10 hingga 80% hanya dalam 15 menit. Karena waktu Anda terlalu berharga untuk disia-siakan.",
+    "edmax.feature2.charge": "Pengisian 10-80%",
     "edmax.feature2.universal": "Universal",
     "edmax.feature2.chargingPort": "Port Pengisian",
     "edmax.feature2.smart": "Pintar",
@@ -723,8 +752,8 @@ const translations = {
     "edmax.feature3.premium": "Premium",
     "edmax.feature3.materials": "Material",
 
-    "edmax.color.title": "Pilih",
-    "edmax.color.titleHighlight": "Gaya Anda",
+    "edmax.color.title": "Tentukan",
+    "edmax.color.titleHighlight": "Gayamu",
     "edmax.color.description":
       "Pilih warna EdPower favorit Anda dan lihat tampilannya.",
 
@@ -800,6 +829,9 @@ const translations = {
     "victory.feature2.description":
       "Tampilan Victory terinspirasi dari desain skuter sporty, menjadikannya pilihan ideal untuk kamu yang ingin tampil beda dan tetap efisien.",
 
+    "victory.color.description":
+      "Pilih warna Victory favoritmu dan lihat tampilannya.",
+
     //athena
 
     "athena.hero.tag": "Motor Listrik Retro",
@@ -822,7 +854,11 @@ const translations = {
     "athena.feature2.description":
       "Athena memadukan tampilan klasik dengan kekuatan motor listrik terkini. Pengalaman berkendara yang menyenangkan, efisien, dan ramah lingkungan.",
 
+    "athena.color.description":
+      "Pilih warna Athena favoritmu dan lihat tampilannya.",
+
     //mini
+
     "mini.hero.tag": "Motor Entry-Level",
     "mini.hero.title": "Solusi Terjangkau untuk",
     "mini.hero.titleHighlight": "Mobilitas Harian",
@@ -843,10 +879,13 @@ const translations = {
     "mini.feature2.description":
       "Mini termasuk kendaraan yang memenuhi syarat subsidi pemerintah. Biaya hemat, bisa charge di rumah, dan cocok untuk semua kalangan.",
 
+    "mini.color.description":
+      "Pilih warna Mini favoritmu dan lihat tampilannya.",
+
     //super charge
     "supercharge.hero.tag": "Fast Charging",
     "supercharge.hero.title": "Isi Daya dari 10% ke 80% dalam",
-    "supercharge.hero.titleHighlight": "Hanya 20 Menit",
+    "supercharge.hero.titleHighlight": "Hanya 15 Menit",
     "supercharge.hero.description":
       "Super Charge adalah solusi pengisian cepat eksklusif dari Wedison. Didesain khusus untuk Edmax, Athena, dan Victory — rasakan efisiensi tanpa kompromi.",
     "supercharge.hero.ctaPrimary": "Temukan Lokasi",
@@ -856,7 +895,7 @@ const translations = {
     "supercharge.feature1.title": "Teknologi Pengisian Generasi Baru",
     "supercharge.feature1.subtitle": "Waktu lebih singkat, performa maksimal",
     "supercharge.feature1.description":
-      "Dengan teknologi fast charge terbaru, Super Charge mampu mengisi baterai dari 10% ke 80% hanya dalam 20 menit. Hemat waktu, tanpa mengorbankan kualitas.",
+      "Dengan teknologi fast charge terbaru, Super Charge mampu mengisi baterai dari 10% ke 80% hanya dalam 15 menit. Hemat waktu, tanpa mengorbankan kualitas.",
 
     "supercharge.feature2.tag": "Tersebar Nasional",
     "supercharge.feature2.title": "Lebih dari 100 Titik Super Charge",

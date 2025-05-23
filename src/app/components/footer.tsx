@@ -11,7 +11,7 @@ export default function Footer() {
               Pioneering the future of electric mobility with cutting-edge
               technology and sustainable design.
             </p>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-sm md:text-base">
               © {new Date().getFullYear()} Wedison Motors. All rights reserved.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/edmax"
+                  href="/edpower"
                   className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
                   EdPower

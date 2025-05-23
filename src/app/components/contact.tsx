@@ -102,6 +102,7 @@ export default function Contact() {
                     id="name"
                     placeholder={t("contact.name")}
                     className="w-full"
+                    required
                   />
                 </div>
                 <div>
@@ -117,6 +118,7 @@ export default function Contact() {
                     type="email"
                     placeholder={t("contact.email")}
                     className="w-full"
+                    required
                   />
                 </div>
               </div>
@@ -132,6 +134,7 @@ export default function Contact() {
                   id="title"
                   placeholder={t("contact.subjectPlaceholder")}
                   className="w-full"
+                  required
                 />
               </div>
               <div>
@@ -146,6 +149,7 @@ export default function Contact() {
                   id="message"
                   placeholder={t("contact.messagePlaceholder")}
                   className="w-full min-h-[120px]"
+                  required
                 />
               </div>
               <Button

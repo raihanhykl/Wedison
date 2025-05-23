@@ -48,13 +48,18 @@ export default function NavbarProduct({ open }: Props) {
         className={cn(
           " sticky top-0 left-0 w-full overflow-hidden bg-white md:transition-discrete duration-300 hidden md:flex justify-center items-center shadow-sm ",
           // open ? "block h-16" : "hidden"
-          open ? "max-h-60 h-60 opacity-100" : "max-h-0 opacity-0"
+          open
+            ? "max-h-60 h-60 opacity-100 pointer-events-auto"
+            : "max-h-0 pointer-events-none"
         )}
       >
         {product.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center hover:scale-105 transition-all duration-300 lg:h-32 lg:w-32 h-20 w-20 mx-14"
+            className={cn(
+              `flex flex-col items-center justify-center hover:scale-105 transition-all duration-300 lg:h-36 lg:w-36 h-20 w-20 mx-14`,
+              item.name === "Victory" && "lg:h-36 lg:w-36 h-20 w-20"
+            )}
           >
             <Link
               href={item.href}
@@ -65,19 +70,23 @@ export default function NavbarProduct({ open }: Props) {
                 {item.name.toUpperCase()}
               </p>
 
-              <Image
-                src={item.image}
-                alt={item.name}
-                width={1000}
-                height={1000}
-                className="lg:h-32 lg:w-32 h-20 w-20"
-              />
+              <div className="overflow-hidden w-34 h-34 items-center justify-center flex">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={1000}
+                  height={1000}
+                  className={
+                    item.name === "Victory"
+                      ? "lg:h-36 lg:w-36 h-20 w-20 object-contain scale-[1.05] object-[100%_40%] "
+                      : "object-contain lg:h-32 lg:w-32 h-20 w-20"
+                  }
+                />
+              </div>
             </Link>
           </div>
         ))}
       </div>
-
-      {/* mobile */}
     </>
   );
 }
