@@ -1,28 +1,41 @@
 import FeatureSection2 from "@/app/components/feature-section";
 import HeroSection from "../components/hero-section";
-import { generateSeoMetadata } from "../lib/seo";
-const { metadata, jsonLd } = generateSeoMetadata({
-  title: "Super Charge - Wedison",
-  description:
-    "Super Charge is a cutting-edge electric motorcycle charging station designed for fast and efficient charging. Super Charge can charge Wedison Bikes from 10% to 80% in just 20 minutes. With its sleek design and advanced technology, Super Charge is the perfect solution for electric vehicle owners looking for a reliable and convenient charging option.",
-  path: "/super-charge",
-  image: "/supercharge-hero.webp",
-  type: "website",
-  jsonLdType: "product",
-  productName: "Super Charge",
-});
+import { getSEOMetadata } from "../lib/seo1";
+// import { generateSeoMetadata } from "../lib/seo";
+// const { metadata, jsonLd } = generateSeoMetadata({
+//   title: "Super Charge - Wedison",
+//   description:
+//     "Super Charge is a cutting-edge electric motorcycle charging station designed for fast and efficient charging. Super Charge can charge Wedison Bikes from 10% to 80% in just 20 minutes. With its sleek design and advanced technology, Super Charge is the perfect solution for electric vehicle owners looking for a reliable and convenient charging option.",
+//   path: "/super-charge",
+//   image: "/supercharge-hero.webp",
+//   type: "website",
+//   jsonLdType: "product",
+//   productName: "Super Charge",
+// });
 
-export { metadata };
+// export { metadata };
+export const metadata = getSEOMetadata({
+  title: "SuperCharge - Stasiun Pengisian Cepat Motor Listrik | Wedison",
+  description:
+    "SuperCharge adalah teknologi stasiun pengisian super cepat dari Wedison, solusi terbaik untuk mengisi daya motor listrik dalam waktu singkat. Lihat lokasi dan keunggulan SuperCharge di sini.",
+  keywords: [
+    "wedison",
+    "supercharge",
+    "charging station",
+    "pengisian motor listrik",
+    "stasiun pengisian",
+    "motor listrik",
+    "EV",
+    "teknologi pengisian cepat",
+  ],
+  url: "https://wedison.co/super-charge",
+  image: "https://wedison.co/supercharge-hero.webp",
+  lang: "id",
+});
 
 export default function EdmaxPage() {
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd }}
-        />
-      )}
       <main className="min-h-screen bg-white">
         <HeroSection
           name="supercharge"

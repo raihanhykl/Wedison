@@ -17,17 +17,17 @@ export default function NavbarProduct({ open }: Props) {
   const product: Product[] = [
     {
       name: "Mini",
-      image: "/mini-grey.webp",
+      image: "/mini-green.webp",
       href: "/mini/",
     },
     {
       name: "Athena",
-      image: "/athena-beige.webp",
+      image: "/athena-tosca.webp",
       href: "/athena/",
     },
     {
       name: "Victory",
-      image: "/victory-grey.webp",
+      image: "/victory-lightblue.webp",
       href: "/victory/",
     },
     //     {

@@ -2,19 +2,38 @@ import FeatureSection2 from "../components/feature-section";
 import HeroSection from "../components/hero-section";
 import SpecificationsSection from "../components/specifications-section";
 import ProductPicker, { ProductColor } from "../components/product-pick";
-import { generateSeoMetadata } from "../lib/seo";
+import { getSEOMetadata } from "../lib/seo1";
 
-const { metadata, jsonLd } = generateSeoMetadata({
-  title: "Mini - Affordable Mobility for Every Ride",
-  description: "Mini is the most agile bike from wedison. it's ",
-  path: "/mini",
-  image: "/mini-hero.webp",
-  type: "website",
-  jsonLdType: "product",
-  productName: "Mini",
+export const metadata = getSEOMetadata({
+  title: "Mini - Motor Listrik Compact & Praktis | Wedison",
+  description:
+    "Mini adalah motor listrik compact dari Wedison, cocok untuk kebutuhan harian, desain praktis dan mudah digunakan. Lihat keunggulan dan spesifikasi lengkapnya di sini.",
+  keywords: [
+    "wedison",
+    "motor listrik",
+    "mini",
+    "motor listrik compact",
+    "kendaraan listrik",
+    "EV",
+    "motor listrik praktis",
+    "electric motorcycle",
+  ],
+  url: "https://wedison.co/mini",
+  image: "https://wedison.co/mini-hero.webp",
+  lang: "id",
 });
 
-export { metadata };
+// const { metadata, jsonLd } = generateSeoMetadata({
+//   title: "Mini - Affordable Mobility for Every Ride",
+//   description: "Mini is the most agile bike from wedison. it's ",
+//   path: "/mini",
+//   image: "/mini-hero.webp",
+//   type: "website",
+//   jsonLdType: "product",
+//   productName: "Mini",
+// });
+
+// export { metadata };
 
 export default function MiniPage() {
   const product: ProductColor[] = [
@@ -46,12 +65,6 @@ export default function MiniPage() {
   ];
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd }}
-        />
-      )}
       <main className="min-h-screen bg-white">
         <HeroSection
           name="mini"

@@ -325,7 +325,7 @@ export default function AboutPage() {
             <p className="text-gray-700 mb-8 text-base md:text-lg">
               {t("about.joinUsDescription")}
             </p>
-            <Link href={"/#contact"}>
+            <Link href={"/corporate/contact/#contact"}>
               <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1 px-6 py-3 text-base">
                 {t("about.contactUs")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />

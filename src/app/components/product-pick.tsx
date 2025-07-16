@@ -65,7 +65,11 @@ export default function ProductPicker({
               descColor
             )}
           >
-            {t(`${productName}.color.description`)}
+            {t(
+              `${
+                productName === "edpower" ? "edmax" : productName
+              }.color.description`
+            )}
           </p>
         </div>
 

@@ -58,6 +58,7 @@ export default function HeroSection({
     setIsVisible(true);
   }, []);
   return (
+    // <section className="relative min-h-[80vh] h-[80vh] md:min-h-screen flex items-center overflow-hidden">
     <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
       <Image
         alt={imageAlt}
@@ -65,7 +66,8 @@ export default function HeroSection({
         width={9000}
         height={1000}
         className={cn(
-          "object-cover inset-0 h-[100vh] 2xl:object-[80%_100%] object-[75%_75%]",
+          // "object-cover md:scale-120 inset-0 h-[100vh] 2xl:object-[10%_140%] scale-200 object-[61%_105%]",
+          "object-cover  inset-0 h-[100vh] 2xl:object-[10%_80%]  object-[75%_75%]",
           imageStyle
         )}
       />

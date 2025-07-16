@@ -3,11 +3,11 @@
 import { useEffect } from "react";
 import { useLanguage } from "@/app/lib/language-context";
 import { useInView } from "react-intersection-observer";
-import ContactForm from "@/app/components/contact3";
 import MapComponent from "@/app/showroom/components/map-component";
 import { cn } from "@/lib/utils";
 import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Contact from "@/app/components/contact4";
 
 export default function ContactPage() {
   const { t } = useLanguage();
@@ -19,11 +19,6 @@ export default function ContactPage() {
 
   // InView hooks for animations
   const { ref: infoRef, inView: infoInView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
-  const { ref: formRef, inView: formInView } = useInView({
     threshold: 0.1,
     triggerOnce: false,
   });
@@ -215,28 +210,11 @@ export default function ContactPage() {
       </section>
 
       {/* Form and Map Section */}
-      <section className="py-12 md:py-16 bg-gray-50">
+      <section id="contact" className="py-12 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Contact Form */}
-            <div
-              ref={formRef}
-              className={cn(
-                "transition-all duration-1000 transform",
-                formInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
-              )}
-            >
-              <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
-                    {t("contact.sendMessage")}
-                  </span>
-                </h2>
-                <ContactForm />
-              </div>
-            </div>
+            <Contact />
 
             {/* Map */}
             <div

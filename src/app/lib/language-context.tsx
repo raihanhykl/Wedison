@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   createContext,
   useContext,
@@ -61,15 +62,16 @@ const translations = {
     // "features.zeroEmissions": "Cut the Carbon, Ride Electric",
     "features.zeroEmissions": "Ride Electric, Cut Emissions by 54%",
     "features.zeroEmissionsDesc":
-      "Battery electric motorcycles emit 53.8% less CO₂ and cut lifecycle emissions by up to 80%, saving riders as much as 0.8 tonnes of CO₂ annually.",
+      "Electric motorcycles emit 53.8% less CO₂ and cut lifecycle emissions by up to 80%, resulting in 14% cleaner air.",
     "features.zeroEmissionsLink":
       "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
     // "features.healthBenefits": "Cleaner Air, Healthier Life",
     "features.healthBenefits":
-      "14% Cleaner Air, 11% Lower Lung Disease Risk, 3.2% Fewer Asthma ER Visits",
+      // "11% Lower Lung Disease Risk, 3.2% Fewer Asthma ER Visits",
+      "11% Lower Lung Disease Risk, and 3.2% Fewer Asthma ER Visits.",
     "features.healthBenefitsDesc":
-      "Riding an electric motorcycle cuts city air pollution by 14%, lowers your risk of lung disease by 11%, and reduces asthma-related ER visits by 3.2%, helping you breathe easier and stay healthier.",
-    // "Riding an electric motorcycle cuts city fine particulate pollution by 14% on average, reduces asthma-related ER visits by 3.2%, helping you and your loved ones breathe easier every day.",
+      "Compared to gasoline motorcycles, electric motorcycles lower your risk of lung diseases and reduce asthma-related ER visits by 3.2%.",
+    // "Electric motorcycle cuts city fine particulate pollution by 14% on average, reduces asthma-related ER visits by 3.2%, helping you and your loved ones breathe easier every day.",
     "features.healthBenefitsLink":
       "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
     // "features.noiseFree": "Say Goodbye to Noise & Air Pollution",
@@ -108,6 +110,13 @@ const translations = {
     "contact.sendMessage": "Send Us a Message",
     "contact.name": "Name",
     "contact.email": "Email",
+    "contact.address": "Address",
+    "contact.addressPlaceholder": "Your address",
+    "contact.province": "Province",
+    "contact.provincePlaceholder": "Select your province",
+    "contact.city": "City",
+    "contact.cityPlaceholder": "Select your city",
+    "contact.provinceError": "Please select a province first.",
     "contact.subject": "Subject",
     "contact.subjectPlaceholder": "How can we help you?",
     "contact.message": "Message",
@@ -191,16 +200,16 @@ const translations = {
     "about.projects.future.title": "Create a Brighter Green Future",
     "about.projects.future.description":
       "Utilizing renewable energy to reduce carbon emissions and support a healthier environment. Expanding the electric vehicle (EV) market, making communities cleaner and transportation more affordable for everyone.",
-    "about.projects.charging.title": "Super Fast Charging",
+    "about.projects.charging.title": "Super Charge",
     "about.projects.charging.description":
-      "We are building a robust charging infrastructure to support the growing electric vehicle ecosystem while creating time-saving opportunities for businesses.",
+      "We built a robust charging infrastructure to support the growing electric vehicle ecosystem while creating time-saving opportunities for businesses.",
     "about.offers.title": "What We Offer",
     "about.offers.motorcycles.title": "Electric Motorcycle Models",
     "about.offers.motorcycles.description":
       "We offer a range of electric motorcycle models, each designed to meet diverse customer needs and preferences.",
-    "about.offers.charging.title": "Super Fast Charging Stations",
+    "about.offers.charging.title": "Super Charge Stations",
     "about.offers.charging.description":
-      "We offer super fast charging stations, providing quick and convenient charging solutions, ensuring that electric motorcycle users can easily power up their vehicles and stay on the road longer.",
+      "We offer Super Charge stations, providing quick and convenient charging solutions, ensuring that electric motorcycle users can easily power up their vehicles and stay on the road longer.",
     "about.joinUs": "Join Our Mission",
     "about.joinUsDescription":
       " Join us in our mission to create a sustainable future through  electric mobility. Together, we can make a difference.",
@@ -434,6 +443,10 @@ const translations = {
       "Pick your favorite Mini color and see it in action.",
 
     //super charge
+    "supercharge.landing.title": "Your Trip",
+    "supercharge.landing.description":
+      "Super Charge your ride with fast, reliable charging. Charge from 10% to 80% in just 15 minutes.",
+
     "supercharge.hero.tag": "Fast Charging",
     "supercharge.hero.title": "Charge from 10% to 80% in",
     "supercharge.hero.titleHighlight": "Just 15 Minutes",
@@ -459,6 +472,48 @@ const translations = {
     "supercharge.feature3.subtitle": "Safety and reliability first",
     "supercharge.feature3.description":
       "Our DC charging station is designed to work in perfect harmony with your Wedison EV motorcycle, ensuring fast charging while enhancing battery longevity. Fully certified to IEC safety standards and compliant with EU Directives, it provides safe, efficient, and reliable power for your motorcycle—every time.",
+
+    //form title
+    "form.title.placeholder": "Select a topic to discuss",
+    "form.title.productInfo": "Electric Motorcycle Product Info",
+    "form.title.productInfo.value": "Informasi Produk Motor Listrik",
+    "form.title.serviceMaintenance": "Service & Maintenance",
+    "form.title.serviceMaintenance.value": "Servis & Perawatan Motor",
+    "form.title.testRide": "Book a Test Ride",
+    "form.title.testRide.value": "Test Ride / Uji Coba Motor",
+    "form.title.paymentOptions": "Payment & Financing Options",
+    "form.title.paymentOptions.value": "Simulasi Kredit / Pembayaran",
+    "form.title.warrantyClaim": "Warranty Claim",
+    "form.title.warrantyClaim.value": "Klaim Garansi",
+    "form.title.feedback": "Feedback & Suggestions",
+    "form.title.feedback.value": "Saran & Masukan",
+    "form.title.technicalIssue": "Technical Issue or Problem",
+    "form.title.technicalIssue.value": "Masalah Teknis / Kendala Penggunaan",
+    "form.title.partnership": "Business Partnership Inquiry",
+    "form.title.partnership.value": "Kerja Sama atau Kemitraan",
+    "form.title.other": "Other (please specify)",
+    "form.title.other.value": "Judul lainnya: ",
+    "form.hasMotor": "Do you own a motorcycle?",
+    "form.vehicle": "Your Vehicle Type",
+    "form.vehicle.placeholder": "Example: Wedison / EdPower / 2023",
+    "form.vehicle.description": "Format: Brand / Model / Year",
+    "form.sending.success.title": "Message Sent Successfully!",
+    "form.sending.success.description":
+      "Thank you for reaching out to us. We will get back to you as soon as possible.",
+    "form.sending.error.title": "Error Sending Message",
+    "form.sending.error.description":
+      "There was an error sending your message. Please try again later or contact us through other channels.",
+    "form.sending.sending": "Sending your message... Please wait.",
+    "form.agreePrivacy.description": (
+      <>
+        Allow PT Wedison to use the above information and contact me via email
+        and/or phone or other personal communication channels for customer
+        service activities in accordance with the{" "}
+        <Link href="/" className="underline text-blue-400">
+          privacy agreement.
+        </Link>
+      </>
+    ),
 
     // Language
     language: "English",
@@ -508,13 +563,13 @@ const translations = {
       "Rasakan akselerasi 0-100 km/jam dalam waktu kurang dari 3 detik dengan torsi instan.",
     "features.zeroEmissions": "Berkendara Listrik, Kurangi Emisi hingga 54%",
     "features.zeroEmissionsDesc":
-      "Motor listrik bertenaga baterai menghasilkan emisi CO₂ 53,8% lebih sedikit dan dapat mengurangi emisi sepanjang siklus hidupnya hingga 80%, menghemat hingga 0,8 ton CO₂ per tahun bagi pengendara.",
+      "Motor listrik bertenaga baterai menghasilkan emisi CO₂ 53,8% lebih sedikit dan dapat mengurangi emisi sepanjang siklus hidupnya hingga 80%, menghasilkan 14% udara lebih bersih.",
     "features.zeroEmissionsLink":
       "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
     "features.healthBenefits":
-      "Udara 14% Lebih Bersih, Risiko Penyakit Paru-Paru 11% Lebih Rendah, 3,2% Lebih Sedikit Kunjungan IGD karena Asma",
+      "Mengurangi 11% Risiko penyakit Paru-paru, dan 3,2% kunjungan IGD terkait asma.",
     "features.healthBenefitsDesc":
-      "Mengendarai motor listrik mengurangi polusi udara kota hingga 14%, menurunkan risiko penyakit paru-paru sebesar 11%, dan mengurangi kunjungan IGD terkait asma sebesar 3,2%, membantu Anda bernapas lebih lega dan tetap sehat.",
+      "Dibanding sepeda motor bensin, motor listrik menurunkan risiko penyakit paru-paru dan kunjungan IGD terkait asma sebesar 3,2%.",
     "features.healthBenefitsLink":
       "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
     "features.noiseFree":
@@ -553,6 +608,13 @@ const translations = {
     "contact.sendMessage": "Kirim Pesan Kepada Kami",
     "contact.name": "Nama",
     "contact.email": "Email",
+    "contact.address": "Alamat",
+    "contact.addressPlaceholder": "Alamat Anda",
+    "contact.province": "Provinsi",
+    "contact.provincePlaceholder": "Pilih provinsi Anda",
+    "contact.city": "Kota",
+    "contact.cityPlaceholder": "Pilih kota Anda",
+    "contact.provinceError": "Silakan pilih provinsi terlebih dahulu.",
     "contact.subject": "Subjek",
     "contact.subjectPlaceholder": "Bagaimana kami dapat membantu Anda?",
     "contact.message": "Pesan",
@@ -639,16 +701,16 @@ const translations = {
       "Menciptakan Masa Depan Hijau yang Lebih Cerah",
     "about.projects.future.description":
       "Memanfaatkan energi terbarukan untuk mengurangi emisi karbon dan mendukung lingkungan yang lebih sehat. Memperluas pasar kendaraan listrik (EV), menjadikan komunitas lebih bersih dan transportasi lebih terjangkau bagi semua orang.",
-    "about.projects.charging.title": "Pengisian Super Cepat",
+    "about.projects.charging.title": "Pengisian Super Charge",
     "about.projects.charging.description":
       "Kami membangun infrastruktur pengisian yang kuat untuk mendukung ekosistem kendaraan listrik yang berkembang sambil menciptakan peluang penghematan waktu bagi bisnis.",
     "about.offers.title": "Apa yang Kami Tawarkan",
     "about.offers.motorcycles.title": "Model Sepeda Motor Listrik",
     "about.offers.motorcycles.description":
       "Kami menawarkan berbagai model sepeda motor listrik, masing-masing dirancang untuk memenuhi kebutuhan dan preferensi pelanggan yang beragam.",
-    "about.offers.charging.title": "Stasiun Pengisian Super Cepat",
+    "about.offers.charging.title": "Stasiun Pengisian Super Charge",
     "about.offers.charging.description":
-      "Kami menawarkan stasiun pengisian super cepat, menyediakan solusi pengisian yang cepat dan nyaman, memastikan bahwa pengguna sepeda motor listrik dapat dengan mudah mengisi daya kendaraan mereka dan tetap di jalan lebih lama.",
+      "Kami menawarkan stasiun pengisian Super Charge, menyediakan solusi pengisian yang cepat dan nyaman, memastikan bahwa pengguna sepeda motor listrik dapat dengan mudah mengisi daya kendaraan mereka dan tetap di jalan lebih lama.",
     "about.joinUs": "Bergabunglah dengan Misi Kami",
     "about.joinUsDescription":
       "Bergabunglah dengan kami dalam misi kami untuk menciptakan masa depan yang berkelanjutan melalui mobilitas listrik. Bersama-sama, kita dapat membuat perbedaan.",
@@ -883,6 +945,10 @@ const translations = {
       "Pilih warna Mini favoritmu dan lihat tampilannya.",
 
     //super charge
+
+    "supercharge.landing.title": "Perjalananmu",
+    "supercharge.landing.description":
+      "Super Charge perjalananmu dengan pengisian cepat dan andal. Isi daya dari 10% ke 80% hanya dalam 15 menit.",
     "supercharge.hero.tag": "Fast Charging",
     "supercharge.hero.title": "Isi Daya dari 10% ke 80% dalam",
     "supercharge.hero.titleHighlight": "Hanya 15 Menit",
@@ -910,6 +976,57 @@ const translations = {
       "Keselamatan dan keandalan adalah prioritas",
     "supercharge.feature3.description":
       "Stasiun pengisian daya DC kami dirancang untuk bekerja secara sempurna dengan motor listrik Wedison Anda, memastikan pengisian daya cepat sekaligus menjaga umur baterai. Telah tersertifikasi penuh sesuai standar keselamatan IEC dan mematuhi Direktif Uni Eropa, memberikan daya yang aman, efisien, dan andal untuk motor Anda—setiap saat.",
+
+    // form title
+    "form.title.placeholder": "Pilih topik yang ingin dibahas",
+
+    "form.title.productInfo": "Informasi Produk Motor Listrik",
+    "form.title.productInfo.value": "Informasi Produk Motor Listrik",
+
+    "form.title.serviceMaintenance": "Servis & Perawatan Motor",
+    "form.title.serviceMaintenance.value": "Servis & Perawatan Motor",
+
+    "form.title.testRide": "Booking Uji Coba Motor",
+    "form.title.testRide.value": "Test Ride / Uji Coba Motor",
+
+    "form.title.paymentOptions": "Simulasi Kredit / Pembayaran",
+    "form.title.paymentOptions.value": "Simulasi Kredit / Pembayaran",
+
+    "form.title.warrantyClaim": "Klaim Garansi",
+    "form.title.warrantyClaim.value": "Klaim Garansi",
+
+    "form.title.feedback": "Saran & Masukan",
+    "form.title.feedback.value": "Saran & Masukan",
+
+    "form.title.technicalIssue": "Masalah Teknis / Kendala Penggunaan",
+    "form.title.technicalIssue.value": "Masalah Teknis / Kendala Penggunaan",
+
+    "form.title.partnership": "Kerja Sama atau Kemitraan",
+    "form.title.partnership.value": "Kerja Sama atau Kemitraan",
+
+    "form.title.other": "Lainnya (tuliskan di bawah)",
+    "form.title.other.value": "Judul Lainnya: ",
+    "form.hasMotor": "Apakah Anda memiliki motor saat ini?",
+    "form.vehicle": "Jenis Kendaraan anda",
+    "form.vehicle.placeholder": "Contoh: Wedison / Edmax / 2023",
+    "form.vehicle.description": "Format: Merek / Model / Tahun",
+    "form.sending.success.title": "Pesan Berhasil Dikirim!",
+    "form.sending.success.description":
+      "Terima kasih telah menghubungi kami. Kami akan segera menghubungi Anda.",
+    "form.sending.error.title": "Terjadi Kesalahan Saat Mengirim Pesan",
+    "form.sending.error.description":
+      "Terjadi kesalahan saat mengirim pesan Anda. Silakan coba lagi nanti atau hubungi kami melalui saluran lain.",
+    "form.sending.sending": "Mengirim pesan Anda... Silahkan tunggu.",
+    "form.agreePrivacy.description": (
+      <>
+        Mengizinkan PT Wedison untuk menggunakan informasi di atas dan
+        menghubungi Saya melalui email dan/atau telepon atau sarana komunikasi
+        pribadi lainnya untuk kegiatan pelayanan kepada customer sesuai dengan{" "}
+        <Link href="/" className="underline text-blue-400">
+          persetujuan privasi.
+        </Link>
+      </>
+    ),
     // Language
     language: "Bahasa Indonesia",
     switchLanguage: "English",
@@ -939,7 +1056,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Translation function
   const t = (key: string): string => {
-    return (translations[language] as Record<string, string>)[key] || key;
+    return (
+      (translations[language] as unknown as Record<string, string>)[key] || key
+    );
+    // return (translations[language] as Record<string, string>)[key] || key;
   };
 
   return (

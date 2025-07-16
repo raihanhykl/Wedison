@@ -2,20 +2,38 @@ import ProductPicker, { ProductColor } from "../components/product-pick";
 import FeatureSection2 from "../components/feature-section";
 import HeroSection from "../components/hero-section";
 import SpecificationsSection from "../components/specifications-section";
-import { generateSeoMetadata } from "../lib/seo";
+import { getSEOMetadata } from "../lib/seo1";
 
-const { metadata, jsonLd } = generateSeoMetadata({
-  title: "Victory - Own The Street With Victory",
+// const { metadata, jsonLd } = generateSeoMetadata({
+//   title: "Victory - Own The Street With Victory",
+//   description:
+//     "Victory is a versatile electric scooter with a sleek design, built for city rides and modern urban style. Enjoy the thrill of the open road with its powerful motor and sleek design. Experience the future of transportation with Victory.",
+//   path: "/victory",
+//   image: "/victory-hero.webp",
+//   type: "website",
+//   jsonLdType: "product",
+//   productName: "Victory",
+// });
+
+// export { metadata };
+export const metadata = getSEOMetadata({
+  title: "Victory - Motor Listrik Urban Modern | Wedison",
   description:
-    "Victory is a versatile electric scooter with a sleek design, built for city rides and modern urban style. Enjoy the thrill of the open road with its powerful motor and sleek design. Experience the future of transportation with Victory.",
-  path: "/victory",
-  image: "/victory-hero.webp",
-  type: "website",
-  jsonLdType: "product",
-  productName: "Victory",
+    "Victory adalah motor listrik urban dari Wedison, didesain untuk mobilitas kota yang efisien, ramah lingkungan, dan hemat energi. Temukan spesifikasi, fitur, dan keunggulannya di sini.",
+  keywords: [
+    "wedison",
+    "motor listrik",
+    "victory",
+    "motor listrik urban",
+    "kendaraan listrik",
+    "EV",
+    "motor listrik hemat energi",
+    "electric motorcycle",
+  ],
+  url: "https://wedison.co/victory",
+  image: "https://wedison.co/victory-hero.webp",
+  lang: "id",
 });
-
-export { metadata };
 
 export default function EdmaxPage() {
   const product: ProductColor[] = [
@@ -38,12 +56,6 @@ export default function EdmaxPage() {
 
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd }}
-        />
-      )}
       <main className="min-h-screen bg-white">
         <HeroSection
           name="victory"

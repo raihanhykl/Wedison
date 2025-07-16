@@ -2,21 +2,40 @@ import ProductPicker, { ProductColor } from "../components/product-pick";
 import HeroSection from "../components/hero-section";
 import FeatureSection2 from "../components/feature-section";
 import SpecificationsSection from "../components/specifications-section";
-import { generateSeoMetadata } from "../lib/seo";
+import { getSEOMetadata } from "../lib/seo1";
+// import { generateSeoMetadata } from "../lib/seo";
 // import Seo from "../lib/seo";
 
-const { metadata, jsonLd } = generateSeoMetadata({
-  title: "EdPower - Ride The Future With EdPower",
-  description:
-    "Edmax is the Flagship Electric Bike from Wedison. Edmax offers Ultimate Driving Experience with its cutting-edge Super Charge Technology, Smart Display, and Advanced Safety Features. Experience the future of transportation with Edmax.",
-  path: "/edpower",
-  image: "/edmax-charging.webp",
-  type: "website",
-  jsonLdType: "product",
-  productName: "EdPower",
-});
+// const { metadata, jsonLd } = generateSeoMetadata({
+//   title: "EdPower - Ride The Future With EdPower",
+//   description:
+//     "Edmax is the Flagship Electric Bike from Wedison. Edmax offers Ultimate Driving Experience with its cutting-edge Super Charge Technology, Smart Display, and Advanced Safety Features. Experience the future of transportation with Edmax.",
+//   path: "/edpower",
+//   image: "/edmax-charging.webp",
+//   type: "website",
+//   jsonLdType: "product",
+//   productName: "EdPower",
+// });
 
-export { metadata };
+// export { metadata };
+export const metadata = getSEOMetadata({
+  title: "EdPower - Motor Listrik Premium Indonesia | Wedison",
+  description:
+    "EdPower adalah motor listrik premium dari Wedison, dengan teknologi SuperCharge, baterai tahan lama, dan desain modern. Lihat fitur, spesifikasi, dan keunggulannya di sini.",
+  keywords: [
+    "wedison",
+    "motor listrik",
+    "edpower",
+    "kendaraan listrik",
+    "EV",
+    "supercharge",
+    "motor listrik premium",
+    "electric motorcycle",
+  ],
+  url: "https://wedison.co/edpower",
+  image: "https://wedison.co/edmax-charging.webp",
+  lang: "id",
+});
 
 export default function EdmaxPage() {
   const product: ProductColor[] = [
@@ -59,12 +78,6 @@ export default function EdmaxPage() {
 
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd }}
-        />
-      )}
       <main className="min-h-screen bg-white">
         {/* Hero Section */}
         {/* <section className="relative min-h-[90vh] h-full md:min-h-screen flex items-center overflow-hidden"> */}
@@ -144,7 +157,12 @@ export default function EdmaxPage() {
             </div>
           </div>
         </section> */}
-        <HeroSection name="edmax" imageAlt="Edmax Front Look" theme="dark" />
+        <HeroSection
+          name="edmax"
+          imageAlt="Edmax Front Look"
+          theme="dark"
+          imageStyle=" scale-200 2xl:object-[90%_140%] md:scale-130 w-full object-[61%_105%] "
+        />
         {/* <section
           ref={feature3Ref}
           className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-black from-50% to-green-950 overflow-hidden relative"

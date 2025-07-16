@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dropworn-menu";
 import { usePathname } from "next/navigation";
 import NavbarProduct from "./navbar-product";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -96,7 +97,7 @@ export default function Navbar() {
       href: "#",
       subMenu: [
         { name: "Mini", href: "/mini/", image: "/mini-grey.webp" },
-        { name: "Athena", href: "/athena/", image: "/athena-beige.webp" },
+        { name: "Athena", href: "/athena/", image: "/athena-tosca.webp" },
         { name: "Victory", href: "/victory/", image: "/victory-grey.webp" },
         // { name: "Dash", href: "/dash" },
         { name: "EdPower", href: "/edpower/", image: "/edpower-black.webp" },
@@ -155,7 +156,7 @@ export default function Navbar() {
     <header
       className={cn(
         // "sticky top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white ",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
         bgTone
         // route == "/products/edmax" ? "bg-black text-[var(--primary-light)]" : ""
         // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent",
@@ -166,7 +167,7 @@ export default function Navbar() {
       {/* <div className="container mx-auto"> */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* <div className="flex items-center justify-between"> */}
-        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20 overflow-hidden">
+        <div className="flex items-center justify-between h-12 sm:h-14 md:h-16 overflow-hidden">
           <div className="flex-shrink-0 h-fit inset-0 p-0 ">
             <Link
               href="/"
@@ -183,7 +184,7 @@ export default function Navbar() {
                 }
                 alt="Wedison Logo"
                 width={150}
-                height={100}
+                height={1000}
               />
             </Link>
           </div>
@@ -439,6 +440,13 @@ export default function Navbar() {
               )}
             </div>
           ))}
+          <Button
+            onClick={() =>
+              console.log("INI PUBLIC KEY" + process.env.EMAIL_CONFIG_publicKey)
+            }
+          >
+            TEST
+          </Button>
         </div>
       </div>
       <NavbarProduct open={open} />

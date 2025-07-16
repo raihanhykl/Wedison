@@ -28,12 +28,12 @@ export default function ShowroomPageStructure() {
   // Showroom images
   const showroomImages = [
     {
-      src: "/showroom-waitingroom.webp",
-      alt: "Wedison Motors Showroom Waiting Room",
-    },
-    {
       src: "/ShowRoom-Receptionist.webp",
       alt: "Wedison Motors Showroom Receptionist",
+    },
+    {
+      src: "/showroom-waitingroom.webp",
+      alt: "Wedison Motors Showroom Waiting Room",
     },
     // {
     //   src: "/placeholder.svg?height=600&width=1200",
@@ -135,7 +135,7 @@ export default function ShowroomPageStructure() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Link href={"/#contact"}>
+                <Link href={"/corporate/contact/#contact"}>
                   <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1">
                     {t("showroom.bookVisit")}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

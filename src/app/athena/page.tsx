@@ -2,20 +2,41 @@ import ProductPicker, { ProductColor } from "../components/product-pick";
 import HeroSection from "../components/hero-section";
 import SpecificationsSection from "../components/specifications-section";
 import FeatureSection2 from "../components/feature-section";
-import { generateSeoMetadata } from "../lib/seo";
+// import { generateSeoMetadata } from "../lib/seo";
+import { getSEOMetadata } from "../lib/seo1";
+// import { useLanguage } from "../lib/language-context";
 
-const { metadata, jsonLd } = generateSeoMetadata({
-  title: "Athena - The Future of Retro Electric Scooter",
+// const { metadata, jsonLd } = generateSeoMetadata({
+//   title: "Athena - The Future of Retro Electric Scooter",
+//   description:
+//     "Athena is a combination of a retro with a futuristic scooter. It has a retro and timeless design, combined with advanced technology.",
+//   path: "/athena",
+//   image: "/athena-hero.webp",
+//   type: "website",
+//   jsonLdType: "product",
+//   productName: "Athena",
+// });
+
+// export { metadata };
+
+export const metadata = getSEOMetadata({
+  title: "Athena - Motor Listrik Premium Indonesia",
   description:
-    "Athena is a combination of a retro with a futuristic scooter. It has a retro and timeless design, combined with advanced technology.",
-  path: "/athena",
-  image: "/athena-hero.webp",
-  type: "website",
-  jsonLdType: "product",
-  productName: "Athena",
+    "Athena adalah motor listrik premium dari Wedison, dengan teknologi SuperCharge, baterai tahan lama, dan desain modern. Lihat fitur, spesifikasi, dan keunggulannya di sini.",
+  keywords: [
+    "wedison",
+    "motor listrik",
+    "athena",
+    "kendaraan listrik",
+    "EV",
+    "supercharge",
+    "motor listrik terbaik",
+    "electric motorcycle",
+  ],
+  url: "https://wedison.co/athena",
+  image: "https://wedison.co/athena-hero.webp",
+  lang: "id",
 });
-
-export { metadata };
 export default function EdmaxPage() {
   const product: ProductColor[] = [
     {
@@ -52,12 +73,12 @@ export default function EdmaxPage() {
 
   return (
     <>
-      {jsonLd && (
+      {/* {jsonLd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd }}
         />
-      )}
+      )} */}
       <main className="min-h-screen bg-white">
         <HeroSection name="athena" imageAlt="Athena Front Look" theme="dark" />
         <FeatureSection2

@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /dash
+Disallow: /testing-product
 
 # Host
 Host: https://wedison.co
