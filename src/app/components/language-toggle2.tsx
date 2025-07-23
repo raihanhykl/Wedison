@@ -17,9 +17,9 @@ export default function LanguageToggle2({
   const [whitePage, setWhitePage] = useState(false);
   useEffect(() => {
     if (
-      route === "/corporate/about" ||
-      route === "/corporate/contact" ||
-      route === "/showroom" ||
+      route === "/corporate/about/" ||
+      route === "/corporate/contact/" ||
+      route === "/showroom/" ||
       route === "/super-charge/"
     ) {
       setWhitePage(true);

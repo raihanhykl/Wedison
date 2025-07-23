@@ -1290,21 +1290,16 @@ const translations = {
     "edmax.specs.suspension": "Suspensi",
 
     // edpower
-    "edpower.productPage.hero.imageAlt": "Victory Abu-Abu",
-    "edpower.productPage.hero.title": "VICTORY",
-    "edpower.productPage.hero.description":
-      "Taklukkan jalanan dengan gaya dan performa.",
+    "edpower.productPage.hero.imageAlt":
+      "Tampilan penuh EDPower dari sudut depan tiga perempat, menonjolkan desain maxi-scooter yang kokoh dan fitur premiumnya.",
+    "edpower.productPage.hero.title": "EDPOWER",
+    "edpower.productPage.hero.description": "Masa Depan Berkendara Listrik",
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": "115",
+    "edpower.productPage.techSpecs1.title": "135",
     "edpower.productPage.techSpecs1.unit": "km",
-    "edpower.productPage.techSpecs1.desc": (
-      <>
-        <p>Jarak Tempuh</p>
-        <p className="text-xs text-gray-500">*dengan Baterai Extended</p>
-      </>
-    ),
+    "edpower.productPage.techSpecs1.desc": "Jarak Tempuh",
 
     "edpower.productPage.techSpecs2.title": "15",
     "edpower.productPage.techSpecs2.unit": "menit",
@@ -1315,43 +1310,61 @@ const translations = {
     "edpower.productPage.techSpecs3.unit": "km/jam",
     "edpower.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
-    "edpower.productPage.productOverview.imageAlt": "Victory Abu-Abu",
+    "edpower.productPage.productOverview.imageAlt":
+      "Tampilan samping dramatis EDPower, menonjolkan jok lebar, posisi berkendara kokoh, dan tampilan futuristik.",
     "edpower.productPage.productOverview.title":
-      "Sporty, Lincah, Tak Terhentikan.",
+      "Kekuatan Utama, Kenyamanan Tak Tertandingi.",
     "edpower.productPage.productOverview.description":
-      "Victory dari Wedison menghadirkan tingkat sportiness dan kelincahan baru dalam mobilitas listrik. Dirancang khusus untuk berkendara di kota, Victory memadukan tampilan agresif, akselerasi super cepat, dan kendali yang luar biasa. Dengan wheelbase lebar dan rem cakram CBS canggih, Anda akan merasa percaya diri di setiap tikungan. Tempuh jarak hingga 115 km dan isi daya dalam hitungan menit—Victory selalu membawa Anda selangkah lebih maju di setiap perjalanan.",
+      "Inilah EDPower—skuter listrik andalan dari Wedison. Dengan jok luas, desain futuristik, dan jarak tempuh terbaik hingga 135 km, EDPower menetapkan standar baru untuk kendaraan roda dua listrik. Nikmati kenyamanan tingkat lanjut, konektivitas canggih, dan tenaga yang siap menjelajah jauh. Dirancang bagi mereka yang menuntut yang terbaik.",
 
-    "edpower.productPage.productHighlight1.imageAlt": "Tampilan Depan Victory",
-    "edpower.productPage.productHighlight1.title": "Desain Sporty yang Ikonik",
+    "edpower.productPage.productHighlight1.imageAlt":
+      "Tampilan kokpit menampilkan layar TFT besar dengan antarmuka Apple CarPlay & Android Auto",
+    "edpower.productPage.productHighlight1.title":
+      "Wireless Apple CarPlay & Android Auto",
     "edpower.productPage.productHighlight1.description":
-      "Victory tampil mencolok dengan bentuk aerodinamis yang tegas dan pencahayaan LED bergaya tajam—dirancang untuk pengendara yang ingin tampil beda di setiap lampu merah.",
+      "Hubungkan smartphone Anda dengan mudah melalui Apple CarPlay atau Android Auto tanpa kabel—untuk navigasi, panggilan, musik, dan lainnya langsung dari layar berwarna skuter Anda. Tetap terhubung dan terkendali, ke mana pun Anda melaju.",
 
     "edpower.productPage.productHighlight2.imageAlt":
-      "Tampilan tiga perempat depan menunjukkan ban lebar dan suspensi",
-    "edpower.productPage.productHighlight2.title":
-      "Kendali Urban yang Superior",
+      "Bagasi bawah jok terbuka menampilkan ruang ekstra besar",
+    "edpower.productPage.productHighlight2.title": "Bagasi XXL di Bawah Jok",
     "edpower.productPage.productHighlight2.description":
-      "Ban lebar, daya cengkeram tinggi, dan suspensi hidrolik memberikan pengendalian yang presisi dan alami di berbagai kondisi—sempurna untuk gaya hidup kota yang dinamis.",
+      "Bawa semua yang Anda butuhkan untuk perjalanan kota maupun jarak jauh. Bagasi bawah jok EDPower yang sangat besar dengan mudah memuat dua helm, belanjaan, atau seluruh perlengkapan penting Anda.",
 
     "edpower.productPage.productHighlight3.imageAlt":
-      "Tampilan dekat port SuperCharge dengan branding Wedison",
-    "edpower.productPage.productHighlight3.title": "Siap SuperCharge",
+      "Tampilan belakang tiga perempat menonjolkan postur EDPower yang lebar dan jok ekstra luas",
+    "edpower.productPage.productHighlight3.title":
+      "Kenyamanan & Ruang Tanpa Tanding",
     "edpower.productPage.productHighlight3.description":
-      "Isi daya dari 10% ke 80% hanya dalam 15 menit dengan Wedison SuperCharge, atau isi daya di rumah untuk fleksibilitas penuh.",
+      "Dengan jok ekstra lebar dan empuk serta posisi berkendara ergonomis, EDPower menghadirkan kenyamanan sepanjang hari—ideal untuk perjalanan harian atau liburan akhir pekan.",
+
+    "edpower.productPage.productHighlight4.imageAlt":
+      "Tampilan depan menampilkan lampu LED canggih dan bodi modern",
+    "edpower.productPage.productHighlight4.title":
+      "Desain Modern yang Mencuri Perhatian",
+    "edpower.productPage.productHighlight4.description":
+      "Dari bagian depan yang tegas hingga bodi belakang yang sculpted, setiap detail EDPower dirancang untuk menarik perhatian. Rasakan masa depan dengan penuh percaya diri dan gaya.",
+
+    "edpower.productPage.productHighlight5.imageAlt":
+      "Indikator baterai/jarak tempuh pada dashboard, tampilan close-up",
+    "edpower.productPage.productHighlight5.title":
+      "Jarak Tempuh Terbaik 135 km",
+    "edpower.productPage.productHighlight5.description":
+      "Jelajahi lebih jauh dari sebelumnya. Dengan jarak tempuh hingga 135 km dalam sekali pengisian, EDPower siap menjelajah kota maupun luar kota—tanpa batas, hanya kebebasan.",
 
     "edpower.productPage.chargingOverview.imageAlt":
-      "Victory terparkir di showroom Wedison, dengan stasiun SuperCharge di latar",
-    "edpower.productPage.chargingOverview.title": "Isi Daya Sesuai Gaya Anda",
+      "EDPower terparkir di showroom Wedison dengan stasiun Super Charge dan charger rumah yang terlihat",
+    "edpower.productPage.chargingOverview.title":
+      "Pengisian Cepat & Fleksibel untuk Setiap Gaya Hidup",
     "edpower.productPage.chargingOverview.description":
-      "Isi daya dalam hitungan menit dengan SuperCharge di seluruh showroom Wedison, atau isi ulang dengan mudah di rumah. Victory menyesuaikan gaya hidup Anda—selalu siap untuk langkah berikutnya.",
+      "EDPower menyesuaikan jadwal Anda dengan dua pilihan pengisian daya yang mudah: Super Charge ultra-cepat di showroom Wedison, atau pengisian semalam yang praktis di rumah. Selalu bertenaga, selalu siap berangkat.",
 
     "edpower.productPage.chargingHighlight1.imageAlt":
-      "Victory di stasiun SuperCharge Wedison, kabel terhubung",
-    "edpower.productPage.chargingHighlight1.title": "SuperCharge Super Cepat",
+      "EDPower terhubung ke stasiun Super Charge Wedison",
+    "edpower.productPage.chargingHighlight1.title": "Wedison Super Charge",
     "edpower.productPage.chargingHighlight1.description": (
       <>
-        Isi daya dari 10% ke 80% hanya dalam 15 menit—sempurna untuk berhenti
-        sejenak di hari yang sibuk. Tersedia di semua showroom Wedison.
+        Isi daya dari 10% ke 80% hanya dalam 15 menit. Sempurna untuk isi cepat
+        di sela aktivitas—tersedia di seluruh showroom Wedison.
         <Link href="/super-charge" className="underline text-primary">
           Pelajari Lebih Lanjut
         </Link>
@@ -1359,11 +1372,11 @@ const translations = {
     ),
 
     "edpower.productPage.chargingHighlight2.imageAlt":
-      "Victory terhubung ke charger rumah di garasi modern",
+      "EDPower terhubung ke charger rumah di garasi modern yang bersih",
     "edpower.productPage.chargingHighlight2.title":
-      "Pengisian Daya Harian di Rumah",
+      "Pengisian Daya di Rumah Tanpa Repot",
     "edpower.productPage.chargingHighlight2.description":
-      "Colokkan di rumah dan bangun dengan baterai penuh. Dengan charger rumahan bawaan, Victory selalu siap diajak berangkat—praktis, mudah, dan bisa diandalkan.",
+      "Colokkan di rumah dan mulai hari Anda dengan baterai penuh. EDPower membuat pengisian semalam menjadi mudah dan tanpa khawatir.",
 
     "edpower.specs.engine.motorType": "Brusless DC Motor",
     "edpower.specs.engine.motorPower": "3.000 Watt (3 kW)",

@@ -149,7 +149,7 @@ export default function Landing() {
                             className="px-8 md:px-16 rounded-sm"
                             size={"lg"}
                           >
-                            <Link href="/edpower">Learn More</Link>
+                            <Link href={item.link}>Learn More</Link>
                           </Button>
                           <Button
                             className=" text-[var(--primary)] px-8 md:px-16 rounded-sm"

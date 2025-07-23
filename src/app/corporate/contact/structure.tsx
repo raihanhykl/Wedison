@@ -83,7 +83,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-8 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
+      <section className="pt-16 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-0 2xl:py-20">
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">

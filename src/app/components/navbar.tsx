@@ -26,9 +26,9 @@ export default function Navbar() {
 
   useEffect(() => {
     if (
-      route === "/corporate/about" ||
-      route === "/corporate/contact" ||
-      route === "/showroom" ||
+      route === "/corporate/about/" ||
+      route === "/corporate/contact/" ||
+      route === "/showroom/" ||
       route === "/super-charge/"
     ) {
       setWhitePage(true);
@@ -54,11 +54,12 @@ export default function Navbar() {
     //   setBgTone("bg-black");
     //   setBgAccent("bg-[#7fa3a4]");
     // }
-    else if (route === "/athena/" || route === "/athena") {
-      setTone("text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black");
-      setBgTone("bg-black");
-      setBgAccent("bg-[#ff7db6]");
-    } else {
+    // else if (route === "/athena/" || route === "/athena") {
+    //   setTone("text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black");
+    //   setBgTone("bg-black");
+    //   setBgAccent("bg-[#ff7db6]");
+    // }
+    else {
       setTone("");
       setBgTone("");
       setBgAccent("");
@@ -77,7 +78,7 @@ export default function Navbar() {
         { name: "Mini", href: "/mini/", image: "/mini-grey.webp" },
         {
           name: "Athena",
-          href: "/testing-product/",
+          href: "/athena/",
           image: "/athena-tosca.webp",
         },
         { name: "Victory", href: "/victory/", image: "/victory-grey.webp" },
@@ -97,8 +98,8 @@ export default function Navbar() {
       name: t("nav.corporate"),
       href: "#",
       subMenu: [
-        { name: t("nav.aboutUs"), href: "/corporate/about", image: "" },
-        { name: t("nav.contactUs"), href: "/corporate/contact", image: "" },
+        { name: t("nav.aboutUs"), href: "/corporate/about/", image: "" },
+        { name: t("nav.contactUs"), href: "/corporate/contact/", image: "" },
       ],
     },
   ];
@@ -347,7 +348,8 @@ export default function Navbar() {
                 className={cn(
                   "inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100 focus:outline-none",
                   tone,
-                  scrolled || mobileMenuOpen ? " text-black" : " text-white"
+                  scrolled || mobileMenuOpen ? " text-black" : " text-white",
+                  whitePage ? "text-black" : "text-white"
                 )}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >

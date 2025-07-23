@@ -20,13 +20,13 @@ export default function NavbarCorporate({ open }: Props) {
       >
         <div className="w-[50%] h-full flex justify-evenly items-center">
           <Link
-            href="/"
+            href="/corporate/about/"
             className=" text-2xl font-bold text-black px-4 underline"
           >
             About Us
           </Link>
           <Link
-            href="/"
+            href="/corporate/contact/"
             className=" text-2xl font-bold text-black px-4 underline"
           >
             Contact Us

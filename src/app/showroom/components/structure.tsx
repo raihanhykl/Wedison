@@ -68,7 +68,7 @@ export default function ShowroomPageStructure() {
   return (
     <main className="min-h-[70%] bg-white">
       {/* Hero Section with Carousel */}
-      <section className="pt-6 md:pt-3">
+      <section className="mt-20 md:mt-30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
