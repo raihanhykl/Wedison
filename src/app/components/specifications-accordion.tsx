@@ -8,83 +8,151 @@ import {
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/app/lib/language-context";
 
-export default function SpecificationsAccordion() {
+export default function SpecificationsAccordion({
+  motorType,
+}: {
+  motorType: string;
+}) {
   const { t } = useLanguage();
 
   const specifications = [
     {
-      category: t("edmax.specs.engine"),
-      details: [
-        { label: "Motor Type", value: "Brushless DC Electric Motor" },
-        { label: "Maximum Power", value: "12 kW (16.1 hp)" },
-        { label: "Maximum Torque", value: "42 Nm" },
-        { label: "Top Speed", value: "150 km/h (93 mph)" },
-        { label: "Acceleration (0-60 km/h)", value: "3.2 seconds" },
-      ],
-    },
-    {
-      category: t("edmax.specs.battery"),
-      details: [
-        { label: "Battery Type", value: "Lithium-ion" },
-        { label: "Battery Capacity", value: "7.2 kWh" },
-        { label: "Voltage", value: "72V" },
-        { label: "Charging Time (0-80%)", value: "20 minutes (Super Charge)" },
-        { label: "Charging Time (0-100%)", value: "3 hours (Standard Outlet)" },
-        { label: "Range", value: "120 km (75 miles)" },
-      ],
-    },
-    {
-      category: t("edmax.specs.brake"),
+      category: t("specs.category.engine"),
       details: [
         {
-          label: "Front Brake",
-          value: "Dual 320mm Disc with 4-piston Caliper",
+          label: t("specs.category.engine.motorType"),
+          value: t(`${motorType}.specs.engine.motorType`),
         },
         {
-          label: "Rear Brake",
-          value: "Single 240mm Disc with 2-piston Caliper",
-        },
-        { label: "ABS", value: "Dual-channel ABS" },
-        { label: "Regenerative Braking", value: "Yes, with adjustable levels" },
-      ],
-    },
-    {
-      category: t("edmax.specs.dimension"),
-      details: [
-        { label: "Length", value: "2,100 mm" },
-        { label: "Width", value: "780 mm" },
-        { label: "Height", value: "1,150 mm" },
-        { label: "Seat Height", value: "780 mm" },
-        { label: "Ground Clearance", value: "160 mm" },
-        { label: "Wheelbase", value: "1,450 mm" },
-        { label: "Weight", value: "185 kg" },
-      ],
-    },
-    {
-      category: t("edmax.specs.tire"),
-      details: [
-        { label: "Front Tire", value: "120/70 ZR17" },
-        { label: "Rear Tire", value: "180/55 ZR17" },
-        { label: "Tire Type", value: "Tubeless Radial" },
-      ],
-    },
-    {
-      category: t("edmax.specs.suspension"),
-      details: [
-        {
-          label: "Front Suspension",
-          value: "43mm USD Forks, fully adjustable, 120mm travel",
+          label: t("specs.category.engine.motorPower"),
+          value: t(`${motorType}.specs.engine.motorPower`),
         },
         {
-          label: "Rear Suspension",
-          value: "Mono-shock, adjustable preload and rebound, 130mm travel",
+          label: t("specs.category.engine.topSpeed"),
+          value: t(`${motorType}.specs.engine.topSpeed`),
+        },
+        // { label: "Top Speed", value: "150 km/h (93 mph)" },
+        {
+          label: t("specs.category.engine.acceleration"),
+          value: t(`${motorType}.specs.engine.acceleration`),
+        },
+      ],
+    },
+    {
+      category: t("specs.category.battery"),
+      details: [
+        {
+          label: t("specs.category.battery.batteryType"),
+          value: t(`${motorType}.specs.battery.batteryType`),
+        },
+        {
+          label: t("specs.category.battery.batteryCapacity"),
+          value: t(`${motorType}.specs.battery.batteryCapacity`),
+        },
+        {
+          label: t("specs.category.battery.voltage"),
+          value: t(`${motorType}.specs.battery.voltage`),
+        },
+        {
+          label: t("specs.category.battery.chargingTimeSuperCharge"),
+          value: t(`${motorType}.specs.battery.chargingTimeSuperCharge`),
+        },
+        {
+          label: t("specs.category.battery.chargingTimeHome"),
+          value: t(`${motorType}.specs.battery.chargingTimeHome`),
+        },
+        {
+          label: t("specs.category.battery.range"),
+          value: t(`${motorType}.specs.battery.range`),
+        },
+      ],
+    },
+    {
+      category: t("specs.category.brake"),
+      details: [
+        {
+          label: t("specs.category.brake.frontBrake"),
+          value: t(`${motorType}.specs.brake.frontBrake`),
+        },
+        {
+          label: t("specs.category.brake.rearBrake"),
+          value: t(`${motorType}.specs.brake.rearBrake`),
+        },
+        {
+          label: t("specs.category.brake.cbsSupport"),
+          value: t(`${motorType}.specs.brake.cbsSupport`),
+        },
+        // { label: "Regenerative Braking", value: "Yes, with adjustable levels" },
+      ],
+    },
+    {
+      category: t("specs.category.dimension"),
+      details: [
+        {
+          label: t("specs.category.dimension.length"),
+          value: t(`${motorType}.specs.dimension.length`),
+        },
+        {
+          label: t("specs.category.dimension.width"),
+          value: t(`${motorType}.specs.dimension.width`),
+        },
+        {
+          label: t("specs.category.dimension.height"),
+          value: t(`${motorType}.specs.dimension.height`),
+        },
+        {
+          label: t("specs.category.dimension.wheelbase"),
+          value: t(`${motorType}.specs.dimension.wheelbase`),
+        },
+        {
+          label: t("specs.category.dimension.groundClearance"),
+          value: t(`${motorType}.specs.dimension.groundClearance`),
+        },
+        {
+          label: t("specs.category.dimension.seatHeight"),
+          value: t(`${motorType}.specs.dimension.seatHeight`),
+        },
+        {
+          label: t("specs.category.dimension.weight"),
+          value: t(`${motorType}.specs.dimension.weight`),
+        },
+      ],
+    },
+    {
+      category: t("specs.category.tire"),
+      details: [
+        {
+          label: t("specs.category.tire.frontTire"),
+          value: t(`${motorType}.specs.tire.frontTire`),
+        },
+        {
+          label: t("specs.category.tire.rearTire"),
+          value: t(`${motorType}.specs.tire.rearTire`),
+        },
+        // { label: "Tire Type", value: "Tubeless Radial" },
+      ],
+    },
+    {
+      category: t("specs.category.suspension"),
+      details: [
+        {
+          label: t("specs.category.suspension.frontSuspension"),
+          value: t(`${motorType}.specs.suspension.frontSuspension`),
+        },
+        {
+          label: t("specs.category.suspension.rearSuspension"),
+          value: t(`${motorType}.specs.suspension.rearSuspension`),
         },
       ],
     },
   ];
 
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full transition-all duration-300"
+    >
       {specifications.map((spec, index) => (
         <AccordionItem
           key={index}
@@ -94,7 +162,7 @@ export default function SpecificationsAccordion() {
           <AccordionTrigger className="text-lg font-medium py-4 hover:text-[var(--primary)] transition-colors">
             {spec.category}
           </AccordionTrigger>
-          <AccordionContent className="pb-4">
+          <AccordionContent className="pb-4 data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
             <div className="space-y-2">
               {spec.details.map((detail, detailIndex) => (
                 <div

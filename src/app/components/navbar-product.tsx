@@ -23,7 +23,7 @@ export default function NavbarProduct({ open }: Props) {
     {
       name: "Athena",
       image: "/athena-tosca.webp",
-      href: "/athena/",
+      href: "/testing-product/",
     },
     {
       name: "Victory",
@@ -45,9 +45,14 @@ export default function NavbarProduct({ open }: Props) {
     <>
       {/* desktop */}
       <div
+        // className={cn(
+        //   "origin-top transition-all duration-300 transform hidden md:flex justify-center items-center shadow-sm bg-white w-full sticky top-0 left-0 z-50",
+        //   open
+        //     ? "scale-y-100 opacity-100 pointer-events-auto"
+        //     : "scale-y-0 opacity-0 pointer-events-none"
+        // )}
         className={cn(
           " sticky top-0 left-0 w-full overflow-hidden bg-white md:transition-discrete duration-300 hidden md:flex justify-center items-center shadow-sm ",
-          // open ? "block h-16" : "hidden"
           open
             ? "max-h-60 h-60 opacity-100 pointer-events-auto"
             : "max-h-0 pointer-events-none"

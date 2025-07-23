@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropworn-menu";
 import { usePathname } from "next/navigation";
 import NavbarProduct from "./navbar-product";
-import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -155,9 +154,13 @@ export default function Navbar() {
     // <div className="relative">
     <header
       className={cn(
-        // "sticky top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
+        // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
+        // scrolled || open
+        //   ? "bg-white backdrop-blur-md shadow-soft"
+        //   : "bg-transparent",
         bgTone
+
         // route == "/products/edmax" ? "bg-black text-[var(--primary-light)]" : ""
         // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent",
         // scrolled ? "bg-white/90 backdrop-blur-md shadow-soft" : "bg-transparent"
@@ -181,6 +184,11 @@ export default function Navbar() {
                   bgTone
                     ? "/wedison-sidebyside-white.png"
                     : "/wedison-sidebyside.png"
+                  // !scrolled || bgTone
+                  //   ? open
+                  //     ? "/wedison-sidebyside.png"
+                  //     : "/wedison-sidebyside-white.png"
+                  //   : "/wedison-sidebyside.png"
                 }
                 alt="Wedison Logo"
                 width={150}
@@ -440,17 +448,10 @@ export default function Navbar() {
               )}
             </div>
           ))}
-          <Button
-            onClick={() =>
-              console.log("INI PUBLIC KEY" + process.env.EMAIL_CONFIG_publicKey)
-            }
-          >
-            TEST
-          </Button>
         </div>
       </div>
       <NavbarProduct open={open} />
     </header>
-    // {/* </div> */}
+    // </div>
   );
 }

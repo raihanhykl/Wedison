@@ -15,6 +15,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
   const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const route = usePathname();
+  const [scrolled, setScrolled] = useState(false);
 
   // let tone: string | null = null;
   const [tone, setTone] = useState<string | null>(null);
@@ -33,6 +34,20 @@ export default function LanguageToggle({ className }: { className?: string }) {
   //   }
   // };
   // pageTone();
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled, route]);
 
   useEffect(() => {
     if (route == "/edpower/" || route == "/edpower") {
@@ -87,7 +102,9 @@ export default function LanguageToggle({ className }: { className?: string }) {
         <DropdownMenuTrigger
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            "flex items-center gap-1.5 text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium ring-0 outline-none",
+            "flex items-center gap-1.5 text-white hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-semibold ring-0 outline-none",
+            // "flex items-center gap-1.5 text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium ring-0 outline-none",
+            scrolled ? "bg-none backdrop-blur-md shadow-soft" : "bg-none",
             tone && tone
           )}
         >
@@ -99,6 +116,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
             onClick={toggleLanguage}
             className={cn(
               "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[var(--primary)] hover:rounded-md"
+              // "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[var(--primary)] hover:rounded-md"
             )}
           >
             {t("switchLanguage")}

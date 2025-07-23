@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Link from "next/link";
 import { carouselData } from "../testing-product/peek";
+import { useLanguage } from "./language-context";
 
 interface overview {
   imageUrl: string;
+  imageUrlMobile?: string;
   imageAlt: string;
   className?: string;
   title: string;
@@ -18,6 +19,7 @@ interface TechSpecItem {
 interface ProductData {
   hero: {
     imageUrl: string;
+    imageUrlMobile?: string;
     imageAlt: string;
     className?: string;
     title: string;
@@ -30,194 +32,237 @@ interface ProductData {
   chargingHighlight?: carouselData[];
 }
 
-export default function getProductData(bikeType: string) {
+export default function GetProductData(bikeType: string) {
+  const { t } = useLanguage();
   const mini: ProductData = {
     hero: {
-      imageUrl: "/mini-hero.webp",
-      imageAlt: "Mini Hero",
+      // imageUrl: "/edpower-hero.webp",
+      imageUrl: "/mini-hero1.webp",
+      imageAlt: t("mini.productPage.hero.imageAlt"),
+      imageUrlMobile: "/mini-heroMobile.webp",
       className: "object-100%_0% object-cover w-full ",
-      title: "Mini",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum tenetur placeat libero asperiores impedit facere atque,",
+      title: t("mini.productPage.hero.title"),
+      desc: t("mini.productPage.hero.description"),
     },
     techSpec: [
       {
-        title: "357",
-        unit: "mi",
-        desc: "Range (EPA est.)",
+        title: t("mini.productPage.techSpecs1.title"),
+        unit: t("mini.productPage.techSpecs1.unit"),
+        desc: t("mini.productPage.techSpecs1.desc"),
       },
       {
-        title: "182",
-        unit: "mi",
-        desc: "Charge in 15 min",
+        title: t("mini.productPage.techSpecs2.title"),
+        desc: t("mini.productPage.techSpecs2.desc"),
+        unit:
+          t("mini.productPage.techSpecs2.unit") !==
+          "mini.productPage.techSpecs2.unit"
+            ? t("mini.productPage.techSpecs2.unit")
+            : "",
       },
       {
-        title: "FSD",
-        desc: (
-          <>
-            Full Self-Driving {"(Supervised)"} <br /> Comptatible
-          </>
-        ),
+        title: t("mini.productPage.techSpecs3.title"),
+        desc: t("mini.productPage.techSpecs3.desc"),
+        unit: t("mini.productPage.techSpecs3.unit"),
       },
     ],
     productOverview: {
-      imageUrl: "/mini-hero.webp",
-      imageAlt: "Mini Hero",
+      imageUrl: "/mini-ProductOverview.webp",
+      imageAlt: t("mini.productPage.productOverview.imageAlt"),
       className: "object-100%_0% object-cover w-full ",
-      title: "Even Quieter",
-      desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+      title: t("mini.productPage.productOverview.title"),
+      desc: t("mini.productPage.productOverview.description"),
     },
     productHighlight: [
       {
-        image: "/mini-hero.webp",
-        alt: "Mini Hero",
-        title: "Even Quieter",
-        desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+        image: "/mini-ProductCard1.webp",
+        alt: t("mini.productPage.productHighlight1.imageAlt"),
+        title: t("mini.productPage.productHighlight1.title"),
+        desc: t("mini.productPage.productHighlight1.description"),
       },
       {
-        image: "/edmax-hero.webp",
-        alt: "Edmax Hero",
+        image: "/mini-ProductCard2.webp",
         className: "object-100%_0% object-cover w-full ",
-        title: "Even Quieter",
-        desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+        alt: t("mini.productPage.productHighlight2.imageAlt"),
+        title: t("mini.productPage.productHighlight2.title"),
+        desc: t("mini.productPage.productHighlight2.description"),
       },
       {
-        image: "/athena-hero.webp",
-        alt: "Athena Hero",
-        title: "Even Quieter",
-        desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+        image: "/mini-ProductCard3.webp",
+        alt: t("mini.productPage.productHighlight3.imageAlt"),
+        title: t("mini.productPage.productHighlight3.title"),
+        desc: t("mini.productPage.productHighlight3.description"),
       },
     ],
     chargingOverview: {
-      imageUrl: "/mini-hero.webp",
-      imageAlt: "Mini Hero",
+      imageUrl: "/mini-ChargingOverview.webp",
+      imageAlt: t("mini.productPage.chargingOverview.imageAlt"),
       className: "object-100%_0% object-cover w-full ",
-      title: "Even Quieter",
-      desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+      title: t("mini.productPage.chargingOverview.title"),
+      desc: t("mini.productPage.chargingOverview.description"),
     },
-    chargingHighlight: [
-      {
-        image: "/supercharge-chip.webp",
-        alt: "SuperCharge",
-        className: "object-[10%_10%] object-cover w-full",
-        title: "SuperCharge",
-        desc: (
-          <>
-            Experience lightning-fast charging with our advanced SuperCharge
-            technology, designed to keep you on the road with charge your
-            battery from 10% to 80% in just 15 Minutes.{" "}
-            <Link href="/super-charge" className="underline text-primary">
-              Learn More
-            </Link>
-          </>
-        ),
-      },
-      {
-        image: "/supercharge-hero.webp",
-        alt: "Home Charging",
-        className: "object-[100%_40%] object-cover w-full",
-        title: "Home Charging",
-        desc: (
-          <>
-            Enjoy the convenience of charging your vehicle at home, where you
-            can fully charge your EdPower in just 4 hours, ensuring it&apos;s
-            ready whenever you are.
-          </>
-        ),
-      },
-    ],
   };
   const athena: ProductData = {
     hero: {
       imageUrl: "/athena-hero2.webp",
-      imageAlt: "Mini Hero",
+      imageUrlMobile: "/athena-hero2mobile.webp",
+      imageAlt: t(`athena.productPage.hero.imageAlt`),
       className: "object-100%_0% object-cover w-full ",
-      title: "ATHENA",
-      desc: "Gaya Retro, Tenaga Masa Kini",
+      title: t(`athena.productPage.hero.title`),
+      desc: t(`athena.productPage.hero.description`),
     },
     techSpec: [
       {
-        title: "357",
-        unit: "mi",
-        desc: "Range (EPA est.)",
+        title: t(`athena.productPage.techSpecs1.title`),
+        unit: t(`athena.productPage.techSpecs1.unit`),
+        desc: t(`athena.productPage.techSpecs1.desc`),
       },
       {
-        title: "182",
-        unit: "mi",
-        desc: "Charge in 15 min",
+        title: t(`athena.productPage.techSpecs2.title`),
+        unit: t(`athena.productPage.techSpecs2.unit`),
+        desc: t(`athena.productPage.techSpecs2.desc`),
       },
       {
-        title: "FSD",
-        desc: (
-          <>
-            Full Self-Driving {"(Supervised)"} <br /> Comptatible
-          </>
-        ),
+        title: t(`athena.productPage.techSpecs3.title`),
+        unit: t(`athena.productPage.techSpecs3.unit`),
+        desc: t(`athena.productPage.techSpecs3.desc`),
       },
     ],
     productOverview: {
-      imageUrl: "/mini-hero.webp",
-      imageAlt: "Mini Hero",
+      imageUrl: "/athena-overview3.webp",
+      imageUrlMobile: "/athena-overview3.webp",
+      // imageUrlMobile: "/athena-overviewMobile.webp",
+      imageAlt: t(`athena.productPage.productOverview.imageAlt`),
       className: "object-100%_0% object-cover w-full ",
-      title: "Timeless Elegance, Recharged",
-      desc: "Athena by Wedison combines timeless European scooter elegance with cutting-edge electric technology. Designed to stand out while staying quiet, Athena brings a fresh sophistication to city streets—delivering smooth, silent rides with every journey. With up to 100 km range per charge, robust CBS disc brakes, and advanced hydraulic suspension, Athena isn’t just a ride. It’s an experience, crafted for those who crave effortless style and next-generation performance. Fast-charge at any Wedison showroom or enjoy convenient home charging—Athena adapts perfectly to your modern lifestyle.",
+      title: t(`athena.productPage.productOverview.title`),
+      desc: t(`athena.productPage.productOverview.description`),
     },
     productHighlight: [
       {
-        image: "/mini-hero.webp",
-        alt: "Mini Hero",
-        title: "Effortless Control",
-        desc: " Navigate with confidence using Athena’s modern LCD instrument cluster—clear, bright, and intuitive, giving you all the info you need at a glance. Experience digital connectivity that puts you in control, every moment of the ride.",
+        image: "/athena-ProductCard1.webp",
+        imageMobile: "/athena-ProductCard1.webp",
+        alt: t(`athena.productPage.productHighlight1.imageAlt`),
+        title: t(`athena.productPage.productHighlight1.title`),
+        desc: t(`athena.productPage.productHighlight1.description`),
       },
       {
-        image: "/edmax-hero.webp",
+        image: "/athena-ProductCard2.webp",
         alt: "Edmax Hero",
         className: "object-100%_0% object-cover w-full ",
-        title: "Super Charge",
-        desc: "Power up from 10% to 80% in just 15 minutes with Wedison Super Charge (available at all showrooms), or conveniently charge at home with a full charge in under 4 hours. Athena is engineered for the non-stop city pace.",
+        title: t(`athena.productPage.productHighlight2.title`),
+        desc: t(`athena.productPage.productHighlight2.description`),
       },
       {
-        image: "/athena-hero.webp",
-        alt: "Athena Hero",
-        title: "Designed for the City",
-        desc: "With CBS disc brakes front and rear, plus a stable wide-tire setup, Athena offers agile handling and confident braking—so you can move through city streets with poise, comfort, and unmistakable style.",
+        image: "/athena-productCard3.webp",
+        alt: t(`athena.productPage.productHighlight3.imageAlt`),
+        title: t(`athena.productPage.productHighlight3.title`),
+        desc: t(`athena.productPage.productHighlight3.description`),
       },
     ],
     chargingOverview: {
-      imageUrl: "/mini-hero.webp",
-      imageAlt: "Mini Hero",
+      imageUrl: "/athena-ChargingOverview.webp",
+      imageAlt: t(`athena.productPage.chargingOverview.imageAlt`),
       className: "object-100%_0% object-cover w-full ",
-      title: "Charging Made Effortless",
-      desc: "Stay in motion with Athena’s flexible charging solutions. Plug in at home for everyday convenience, or experience rapid Super Charge at any Wedison showroom. Athena gives you the freedom to choose—charge where you live, or power up fast when you're on the go.",
+
+      title: t(`athena.productPage.chargingOverview.title`),
+      desc: t(`athena.productPage.chargingOverview.description`),
     },
     chargingHighlight: [
       {
-        image: "/supercharge-chip.webp",
-        alt: "SuperCharge",
+        image: "/athena-ChargingCard1.webp",
+        alt: t(`athena.productPage.chargingHighlight1.imageAlt`),
         className: "object-[10%_10%] object-cover w-full",
-        title: "15-Minute Super Charge",
-        desc: (
-          <>
-            Experience lightning-fast charging with our advanced SuperCharge
-            technology, designed to keep you on the road with charge your
-            battery from 10% to 80% in just 15 Minutes.{" "}
-            <Link href="/super-charge" className="underline text-primary">
-              Learn More
-            </Link>
-          </>
-        ),
+        title: t(`athena.productPage.chargingHighlight1.title`),
+        desc: t(`athena.productPage.chargingHighlight1.description`),
       },
       {
-        image: "/supercharge-hero.webp",
-        alt: "Home Charging",
+        image: "/athena-ChargingCard2.webp",
+        alt: t(`athena.productPage.chargingHighlight2.imageAlt`),
         className: "object-[100%_40%] object-cover w-full",
-        title: "Convenient Home Charging",
-        desc: (
-          <>
-            Charge overnight, or anytime it suits you. Athena&apos;s included
-            home charger delivers a full battery in under four hours—seamless,
-            silent, and ready when you are.
-          </>
-        ),
+        title: t(`athena.productPage.chargingHighlight2.title`),
+        desc: t(`athena.productPage.chargingHighlight2.description`),
+      },
+    ],
+  };
+  const victory: ProductData = {
+    hero: {
+      imageUrl: "/victory-hero1.webp",
+      // imageUrlMobile: "/athena-hero2mobile.webp",
+      imageAlt: t(`victory.productPage.hero.imageAlt`),
+      imageUrlMobile: "/victory-heroMobile.webp",
+      className: "object-100%_0% object-cover w-full ",
+      title: t(`victory.productPage.hero.title`),
+      desc: t(`victory.productPage.hero.description`),
+    },
+    techSpec: [
+      {
+        title: t(`athena.productPage.techSpecs1.title`),
+        unit: t(`athena.productPage.techSpecs1.unit`),
+        desc: t(`athena.productPage.techSpecs1.desc`),
+      },
+      {
+        title: t(`athena.productPage.techSpecs2.title`),
+        unit: t(`athena.productPage.techSpecs2.unit`),
+        desc: t(`athena.productPage.techSpecs2.desc`),
+      },
+      {
+        title: t(`athena.productPage.techSpecs3.title`),
+        unit: t(`athena.productPage.techSpecs3.unit`),
+        desc: t(`athena.productPage.techSpecs3.desc`),
+      },
+    ],
+    productOverview: {
+      imageUrl: "/victory-ProductOverview.webp",
+      // imageUrlMobile: "/athena-overview3.webp",
+      // imageUrlMobile: "/athena-overviewMobile.webp",
+      imageAlt: t(`victory.productPage.productOverview.imageAlt`),
+      className: "object-100%_0% object-cover w-full ",
+      title: t(`victory.productPage.productOverview.title`),
+      desc: t(`victory.productPage.productOverview.description`),
+    },
+    productHighlight: [
+      {
+        image: "/victory-ProductHighlight1.webp",
+        // imageMobile: "/athena-ProductCard1.webp",
+        alt: t(`victory.productPage.productHighlight1.imageAlt`),
+        title: t(`victory.productPage.productHighlight1.title`),
+        desc: t(`victory.productPage.productHighlight1.description`),
+      },
+      {
+        image: "/victory-ProductHighlight2.webp",
+        alt: "Edmax Hero",
+        className: "object-100%_0% object-cover w-full ",
+        title: t(`victory.productPage.productHighlight2.title`),
+        desc: t(`victory.productPage.productHighlight2.description`),
+      },
+      {
+        image: "/victory-ProductHighlight3.webp",
+        alt: t(`victory.productPage.productHighlight3.imageAlt`),
+        title: t(`victory.productPage.productHighlight3.title`),
+        desc: t(`victory.productPage.productHighlight3.description`),
+      },
+    ],
+    chargingOverview: {
+      imageUrl: "/athena-ChargingOverview.webp",
+      imageAlt: t(`victory.productPage.chargingOverview.imageAlt`),
+      className: "object-100%_0% object-cover w-full ",
+
+      title: t(`victory.productPage.chargingOverview.title`),
+      desc: t(`victory.productPage.chargingOverview.description`),
+    },
+    chargingHighlight: [
+      {
+        image: "/athena-ChargingCard1.webp",
+        alt: t(`victory.productPage.chargingHighlight1.imageAlt`),
+        className: "object-[10%_10%] object-cover w-full",
+        title: t(`victory.productPage.chargingHighlight1.title`),
+        desc: t(`victory.productPage.chargingHighlight1.description`),
+      },
+      {
+        image: "/athena-ChargingCard2.webp",
+        alt: t(`victory.productPage.chargingHighlight2.imageAlt`),
+        className: "object-[100%_40%] object-cover w-full",
+        title: t(`victory.productPage.chargingHighlight2.title`),
+        desc: t(`victory.productPage.chargingHighlight2.description`),
       },
     ],
   };
@@ -229,7 +274,7 @@ export default function getProductData(bikeType: string) {
     case "athena":
       return athena;
     case "victory":
-      return mini;
+      return victory;
     default:
       return null;
   }

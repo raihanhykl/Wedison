@@ -4,39 +4,39 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import PeekCarousel from "./peek";
-import getProductData from "../lib/product-data";
 import { cn } from "@/lib/utils";
+import SpecificationsAccordion from "../components/specifications-accordion";
+import GetProductData from "../lib/product-data";
 
 type Props = {
   motorType: string;
 };
 
 export default function ProductPageComponent({ motorType }: Props) {
-  const [isDesktop, setIsDesktop] = useState(false);
-  const product = getProductData(motorType);
+  const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
+  const product = GetProductData(motorType);
   useEffect(() => {
-    const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
+    // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
     checkScreen(); // initial check
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  if (!product) {
-    return null;
-  }
+  if (!product || isDesktop === undefined) return null;
 
   return (
     <div>
       {/* hero */}
       <div className=" relative w-full">
-        <div className="flex flex-col items-center justify-center w-full h-[90vh] md:h-[96vh] overflow-hidden">
+        <div className="flex flex-col items-center justify-center w-full h-[100vh] md:h-[100vh] overflow-hidden">
+          {/* <div className="flex flex-col items-center justify-center w-full h-[90vh] md:h-[96vh] overflow-hidden"> */}
           <div className="relative w-full h-full scale-100 md:scale-100">
             <Image
-              // src={product?.hero.imageUrl}
               src={
                 isDesktop
-                  ? "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-Y-2-Hero-Desktop.jpg"
-                  : "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-Y-2-Hero-Mobile.jpg"
+                  ? product?.hero.imageUrl
+                  : product?.hero.imageUrlMobile || product?.hero.imageUrl
               }
               alt={product?.hero.imageAlt}
               width={1000}
@@ -50,31 +50,8 @@ export default function ProductPageComponent({ motorType }: Props) {
             />
           </div>
         </div>
-        {/* <div className="absolute top-0 left-0 w-full h-full flex items-center py-10 md:py-24">
-          <div className=" flex flex-col items-start justify-center items gap-4 px-24 w-[40%]">
-            <h1 className="text-4xl md:text-8xl font-bold text-start  text-white">
-              {product?.hero.title}
-            </h1>
-            <p className="text-sm md:text-2xl  italic w-full  text-white">
-              {product?.hero.desc}
-            </p>
-            <div className="flex w-full justify-start gap-4 mt-2">
-              <Button className="px-8 md:px-16 rounded-sm" size={"lg"}>
-                <Link href="/edpower">Learn More</Link>
-              </Button>
-              <Button
-                className=" text-[var(--primary)] px-8 md:px-16 rounded-sm"
-                size={"lg"}
-                variant={"outline"}
-                disabled
-              >
-                Get Started
-              </Button>
-            </div>
-          </div>
-        </div> */}
         <div className="absolute top-0 left-0 w-full h-full flex items-start py-10 md:py-24">
-          <div className=" flex flex-col items-center justify-center items gap-2 w-full">
+          <div className="mt-8 flex flex-col items-center justify-center items gap-2 w-full">
             <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
               {product?.hero.title}
             </h1>
@@ -98,7 +75,7 @@ export default function ProductPageComponent({ motorType }: Props) {
         </div>
       </div>
       {/* technical spec */}
-      <div className="py-26 w-full px-8 md:px-16 md:my-16">
+      <div className="py-26 w-full px-8 md:px-16 md:my-16 max-w-[2480px] mx-auto">
         <div className="flex justify-center container mx-auto">
           <div className="  flex items-center justify-center w-full max-w-6xl">
             <div className=" flex flex-col md:flex-row items-center md:items-start md:justify-evenly h-full w-fit md:w-full">
@@ -115,21 +92,7 @@ export default function ProductPageComponent({ motorType }: Props) {
                   {product?.techSpec[0].desc}
                 </div>
               </div>
-              <div className=" w-[80%] h-[1px] bg-gradient-to-r md:w-[1px] md:h-full my-3 md:my-0 md:bg-gradient-to-b from-white from-0% via-black/40 to-100%  to-white"></div>
-              <div className=" max-md:w-full">
-                <div className=" flex justify-start ">
-                  <div className="text-6xl md:text-7xl font-medium md:font-bold">
-                    {product?.techSpec[1].title}
-                  </div>
-                  <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
-                    {product?.techSpec[1].unit}
-                  </div>
-                </div>
-                <div className="text-lg font-medium md:font-semibold">
-                  {product?.techSpec[1].desc}
-                </div>
-              </div>
-              <div className=" w-[80%] h-[1px] bg-gradient-to-r md:w-[1px] md:h-full my-3 md:my-0 md:bg-gradient-to-b from-white from-0% via-black/40 to-100% to-white"></div>
+              <div className=" w-[80%] h-[1px] bg-gradient-to-r md:w-[1px] md:h-full my-3 md:my-0 md:bg-gradient-to-b from-white from-0% via-black/40 to-100% mx-[1px] to-white"></div>
 
               <div className=" max-md:w-full">
                 <div className=" flex justify-start ">
@@ -144,15 +107,35 @@ export default function ProductPageComponent({ motorType }: Props) {
                   {product?.techSpec[1].desc}
                 </div>
               </div>
+              <div className=" w-[80%] h-[1px] bg-gradient-to-r md:w-[1px] md:h-full my-3 md:my-0 md:bg-gradient-to-b from-white from-0% via-black/40 to-100% mx-[1px] to-white"></div>
+
+              <div className=" max-md:w-full">
+                <div className=" flex justify-start ">
+                  <div className="text-6xl md:text-7xl font-medium md:font-bold">
+                    {product?.techSpec[2].title}
+                  </div>
+                  <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
+                    {product?.techSpec[2].unit}
+                  </div>
+                </div>
+                <div className="text-lg font-medium md:font-semibold">
+                  {product?.techSpec[2].desc}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       {/* Product Overview */}
-      <div className="w-full xl:px-16 flex flex-col justify-center">
+      <div className="w-full xl:px-16 flex flex-col justify-center max-w-[2480px] mx-auto">
         <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px] xl:h-[700px] max-w-[2480px] mx-auto">
           <Image
-            src={product?.productOverview.imageUrl}
+            src={
+              isDesktop
+                ? product?.productOverview.imageUrl
+                : product?.productOverview.imageUrlMobile ||
+                  product?.productOverview.imageUrl
+            }
             alt={product?.productOverview.imageAlt}
             width={1000}
             height={1000}
@@ -175,20 +158,26 @@ export default function ProductPageComponent({ motorType }: Props) {
         </div>
       </div>
       {/* Product Highlight */}
-      <div className="">
+      <div className=" max-w-[2880px] mx-auto overflow-visible">
         <PeekCarousel
           data={product.productHighlight}
           for={motorType}
           perView={1.35}
+          // perView={1.35}
         />
       </div>
 
       {/* Supercharge Overview */}
       {product?.chargingOverview && (
-        <div className="w-full xl:px-16 flex flex-col justify-center">
+        <div className="w-full xl:px-16 flex flex-col justify-center max-w-[2480px] mx-auto">
           <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px] max-w-[2480px] mx-auto">
             <Image
-              src={product?.chargingOverview.imageUrl}
+              src={
+                isDesktop
+                  ? product?.chargingOverview.imageUrl
+                  : product?.chargingOverview.imageUrlMobile ||
+                    product?.chargingOverview.imageUrl
+              }
               alt={product?.chargingOverview.imageAlt}
               width={1000}
               height={1000}
@@ -214,7 +203,7 @@ export default function ProductPageComponent({ motorType }: Props) {
 
       {/* Supercharge Highlight */}
       {product.chargingHighlight && (
-        <div className="">
+        <div className="max-w-[2880px] mx-auto overflow-visible">
           <PeekCarousel
             data={product.chargingHighlight}
             for="supercharge"
@@ -222,6 +211,12 @@ export default function ProductPageComponent({ motorType }: Props) {
           />
         </div>
       )}
+
+      {/* Specification Accordion */}
+      <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
+        {/* <DashSpecificationsAccordion /> */}
+        <SpecificationsAccordion motorType={motorType} />
+      </div>
     </div>
   );
 }

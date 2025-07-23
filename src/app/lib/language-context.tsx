@@ -264,6 +264,45 @@ const translations = {
       "**Pertalite fuel (BBM) costs are based on prices as of December 2024",
     "calculator.page.cta": "Prove Yourself",
 
+    // specifications accordion
+    "specs.category.engine": "Engine",
+    "specs.category.engine.motorType": "Motor Type",
+    "specs.category.engine.motorPower": "Motor Power",
+    "specs.category.engine.topSpeed": "Top Speed",
+    "specs.category.engine.acceleration": "Acceleration (0-60 km/h)",
+
+    "specs.category.battery": "Battery",
+    "specs.category.battery.batteryType": "Battery Type",
+    "specs.category.battery.batteryCapacity": "Battery Capacity",
+    "specs.category.battery.voltage": "Voltage",
+    "specs.category.battery.chargingTimeSuperCharge":
+      "Charging Time with Super Charge (10-80%)",
+    "specs.category.battery.chargingTimeHome":
+      "Charging Time with Home Charging (0-100%)",
+    "specs.category.battery.range": "Cruising Range",
+
+    "specs.category.brake": "Brake",
+    "specs.category.brake.frontBrake": "Front Brake",
+    "specs.category.brake.rearBrake": "Rear Brake",
+    "specs.category.brake.cbsSupport": "CBS",
+
+    "specs.category.dimension": "Dimension",
+    "specs.category.dimension.length": "Length",
+    "specs.category.dimension.width": "Width",
+    "specs.category.dimension.height": "Height",
+    "specs.category.dimension.wheelbase": "Wheelbase",
+    "specs.category.dimension.seatHeight": "Seat Height",
+    "specs.category.dimension.weight": "Weight",
+    "specs.category.dimension.groundClearance": "Ground Clearance",
+
+    "specs.category.tire": "Tire",
+    "specs.category.tire.frontTire": "Front Tire",
+    "specs.category.tire.rearTire": "Rear Tire",
+
+    "specs.category.suspension": "Suspension",
+    "specs.category.suspension.frontSuspension": "Front Suspension",
+    "specs.category.suspension.rearSuspension": "Rear Suspension",
+
     //edmax
     "edmax.title":
       "EdPower – Powerful & Smart Electric Motorcycle from Wedison",
@@ -326,6 +365,116 @@ const translations = {
     "edmax.specs.dimension": "Dimension",
     "edmax.specs.tire": "Tire",
     "edmax.specs.suspension": "Suspension",
+
+    // edpower
+    "edpower.productPage.hero.imageAlt":
+      " Full body of EDPower from a three-quarter front angle, showcasing its robust, maxi-scooter design and premium features.",
+    "edpower.productPage.hero.title": "EDPOWER",
+    "edpower.productPage.hero.description": "The Future of Electric Riding",
+    "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
+    "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
+
+    "edpower.productPage.techSpecs1.title": "135",
+    "edpower.productPage.techSpecs1.unit": "km",
+    "edpower.productPage.techSpecs1.desc": "Cruising Range",
+
+    "edpower.productPage.techSpecs2.title": "15",
+    "edpower.productPage.techSpecs2.unit": "minutes",
+    "edpower.productPage.techSpecs2.desc":
+      "Charge from 10% to 80% with SuperCharge",
+
+    "edpower.productPage.techSpecs3.title": "80",
+    "edpower.productPage.techSpecs3.unit": "km/hour",
+    "edpower.productPage.techSpecs3.desc": "Top Speed",
+
+    "edpower.productPage.productOverview.imageAlt":
+      "EDPower from a dramatic side profile, emphasizing its wide seat, bold stance, and tech-forward look.",
+    "edpower.productPage.productOverview.title":
+      "Flagship Power, Unrivaled Comfort.",
+    "edpower.productPage.productOverview.description":
+      "Meet EDPower—the ultimate electric scooter from Wedison. With its spacious saddle, futuristic styling, and best-in-class range up to 135 km, EDPower sets a new standard for electric two-wheelers. Enjoy advanced comfort, cutting-edge connectivity, and unstoppable power for the longest journeys. Engineered for those who demand the best.",
+
+    "edpower.productPage.productHighlight1.imageAlt":
+      "Cockpit view showcasing the large TFT display with Apple CarPlay & Android Auto interface",
+    "edpower.productPage.productHighlight1.title":
+      "Wireless Apple CarPlay & Android Auto",
+    "edpower.productPage.productHighlight1.description":
+      "Seamlessly connect your smartphone via wireless Apple CarPlay or Android Auto—enabling navigation, calls, music, and more, right from your scooter’s vibrant display. Stay connected and in control, wherever the road takes you.",
+
+    "edpower.productPage.productHighlight2.imageAlt":
+      "Underseat storage, lid open, revealing extra-large compartment",
+    "edpower.productPage.productHighlight2.title": "XXL Underseat Storage",
+    "edpower.productPage.productHighlight2.description":
+      "Pack everything you need for city or long-distance rides. EDPower’s enormous underseat storage easily fits two helmets, groceries, or all your essentials.",
+
+    "edpower.productPage.productHighlight3.imageAlt":
+      "Rear three-quarter angle highlighting EDPower’s broad stance and wide seat",
+    "edpower.productPage.productHighlight3.title": "Unmatched Comfort & Space",
+    "edpower.productPage.productHighlight3.description":
+      "With a generously padded, extra-wide seat and ergonomic riding position, EDPower delivers all-day comfort—ideal for solo commutes or weekend escapes.",
+
+    "edpower.productPage.productHighlight4.imageAlt":
+      "Front shot showing advanced LED headlamps and modern bodywork",
+    "edpower.productPage.productHighlight4.title": "Striking, Modern Design",
+    "edpower.productPage.productHighlight4.description":
+      "From its bold front end to its sculpted rear, EDPower commands attention with every detail. Ride the future with confidence and style.",
+
+    "edpower.productPage.productHighlight5.imageAlt":
+      " Battery/range indicator on the dashboard, close-up",
+    "edpower.productPage.productHighlight5.title": "Class-Leading 135 km Range",
+    "edpower.productPage.productHighlight5.description":
+      "Go farther than ever. With up to 135 km on a single charge, EDPower is ready for city exploring or out-of-town adventures—no limits, just freedom.",
+
+    "edpower.productPage.chargingOverview.imageAlt":
+      "EDPower parked at a Wedison showroom with Super Charge and home charger visible",
+    "edpower.productPage.chargingOverview.title":
+      "Fast, Flexible Charging for Every Lifestyle",
+    "edpower.productPage.chargingOverview.description":
+      "EDPower adapts to your schedule with two effortless charging options: ultra-fast Super Charge at Wedison showrooms, or convenient overnight home charging. Always powered, always ready.",
+
+    "edpower.productPage.chargingHighlight1.imageAlt":
+      "EDPower connected to a Wedison Super Charge station",
+    "edpower.productPage.chargingHighlight1.title": "Wedison Super Charge",
+    "edpower.productPage.chargingHighlight1.description": (
+      <>
+        Charge from 10% to 80% in just 15 minutes. Perfect for quick top-ups on
+        the go—available at all Wedison showrooms.
+        <Link href="/super-charge" className="underline text-primary">
+          Learn More
+        </Link>
+      </>
+    ),
+
+    "edpower.productPage.chargingHighlight2.imageAlt":
+      "EDPower plugged into a home charger in a clean, modern garage",
+    "edpower.productPage.chargingHighlight2.title": "Hassle-Free Home Charging",
+    "edpower.productPage.chargingHighlight2.description":
+      "Plug in at home and start each day with a full battery. EDPower makes overnight charging effortless and worry-free.",
+
+    "edpower.specs.engine.motorType": "Brusless DC Motor",
+    "edpower.specs.engine.motorPower": "3.000 Watt (3 kW)",
+    "edpower.specs.engine.topSpeed": "80 km/hour",
+    "edpower.specs.engine.acceleration": "7.9 seconds",
+    "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "edpower.specs.battery.batteryCapacity": "5 kWh",
+    "edpower.specs.battery.voltage": "76.8 Volt",
+    "edpower.specs.battery.chargingTimeSuperCharge": "15 minutes",
+    "edpower.specs.battery.chargingTimeHome": "4 hours",
+    "edpower.specs.battery.range": "135 km",
+    "edpower.specs.brake.frontBrake": "Disc Brake",
+    "edpower.specs.brake.rearBrake": "Disc Brake",
+    "edpower.specs.brake.cbsSupport": "Yes",
+    "edpower.specs.dimension.length": "2.000 mm",
+    "edpower.specs.dimension.width": "710 mm",
+    "edpower.specs.dimension.height": "1.200 mm",
+    "edpower.specs.dimension.wheelbase": "1.450 mm",
+    "edpower.specs.dimension.groundClearance": "160 mm",
+    "edpower.specs.dimension.seatHeight": "740 mm",
+    "edpower.specs.dimension.weight": "140 kg",
+    "edpower.specs.tire.frontTire": "100/80-14",
+    "edpower.specs.tire.rearTire": "1020/70-14",
+    "edpower.specs.suspension.frontSuspension": "Hydraulic Telescopic",
+    "edpower.specs.suspension.rearSuspension": "Hydraulic Telescopic",
 
     // Dash Page
     "dash.title": "Dash – Electric Delivery Bike with Flexible Cargo Mounting",
@@ -394,29 +543,227 @@ const translations = {
     "victory.color.description":
       "Pick your favorite Victory color and see it in action.",
 
+    // ====
+
+    "victory.productPage.hero.imageAlt": "Gray Victory",
+    "victory.productPage.hero.title": "VICTORY",
+    "victory.productPage.hero.description":
+      "Conquer the streets with style and performance.",
+    "victory.productPage.hero.ctaPrimary": "Order Now",
+    "victory.productPage.hero.ctaSecondary": "Download Brochure",
+
+    "victory.productPage.techSpecs1.title": "115",
+    "victory.productPage.techSpecs1.unit": "km",
+    "victory.productPage.techSpecs1.desc": (
+      <>
+        <p>Cruising Range</p>
+        <p className="text-xs text-gray-500">*with Extended Battery</p>
+      </>
+    ),
+
+    "victory.productPage.techSpecs2.title": "15",
+    "victory.productPage.techSpecs2.unit": "minutes",
+    "victory.productPage.techSpecs2.desc":
+      "Charge from 10% to 80% with SuperCharge",
+
+    "victory.productPage.techSpecs3.title": "80",
+    "victory.productPage.techSpecs3.unit": "km/h",
+    "victory.productPage.techSpecs3.desc": "Top Speed",
+
+    "victory.productPage.productOverview.imageAlt": "Gray Victory",
+    "victory.productPage.productOverview.title": "Sporty, Agile, Unstoppable.",
+    "victory.productPage.productOverview.description":
+      "Victory by Wedison brings a new level of sportiness and agility to electric mobility. Purpose-built for city riding, Victory combines aggressive styling, lightning-fast acceleration, and outstanding control. Its wide wheelbase and advanced CBS disc brakes give you confidence in every corner. Go further with up to 115 km range and charge up in minutes—Victory puts you ahead in every journey.",
+
+    "victory.productPage.productHighlight1.imageAlt": "Victory Front look",
+    "victory.productPage.productHighlight1.title": "Signature Sporty Design",
+    "victory.productPage.productHighlight1.description":
+      "Victory stands out with a bold, aerodynamic shape and angular LED lighting—designed for riders who want to turn heads at every stoplight.",
+
+    "victory.productPage.productHighlight2.imageAlt":
+      "Front three-quarter view showing wide tire profile and suspension",
+    "victory.productPage.productHighlight2.title": "Superior Urban Handling",
+    "victory.productPage.productHighlight2.description":
+      "Wide wheels, grippy tires, and hydraulic shock absorbers deliver natural, precise handling in every situation—perfect for fast-paced city life.",
+
+    "victory.productPage.productHighlight3.imageAlt":
+      "Close-up of Super Charge port with Wedison branding",
+    "victory.productPage.productHighlight3.title": "Super Charge Ready",
+    "victory.productPage.productHighlight3.description":
+      "Recharge from 10% to 80% in just 15 minutes with Wedison Super Charge, or top up at home for total flexibility.",
+
+    "victory.productPage.chargingOverview.imageAlt":
+      "Victory parked at a Wedison showroom, Super Charge station in view",
+    "victory.productPage.chargingOverview.title": "Charge Your Way",
+    "victory.productPage.chargingOverview.description":
+      "Power up in minutes with Super Charge at any Wedison showroom, or recharge conveniently at home. Victory adapts to your lifestyle—always ready for your next move.",
+
+    "victory.productPage.chargingHighlight1.imageAlt":
+      "Victory at a Wedison Super Charge station, cable connected",
+    "victory.productPage.chargingHighlight1.title": "Ultra-Fast SuperCharge",
+    "victory.productPage.chargingHighlight1.description": (
+      <>
+        Go from 10% to 80% charge in just 15 minutes—perfect for quick stops and
+        busy days. Available at all Wedison showrooms.
+        <Link href="/super-charge" className="underline text-primary">
+          Learn More
+        </Link>
+      </>
+    ),
+
+    "victory.productPage.chargingHighlight2.imageAlt":
+      "Victory plugged into a home charger in a modern garage setting",
+    "victory.productPage.chargingHighlight2.title": "Everyday Home Charging",
+    "victory.productPage.chargingHighlight2.description":
+      "Plug in at home and wake up fully charged. With the included home charger, Victory is always ready to go—simple, convenient, and reliable.",
+
+    "victory.specs.engine.motorType": "Brusless DC Motor",
+    "victory.specs.engine.motorPower": "3.000 Watt (3 kW)",
+    "victory.specs.engine.topSpeed": "80 km/hour",
+    "victory.specs.engine.acceleration": "6.5 seconds",
+    "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "victory.specs.battery.batteryCapacity":
+      "2.5 kWh (Regular Battery) / 3.4 kWh (Extended Battery)",
+    "victory.specs.battery.voltage": "76.8 Volt",
+    "victory.specs.battery.chargingTimeSuperCharge": "15 minutes",
+    "victory.specs.battery.chargingTimeHome": "4 hours",
+    "victory.specs.battery.range":
+      "85 km (Regular Battery) / 115 km (Extended Battery)",
+    "victory.specs.brake.frontBrake": "Disc Brake",
+    "victory.specs.brake.rearBrake": "Disc Brake",
+    "victory.specs.brake.cbsSupport": "Yes",
+    "victory.specs.dimension.length": "1.950 mm",
+    "victory.specs.dimension.width": "690 mm",
+    "victory.specs.dimension.height": "1.130 mm",
+    "victory.specs.dimension.wheelbase": "1.380 mm",
+    "victory.specs.dimension.groundClearance": "140 mm",
+    "victory.specs.dimension.seatHeight": "765 mm",
+    "victory.specs.dimension.weight": "116.5 kg",
+    "victory.specs.tire.frontTire": "90/90-14",
+    "victory.specs.tire.rearTire": "100/80-14",
+    "victory.specs.suspension.frontSuspension": "Hydraulic Telescopic",
+    "victory.specs.suspension.rearSuspension": "Hydraulic Telescopic",
+
     //athena
 
-    "athena.hero.tag": "Retro Electric Scooter",
-    "athena.hero.title": "Iconic Design with",
-    "athena.hero.titleHighlight": "Classic & Modern Touch",
-    "athena.hero.description":
-      "Athena blends retro-classic aesthetics with modern EV performance — timeless style meets cutting-edge electric mobility.",
-    "athena.hero.orderNow": "Order Now",
-    "athena.hero.downloadBrochure": "Download Brochure",
+    // "athena.hero.tag": "Retro Electric Scooter",
+    // "athena.hero.title": "Iconic Design with",
+    // "athena.hero.titleHighlight": "Classic & Modern Touch",
+    // "athena.hero.description":
+    //   "Athena blends retro-classic aesthetics with modern EV performance — timeless style meets cutting-edge electric mobility.",
+    // "athena.hero.orderNow": "Order Now",
+    // "athena.hero.downloadBrochure": "Download Brochure",
 
-    "athena.feature1.tag": "Comfortable Ride",
-    "athena.feature1.title": "Comfort on the Road, Beauty in Motion",
-    "athena.feature1.subtitle": "Ergonomic design, smooth ride quality",
-    "athena.feature1.description":
-      "Athena's ergonomic riding posture and smooth suspension deliver a stylish yet relaxed experience — perfect for city cruising.",
+    // "athena.feature1.tag": "Comfortable Ride",
+    // "athena.feature1.title": "Comfort on the Road, Beauty in Motion",
+    // "athena.feature1.subtitle": "Ergonomic design, smooth ride quality",
+    // "athena.feature1.description":
+    //   "Athena's ergonomic riding posture and smooth suspension deliver a stylish yet relaxed experience — perfect for city cruising.",
 
-    "athena.feature2.tag": "Modern EV Tech",
-    "athena.feature2.title": "Retro Style, Modern Power",
-    "athena.feature2.subtitle": "Classic look, electric performance",
-    "athena.feature2.description":
-      "Combining vintage appeal with powerful EV tech, Athena gives you a fun, efficient, and future-ready ride without sacrificing style.",
-    "athena.color.description":
-      "Pick your favorite Athena color and see it in action.",
+    // "athena.feature2.tag": "Modern EV Tech",
+    // "athena.feature2.title": "Retro Style, Modern Power",
+    // "athena.feature2.subtitle": "Classic look, electric performance",
+    // "athena.feature2.description":
+    //   "Combining vintage appeal with powerful EV tech, Athena gives you a fun, efficient, and future-ready ride without sacrificing style.",
+    // "athena.color.description":
+    //   "Pick your favorite Athena color and see it in action.",
+
+    "athena.productPage.hero.imageAlt": "Pink Athena and Yellow Athena",
+    "athena.productPage.hero.title": "ATHENA",
+    "athena.productPage.hero.description": "Retro Style, Modern Power",
+    "athena.productPage.hero.ctaPrimary": "Order Now",
+    "athena.productPage.hero.ctaSecondary": "Download Brochure",
+
+    "athena.productPage.techSpecs1.title": "115",
+    "athena.productPage.techSpecs1.unit": "km",
+    "athena.productPage.techSpecs1.desc": (
+      <>
+        <p>Cruising Range</p>
+        <p className="text-xs text-gray-500">*with Extended Battery</p>
+      </>
+    ),
+
+    "athena.productPage.techSpecs2.title": "15",
+    "athena.productPage.techSpecs2.unit": "minutes",
+    "athena.productPage.techSpecs2.desc":
+      "Charge from 10% to 80% with SuperCharge",
+
+    "athena.productPage.techSpecs3.title": "80",
+    "athena.productPage.techSpecs3.unit": "km/h",
+    "athena.productPage.techSpecs3.desc": "Top Speed",
+
+    "athena.productPage.productOverview.imageAlt": "Green Athena",
+    "athena.productPage.productOverview.title": "Timeless Elegance, Recharged",
+    "athena.productPage.productOverview.description":
+      "Athena by Wedison combines timeless European scooter elegance with cutting-edge electric technology. Designed to stand out while staying quiet, Athena brings a fresh sophistication to city streets—delivering smooth, silent rides with every journey. With up to 115 km range per charge, robust CBS disc brakes, and advanced hydraulic suspension, Athena isn’t just a ride. It’s an experience, crafted for those who crave effortless style and next-generation performance. Fast-charge at any Wedison showroom or enjoy convenient home charging—Athena adapts perfectly to your modern lifestyle.",
+
+    "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
+    "athena.productPage.productHighlight1.title": "Modern Digital Display",
+    "athena.productPage.productHighlight1.description":
+      "Athena’s clear and bright LCD instrument panel provides all essential ride information at a glance. Simple, digital, and reliable—so you can focus on the road ahead, free from distractions.",
+
+    "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
+    "athena.productPage.productHighlight2.title": "SuperCharge",
+    "athena.productPage.productHighlight2.description":
+      "Power up from 10% to 80% in just 15 minutes with Wedison Super Charge (available at all showrooms), or conveniently charge at home with a full charge in under 4 hours. Athena is engineered for the non-stop city pace.",
+
+    "athena.productPage.productHighlight3.imageAlt":
+      "CBS Breaking System Athena",
+    "athena.productPage.productHighlight3.title": "Designed for the City",
+    "athena.productPage.productHighlight3.description":
+      "With CBS disc brakes front and rear, plus a stable wide-tire setup, Athena offers agile handling and confident braking—so you can move through city streets with poise, comfort, and unmistakable style.",
+
+    "athena.productPage.chargingOverview.imageAlt":
+      "Green Athena with SuperCharge and Home Charging",
+    "athena.productPage.chargingOverview.title": "Charging Made Effortless",
+    "athena.productPage.chargingOverview.description":
+      "Stay in motion with Athena’s flexible charging solutions. Plug in at home for everyday convenience, or experience rapid Super Charge at any Wedison showroom. Athena gives you the freedom to choose—charge where you live, or power up fast when you're on the go.",
+
+    "athena.productPage.chargingHighlight1.imageAlt": "Athena with SuperCharge",
+    "athena.productPage.chargingHighlight1.title": "15-Minute SuperCharge",
+    "athena.productPage.chargingHighlight1.description": (
+      <>
+        Experience lightning-fast charging with our advanced SuperCharge
+        technology, designed to keep you on the road with charge your battery
+        from 10% to 80% in just 15 Minutes.
+        <Link href="/super-charge" className="underline text-primary">
+          Learn More
+        </Link>
+      </>
+    ),
+
+    "athena.productPage.chargingHighlight2.imageAlt":
+      "Athena with Home Charger",
+    "athena.productPage.chargingHighlight2.title": "Convenient Home Charging",
+    "athena.productPage.chargingHighlight2.description":
+      "Charge overnight, or anytime it suits you. Athena's included home charger delivers a full battery in under four hours—seamless, silent, and ready when you are.",
+
+    "athena.specs.engine.motorType": "Brusless DC Motor",
+    "athena.specs.engine.motorPower": "2.500 Watt (2.5 kW)",
+    "athena.specs.engine.topSpeed": "80 km/hour",
+    "athena.specs.engine.acceleration": "6.5 seconds",
+    "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "athena.specs.battery.batteryCapacity":
+      "2.5 kWh (Regular Battery) / 3.4 kWh (Extended Battery)",
+    "athena.specs.battery.voltage": "76.8 Volt",
+    "athena.specs.battery.chargingTimeSuperCharge": "15 minutes",
+    "athena.specs.battery.chargingTimeHome": "4 hour",
+    "athena.specs.battery.range":
+      "85 km (Regular Battery) / 115 km (Extended Battery)",
+    "athena.specs.brake.frontBrake": "Disc Brake",
+    "athena.specs.brake.rearBrake": "Disc Brake",
+    "athena.specs.brake.cbsSupport": "Yes",
+    "athena.specs.dimension.length": "1.850 mm",
+    "athena.specs.dimension.width": "750 mm",
+    "athena.specs.dimension.height": "1.155 mm",
+    "athena.specs.dimension.wheelbase": "1.350 mm",
+    "athena.specs.dimension.groundClearance": "160 mm",
+    "athena.specs.dimension.seatHeight": "775 mm",
+    "athena.specs.dimension.weight": "113.5 kg",
+    "athena.specs.tire.frontTire": "100/80-12",
+    "athena.specs.tire.rearTire": "100/80-12",
+    "athena.specs.suspension.frontSuspension": "Hydraulic Telescopic",
+    "athena.specs.suspension.rearSuspension": "Hydraulic Telescopic",
 
     //mini
     "mini.hero.tag": "Entry-Level EV",
@@ -441,6 +788,79 @@ const translations = {
 
     "mini.color.description":
       "Pick your favorite Mini color and see it in action.",
+
+    // ===
+
+    "mini.productPage.hero.imageAlt": "Red Mini and White Mini",
+    "mini.productPage.hero.title": "MINI",
+    "mini.productPage.hero.description": "Affordable Mobility for Every Ride",
+    "mini.productPage.hero.ctaPrimary": "Order Now",
+    "mini.productPage.hero.ctaSecondary": "Download Brochure",
+
+    "mini.productPage.techSpecs1.title": "65",
+    "mini.productPage.techSpecs1.unit": "km",
+    "mini.productPage.techSpecs1.desc": "Cruising Range",
+
+    "mini.productPage.techSpecs2.title": "LED",
+    "mini.productPage.techSpecs2.desc": "Head unit Display",
+
+    "mini.productPage.techSpecs3.title": "55",
+    "mini.productPage.techSpecs3.unit": "km/h",
+    "mini.productPage.techSpecs3.desc": "Top Speed",
+
+    "mini.productPage.productOverview.imageAlt": "Red Mini",
+    "mini.productPage.productOverview.title":
+      "Small in Size. Big on Experience.",
+    "mini.productPage.productOverview.description":
+      "An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+
+    "mini.productPage.productHighlight1.imageAlt": "Mini Underseat storage",
+    "mini.productPage.productHighlight1.title": "XL Underseat Storage",
+    "mini.productPage.productHighlight1.description":
+      "Bring more along for every ride. Mini’s extra-large underseat compartment fits a backpack, groceries, or even a full-face helmet—more space, more possibilities.",
+
+    "mini.productPage.productHighlight2.imageAlt": "Mini LED Display",
+    "mini.productPage.productHighlight2.title": "Digital LED Display",
+    "mini.productPage.productHighlight2.description":
+      "Stay informed and in control with a crisp, modern digital LED display. Get real-time info on speed, battery, and more—all at a glance.",
+
+    "mini.productPage.productHighlight3.imageAlt": "Mini Disc Brakes",
+    "mini.productPage.productHighlight3.title": "Confident Dual Disc Brakes",
+    "mini.productPage.productHighlight3.description":
+      "Experience maximum stopping power and safety with disc brakes on both the front and rear wheels. Enjoy smooth, responsive braking in all riding conditions—so you can ride with complete peace of mind.",
+
+    "mini.productPage.chargingOverview.imageAlt":
+      "Red Mini charging at a home outlet",
+    "mini.productPage.chargingOverview.title": "Simple Home Charging",
+    "mini.productPage.chargingOverview.description":
+      "Recharge easily from any standard outlet. With the included home charger, Mini is always ready for your next ride—no fast-charging needed, just plug and go.",
+
+    // ===
+
+    "mini.specs.engine.motorType": "Brusless DC Motor",
+    "mini.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
+    "mini.specs.engine.topSpeed": "55 km/hour",
+    "mini.specs.engine.acceleration": "9.3 seconds",
+    "mini.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "mini.specs.battery.batteryCapacity": "1.6 kWh",
+    "mini.specs.battery.voltage": "64 Volt",
+    "mini.specs.battery.chargingTimeSuperCharge": "-",
+    "mini.specs.battery.chargingTimeHome": "4 hours",
+    "mini.specs.battery.range": "65 km",
+    "mini.specs.brake.frontBrake": "Disc Brake",
+    "mini.specs.brake.rearBrake": "Disc Brake",
+    "mini.specs.brake.cbsSupport": "No",
+    "mini.specs.dimension.length": "1.790 mm",
+    "mini.specs.dimension.width": "670 mm",
+    "mini.specs.dimension.height": "1.110 mm",
+    "mini.specs.dimension.wheelbase": "1.370 mm",
+    "mini.specs.dimension.groundClearance": "130 mm",
+    "mini.specs.dimension.seatHeight": "760 mm",
+    "mini.specs.dimension.weight": "78.5 kg",
+    "mini.specs.tire.frontTire": "90/90-10",
+    "mini.specs.tire.rearTire": "90/90-10",
+    "mini.specs.suspension.frontSuspension": "Hydraulic Telescopic",
+    "mini.specs.suspension.rearSuspension": "Hydraulic Telescopic",
 
     //super charge
     "supercharge.landing.title": "Your Trip",
@@ -767,6 +1187,46 @@ const translations = {
       "**Harga bahan bakar Pertalite mengacu pada harga per Desember 2024",
     "calculator.page.cta": "Buktikan Sendiri",
 
+    // specifications accordion
+    "specs.category.engine": "Mesin",
+    "specs.category.engine.motorType": "Tipe Motor",
+    "specs.category.engine.motorPower": "Daya Motor (rata-rata)",
+    "specs.category.engine.topSpeed": "Kecepatan Maksimum",
+    "specs.category.engine.acceleration": "Akselerasi (0-50 km/j)",
+
+    "specs.category.battery": "Baterai",
+    "specs.category.battery.batteryType": "Tipe Baterai",
+    "specs.category.battery.batteryCapacity": "Kapasitas Baterai",
+    "specs.category.battery.voltage": "Tegangan Baterai (Volt)",
+    "specs.category.battery.chargingTimeSuperCharge":
+      "Waktu Pengisian dengan Super Charge (10-80%)",
+    "specs.category.battery.chargingTimeHome":
+      "Waktu Pengisian dengan Home Charging (0-100%)",
+    "specs.category.battery.range": "Jarak Tempuh",
+
+    "specs.category.brake": "Rem",
+    "specs.category.brake.frontBrake": "Rem Depan",
+    "specs.category.brake.rearBrake": "Rem Belakang",
+    "specs.category.brake.cbsSupport": "CBS",
+
+    "specs.category.dimension": "Dimensi",
+    "specs.category.dimension.length": "Panjang",
+    "specs.category.dimension.width": "Lebar",
+    "specs.category.dimension.height": "Tinggi",
+    "specs.category.dimension.wheelbase": "Jarak Sumbu Roda (Wheelbase)",
+    "specs.category.dimension.groundClearance":
+      "Jarak Terendah ke Tanah (Ground Clearance)",
+    "specs.category.dimension.seatHeight": "Tinggi Jok",
+    "specs.category.dimension.weight": "Berat",
+
+    "specs.category.tire": "Ban",
+    "specs.category.tire.frontTire": "Ban Depan",
+    "specs.category.tire.rearTire": "Ban Belakang",
+
+    "specs.category.suspension": "Suspensi",
+    "specs.category.suspension.frontSuspension": "Suspensi Depan",
+    "specs.category.suspension.rearSuspension": "Suspensi Belakang",
+
     //edmax
     "edmax.title": "Edmax – Motor Listrik Canggih dan Bertenaga dari Wedison",
     "edmax.description":
@@ -828,6 +1288,107 @@ const translations = {
     "edmax.specs.dimension": "Dimensi",
     "edmax.specs.tire": "Ban",
     "edmax.specs.suspension": "Suspensi",
+
+    // edpower
+    "edpower.productPage.hero.imageAlt": "Victory Abu-Abu",
+    "edpower.productPage.hero.title": "VICTORY",
+    "edpower.productPage.hero.description":
+      "Taklukkan jalanan dengan gaya dan performa.",
+    "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
+    "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
+
+    "edpower.productPage.techSpecs1.title": "115",
+    "edpower.productPage.techSpecs1.unit": "km",
+    "edpower.productPage.techSpecs1.desc": (
+      <>
+        <p>Jarak Tempuh</p>
+        <p className="text-xs text-gray-500">*dengan Baterai Extended</p>
+      </>
+    ),
+
+    "edpower.productPage.techSpecs2.title": "15",
+    "edpower.productPage.techSpecs2.unit": "menit",
+    "edpower.productPage.techSpecs2.desc":
+      "Isi daya dari 10% ke 80% dengan SuperCharge",
+
+    "edpower.productPage.techSpecs3.title": "80",
+    "edpower.productPage.techSpecs3.unit": "km/jam",
+    "edpower.productPage.techSpecs3.desc": "Kecepatan Maksimum",
+
+    "edpower.productPage.productOverview.imageAlt": "Victory Abu-Abu",
+    "edpower.productPage.productOverview.title":
+      "Sporty, Lincah, Tak Terhentikan.",
+    "edpower.productPage.productOverview.description":
+      "Victory dari Wedison menghadirkan tingkat sportiness dan kelincahan baru dalam mobilitas listrik. Dirancang khusus untuk berkendara di kota, Victory memadukan tampilan agresif, akselerasi super cepat, dan kendali yang luar biasa. Dengan wheelbase lebar dan rem cakram CBS canggih, Anda akan merasa percaya diri di setiap tikungan. Tempuh jarak hingga 115 km dan isi daya dalam hitungan menit—Victory selalu membawa Anda selangkah lebih maju di setiap perjalanan.",
+
+    "edpower.productPage.productHighlight1.imageAlt": "Tampilan Depan Victory",
+    "edpower.productPage.productHighlight1.title": "Desain Sporty yang Ikonik",
+    "edpower.productPage.productHighlight1.description":
+      "Victory tampil mencolok dengan bentuk aerodinamis yang tegas dan pencahayaan LED bergaya tajam—dirancang untuk pengendara yang ingin tampil beda di setiap lampu merah.",
+
+    "edpower.productPage.productHighlight2.imageAlt":
+      "Tampilan tiga perempat depan menunjukkan ban lebar dan suspensi",
+    "edpower.productPage.productHighlight2.title":
+      "Kendali Urban yang Superior",
+    "edpower.productPage.productHighlight2.description":
+      "Ban lebar, daya cengkeram tinggi, dan suspensi hidrolik memberikan pengendalian yang presisi dan alami di berbagai kondisi—sempurna untuk gaya hidup kota yang dinamis.",
+
+    "edpower.productPage.productHighlight3.imageAlt":
+      "Tampilan dekat port SuperCharge dengan branding Wedison",
+    "edpower.productPage.productHighlight3.title": "Siap SuperCharge",
+    "edpower.productPage.productHighlight3.description":
+      "Isi daya dari 10% ke 80% hanya dalam 15 menit dengan Wedison SuperCharge, atau isi daya di rumah untuk fleksibilitas penuh.",
+
+    "edpower.productPage.chargingOverview.imageAlt":
+      "Victory terparkir di showroom Wedison, dengan stasiun SuperCharge di latar",
+    "edpower.productPage.chargingOverview.title": "Isi Daya Sesuai Gaya Anda",
+    "edpower.productPage.chargingOverview.description":
+      "Isi daya dalam hitungan menit dengan SuperCharge di seluruh showroom Wedison, atau isi ulang dengan mudah di rumah. Victory menyesuaikan gaya hidup Anda—selalu siap untuk langkah berikutnya.",
+
+    "edpower.productPage.chargingHighlight1.imageAlt":
+      "Victory di stasiun SuperCharge Wedison, kabel terhubung",
+    "edpower.productPage.chargingHighlight1.title": "SuperCharge Super Cepat",
+    "edpower.productPage.chargingHighlight1.description": (
+      <>
+        Isi daya dari 10% ke 80% hanya dalam 15 menit—sempurna untuk berhenti
+        sejenak di hari yang sibuk. Tersedia di semua showroom Wedison.
+        <Link href="/super-charge" className="underline text-primary">
+          Pelajari Lebih Lanjut
+        </Link>
+      </>
+    ),
+
+    "edpower.productPage.chargingHighlight2.imageAlt":
+      "Victory terhubung ke charger rumah di garasi modern",
+    "edpower.productPage.chargingHighlight2.title":
+      "Pengisian Daya Harian di Rumah",
+    "edpower.productPage.chargingHighlight2.description":
+      "Colokkan di rumah dan bangun dengan baterai penuh. Dengan charger rumahan bawaan, Victory selalu siap diajak berangkat—praktis, mudah, dan bisa diandalkan.",
+
+    "edpower.specs.engine.motorType": "Brusless DC Motor",
+    "edpower.specs.engine.motorPower": "3.000 Watt (3 kW)",
+    "edpower.specs.engine.topSpeed": "80 km/jam",
+    "edpower.specs.engine.acceleration": "7.9 detik",
+    "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "edpower.specs.battery.batteryCapacity": "5 kWh",
+    "edpower.specs.battery.voltage": "76.8 Volt",
+    "edpower.specs.battery.chargingTimeSuperCharge": "15 menit",
+    "edpower.specs.battery.chargingTimeHome": "4 jam",
+    "edpower.specs.battery.range": "135 km",
+    "edpower.specs.brake.frontBrake": "Rem Cakram",
+    "edpower.specs.brake.rearBrake": "Rem Cakram",
+    "edpower.specs.brake.cbsSupport": "Ya",
+    "edpower.specs.dimension.length": "2.000 mm",
+    "edpower.specs.dimension.width": "710 mm",
+    "edpower.specs.dimension.height": "1.200 mm",
+    "edpower.specs.dimension.wheelbase": "1.450 mm",
+    "edpower.specs.dimension.groundClearance": "160 mm",
+    "edpower.specs.dimension.seatHeight": "740 mm",
+    "edpower.specs.dimension.weight": "140 kg",
+    "edpower.specs.tire.frontTire": "100/80-14",
+    "edpower.specs.tire.rearTire": "1020/70-14",
+    "edpower.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
+    "edpower.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
 
     //dash
     "dash.title":
@@ -894,30 +1455,235 @@ const translations = {
     "victory.color.description":
       "Pilih warna Victory favoritmu dan lihat tampilannya.",
 
+    // ===
+
+    "victory.productPage.hero.imageAlt": "Victory Abu-Abu",
+    "victory.productPage.hero.title": "VICTORY",
+    "victory.productPage.hero.description":
+      "Taklukkan jalanan dengan gaya dan performa.",
+    "victory.productPage.hero.ctaPrimary": "Pesan Sekarang",
+    "victory.productPage.hero.ctaSecondary": "Unduh Brosur",
+
+    "victory.productPage.techSpecs1.title": "115",
+    "victory.productPage.techSpecs1.unit": "km",
+    "victory.productPage.techSpecs1.desc": (
+      <>
+        <p>Jarak Tempuh</p>
+        <p className="text-xs text-gray-500">*dengan Baterai Extended</p>
+      </>
+    ),
+
+    "victory.productPage.techSpecs2.title": "15",
+    "victory.productPage.techSpecs2.unit": "menit",
+    "victory.productPage.techSpecs2.desc":
+      "Isi daya dari 10% ke 80% dengan SuperCharge",
+
+    "victory.productPage.techSpecs3.title": "80",
+    "victory.productPage.techSpecs3.unit": "km/jam",
+    "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
+
+    "victory.productPage.productOverview.imageAlt": "Victory Abu-Abu",
+    "victory.productPage.productOverview.title":
+      "Sporty, Lincah, Tak Terhentikan.",
+    "victory.productPage.productOverview.description":
+      "Victory dari Wedison menghadirkan tingkat sportiness dan kelincahan baru dalam mobilitas listrik. Dirancang khusus untuk berkendara di kota, Victory memadukan tampilan agresif, akselerasi super cepat, dan kendali yang luar biasa. Dengan wheelbase lebar dan rem cakram CBS canggih, Anda akan merasa percaya diri di setiap tikungan. Tempuh jarak hingga 115 km dan isi daya dalam hitungan menit—Victory selalu membawa Anda selangkah lebih maju di setiap perjalanan.",
+
+    "victory.productPage.productHighlight1.imageAlt": "Tampilan Depan Victory",
+    "victory.productPage.productHighlight1.title": "Desain Sporty yang Ikonik",
+    "victory.productPage.productHighlight1.description":
+      "Victory tampil mencolok dengan bentuk aerodinamis yang tegas dan pencahayaan LED bergaya tajam—dirancang untuk pengendara yang ingin tampil beda di setiap lampu merah.",
+
+    "victory.productPage.productHighlight2.imageAlt":
+      "Tampilan tiga perempat depan menunjukkan ban lebar dan suspensi",
+    "victory.productPage.productHighlight2.title":
+      "Kendali Urban yang Superior",
+    "victory.productPage.productHighlight2.description":
+      "Ban lebar, daya cengkeram tinggi, dan suspensi hidrolik memberikan pengendalian yang presisi dan alami di berbagai kondisi—sempurna untuk gaya hidup kota yang dinamis.",
+
+    "victory.productPage.productHighlight3.imageAlt":
+      "Tampilan dekat port SuperCharge dengan branding Wedison",
+    "victory.productPage.productHighlight3.title": "Siap SuperCharge",
+    "victory.productPage.productHighlight3.description":
+      "Isi daya dari 10% ke 80% hanya dalam 15 menit dengan Wedison SuperCharge, atau isi daya di rumah untuk fleksibilitas penuh.",
+
+    "victory.productPage.chargingOverview.imageAlt":
+      "Victory terparkir di showroom Wedison, dengan stasiun SuperCharge di latar",
+    "victory.productPage.chargingOverview.title": "Isi Daya Sesuai Gaya Anda",
+    "victory.productPage.chargingOverview.description":
+      "Isi daya dalam hitungan menit dengan SuperCharge di seluruh showroom Wedison, atau isi ulang dengan mudah di rumah. Victory menyesuaikan gaya hidup Anda—selalu siap untuk langkah berikutnya.",
+
+    "victory.productPage.chargingHighlight1.imageAlt":
+      "Victory di stasiun SuperCharge Wedison, kabel terhubung",
+    "victory.productPage.chargingHighlight1.title": "SuperCharge Super Cepat",
+    "victory.productPage.chargingHighlight1.description": (
+      <>
+        Isi daya dari 10% ke 80% hanya dalam 15 menit—sempurna untuk berhenti
+        sejenak di hari yang sibuk. Tersedia di semua showroom Wedison.
+        <Link href="/super-charge" className="underline text-primary">
+          Pelajari Lebih Lanjut
+        </Link>
+      </>
+    ),
+
+    "victory.productPage.chargingHighlight2.imageAlt":
+      "Victory terhubung ke charger rumah di garasi modern",
+    "victory.productPage.chargingHighlight2.title":
+      "Pengisian Daya Harian di Rumah",
+    "victory.productPage.chargingHighlight2.description":
+      "Colokkan di rumah dan bangun dengan baterai penuh. Dengan charger rumahan bawaan, Victory selalu siap diajak berangkat—praktis, mudah, dan bisa diandalkan.",
+
+    "victory.specs.engine.motorType": "Brusless DC Motor",
+    "victory.specs.engine.motorPower": "3.000 Watt (3 kW)",
+    "victory.specs.engine.topSpeed": "80 km/jam",
+    "victory.specs.engine.acceleration": "6.5 detik",
+    "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "victory.specs.battery.batteryCapacity":
+      "2.5 kWh (Baterai Regular) / 3.4 kWh (Baterai Extended)",
+    "victory.specs.battery.voltage": "76.8 Volt",
+    "victory.specs.battery.chargingTimeSuperCharge": "15 menit",
+    "victory.specs.battery.chargingTimeHome": "4 jam",
+    "victory.specs.battery.range":
+      "85 km (Baterai Regular) / 115 km (Baterai Extended)",
+    "victory.specs.brake.frontBrake": "Rem Cakram",
+    "victory.specs.brake.rearBrake": "Rem Cakram",
+    "victory.specs.brake.cbsSupport": "Ya",
+    "victory.specs.dimension.length": "1.950 mm",
+    "victory.specs.dimension.width": "690 mm",
+    "victory.specs.dimension.height": "1.130 mm",
+    "victory.specs.dimension.wheelbase": "1.380 mm",
+    "victory.specs.dimension.groundClearance": "140 mm",
+    "victory.specs.dimension.seatHeight": "765 mm",
+    "victory.specs.dimension.weight": "116.5 kg",
+    "victory.specs.tire.frontTire": "90/90-14",
+    "victory.specs.tire.rearTire": "100/80-14",
+    "victory.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
+    "victory.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
+
     //athena
 
-    "athena.hero.tag": "Motor Listrik Retro",
-    "athena.hero.title": "Desain Ikonik yang",
-    "athena.hero.titleHighlight": "Klasik & Modern",
-    "athena.hero.description":
-      "Athena menghadirkan estetika retro klasik dengan performa modern. Perpaduan gaya abadi dan teknologi masa kini dalam satu kendaraan elektrik.",
-    "athena.hero.orderNow": "Pesan Sekarang",
-    "athena.hero.downloadBrochure": "Unduh Brosur",
+    // "athena.hero.tag": "Motor Listrik Retro",
+    // "athena.hero.title": "Desain Ikonik yang",
+    // "athena.hero.titleHighlight": "Klasik & Modern",
+    // "athena.hero.description":
+    //   "Athena menghadirkan estetika retro klasik dengan performa modern. Perpaduan gaya abadi dan teknologi masa kini dalam satu kendaraan elektrik.",
+    // "athena.hero.orderNow": "Pesan Sekarang",
+    // "athena.hero.downloadBrochure": "Unduh Brosur",
 
-    "athena.feature1.tag": "Kenyamanan Berkendara",
-    "athena.feature1.title": "Nyaman Dikendarai, Elegan Dipandang",
-    "athena.feature1.subtitle": "Desain ergonomis, sensasi berkendara halus",
-    "athena.feature1.description":
-      "Dengan posisi duduk ergonomis dan suspensi yang mendukung kenyamanan, Athena siap menemani perjalananmu dengan penuh gaya dan rasa rileks.",
+    // "athena.feature1.tag": "Kenyamanan Berkendara",
+    // "athena.feature1.title": "Nyaman Dikendarai, Elegan Dipandang",
+    // "athena.feature1.subtitle": "Desain ergonomis, sensasi berkendara halus",
+    // "athena.feature1.description":
+    //   "Dengan posisi duduk ergonomis dan suspensi yang mendukung kenyamanan, Athena siap menemani perjalananmu dengan penuh gaya dan rasa rileks.",
 
-    "athena.feature2.tag": "Teknologi EV Modern",
-    "athena.feature2.title": "Gaya Retro, Tenaga Masa Kini",
-    "athena.feature2.subtitle": "Tampilan klasik, performa elektrik modern",
-    "athena.feature2.description":
-      "Athena memadukan tampilan klasik dengan kekuatan motor listrik terkini. Pengalaman berkendara yang menyenangkan, efisien, dan ramah lingkungan.",
+    // "athena.feature2.tag": "Teknologi EV Modern",
+    // "athena.feature2.title": "Gaya Retro, Tenaga Masa Kini",
+    // "athena.feature2.subtitle": "Tampilan klasik, performa elektrik modern",
+    // "athena.feature2.description":
+    //   "Athena memadukan tampilan klasik dengan kekuatan motor listrik terkini. Pengalaman berkendara yang menyenangkan, efisien, dan ramah lingkungan.",
 
-    "athena.color.description":
-      "Pilih warna Athena favoritmu dan lihat tampilannya.",
+    // "athena.color.description":
+    //   "Pilih warna Athena favoritmu dan lihat tampilannya.",
+
+    "athena.productPage.hero.imageAlt": "Athena Pink dan Athena Kuning",
+    "athena.productPage.hero.title": "ATHENA",
+    "athena.productPage.hero.description": "Gaya Retro, Tenaga Masa Kini",
+    "athena.productPage.hero.ctaPrimary": "Pesan Sekarang",
+    "athena.productPage.hero.ctaSecondary": "Download Brosur",
+
+    "athena.productPage.techSpecs1.title": "115",
+    "athena.productPage.techSpecs1.unit": "km",
+    "athena.productPage.techSpecs1.desc": (
+      <>
+        <p>Jarak Tempuh</p>
+        <p className="text-xs text-gray-500">*dengan Baterai Extended</p>
+      </>
+    ),
+
+    "athena.productPage.techSpecs2.title": "15",
+    "athena.productPage.techSpecs2.unit": "menit",
+    "athena.productPage.techSpecs2.desc":
+      "Charge dari 10% ke 80% dengan SuperCharge",
+
+    "athena.productPage.techSpecs3.title": "80",
+    "athena.productPage.techSpecs3.unit": "km/jam",
+    "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
+
+    "athena.productPage.productOverview.imageAlt": "Athena Hijau",
+    "athena.productPage.productOverview.title":
+      "Keanggunan Tak Lekang Waktu, Kini Teraliri Energi Baru",
+    "athena.productPage.productOverview.description":
+      "Athena dari Wedison memadukan keanggunan klasik skuter Eropa dengan teknologi listrik terkini. Dirancang untuk mencuri perhatian tanpa mengundang bising, Athena menghadirkan sentuhan baru penuh gaya di jalanan kota—mengantar Anda melaju mulus dan senyap di setiap perjalanan. Dengan jangkauan hingga 115 km dalam sekali pengisian, rem cakram CBS yang tangguh, serta suspensi hidrolik canggih, Athena bukan sekadar kendaraan. Ini adalah sebuah pengalaman, dirancang bagi mereka yang mendambakan gaya tanpa usaha dan performa generasi baru. Isi daya cepat di showroom Wedison atau nikmati kemudahan charging di rumah—Athena siap menyesuaikan diri dengan gaya hidup modern Anda.",
+
+    "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
+    "athena.productPage.productHighlight1.title": "Layar Digital Canggih",
+    "athena.productPage.productHighlight1.description":
+      "Athena dilengkapi head unit modern dengan layar sentuh intuitif, mendukung Apple CarPlay dan Android Auto. Nikmati navigasi, musik, dan notifikasi dengan mudah.",
+
+    "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
+    "athena.productPage.productHighlight2.title": "SuperCharge",
+    "athena.productPage.productHighlight2.description":
+      "Isi daya dari 10% hingga 80% hanya dalam 15 menit dengan Wedison Super Charge (tersedia di seluruh showroom), atau isi daya dengan mudah di rumah hingga penuh dalam kurang dari 4 jam. Athena dirancang untuk mengikuti ritme kota yang tak pernah berhenti.",
+
+    "athena.productPage.productHighlight3.imageAlt":
+      "Sistem Pengereman CBS Athena",
+    "athena.productPage.productHighlight3.title": "Dirancang untuk Perkotaan",
+    "athena.productPage.productHighlight3.description":
+      "Dengan rem cakram CBS di depan dan belakang, serta ban lebar yang stabil, Athena menghadirkan kendali lincah dan pengereman yang meyakinkan—memungkinkan Anda melaju di jalanan kota dengan percaya diri, nyaman, dan penuh gaya.",
+
+    "athena.productPage.chargingOverview.imageAlt":
+      "Athena Hijau dengan SuperCharge dan Home Charging",
+    "athena.productPage.chargingOverview.title": "Pengisian Daya Tanpa Ribet",
+    "athena.productPage.chargingOverview.description":
+      "Tetap bergerak dengan solusi pengisian daya fleksibel dari Athena. Cukup colokkan di rumah untuk kenyamanan sehari-hari, atau nikmati kecepatan Super Charge di seluruh showroom Wedison. Athena memberi Anda kebebasan untuk memilih—isi daya di tempat tinggal, atau isi cepat saat sedang bepergian.",
+
+    "athena.productPage.chargingHighlight1.imageAlt":
+      "Athena dengan SuperCharge",
+    "athena.productPage.chargingHighlight1.title":
+      "15-Menit dengan SuperCharge",
+    "athena.productPage.chargingHighlight1.description": (
+      <>
+        Rasakan pengisian daya super cepat dengan teknologi SuperCharge canggih
+        kami—dirancang agar Anda tetap bisa melaju, mengisi daya baterai dari
+        10% hingga 80% hanya dalam 15 menit.
+        <Link href="/super-charge" className="underline text-primary">
+          Pelajari Lebih Lanjut
+        </Link>
+      </>
+    ),
+
+    "athena.productPage.chargingHighlight2.imageAlt":
+      "Athena dengan Home Charger",
+    "athena.productPage.chargingHighlight2.title":
+      "Pengisian Daya di Rumah yang Praktis",
+    "athena.productPage.chargingHighlight2.description":
+      "Isi daya semalaman, atau kapan pun sesuai jadwal Anda. Charger rumahan bawaan Athena mampu mengisi penuh baterai dalam waktu kurang dari empat jam—tanpa suara, tanpa repot, dan selalu siap saat Anda butuh.",
+
+    "athena.specs.engine.motorType": "Brusless DC Motor",
+    "athena.specs.engine.motorPower": "2.500 Watt (2.5 kW)",
+    "athena.specs.engine.topSpeed": "80 km/jam",
+    "athena.specs.engine.acceleration": "6.5 detik",
+    "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "athena.specs.battery.batteryCapacity":
+      "2.5 kWh (Baterai Regular) / 3.4 kWh (Baterai Extended)",
+    "athena.specs.battery.voltage": "76.8 Volt",
+    "athena.specs.battery.chargingTimeSuperCharge": "15 menit",
+    "athena.specs.battery.chargingTimeHome": "4 jam",
+    "athena.specs.battery.range":
+      "85 km (Baterai Regular) / 115 km (Baterai Extended)",
+    "athena.specs.brake.frontBrake": "Rem Cakram",
+    "athena.specs.brake.rearBrake": "Rem Cakram",
+    "athena.specs.brake.cbsSupport": "Ya",
+    "athena.specs.dimension.length": "1.850 mm",
+    "athena.specs.dimension.width": "750 mm",
+    "athena.specs.dimension.height": "1.155 mm",
+    "athena.specs.dimension.wheelbase": "1.350 mm",
+    "athena.specs.dimension.groundClearance": "160 mm",
+    "athena.specs.dimension.seatHeight": "775 mm",
+    "athena.specs.dimension.weight": "113.5 kg",
+    "athena.specs.tire.frontTire": "100/80-12",
+    "athena.specs.tire.rearTire": "100/80-12",
+    "athena.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
+    "athena.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
 
     //mini
 
@@ -943,6 +1709,81 @@ const translations = {
 
     "mini.color.description":
       "Pilih warna Mini favoritmu dan lihat tampilannya.",
+
+    // ===
+
+    "mini.productPage.hero.imageAlt": "Mini Merah dan Mini Putih",
+    "mini.productPage.hero.title": "MINI",
+    "mini.productPage.hero.description":
+      "Mobilitas Terjangkau untuk Setiap Perjalanan",
+    "mini.productPage.hero.ctaPrimary": "Pesan Sekarang",
+    "mini.productPage.hero.ctaSecondary": "Unduh Brosur",
+
+    "mini.productPage.techSpecs1.title": "65",
+    "mini.productPage.techSpecs1.unit": "km",
+    "mini.productPage.techSpecs1.desc": "Jarak Tempuh",
+
+    "mini.productPage.techSpecs2.title": "LED",
+    "mini.productPage.techSpecs2.desc": "Tampilan Head Unit",
+
+    "mini.productPage.techSpecs3.title": "55",
+    "mini.productPage.techSpecs3.unit": "km/jam",
+    "mini.productPage.techSpecs3.desc": "Kecepatan Maksimum",
+
+    "mini.productPage.productOverview.imageAlt": "Mini Merah",
+    "mini.productPage.productOverview.title":
+      "Kecil Ukurannya, Besar Pengalamannya.",
+    "mini.productPage.productOverview.description":
+      "Paket roda dan ban terbaru menghadirkan pengalaman berkendara yang lebih halus. Rangka bodi yang didesain ulang mengurangi jumlah komponen dari 70 menjadi 1 untuk menghilangkan celah. Semua itu untuk menciptakan perjalanan yang senyap dan nyaman.",
+
+    "mini.productPage.productHighlight1.imageAlt": "Bagasi Bawah Jok Mini",
+    "mini.productPage.productHighlight1.title": "Bagasi XL di Bawah Jok",
+    "mini.productPage.productHighlight1.description":
+      "Bawa lebih banyak di setiap perjalanan. Kompartemen bawah jok Mini yang ekstra luas bisa memuat ransel, belanjaan, bahkan helm full-face—lebih banyak ruang, lebih banyak kemungkinan.",
+
+    "mini.productPage.productHighlight2.imageAlt": "Tampilan LED Mini",
+    "mini.productPage.productHighlight2.title": "Tampilan Digital LED",
+    "mini.productPage.productHighlight2.description":
+      "Tetap terinformasi dan terkendali dengan layar LED digital modern yang tajam. Lihat kecepatan, baterai, dan info lainnya secara real-time—cukup dengan sekali lirik.",
+
+    "mini.productPage.productHighlight3.imageAlt": "Rem Cakram Mini",
+    "mini.productPage.productHighlight3.title": "Rem Cakram Ganda yang Andal",
+    "mini.productPage.productHighlight3.description":
+      "Nikmati kekuatan pengereman maksimal dan rasa aman dengan rem cakram di roda depan dan belakang. Memberikan pengereman yang halus dan responsif dalam segala kondisi—untuk perjalanan yang tenang dan percaya diri.",
+
+    "mini.productPage.chargingOverview.imageAlt":
+      "Mini Merah sedang diisi daya di colokan rumah",
+    "mini.productPage.chargingOverview.title":
+      "Pengisian Daya di Rumah yang Simpel",
+    "mini.productPage.chargingOverview.description":
+      "Isi daya dengan mudah dari colokan listrik biasa. Dengan charger rumah bawaan, Mini selalu siap menemani perjalanan berikutnya—tanpa perlu fast-charging, cukup colokkan dan jalan.",
+
+    // ===
+
+    "mini.specs.engine.motorType": "Brusless DC Motor",
+    "mini.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
+    "mini.specs.engine.topSpeed": "55 km/jam",
+    "mini.specs.engine.acceleration": "9.3 detik",
+    "mini.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "mini.specs.battery.batteryCapacity": "1.6 kWh",
+    "mini.specs.battery.voltage": "64 Volt",
+    "mini.specs.battery.chargingTimeSuperCharge": "-",
+    "mini.specs.battery.chargingTimeHome": "4 jam",
+    "mini.specs.battery.range": "65 km",
+    "mini.specs.brake.frontBrake": "Rem Cakram",
+    "mini.specs.brake.rearBrake": "Rem Cakram",
+    "mini.specs.brake.cbsSupport": "Tidak",
+    "mini.specs.dimension.length": "1.790 mm",
+    "mini.specs.dimension.width": "670 mm",
+    "mini.specs.dimension.height": "1.110 mm",
+    "mini.specs.dimension.wheelbase": "1.370 mm",
+    "mini.specs.dimension.groundClearance": "130 mm",
+    "mini.specs.dimension.seatHeight": "760 mm",
+    "mini.specs.dimension.weight": "78.5 kg",
+    "mini.specs.tire.frontTire": "90/90-10",
+    "mini.specs.tire.rearTire": "90/90-10",
+    "mini.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
+    "mini.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
 
     //super charge
 

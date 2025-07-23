@@ -17,7 +17,8 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-[100vh] flex items-center overflow-hidden">
+      {/* <section className="relative min-h-[90vh] md:min-h-[90vh] flex items-center overflow-hidden"> */}
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-200"></div>
       {/* <Image
@@ -30,6 +31,7 @@ export default function Hero() {
       /> */}
 
       {/* Hero content */}
+      {/* <div className="container py-0 mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> */}
       <div className="container py-0 mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* <div className="block lg:flex gap-8 md:gap-12 items-center"> */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 md:gap-12 items-center">

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { HeartPulse, Leaf, Wind } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLanguage } from "../lib/language-context";
 import Link from "next/link";
 import Preloader from "../components/Preloader";
@@ -22,7 +22,47 @@ export default function Landing() {
   const [selectedProductIndex, setSelectedProductIndex] = React.useState(0);
   const carouselProductApi = React.useRef<any>(null);
   const { t } = useLanguage();
-  const items: string[] = ["ed-power", "mini", "athena", "victory"];
+  const items: {
+    image: string;
+    imageMobile: string;
+    imageAlt: string;
+    title: string;
+    description: string;
+    link: string;
+  }[] = [
+    {
+      image: "/edpower-landingHero.webp",
+      imageAlt: "EDPower in Gray",
+      imageMobile: "/edpower-landingHeroMobile.webp",
+      title: t("edpower.productPage.hero.title"),
+      description: t("edpower.productPage.hero.description"),
+      link: "/edpower/",
+    },
+    {
+      image: "/athena-hero2.webp",
+      imageAlt: "Athena in Gray",
+      imageMobile: "/athena-hero2mobile.webp",
+      title: t("athena.productPage.hero.title"),
+      description: t("athena.productPage.hero.description"),
+      link: "/athena/",
+    },
+    {
+      image: "/mini-hero1.webp",
+      imageAlt: "Mini in Gray",
+      imageMobile: "/mini-heroMobile.webp",
+      title: t("mini.productPage.hero.title"),
+      description: t("mini.productPage.hero.description"),
+      link: "/mini/",
+    },
+    {
+      image: "/victory-hero1.webp",
+      imageAlt: "Victory in Gray",
+      imageMobile: "/victory-heroMobile.webp",
+      title: t("victory.productPage.hero.title"),
+      description: t("victory.productPage.hero.description"),
+      link: "/victory/",
+    },
+  ];
   const features: any = [
     {
       icon: <Leaf className="h-14 w-14 text-[var(--primary)]" />,
@@ -43,6 +83,14 @@ export default function Landing() {
       link: t("features.noiseFreeLink"),
     },
   ];
+  const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
+  useEffect(() => {
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
+    // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
+    checkScreen(); // initial check
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
   // const [showContent, setShowContent] = useState(false);
 
   // useEffect(() => {
@@ -74,23 +122,27 @@ export default function Landing() {
               {" "}
               {items.map((item, index) => (
                 <CarouselItem key={index} className="w-full">
-                  <div className=" relative w-full">
-                    <div className="flex flex-col items-center justify-center w-full h-[70vh] md:h-[80vh]">
+                  {/* <div className=" relative w-full">
+                    <div className="flex flex-col items-center justify-center w-full h-[70vh] md:h-[100vh] scale-100 "> */}
+                  <div className=" relative w-full h-[100vh] overflow-hidden">
+                    <div className="flex flex-col items-center justify-center w-full h-full scale-100 ">
                       <Image
-                        src={index % 2 === 0 ? "/hero.webp" : "/hero2.png"}
-                        alt={`contoh-hero-${item}`}
+                        src={isDesktop ? item.image : item.imageMobile}
+                        alt={item.imageAlt}
                         width={1000}
                         height={1000}
-                        className=" object-cover object-[37%_50%] lg:object-[50%_20%] w-full h-full "
+                        quality={100}
+                        className=" object-cover object-center w-full h-full "
+                        // className=" object-cover object-[37%_50%] lg:object-[50%_20%] w-full h-full "
                       />
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full flex items-start py-10 md:py-24">
-                      <div className=" flex flex-col items-center justify-center items gap-2 w-full">
+                      <div className="mt-8 flex flex-col items-center justify-center items gap-2 w-full">
                         <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
-                          ED-Power
+                          {item.title}
                         </h1>
                         <p className="text-sm md:text-lg text-center text-white">
-                          {t("hero.title") + " " + t("hero.titleHighlight")}
+                          {item.description}
                         </p>
                         <div className="flex w-full justify-center gap-4 mt-2">
                           <Button
@@ -156,18 +208,20 @@ export default function Landing() {
                   >
                     <div className="relative h-full rounded-lg shadow aspect-[2/3] md:aspect-[4/3] lg:aspect-[2/1]">
                       <Image
-                        src={`/${
-                          item === "ed-power" ? "edmax" : item
-                        }-hero.webp`}
-                        alt={`Product ${item}`}
+                        // src={`/${
+                        //   item === "ed-power" ? "edmax" : item
+                        // }-hero.webp`}
+                        src={isDesktop ? item.image : item.imageMobile}
+                        alt={item.imageAlt}
                         width={1000}
                         height={1000}
                         // className={`object-cover md:object-center object-[90%_10%] w-full h-full  rounded-xl`}
-                        className={`object-cover lg:object-center ${
-                          item === "mini"
-                            ? "object-[65%_10%] md:object-[100%_10%]"
-                            : "object-[76%_10%] md:object-[95%_10%]"
-                        } w-full h-full rounded-xl`}
+                        className={`object-cover md:object-center w-full h-full rounded-xl`}
+                        // className={`object-cover lg:object-center ${
+                        //   item === "mini"
+                        //     ? "object-[65%_10%] md:object-[100%_10%]"
+                        //     : "object-[76%_10%] md:object-[95%_10%]"
+                        // } w-full h-full rounded-xl`}
                         onClick={() =>
                           index !== selectedProductIndex
                             ? carouselProductApi.current?.scrollTo(index)
@@ -177,25 +231,28 @@ export default function Landing() {
                       <div className="absolute bottom-0 left-0 w-fit gap-2  p-4 md:p-8">
                         <div className=" flex flex-col items-start justify-center items w-fit  ">
                           <h1 className="text-[40px] md:text-3xl font-[700] text-center text-white">
-                            {item === "ed-power"
+                            {item.title}
+                            {/* {item === "ed-power"
                               ? "Ed-Power"
-                              : item.charAt(0).toUpperCase() + item.slice(1)}
+                              : item.charAt(0).toUpperCase() + item.slice(1)} */}
                           </h1>
                           <p className="text-xs md:text-sm text-start text-white text">
-                            {item === "ed-power"
+                            {item.description}
+                            {/* {item === "ed-power"
                               ? t("edmax.hero.title") +
                                 " " +
                                 t("edmax.hero.titleHighlight")
                               : t(`${item}.hero.title`) +
                                 " " +
-                                t(`${item}.hero.titleHighlight`)}
+                                t(`${item}.hero.titleHighlight`)} */}
                           </p>
                           <div className="flex justify-center gap-2 mt-4  w-full">
                             <Button className="px-4 w-[50%] md:px-8 text-sm rounded-sm">
                               <Link
-                                href={`/${
-                                  item === "ed-power" ? "edpower" : item
-                                }`}
+                                href={item.link}
+                                // href={`/${
+                                //   item === "ed-power" ? "edpower" : item
+                                // }`}
                               >
                                 Learn More
                               </Link>

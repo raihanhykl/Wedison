@@ -75,7 +75,7 @@ export default function NotFound() {
                     {text.homeButton}
                   </Button>
                 </Link>
-                <Link href="/#products">
+                <Link href="/">
                   <Button
                     variant="outline"
                     className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto"

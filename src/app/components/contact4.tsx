@@ -302,12 +302,13 @@ export default function Contact() {
               />
 
               {/* Province and City Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              <div className=" sm:flex sm:gap-6">
+                {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6"> */}
                 <FormField
                   control={form.control}
                   name="province"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="flex-1">
                       <FormLabel>{t("contact.province")}</FormLabel>
                       <FormControl>
                         <Select
@@ -316,7 +317,7 @@ export default function Contact() {
                           disabled={isSubmitting}
                         >
                           <FormControl>
-                            <SelectTrigger className="w-full">
+                            <SelectTrigger className="">
                               <SelectValue
                                 placeholder={t("contact.provincePlaceholder")}
                               />
@@ -343,17 +344,18 @@ export default function Contact() {
                   control={form.control}
                   name="city"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("contact.city")}</FormLabel>
+                    <FormItem className="w-full max-w-[300px] max-sm:pt-3">
+                      <FormLabel className="">{t("contact.city")}</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
                           value={field.value}
                           disabled={isSubmitting || !selectedProvince}
                         >
-                          <FormControl>
-                            <SelectTrigger className="w-full">
+                          <FormControl className="w-full max-w-full">
+                            <SelectTrigger className="lg:w-[48%] xl:w-[93%] 2xl:w-full  max-w-full">
                               <SelectValue
+                                className="truncate"
                                 placeholder={
                                   selectedProvince
                                     ? t("contact.cityPlaceholder")
@@ -379,13 +381,13 @@ export default function Contact() {
                   )}
                 />
               </div>
-              <div className="flex items-start gap-0">
+              <div className="flex items-start gap-4">
                 {/* hasMotor Field */}
                 <FormField
                   control={form.control}
                   name="hasMotor"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col items-start gap-2 pt-2 min-w-[150px] max-w-[25%]">
+                    <FormItem className="flex flex-col items-start gap-2 pt-0 min-w-[150px] max-w-[25%] ">
                       <FormLabel htmlFor="hasMotor" className="cursor-pointer">
                         {t("form.hasMotor")}
                       </FormLabel>
@@ -552,34 +554,6 @@ export default function Contact() {
               </Button>
             </form>
           </Form>
-          <Button
-            onClick={() => {
-              toast(t("form.sending.success.title"), {
-                description: (
-                  <p className=" text-black/60">
-                    {" "}
-                    {t("form.sending.success.description")}
-                  </p>
-                ),
-                descriptionClassName: "text-black",
-                icon: <CheckCircle2 className="text-primary mr-2" />,
-                duration: 4000,
-                className: "text-black",
-                classNames: {
-                  description: "text-black",
-                },
-                position: "top-center",
-                style: {
-                  backgroundColor: "white",
-                  color: "black",
-                  gap: "1rem",
-                },
-              });
-            }}
-            className="mt-4 bg-blue-500 hover:bg-blue-600"
-          >
-            Check Provinces
-          </Button>
         </div>
       </div>
     </section>

@@ -21,6 +21,7 @@ const images = [
 ];
 export interface carouselData {
   image: string;
+  imageMobile?: string;
   alt: string;
   className?: HTMLAttributes<HTMLDivElement>["className"];
   title: string;
@@ -38,13 +39,21 @@ interface PeekCarousel {
 export default function PeekCarousel(data: PeekCarousel) {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [firstLast, setFirstLast] = useState<boolean>(true);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: false,
     mode: "free",
     slides: {
       origin: data.origin ? data.origin : firstLast ? "center" : "center",
-      perView: data.perView ? data.perView : firstLast ? 1.75 : 1.75,
+      // perView: data.perView ? data.perView : firstLast ? 1.15 : 1.15,
+      perView: isDesktop
+        ? 1.35
+        : data.perView
+        ? data.perView
+        : firstLast
+        ? 1.75
+        : 1.75,
       spacing: data.spacing ? data.spacing : 25,
     },
     defaultAnimation: {
@@ -62,6 +71,13 @@ export default function PeekCarousel(data: PeekCarousel) {
       );
     },
   });
+  useEffect(() => {
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
+    // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
+    checkScreen(); // initial check
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   useEffect(() => {
     if (currentSlide > 0) {
@@ -72,7 +88,7 @@ export default function PeekCarousel(data: PeekCarousel) {
   return (
     <div
       ref={sliderRef}
-      className="keen-slider overflow-hidden mb-32"
+      className="keen-slider overflow-hidden mb-32 "
       // className="keen-slider px-6 sm:px-24 xl:px-40 overflow-hidden "
     >
       {data.data.map((src, index) => (
@@ -86,12 +102,13 @@ export default function PeekCarousel(data: PeekCarousel) {
             // setCurrentSlide(index);
           }}
         >
-          <div className="relative w-full  rounded-xl overflow-hidden">
+          <div className="relative w-full rounded-xl overflow-visible">
             <Image
-              src={src.image}
+              src={isDesktop ? src.image : src.imageMobile || src.image}
               alt={src.alt}
               width={1000}
               height={500}
+              quality={100}
               className={cn(
                 "rounded-xl w-full xl:h-[580px] xl:w-full sm:h-[404px]  h-[370px]   object-cover object-center",
                 src.className

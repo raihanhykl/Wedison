@@ -2,7 +2,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./lib/language-context";
-import Navbar from "./components/navbar4";
+import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -52,7 +52,8 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <Navbar />
-          <div className=" pt-12 md:pt-16">{children}</div>
+          <div className="">{children}</div>
+          {/* <div className=" pt-12 md:pt-16">{children}</div> */}
           <SpeedInsights />
           <Footer />
         </LanguageProvider>
