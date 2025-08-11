@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,10 +19,37 @@ export default function Navbar() {
   const route = usePathname();
   const [openProduct, setOpenProduct] = useState(false);
   const [openCorporate, setOpenCorporate] = useState(false);
-  const [tone, setTone] = useState("");
-  const [bgTone, setBgTone] = useState("");
-  const [bgAccent, setBgAccent] = useState("");
+  // const [tone, setTone] = useState("");
+  // const [bgTone, setBgTone] = useState("");
+  // const [bgAccent, setBgAccent] = useState("");
   const [whitePage, setWhitePage] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const openerRef = useRef<HTMLButtonElement>(null); // atau div/span sesuai elemen
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) &&
+        openerRef.current &&
+        !openerRef.current.contains(target)
+      ) {
+        setOpenProduct(false);
+      }
+    };
+
+    if (openProduct) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [openProduct]);
 
   useEffect(() => {
     if (
@@ -35,15 +62,15 @@ export default function Navbar() {
     } else {
       setWhitePage(false);
     }
-    if (route === "/edpower/" || route === "/edpower") {
-      setTone("text-[var(--primary-light)] hover:bg-black");
-      setBgTone("bg-black");
-      setBgAccent("bg-[var(--primary-light)]");
-    } else if (route === "/dash/" || route === "/dash") {
-      setTone("text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black");
-      setBgTone("bg-black");
-      setBgAccent("bg-[#fdc600]");
-    }
+    // if (route === "/edpower/" || route === "/edpower") {
+    //   setTone("text-[var(--primary-light)] hover:bg-black");
+    //   setBgTone("bg-black");
+    //   setBgAccent("bg-[var(--primary-light)]");
+    // } else if (route === "/dash/" || route === "/dash") {
+    //   setTone("text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black");
+    //   setBgTone("bg-black");
+    //   setBgAccent("bg-[#fdc600]");
+    // }
     // else if (route === "/victory/" || route === "/victory") {
     //   setTone("text-white hover:text-white/80 hover:bg-black");
     //   setBgTone("bg-black");
@@ -59,11 +86,11 @@ export default function Navbar() {
     //   setBgTone("bg-black");
     //   setBgAccent("bg-[#ff7db6]");
     // }
-    else {
-      setTone("");
-      setBgTone("");
-      setBgAccent("");
-    }
+    // else {
+    //   setTone("");
+    //   setBgTone("");
+    //   setBgAccent("");
+    // }
 
     setOpenProduct(false);
     setOpenCorporate(false);
@@ -75,15 +102,23 @@ export default function Navbar() {
       name: t("nav.products"),
       href: "#",
       subMenu: [
-        { name: "Mini", href: "/mini/", image: "/mini-grey.webp" },
+        { name: "Mini", href: "/mini/", image: "/navbar-product/mini.webp" },
         {
           name: "Athena",
           href: "/athena/",
-          image: "/athena-tosca.webp",
+          image: "/navbar-product/athena.webp",
         },
-        { name: "Victory", href: "/victory/", image: "/victory-grey.webp" },
+        {
+          name: "Victory",
+          href: "/victory/",
+          image: "/navbar-product/victory.webp",
+        },
         // { name: "Dash", href: "/dash" },
-        { name: "EdPower", href: "/edpower/", image: "/edpower-black.webp" },
+        {
+          name: "EdPower",
+          href: "/edpower/",
+          image: "/navbar-product/edpower.webp",
+        },
       ],
     },
     {
@@ -145,8 +180,8 @@ export default function Navbar() {
           // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
           scrolled || openProduct || openCorporate || mobileMenuOpen
             ? "bg-white backdrop-blur-md shadow-soft"
-            : "bg-transparent",
-          bgTone
+            : "bg-transparent"
+          // bgTone
         )}
       >
         {/* <div className="container mx-auto"> */}
@@ -158,18 +193,13 @@ export default function Navbar() {
                 href="/"
                 className="flex items-center cursor-pointer shadow-xs h-full"
               >
-                {/* <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
-                Wedison Motors
-                </span> */}
                 <Image
                   src={
-                    whitePage
+                    scrolled || openProduct || openCorporate || mobileMenuOpen
                       ? "/wedison-sidebyside.png"
-                      : !scrolled || bgTone
-                      ? openProduct || openCorporate || mobileMenuOpen
-                        ? "/wedison-sidebyside.png"
-                        : "/wedison-sidebyside-white.png"
-                      : "/wedison-sidebyside.png"
+                      : whitePage
+                      ? "/wedison-sidebyside.png"
+                      : "/wedison-sidebyside-white.png"
                   }
                   alt="Wedison Logo"
                   width={150}
@@ -183,20 +213,20 @@ export default function Navbar() {
             <nav className="hidden md:flex space-x-4 lg:space-x-8 items-center border-none outline-none ring-0">
               {navItems.map((item) => (
                 <div key={item.name} className="relative group">
-                  {/* <div key={item.name} className="relative group"> */}
                   {item.subMenu ? (
                     item.name === t("nav.products") ? (
                       <button
+                        ref={openerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          whitePage ? "text-black" : "text-white",
-                          // "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
                           scrolled || openProduct || openCorporate
                             ? "text-black hover:text-[var(--primary)]"
-                            : "",
+                            : whitePage
+                            ? "text-black"
+                            : "text-white",
                           activeDropdown === item.name &&
-                            "text-[var(--primary)]",
-                          tone
+                            "text-[var(--primary)]"
+                          // tone
                         )}
                         onClick={() => toggleOpen("openProduct")}
                       >
@@ -214,60 +244,12 @@ export default function Navbar() {
 
                             // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
                             (scrolled || openProduct || openCorporate) &&
-                              "bg-[var(--primary)]",
-                            bgAccent
+                              "bg-[var(--primary)]"
+                            // bgAccent
                           )}
                         />
                       </button>
                     ) : (
-                      // <DropdownMenu>
-                      //   <DropdownMenuTrigger
-                      //     asChild
-                      //     className=" border-none outline-none ring-0"
-                      //   >
-                      //     <button
-                      //       className={cn(
-                      //         "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                      //         whitePage ? "text-black" : "text-white",
-                      //         scrolled || openProduct
-                      //           ? "text-black hover:text-[var(--primary)]"
-                      //           : "",
-                      //         activeDropdown === item.name &&
-                      //           "text-[var(--primary)]",
-                      //         tone
-                      //       )}
-                      //     >
-                      //       {item.name}
-                      //       <ChevronDown
-                      //         className={cn(
-                      //           "ml-1 h-4 w-4 transition-transform duration-200",
-                      //           activeDropdown === item.name && "rotate-180"
-                      //         )}
-                      //       />
-                      //       <span
-                      //         className={cn(
-                      //           "absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
-                      //           whitePage ? "bg-black" : "bg-white",
-                      //           (scrolled || openProduct) &&
-                      //             "bg-[var(--primary)]",
-                      //           bgAccent
-                      //         )}
-                      //       />
-                      //     </button>
-                      //   </DropdownMenuTrigger>
-                      //   <DropdownMenuContent className=" mt-2 rounded-md shadow-soft bg-white border border-[var(--primary-light)]">
-                      //     {item.subMenu.map((subItem) => (
-                      //       <DropdownMenuItem key={subItem.name} asChild>
-                      //         <Link
-                      //           href={subItem.href}
-                      //           className="block w-full px-0 py-2 text-sm text-black hover:bg-red-500 hover:text-red-500"
-                      //         >
-                      //           {subItem.name}
-                      //         </Link>
-                      //       </DropdownMenuItem>
-                      //     ))}
-                      //   </DropdownMenuContent>
-                      // </DropdownMenu>
                       <button
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
@@ -277,8 +259,8 @@ export default function Navbar() {
                             ? "text-black hover:text-[var(--primary)]"
                             : "",
                           activeDropdown === item.name &&
-                            "text-[var(--primary)]",
-                          tone
+                            "text-[var(--primary)]"
+                          // tone
                         )}
                         onClick={() => toggleOpen("openCorporate")}
                       >
@@ -296,8 +278,8 @@ export default function Navbar() {
 
                             // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
                             (scrolled || openProduct || openCorporate) &&
-                              "bg-[var(--primary)]",
-                            bgAccent
+                              "bg-[var(--primary)]"
+                            // bgAccent
                           )}
                         />
                       </button>
@@ -314,8 +296,8 @@ export default function Navbar() {
                         //   "text-[var(--primary-light)]"
                         scrolled || openProduct || openCorporate
                           ? "text-black hover:text-[var(--primary)]"
-                          : "",
-                        tone
+                          : ""
+                        // tone
                       )}
                     >
                       {item.name}
@@ -325,8 +307,8 @@ export default function Navbar() {
                           whitePage ? "bg-black" : "bg-white",
 
                           // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
-                          (scrolled || openProduct) && "bg-[var(--primary)]",
-                          bgAccent
+                          (scrolled || openProduct) && "bg-[var(--primary)]"
+                          // bgAccent
                         )}
                       />
                     </Link>
@@ -346,10 +328,13 @@ export default function Navbar() {
               <button
                 type="button"
                 className={cn(
-                  "inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100 focus:outline-none",
-                  tone,
-                  scrolled || mobileMenuOpen ? " text-black" : " text-white",
-                  whitePage ? "text-black" : "text-white"
+                  "inline-flex bg-none items-center justify-center p-2 rounded-md text-gray-800 hover:scale-120 hover:bg-gray-100/0 transition-all duration-300 focus:outline-none",
+                  scrolled || mobileMenuOpen
+                    ? " text-black"
+                    : whitePage
+                    ? "text-black"
+                    : "text-white"
+                  // tone
                 )}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
@@ -468,12 +453,12 @@ export default function Navbar() {
                                 alt={item.name}
                                 width={10}
                                 height={10}
-                                className={cn(
-                                  "lg:h-32 lg:w-32 h-16 w-16",
-                                  item.name === "Victory" &&
-                                    "lg:h-36 lg:w-36 h-20 w-20 object-contain scale-[1.16] object-[100%_40%]"
-                                  // "scale-125"
-                                )}
+                                className={cn("lg:h-32 lg:w-32 h-16 w-16")}
+                                // className={cn(
+                                //   "lg:h-32 lg:w-32 h-16 w-16",
+                                //   item.name === "Victory" &&
+                                //     "lg:h-36 lg:w-36 h-20 w-20 object-contain scale-[1.16] object-[100%_40%]"
+                                // )}
                                 loading="eager"
                               />
                             </div>
@@ -496,7 +481,9 @@ export default function Navbar() {
             ))}
           </div>
         </div>
-        <NavbarProduct open={openProduct} />
+
+        <NavbarProduct open={openProduct} ref={menuRef} />
+
         <NavbarCorporate open={openCorporate} />
       </header>
     </div>

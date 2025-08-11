@@ -51,11 +51,12 @@ export default function LanguageToggle2({
           language === "en" ? "pl-2" : "pr-2"
         }`,
 
-        scrolled || toggleOpen
-          ? "border-black"
-          : whitePage
-          ? "border-black"
-          : "border-white"
+        // scrolled || toggleOpen
+        //   ? "border-black"
+        //   : whitePage
+        //   ? "border-black"
+        //   : "border-white"
+        scrolled || toggleOpen || whitePage ? "border-black" : "border-white"
       )}
     >
       <div

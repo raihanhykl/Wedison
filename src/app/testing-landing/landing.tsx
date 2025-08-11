@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useLanguage } from "../lib/language-context";
 import Link from "next/link";
 import Preloader from "../components/Preloader";
+import ComparisonTable from "../components/comparison-table";
 
 export default function Landing() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -26,38 +27,44 @@ export default function Landing() {
     image: string;
     imageMobile: string;
     imageAlt: string;
+    cardMobile: string;
     title: string;
     description: string;
     link: string;
   }[] = [
     {
-      image: "/edpower-landingHero.webp",
+      image: "/edpower-landing-hero.webp",
       imageAlt: "EDPower in Gray",
-      imageMobile: "/edpower-landingHeroMobile.webp",
+      imageMobile: "/edpower-landing-hero-mobile.webp",
+      cardMobile: "/edpower-landing-card-mobile.webp",
       title: t("edpower.productPage.hero.title"),
       description: t("edpower.productPage.hero.description"),
       link: "/edpower/",
     },
     {
-      image: "/athena-hero2.webp",
+      image: "/athena-landing-hero.webp",
       imageAlt: "Athena in Gray",
-      imageMobile: "/athena-hero2mobile.webp",
+      imageMobile: "/athena-landing-hero-mobile.webp",
+      cardMobile: "/athena-landing-card-mobile.webp",
       title: t("athena.productPage.hero.title"),
       description: t("athena.productPage.hero.description"),
       link: "/athena/",
     },
     {
-      image: "/mini-hero1.webp",
+      image: "/mini-landing-hero.webp",
       imageAlt: "Mini in Gray",
-      imageMobile: "/mini-heroMobile.webp",
+      imageMobile: "/mini-landing-hero-mobile.webp",
+      cardMobile: "/mini-landing-card-mobile.webp",
+
       title: t("mini.productPage.hero.title"),
       description: t("mini.productPage.hero.description"),
       link: "/mini/",
     },
     {
-      image: "/victory-hero1.webp",
+      image: "/victory-landing-hero.webp",
       imageAlt: "Victory in Gray",
-      imageMobile: "/victory-heroMobile.webp",
+      imageMobile: "/victory-landing-hero-mobile.webp",
+      cardMobile: "/victory-landing-card-mobile.webp",
       title: t("victory.productPage.hero.title"),
       description: t("victory.productPage.hero.description"),
       link: "/victory/",
@@ -86,26 +93,17 @@ export default function Landing() {
   const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
   useEffect(() => {
     const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
-    // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
     checkScreen(); // initial check
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
-  // const [showContent, setShowContent] = useState(false);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowContent(true);
-  //   }, 2500);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
 
   return (
     <>
       <Preloader />
 
       <div>
+        {/* Hero */}
         <div>
           <Carousel
             opts={{
@@ -122,8 +120,6 @@ export default function Landing() {
               {" "}
               {items.map((item, index) => (
                 <CarouselItem key={index} className="w-full">
-                  {/* <div className=" relative w-full">
-                    <div className="flex flex-col items-center justify-center w-full h-[70vh] md:h-[100vh] scale-100 "> */}
                   <div className=" relative w-full h-[100vh] overflow-hidden">
                     <div className="flex flex-col items-center justify-center w-full h-full scale-100 ">
                       <Image
@@ -133,7 +129,6 @@ export default function Landing() {
                         height={1000}
                         quality={100}
                         className=" object-cover object-center w-full h-full "
-                        // className=" object-cover object-[37%_50%] lg:object-[50%_20%] w-full h-full "
                       />
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full flex items-start py-10 md:py-24">
@@ -141,24 +136,32 @@ export default function Landing() {
                         <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
                           {item.title}
                         </h1>
-                        <p className="text-sm md:text-lg text-center text-white">
+                        <p className="text-sm md:text-lg text-center text-white font-semibold">
                           {item.description}
                         </p>
                         <div className="flex w-full justify-center gap-4 mt-2">
-                          <Button
-                            className="px-8 md:px-16 rounded-sm"
-                            size={"lg"}
+                          {" "}
+                          <Link href={item.link}>
+                            <Button
+                              className="px-8 md:px-16 rounded-sm font-semibold cursor-pointer"
+                              size={"lg"}
+                            >
+                              {t("btn.learn.more")}
+                            </Button>
+                          </Link>
+                          <Link
+                            href={"/brochure/brochure-wedison.pdf"}
+                            target="_blank"
                           >
-                            <Link href={item.link}>Learn More</Link>
-                          </Button>
-                          <Button
-                            className=" text-[var(--primary)] px-8 md:px-16 rounded-sm"
-                            size={"lg"}
-                            variant={"outline"}
-                            disabled
-                          >
-                            Get Started
-                          </Button>
+                            <Button
+                              className=" text-[var(--primary)] px-8 md:px-16 rounded-sm cursor-pointer font-semibold"
+                              size={"lg"}
+                              variant={"outline"}
+                              // disabled
+                            >
+                              {t("btn.see.brochure")}
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -185,7 +188,8 @@ export default function Landing() {
           </Carousel>
         </div>
 
-        <div className="py-6 my-6">
+        {/* Product */}
+        <div className="py-6 my-6 *:select-none">
           <div className="w-full overflow-x-auto">
             <Carousel
               opts={{
@@ -208,20 +212,11 @@ export default function Landing() {
                   >
                     <div className="relative h-full rounded-lg shadow aspect-[2/3] md:aspect-[4/3] lg:aspect-[2/1]">
                       <Image
-                        // src={`/${
-                        //   item === "ed-power" ? "edmax" : item
-                        // }-hero.webp`}
-                        src={isDesktop ? item.image : item.imageMobile}
+                        src={isDesktop ? item.image : item.cardMobile}
                         alt={item.imageAlt}
                         width={1000}
                         height={1000}
-                        // className={`object-cover md:object-center object-[90%_10%] w-full h-full  rounded-xl`}
                         className={`object-cover md:object-center w-full h-full rounded-xl`}
-                        // className={`object-cover lg:object-center ${
-                        //   item === "mini"
-                        //     ? "object-[65%_10%] md:object-[100%_10%]"
-                        //     : "object-[76%_10%] md:object-[95%_10%]"
-                        // } w-full h-full rounded-xl`}
                         onClick={() =>
                           index !== selectedProductIndex
                             ? carouselProductApi.current?.scrollTo(index)
@@ -230,40 +225,30 @@ export default function Landing() {
                       />
                       <div className="absolute bottom-0 left-0 w-fit gap-2  p-4 md:p-8">
                         <div className=" flex flex-col items-start justify-center items w-fit  ">
-                          <h1 className="text-[40px] md:text-3xl font-[700] text-center text-white">
+                          <h1 className="text-[40px] md:text-3xl font-[750] text-center text-white">
                             {item.title}
-                            {/* {item === "ed-power"
-                              ? "Ed-Power"
-                              : item.charAt(0).toUpperCase() + item.slice(1)} */}
                           </h1>
-                          <p className="text-xs md:text-sm text-start text-white text">
+                          <p className="text-xs md:text-sm text-start text-white text font-medium">
                             {item.description}
-                            {/* {item === "ed-power"
-                              ? t("edmax.hero.title") +
-                                " " +
-                                t("edmax.hero.titleHighlight")
-                              : t(`${item}.hero.title`) +
-                                " " +
-                                t(`${item}.hero.titleHighlight`)} */}
                           </p>
-                          <div className="flex justify-center gap-2 mt-4  w-full">
-                            <Button className="px-4 w-[50%] md:px-8 text-sm rounded-sm">
-                              <Link
-                                href={item.link}
-                                // href={`/${
-                                //   item === "ed-power" ? "edpower" : item
-                                // }`}
-                              >
-                                Learn More
-                              </Link>
-                            </Button>
-                            <Button
-                              className=" text-[var(--primary)] px-4 w-[50%] md:px-8 rounded-sm"
-                              variant={"outline"}
-                              disabled
+                          <div className="flex flex-col md:flex-row justify-center gap-2 mt-2 w-full">
+                            <Link href={item.link} className=" w-[50%]">
+                              <Button className="px-4 md:px-8 text-xs  md:text-sm rounded-sm cursor-pointer">
+                                {t("btn.learn.more")}
+                              </Button>
+                            </Link>
+
+                            <Link
+                              href={"/corporate/contact/"}
+                              className=" w-[50%]"
                             >
-                              Order Now
-                            </Button>
+                              <Button
+                                className=" text-[var(--primary)] px-4 text-xs  md:text-sm cursor-pointer md:px-8 rounded-sm"
+                                variant={"outline"}
+                              >
+                                {t("btn.book.test.ride")}
+                              </Button>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -309,7 +294,6 @@ export default function Landing() {
                     height={500}
                     className="p-0 "
                   />{" "}
-                  {/* {t("supercharge.landing.title")} */}
                 </div>
               </h1>
               <p className="text-sm md:text-lg text-center text-white">
@@ -322,16 +306,17 @@ export default function Landing() {
                 >
                   <Link href="/super-charge">More Information</Link>
                 </Button>
-                {/* <Button
-                className=" text-[var(--primary)] px-6 md:px-16 rounded-sm"
-                size={"lg"}
-                variant={"outline"}
-              >
-                More Information
-              </Button> */}
               </div>
             </div>
           </div>
+        </div>
+
+        {/* <div className="w-full my-14">
+          <SpecTable />
+        </div> */}
+
+        <div className="container mx-auto my-24 px-4">
+          <ComparisonTable mode="overview" primaryBikeId="" />
         </div>
 
         {/* environmental advantage */}
@@ -368,13 +353,6 @@ export default function Landing() {
                     <p className="text-xs md:text-sm text-white text-start md:text-center">
                       {feature.description}
                     </p>
-                    {/* <a
-                        href={feature.link}
-                        target="_blank"
-                        className="text-xs text-[var(--primary)] underline mt-1"
-                      >
-                        Learn More
-                      </a> */}
                   </div>
                 ))}
               </div>

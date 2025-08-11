@@ -23,6 +23,13 @@ const translations = {
     "landing.title": "Wedison - The Future of Electric Mobility",
     "landing.description":
       "Wedison is an eco-friendly electric motorcycle brand with the latest Super Charge technology.",
+
+    // buttons
+    "btn.learn.more": "Learn More",
+    "btn.book.test.ride": "Book Test Ride",
+    "btn.see.brochure": "See Brochure",
+    "btn.order.now": "Order Now",
+
     // Navbar
     "nav.products": "Products",
     "nav.experienceCenter": "Experience Center",
@@ -142,6 +149,9 @@ const translations = {
     "footer.privacy": "Privacy",
     "footer.terms": "Terms",
     "footer.cookies": "Cookies",
+    "footer.contact": "Contact Us",
+    "footer.about": "About Us",
+    "footer.meetus": "Meet Us",
 
     // Showroom Page
     "showroom.title": "Visit Our",
@@ -438,7 +448,7 @@ const translations = {
     "edpower.productPage.chargingHighlight1.description": (
       <>
         Charge from 10% to 80% in just 15 minutes. Perfect for quick top-ups on
-        the go—available at all Wedison showrooms.
+        the go—available at all Wedison showrooms.{" "}
         <Link href="/super-charge" className="underline text-primary">
           Learn More
         </Link>
@@ -604,7 +614,7 @@ const translations = {
     "victory.productPage.chargingHighlight1.description": (
       <>
         Go from 10% to 80% charge in just 15 minutes—perfect for quick stops and
-        busy days. Available at all Wedison showrooms.
+        busy days. Available at all Wedison showrooms.{" "}
         <Link href="/super-charge" className="underline text-primary">
           Learn More
         </Link>
@@ -725,7 +735,7 @@ const translations = {
       <>
         Experience lightning-fast charging with our advanced SuperCharge
         technology, designed to keep you on the road with charge your battery
-        from 10% to 80% in just 15 Minutes.
+        from 10% to 80% in just 15 Minutes.{" "}
         <Link href="/super-charge" className="underline text-primary">
           Learn More
         </Link>
@@ -945,6 +955,12 @@ const translations = {
     "landing.description":
       "Wedison adalah brand motor listrik yang ramah lingkungan dengan teknologi Super Charge terkini.",
 
+    // buttons
+    "btn.learn.more": "Pelajari Lebih Lanjut",
+    "btn.book.test.ride": "Jadwalkan Test Ride",
+    "btn.see.brochure": "Lihat Brosur",
+    "btn.order.now": "Pesan Sekarang",
+
     // Navbar
     "nav.products": "Produk",
     "nav.experienceCenter": "Pusat Pengalaman",
@@ -1054,12 +1070,15 @@ const translations = {
     "footer.products": "Produk",
     "footer.experience": "Pengalaman",
     "footer.corporate": "Perusahaan",
+    "footer.contact": "Hubungi Kami",
+    "footer.about": "Tentang Kami",
     "footer.copyright": "© 2025 Wedison Motors. Seluruh hak cipta dilindungi.",
     "footer.tagline":
       "Dirancang dengan mempertimbangkan keberlanjutan. Didukung oleh energi terbarukan.",
     "footer.privacy": "Privasi",
     "footer.terms": "Ketentuan",
     "footer.cookies": "Cookies",
+    "footer.meetus": "Temukan Kami",
 
     //showroom
 
@@ -1364,7 +1383,7 @@ const translations = {
     "edpower.productPage.chargingHighlight1.description": (
       <>
         Isi daya dari 10% ke 80% hanya dalam 15 menit. Sempurna untuk isi cepat
-        di sela aktivitas—tersedia di seluruh showroom Wedison.
+        di sela aktivitas—tersedia di seluruh showroom Wedison.{" "}
         <Link href="/super-charge" className="underline text-primary">
           Pelajari Lebih Lanjut
         </Link>
@@ -1531,7 +1550,7 @@ const translations = {
     "victory.productPage.chargingHighlight1.description": (
       <>
         Isi daya dari 10% ke 80% hanya dalam 15 menit—sempurna untuk berhenti
-        sejenak di hari yang sibuk. Tersedia di semua showroom Wedison.
+        sejenak di hari yang sibuk. Tersedia di semua showroom Wedison.{" "}
         <Link href="/super-charge" className="underline text-primary">
           Pelajari Lebih Lanjut
         </Link>
@@ -1657,7 +1676,7 @@ const translations = {
       <>
         Rasakan pengisian daya super cepat dengan teknologi SuperCharge canggih
         kami—dirancang agar Anda tetap bisa melaju, mengisi daya baterai dari
-        10% hingga 80% hanya dalam 15 menit.
+        10% hingga 80% hanya dalam 15 menit.{" "}
         <Link href="/super-charge" className="underline text-primary">
           Pelajari Lebih Lanjut
         </Link>

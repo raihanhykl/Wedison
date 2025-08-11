@@ -7,6 +7,8 @@ import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
 import SpecificationsAccordion from "../components/specifications-accordion";
 import GetProductData from "../lib/product-data";
+import { useLanguage } from "../lib/language-context";
+import ComparisonTable from "../components/comparison-table";
 
 type Props = {
   motorType: string;
@@ -15,6 +17,7 @@ type Props = {
 export default function ProductPageComponent({ motorType }: Props) {
   const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
   const product = GetProductData(motorType);
+  const { t } = useLanguage();
   useEffect(() => {
     const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
     // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
@@ -59,17 +62,24 @@ export default function ProductPageComponent({ motorType }: Props) {
               {product?.hero.desc}
             </p>
             <div className="flex w-full justify-center gap-4 mt-2">
-              <Button className="px-8 md:px-16 rounded-sm" size={"lg"}>
-                <Link href="/edpower">Learn More</Link>
-              </Button>
-              <Button
-                className=" text-[var(--primary)] px-8 md:px-16 rounded-sm"
-                size={"lg"}
-                variant={"outline"}
-                disabled
-              >
-                Get Started
-              </Button>
+              <Link href={`/corporate/contact/`}>
+                <Button
+                  className="px-8 md:px-16 rounded-sm cursor-pointer font-semibold"
+                  size={"lg"}
+                >
+                  {t("btn.book.test.ride")}
+                </Button>
+              </Link>
+
+              <Link href={`/brochure/brochure-wedison.pdf`} target="_blank">
+                <Button
+                  className=" text-[var(--primary)] px-8 md:px-16 cursor-pointer font-medium rounded-sm"
+                  size={"lg"}
+                  variant={"outline"}
+                >
+                  {t("btn.see.brochure")}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -151,7 +161,7 @@ export default function ProductPageComponent({ motorType }: Props) {
             <h2 className="text-5xl xl:text-6xl font-medium mb-1">
               {product?.productOverview.title}
             </h2>
-            <p className="text-2xl xl:text-2xl font-normal mb-10 sm:mb-32  text-muted-foreground">
+            <p className="text-2xl xl:text-2xl text-justify font-normal mb-10 sm:mb-32  text-muted-foreground">
               {product?.productOverview.desc}
             </p>
           </div>
@@ -193,7 +203,7 @@ export default function ProductPageComponent({ motorType }: Props) {
               <h2 className="text-5xl xl:text-6xl font-medium mb-1">
                 {product?.chargingOverview.title}
               </h2>
-              <p className="text-2xl xl:text-2xl font-normal mb-10 sm:mb-32  text-muted-foreground">
+              <p className="text-2xl xl:text-2xl text-justify font-normal mb-10 sm:mb-32  text-muted-foreground">
                 {product?.chargingOverview.desc}
               </p>
             </div>
@@ -216,6 +226,14 @@ export default function ProductPageComponent({ motorType }: Props) {
       <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
         {/* <DashSpecificationsAccordion /> */}
         <SpecificationsAccordion motorType={motorType} />
+      </div>
+
+      <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
+        <ComparisonTable
+          // bikes={bikesData}
+          primaryBikeId={motorType}
+          mode="comparison"
+        />
       </div>
     </div>
   );
