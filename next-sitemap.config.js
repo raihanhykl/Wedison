@@ -18,13 +18,11 @@ module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://wedison.co",
   sitemapSize: 7000,
   generateRobotsTxt: true,
-  exclude: ["/dash", "/testing-product"],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dash", "/testing-product"],
       },
     ],
   },
