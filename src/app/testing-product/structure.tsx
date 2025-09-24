@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function ProductPageComponent({ motorType }: Props) {
-  const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
+  const [isDesktop, setIsDesktop] = useState<boolean>(true);
   const product = GetProductData(motorType);
   const [count1, setCount1] = useState<number | string>(0);
   const [count2, setCount2] = useState<number | string>(0);
@@ -56,7 +56,8 @@ export default function ProductPageComponent({ motorType }: Props) {
     return () => window.removeEventListener("resize", checkScreen);
   }, [inView]);
 
-  if (!product || isDesktop === undefined) return null;
+  // if (!product || isDesktop === undefined) return null;
+  if (!product) return null;
 
   return (
     <div>

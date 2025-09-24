@@ -91,7 +91,7 @@ export default function Landing() {
       link: t("features.noiseFreeLink"),
     },
   ];
-  const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
+  const [isDesktop, setIsDesktop] = useState<boolean>(true);
   useEffect(() => {
     const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
     checkScreen(); // initial check
