@@ -29,10 +29,11 @@ export default function PeekCarousel(data: PeekCarousel) {
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: false,
-    mode: "free-snap",
+    mode: "snap",
     slides: {
       origin: "center",
-      perView: isDesktop ? 1.35 : data.perView ? data.perView : 1.75,
+      perView: 1,
+      // perView: isDesktop ? 1.23 : data.perView ? data.perView : 1.75,
       spacing: data.spacing ? data.spacing : 25,
     },
     defaultAnimation: {
@@ -59,39 +60,56 @@ export default function PeekCarousel(data: PeekCarousel) {
   }, [currentSlide, instanceRef]);
 
   return (
-    <div ref={sliderRef} className="keen-slider overflow-hidden mb-32 ">
-      {data.data.map((src, index) => (
+    <div className="w-full overflow-hidden">
+      <div className="mx-[136px] px-6 max-w-[2486px] overflow-visible">
         <div
-          key={index}
-          className={`keen-slider__slide ${
-            currentSlide === index ? "" : "cursor-pointer"
-          }`}
-          onClick={() => {
-            if (index !== currentSlide) instanceRef.current?.moveToIdx(index);
-          }}
+          ref={sliderRef}
+          className="keen-slider overflow-visible mb-32 "
+          style={{ overflow: "visible" }}
         >
-          <div className="relative w-full rounded-xl overflow-visible">
-            <Image
-              src={isDesktop ? src.image : src.imageMobile || src.image}
-              alt={src.alt}
-              width={1000}
-              height={500}
-              quality={100}
-              className={cn(
-                "rounded-xl w-full xl:h-[580px] xl:w-full sm:h-[404px]  h-[370px]   object-cover object-center",
-                src.className
-              )}
-            />
-          </div>
-          <div className="pl-3 mt-6 w-full">
-            <h3 className=" text-4xl xl:text-5xl font-medium">{src.title}</h3>
+          <div
+            className=" keen-slider overflow-visible"
+            style={{ overflow: "visible" }}
+          >
+            {data.data.map((src, index) => (
+              <div
+                key={index}
+                className={`keen-slider__slide overflow-visible z-0  ${
+                  currentSlide === index ? "" : "cursor-pointer"
+                }`}
+                // style={{ overflow: "visible" }}
+                onClick={() => {
+                  if (index !== currentSlide)
+                    instanceRef.current?.moveToIdx(index);
+                }}
+              >
+                <div className="relative w-full rounded-xl">
+                  <Image
+                    src={isDesktop ? src.image : src.imageMobile || src.image}
+                    alt={src.alt}
+                    width={1000}
+                    height={500}
+                    quality={100}
+                    className={cn(
+                      "rounded-xl w-full xl:h-[580px] xl:w-full sm:h-[404px]  h-[370px]   object-cover object-center",
+                      src.className
+                    )}
+                  />
+                </div>
+                <div className="pl-3 mt-6 w-full">
+                  <h3 className=" text-4xl xl:text-5xl font-medium">
+                    {src.title}
+                  </h3>
 
-            <p className=" mt-2 text-xl text-muted-foreground font-normal w-[90%] sm:w-[90%] lg:w-[80%] overflow-visible text-align">
-              {src.desc}
-            </p>
+                  <p className=" mt-2 text-xl text-muted-foreground font-normal w-[90%] sm:w-[90%] lg:w-[80%] overflow-visible text-align">
+                    {src.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 }

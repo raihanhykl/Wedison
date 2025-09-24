@@ -1,6 +1,8 @@
 import FeatureSection2 from "@/app/components/feature-section";
 import HeroSection from "../components/hero-section";
 import { getSEOMetadata } from "../lib/seo1";
+import VideoSection from "./videoSection";
+import { Suspense } from "react";
 // import { generateSeoMetadata } from "../lib/seo";
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Super Charge - Wedison",
@@ -44,6 +46,9 @@ export default function EdmaxPage() {
           imageStyle="object-[70%_40%] md:object-[0%_40%] 2xl:object-[0%_60%] "
           noButton={true}
         />
+        <Suspense fallback={<p>Loading video...</p>}>
+          <VideoSection />
+        </Suspense>
         <FeatureSection2
           page="supercharge"
           feature={1}

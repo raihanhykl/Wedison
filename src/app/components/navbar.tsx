@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import NavbarProduct from "./navbar-product";
 import LanguageToggle2 from "./language-toggle2";
 import NavbarCorporate from "./navbar-corporate";
+import NavbarDiscover from "./navbar-discover";
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -19,6 +20,7 @@ export default function Navbar() {
   const route = usePathname();
   const [openProduct, setOpenProduct] = useState(false);
   const [openCorporate, setOpenCorporate] = useState(false);
+  const [openDiscover, setOpenDiscover] = useState(false);
   // const [tone, setTone] = useState("");
   // const [bgTone, setBgTone] = useState("");
   // const [bgAccent, setBgAccent] = useState("");
@@ -62,38 +64,9 @@ export default function Navbar() {
     } else {
       setWhitePage(false);
     }
-    // if (route === "/edpower/" || route === "/edpower") {
-    //   setTone("text-[var(--primary-light)] hover:bg-black");
-    //   setBgTone("bg-black");
-    //   setBgAccent("bg-[var(--primary-light)]");
-    // } else if (route === "/dash/" || route === "/dash") {
-    //   setTone("text-[#fdc600] hover:text-[#fdc600]/80 hover:bg-black");
-    //   setBgTone("bg-black");
-    //   setBgAccent("bg-[#fdc600]");
-    // }
-    // else if (route === "/victory/" || route === "/victory") {
-    //   setTone("text-white hover:text-white/80 hover:bg-black");
-    //   setBgTone("bg-black");
-    //   setBgAccent("bg-white");
-    // }
-    // else if (route === "/mini/" || route === "/mini") {
-    //   setTone("text-[#7fa3a4] hover:text-[#7fa3a4]/80 hover:bg-black");
-    //   setBgTone("bg-black");
-    //   setBgAccent("bg-[#7fa3a4]");
-    // }
-    // else if (route === "/athena/" || route === "/athena") {
-    //   setTone("text-[#ff7db6] hover:text-[#ff7db6]/80 hover:bg-black");
-    //   setBgTone("bg-black");
-    //   setBgAccent("bg-[#ff7db6]");
-    // }
-    // else {
-    //   setTone("");
-    //   setBgTone("");
-    //   setBgAccent("");
-    // }
-
     setOpenProduct(false);
     setOpenCorporate(false);
+    setOpenDiscover(false);
     setMobileMenuOpen(false);
   }, [route]);
 
@@ -122,8 +95,26 @@ export default function Navbar() {
       ],
     },
     {
-      name: t("nav.experienceCenter"),
+      name: t("nav.discover"),
       href: "/showroom",
+      subMenu: [
+        { name: "Mini", href: "/mini/", image: "/navbar-product/mini.webp" },
+        {
+          name: "Experience Center",
+          href: "/showroom/",
+          image: "",
+        },
+        {
+          name: "Media Center",
+          href: "/media-center/",
+          image: "",
+        },
+        {
+          name: "FAQ",
+          href: "/faq/",
+          image: "",
+        },
+      ],
     },
     {
       name: t("nav.superCharge"),
@@ -133,7 +124,11 @@ export default function Navbar() {
       name: t("nav.corporate"),
       href: "#",
       subMenu: [
-        { name: t("nav.aboutUs"), href: "/corporate/about/", image: "" },
+        {
+          name: t("nav.aboutUs"),
+          href: "/corporate/about/",
+          image: "",
+        },
         { name: t("nav.contactUs"), href: "/corporate/contact/", image: "" },
       ],
     },
@@ -156,15 +151,23 @@ export default function Navbar() {
 
   const toggleOpen = (state: string) => {
     if (state === "openProduct") {
-      if (openCorporate) {
+      if (openCorporate || openDiscover) {
         setOpenCorporate(false);
+        setOpenDiscover(false);
       }
       setOpenProduct(!openProduct);
-    } else {
-      if (openProduct) {
+    } else if (state === "openCorporate") {
+      if (openProduct || openDiscover) {
         setOpenProduct(false);
+        setOpenDiscover(false);
       }
       setOpenCorporate(!openCorporate);
+    } else {
+      if (openProduct || openCorporate) {
+        setOpenProduct(false);
+        setOpenCorporate(false);
+      }
+      setOpenDiscover(!openDiscover);
     }
   };
 
@@ -178,7 +181,11 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full",
           // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
-          scrolled || openProduct || openCorporate || mobileMenuOpen
+          scrolled ||
+            openProduct ||
+            openCorporate ||
+            openDiscover ||
+            mobileMenuOpen
             ? "bg-white backdrop-blur-md shadow-soft"
             : "bg-transparent"
           // bgTone
@@ -195,7 +202,11 @@ export default function Navbar() {
               >
                 <Image
                   src={
-                    scrolled || openProduct || openCorporate || mobileMenuOpen
+                    scrolled ||
+                    openProduct ||
+                    openCorporate ||
+                    openDiscover ||
+                    mobileMenuOpen
                       ? "/wedison-sidebyside.png"
                       : whitePage
                       ? "/wedison-sidebyside.png"
@@ -219,7 +230,10 @@ export default function Navbar() {
                         ref={openerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          scrolled || openProduct || openCorporate
+                          scrolled ||
+                            openProduct ||
+                            openCorporate ||
+                            openDiscover
                             ? "text-black hover:text-[var(--primary)]"
                             : whitePage
                             ? "text-black"
@@ -243,19 +257,25 @@ export default function Navbar() {
                             whitePage ? "bg-black" : "bg-white",
 
                             // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
-                            (scrolled || openProduct || openCorporate) &&
+                            (scrolled ||
+                              openProduct ||
+                              openCorporate ||
+                              openDiscover) &&
                               "bg-[var(--primary)]"
                             // bgAccent
                           )}
                         />
                       </button>
-                    ) : (
+                    ) : item.name === t("nav.corporate") ? (
                       <button
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
                           whitePage ? "text-black" : "text-white",
                           // "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
-                          scrolled || openProduct || openCorporate
+                          scrolled ||
+                            openProduct ||
+                            openCorporate ||
+                            openDiscover
                             ? "text-black hover:text-[var(--primary)]"
                             : "",
                           activeDropdown === item.name &&
@@ -277,7 +297,50 @@ export default function Navbar() {
                             whitePage ? "bg-black" : "bg-white",
 
                             // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
-                            (scrolled || openProduct || openCorporate) &&
+                            (scrolled ||
+                              openProduct ||
+                              openCorporate ||
+                              openDiscover) &&
+                              "bg-[var(--primary)]"
+                            // bgAccent
+                          )}
+                        />
+                      </button>
+                    ) : (
+                      <button
+                        className={cn(
+                          "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
+                          whitePage ? "text-black" : "text-white",
+                          // "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
+                          scrolled ||
+                            openProduct ||
+                            openCorporate ||
+                            openDiscover
+                            ? "text-black hover:text-[var(--primary)]"
+                            : "",
+                          activeDropdown === item.name &&
+                            "text-[var(--primary)]"
+                          // tone
+                        )}
+                        onClick={() => toggleOpen("openDiscover")}
+                      >
+                        {item.name}
+                        <ChevronDown
+                          className={cn(
+                            "ml-1 h-4 w-4 transition-transform duration-200",
+                            openDiscover && "rotate-180"
+                          )}
+                        />
+                        <span
+                          className={cn(
+                            "absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
+                            whitePage ? "bg-black" : "bg-white",
+
+                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
+                            (scrolled ||
+                              openProduct ||
+                              openCorporate ||
+                              openDiscover) &&
                               "bg-[var(--primary)]"
                             // bgAccent
                           )}
@@ -294,7 +357,7 @@ export default function Navbar() {
                         // "flex items-center text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
                         // route == "/products/edmax" &&
                         //   "text-[var(--primary-light)]"
-                        scrolled || openProduct || openCorporate
+                        scrolled || openProduct || openCorporate || openDiscover
                           ? "text-black hover:text-[var(--primary)]"
                           : ""
                         // tone
@@ -317,7 +380,9 @@ export default function Navbar() {
               ))}
 
               {/* <LanguageToggle /> */}
-              <LanguageToggle2 toggleOpen={openProduct || openCorporate} />
+              <LanguageToggle2
+                toggleOpen={openProduct || openCorporate || openDiscover}
+              />
             </nav>
 
             {/* Mobile menu button and language toggle */}
@@ -485,6 +550,8 @@ export default function Navbar() {
         <NavbarProduct open={openProduct} ref={menuRef} />
 
         <NavbarCorporate open={openCorporate} />
+
+        <NavbarDiscover open={openDiscover} />
       </header>
     </div>
   );

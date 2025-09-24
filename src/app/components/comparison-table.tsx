@@ -113,10 +113,10 @@ export default function ComparisonTable({
     <div className="w-full space-y-6">
       {/* Comparison Controls (Comparison Mode Only) */}
       {mode === "comparison" && (
-        <Card className="p-4">
+        <Card className="p-4 border-none">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-semibold">Compare Models</h3>
+              <h3 className="text-lg font-semibold">{t("compare.model")}</h3>
               {/* <h3 className="text-lg font-semibold">{t("comparison.title")}</h3> */}
               {/* <p className="text-sm text-muted-foreground"> */}
               {/* {t(`comparison.description`, { bikeName: primaryBike?.name })} */}
@@ -128,8 +128,8 @@ export default function ComparisonTable({
                 value={comparisonBikeId || ""}
                 onValueChange={handleComparisonSelect}
               >
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder={"Select a bike to compare"} />
+                <SelectTrigger className="w-fit">
+                  <SelectValue placeholder={t("compare.select.bike")} />
                 </SelectTrigger>
                 <SelectContent>
                   {availableForComparison.map((bike) => (
@@ -156,7 +156,7 @@ export default function ComparisonTable({
       )}
       {/* Desktop/Tablet Table View */}
       <div className="hidden md:block">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overscroll-x-none">
           <div className="min-w-full">
             {/* Header */}
             <div
@@ -204,14 +204,14 @@ export default function ComparisonTable({
             <div className="space-y-4">
               {specCategories.map((category) => (
                 <div key={category.title} className="space-y-0">
-                  <h2 className="text-xl font-bold text-primary mb-4 border-b border-border pb-0 sticky left-0 bg-background">
+                  <h2 className="text-xl font-bold text-primary mb-4 border-b border-black pb-0 sticky left-0 bg-background">
                     {category.title}
                   </h2>
 
                   {category.specs.map((spec) => (
                     <div
                       key={spec.key}
-                      className="grid gap-4 py-3 border-b border-border/50 hover:bg-muted/30 transition-colors"
+                      className="grid gap-4 py-3 border-b border-black/20 hover:bg-muted/30 transition-colors"
                       style={{
                         gridTemplateColumns: `minmax(200px, 300px) repeat(${displayedBikes.length}, 1fr)`,
                       }}
@@ -298,8 +298,8 @@ export default function ComparisonTable({
       </div> */}
       <div className="md:hidden space-y-6">
         {specCategories.map((category) => (
-          <Card key={category.title} className="p-4">
-            <h2 className="text-lg font-bold text-primary mb-4 border-b border-border pb-2">
+          <Card key={category.title} className="p-4 border-none">
+            <h2 className="text-lg font-bold text-primary mb-4 border-b border-black pb-2">
               {category.title}
             </h2>
 
@@ -314,7 +314,7 @@ export default function ComparisonTable({
 
                 <div
                   ref={register}
-                  className="flex-1 overflow-x-auto scrollbar-hide"
+                  className="flex-1 overflow-x-auto scrollbar-hide overscroll-none"
                   onScroll={onScroll}
                 >
                   <div className="flex gap-2 min-w-max">
@@ -324,7 +324,7 @@ export default function ComparisonTable({
                         className={`w-28 flex-shrink-0 text-center p-2 rounded-t border-b-2 ${
                           bike === primaryBikeId
                             ? "border-primary bg-primary/5"
-                            : "border-border bg-muted/30"
+                            : "border-black bg-muted/30"
                         }`}
                       >
                         <div className="flex items-center justify-center gap-1">
@@ -348,7 +348,7 @@ export default function ComparisonTable({
             {/* Rows */}
             <div className="space-y-1">
               {category.specs.map((spec) => (
-                <div key={spec.key} className="flex border-b border-border/30">
+                <div key={spec.key} className="flex border-b border-black/30">
                   <div className="w-32 flex-shrink-0 pr-2 py-2">
                     <div className="text-xs font-medium text-muted-foreground leading-tight">
                       {spec.label}
@@ -357,14 +357,14 @@ export default function ComparisonTable({
 
                   <div
                     ref={register}
-                    className="flex-1 overflow-x-auto scrollbar-hide"
+                    className="flex-1 overflow-x-auto scrollbar-hide overscroll-none"
                     onScroll={onScroll}
                   >
                     <div className="flex gap-2 min-w-max">
                       {displayedBikes.map((bike) => (
                         <div
                           key={bike}
-                          className={`w-28 flex-shrink-0 p-2 text-center border-l border-border/30 ${
+                          className={`w-28 flex-shrink-0 p-2 text-center border-l border-black/30 ${
                             bike === primaryBikeId
                               ? "bg-primary/5"
                               : "bg-muted/10"
@@ -388,20 +388,6 @@ export default function ComparisonTable({
           </Card>
         ))}
       </div>
-      {/* No Comparison Selected Message */}
-      {mode === "comparison" && !comparisonBike && (
-        <Card className="p-8 text-center">
-          <h3 className="text-lg font-semibold mb-2">
-            {t("comparison.noSelection.title")}
-          </h3>
-          <p className="text-muted-foreground">
-            {/* {t("comparison.noSelection.description", {
-              bikeName: primaryBike?.name,
-            })} */}
-            No comparison selected
-          </p>
-        </Card>
-      )}
     </div>
   );
 }

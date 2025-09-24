@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-          <div className=" mr-6">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
+          <div className=" mr-6 col-span-2">
             <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent">
               Wedison Motors
             </h3>
@@ -183,8 +183,8 @@ export default function Footer() {
                       <Image
                         src="/icons/instagram.svg"
                         alt="Instagram"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                       />
                       {/* wedison.id */}
                     </Link>
@@ -198,8 +198,8 @@ export default function Footer() {
                       <Image
                         src="/icons/tiktok.svg"
                         alt="Tiktok"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                       />
                       {/* wedison.id */}
                     </Link>
@@ -213,8 +213,8 @@ export default function Footer() {
                       <Image
                         src="/icons/youtube.svg"
                         alt="Instagram"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                       />
                       {/* Motor Listrik Wedison */}
                     </Link>
@@ -232,8 +232,8 @@ export default function Footer() {
                       <Image
                         src="/icons/facebook.svg"
                         alt="Facebook"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                       />
                       {/* wedisonid */}
                     </Link>
@@ -247,8 +247,8 @@ export default function Footer() {
                       <Image
                         src="/icons/whatsapp.svg"
                         alt="Instagram"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                       />
                       {/* +62 821-2465-7804 */}
                     </Link>
@@ -261,8 +261,8 @@ export default function Footer() {
                       <Image
                         src="/icons/mail.svg"
                         alt="Instagram"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                       />
                       {/* support@wedison.co */}
                     </Link>

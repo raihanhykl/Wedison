@@ -16,6 +16,7 @@ import { useLanguage } from "../lib/language-context";
 import Link from "next/link";
 import Preloader from "../components/Preloader";
 import ComparisonTable from "../components/comparison-table";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function Landing() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -109,6 +110,12 @@ export default function Landing() {
             opts={{
               loop: true,
             }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+                stopOnFocusIn: true,
+              }),
+            ]}
             setApi={(api: CarouselApi) => {
               carouselApi.current = api;
               api?.on("select", () =>
@@ -128,6 +135,7 @@ export default function Landing() {
                         width={1000}
                         height={1000}
                         quality={100}
+                        loading={"eager"}
                         className=" object-cover object-center w-full h-full "
                       />
                     </div>

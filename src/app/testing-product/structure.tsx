@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -5,10 +7,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
-import SpecificationsAccordion from "../components/specifications-accordion";
 import GetProductData from "../lib/product-data";
 import { useLanguage } from "../lib/language-context";
 import ComparisonTable from "../components/comparison-table";
+import { useInView } from "react-intersection-observer";
 
 type Props = {
   motorType: string;
@@ -17,14 +19,42 @@ type Props = {
 export default function ProductPageComponent({ motorType }: Props) {
   const [isDesktop, setIsDesktop] = useState<boolean | undefined>(undefined);
   const product = GetProductData(motorType);
+  const [count1, setCount1] = useState<number | string>(0);
+  const [count2, setCount2] = useState<number | string>(0);
+  const [count3, setCount3] = useState<number | string>(0);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   const { t } = useLanguage();
   useEffect(() => {
+    const incrementer = (num: any, countSetter: any) => {
+      if (typeof num !== "number") return countSetter(num);
+      const finalCount = num;
+      let currentCount = 0;
+      // const increment = Math.ceil(1);
+      const increment = Math.ceil(finalCount / 80);
+      const timer = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= finalCount) {
+          currentCount = finalCount;
+          clearInterval(timer);
+        }
+        countSetter(currentCount);
+      }, 20);
+
+      return () => clearInterval(timer);
+    };
     const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
     // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
+    if (inView) {
+      incrementer(product?.techSpec[0].title, setCount1);
+      incrementer(product?.techSpec[1].title, setCount2);
+      incrementer(product?.techSpec[2].title, setCount3);
+    }
     checkScreen(); // initial check
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
-  }, []);
+  }, [inView]);
 
   if (!product || isDesktop === undefined) return null;
 
@@ -91,8 +121,12 @@ export default function ProductPageComponent({ motorType }: Props) {
             <div className=" flex flex-col md:flex-row items-center md:items-start md:justify-evenly h-full w-fit md:w-full">
               <div className=" max-md:w-full">
                 <div className=" flex justify-start  w-full">
-                  <div className="text-6xl md:text-7xl font-medium md:font-bold ">
-                    {product?.techSpec[0].title}
+                  <div
+                    ref={ref}
+                    className="text-6xl md:text-7xl font-medium md:font-bold "
+                  >
+                    {/* {product?.techSpec[0].title} */}
+                    {count1}
                   </div>
                   <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
                     {product?.techSpec[0].unit}
@@ -107,7 +141,8 @@ export default function ProductPageComponent({ motorType }: Props) {
               <div className=" max-md:w-full">
                 <div className=" flex justify-start ">
                   <div className="text-6xl md:text-7xl font-medium md:font-bold">
-                    {product?.techSpec[1].title}
+                    {/* {product?.techSpec[1].title} */}
+                    {count2}
                   </div>
                   <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
                     {product?.techSpec[1].unit}
@@ -122,7 +157,8 @@ export default function ProductPageComponent({ motorType }: Props) {
               <div className=" max-md:w-full">
                 <div className=" flex justify-start ">
                   <div className="text-6xl md:text-7xl font-medium md:font-bold">
-                    {product?.techSpec[2].title}
+                    {/* {product?.techSpec[2].title} */}
+                    {count3}
                   </div>
                   <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
                     {product?.techSpec[2].unit}
@@ -180,7 +216,7 @@ export default function ProductPageComponent({ motorType }: Props) {
       {/* Supercharge Overview */}
       {product?.chargingOverview && (
         <div className="w-full xl:px-16 flex flex-col justify-center max-w-[2480px] mx-auto">
-          <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px] max-w-[2480px] mx-auto">
+          <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px] xl:h-[700px] max-w-[2480px] mx-auto ">
             <Image
               src={
                 isDesktop
@@ -192,7 +228,7 @@ export default function ProductPageComponent({ motorType }: Props) {
               width={1000}
               height={1000}
               className={cn(
-                "w-full h-full object-cover object-center xl:rounded-md",
+                "w-full h-full object-cover object-center xl:rounded-md ",
                 product.chargingOverview.className
               )}
             />
@@ -223,10 +259,10 @@ export default function ProductPageComponent({ motorType }: Props) {
       )}
 
       {/* Specification Accordion */}
-      <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
-        {/* <DashSpecificationsAccordion /> */}
+      {/* <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
+
         <SpecificationsAccordion motorType={motorType} />
-      </div>
+      </div> */}
 
       <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
         <ComparisonTable

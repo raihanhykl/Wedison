@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import Link from "next/link";
 import {
   createContext,
@@ -24,6 +34,10 @@ const translations = {
     "landing.description":
       "Wedison is an eco-friendly electric motorcycle brand with the latest Super Charge technology.",
 
+    // compare table
+    "compare.model": "Compare Models",
+    "compare.select.bike": "Select a bike to compare",
+
     // buttons
     "btn.learn.more": "Learn More",
     "btn.book.test.ride": "Book Test Ride",
@@ -32,14 +46,30 @@ const translations = {
 
     // Navbar
     "nav.products": "Products",
-    "nav.experienceCenter": "Experience Center",
+    "nav.discover": "Discover",
+    "nav.discover.leftCard.title": "Discover Wedison",
+    "nav.discover.leftCard.description":
+      "Explore the Experience Center, find answers in the FAQ, and stay updated through the Media Center. All information in one place.",
+    "nav.experienceCenter.description":
+      "Visit the Wedison showroom and experience the 15-minute supercharge firsthand.",
+    "nav.faq.description":
+      "Find answers to common questions about our products, services, and technology.",
+    "nav.mediaCenter.description":
+      "Get the latest news, official releases, and highlights about Wedison",
     "nav.showroom": "Showroom",
     "nav.serviceLocation": "Service Location",
     "nav.superCharge": "Super Charge",
     "nav.corporate": "Corporate",
+    "nav.corporate.leftCard.title": "Powering the Future",
+    "nav.corporate.leftCard.description":
+      "With supercharge technology, Wedison delivers an electric riding experience that is fast, efficient, and environmentally friendly.",
     "nav.aboutUs": "About Us",
+    "nav.aboutUs.description":
+      "Discover Wedison’s vision, mission, and commitment to driving innovation in electric mobility for a sustainable future.",
     "nav.careers": "Careers",
     "nav.contactUs": "Contact Us",
+    "nav.contactUs.description":
+      "Need assistance or further information? The Wedison team is here to help you.",
     "nav.helpCenter": "Help Center",
 
     // Hero
@@ -188,7 +218,7 @@ const translations = {
     "about.titleHighlight": "Wedison Group",
     "about.overview.title": "WEDISON: Pioneering Green Energy in Mobility",
     "about.overview.p1":
-      "Wedison is a leading player in the EV industry. We are Indonesia's first fast-charging electric motorcycle. For us, it's not just about selling electric motorcycles — it's about creating a green ecosystem that fosters sustainable mobility across the world.",
+      "Wedison is a leading Tech Company. We are Indonesia's first fast-charging electric motorcycle. For us, it's not just about selling electric motorcycles, it's about creating a green ecosystem that fosters sustainable mobility across the world.",
     "about.overview.p2":
       "Paired with our advanced electric charging system, our electric motorcycles will enrich the lifestyles of our consumers and better our environment.",
     "about.mission.title": "Our Mission",
@@ -384,16 +414,16 @@ const translations = {
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": "135",
+    "edpower.productPage.techSpecs1.title": 135,
     "edpower.productPage.techSpecs1.unit": "km",
     "edpower.productPage.techSpecs1.desc": "Cruising Range",
 
-    "edpower.productPage.techSpecs2.title": "15",
+    "edpower.productPage.techSpecs2.title": 15,
     "edpower.productPage.techSpecs2.unit": "minutes",
     "edpower.productPage.techSpecs2.desc":
       "Charge from 10% to 80% with SuperCharge",
 
-    "edpower.productPage.techSpecs3.title": "80",
+    "edpower.productPage.techSpecs3.title": 80,
     "edpower.productPage.techSpecs3.unit": "km/hour",
     "edpower.productPage.techSpecs3.desc": "Top Speed",
 
@@ -482,7 +512,7 @@ const translations = {
     "edpower.specs.dimension.seatHeight": "740 mm",
     "edpower.specs.dimension.weight": "140 kg",
     "edpower.specs.tire.frontTire": "100/80-14",
-    "edpower.specs.tire.rearTire": "1020/70-14",
+    "edpower.specs.tire.rearTire": "120/70-14",
     "edpower.specs.suspension.frontSuspension": "Hydraulic Telescopic",
     "edpower.specs.suspension.rearSuspension": "Hydraulic Telescopic",
 
@@ -562,7 +592,7 @@ const translations = {
     "victory.productPage.hero.ctaPrimary": "Order Now",
     "victory.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "victory.productPage.techSpecs1.title": "115",
+    "victory.productPage.techSpecs1.title": 115,
     "victory.productPage.techSpecs1.unit": "km",
     "victory.productPage.techSpecs1.desc": (
       <>
@@ -571,12 +601,12 @@ const translations = {
       </>
     ),
 
-    "victory.productPage.techSpecs2.title": "15",
+    "victory.productPage.techSpecs2.title": 15,
     "victory.productPage.techSpecs2.unit": "minutes",
     "victory.productPage.techSpecs2.desc":
       "Charge from 10% to 80% with SuperCharge",
 
-    "victory.productPage.techSpecs3.title": "80",
+    "victory.productPage.techSpecs3.title": 80,
     "victory.productPage.techSpecs3.unit": "km/h",
     "victory.productPage.techSpecs3.desc": "Top Speed",
 
@@ -684,7 +714,7 @@ const translations = {
     "athena.productPage.hero.ctaPrimary": "Order Now",
     "athena.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "athena.productPage.techSpecs1.title": "115",
+    "athena.productPage.techSpecs1.title": 115,
     "athena.productPage.techSpecs1.unit": "km",
     "athena.productPage.techSpecs1.desc": (
       <>
@@ -693,12 +723,12 @@ const translations = {
       </>
     ),
 
-    "athena.productPage.techSpecs2.title": "15",
+    "athena.productPage.techSpecs2.title": 15,
     "athena.productPage.techSpecs2.unit": "minutes",
     "athena.productPage.techSpecs2.desc":
       "Charge from 10% to 80% with SuperCharge",
 
-    "athena.productPage.techSpecs3.title": "80",
+    "athena.productPage.techSpecs3.title": 80,
     "athena.productPage.techSpecs3.unit": "km/h",
     "athena.productPage.techSpecs3.desc": "Top Speed",
 
@@ -807,14 +837,14 @@ const translations = {
     "mini.productPage.hero.ctaPrimary": "Order Now",
     "mini.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "mini.productPage.techSpecs1.title": "65",
+    "mini.productPage.techSpecs1.title": 65,
     "mini.productPage.techSpecs1.unit": "km",
     "mini.productPage.techSpecs1.desc": "Cruising Range",
 
     "mini.productPage.techSpecs2.title": "LED",
     "mini.productPage.techSpecs2.desc": "Head unit Display",
 
-    "mini.productPage.techSpecs3.title": "55",
+    "mini.productPage.techSpecs3.title": 55,
     "mini.productPage.techSpecs3.unit": "km/h",
     "mini.productPage.techSpecs3.desc": "Top Speed",
 
@@ -939,11 +969,226 @@ const translations = {
         Allow PT Wedison to use the above information and contact me via email
         and/or phone or other personal communication channels for customer
         service activities in accordance with the{" "}
-        <Link href="/" className="underline text-blue-400">
+        {/* <Link href="/" className="underline text-blue-400">
           privacy agreement.
-        </Link>
+        </Link> */}
+        <AlertDialog>
+          <AlertDialogTrigger className="underline text-blue-400 cursor-pointer font-semibold">
+            Privacy Agreement
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Privacy Agreement</AlertDialogTitle>
+              <AlertDialogDescription>
+                By submitting this form, you agree that Wedison may collect and
+                use your personal data solely to respond to your inquiry. Your
+                information will not be shared with third parties without your
+                consent.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction>I Understand</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </>
     ),
+    "form.agreePrivacy.dialogTitle": "Privacy Agreement",
+    "form.agreePrivacy.dialogDescription":
+      "By submitting this form, you agree that Wedison may collect and use your personal data solely to respond to your inquiry. Your information will not be shared with third parties without your consent.",
+    "form.agreePrivacy.dialogButton": "I Understand",
+
+    // FAQ
+    "faq.category.Battery": "Battery",
+    "faq.category.Charging": "Charging",
+    "faq.category.Performance": "Performance",
+    "faq.category.Safety": "Safety",
+    "faq.category.Servicing": "Servicing: Warranty, Repair, and Maintenance",
+    "faq.category.SmartFeatures": "Smart Features, Bluetooth, App",
+    "faq.category.Tires": "Tires",
+
+    // Battery Questions
+    "faq.Battery.questions.0.question": "What is the battery warranty?",
+    "faq.Battery.questions.0.answer":
+      "Wedison battery is covered by a 3 year warranty",
+    "faq.Battery.questions.1.question":
+      "How long does it take to fully charge the battery?",
+    "faq.Battery.questions.1.answer":
+      "Wedison Super Charge: 10% to 80% in 15 minutes/ 10% to 95% in 20 minutes\nWedison Regular Charge: Varies depending on the adapter and battery size, with a duration ranging from approximately 2 to 10 hours.",
+    "faq.Battery.questions.2.question": "What type of battery do you use?",
+    "faq.Battery.questions.2.answer":
+      "Wedison EV uses Lithium-ion Battery (LFP), a type of rechargeable battery commonly used in devices like smartphones, laptops, and electric vehicles.\n\nThe characteristics of Lithium-ion Battery are as follow:\nA. High energy density: It can store a considerable amount of electrical energy in a smaller, lighter package.\nB. High temperature: It performs efficiently at high temperatures of up to 45 degrees celsius and can endure low temperatures without sustaining damage.\nC. Low self-discharge rate: The battery retains its energy effectively even when left unused for days or weeks.\nD. High no. of charge cycles: It enables numerous charge cycles of more than 5,000 while maintaining nearly all of their original capacity.\nE. Charges quickly: Wedison EV can be fully charged in 30 mins at one of the super fast charging stations.",
+    "faq.Battery.questions.3.question": "How many type of battery do you sell?",
+    "faq.Battery.questions.3.answer":
+      "Wedison offers 2 battery variations for select models. \nTravelling at 50km/h, the basic and extended versions are capable of travelling up to 85 and 115 km respectively.",
+    "faq.Battery.questions.4.question": "Where is the battery from?",
+    "faq.Battery.questions.4.answer":
+      "Wedison's proprietary battery is developed internally.",
+    "faq.Battery.questions.5.question": "How long can your battery last?",
+    "faq.Battery.questions.5.answer":
+      "Under normal operating conditions, Wedison's proprietary battery is designed to last up to 12 years.",
+    "faq.Battery.questions.6.question":
+      "Can we use external/third party battery/charger?",
+    "faq.Battery.questions.6.answer":
+      "No, electric motorcycles require a CAN (Controller Area Network) to communicate with other components of the EV for operation and charging. However, third-party batteries do not use the same CAN for communication.",
+    "faq.Battery.questions.7.question": "Can the battery be replaced?",
+    "faq.Battery.questions.7.answer":
+      "Yes, Wedison supplies original spare parts and accessories like battery.",
+    "faq.Battery.questions.8.question":
+      "How can I keep the battery in good condition?",
+    "faq.Battery.questions.8.answer":
+      "During daily use, please try to charge the battery in a timely manner before the level drops below 20% to help extend battery life.",
+    "faq.Battery.questions.9.question": "How do I extend battery life?",
+    "faq.Battery.questions.9.answer":
+      "Avoid fully discharging to 0% or charging to 100%. \nAim to keep the charge between 20% and 80% to reduce battery stress and maximize lifespan.",
+    "faq.Battery.questions.10.question":
+      "What is the battery Ingress protection (IP) rating?",
+    "faq.Battery.questions.10.answer":
+      "Wedison batteries are IP67,\nThe battery is completely dustproof and can be immersed in water up to 1 meter deep for up to 30 minutes without damage.",
+    "faq.Battery.questions.11.question":
+      "How often should I charge the battery? Travelling?",
+    "faq.Battery.questions.11.answer":
+      "If the vehicle is not used for an extended period (more than a week), please ensure it is charged at least once every month.",
+    "faq.Battery.questions.12.question":
+      "What happens if I don't use the vehicle for an extended period?",
+    "faq.Battery.questions.12.answer":
+      "Turn off the MCB (circuit breaker) and ensure the battery is charged at least once a month to maintain health.",
+
+    // Charging Questions
+    "faq.Charging.questions.0.question": "Where can we charge our motorcycles?",
+    "faq.Charging.questions.0.answer":
+      "Super Charge\nAt Wedison super charge stations, which will progressively be rolled out countrywide.\nRegular Charge \nAt home/places with standard wall socket",
+    "faq.Charging.questions.1.question": "How can we charge our motorcycles?",
+    "faq.Charging.questions.1.answer":
+      "Wedison EV comes with regular and super charge ports which can be charged at home and designated charging stations.",
+    "faq.Charging.questions.2.question":
+      "Can I use third-party power adapter to charge the EV?",
+    "faq.Charging.questions.2.answer":
+      "Use only Wedison issued parts and supplies for optimal battery health and performance.",
+    "faq.Charging.questions.3.question":
+      "Can we charge the motorcycles at home?",
+    "faq.Charging.questions.3.answer":
+      "Yes, Wedison EV has regular port for charging at home.",
+    "faq.Charging.questions.4.question":
+      "Does fast charging damange the battery?",
+    "faq.Charging.questions.4.answer":
+      "Wedison's batteries are engineered for fast charging and long cycle life without causing damage.",
+    "faq.Charging.questions.5.question": "Is it fast charging dangerous?",
+    "faq.Charging.questions.5.answer":
+      "Wedison's fast charging does not shorten battery life or pose any risk of explosion.",
+    "faq.Charging.questions.6.question": "Is overcharging dangerous?",
+    "faq.Charging.questions.6.answer":
+      "Wedison battery is equipped with protection management system\nIf the battery becomes too hot due to overcharging, a built-in safety feature will automatically cut off the power to prevent damage or danger.",
+    "faq.Charging.questions.7.question": "Why does charging slow down?",
+    "faq.Charging.questions.7.answer":
+      "Wedison's advanced lithium-ion battery technology features intelligent charging that balances speed and long-term performance. It charges rapidly up to 95% capacity, then shifts to a slower, controlled rate to protect and extend battery life.\n\nThis intelligent charging approach gets you back on the road faster while helping extend your battery's overall lifespan.",
+    "faq.Charging.questions.8.question":
+      "What is the duration for regular charging? (600W charger)",
+    "faq.Charging.questions.8.answer":
+      "The charging time varies depending on model and battery capacity. \nCharging time with a 600w charging adapter from 0-100%:\nRefe to Regular Charge Data",
+    "faq.Charging.questions.9.question":
+      "What is the duration for regular charging? (1260W charger)",
+    "faq.Charging.questions.9.answer":
+      "The charging time varies depending on model and battery capacity. \nCharging time with a 1260w charging adapter from 0-100%:\nMini: 3.5 hr (No change, can only use a 600w charger)\nRefe to Regular Charge Data",
+    "faq.Charging.questions.10.question": "How do I perform regular charging?",
+    "faq.Charging.questions.10.answer":
+      "First connect the charger to the vehicle's charging port, then plug it into the power source. \nAfter charging is complete, unplug the power source first, then disconnect the charger from the vehicle.",
+    "faq.Charging.questions.11.question": "Is charging free?",
+    "faq.Charging.questions.11.answer":
+      "No, electric charging is on a Pay as Per use basis, and charging price varies from location and charging station/operators.",
+
+    // Performance Questions
+    "faq.Performance.questions.0.question":
+      "What is the speed of the motorcycle?",
+    "faq.Performance.questions.0.answer":
+      "Depending on the model, the top speed ranges from 60 km/hr to 95 km/hr",
+    "faq.Performance.questions.1.question":
+      "What is the motor power / BLDC of the motorcycle?",
+    "faq.Performance.questions.1.answer":
+      "The motor power varies between models, ranging from 1200KW to 5000KW",
+    "faq.Performance.questions.2.question":
+      "What is the range of the motorcycle?",
+    "faq.Performance.questions.2.answer":
+      "The range varies between model and battery, ranging from 70 km to 140 km",
+    "faq.Performance.questions.3.question":
+      "Is Wedison EV safe to be used in rain and flood?",
+    "faq.Performance.questions.3.answer":
+      "Wedison's motor, control unit, and battery are IP67, which have been tested to be waterproof.\nWhile they have undergone a water immersion test at 1 meter, extended immersion is not recommended.",
+    "faq.Performance.questions.4.question":
+      "Can the motorcycles travel uphill?",
+    "faq.Performance.questions.4.answer":
+      "Yes, it can go uphill and the climbing ability depends on the model:\nMini, EdPower, & EdPro: 12%\nAthena and Victory: 15%",
+    "faq.Performance.questions.5.question":
+      "Does the battery degrade overtime?",
+    "faq.Performance.questions.5.answer":
+      "Like any device powered by a lithium-ion battery, the battery's ability to hold a charge gradually decreases with each charge and discharge cycle. \nThe wear and tear of the battery is influenced by factors such as charge cycles, age of battery, and temperature. \n\nEvery Wedison EV is equipped with a proprietary Lithium Ion battery, which is backed by a 3 year warranty.",
+
+    // Safety Questions
+    "faq.Safety.questions.0.question": "Is your battery safe?",
+    "faq.Safety.questions.0.answer":
+      "Wedison's proprietary batteries feature an advanced battery management system\nwith safety measures to prevent overheating, overcharging, and the risk of fire",
+    "faq.Safety.questions.1.question": "What brakes do you use?",
+    "faq.Safety.questions.1.answer":
+      "CBS (Combined Braking System), an efficient braking system that automatically distributes braking force between the front and rear brakes when the rider applies the brakes:\nAthena, Victory, & EdPower\n\nFront and rear disc brakes, providing enhanced control, safety, and braking performance:\nMini motorcycle",
+    "faq.Safety.questions.2.question": "What motor do you use?",
+    "faq.Safety.questions.2.answer":
+      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 85 km/hr. (Mini, Athena, Victory, EdPower)",
+
+    // Servicing Questions
+    "faq.Servicing.questions.0.question":
+      "Does Wedison EV come with free servicing?",
+    "faq.Servicing.questions.0.answer":
+      "Yes, every Wedison motorcycle comes with 3 complimentary servicing sessions at Wedison or authorized service centers. \nMileage-based warranty inspections are scheduled at 1,000 km, 5,000 km, and 10,000 km intervals.",
+    "faq.Servicing.questions.1.question":
+      "What mileage is covered under the complimentary servicing schedule?",
+    "faq.Servicing.questions.1.answer":
+      "The mileage warranty includes checks at 1,000 km, 5,000 km, and 10,000 km.",
+    "faq.Servicing.questions.2.question":
+      "Where can I service the EV motorcycles?",
+    "faq.Servicing.questions.2.answer":
+      "At Wedison and/or authorized service centers with the likes of Honda/Yamaha Service Center.",
+    "faq.Servicing.questions.3.question":
+      "Does Wedison provide spare parts for the motorcycle?",
+    "faq.Servicing.questions.3.answer":
+      "Yes, Wedison provides ready parts for the motorcycle.",
+    "faq.Servicing.questions.4.question":
+      "Does the battery come with a warranty?",
+    "faq.Servicing.questions.4.answer":
+      "Yes, the proprietary battery comes with a 3 year warranty.",
+    "faq.Servicing.questions.5.question":
+      "Does Wedison motorcycles come with a warranty?",
+    "faq.Servicing.questions.5.answer":
+      "Yes, the motorcycle comes with a 2 year warranty.",
+    "faq.Servicing.questions.6.question":
+      "How much does it cost to repair the motorcycle, dynamo, and etc?",
+    "faq.Servicing.questions.6.answer":
+      "Electric motorcycle repair costs vary on the type and brand of parts, and extent of damage or repair required. \n\nUsers have to check with the respective workshop on pricing.",
+    "faq.Servicing.questions.7.question":
+      "How does one maintain Wedison motorcycle?",
+    "faq.Servicing.questions.7.answer":
+      "Proper care and handling, in conjunction with proper and regular maintenance can extend the lifespan of the motorcycle. \nYou don't need to charge your EV every day:\n- Instead, charge it as needed, keeping the battery between 20% and 80% for optimal health and range.\n- Charge it at least once a month.\n- For optimal performance and battery quality, Wedison EVs should be charged and serviced at designated super fast charge stations and service centers respectively.",
+    "faq.Servicing.questions.8.question": "Is modification allowed to the EV?",
+    "faq.Servicing.questions.8.answer":
+      "The product covered under Wedison's warranty includes only its original configuration, design, or specifications. \nDamages, faults, failures, or imperfections caused by abuse, tampering, illegal use, negligence, or prolonged operation are not covered.",
+    "faq.Servicing.questions.9.question":
+      "What conditions will void the warranty?",
+    "faq.Servicing.questions.9.answer":
+      "Damange resulting from use of non-origanl Wedison spar parts or unauthorized modifications. \n\nDamages resulting from unavoidable or unforeseen events—such as smoke, substance exposure, earthquakes, typhoons, floods, chemical corrosion, promotional or advertising activities, complimentary items, noise-related issues, or contact with artificial soft or hard materials—are not covered.",
+    "faq.Servicing.questions.10.question":
+      "what are the limitations of the warranty",
+    "faq.Servicing.questions.10.answer":
+      "No components are covered under a lifetime warranty.\nReplacement parts provided under warranty are only covered for the remainder of the original warranty period.\nFor parts purchased or replaced outside of warranty service, the warranty period begins from the date of purchase or replacement.",
+
+    // Smart Features Questions
+    "faq.SmartFeatures.questions.0.question":
+      "What are the smart features available?",
+    "faq.SmartFeatures.questions.0.answer":
+      "Wedison Smart Phone App: for select models, it can be used to power the motorcycle on and off via an app using bluetooth connection.\nAdditionally, other features will be rolled out on the app to provide more data.",
+
+    // Tires Questions
+    "faq.Tires.questions.0.question": "What is the tire dimension?",
+    "faq.Tires.questions.0.answer":
+      "Mini: Front: 90/90-10; Rear 90/90-10\nAthena: Front: 100/80-12; Rear 100/80-12\nVictory: Front: 90/90-14; Rear: 100/80-14\nEdPower: Front: 100/90-14; Rear: 120/70-14",
 
     // Language
     language: "English",
@@ -955,6 +1200,10 @@ const translations = {
     "landing.description":
       "Wedison adalah brand motor listrik yang ramah lingkungan dengan teknologi Super Charge terkini.",
 
+    // compare table
+    "compare.model": "Bandingkan Model",
+    "compare.select.bike": "Pilih motor untuk bandingkan",
+
     // buttons
     "btn.learn.more": "Pelajari Lebih Lanjut",
     "btn.book.test.ride": "Jadwalkan Test Ride",
@@ -963,14 +1212,30 @@ const translations = {
 
     // Navbar
     "nav.products": "Produk",
-    "nav.experienceCenter": "Pusat Pengalaman",
+    "nav.discover": "Jelajahi",
+    "nav.discover.leftCard.title": "Jelajahi Wedison",
+    "nav.discover.leftCard.description":
+      "Jelajahi Experience Center, temukan jawaban di FAQ, dan ikuti kabar terbaru lewat Media Center. Semua informasi ada di satu tempat.",
+    "nav.experienceCenter.description":
+      "Kunjungi showroom Wedison dan rasakan langsung teknologi supercharge 15 menit.",
+    "nav.faq.description":
+      "Temukan jawaban atas pertanyaan seputar produk, layanan, dan teknologi kami.",
+    "nav.mediaCenter.description":
+      "Dapatkan berita, rilis resmi, dan highlight terbaru tentang Wedison.",
     "nav.showroom": "Ruang Pamer",
     "nav.serviceLocation": "Lokasi Layanan",
     "nav.superCharge": "Super Charge",
     "nav.corporate": "Perusahaan",
+    "nav.corporate.leftCard.title": "Powering the Future",
+    "nav.corporate.leftCard.description":
+      "Dengan teknologi supercharge, Wedison menghadirkan pengalaman berkendara listrik yang cepat, efisien, dan ramah lingkungan.",
     "nav.aboutUs": "Tentang Kami",
+    "nav.aboutUs.description":
+      "Kenali visi, misi, dan komitmen Wedison dalam menghadirkan inovasi motor listrik untuk masa depan berkelanjutan.",
     "nav.careers": "Karir",
     "nav.contactUs": "Hubungi Kami",
+    "nav.contactUs.description":
+      "Butuh bantuan atau informasi lebih lanjut? Tim Wedison siap melayani Anda.",
     "nav.helpCenter": "Pusat Bantuan",
 
     // Hero
@@ -1116,7 +1381,7 @@ const translations = {
     "about.titleHighlight": "Wedison Group",
     "about.overview.title": "WEDISON: Pelopor Energi Hijau dalam Mobilitas",
     "about.overview.p1":
-      "Wedison adalah pemain utama dalam industri kendaraan listrik. Kami adalah sepeda motor listrik pengisian cepat pertama di Indonesia. Bagi kami, ini bukan hanya tentang menjual sepeda motor listrik — ini tentang menciptakan ekosistem hijau yang mendorong mobilitas berkelanjutan di seluruh dunia.",
+      "Wedison adalah perusahaan teknologi terkemuka. Kami adalah perusahaan sepeda motor listrik pengisian cepat pertama di Indonesia. Bagi kami, ini bukan hanya tentang menjual sepeda motor listrik, ini tentang menciptakan ekosistem hijau yang mendorong mobilitas berkelanjutan di seluruh dunia.",
     "about.overview.p2":
       "Dipasangkan dengan sistem pengisian listrik canggih kami, sepeda motor listrik kami akan memperkaya gaya hidup konsumen kami dan memperbaiki lingkungan kita.",
     "about.mission.title": "Misi Kami",
@@ -1316,16 +1581,16 @@ const translations = {
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": "135",
+    "edpower.productPage.techSpecs1.title": 135,
     "edpower.productPage.techSpecs1.unit": "km",
     "edpower.productPage.techSpecs1.desc": "Jarak Tempuh",
 
-    "edpower.productPage.techSpecs2.title": "15",
+    "edpower.productPage.techSpecs2.title": 15,
     "edpower.productPage.techSpecs2.unit": "menit",
     "edpower.productPage.techSpecs2.desc":
       "Isi daya dari 10% ke 80% dengan SuperCharge",
 
-    "edpower.productPage.techSpecs3.title": "80",
+    "edpower.productPage.techSpecs3.title": 80,
     "edpower.productPage.techSpecs3.unit": "km/jam",
     "edpower.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -1418,7 +1683,7 @@ const translations = {
     "edpower.specs.dimension.seatHeight": "740 mm",
     "edpower.specs.dimension.weight": "140 kg",
     "edpower.specs.tire.frontTire": "100/80-14",
-    "edpower.specs.tire.rearTire": "1020/70-14",
+    "edpower.specs.tire.rearTire": "120/70-14",
     "edpower.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
     "edpower.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
 
@@ -1496,7 +1761,7 @@ const translations = {
     "victory.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "victory.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "victory.productPage.techSpecs1.title": "115",
+    "victory.productPage.techSpecs1.title": 115,
     "victory.productPage.techSpecs1.unit": "km",
     "victory.productPage.techSpecs1.desc": (
       <>
@@ -1505,12 +1770,12 @@ const translations = {
       </>
     ),
 
-    "victory.productPage.techSpecs2.title": "15",
+    "victory.productPage.techSpecs2.title": 15,
     "victory.productPage.techSpecs2.unit": "menit",
     "victory.productPage.techSpecs2.desc":
       "Isi daya dari 10% ke 80% dengan SuperCharge",
 
-    "victory.productPage.techSpecs3.title": "80",
+    "victory.productPage.techSpecs3.title": 80,
     "victory.productPage.techSpecs3.unit": "km/jam",
     "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -1622,7 +1887,7 @@ const translations = {
     "athena.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "athena.productPage.hero.ctaSecondary": "Download Brosur",
 
-    "athena.productPage.techSpecs1.title": "115",
+    "athena.productPage.techSpecs1.title": 115,
     "athena.productPage.techSpecs1.unit": "km",
     "athena.productPage.techSpecs1.desc": (
       <>
@@ -1631,12 +1896,12 @@ const translations = {
       </>
     ),
 
-    "athena.productPage.techSpecs2.title": "15",
+    "athena.productPage.techSpecs2.title": 15,
     "athena.productPage.techSpecs2.unit": "menit",
     "athena.productPage.techSpecs2.desc":
       "Charge dari 10% ke 80% dengan SuperCharge",
 
-    "athena.productPage.techSpecs3.title": "80",
+    "athena.productPage.techSpecs3.title": 80,
     "athena.productPage.techSpecs3.unit": "km/jam",
     "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -1751,14 +2016,14 @@ const translations = {
     "mini.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "mini.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "mini.productPage.techSpecs1.title": "65",
+    "mini.productPage.techSpecs1.title": 65,
     "mini.productPage.techSpecs1.unit": "km",
     "mini.productPage.techSpecs1.desc": "Jarak Tempuh",
 
     "mini.productPage.techSpecs2.title": "LED",
     "mini.productPage.techSpecs2.desc": "Tampilan Head Unit",
 
-    "mini.productPage.techSpecs3.title": "55",
+    "mini.productPage.techSpecs3.title": 55,
     "mini.productPage.techSpecs3.unit": "km/jam",
     "mini.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -1895,11 +2160,223 @@ const translations = {
         Mengizinkan PT Wedison untuk menggunakan informasi di atas dan
         menghubungi Saya melalui email dan/atau telepon atau sarana komunikasi
         pribadi lainnya untuk kegiatan pelayanan kepada customer sesuai dengan{" "}
-        <Link href="/" className="underline text-blue-400">
+        {/* <Link href="/" className="underline text-blue-400">
           persetujuan privasi.
-        </Link>
+        </Link> */}
+        <AlertDialog>
+          <AlertDialogTrigger className="underline text-blue-400 cursor-pointer font-semibold">
+            Persetujuan Privasi
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Persetujuan Privasi</AlertDialogTitle>
+              <AlertDialogDescription>
+                Dengan mengirimkan formulir ini, Anda menyetujui bahwa Wedison
+                dapat mengumpulkan dan menggunakan data pribadi Anda hanya untuk
+                menanggapi pertanyaan Anda. Informasi Anda tidak akan dibagikan
+                kepada pihak ketiga tanpa persetujuan Anda.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction>Saya Mengerti</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </>
     ),
+
+    // FAQ
+    "faq.category.Battery": "Baterai",
+    "faq.category.Charging": "Pengisian Daya",
+    "faq.category.Performance": "Performa",
+    "faq.category.Safety": "Keamanan",
+    "faq.category.Servicing": "Layanan: Garansi, Perbaikan, dan Perawatan",
+    "faq.category.SmartFeatures": "Fitur Pintar, Bluetooth, Aplikasi",
+    "faq.category.Tires": "Ban",
+
+    // Battery Questions
+    "faq.Battery.questions.0.question": "Apa jaminan untuk baterai?",
+    "faq.Battery.questions.0.answer":
+      "Baterai Wedison dilindungi garansi 3 tahun",
+    "faq.Battery.questions.1.question":
+      "Berapa lama waktu yang dibutuhkan untuk mengisi baterai hingga penuh?",
+    "faq.Battery.questions.1.answer":
+      "Wedison Super Charge: 10% hingga 80% dalam 15 menit/ 10% hingga 95% dalam 20 menit\nWedison Regular Charge: Bervariasi tergantung adaptor dan ukuran baterai, dengan durasi antara 2 hingga 10 jam.",
+    "faq.Battery.questions.2.question": "Jenis baterai apa yang Anda gunakan?",
+    "faq.Battery.questions.2.answer":
+      "Wedison EV menggunakan Baterai Lithium-ion (LFP), jenis baterai isi ulang yang umum digunakan pada perangkat seperti smartphone, laptop, dan kendaraan listrik.\n\nKarakteristik Baterai Lithium-ion adalah sebagai berikut:\nA. Kepadatan energi tinggi: Dapat menyimpan energi listrik yang cukup besar dalam paket yang lebih kecil dan ringan.\nB. Tahan suhu tinggi: Berkinerja efisien pada suhu tinggi hingga 45 derajat celsius dan tahan terhadap suhu rendah tanpa mengalami kerusakan.\nC. Tingkat self-discharge rendah: Baterai mempertahankan energinya dengan efektif bahkan ketika tidak digunakan selama berhari-hari atau berminggu-minggu.\nD. Jumlah siklus pengisian tinggi: Memungkinkan lebih dari 5.000 siklus pengisian sambil mempertahankan hampir seluruh kapasitas aslinya.\nE. Pengisian cepat: Wedison EV dapat diisi penuh dalam 30 menit di salah satu stasiun pengisian super cepat.",
+    "faq.Battery.questions.3.question":
+      "Berapa banyak jenis baterai yang Anda jual?",
+    "faq.Battery.questions.3.answer":
+      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 85 dan 115 km.",
+    "faq.Battery.questions.4.question": "Baterai berasal dari mana?",
+    "faq.Battery.questions.4.answer":
+      "Baterai proprietary Wedison dikembangkan secara internal.",
+    "faq.Battery.questions.5.question":
+      "Berapa lama baterai Anda dapat bertahan?",
+    "faq.Battery.questions.5.answer":
+      "Dalam kondisi operasional normal, baterai proprietary Wedison dirancang untuk bertahan hingga 12 tahun.",
+    "faq.Battery.questions.6.question":
+      "Bisakah kami menggunakan baterai/pengisi daya pihak ketiga?",
+    "faq.Battery.questions.6.answer":
+      "Tidak, sepeda motor listrik memerlukan CAN (Controller Area Network) untuk berkomunikasi dengan komponen EV lainnya untuk operasi dan pengisian daya. Namun, baterai pihak ketiga tidak menggunakan CAN yang sama untuk komunikasi.",
+    "faq.Battery.questions.7.question": "Bisakah baterai diganti?",
+    "faq.Battery.questions.7.answer":
+      "Ya, Wedison menyediakan suku cadang dan aksesori asli seperti baterai.",
+    "faq.Battery.questions.8.question":
+      "Bagaimana saya bisa menjaga baterai dalam kondisi baik?",
+    "faq.Battery.questions.8.answer":
+      "Selama penggunaan sehari-hari, harap coba isi daya baterai tepat waktu sebelum level turun di bawah 20% untuk membantu memperpanjang masa pakai baterai.",
+    "faq.Battery.questions.9.question":
+      "Bagaimana cara memperpanjang masa pakai baterai?",
+    "faq.Battery.questions.9.answer":
+      "Hindari mengosongkan hingga 0% atau mengisi hingga 100%. \nUsahakan untuk menjaga daya antara 20% dan 80% untuk mengurangi stres baterai dan memaksimalkan masa pakai.",
+    "faq.Battery.questions.10.question":
+      "Apa peringkat perlindungan masuk (IP) baterai?",
+    "faq.Battery.questions.10.answer":
+      "Baterai Wedison memiliki rating IP67,\nBaterai benar-benar kedap debu dan dapat direndam dalam air hingga kedalaman 1 meter selama 30 menit tanpa kerusakan.",
+    "faq.Battery.questions.11.question":
+      "Seberapa sering saya harus mengisi daya baterai? Saat bepergian?",
+    "faq.Battery.questions.11.answer":
+      "Jika kendaraan tidak digunakan untuk waktu yang lama (lebih dari seminggu), pastikan untuk mengisi dayanya setidaknya sekali setiap bulan.",
+    "faq.Battery.questions.12.question":
+      "Apa yang terjadi jika saya tidak menggunakan kendaraan untuk waktu yang lama?",
+    "faq.Battery.questions.12.answer":
+      "Matikan MCB (pemutus sirkuit) dan pastikan baterai diisi setidaknya sekali sebulan untuk menjaga kesehatannya.",
+
+    // Charging Questions
+    "faq.Charging.questions.0.question":
+      "Di mana kami dapat mengisi daya motor kami?",
+    "faq.Charging.questions.0.answer":
+      "Super Charge\nDi stasiun super charge Wedison, yang akan secara bertahap diluncurkan di seluruh negeri.\nRegular Charge \nDi rumah/tempat dengan stopkontak dinding standar",
+    "faq.Charging.questions.1.question":
+      "Bagaimana kami dapat mengisi daya motor kami?",
+    "faq.Charging.questions.1.answer":
+      "Wedison EV dilengkapi dengan port pengisian reguler dan super yang dapat diisi di rumah dan stasiun pengisian daya yang ditentukan.",
+    "faq.Charging.questions.2.question":
+      "Bisakah saya menggunakan adaptor daya pihak ketiga untuk mengisi EV?",
+    "faq.Charging.questions.2.answer":
+      "Gunakan hanya suku cadang dan perlengkapan yang dikeluarkan Wedison untuk kesehatan dan kinerja baterai yang optimal.",
+    "faq.Charging.questions.3.question":
+      "Bisakah kami mengisi daya motor di rumah?",
+    "faq.Charging.questions.3.answer":
+      "Ya, Wedison EV memiliki port reguler untuk pengisian daya di rumah.",
+    "faq.Charging.questions.4.question":
+      "Apakah pengisian cepat merusak baterai?",
+    "faq.Charging.questions.4.answer":
+      "Baterai Wedison dirancang untuk pengisian cepat dan siklus hidup panjang tanpa menyebabkan kerusakan.",
+    "faq.Charging.questions.5.question": "Apakah pengisian cepat berbahaya?",
+    "faq.Charging.questions.5.answer":
+      "Pengisian cepat Wedison tidak memperpendek masa pakai baterai atau menimbulkan risiko ledakan.",
+    "faq.Charging.questions.6.question": "Apakah overcharging berbahaya?",
+    "faq.Charging.questions.6.answer":
+      "Baterai Wedison dilengkapi dengan sistem manajemen perlindungan\nJika baterai menjadi terlalu panas karena overcharging, fitur keamanan bawaan akan secara otomatis memutus daya untuk mencegah kerusakan atau bahaya.",
+    "faq.Charging.questions.7.question": "Mengapa pengisian daya melambat?",
+    "faq.Charging.questions.7.answer":
+      "Teknologi baterai lithium-ion canggih Wedison menampilkan pengisian pintar yang menyeimbangkan kecepatan dan kinerja jangka panjang. Ini mengisi daya dengan cepat hingga kapasitas 95%, kemudian beralih ke kecepatan yang lebih lambat dan terkontrol untuk melindungi dan memperpanjang masa pakai baterai.\n\nPendekatan pengisian pintar ini membuat Anda kembali berkendara lebih cepat sambil membantu memperpanjang masa pakai baterai secara keseluruhan.",
+    "faq.Charging.questions.8.question":
+      "Berapa durasi pengisian reguler? (charger 600W)",
+    "faq.Charging.questions.8.answer":
+      "Waktu pengisian bervariasi tergantung model dan kapasitas baterai. \nWaktu pengisian dengan adaptor pengisian 600w dari 0-100%:\nLihat Data Pengisian Reguler",
+    "faq.Charging.questions.9.question":
+      "Berapa durasi pengisian reguler? (charger 1260W)",
+    "faq.Charging.questions.9.answer":
+      "Waktu pengisian bervariasi tergantung model dan kapasitas baterai. \nWaktu pengisian dengan adaptor pengisian 1260w dari 0-100%:\nMini: 3,5 jam (Tidak berubah, hanya dapat menggunakan charger 600w)\nLihat Data Pengisian Reguler",
+    "faq.Charging.questions.10.question":
+      "Bagaimana cara melakukan pengisian reguler?",
+    "faq.Charging.questions.10.answer":
+      "Pertama sambungkan pengisi daya ke port pengisian kendaraan, lalu colokkan ke sumber daya. \nSetelah pengisian selesai, cabut sumber daya terlebih dahulu, lalu lepaskan pengisi daya dari kendaraan.",
+    "faq.Charging.questions.11.question": "Apakah pengisian daya gratis?",
+    "faq.Charging.questions.11.answer":
+      "Tidak, pengisian daya listrik berdasarkan Pay as Per use, dan harga pengisian daya bervariasi tergantung lokasi dan stasiun pengisian daya/operator.",
+
+    // Performance Questions
+    "faq.Performance.questions.0.question": "Berapa kecepatan motor?",
+    "faq.Performance.questions.0.answer":
+      "Tergantung model, kecepatan tertinggi berkisar dari 60 km/jam hingga 95 km/jam",
+    "faq.Performance.questions.1.question": "Berapa daya motor / BLDC motor?",
+    "faq.Performance.questions.1.answer":
+      "Daya motor bervariasi antar model, berkisar dari 1200KW hingga 5000KW",
+    "faq.Performance.questions.2.question": "Berapa jarak tempuh motor?",
+    "faq.Performance.questions.2.answer":
+      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 70 km hingga 140 km",
+    "faq.Performance.questions.3.question":
+      "Apakah Wedison EV aman digunakan dalam hujan dan banjir?",
+    "faq.Performance.questions.3.answer":
+      "Motor, unit kontrol, dan baterai Wedison adalah IP67, yang telah diuji kedap air.\nMeskipun telah menjalani tes perendaman air pada 1 meter, perendaman yang diperpanjang tidak disarankan.",
+    "faq.Performance.questions.4.question": "Bisakah motor menanjak?",
+    "faq.Performance.questions.4.answer":
+      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nMini, EdPower, & EdPro: 12%\nAthena dan Victory: 15%",
+    "faq.Performance.questions.5.question":
+      "Apakah baterai menurun seiring waktu?",
+    "faq.Performance.questions.5.answer":
+      "Seperti perangkat apa pun yang ditenagai oleh baterai lithium-ion, kemampuan baterai untuk menahan daya secara bertahap menurun dengan setiap siklus pengisian dan pengosongan. \nKeausan baterai dipengaruhi oleh faktor-faktor seperti siklus pengisian, usia baterai, dan suhu. \n\nSetiap Wedison EV dilengkapi dengan baterai Lithium Ion proprietary, yang didukung dengan garansi 3 tahun.",
+
+    // Safety Questions
+    "faq.Safety.questions.0.question": "Apakah baterai Anda aman?",
+    "faq.Safety.questions.0.answer":
+      "Baterai proprietary Wedison menampilkan sistem manajemen baterai canggih\ndengan langkah-langkah keamanan untuk mencegah overheating, overcharging, dan risiko kebakaran",
+    "faq.Safety.questions.1.question": "Rem apa yang Anda gunakan?",
+    "faq.Safety.questions.1.answer":
+      "CBS (Combined Braking System), sistem pengereman efisien yang secara otomatis mendistribusikan gaya pengereman antara rem depan dan belakang ketika pengendara mengerem:\nAthena, Victory, & EdPower\n\nRem cakram depan dan belakang, memberikan kontrol, keamanan, dan kinerja pengereman yang ditingkatkan:\nMotor Mini",
+    "faq.Safety.questions.2.question": "Motor apa yang Anda gunakan?",
+    "faq.Safety.questions.2.answer":
+      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 85 km/jam. (Mini, Athena, Victory, EdPower)",
+
+    // Servicing Questions
+    "faq.Servicing.questions.0.question":
+      "Apakah Wedison EV dilengkapi dengan layanan gratis?",
+    "faq.Servicing.questions.0.answer":
+      "Ya, setiap motor Wedison dilengkapi dengan 3 sesi layanan gratis di Wedison atau pusat layanan terauthorisasi. \nPemeriksaan garansi berbasis jarak tempuh dijadwalkan pada interval 1.000 km, 5.000 km, dan 10.000 km.",
+    "faq.Servicing.questions.1.question":
+      "Jarak tempuh apa yang dicakup dalam jadwal layanan gratis?",
+    "faq.Servicing.questions.1.answer":
+      "Garansi jarak tempuh termasuk pemeriksaan pada 1.000 km, 5.000 km, dan 10.000 km.",
+    "faq.Servicing.questions.2.question":
+      "Di mana saya dapat melayani EV motor?",
+    "faq.Servicing.questions.2.answer":
+      "Di Wedison dan/atau pusat layanan terauthorisasi seperti Honda/Yamaha Service Center.",
+    "faq.Servicing.questions.3.question":
+      "Apakah Wedison menyediakan suku cadang untuk motor?",
+    "faq.Servicing.questions.3.answer":
+      "Ya, Wedison menyediakan suku cadang siap pakai untuk motor.",
+    "faq.Servicing.questions.4.question": "Apakah baterai dilengkapi garansi?",
+    "faq.Servicing.questions.4.answer":
+      "Ya, baterai proprietary dilengkapi dengan garansi 3 tahun.",
+    "faq.Servicing.questions.5.question":
+      "Apakah motor Wedison dilengkapi garansi?",
+    "faq.Servicing.questions.5.answer":
+      "Ya, motor dilengkapi dengan garansi 2 tahun.",
+    "faq.Servicing.questions.6.question":
+      "Berapa biaya untuk memperbaiki motor, dinamo, dan lainnya?",
+    "faq.Servicing.questions.6.answer":
+      "Biaya perbaikan motor listrik bervariasi berdasarkan jenis dan merek suku cadang, dan tingkat kerusakan atau perbaikan yang diperlukan. \n\nPengguna harus memeriksa harga dengan bengkel masing-masing.",
+    "faq.Servicing.questions.7.question":
+      "Bagaimana cara merawat motor Wedison?",
+    "faq.Servicing.questions.7.answer":
+      "Perawatan dan penanganan yang tepat, bersama dengan perawatan yang tepat dan teratur dapat memperpanjang masa pakai motor. \nAnda tidak perlu mengisi daya EV setiap hari:\n- Sebaliknya, isi daya sesuai kebutuhan, jaga baterai antara 20% dan 80% untuk kesehatan dan jangkauan optimal.\n- Isi daya setidaknya sekali sebulan.\n- Untuk kinerja dan kualitas baterai optimal, Wedison EV harus diisi daya dan diservis di stasiun pengisian super cepat dan pusat layanan yang ditentukan masing-masing.",
+    "faq.Servicing.questions.8.question":
+      "Apakah modifikasi diizinkan untuk EV?",
+    "faq.Servicing.questions.8.answer":
+      "Produk yang dicakup dalam garansi Wedison hanya mencakup konfigurasi, desain, atau spesifikasi aslinya. \nKerusakan, kesalahan, kegagalan, atau ketidaksempurnaan yang disebabkan oleh penyalahgunaan, gangguan, penggunaan ilegal, kelalaian, atau operasi yang berkepanjangan tidak dicakup.",
+    "faq.Servicing.questions.9.question":
+      "Kondisi apa yang akan membatalkan garansi?",
+    "faq.Servicing.questions.9.answer":
+      "Kerusakan yang diakibatkan oleh penggunaan suku cadang Wedison non-original atau modifikasi yang tidak diauthorisasi. \n\nKerusakan yang diakibatkan oleh peristiwa yang tidak dapat dihindari atau tidak terduga—seperti asap, paparan zat, gempa bumi, topan, banjir, korosi kimia, aktivitas promosi atau periklanan, item gratis, masalah terkait kebisingan, atau kontak dengan bahan lunak atau keras buatan—tidak dicakup.",
+    "faq.Servicing.questions.10.question": "Apa batasan garansi?",
+    "faq.Servicing.questions.10.answer":
+      "Tidak ada komponen yang dicakup under garansi seumur hidup.\nSuku cadang pengganti yang disediakan under garansi hanya dicakup untuk sisa periode garansi asli.\nUntuk suku cadang yang dibeli atau diganti di luar layanan garansi, periode garansi dimulai dari tanggal pembelian atau penggantian.",
+
+    // Smart Features Questions
+    "faq.SmartFeatures.questions.0.question": "Apa fitur pintar yang tersedia?",
+    "faq.SmartFeatures.questions.0.answer":
+      "Aplikasi Wedison Smart Phone: untuk model tertentu, dapat digunakan untuk menyalakan dan mematikan motor melalui aplikasi menggunakan koneksi bluetooth.\nSelain itu, fitur lain akan diluncurkan di aplikasi untuk memberikan lebih banyak data.",
+
+    // Tires Questions
+    "faq.Tires.questions.0.question": "Apa dimensi ban?",
+    "faq.Tires.questions.0.answer":
+      "Mini: Depan: 90/90-10; Belakang 90/90-10\nAthena: Depan: 100/80-12; Belakang 100/80-12\nVictory: Depan: 90/90-14; Belakang: 100/80-14\nEdPower: Depan: 100/90-14; Belakang: 120/70-14",
+
     // Language
     language: "Bahasa Indonesia",
     switchLanguage: "English",

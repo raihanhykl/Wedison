@@ -26,7 +26,7 @@ function useSyncedHScroll() {
 
     // lepas flag di frame berikutnya agar smooth & anti feedback loop
     requestAnimationFrame(() => {
-      isSyncingRef.current = false;
+      isSyncingRef.current = true;
     });
   }, []);
 
