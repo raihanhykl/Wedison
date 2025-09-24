@@ -26,4 +26,15 @@ module.exports = {
       },
     ],
   },
+  transform: async (config, url) => {
+    // paksa trailing slash di setiap URL di sitemap
+    const hasExt = /\.[^/]+$/.test(url);
+    const normalized = hasExt || url.endsWith("/") ? url : `${url}/`;
+    return {
+      loc: normalized,
+      changefreq: "weekly",
+      priority: 0.7,
+      lastmod: new Date().toISOString(),
+    };
+  },
 };

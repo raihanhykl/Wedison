@@ -26,7 +26,7 @@ export const metadata = getSEOMetadata({
     "visi misi",
     "produsen motor listrik",
   ],
-  url: "https://wedison.co/corporate/about",
+  url: "https://wedison.co/corporate/about/",
   image: "https://wedison.co/about-us.webp",
   lang: "id",
 });

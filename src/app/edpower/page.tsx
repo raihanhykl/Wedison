@@ -15,7 +15,7 @@ export const metadata = getSEOMetadata({
     "motor listrik premium",
     "electric motorcycle",
   ],
-  url: "https://wedison.co/edpower",
+  url: "https://wedison.co/edpower/",
   image: "https://wedison.co/edpower-product-hero.webp",
   lang: "id",
 });

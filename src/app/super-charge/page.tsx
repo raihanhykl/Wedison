@@ -30,7 +30,7 @@ export const metadata = getSEOMetadata({
     "EV",
     "teknologi pengisian cepat",
   ],
-  url: "https://wedison.co/super-charge",
+  url: "https://wedison.co/super-charge/",
   image: "https://wedison.co/supercharge-hero.webp",
   lang: "id",
 });

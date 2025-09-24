@@ -27,7 +27,7 @@ export const metadata = getSEOMetadata({
     "supercharge",
     "EV",
   ],
-  url: "https://wedison.co/corporate/contact",
+  url: "https://wedison.co/corporate/contact/",
   image: "https://wedison.co/contact-us.webp",
   lang: "id",
 });

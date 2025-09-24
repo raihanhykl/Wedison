@@ -15,7 +15,7 @@ export const metadata = getSEOMetadata({
     "motor listrik praktis",
     "electric motorcycle",
   ],
-  url: "https://wedison.co/mini",
+  url: "https://wedison.co/mini/",
   image: "https://wedison.co/mini-product-hero.webp",
   lang: "id",
 });

@@ -16,7 +16,7 @@ export const metadata = getSEOMetadata({
     "motor listrik hemat energi",
     "electric motorcycle",
   ],
-  url: "https://wedison.co/victory",
+  url: "https://wedison.co/victory/",
   image: "https://wedison.co/victory-product-hero.webp",
   lang: "id",
 });

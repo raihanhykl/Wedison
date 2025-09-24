@@ -15,7 +15,7 @@ export const metadata = getSEOMetadata({
     "motor listrik terbaik",
     "electric motorcycle",
   ],
-  url: "https://wedison.co/athena",
+  url: "https://wedison.co/athena/",
   image: "https://wedison.co/athena-product-hero.webp",
   lang: "id",
 });
