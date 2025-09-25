@@ -5,7 +5,7 @@ import { LanguageProvider } from "./lib/language-context";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/sonner";
 import { getSEOMetadata } from "./lib/seo1";
 
@@ -54,10 +54,16 @@ export default function RootLayout({
           <Navbar />
           <div className="">{children}</div>
           {/* <div className=" pt-12 md:pt-16">{children}</div> */}
-          <SpeedInsights />
+          {/* <SpeedInsights /> */}
           <Footer />
         </LanguageProvider>
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            classNames: {
+              description: "!text-gray-500",
+            },
+          }}
+        />
       </body>
     </html>
   );

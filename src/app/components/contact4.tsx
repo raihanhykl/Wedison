@@ -517,13 +517,6 @@ export default function Contact() {
                       />
                     </FormControl>
                     <div>
-                      {/* <FormLabel htmlFor="agreePrivacy" className="text-sm">
-                        Mengizinkan PT Astra Honda Motor untuk menggunakan
-                        informasi di atas dan menghubungi Saya melalui email dan
-                        /atau telepon atau sarana komunikasi pribadi lainnya
-                        untuk kegiatan pelayanan kepada customer sesuai dengan
-                        persetujuan privasi{" "}
-                      </FormLabel> */}
                       <FormDescription>
                         {t("form.agreePrivacy.description")}
                       </FormDescription>
