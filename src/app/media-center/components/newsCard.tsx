@@ -51,7 +51,7 @@ import * as React from "react";
 
 export function NewsCard({ data }: { data: LinkPreview }) {
   return (
-    <Card className="mx-auto h-full flex flex-col overflow-hidden border-none outline-none">
+    <Card className="mx-auto h-full flex flex-col overflow-hidden border-none outline-none p-0">
       <a
         href={data.url}
         target="_blank"
@@ -60,7 +60,7 @@ export function NewsCard({ data }: { data: LinkPreview }) {
       >
         {/* Bungkus gambar dgn aspect ratio tetap */}
         <div
-          className="relative w-full overflow-hidden rounded-xl
+          className="relative w-full overflow-hidden rounded-[4px_4px_0_0]
                         aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9]"
         >
           <Image

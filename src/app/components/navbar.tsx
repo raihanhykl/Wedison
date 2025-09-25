@@ -96,7 +96,7 @@ export default function Navbar() {
     },
     {
       name: t("nav.discover"),
-      href: "/showroom",
+      href: "#",
       subMenu: [
         { name: "Mini", href: "/mini/", image: "/navbar-product/mini.webp" },
         {
@@ -118,7 +118,7 @@ export default function Navbar() {
     },
     {
       name: t("nav.superCharge"),
-      href: "/super-charge",
+      href: "/super-charge/",
     },
     {
       name: t("nav.corporate"),

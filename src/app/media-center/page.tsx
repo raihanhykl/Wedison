@@ -17,7 +17,7 @@ export const metadata = getSEOMetadata({
     "inovasi kendaraan listrik",
   ],
   url: "https://wedison.co/media-center/",
-  image: "https://wedison.co/media-center-banner.webp",
+  image: "https://wedison.co/wedison-sidebyside.png",
   lang: "id",
 });
 export default function Page() {

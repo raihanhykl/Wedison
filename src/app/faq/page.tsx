@@ -18,7 +18,7 @@ export const metadata = getSEOMetadata({
     "perawatan kendaraan listrik",
   ],
   url: "https://wedison.co/faq/",
-  image: "https://wedison.co/faq-banner.webp",
+  image: "https://wedison.co/wedison-sidebyside.png",
   lang: "id",
 });
 
