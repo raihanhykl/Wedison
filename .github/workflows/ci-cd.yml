@@ -14,7 +14,7 @@ concurrency:
 env:
   NODE_VERSION: 20
   BUILD_DIR: out # hasil build Next.js SSG
-  REMOTE_DIR: /public_html # root Hostinger kamu
+  REMOTE_DIR: /domains/wedison.co/public_html # root Hostinger kamu
   WEBSITE_URL: https://wedison.co
 
 jobs:
