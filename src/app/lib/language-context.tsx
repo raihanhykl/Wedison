@@ -40,7 +40,7 @@ const translations = {
 
     // buttons
     "btn.learn.more": "Learn More",
-    "btn.book.test.ride": "Book Test Ride",
+    "btn.buy.on.tokopedia": "Buy on Tokopedia",
     "btn.see.brochure": "See Brochure",
     "btn.order.now": "Order Now",
 
@@ -97,24 +97,34 @@ const translations = {
     "features.impressivePerformanceDesc":
       "Experience 0-95 km/h in under 3 seconds with instant torque delivery.",
     // "features.zeroEmissions": "Cut the Carbon, Ride Electric",
-    "features.zeroEmissions": "Ride Electric, Cut Emissions by 54%",
+    // "features.zeroEmissions": "Ride Electric, Cut Emissions by 54%",
+    // "features.zeroEmissionsDesc":
+    //   "Electric motorcycles emit 53.8% less CO₂ and cut lifecycle emissions by up to 80%, resulting in 14% cleaner air.",
+    // "features.zeroEmissionsLink":
+    //   "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
+    "features.zeroEmissions": "Zero Emission, Cleaner Air",
     "features.zeroEmissionsDesc":
-      "Electric motorcycles emit 53.8% less CO₂ and cut lifecycle emissions by up to 80%, resulting in 14% cleaner air.",
+      "Powered by pure electricity, Wedison helps reduce urban air pollution. Every ride means fresher air for all of us.",
     "features.zeroEmissionsLink":
       "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
     // "features.healthBenefits": "Cleaner Air, Healthier Life",
-    "features.healthBenefits":
-      // "11% Lower Lung Disease Risk, 3.2% Fewer Asthma ER Visits",
-      "11% Lower Lung Disease Risk, and 3.2% Fewer Asthma ER Visits.",
+    // "features.healthBenefits":
+    //   "11% Lower Lung Disease Risk, and 3.2% Fewer Asthma ER Visits.",
+    // "features.healthBenefitsDesc":
+    //   "Compared to gasoline motorcycles, electric motorcycles lower your risk of lung diseases and reduce asthma-related ER visits by 3.2%.",
+    "features.healthBenefits": "Smarter Energy Efficiency",
     "features.healthBenefitsDesc":
-      "Compared to gasoline motorcycles, electric motorcycles lower your risk of lung diseases and reduce asthma-related ER visits by 3.2%.",
+      "Compared to conventional motorcycles, Wedison uses less energy to travel the same distance, saving both resources and costs.",
     // "Electric motorcycle cuts city fine particulate pollution by 14% on average, reduces asthma-related ER visits by 3.2%, helping you and your loved ones breathe easier every day.",
     "features.healthBenefitsLink":
       "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
     // "features.noiseFree": "Say Goodbye to Noise & Air Pollution",
-    "features.noiseFree": "Enjoy 23% Quieter, Zero-Exhaust Rides",
+    // "features.noiseFree": "Enjoy 23% Quieter, Zero-Exhaust Rides",
+    // "features.noiseFreeDesc":
+    //   "Electric motorcycle rides are up to 23% quieter and emit no exhaust, saving about 46.5 g of CO₂ and 1.95 g of CO per kilometer.",
+    "features.noiseFree": "Driving a Sustainable Future",
     "features.noiseFreeDesc":
-      "Electric motorcycle rides are up to 23% quieter and emit no exhaust, saving about 46.5 g of CO₂ and 1.95 g of CO per kilometer.",
+      "Every time you choose Wedison, you contribute to the transition toward green, eco-friendly, and sustainable mobility.",
     "features.noiseFreeLink":
       "https://www.sciencedirect.com/science/article/pii/S0160412023003896",
 
@@ -998,6 +1008,9 @@ const translations = {
       "By submitting this form, you agree that Wedison may collect and use your personal data solely to respond to your inquiry. Your information will not be shared with third parties without your consent.",
     "form.agreePrivacy.dialogButton": "I Understand",
 
+    "mediaCenter.landing.h1": "Media Center",
+    "mediaCenter.landing.news.title": "News",
+
     // FAQ
     "faq.category.Battery": "Battery",
     "faq.category.Charging": "Charging",
@@ -1206,7 +1219,7 @@ const translations = {
 
     // buttons
     "btn.learn.more": "Pelajari Lebih Lanjut",
-    "btn.book.test.ride": "Jadwalkan Test Ride",
+    "btn.buy.on.tokopedia": "Beli di Tokopedia",
     "btn.see.brochure": "Lihat Brosur",
     "btn.order.now": "Pesan Sekarang",
 
@@ -2184,6 +2197,10 @@ const translations = {
         </AlertDialog>
       </>
     ),
+
+    // Media Center
+    "mediaCenter.landing.h1": "Media Center",
+    "mediaCenter.landing.news.title": "Berita",
 
     // FAQ
     "faq.category.Battery": "Baterai",

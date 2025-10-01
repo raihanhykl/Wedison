@@ -161,6 +161,51 @@ export default function ShowroomPageStructure() {
               <MapComponent latitude={-6.2484} longitude={106.781} zoom={15} />
             </div>
           </div>
+          {/* upcoming branch */}
+          <div className=" mt-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
+              <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
+                {/* {t("showroom.upcomingBranch")} */}
+                Up Coming Branch
+              </span>
+            </h2>
+            <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-12 items-start">
+              {/* bandung */}
+              <div className="bg-white p-6 rounded-xl shadow-soft">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
+                      <MapPin className="h-5 w-5 text-[var(--primary)]" />
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      {/* {t("showroom.findUs")} */}
+                      Wedison Bandung
+                    </h3>
+                    <p className="text-gray-600">{t("showroom.address")}</p>
+                  </div>
+                </div>
+              </div>
+              {/* Kali Malang */}
+              <div className="bg-white p-6 rounded-xl shadow-soft">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
+                      <MapPin className="h-5 w-5 text-[var(--primary)]" />
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      {/* {t("showroom.findUs")} */}
+                      Wedison Kalimalang
+                    </h3>
+                    <p className="text-gray-600">{t("showroom.address")}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

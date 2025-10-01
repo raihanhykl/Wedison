@@ -32,7 +32,7 @@ export default function PeekCarousel(data: PeekCarousel) {
     mode: "snap",
     slides: {
       origin: "center",
-      perView: 1,
+      perView: isDesktop ? 1 : 1.1,
       // perView: isDesktop ? 1.23 : data.perView ? data.perView : 1.75,
       spacing: data.spacing ? data.spacing : 25,
     },
@@ -61,7 +61,7 @@ export default function PeekCarousel(data: PeekCarousel) {
 
   return (
     <div className="w-full overflow-hidden">
-      <div className="mx-[136px] px-6 max-w-[2486px] overflow-visible">
+      <div className="sm:mx-[72px] xl:mx-[138px] px-4 max-w-[2486px] overflow-visible">
         <div
           ref={sliderRef}
           className="keen-slider overflow-visible mb-32 "
@@ -96,7 +96,7 @@ export default function PeekCarousel(data: PeekCarousel) {
                     )}
                   />
                 </div>
-                <div className="pl-3 mt-6 w-full">
+                <div className="pl-0 mt-6 w-full">
                   <h3 className=" text-4xl xl:text-5xl font-medium">
                     {src.title}
                   </h3>

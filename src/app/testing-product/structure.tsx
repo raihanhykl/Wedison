@@ -93,18 +93,33 @@ export default function ProductPageComponent({ motorType }: Props) {
               {product?.hero.desc}
             </p>
             <div className="flex w-full justify-center gap-4 mt-2">
-              <Link href={`/corporate/contact/`}>
+              {/* <Link href={`/corporate/contact/`}> */}
+              <Link
+                href={`https://www.tokopedia.com/wedison-store`}
+                target="_blank"
+              >
                 <Button
-                  className="px-8 md:px-16 rounded-sm cursor-pointer font-semibold"
+                  // className="px-4 md:px-4 rounded-sm cursor-pointer flex items-center justify-between font-semibold"
+                  className="px-4 md:px-4 rounded-sm cursor-pointer flex items-center justify-between font-semibold bg-white text-black border border-black w-full hover:bg-white hover:text-primary"
                   size={"lg"}
                 >
-                  {t("btn.book.test.ride")}
+                  <Image
+                    // src="/icons/tokopedia.svg"
+                    src="/icons/Tokopedia_Mascot.png"
+                    alt="Tokopedia Logo"
+                    width={100}
+                    height={100}
+                    loading="eager"
+                    className="w-6 h-6 md:w-8 md:h-8"
+                  />
+                  <p>{t("btn.buy.on.tokopedia")}</p>
                 </Button>
               </Link>
 
               <Link href={`/brochure/brochure-wedison.pdf`} target="_blank">
                 <Button
-                  className=" text-[var(--primary)] px-8 md:px-16 cursor-pointer font-medium rounded-sm"
+                  className=" text-white px-8 md:px-12 cursor-pointer font-medium rounded-sm border-white bg-white/15 hover:text-white hover:bg-white/20"
+                  // className=" text-[var(--primary)] px-8 md:px-16 cursor-pointer font-medium rounded-sm"
                   size={"lg"}
                   variant={"outline"}
                 >
@@ -194,7 +209,7 @@ export default function ProductPageComponent({ motorType }: Props) {
         </div>
 
         <div className=" w-full flex items-center justify-center ">
-          <div className="w-full sm:mt-14 mt-8 px-6 sm:mx-[72px]">
+          <div className="w-full sm:mt-14 mt-8 px-4 sm:mx-[72px]">
             <h2 className="text-5xl xl:text-6xl font-medium mb-1">
               {product?.productOverview.title}
             </h2>

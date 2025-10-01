@@ -1,11 +1,17 @@
+"use client";
 import Image from "next/image";
 import React from "react";
-import { PRESS_URLS } from "../../../public/data/press-urls";
-import { fetchAllPreviews } from "../lib/fetchPreview";
+import { LinkPreview } from "../lib/fetchPreview";
 import { NewsCard } from "./components/newsCard";
+import { useLanguage } from "../lib/language-context";
 
-export default async function MediaCenterstructure() {
-  const previews = await fetchAllPreviews(PRESS_URLS);
+type Props = {
+  previews: LinkPreview[];
+};
+
+export default function MediaCenterClient({ previews }: Props) {
+  // const [previews, setPreviews] = useState<LinkPreview[]>([]);
+  const { t } = useLanguage();
 
   return (
     <div className=" w-full">
@@ -20,17 +26,19 @@ export default async function MediaCenterstructure() {
           alt="banner"
           className="absolute w-full object-cover object-top md:h-full"
         />
-        <div className=" absolute inset-0 bg-gradient-to-b from-black/30 to-black/50 w-full h-full flex items-center justify-evenly">
+        <div className=" absolute inset-0 bg-gradient-to-b  from-black/30 to-black/50 w-full h-full flex items-center justify-evenly">
           <h1 className=" text-7xl text-white font-semibold tracking-wide">
-            Media Center
+            {t("mediaCenter.landing.h1")}
           </h1>
         </div>
       </div>
 
       {/* Berita */}
       <div className=" mx-auto container">
-        <div className=" m-8 ">
-          <h2 className=" text-6xl font-semibold">Berita</h2>
+        <div className=" m-8">
+          <h2 className=" text-6xl font-semibold">
+            {t("mediaCenter.landing.news.title")}
+          </h2>
           <div className=" w-full h-[2px] mt-2 bg-gray-200"></div>
         </div>
 

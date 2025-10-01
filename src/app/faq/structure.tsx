@@ -53,8 +53,8 @@ export default function FaqStructure() {
           className=" h-full w-full object-cover object-[80%_100%] absolute inset-0 z-10"
         />
         <div className=" w-full h-full bg-black/50 absolute inset-0 z-20">
-          <div className=" h-full w-[50%] mr-auto text-white flex-col flex items-center justify-center">
-            <div className=" flex flex-col items-start w-[50%]">
+          <div className=" h-full w-full md:w-[50%] mr-auto text-white flex-col flex items-center justify-center">
+            <div className=" flex flex-col items-center">
               <h2 className=" text-8xl tracking-wider font-bold">FAQ</h2>
               {/* <p className="my-2 text-xl text-white">
                 Find answers to the most common questions about our services,
@@ -78,7 +78,7 @@ export default function FaqStructure() {
           {/* <h1 className="text-6xl font-bold text-gray-900 tracking-wider">
             FAQ
           </h1> */}
-          <p className="my-16 text-xl text-gray-600">
+          <p className="my-4 md:my-16 text-xl text-gray-600">
             Find answers to the most common questions about our services,
             products, and general information. If you don&apos;t see the answer
             you&apos;re looking for, feel free to{" "}
@@ -108,7 +108,6 @@ export default function FaqStructure() {
         <DropdownFAQ
           title={activeTab as keyof ReturnType<typeof GetQuestions>}
         />
-        ;
       </div>
     </div>
   );

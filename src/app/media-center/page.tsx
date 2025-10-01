@@ -1,7 +1,9 @@
 import React from "react";
-import MediaCenterstructure from "./structure";
 import { notFound } from "next/navigation";
 import { getSEOMetadata } from "../lib/seo1";
+import { fetchAllPreviews } from "../lib/fetchPreview";
+import { PRESS_URLS } from "../../../public/data/press-urls";
+import MediaCenterClient from "./mediaCenterClient";
 // import Baru from "./components/baru";
 export const metadata = getSEOMetadata({
   title: "Media Center - Berita & Update Wedison",
@@ -20,13 +22,15 @@ export const metadata = getSEOMetadata({
   image: "https://wedison.co/wedison-sidebyside.png",
   lang: "id",
 });
-export default function Page() {
+export default async function Page() {
+  const previews = await fetchAllPreviews(PRESS_URLS);
+
   const dev = true;
   if (!dev) return notFound();
   return (
     <div>
       <div className=" ">
-        <MediaCenterstructure />
+        <MediaCenterClient previews={previews} />
       </div>
       {/* <Baru /> */}
     </div>

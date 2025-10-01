@@ -328,7 +328,7 @@ export default function Landing() {
         </div>
 
         {/* environmental advantage */}
-        <div className="relative w-full h-[90vh] md:h-[70vh]">
+        <div className="relative w-full h-[100vh] md:h-[70vh]">
           <Image
             src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Z3JlZW4lMjBlbnZpcm9ubWVudHxlbnwwfHwwfHx8MA%3D%3D"
             alt="environmental-advantage"
@@ -338,13 +338,13 @@ export default function Landing() {
           />
           <div className="absolute top-0  right-0 w-full h-full flex items-start py-6 md:py-10">
             <div className=" flex flex-col items-center justify-center items gap-2 w-full h-full">
-              <h1 className="text-xl md:text-4xl font-bold text-center text-white">
+              <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
                 Environmental Advantage
               </h1>
-              <p className="text-sm md:text-md text-center text-white">
+              <p className="text-lg md:text-xl text-center text-white">
                 {t("features.title") + " " + t("features.titleHighlight")}
               </p>
-              <div className="flex flex-col md:flex-row items-start w-full justify-evenly gap-4 mt-12 p-2">
+              <div className="flex flex-col md:flex-row items-start w-full justify-evenly gap-12 mt-4 md:mt-12 p-2">
                 {features.map((feature: any, index: any) => (
                   <div
                     key={index}
@@ -354,11 +354,11 @@ export default function Landing() {
                       <div className="text-[var(--primary)] mb-2">
                         {feature.icon}
                       </div>
-                      <h2 className="text-sm md:text-lg font-semibold text-white ">
+                      <h2 className="text-xl md:text-2xl font-semibold text-white ">
                         {feature.title}
                       </h2>
                     </div>
-                    <p className="text-xs md:text-sm text-white text-start md:text-center">
+                    <p className="text-md md:text-lg text-white text-start md:text-center">
                       {feature.description}
                     </p>
                   </div>

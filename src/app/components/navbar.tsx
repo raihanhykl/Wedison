@@ -25,24 +25,44 @@ export default function Navbar() {
   // const [bgTone, setBgTone] = useState("");
   // const [bgAccent, setBgAccent] = useState("");
   const [whitePage, setWhitePage] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const openerRef = useRef<HTMLButtonElement>(null); // atau div/span sesuai elemen
+  const productRef = useRef<HTMLDivElement>(null);
+  const productOpenerRef = useRef<HTMLButtonElement>(null);
+  const discoverRef = useRef<HTMLDivElement>(null);
+  const discoverOpenerRef = useRef<HTMLButtonElement>(null);
+  const corporateRef = useRef<HTMLDivElement>(null);
+  const corporateOpenerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
 
       if (
-        menuRef.current &&
-        !menuRef.current.contains(target) &&
-        openerRef.current &&
-        !openerRef.current.contains(target)
+        productRef.current &&
+        !productRef.current.contains(target) &&
+        productOpenerRef.current &&
+        !productOpenerRef.current.contains(target)
       ) {
         setOpenProduct(false);
       }
+      if (
+        discoverRef.current &&
+        !discoverRef.current.contains(target) &&
+        discoverOpenerRef.current &&
+        !discoverOpenerRef.current.contains(target)
+      ) {
+        setOpenDiscover(false);
+      }
+      if (
+        corporateRef.current &&
+        !corporateRef.current.contains(target) &&
+        corporateOpenerRef.current &&
+        !corporateOpenerRef.current.contains(target)
+      ) {
+        setOpenCorporate(false);
+      }
     };
 
-    if (openProduct) {
+    if (openProduct || openCorporate || openDiscover) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("touchstart", handleClickOutside);
     }
@@ -51,7 +71,7 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };
-  }, [openProduct]);
+  }, [openProduct, openCorporate, openDiscover]);
 
   useEffect(() => {
     if (
@@ -98,7 +118,6 @@ export default function Navbar() {
       name: t("nav.discover"),
       href: "#",
       subMenu: [
-        { name: "Mini", href: "/mini/", image: "/navbar-product/mini.webp" },
         {
           name: "Experience Center",
           href: "/showroom/",
@@ -227,7 +246,7 @@ export default function Navbar() {
                   {item.subMenu ? (
                     item.name === t("nav.products") ? (
                       <button
-                        ref={openerRef}
+                        ref={productOpenerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
                           scrolled ||
@@ -268,6 +287,7 @@ export default function Navbar() {
                       </button>
                     ) : item.name === t("nav.corporate") ? (
                       <button
+                        ref={corporateOpenerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
                           whitePage ? "text-black" : "text-white",
@@ -308,6 +328,7 @@ export default function Navbar() {
                       </button>
                     ) : (
                       <button
+                        ref={discoverOpenerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
                           whitePage ? "text-black" : "text-white",
@@ -547,11 +568,11 @@ export default function Navbar() {
           </div>
         </div>
 
-        <NavbarProduct open={openProduct} ref={menuRef} />
+        <NavbarProduct open={openProduct} ref={productRef} />
 
-        <NavbarCorporate open={openCorporate} />
+        <NavbarCorporate open={openCorporate} ref={corporateRef} />
 
-        <NavbarDiscover open={openDiscover} />
+        <NavbarDiscover open={openDiscover} ref={discoverRef} />
       </header>
     </div>
   );
