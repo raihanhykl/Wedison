@@ -23,7 +23,12 @@ export const metadata = getSEOMetadata({
   lang: "id",
 });
 export default async function Page() {
-  const previews = await fetchAllPreviews(PRESS_URLS);
+  // const previews = await fetchAllPreviews(PRESS_URLS);
+  const previews = (await fetchAllPreviews(PRESS_URLS)).sort((a, b) => {
+    const da = a.published ? new Date(a.published).getTime() : 0;
+    const db = b.published ? new Date(b.published).getTime() : 0;
+    return db - da; // terbaru duluan
+  });
 
   const dev = true;
   if (!dev) return notFound();

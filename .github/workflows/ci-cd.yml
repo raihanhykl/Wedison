@@ -36,7 +36,7 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Lint (optional)
+      - name: Lint
         run: npm run lint --if-present
 
       # Kamu sudah set output:'export' di next.config.ts, jadi cukup 'next build' (script build kamu: next build && next-sitemap)
