@@ -47,14 +47,15 @@
 import { LinkPreview } from "@/app/lib/fetchPreview";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 
 export function NewsCard({ data }: { data: LinkPreview }) {
   return (
     <Card className="mx-auto h-full flex flex-col overflow-hidden border-none outline-none p-0">
-      <a
-        href={data.url}
-        target="_blank"
+      <Link
+        // href={data.url}
+        href={"/media-center/" + data.slug}
         rel="noreferrer"
         className="h-full flex flex-col"
       >
@@ -102,7 +103,7 @@ export function NewsCard({ data }: { data: LinkPreview }) {
           {/* Dorong elemen terakhir ke bawah jika butuh footer/button nanti */}
           <div className="mt-auto" />
         </div>
-      </a>
+      </Link>
     </Card>
   );
 }

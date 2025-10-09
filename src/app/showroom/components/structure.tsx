@@ -178,12 +178,12 @@ export default function ShowroomPageStructure() {
                       <MapPin className="h-5 w-5 text-[var(--primary)]" />
                     </div>
                   </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  <div className="ml-4 flex flex-col justify-center items-center">
+                    <h3 className="text-lg font-semibold text-gray-900 my-auto">
                       {/* {t("showroom.findUs")} */}
                       Wedison Bandung
                     </h3>
-                    <p className="text-gray-600">{t("showroom.address")}</p>
+                    {/* <p className="text-gray-600">{t("showroom.address")}</p> */}
                   </div>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export default function ShowroomPageStructure() {
                       {/* {t("showroom.findUs")} */}
                       Wedison Kalimalang
                     </h3>
-                    <p className="text-gray-600">{t("showroom.address")}</p>
+                    {/* <p className="text-gray-600">{t("showroom.address")}</p> */}
                   </div>
                 </div>
               </div>

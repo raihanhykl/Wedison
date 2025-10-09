@@ -1,134 +1,17 @@
-// // Build-time only. Tidak dipakai di client.
-// export type LinkPreview = {
-//   url: string;
-//   title: string;
-//   description?: string;
-//   image?: string;
-//   site?: string;
-//   published?: string;
-// };
+// import { PRESS_URLS } from "../../../public/data/press-urls";
 
-// function pickMeta(html: string, prop: string) {
-//   // Cari <meta property="og:..."> atau <meta name="...">
-//   const reProp = new RegExp(
-//     `<meta[^>]+property=["']${prop}["'][^>]+content=["']([^"']+)["']`,
-//     "i"
-//   );
-//   const reName = new RegExp(
-//     `<meta[^>]+name=["']${prop}["'][^>]+content=["']([^"']+)["']`,
-//     "i"
-//   );
-//   const ldMatch = html.match(
-//     /<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i
-//   );
-//   if (ldMatch) {
-//     try {
-//       const ld = JSON.parse(ldMatch[1]);
-//       // kadang array, kadang object tunggal
-//       const obj = Array.isArray(ld) ? ld[0] : ld;
-//       published = obj.datePublished || obj.dateCreated || published;
-//     } catch {}
-//   }
+import { PRESS_URLS } from "../../../public/data/press-urls";
 
-//   const m1 = html.match(reProp);
-//   if (m1?.[1]) return m1[1].trim();
-//   const m2 = html.match(reName);
-//   if (m2?.[1]) return m2[1].trim();
-//   return "";
-// }
-
-// function absolutify(baseUrl: string, maybeRelative: string | undefined) {
-//   if (!maybeRelative) return undefined;
-//   try {
-//     // kalau sudah absolute http/https, langsung return
-//     if (/^https?:\/\//i.test(maybeRelative)) return maybeRelative;
-//     const u = new URL(baseUrl);
-//     return new URL(maybeRelative, `${u.protocol}//${u.host}`).toString();
-//   } catch {
-//     return undefined;
-//   }
-// }
-
-// function hostnameOf(u: string) {
-//   try {
-//     return new URL(u).hostname.replace(/^www\./, "");
-//   } catch {
-//     return "";
-//   }
-// }
-
-// export async function fetchPreview(
-//   url: string,
-//   timeoutMs = 15000
-// ): Promise<LinkPreview> {
-//   const controller = new AbortController();
-//   const t = setTimeout(() => controller.abort(), timeoutMs);
-
-//   try {
-//     // Penting: cache 'force-cache' agar Next bisa SSG
-//     const res = await fetch(url, {
-//       cache: "force-cache",
-//       signal: controller.signal,
-//     });
-//     const html = await res.text();
-
-//     const title =
-//       pickMeta(html, "og:title") ||
-//       pickMeta(html, "twitter:title") ||
-//       (html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] ?? "").trim();
-
-//     const description =
-//       pickMeta(html, "og:description") || pickMeta(html, "description");
-
-//     const image = absolutify(
-//       url,
-//       pickMeta(html, "og:image") || pickMeta(html, "twitter:image")
-//     );
-
-//     const site = pickMeta(html, "og:site_name") || hostnameOf(url);
-
-//     const published =
-//       pickMeta(html, "article:published_time") ||
-//       pickMeta(html, "og:updated_time") ||
-//       pickMeta(html, "article:modified_time") ||
-//       pickMeta(html, "pubdate") ||
-//       pickMeta(html, "content_PublishedDate") ||
-//       "";
-
-//     return { url, title, description, image, site, published };
-//   } catch {
-//     // fallback minimal agar build tetap jalan meski ada URL yang gagal di-fetch
-//     return {
-//       url,
-//       title: url,
-//       description: "",
-//       image: undefined,
-//       site: hostnameOf(url),
-//     };
-//   } finally {
-//     clearTimeout(t);
-//   }
-// }
-
-// export async function fetchAllPreviews(urls: string[]) {
-//   // Batasi concurrency biar build stabil
-//   const MAX = 4;
-//   const out: LinkPreview[] = [];
-//   for (let i = 0; i < urls.length; i += MAX) {
-//     const chunk = urls.slice(i, i + MAX);
-//     const results = await Promise.all(chunk.map((u) => fetchPreview(u)));
-//     out.push(...results);
-//   }
-//   return out;
-// }
-// // Build-time only. Tidak dipakai di client.
 export type LinkPreview = {
   url: string;
   title: string;
+  headLine: string;
+  slug: string;
   description?: string;
-  image?: string;
+  image?: string | null;
   site?: string;
   published?: string;
+  author?: string;
 };
 
 function pickMeta(html: string, prop: string) {
@@ -147,6 +30,8 @@ function pickMeta(html: string, prop: string) {
   if (m2?.[1]) return m2[1].trim();
   return "";
 }
+
+// pick author using jsonld
 
 // --- Fallback helpers: JSON-LD & <time> -------------------------------------
 
@@ -262,7 +147,8 @@ function hostnameOf(u: string) {
 }
 
 export async function fetchPreview(
-  url: string,
+  // url: string,
+  newsData: PRESS_URLS,
   timeoutMs = 15000
 ): Promise<LinkPreview> {
   const controller = new AbortController();
@@ -270,11 +156,13 @@ export async function fetchPreview(
 
   try {
     // Penting: cache 'force-cache' agar Next bisa SSG
-    const res = await fetch(url, {
+    const res = await fetch(newsData.url, {
       cache: "force-cache",
       signal: controller.signal,
     });
     const html = await res.text();
+
+    const url = newsData.url;
 
     const title =
       pickMeta(html, "og:title") ||
@@ -282,14 +170,16 @@ export async function fetchPreview(
       (html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] ?? "").trim();
 
     const description =
-      pickMeta(html, "og:description") || pickMeta(html, "description");
+      pickMeta(html, "og:description") ||
+      pickMeta(html, "description") ||
+      pickMeta(html, "og:image:secure_url");
 
     const image = absolutify(
       url,
       pickMeta(html, "og:image") || pickMeta(html, "twitter:image")
     );
 
-    const site = pickMeta(html, "og:site_name") || hostnameOf(url);
+    const site = pickMeta(html, "og:site_name") || hostnameOf(newsData.url);
 
     // 1) meta tags umum
     let published =
@@ -318,22 +208,35 @@ export async function fetchPreview(
     // Normalisasi akhir ke ISO (atau "")
     published = normalizeDate(published);
 
-    return { url, title, description, image, site, published };
+    return {
+      url,
+      title,
+      description,
+      image: image || null,
+      slug: newsData.slug,
+      site,
+      published,
+      author: newsData.author,
+      headLine: newsData.headLine,
+    };
   } catch {
     // fallback minimal agar build tetap jalan meski ada URL yang gagal di-fetch
     return {
-      url,
-      title: url,
+      url: newsData.url,
+      title: newsData.url,
+      slug: newsData.slug,
       description: "",
       image: undefined,
-      site: hostnameOf(url),
+      site: hostnameOf(newsData.url),
+      headLine: newsData.headLine,
+      author: newsData.author,
     };
   } finally {
     clearTimeout(t);
   }
 }
 
-export async function fetchAllPreviews(urls: string[]) {
+export async function fetchAllPreviews(urls: PRESS_URLS[]) {
   // Batasi concurrency biar build stabil
   const MAX = 4;
   const out: LinkPreview[] = [];
