@@ -64,6 +64,7 @@ export default function HeroSection({
         alt={imageAlt}
         src={`/${name}-hero.webp`}
         width={9000}
+        loading="eager"
         height={1000}
         className={cn(
           // "object-cover md:scale-120 inset-0 h-[100vh] 2xl:object-[10%_140%] scale-200 object-[61%_105%]",

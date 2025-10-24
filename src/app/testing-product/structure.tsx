@@ -76,6 +76,7 @@ export default function ProductPageComponent({ motorType }: Props) {
               width={1000}
               quality={100}
               height={1000}
+              loading="eager"
               className={cn(
                 " object-cover object-center w-full h-full",
                 // " object-cover object-[50%_50%] lg:object-[90%_0%] w-full h-full",

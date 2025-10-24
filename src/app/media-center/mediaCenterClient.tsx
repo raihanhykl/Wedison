@@ -46,7 +46,7 @@ export default function MediaCenterClient({ previews }: Props) {
           <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
             {/* {[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3].map((a, i) => ( */}
             {previews.map((p) => (
-              <div key={p.url} className=" rounded-xl">
+              <div key={p.url} className="rounded-xl">
                 <NewsCard data={p} />
               </div>
             ))}
