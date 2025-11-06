@@ -62,7 +62,7 @@ export default function HeroSection({
     <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
       <Image
         alt={imageAlt}
-        src={`/${name}-hero.webp`}
+        src={`/${name}/${name}-hero.webp`}
         width={9000}
         loading="eager"
         height={1000}

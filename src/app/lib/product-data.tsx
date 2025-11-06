@@ -269,10 +269,10 @@ export default function GetProductData(bikeType: string) {
 
   const product: ProductData = {
     hero: {
-      imageUrl: `/${bikeType}-product-hero.webp`,
+      imageUrl: `/${bikeType}/${bikeType}-product-hero.webp`,
 
       imageAlt: t(`${bikeType}.productPage.hero.imageAlt`),
-      imageUrlMobile: `/${bikeType}-product-hero-mobile.webp`,
+      imageUrlMobile: `/${bikeType}/${bikeType}-product-hero-mobile.webp`,
       className: "object-100%_0% object-cover w-full ",
       title: t(`${bikeType}.productPage.hero.title`),
       desc: t(`${bikeType}.productPage.hero.description`),
@@ -297,8 +297,8 @@ export default function GetProductData(bikeType: string) {
       },
     ],
     productOverview: {
-      imageUrl: `/${bikeType}-product-overview.webp`,
-      imageUrlMobile: `/${bikeType}-product-overview-mobile.webp`,
+      imageUrl: `/${bikeType}/${bikeType}-product-overview.webp`,
+      imageUrlMobile: `/${bikeType}/${bikeType}-product-overview-mobile.webp`,
       imageAlt: t(`${bikeType}.productPage.productOverview.imageAlt`),
       className: "object-100%_0% object-cover w-full ",
       title: t(`${bikeType}.productPage.productOverview.title`),
@@ -306,24 +306,24 @@ export default function GetProductData(bikeType: string) {
     },
     productHighlight: [
       {
-        image: `/${bikeType}-product-card1.webp`,
-        imageMobile: `/${bikeType}-product-card1-mobile.webp`,
+        image: `/${bikeType}/${bikeType}-product-card1.webp`,
+        imageMobile: `/${bikeType}/${bikeType}-product-card1-mobile.webp`,
         alt: t(`${bikeType}.productPage.productHighlight1.imageAlt`),
         title: t(`${bikeType}.productPage.productHighlight1.title`),
         desc: t(`${bikeType}.productPage.productHighlight1.description`),
       },
       {
-        image: `/${bikeType}-product-card2.webp`,
+        image: `/${bikeType}/${bikeType}-product-card2.webp`,
         alt: "Edmax Hero",
-        imageMobile: `/${bikeType}-product-card2-mobile.webp`,
+        imageMobile: `/${bikeType}/${bikeType}-product-card2-mobile.webp`,
 
         className: "object-100%_0% object-cover w-full ",
         title: t(`${bikeType}.productPage.productHighlight2.title`),
         desc: t(`${bikeType}.productPage.productHighlight2.description`),
       },
       {
-        image: `/${bikeType}-product-card3.webp`,
-        imageMobile: `/${bikeType}-product-card3-mobile.webp`,
+        image: `/${bikeType}/${bikeType}-product-card3.webp`,
+        imageMobile: `/${bikeType}/${bikeType}-product-card3-mobile.webp`,
 
         alt: t(`${bikeType}.productPage.productHighlight3.imageAlt`),
         title: t(`${bikeType}.productPage.productHighlight3.title`),
@@ -332,9 +332,9 @@ export default function GetProductData(bikeType: string) {
       ...(bikeType == "edpower"
         ? [
             {
-              image: `/${bikeType}-product-card4.webp`,
+              image: `/${bikeType}/${bikeType}-product-card4.webp`,
               alt: "Edmax Hero",
-              imageMobile: `/${bikeType}-product-card4-mobile.webp`,
+              imageMobile: `/${bikeType}/${bikeType}-product-card4-mobile.webp`,
 
               className: "object-100%_0% object-cover w-full ",
               title: t(`${bikeType}.productPage.productHighlight4.title`),
@@ -344,8 +344,8 @@ export default function GetProductData(bikeType: string) {
         : []),
     ],
     chargingOverview: {
-      imageUrl: `/${bikeType}-charging-overview.webp`,
-      imageUrlMobile: `/${bikeType}-charging-overview-mobile.webp`,
+      imageUrl: `/${bikeType}/${bikeType}-charging-overview.webp`,
+      imageUrlMobile: `/${bikeType}/${bikeType}-charging-overview-mobile.webp`,
       imageAlt: t(`${bikeType}.productPage.chargingOverview.imageAlt`),
       className: "object-100%_0% object-cover w-full ",
       title: t(`${bikeType}.productPage.chargingOverview.title`),
@@ -354,16 +354,16 @@ export default function GetProductData(bikeType: string) {
     ...(bikeType !== "mini" && {
       chargingHighlight: [
         {
-          image: `/${bikeType}-charging-card1.webp`,
-          imageMobile: `/${bikeType}-charging-card1-mobile.webp`,
+          image: `/${bikeType}/${bikeType}-charging-card1.webp`,
+          imageMobile: `/${bikeType}/${bikeType}-charging-card1-mobile.webp`,
           alt: t(`${bikeType}.productPage.chargingHighlight1.imageAlt`),
           className: "object-center object-cover w-full",
           title: t(`${bikeType}.productPage.chargingHighlight1.title`),
           desc: t(`${bikeType}.productPage.chargingHighlight1.description`),
         },
         {
-          image: `/${bikeType}-charging-card2.webp`,
-          imageMobile: `/${bikeType}-charging-card2-mobile.webp`,
+          image: `/${bikeType}/${bikeType}-charging-card2.webp`,
+          imageMobile: `/${bikeType}/${bikeType}-charging-card2-mobile.webp`,
 
           alt: t(`${bikeType}.productPage.chargingHighlight2.imageAlt`),
           className: "object-center object-cover w-full",
