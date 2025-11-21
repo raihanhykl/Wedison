@@ -55,7 +55,7 @@ export function NewsCard({ data }: { data: LinkPreview }) {
     <Card className="mx-auto h-full flex flex-col overflow-hidden border-none outline-none p-0">
       <Link
         // href={data.url}
-        href={"/media-center/" + data.slug}
+        href={"/media-center/news/" + data.slug}
         rel="noreferrer"
         className="h-full flex flex-col"
       >
