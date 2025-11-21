@@ -34,38 +34,38 @@ export default function Landing() {
     link: string;
   }[] = [
     {
-      image: "/edpower-landing-hero.webp",
+      image: "/edpower/edpower-landing-hero.webp",
       imageAlt: "EDPower in Gray",
-      imageMobile: "/edpower-landing-hero-mobile.webp",
-      cardMobile: "/edpower-landing-card-mobile.webp",
+      imageMobile: "/edpower/edpower-landing-hero-mobile.webp",
+      cardMobile: "/edpower/edpower-landing-card-mobile.webp",
       title: t("edpower.productPage.hero.title"),
       description: t("edpower.productPage.hero.description"),
       link: "/edpower/",
     },
     {
-      image: "/athena-landing-hero.webp",
+      image: "/athena/athena-landing-hero.webp",
       imageAlt: "Athena in Gray",
-      imageMobile: "/athena-landing-hero-mobile.webp",
-      cardMobile: "/athena-landing-card-mobile.webp",
+      imageMobile: "/athena/athena-landing-hero-mobile.webp",
+      cardMobile: "/athena/athena-landing-card-mobile.webp",
       title: t("athena.productPage.hero.title"),
       description: t("athena.productPage.hero.description"),
       link: "/athena/",
     },
     {
-      image: "/mini-landing-hero.webp",
+      image: "/mini/mini-landing-hero.webp",
       imageAlt: "Mini in Gray",
-      imageMobile: "/mini-landing-hero-mobile.webp",
-      cardMobile: "/mini-landing-card-mobile.webp",
+      imageMobile: "/mini/mini-landing-hero-mobile.webp",
+      cardMobile: "/mini/mini-landing-card-mobile.webp",
 
       title: t("mini.productPage.hero.title"),
       description: t("mini.productPage.hero.description"),
       link: "/mini/",
     },
     {
-      image: "/victory-landing-hero.webp",
+      image: "/victory/victory-landing-hero.webp",
       imageAlt: "Victory in Gray",
-      imageMobile: "/victory-landing-hero-mobile.webp",
-      cardMobile: "/victory-landing-card-mobile.webp",
+      imageMobile: "/victory/victory-landing-hero-mobile.webp",
+      cardMobile: "/victory/victory-landing-card-mobile.webp",
       title: t("victory.productPage.hero.title"),
       description: t("victory.productPage.hero.description"),
       link: "/victory/",
@@ -285,7 +285,7 @@ export default function Landing() {
         {/* supercharge */}
         <div className="relative w-full h-[70vh] md:h-[70vh]">
           <Image
-            src="/supercharge-testing.png"
+            src="/supercharge/supercharge-testing.png"
             alt="supercharge"
             width={1000}
             height={1000}
@@ -296,7 +296,7 @@ export default function Landing() {
               <h1 className="text-3xl md:text-5xl font-bold text-center text-white xl:flex text-nowrap">
                 <div className=" p-0 flex flex-col xl:flex-row items-center justify-center gap-2 bg-red-100/0">
                   <Image
-                    src="/supercharge-typo-nobg.png"
+                    src="/supercharge/supercharge-typo-nobg.png"
                     alt="Super Charge"
                     width={500}
                     height={500}

@@ -53,7 +53,7 @@ export default function EdmaxPage() {
           page="supercharge"
           feature={1}
           alt="man riding dash electric motorcycle"
-          image="/supercharge-chip.webp"
+          image="/supercharge/supercharge-chip.webp"
           style="bg-gray-100"
           // style="bg-gradient-to-bl  from-[#1E1F22] from-60% to-[#3A3B3F]"
           titleColor="text-black"
@@ -64,7 +64,7 @@ export default function EdmaxPage() {
           page="supercharge"
           feature={2}
           alt="Victory in the golden hour"
-          image="/supercharge-location.webp"
+          image="/supercharge/supercharge-location.webp"
           style="bg-white object-[100%_0%] object-cover"
           titleColor="text-black"
           descColor="text-gray-600"
