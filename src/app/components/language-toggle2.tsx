@@ -20,7 +20,8 @@ export default function LanguageToggle2({
       route === "/corporate/about/" ||
       route === "/corporate/contact/" ||
       route === "/showroom/" ||
-      route === "/super-charge/"
+      route === "/super-charge/" ||
+      (route.startsWith("/media-center/") && route !== "/media-center/")
     ) {
       setWhitePage(true);
     } else {
