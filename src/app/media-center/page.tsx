@@ -2,8 +2,9 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { getSEOMetadata } from "../lib/seo1";
 import { fetchAllPreviews } from "../lib/fetchPreview";
-import { PRESS_URLS } from "../../../public/data/press-urls";
 import MediaCenterClient from "./mediaCenterClient";
+import { PRESS_URLS } from "../../../public/data/press-urls";
+// import { PRESS_URLS } from "../../../public/data/press-urls";
 // import Baru from "./components/baru";
 export const metadata = getSEOMetadata({
   title: "Media Center - Berita & Update Wedison",

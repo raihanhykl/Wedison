@@ -78,7 +78,8 @@ export default function Navbar() {
       route === "/corporate/about/" ||
       route === "/corporate/contact/" ||
       route === "/showroom/" ||
-      route === "/super-charge/"
+      route === "/super-charge/" ||
+      (route.startsWith("/media-center/") && route !== "/media-center/")
     ) {
       setWhitePage(true);
     } else {
