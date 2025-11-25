@@ -1027,10 +1027,10 @@ const translations = {
     "faq.Battery.questions.1.question":
       "How long does it take to fully charge the battery?",
     "faq.Battery.questions.1.answer":
-      "Wedison Super Charge: 10% to 80% in 15 minutes/ 10% to 95% in 20 minutes\nWedison Regular Charge: Varies depending on the adapter and battery size, with a duration ranging from approximately 2 to 10 hours.",
+      "Wedison Super Charge: 10% to 80% in 15 minutes / 10% to 95% in 20 minutes. Wedison Regular Charge: Varies depending on the adapter and battery size, with a duration ranging from approximately 2 to 10 hours.",
     "faq.Battery.questions.2.question": "What type of battery do you use?",
     "faq.Battery.questions.2.answer":
-      "Wedison EV uses Lithium-ion Battery (LFP), a type of rechargeable battery commonly used in devices like smartphones, laptops, and electric vehicles.\n\nThe characteristics of Lithium-ion Battery are as follow:\nA. High energy density: It can store a considerable amount of electrical energy in a smaller, lighter package.\nB. High temperature: It performs efficiently at high temperatures of up to 45 degrees celsius and can endure low temperatures without sustaining damage.\nC. Low self-discharge rate: The battery retains its energy effectively even when left unused for days or weeks.\nD. High no. of charge cycles: It enables numerous charge cycles of more than 5,000 while maintaining nearly all of their original capacity.\nE. Charges quickly: Wedison EV can be fully charged in 30 mins at one of the super fast charging stations.",
+      "Wedison EV uses Lithium-ion Battery (LFP), a type of rechargeable battery commonly used in devices like smartphones, laptops, and electric vehicles.\n\nThe characteristics of Lithium-ion Battery are as follow:\nA. High energy density: It can store a considerable amount of electrical energy in a smaller, lighter package.\nB. High temperature: It performs efficiently at high temperatures of up to 45 degrees celsius and can endure low temperatures without sustaining damage.\nC. Low self-discharge rate: The battery retains its energy effectively even when left unused for days or weeks.\nD. High number of charge cycles: It enables numerous charge cycles of more than 5,000 while maintaining nearly all of their original capacity.\nE. Charges quickly: Wedison EV can be fully charged in 30 mins at one of the super fast charging stations.",
     "faq.Battery.questions.3.question": "How many type of battery do you sell?",
     "faq.Battery.questions.3.answer":
       "Wedison offers 2 battery variations for select models. \nTravelling at 50km/h, the basic and extended versions are capable of travelling up to 85 and 115 km respectively.",
@@ -1070,7 +1070,7 @@ const translations = {
     // Charging Questions
     "faq.Charging.questions.0.question": "Where can we charge our motorcycles?",
     "faq.Charging.questions.0.answer":
-      "Super Charge\nAt Wedison super charge stations, which will progressively be rolled out countrywide.\nRegular Charge \nAt home/places with standard wall socket",
+      "SuperCharge\nAt Wedison super charge stations, which will progressively be rolled out countrywide.\nRegular Charge \nAt home/places with standard wall socket",
     "faq.Charging.questions.1.question": "How can we charge our motorcycles?",
     "faq.Charging.questions.1.answer":
       "Wedison EV comes with regular and super charge ports which can be charged at home and designated charging stations.",
@@ -1083,7 +1083,7 @@ const translations = {
     "faq.Charging.questions.3.answer":
       "Yes, Wedison EV has regular port for charging at home.",
     "faq.Charging.questions.4.question":
-      "Does fast charging damange the battery?",
+      "Does fast charging damage the battery?",
     "faq.Charging.questions.4.answer":
       "Wedison's batteries are engineered for fast charging and long cycle life without causing damage.",
     "faq.Charging.questions.5.question": "Is it fast charging dangerous?",
@@ -1098,11 +1098,11 @@ const translations = {
     "faq.Charging.questions.8.question":
       "What is the duration for regular charging? (600W charger)",
     "faq.Charging.questions.8.answer":
-      "The charging time varies depending on model and battery capacity. \nCharging time with a 600w charging adapter from 0-100%:\nRefe to Regular Charge Data",
+      "The charging time varies depending on model and battery capacity. \nCharging time with a 600w charging adapter from 0-100%:\nRefer to Regular Charge Data",
     "faq.Charging.questions.9.question":
       "What is the duration for regular charging? (1260W charger)",
     "faq.Charging.questions.9.answer":
-      "The charging time varies depending on model and battery capacity. \nCharging time with a 1260w charging adapter from 0-100%:\nMini: 3.5 hr (No change, can only use a 600w charger)\nRefe to Regular Charge Data",
+      "The charging time varies depending on model and battery capacity. \nCharging time with a 1260w charging adapter from 0-100%:\nMini: 3.5 hr (No change, can only use a 600w charger)\nRefer to Regular Charge Data",
     "faq.Charging.questions.10.question": "How do I perform regular charging?",
     "faq.Charging.questions.10.answer":
       "First connect the charger to the vehicle's charging port, then plug it into the power source. \nAfter charging is complete, unplug the power source first, then disconnect the charger from the vehicle.",
@@ -1118,11 +1118,11 @@ const translations = {
     "faq.Performance.questions.1.question":
       "What is the motor power / BLDC of the motorcycle?",
     "faq.Performance.questions.1.answer":
-      "The motor power varies between models, ranging from 1200KW to 5000KW",
+      "The motor power varies between models, ranging from 1,2KW to 5KW",
     "faq.Performance.questions.2.question":
       "What is the range of the motorcycle?",
     "faq.Performance.questions.2.answer":
-      "The range varies between model and battery, ranging from 70 km to 140 km",
+      "The range varies between model and battery, ranging from 85 km to 135 km",
     "faq.Performance.questions.3.question":
       "Is Wedison EV safe to be used in rain and flood?",
     "faq.Performance.questions.3.answer":
@@ -1145,7 +1145,7 @@ const translations = {
       "CBS (Combined Braking System), an efficient braking system that automatically distributes braking force between the front and rear brakes when the rider applies the brakes:\nAthena, Victory, & EdPower\n\nFront and rear disc brakes, providing enhanced control, safety, and braking performance:\nMini motorcycle",
     "faq.Safety.questions.2.question": "What motor do you use?",
     "faq.Safety.questions.2.answer":
-      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 85 km/hr. (Mini, Athena, Victory, EdPower)",
+      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 95 km/hr. (Mini, Athena, Victory, EdPower)",
 
     // Servicing Questions
     "faq.Servicing.questions.0.question":
@@ -1158,8 +1158,7 @@ const translations = {
       "The mileage warranty includes checks at 1,000 km, 5,000 km, and 10,000 km.",
     "faq.Servicing.questions.2.question":
       "Where can I service the EV motorcycles?",
-    "faq.Servicing.questions.2.answer":
-      "At Wedison and/or authorized service centers with the likes of Honda/Yamaha Service Center.",
+    "faq.Servicing.questions.2.answer": "At Wedison authorized service centers",
     "faq.Servicing.questions.3.question":
       "Does Wedison provide spare parts for the motorcycle?",
     "faq.Servicing.questions.3.answer":
@@ -1186,7 +1185,7 @@ const translations = {
     "faq.Servicing.questions.9.question":
       "What conditions will void the warranty?",
     "faq.Servicing.questions.9.answer":
-      "Damange resulting from use of non-origanl Wedison spar parts or unauthorized modifications. \n\nDamages resulting from unavoidable or unforeseen events—such as smoke, substance exposure, earthquakes, typhoons, floods, chemical corrosion, promotional or advertising activities, complimentary items, noise-related issues, or contact with artificial soft or hard materials—are not covered.",
+      "Damage resulting from use of non-original Wedison spar parts or unauthorized modifications. \n\nDamages resulting from unavoidable or unforeseen events—such as smoke, substance exposure, earthquakes, typhoons, floods, chemical corrosion, promotional or advertising activities, complimentary items, noise-related issues, or contact with artificial soft or hard materials—are not covered.",
     "faq.Servicing.questions.10.question":
       "what are the limitations of the warranty",
     "faq.Servicing.questions.10.answer":
@@ -2225,7 +2224,7 @@ const translations = {
     "faq.Battery.questions.3.question":
       "Berapa banyak jenis baterai yang Anda jual?",
     "faq.Battery.questions.3.answer":
-      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 85 dan 115 km.",
+      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 85 dan 135 km.",
     "faq.Battery.questions.4.question": "Baterai berasal dari mana?",
     "faq.Battery.questions.4.answer":
       "Baterai proprietary Wedison dikembangkan secara internal.",
@@ -2265,7 +2264,7 @@ const translations = {
     "faq.Charging.questions.0.question":
       "Di mana kami dapat mengisi daya motor kami?",
     "faq.Charging.questions.0.answer":
-      "Super Charge\nDi stasiun super charge Wedison, yang akan secara bertahap diluncurkan di seluruh negeri.\nRegular Charge \nDi rumah/tempat dengan stopkontak dinding standar",
+      "SuperCharge\nDi stasiun super charge Wedison, yang akan secara bertahap diluncurkan di seluruh negeri.\nRegular Charge \nDi rumah/tempat dengan stopkontak dinding standar",
     "faq.Charging.questions.1.question":
       "Bagaimana kami dapat mengisi daya motor kami?",
     "faq.Charging.questions.1.answer":
@@ -2310,13 +2309,13 @@ const translations = {
     // Performance Questions
     "faq.Performance.questions.0.question": "Berapa kecepatan motor?",
     "faq.Performance.questions.0.answer":
-      "Tergantung model, kecepatan tertinggi berkisar dari 60 km/jam hingga 95 km/jam",
+      "Tergantung model, kecepatan tertinggi berkisar dari 65 km/jam hingga 95 km/jam",
     "faq.Performance.questions.1.question": "Berapa daya motor / BLDC motor?",
     "faq.Performance.questions.1.answer":
-      "Daya motor bervariasi antar model, berkisar dari 1200KW hingga 5000KW",
+      "Daya motor bervariasi antar model, berkisar dari 1,2KW hingga 5KW",
     "faq.Performance.questions.2.question": "Berapa jarak tempuh motor?",
     "faq.Performance.questions.2.answer":
-      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 70 km hingga 140 km",
+      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 85 km hingga 135 km",
     "faq.Performance.questions.3.question":
       "Apakah Wedison EV aman digunakan dalam hujan dan banjir?",
     "faq.Performance.questions.3.answer":
@@ -2338,7 +2337,7 @@ const translations = {
       "CBS (Combined Braking System), sistem pengereman efisien yang secara otomatis mendistribusikan gaya pengereman antara rem depan dan belakang ketika pengendara mengerem:\nAthena, Victory, & EdPower\n\nRem cakram depan dan belakang, memberikan kontrol, keamanan, dan kinerja pengereman yang ditingkatkan:\nMotor Mini",
     "faq.Safety.questions.2.question": "Motor apa yang Anda gunakan?",
     "faq.Safety.questions.2.answer":
-      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 85 km/jam. (Mini, Athena, Victory, EdPower)",
+      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 95 km/jam. (Mini, Athena, Victory, EdPower)",
 
     // Servicing Questions
     "faq.Servicing.questions.0.question":
@@ -2352,7 +2351,7 @@ const translations = {
     "faq.Servicing.questions.2.question":
       "Di mana saya dapat melayani EV motor?",
     "faq.Servicing.questions.2.answer":
-      "Di Wedison dan/atau pusat layanan terauthorisasi seperti Honda/Yamaha Service Center.",
+      "Di bengkel resmi Wedison atau pusat layanan terauthorisasi Wedison terdekat.",
     "faq.Servicing.questions.3.question":
       "Apakah Wedison menyediakan suku cadang untuk motor?",
     "faq.Servicing.questions.3.answer":

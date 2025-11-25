@@ -62,7 +62,7 @@ export default function HeroSection({
     <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
       <Image
         alt={imageAlt}
-        src={`/${name}/${name}-hero.webp`}
+        src={`/${name}/${name}-hero-1.webp`}
         width={9000}
         loading="eager"
         height={1000}
@@ -73,7 +73,8 @@ export default function HeroSection({
         )}
       />
       {/* dark overlay */}
-      <div className="md:hidden absolute inset-0 bg-black/60 z-10" />
+      {/* <div className="md:hidden absolute inset-0 bg-black/60 z-10" /> */}
+      <div className=" absolute inset-0 bg-black/30 z-10" />
 
       {/* Hero content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 absolute z-20 left-0 md:left-15">

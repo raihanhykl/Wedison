@@ -42,8 +42,8 @@ export default function EdmaxPage() {
         <HeroSection
           name="supercharge"
           imageAlt="Super Charge Charging Station"
-          theme="light"
-          imageStyle="object-[70%_40%] md:object-[0%_40%] 2xl:object-[0%_60%] "
+          theme="dark"
+          imageStyle="object-[90%_10%] md:object-[100%_40%] 2xl:object-[0%_100%] "
           noButton={true}
         />
         <Suspense fallback={<p>Loading video...</p>}>
@@ -53,7 +53,7 @@ export default function EdmaxPage() {
           page="supercharge"
           feature={1}
           alt="man riding dash electric motorcycle"
-          image="/supercharge/supercharge-chip.webp"
+          image="/supercharge/supercharge-chip-1.webp"
           style="bg-gray-100"
           // style="bg-gradient-to-bl  from-[#1E1F22] from-60% to-[#3A3B3F]"
           titleColor="text-black"
@@ -64,7 +64,7 @@ export default function EdmaxPage() {
           page="supercharge"
           feature={2}
           alt="Victory in the golden hour"
-          image="/supercharge/supercharge-location.webp"
+          image="/supercharge/supercharge-location-1.webp"
           style="bg-white object-[100%_0%] object-cover"
           titleColor="text-black"
           descColor="text-gray-600"
@@ -74,7 +74,7 @@ export default function EdmaxPage() {
           page="supercharge"
           feature={3}
           alt="Victory in the golden hour"
-          image="/edmax-charging.webp"
+          image="/supercharge/supercharge-charging.webp"
           imageStyle="object-[10%_100%]"
           style="bg-gray-100"
           titleColor="text-black"

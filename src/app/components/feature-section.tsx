@@ -46,7 +46,7 @@ export default function FeatureSection2({
       )}
       // className="py-16 md:py-20 lg:py-24 bg-white overflow-hidden relative"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div
             className={cn(
@@ -83,7 +83,7 @@ export default function FeatureSection2({
             </h3>
             <p
               className={cn(
-                `text-base sm:text-lg text-gray-300 mb-6 max-w-lg`,
+                `text-base sm:text-lg text-gray-300 mb-6 max-w-[80%]`,
                 descColor
               )}
             >
@@ -100,7 +100,7 @@ export default function FeatureSection2({
                 : "opacity-0 -translate-x-16"
             )}
           >
-            <div className="relative h-[300px] sm:h-[400px] md:h-[450px] w-full rounded-xl overflow-hidden shadow-soft-lg">
+            <div className="relative h-[300px] sm:h-[400px] md:h-[550px] w-full rounded-xl overflow-hidden shadow-soft-lg">
               {edmaxCarousel ? (
                 <HeadunitCarousel />
               ) : (

@@ -72,9 +72,9 @@ export default function FaqStructure() {
         </div>
       </div>
 
-      <div className=" px-4">
+      <div className=" px-4 w-full max-w-2400px">
         {/* header */}
-        <div className="mb-6 max-w-7xl mx-auto my-10">
+        <div className="mb-6 max-w-[2200px] mx-auto my-10">
           {/* <h1 className="text-6xl font-bold text-gray-900 tracking-wider">
             FAQ
           </h1> */}
@@ -88,7 +88,7 @@ export default function FaqStructure() {
           </p>
         </div>
         {/* tabs */}
-        <div className="flex justify-between border-b border-gray-200 mb-6 w-full max-w-7xl mx-auto my-10">
+        <div className="flex justify-between border-b border-gray-200 mb-6 w-full max-w-[2200px] mx-auto my-10">
           <nav className="-mb-px flex space-x-8 overflow-x-auto">
             {sections.map((section, idx) => (
               <button

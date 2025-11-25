@@ -58,7 +58,7 @@ export default function ShowroomCarousel({ images }: ShowroomCarouselProps) {
   };
 
   return (
-    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[600px] overflow-hidden rounded-xl">
+    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[800px] overflow-hidden rounded-xl">
       {/* Images */}
       <div className="relative w-full h-full">
         {images.map((image, index) => (

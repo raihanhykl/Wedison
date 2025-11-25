@@ -330,12 +330,13 @@ export default function Landing() {
         {/* environmental advantage */}
         <div className="relative w-full h-[100vh] md:h-[70vh]">
           <Image
-            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Z3JlZW4lMjBlbnZpcm9ubWVudHxlbnwwfHwwfHx8MA%3D%3D"
+            src="/Environtmental-Advantage.webp"
             alt="environmental-advantage"
             width={1000}
             height={1000}
-            className=" object-cover object-[50%_50%] lg:object-[0%_55%] w-full h-full "
+            className=" object-cover object-[30%_50%] lg:object-[0%_55%] w-full h-full "
           />
+          <div className=" absolute inset-0 bg-black/60"></div>
           <div className="absolute top-0  right-0 w-full h-full flex items-start py-6 md:py-10">
             <div className=" flex flex-col items-center justify-center items gap-2 w-full h-full">
               <h1 className="text-4xl md:text-6xl font-bold text-center text-white">

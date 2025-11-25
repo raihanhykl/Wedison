@@ -78,7 +78,7 @@ export default function Navbar() {
       route === "/corporate/about/" ||
       route === "/corporate/contact/" ||
       route === "/showroom/" ||
-      route === "/super-charge/" ||
+      // route === "/super-charge/" ||
       (route.startsWith("/media-center/") && route !== "/media-center/")
     ) {
       setWhitePage(true);
@@ -212,7 +212,7 @@ export default function Navbar() {
         )}
       >
         {/* <div className="container mx-auto"> */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
           {/* <div className="flex items-center justify-between"> */}
           <div className="flex items-center justify-between h-12 sm:h-14 md:h-16 overflow-hidden">
             <div className="flex-shrink-0 h-fit inset-0 p-0 ">

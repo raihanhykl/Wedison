@@ -69,7 +69,7 @@ export default function ShowroomPageStructure() {
     <main className="min-h-[70%] bg-white">
       {/* Hero Section with Carousel */}
       <section className="mt-20 md:mt-30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
           <div className="text-center mb-8 md:mb-12">
             <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
               <span className="text-sm font-medium">{t("showroom.tag")}</span>
@@ -94,7 +94,7 @@ export default function ShowroomPageStructure() {
 
       {/* Location Section */}
       <section className="py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
@@ -211,7 +211,7 @@ export default function ShowroomPageStructure() {
 
       {/* What You Can Do Section */}
       <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
             <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
               {t("showroom.whatYouCanDo")}

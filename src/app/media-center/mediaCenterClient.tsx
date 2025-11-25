@@ -34,7 +34,7 @@ export default function MediaCenterClient({ previews }: Props) {
       </div>
 
       {/* Berita */}
-      <div className=" mx-auto container">
+      <div className=" mx-auto container max-w-[2200px]">
         <div className=" m-8">
           <h2 className=" text-6xl font-semibold">
             {t("mediaCenter.landing.news.title")}
@@ -42,7 +42,7 @@ export default function MediaCenterClient({ previews }: Props) {
           <div className=" w-full h-[2px] mt-2 bg-gray-200"></div>
         </div>
 
-        <div className=" mx-auto container px-4 py-8">
+        <div className=" mx-auto container max-w-[2200px] px-4 py-8">
           <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
             {/* {[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3].map((a, i) => ( */}
             {previews.map((p) => (
