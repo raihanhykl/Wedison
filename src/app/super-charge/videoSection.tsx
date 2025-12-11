@@ -30,7 +30,7 @@ export default function VideoSection() {
           autoPlay={false}
           muted
           className="bg-white rounded-xl"
-          src="/SuperCharge/overview-supercharge.mov"
+          src="/supercharge/overview-supercharge.mov"
         ></video>
       </div>
     </div>
