@@ -281,7 +281,7 @@ export default function Landing() {
         {/* supercharge */}
         <div className="relative w-full h-[70vh] md:h-[70vh]">
           <Image
-            src="/supercharge/supercharge-testing.png"
+            src="/super-charge/supercharge-testing.png"
             alt="supercharge"
             width={1000}
             height={1000}
@@ -292,7 +292,7 @@ export default function Landing() {
               <h1 className="text-3xl md:text-5xl font-bold text-center text-white xl:flex text-nowrap">
                 <div className=" p-0 flex flex-col xl:flex-row items-center justify-center gap-2 bg-red-100/0">
                   <Image
-                    src="/supercharge/supercharge-typo-nobg.png"
+                    src="/super-charge/supercharge-typo-nobg.png"
                     alt="Super Charge"
                     width={500}
                     height={500}
