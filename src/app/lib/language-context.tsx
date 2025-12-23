@@ -37,6 +37,11 @@ const translations = {
     // compare table
     "compare.model": "Compare Models",
     "compare.select.bike": "Select a bike to compare",
+    "compare.title": "Compare Our Models",
+    "compare.subtitle": "Find the perfect electric motorcycle that suits your lifestyle",
+    "compare.expandAll": "Expand All",
+    "compare.collapseAll": "Collapse All",
+    "compare.swipeHint": "Swipe to see more",
 
     // buttons
     "btn.learn.more": "Learn More",
@@ -1215,6 +1220,11 @@ const translations = {
     // compare table
     "compare.model": "Bandingkan Model",
     "compare.select.bike": "Pilih motor untuk bandingkan",
+    "compare.title": "Bandingkan Model Kami",
+    "compare.subtitle": "Temukan motor listrik yang sempurna sesuai gaya hidupmu",
+    "compare.expandAll": "Buka Semua",
+    "compare.collapseAll": "Tutup Semua",
+    "compare.swipeHint": "Geser untuk lihat lebih",
 
     // buttons
     "btn.learn.more": "Pelajari Lebih Lanjut",

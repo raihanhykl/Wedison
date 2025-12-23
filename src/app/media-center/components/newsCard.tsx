@@ -77,7 +77,7 @@ export function NewsCard({ data }: { data: LinkPreview }) {
 
         {/* Konten teks: pakai flex-1 agar mengisi sisa tinggi card */}
         <div className="flex flex-col flex-1 p-3 gap-1 min-h-0">
-          <div className="text-sm text-gray-500">
+          <div className="text-xs sm:text-sm text-gray-500">
             {data.site}
             {data.published
               ? " • " +

@@ -105,7 +105,7 @@ export default function Landing() {
 
       <div>
         {/* Hero */}
-        <div>
+        <div className="relative">
           <Carousel
             opts={{
               loop: true,
@@ -124,34 +124,30 @@ export default function Landing() {
             }}
           >
             <CarouselContent>
-              {" "}
               {items.map((item, index) => (
                 <CarouselItem key={index} className="w-full">
-                  <div className=" relative w-full h-[100vh] overflow-hidden">
-                    <div className="flex flex-col items-center justify-center w-full h-full scale-100 ">
-                      <Image
-                        src={isDesktop ? item.image : item.imageMobile}
-                        alt={item.imageAlt}
-                        width={1000}
-                        height={1000}
-                        quality={100}
-                        loading={"eager"}
-                        className=" object-cover object-center w-full h-full "
-                      />
-                    </div>
-                    <div className="absolute top-0 left-0 w-full h-full flex items-start py-10 md:py-24">
-                      <div className="mt-8 flex flex-col items-center justify-center items gap-2 w-full">
-                        <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
+                  <div className="relative w-full h-[100svh] sm:h-[100vh] overflow-hidden">
+                    <Image
+                      src={isDesktop ? item.image : item.imageMobile}
+                      alt={item.imageAlt}
+                      width={1000}
+                      height={1000}
+                      quality={100}
+                      loading={"eager"}
+                      className="object-cover object-center w-full h-full absolute inset-0"
+                    />
+                    <div className="absolute inset-0 flex items-start justify-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 px-4 sm:px-6 md:px-8">
+                      <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 w-full max-w-4xl">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-white leading-tight">
                           {item.title}
                         </h1>
-                        <p className="text-sm md:text-lg text-center text-white font-semibold">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-center text-white font-semibold max-w-2xl px-2">
                           {item.description}
                         </p>
-                        <div className="flex w-full justify-center gap-4 mt-2">
-                          {" "}
-                          <Link href={item.link}>
+                        <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center items-center gap-3 sm:gap-4 mt-2 sm:mt-4">
+                          <Link href={item.link} className="w-full sm:w-auto">
                             <Button
-                              className="px-8 md:px-16 rounded-sm font-semibold cursor-pointer"
+                              className="w-full sm:w-auto px-6 sm:px-8 md:px-12 lg:px-16 rounded-sm font-semibold cursor-pointer text-sm sm:text-base"
                               size={"lg"}
                             >
                               {t("btn.learn.more")}
@@ -160,12 +156,12 @@ export default function Landing() {
                           <Link
                             href={"/brochure/brochure-wedison.pdf"}
                             target="_blank"
+                            className="w-full sm:w-auto"
                           >
                             <Button
-                              className=" text-[var(--primary)] px-8 md:px-16 rounded-sm cursor-pointer font-semibold"
+                              className="w-full sm:w-auto text-[var(--primary)] px-6 sm:px-8 md:px-12 lg:px-16 rounded-sm cursor-pointer font-semibold text-sm sm:text-base"
                               size={"lg"}
                               variant={"outline"}
-                              // disabled
                             >
                               {t("btn.see.brochure")}
                             </Button>
@@ -177,13 +173,13 @@ export default function Landing() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute top-1/2 left-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-16 h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80 " />
-            <CarouselNext className="absolute top-1/2 right-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-16 h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80 " />
-            <div className="absolute bottom-10 right-1/2 translate-x-1/2 flex justify-center gap-3 mt-4">
+            <CarouselPrevious className="absolute top-1/2 left-2 sm:left-4 md:left-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80" />
+            <CarouselNext className="absolute top-1/2 right-2 sm:right-4 md:right-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80" />
+            <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex justify-center gap-2 sm:gap-3">
               {items.map((_, index) => (
                 <button
                   key={index}
-                  className={`h-3 w-3 rounded-full cursor-pointer ${
+                  className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full cursor-pointer transition-colors ${
                     selectedIndex === index
                       ? "bg-black hover:bg-black/50"
                       : "bg-gray-400 hover:bg-gray-400/50"
@@ -328,38 +324,38 @@ export default function Landing() {
         </div>
 
         {/* environmental advantage */}
-        <div className="relative w-full h-[100vh] md:h-[70vh]">
+        <div className="relative w-full min-h-[100svh] sm:min-h-[90vh] md:min-h-[80vh] lg:min-h-[70vh]">
           <Image
             src="/Environtmental-Advantage.webp"
             alt="environmental-advantage"
             width={1000}
             height={1000}
-            className=" object-cover object-[30%_50%] lg:object-[0%_55%] w-full h-full "
+            className="object-cover object-[30%_50%] md:object-[20%_50%] lg:object-[0%_55%] w-full h-full absolute inset-0"
           />
-          <div className=" absolute inset-0 bg-black/60"></div>
-          <div className="absolute top-0  right-0 w-full h-full flex items-start py-6 md:py-10">
-            <div className=" flex flex-col items-center justify-center items gap-2 w-full h-full">
-              <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
+          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="relative z-10 w-full h-full flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8">
+            <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full max-w-7xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white">
                 Environmental Advantage
               </h1>
-              <p className="text-lg md:text-xl text-center text-white">
+              <p className="text-base sm:text-lg md:text-xl text-center text-white max-w-2xl px-2">
                 {t("features.title") + " " + t("features.titleHighlight")}
               </p>
-              <div className="flex flex-col md:flex-row items-start w-full justify-evenly gap-12 mt-4 md:mt-12 p-2">
+              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center w-full gap-8 sm:gap-6 md:gap-8 lg:gap-12 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
                 {features.map((feature: any, index: any) => (
                   <div
                     key={index}
-                    className="flex flex-col md:items-center md:justify-center items-start justify-start md:w-[22%] gap-2 "
+                    className="flex flex-col items-center justify-start w-full sm:w-[45%] md:w-[30%] lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
                   >
-                    <div className="flex md:flex-row justify-start items-center gap-2">
-                      <div className="text-[var(--primary)] mb-2">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+                      <div className="text-[var(--primary)]">
                         {feature.icon}
                       </div>
-                      <h2 className="text-xl md:text-2xl font-semibold text-white ">
+                      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white text-center">
                         {feature.title}
                       </h2>
                     </div>
-                    <p className="text-md md:text-lg text-white text-start md:text-center">
+                    <p className="text-sm sm:text-base md:text-lg text-white text-center leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
