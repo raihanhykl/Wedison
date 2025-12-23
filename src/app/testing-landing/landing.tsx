@@ -328,38 +328,38 @@ export default function Landing() {
         </div>
 
         {/* environmental advantage */}
-        <div className="relative w-full h-[100vh] md:h-[70vh]">
+        <div className="relative w-full min-h-[100svh] sm:min-h-[90vh] md:min-h-[80vh] lg:min-h-[70vh]">
           <Image
             src="/Environtmental-Advantage.webp"
             alt="environmental-advantage"
             width={1000}
             height={1000}
-            className=" object-cover object-[30%_50%] lg:object-[0%_55%] w-full h-full "
+            className="object-cover object-[30%_50%] md:object-[20%_50%] lg:object-[0%_55%] w-full h-full absolute inset-0"
           />
-          <div className=" absolute inset-0 bg-black/60"></div>
-          <div className="absolute top-0  right-0 w-full h-full flex items-start py-6 md:py-10">
-            <div className=" flex flex-col items-center justify-center items gap-2 w-full h-full">
-              <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
+          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="relative z-10 w-full h-full flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8">
+            <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full max-w-7xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white">
                 Environmental Advantage
               </h1>
-              <p className="text-lg md:text-xl text-center text-white">
+              <p className="text-base sm:text-lg md:text-xl text-center text-white max-w-2xl px-2">
                 {t("features.title") + " " + t("features.titleHighlight")}
               </p>
-              <div className="flex flex-col md:flex-row items-start w-full justify-evenly gap-12 mt-4 md:mt-12 p-2">
+              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center w-full gap-8 sm:gap-6 md:gap-8 lg:gap-12 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
                 {features.map((feature: any, index: any) => (
                   <div
                     key={index}
-                    className="flex flex-col md:items-center md:justify-center items-start justify-start md:w-[22%] gap-2 "
+                    className="flex flex-col items-center justify-start w-full sm:w-[45%] md:w-[30%] lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
                   >
-                    <div className="flex md:flex-row justify-start items-center gap-2">
-                      <div className="text-[var(--primary)] mb-2">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+                      <div className="text-[var(--primary)]">
                         {feature.icon}
                       </div>
-                      <h2 className="text-xl md:text-2xl font-semibold text-white ">
+                      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white text-center">
                         {feature.title}
                       </h2>
                     </div>
-                    <p className="text-md md:text-lg text-white text-start md:text-center">
+                    <p className="text-sm sm:text-base md:text-lg text-white text-center leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
