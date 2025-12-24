@@ -38,7 +38,8 @@ const translations = {
     "compare.model": "Compare Models",
     "compare.select.bike": "Select a bike to compare",
     "compare.title": "Compare Our Models",
-    "compare.subtitle": "Find the perfect electric motorcycle that suits your lifestyle",
+    "compare.subtitle":
+      "Find the perfect electric motorcycle that suits your lifestyle",
     "compare.expandAll": "Expand All",
     "compare.collapseAll": "Collapse All",
     "compare.swipeHint": "Swipe to see more",
@@ -1221,7 +1222,8 @@ const translations = {
     "compare.model": "Bandingkan Model",
     "compare.select.bike": "Pilih motor untuk bandingkan",
     "compare.title": "Bandingkan Model Kami",
-    "compare.subtitle": "Temukan motor listrik yang sempurna sesuai gaya hidupmu",
+    "compare.subtitle":
+      "Temukan motor listrik yang sempurna sesuai gaya hidupmu",
     "compare.expandAll": "Buka Semua",
     "compare.collapseAll": "Tutup Semua",
     "compare.swipeHint": "Geser untuk lihat lebih",
@@ -1936,7 +1938,7 @@ const translations = {
     "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
     "athena.productPage.productHighlight1.title": "Layar Digital Canggih",
     "athena.productPage.productHighlight1.description":
-      "Athena dilengkapi head unit modern dengan layar sentuh intuitif, mendukung Apple CarPlay dan Android Auto. Nikmati navigasi, musik, dan notifikasi dengan mudah.",
+      "Panel instrumen LCD Athena yang jernih dan terang memberikan semua informasi penting tentang perjalanan secara sekilas. Sederhana, digital, dan andal, sehingga Anda dapat fokus pada jalan di depan, bebas dari gangguan.",
 
     "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
     "athena.productPage.productHighlight2.title": "SuperCharge",
