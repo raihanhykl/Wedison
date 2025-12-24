@@ -184,6 +184,7 @@ export default function ComparisonTable({
                           src={`/navbar-product/${bike}.webp`}
                           alt={bike!}
                           fill
+                          sizes="100px"
                           className="object-contain"
                         />
                       </div>
@@ -223,7 +224,9 @@ export default function ComparisonTable({
             {specCategories.map((category, categoryIndex) => (
               <div
                 key={category.key}
-                className={categoryIndex !== 0 ? "border-t border-gray-200" : ""}
+                className={
+                  categoryIndex !== 0 ? "border-t border-gray-200" : ""
+                }
               >
                 <button
                   onClick={() => toggleCategory(category.key)}
@@ -243,7 +246,9 @@ export default function ComparisonTable({
 
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
-                    expandedCategories.has(category.key) ? "max-h-[1500px]" : "max-h-0"
+                    expandedCategories.has(category.key)
+                      ? "max-h-[1500px]"
+                      : "max-h-0"
                   }`}
                 >
                   {category.specs.map((spec, specIndex) => (
@@ -251,7 +256,11 @@ export default function ComparisonTable({
                       key={spec.key}
                       className={`flex items-stretch ${
                         specIndex % 2 === 0 ? "bg-white" : "bg-gray-50/50"
-                      } ${specIndex !== category.specs.length - 1 ? "border-b border-gray-100" : ""}`}
+                      } ${
+                        specIndex !== category.specs.length - 1
+                          ? "border-b border-gray-100"
+                          : ""
+                      }`}
                     >
                       <div className="w-[100px] flex-shrink-0 px-2 py-2 flex items-center">
                         <span className="text-[10px] text-gray-600 font-medium leading-tight">
@@ -266,10 +275,17 @@ export default function ComparisonTable({
                           >
                             <span
                               className={`text-[10px] font-medium text-center leading-tight ${
-                                bike === primaryBikeId ? "text-[var(--primary)]" : "text-gray-700"
+                                bike === primaryBikeId
+                                  ? "text-[var(--primary)]"
+                                  : "text-gray-700"
                               }`}
                             >
-                              {getSpecificationValue(bike!, category.key, spec.key, t)}
+                              {getSpecificationValue(
+                                bike!,
+                                category.key,
+                                spec.key,
+                                t
+                              )}
                             </span>
                           </div>
                         ))}
@@ -300,6 +316,7 @@ export default function ComparisonTable({
                       src={`/navbar-product/${bike}.webp`}
                       alt={bike!}
                       fill
+                      sizes="(max-width: 1024px) 200px, 240px"
                       className="object-contain"
                     />
                   </div>
@@ -363,7 +380,11 @@ export default function ComparisonTable({
               <div
                 className={`
                   overflow-hidden transition-all duration-500 ease-in-out
-                  ${expandedCategories.has(category.key) ? "max-h-[2000px]" : "max-h-0"}
+                  ${
+                    expandedCategories.has(category.key)
+                      ? "max-h-[2000px]"
+                      : "max-h-0"
+                  }
                 `}
               >
                 <div className="px-4 lg:px-6 pb-4 lg:pb-6">
@@ -373,7 +394,11 @@ export default function ComparisonTable({
                       className={`
                         grid items-center gap-4 lg:gap-6 py-4 lg:py-5
                         ${specIndex % 2 === 0 ? "bg-white" : "bg-gray-50/30"}
-                        ${specIndex !== category.specs.length - 1 ? "border-b border-gray-100" : ""}
+                        ${
+                          specIndex !== category.specs.length - 1
+                            ? "border-b border-gray-100"
+                            : ""
+                        }
                         rounded-lg px-4 lg:px-6 -mx-2 lg:-mx-4
                       `}
                       style={{
@@ -389,7 +414,10 @@ export default function ComparisonTable({
 
                       {/* Spec Values */}
                       {displayedBikes.map((bike) => (
-                        <div key={bike} className="flex items-center justify-center">
+                        <div
+                          key={bike}
+                          className="flex items-center justify-center"
+                        >
                           <div
                             className={`
                               w-full max-w-[200px] text-center px-4 lg:px-6 py-3 lg:py-4
@@ -402,7 +430,12 @@ export default function ComparisonTable({
                               }
                             `}
                           >
-                            {getSpecificationValue(bike!, category.key, spec.key, t)}
+                            {getSpecificationValue(
+                              bike!,
+                              category.key,
+                              spec.key,
+                              t
+                            )}
                           </div>
                         </div>
                       ))}

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "sitemap": "next-sitemap",
-    "export": "next export"
+    "export": "next export",
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -55,6 +56,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

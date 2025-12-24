@@ -24,9 +24,10 @@ export default function Preloader() {
       <Image
         src="/wedison-sidebyside.png"
         alt="Logo"
-        width={1000}
-        height={1000}
-        className={`w-[70%] h-auto opacity-0 transition-opacity duration-1000 ${
+        width={400}
+        height={100}
+        priority
+        className={`w-[70%] max-w-[400px] h-auto opacity-0 transition-opacity duration-1000 ${
           isLoad ? "opacity-100" : "opacity-0"
         }`}
       />
