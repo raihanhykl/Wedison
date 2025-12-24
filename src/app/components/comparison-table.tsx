@@ -184,6 +184,7 @@ export default function ComparisonTable({
                           src={`/navbar-product/${bike}.webp`}
                           alt={bike!}
                           fill
+                          sizes="100px"
                           className="object-contain"
                         />
                       </div>
@@ -315,6 +316,7 @@ export default function ComparisonTable({
                       src={`/navbar-product/${bike}.webp`}
                       alt={bike!}
                       fill
+                      sizes="(max-width: 1024px) 200px, 240px"
                       className="object-contain"
                     />
                   </div>

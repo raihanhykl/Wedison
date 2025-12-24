@@ -11,12 +11,25 @@ import {
 } from "@/components/ui/carousel";
 import { HeartPulse, Leaf, Wind } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLanguage } from "../lib/language-context";
 import Link from "next/link";
 import Preloader from "../components/Preloader";
-import ComparisonTable from "../components/comparison-table";
+import dynamic from "next/dynamic";
 import Autoplay from "embla-carousel-autoplay";
+
+// Lazy load ComparisonTable untuk mengurangi initial bundle size
+const ComparisonTable = dynamic(
+  () => import("../components/comparison-table"),
+  {
+    loading: () => (
+      <div className="w-full h-96 flex items-center justify-center">
+        <div className="animate-pulse bg-gray-200 rounded-lg w-full h-full" />
+      </div>
+    ),
+    ssr: true,
+  }
+);
 
 export default function Landing() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -91,13 +104,6 @@ export default function Landing() {
       link: t("features.noiseFreeLink"),
     },
   ];
-  const [isDesktop, setIsDesktop] = useState<boolean>(true);
-  useEffect(() => {
-    const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
-    checkScreen(); // initial check
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
-  }, []);
 
   return (
     <>
@@ -127,14 +133,23 @@ export default function Landing() {
               {items.map((item, index) => (
                 <CarouselItem key={index} className="w-full">
                   <div className="relative w-full h-[100svh] sm:h-[100vh] overflow-hidden">
+                    {/* Desktop image */}
                     <Image
-                      src={isDesktop ? item.image : item.imageMobile}
+                      src={item.image}
                       alt={item.imageAlt}
-                      width={1000}
-                      height={1000}
-                      quality={100}
-                      loading={"eager"}
-                      className="object-cover object-center w-full h-full absolute inset-0"
+                      fill
+                      priority={index === 0}
+                      sizes="100vw"
+                      className="object-cover object-center hidden sm:block"
+                    />
+                    {/* Mobile image */}
+                    <Image
+                      src={item.imageMobile}
+                      alt={item.imageAlt}
+                      fill
+                      priority={index === 0}
+                      sizes="100vw"
+                      className="object-cover object-center sm:hidden"
                     />
                     <div className="absolute inset-0 flex items-start justify-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 px-4 sm:px-6 md:px-8">
                       <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 w-full max-w-4xl">
@@ -215,12 +230,26 @@ export default function Landing() {
                     className="px-4 basis-[80%] md:basis-[60%]"
                   >
                     <div className="relative h-full rounded-lg shadow aspect-[2/3] md:aspect-[4/3] lg:aspect-[2/1]">
+                      {/* Desktop image */}
                       <Image
-                        src={isDesktop ? item.image : item.cardMobile}
+                        src={item.image}
                         alt={item.imageAlt}
-                        width={1000}
-                        height={1000}
-                        className={`object-cover md:object-center w-full h-full rounded-xl`}
+                        fill
+                        sizes="(max-width: 768px) 80vw, 60vw"
+                        className="object-cover md:object-center rounded-xl hidden md:block"
+                        onClick={() =>
+                          index !== selectedProductIndex
+                            ? carouselProductApi.current?.scrollTo(index)
+                            : null
+                        }
+                      />
+                      {/* Mobile image */}
+                      <Image
+                        src={item.cardMobile}
+                        alt={item.imageAlt}
+                        fill
+                        sizes="80vw"
+                        className="object-cover rounded-xl md:hidden"
                         onClick={() =>
                           index !== selectedProductIndex
                             ? carouselProductApi.current?.scrollTo(index)
@@ -283,9 +312,9 @@ export default function Landing() {
           <Image
             src="/super-charge/supercharge-testing.png"
             alt="supercharge"
-            width={1000}
-            height={1000}
-            className=" object-cover object-[10%_50%] lg:object-[0%_37%] w-full h-full "
+            fill
+            sizes="100vw"
+            className="object-cover object-[10%_50%] lg:object-[0%_37%]"
           />
           <div className="absolute top-0 right-0 w-full h-full flex items-end md:items-center justify-center md:justify-end md:px-10 md:py-24">
             <div className=" flex flex-col items-center justify-center px-1 md:px-5 items gap-0 w-full md:w-fill md:max-w-[60%] xl:bg-none bg-gradient-to-t from-[#000000]/40 via-[#000000]/30 to-transparent p-5">
@@ -295,8 +324,9 @@ export default function Landing() {
                     src="/super-charge/supercharge-typo-nobg.png"
                     alt="Super Charge"
                     width={500}
-                    height={500}
-                    className="p-0 "
+                    height={100}
+                    sizes="(max-width: 768px) 300px, 500px"
+                    className="p-0 w-auto h-auto max-w-[300px] md:max-w-[500px]"
                   />{" "}
                 </div>
               </h1>
@@ -328,9 +358,9 @@ export default function Landing() {
           <Image
             src="/Environtmental-Advantage.webp"
             alt="environmental-advantage"
-            width={1000}
-            height={1000}
-            className="object-cover object-[30%_50%] md:object-[20%_50%] lg:object-[0%_55%] w-full h-full absolute inset-0"
+            fill
+            sizes="100vw"
+            className="object-cover object-[30%_50%] md:object-[20%_50%] lg:object-[0%_55%]"
           />
           <div className="absolute inset-0 bg-black/60"></div>
           <div className="relative z-10 w-full h-full flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8">

@@ -234,7 +234,8 @@ export default function Navbar() {
                   }
                   alt="Wedison Logo"
                   width={150}
-                  height={1000}
+                  height={40}
+                  priority
                 />
               </Link>
             </div>
@@ -538,15 +539,9 @@ export default function Navbar() {
                               <Image
                                 src={item.image}
                                 alt={item.name}
-                                width={10}
-                                height={10}
-                                className={cn("lg:h-32 lg:w-32 h-16 w-16")}
-                                // className={cn(
-                                //   "lg:h-32 lg:w-32 h-16 w-16",
-                                //   item.name === "Victory" &&
-                                //     "lg:h-36 lg:w-36 h-20 w-20 object-contain scale-[1.16] object-[100%_40%]"
-                                // )}
-                                loading="eager"
+                                width={64}
+                                height={64}
+                                className={cn("lg:h-32 lg:w-32 h-16 w-16 object-contain")}
                               />
                             </div>
                           </Link>
