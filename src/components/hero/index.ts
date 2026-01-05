@@ -1,0 +1,16 @@
+export {
+  HeroSlide,
+  type HeroSlideProps,
+  type ContentVariant,
+  type ContentPosition,
+  type HorizontalPosition,
+  type VerticalPosition,
+  type TextAlign,
+  type Theme,
+  type ContentWidth,
+  type OverlayVariant,
+  type AnimationDirection,
+  type CTAButton,
+  type ResponsivePosition,
+  type ResponsiveTextAlign,
+} from "./HeroSlide";

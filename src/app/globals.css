@@ -225,3 +225,13 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+/* Carousel progress animation */
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
