@@ -868,7 +868,7 @@ const translations = {
     "bees.productPage.productOverview.title":
       "Small in Size. Big on Experience.",
     "bees.productPage.productOverview.description":
-      "An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+      "Compact yet packed with features—Bees delivers XL underseat storage, a sleek digital LED display, and confident dual disc brakes. Easy home charging makes every day effortless.",
 
     "bees.productPage.productHighlight1.imageAlt": "Bees Underseat storage",
     "bees.productPage.productHighlight1.title": "XL Underseat Storage",
@@ -2053,7 +2053,7 @@ const translations = {
     "bees.productPage.productOverview.title":
       "Kecil Ukurannya, Besar Pengalamannya.",
     "bees.productPage.productOverview.description":
-      "Paket roda dan ban terbaru menghadirkan pengalaman berkendara yang lebih halus. Rangka bodi yang didesain ulang mengurangi jumlah komponen dari 70 menjadi 1 untuk menghilangkan celah. Semua itu untuk menciptakan perjalanan yang senyap dan nyaman.",
+      "Kompak namun kaya fitur—Bees hadir dengan bagasi bawah jok XL, layar LED digital yang modern, dan rem cakram ganda yang andal. Pengisian daya di rumah yang praktis membuat setiap hari lebih mudah.",
 
     "bees.productPage.productHighlight1.imageAlt": "Bagasi Bawah Jok Bees",
     "bees.productPage.productHighlight1.title": "Bagasi XL di Bawah Jok",

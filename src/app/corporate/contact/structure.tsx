@@ -84,7 +84,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="pt-16 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-0 2xl:py-20">
+        <div className="main-container py-0 2xl:py-20">
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
               <span className="text-sm font-medium">{t("contact.tag")}</span>
@@ -107,7 +107,7 @@ export default function ContactPage() {
 
       {/* Contact Information Section */}
       <section ref={infoRef} className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {contactInfo.map((item, index) => (
               <div
@@ -211,7 +211,7 @@ export default function ContactPage() {
 
       {/* Form and Map Section */}
       <section id="contact" className="py-12 md:py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Contact Form */}
             <Contact />
@@ -259,7 +259,7 @@ export default function ContactPage() {
 
       {/* FAQ Section */}
       <section ref={faqRef} className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
               {t("contact.page.faqTitle")}

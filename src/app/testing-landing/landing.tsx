@@ -264,14 +264,14 @@ export default function Landing() {
                           <p className="text-xs md:text-sm text-start text-white text font-medium">
                             {item.description}
                           </p>
-                          <div className="flex flex-col md:flex-row justify-center gap-2 mt-2 w-full">
+                          <div className="flex flex-col md:flex-row justify-start gap-2 mt-2 w-full">
                             <Link href={item.link} className=" w-[50%]">
                               <Button className="px-4 md:px-8 text-xs  md:text-sm rounded-sm cursor-pointer">
                                 {t("btn.learn.more")}
                               </Button>
                             </Link>
 
-                            <Link
+                            {/* <Link
                               href={"/corporate/contact/"}
                               className=" w-[50%]"
                             >
@@ -281,7 +281,7 @@ export default function Landing() {
                               >
                                 {t("btn.book.test.ride")}
                               </Button>
-                            </Link>
+                            </Link> */}
                           </div>
                         </div>
                       </div>
@@ -349,7 +349,7 @@ export default function Landing() {
           <SpecTable />
         </div> */}
 
-        <div className="container mx-auto my-24 px-4">
+        <div className="main-container my-24">
           <ComparisonTable mode="overview" primaryBikeId="" />
         </div>
 
