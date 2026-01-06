@@ -46,7 +46,7 @@ export default function FeatureSection2({
       )}
       // className="py-16 md:py-20 lg:py-24 bg-white overflow-hidden relative"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
+      <div className="main-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div
             className={cn(
