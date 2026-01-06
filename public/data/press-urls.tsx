@@ -27,7 +27,7 @@ export const PRESS_URLS: PRESS_URLS[] = [
   {
     url: "https://otorider.com/motor-listrik/2025/motor-listrik-wedison-siap-tampil-di-giias-2025-ternyata-canggih-motdbjijgih",
     headLine:
-      "Terdapat lima model yang bakal diboyong ke Indonesia. Mulai dari skutik sporty Victory, lalu ada tipe retro Athena dan Mini untuk komuter harian. Serta Dash untuk kebutuhan kurir barang.",
+      "Terdapat lima model yang bakal diboyong ke Indonesia. Mulai dari skutik sporty Victory, lalu ada tipe retro Athena dan Bees untuk komuter harian. Serta Dash untuk kebutuhan kurir barang.",
     author: "Ilham Pratama",
     slug: "motor-listrik-wedison-siap-tampil-di-giias-2025-ternyata-canggih",
   },
@@ -57,7 +57,7 @@ export const PRESS_URLS: PRESS_URLS[] = [
     url: "https://teknobuzz.id/2025/08/04/ini-teknologi-canggih-yang-diusung-motor-listrik-wedison/",
     author: "Donnie Pratama",
     headLine:
-      "Brand motor listrik asal Singapura, Wedison, resmi memamerkan jajaran produknya di ajang GIIAS (GAIKINDO Indonesia International Auto Show) 2025 yang digelar di ICE BSD, Tangerang pada tanggal 24 Juli hingga 3 Agustus 2025 ini. Mengusung teknologi unggulan Supercharge, Wedison membidik pasar Indonesia dengan empat model motor listrik andalan, yakni Mini, Athena, Victory, dan EdPower.",
+      "Brand motor listrik asal Singapura, Wedison, resmi memamerkan jajaran produknya di ajang GIIAS (GAIKINDO Indonesia International Auto Show) 2025 yang digelar di ICE BSD, Tangerang pada tanggal 24 Juli hingga 3 Agustus 2025 ini. Mengusung teknologi unggulan Supercharge, Wedison membidik pasar Indonesia dengan empat model motor listrik andalan, yakni Bees, Athena, Victory, dan EdPower.",
     slug: "ini-teknologi-canggih-yang-diusung-motor-listrik-wedison",
   },
 ];

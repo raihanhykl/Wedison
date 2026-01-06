@@ -23,11 +23,11 @@ export default function ComparisonTable({
   primaryBikeId,
   mode = "overview",
 }: ComparisonTableProps) {
-  const bikes = ["mini", "athena", "victory", "edpower"];
+  const bikes = ["bees", "athena", "victory", "edpower"];
   const { t } = useLanguage();
   const [comparisonBikeId, setComparisonBikeId] = useState<string | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    new Set(["engine", "battery"])
+    new Set([])
   );
   const [selectedBikes, setSelectedBikes] = useState<Set<string>>(
     new Set(bikes)
@@ -137,7 +137,8 @@ export default function ComparisonTable({
 
       {/* Bike Selection Pills (Overview Mode) */}
       {mode === "overview" && (
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4 mb-6 md:mb-8 lg:mb-10 px-2">
+        // <div className="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4 mb-6 md:mb-8 lg:mb-10 px-2">
+        <div className="w-[80%] sm:w-[80%] mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3 lg:gap-4 mb-6 md:mb-8 lg:mb-10 px-2">
           {bikes.map((bike) => (
             <button
               key={bike}

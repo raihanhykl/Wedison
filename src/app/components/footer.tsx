@@ -34,10 +34,10 @@ export default function Footer() {
             <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <a
-                  href="/mini/"
+                  href="/bees/"
                   className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
-                  Mini
+                  Bees
                 </a>
               </li>
               {/* <li>
@@ -104,7 +104,7 @@ export default function Footer() {
                   href="/super-charge"
                   className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                 >
-                  Super Charge
+                  SuperCharge
                 </a>
               </li>
               {/* <li>

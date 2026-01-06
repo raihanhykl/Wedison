@@ -65,14 +65,14 @@ export default function Landing() {
       link: "/athena/",
     },
     {
-      image: "/mini/mini-landing-hero.webp",
-      imageAlt: "Mini in Gray",
-      imageMobile: "/mini/mini-landing-hero-mobile.webp",
-      cardMobile: "/mini/mini-landing-card-mobile.webp",
+      image: "/bees/bees-landing-hero.webp",
+      imageAlt: "Bees in Gray",
+      imageMobile: "/bees/bees-landing-hero-mobile.webp",
+      cardMobile: "/bees/bees-landing-card-mobile.webp",
 
-      title: t("mini.productPage.hero.title"),
-      description: t("mini.productPage.hero.description"),
-      link: "/mini/",
+      title: t("bees.productPage.hero.title"),
+      description: t("bees.productPage.hero.description"),
+      link: "/bees/",
     },
     {
       image: "/victory/victory-landing-hero.webp",
@@ -264,14 +264,14 @@ export default function Landing() {
                           <p className="text-xs md:text-sm text-start text-white text font-medium">
                             {item.description}
                           </p>
-                          <div className="flex flex-col md:flex-row justify-center gap-2 mt-2 w-full">
+                          <div className="flex flex-col md:flex-row justify-start gap-2 mt-2 w-full">
                             <Link href={item.link} className=" w-[50%]">
                               <Button className="px-4 md:px-8 text-xs  md:text-sm rounded-sm cursor-pointer">
                                 {t("btn.learn.more")}
                               </Button>
                             </Link>
 
-                            <Link
+                            {/* <Link
                               href={"/corporate/contact/"}
                               className=" w-[50%]"
                             >
@@ -281,7 +281,7 @@ export default function Landing() {
                               >
                                 {t("btn.book.test.ride")}
                               </Button>
-                            </Link>
+                            </Link> */}
                           </div>
                         </div>
                       </div>
@@ -314,23 +314,23 @@ export default function Landing() {
             alt="supercharge"
             fill
             sizes="100vw"
-            className="object-cover object-[10%_50%] lg:object-[0%_37%]"
+            className="object-cover object-[10%_50%] sm:object-[0%_50%] lg:object-[0%_37%]"
           />
-          <div className="absolute top-0 right-0 w-full h-full flex items-end md:items-center justify-center md:justify-end md:px-10 md:py-24">
-            <div className=" flex flex-col items-center justify-center px-1 md:px-5 items gap-0 w-full md:w-fill md:max-w-[60%] xl:bg-none bg-gradient-to-t from-[#000000]/40 via-[#000000]/30 to-transparent p-5">
-              <h1 className="text-3xl md:text-5xl font-bold text-center text-white xl:flex text-nowrap">
-                <div className=" p-0 flex flex-col xl:flex-row items-center justify-center gap-2 bg-red-100/0">
+          <div className="absolute top-0 right-0 w-full h-full flex items-end lg:items-center justify-center lg:justify-end lg:px-10 lg:py-24">
+            <div className=" flex flex-col items-center justify-center px-1 md:px-5 items gap-0 w-full lg:w-fill lg:max-w-[50%] xl:bg-none max-lg:bg-gradient-to-t max-lg:from-[#000000]/60 max-lg:from-15% max-lg:via-[#000000]/30 max-md:via-80% max-md:to-transparent p-5">
+              <h1 className="text-3xl md:text-5xl font-bold text-center text-white lg:flex text-nowrap">
+                <div className=" max-sm:px-3 flex flex-col xl:flex-row items-center justify-center gap-2 bg-red-100/0">
                   <Image
                     src="/super-charge/supercharge-typo-nobg.png"
-                    alt="Super Charge"
+                    alt="SuperCharge"
                     width={500}
                     height={100}
                     sizes="(max-width: 768px) 300px, 500px"
-                    className="p-0 w-auto h-auto max-w-[300px] md:max-w-[500px]"
+                    className="p-0 w-auto h-auto max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
                   />{" "}
                 </div>
               </h1>
-              <p className="text-sm md:text-lg text-center text-white">
+              <p className="text-sm md:text-lg text-center text-white mb-4">
                 {t("supercharge.landing.description")}
               </p>
               <div className="md:flex w-full justify-center gap-4 mt-0 px-6 *:mt-3">
@@ -349,7 +349,7 @@ export default function Landing() {
           <SpecTable />
         </div> */}
 
-        <div className="container mx-auto my-24 px-4">
+        <div className="main-container my-24">
           <ComparisonTable mode="overview" primaryBikeId="" />
         </div>
 
@@ -371,11 +371,12 @@ export default function Landing() {
               <p className="text-base sm:text-lg md:text-xl text-center text-white max-w-2xl px-2">
                 {t("features.title") + " " + t("features.titleHighlight")}
               </p>
-              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center w-full gap-8 sm:gap-6 md:gap-8 lg:gap-12 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
+              <div className="flex flex-col lg:flex-row flex-wrap items-center justify-center w-full gap-8 sm:gap-6 md:gap-8 lg:gap-12 mt-8 sm:mt-14 md:mt-24 lg:mt-16">
                 {features.map((feature: any, index: any) => (
                   <div
                     key={index}
-                    className="flex flex-col items-center justify-start w-full sm:w-[45%] md:w-[30%] lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
+                    className="flex flex-col items-center justify-start w-full  lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
+                    // className="flex flex-col items-center justify-start w-full sm:w-[45%] md:w-[30%] lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
                   >
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
                       <div className="text-[var(--primary)]">

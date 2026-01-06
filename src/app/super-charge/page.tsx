@@ -45,7 +45,7 @@ export default function EdmaxPage() {
       <main className="min-h-screen bg-white">
         {/* <HeroSection
           name="supercharge"
-          imageAlt="Super Charge Charging Station"
+          imageAlt="SuperCharge Charging Station"
           theme="dark"
           imageStyle="object-[90%_10%] md:object-[100%_40%] 2xl:object-[0%_100%] "
           noButton={true}
