@@ -286,7 +286,7 @@ export default function GetProductData(bikeType: string) {
       {
         title: t(`${bikeType}.productPage.techSpecs2.title`),
         desc: t(`${bikeType}.productPage.techSpecs2.desc`),
-        ...(bikeType !== "mini" && {
+        ...(bikeType !== "bees" && {
           unit: t(`${bikeType}.productPage.techSpecs2.unit`),
         }),
       },
@@ -351,7 +351,7 @@ export default function GetProductData(bikeType: string) {
       title: t(`${bikeType}.productPage.chargingOverview.title`),
       desc: t(`${bikeType}.productPage.chargingOverview.description`),
     },
-    ...(bikeType !== "mini" && {
+    ...(bikeType !== "bees" && {
       chargingHighlight: [
         {
           image: `/${bikeType}/${bikeType}-charging-card1.webp`,

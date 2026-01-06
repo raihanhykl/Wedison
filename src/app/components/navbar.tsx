@@ -96,7 +96,7 @@ export default function Navbar() {
       name: t("nav.products"),
       href: "#",
       subMenu: [
-        { name: "Mini", href: "/mini/", image: "/navbar-product/mini.webp" },
+        { name: "Bees", href: "/bees/", image: "/navbar-product/bees.webp" },
         {
           name: "Athena",
           href: "/athena/",

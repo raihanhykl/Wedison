@@ -18,10 +18,10 @@ const NavbarProduct = forwardRef<HTMLDivElement, Props>(
     // export default function NavbarProduct({ open, ref }: Props) {
     const product: Product[] = [
       {
-        name: "Mini",
-        image: "/navbar-product/mini.webp",
-        // image: "/mini-green.webp",
-        href: "/mini/",
+        name: "Bees",
+        image: "/navbar-product/bees.webp",
+        // image: "/bees-green.webp",
+        href: "/bees/",
       },
       {
         name: "Athena",
