@@ -38,17 +38,16 @@ export default function MediaCenterClient({ previews }: Props) {
       </div>
 
       {/* Berita */}
-      <div className="mx-auto container max-w-[2200px]">
-        <div className="mx-4 my-6 md:m-8">
+      <div className="main-container">
+        <div className="my-6 md:my-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
             {t("mediaCenter.landing.news.title")}
           </h2>
           <div className="w-full h-[2px] mt-2 bg-gray-200"></div>
         </div>
 
-        <div className=" mx-auto container max-w-[2200px] px-4 py-8">
-          <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
-            {/* {[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3].map((a, i) => ( */}
+        <div className="py-8">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {previews.map((p) => (
               <div key={p.url} className="rounded-xl">
                 <NewsCard data={p} />

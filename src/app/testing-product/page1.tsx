@@ -10,8 +10,8 @@ export default function Page() {
     {
       image: "/bees-hero.webp",
       alt: "Bees Hero",
-      title: "Even Quieter",
-      desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
+      title: "Compact & Feature-Rich",
+      desc: "Compact yet packed with features—Bees delivers XL underseat storage, a sleek digital LED display, and confident dual disc brakes. Easy home charging makes every day effortless.",
     },
     {
       image: "/edmax-hero.webp",

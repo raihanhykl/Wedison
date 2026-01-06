@@ -50,7 +50,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       {/* Hero Section with Image */}
       <section className="pt-0 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-16">
+        <div className="main-container py-16 md:py-20 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               <div className="text-center mb-8 md:mb-0">
@@ -101,7 +101,7 @@ export default function AboutPage() {
 
       {/* Mission Section */}
       <section ref={missionRef} className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <div className="max-w-4xl mx-auto">
             <div
               className={cn(
@@ -130,7 +130,7 @@ export default function AboutPage() {
 
       {/* Core Values Section */}
       <section ref={valuesRef} className="py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
             {t("about.values.title")}
           </h2>
@@ -207,7 +207,7 @@ export default function AboutPage() {
 
       {/* Projects Section */}
       <section ref={projectsRef} className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
             {t("about.projects.title")}
           </h2>
@@ -262,7 +262,7 @@ export default function AboutPage() {
 
       {/* What We Offer Section */}
       <section ref={offersRef} className="py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
             {t("about.offers.title")}
           </h2>
@@ -317,7 +317,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="main-container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
               {t("about.joinUs")}
