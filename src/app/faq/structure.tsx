@@ -50,12 +50,16 @@ export default function FaqStructure() {
           height={400}
           width={1400}
           alt="banner"
-          className=" h-full w-full object-cover object-[80%_100%] absolute inset-0 z-10"
+          className=" h-full w-full object-cover object-[60%_100%] absolute inset-0 z-10"
         />
         <div className=" w-full h-full bg-black/50 absolute inset-0 z-20">
           <div className=" h-full w-full md:w-[50%] mr-auto text-white flex-col flex items-center justify-center">
             <div className=" flex flex-col items-center">
-              <h2 className=" text-8xl tracking-wider font-bold">FAQ</h2>
+              {/* <h2 className=" text-8xl tracking-wider font-bold"> */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white font-semibold tracking-wide px-4 text-center">
+
+                FAQ
+                </h2>
               {/* <p className="my-2 text-xl text-white">
                 Find answers to the most common questions about our services,
                 products, and general information. If you don&apos;t see the

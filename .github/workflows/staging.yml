@@ -1,0 +1,95 @@
+name: CI/CD - Wedison Staging (Next.js SSG → Hostinger FTP)
+
+on:
+  push:
+    branches: [staging, develop]
+  pull_request:
+    branches: [staging, develop]
+  workflow_dispatch: {}
+
+concurrency:
+  group: Wedison-Staging-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 20
+  BUILD_DIR: out
+  REMOTE_DIR: /domains/wedison.co/public_html/staging # atau subdomain/subfolder
+  WEBSITE_URL: https://staging.wedison.co # atau subdomain staging Anda
+
+jobs:
+  ci:
+    name: Build (SSG) & Checks
+    runs-on: ubuntu-latest
+    env:
+      TAILWIND_DISABLE_OXIDE: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Build (Next.js SSG + next-sitemap)
+        run: npm run build
+        env:
+          NODE_ENV: staging
+          # Tambahkan env variables staging jika ada
+          # NEXT_PUBLIC_API_URL: ${{ secrets.STAGING_API_URL }}
+
+      - name: Copy sitemap/robots to out (post-build)
+        shell: bash
+        run: |
+          mkdir -p "${BUILD_DIR}"
+          shopt -s nullglob || true
+          for f in public/robots.txt public/sitemap*.xml public/*.xml.gz; do
+            if [ -f "$f" ]; then
+              cp -f "$f" "${BUILD_DIR}/"
+            fi
+          done
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-out-staging
+          path: ${{ env.BUILD_DIR }}
+
+  deploy:
+    name: Deploy to Hostinger Staging (FTP)
+    needs: ci
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/develop')
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ env.WEBSITE_URL }}
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-out-staging
+          path: ${{ env.BUILD_DIR }}
+
+      - name: FTP Deploy (preserve .htaccess)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          username: ${{ secrets.HOSTINGER_STAGING_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_STAGING_FTP_PASSWORD }}
+          local-dir: ${{ env.BUILD_DIR }}/
+          server-dir: ${{ env.REMOTE_DIR }}/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/.htaccess
+            .htaccess

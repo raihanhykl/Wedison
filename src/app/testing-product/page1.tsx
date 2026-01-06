@@ -8,8 +8,8 @@ import PeekCarousel, { carouselData } from "./peek";
 export default function Page() {
   const ProductData: carouselData[] = [
     {
-      image: "/mini-hero.webp",
-      alt: "Mini Hero",
+      image: "/bees-hero.webp",
+      alt: "Bees Hero",
       title: "Even Quieter",
       desc: "  An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
     },
@@ -64,7 +64,7 @@ export default function Page() {
       <div className=" relative w-full">
         <div className="flex flex-col items-center justify-center w-full h-[96vh] md:h-[96vh]">
           <Image
-            src={"/mini-hero.webp"}
+            src={"/bees-hero.webp"}
             alt={`contoh-hero`}
             width={1000}
             quality={100}
@@ -151,7 +151,7 @@ export default function Page() {
       <div className="w-full xl:px-16 flex flex-col justify-center">
         <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px]">
           <Image
-            src={"/mini-hero.webp"}
+            src={"/bees-hero.webp"}
             alt={`wedison-sidebyside`}
             width={1000}
             height={1000}
@@ -175,7 +175,7 @@ export default function Page() {
       </div>
       {/* Product Highlight */}
       <div className="">
-        <PeekCarousel data={ProductData} for="mini" perView={1.35} />
+        <PeekCarousel data={ProductData} for="bees" perView={1.35} />
       </div>
 
       {/* Supercharge Overview */}

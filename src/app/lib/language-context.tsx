@@ -32,11 +32,17 @@ const translations = {
     //SEO Landing
     "landing.title": "Wedison - The Future of Electric Mobility",
     "landing.description":
-      "Wedison is an eco-friendly electric motorcycle brand with the latest Super Charge technology.",
+      "Wedison is an eco-friendly electric motorcycle brand with the latest SuperCharge technology.",
 
     // compare table
     "compare.model": "Compare Models",
     "compare.select.bike": "Select a bike to compare",
+    "compare.title": "Compare Our Models",
+    "compare.subtitle":
+      "Find the perfect electric motorcycle that suits your lifestyle",
+    "compare.expandAll": "Expand All",
+    "compare.collapseAll": "Collapse All",
+    "compare.swipeHint": "Swipe to see more",
 
     // buttons
     "btn.learn.more": "Learn More",
@@ -58,7 +64,7 @@ const translations = {
       "Get the latest news, official releases, and highlights about Wedison",
     "nav.showroom": "Showroom",
     "nav.serviceLocation": "Service Location",
-    "nav.superCharge": "Super Charge",
+    "nav.superCharge": "SuperCharge",
     "nav.corporate": "Corporate",
     "nav.corporate.leftCard.title": "Powering the Future",
     "nav.corporate.leftCard.description":
@@ -90,7 +96,7 @@ const translations = {
     "features.longRangeBattery": "120km Long-Range Battery",
     "features.longRangeBatteryDesc":
       "Travel up to 100 km on a single charge with our advanced lithium-ion battery technology.",
-    "features.rapidCharging": "Super Charge in 15 Minutes",
+    "features.rapidCharging": "SuperCharge in 15 Minutes",
     "features.rapidChargingDesc":
       "Charge from 10% to 80% in just 15 minutes with our SuperCharge network.",
     "features.impressivePerformance": "0-95km/h in 3 Seconds",
@@ -250,16 +256,16 @@ const translations = {
     "about.projects.future.title": "Create a Brighter Green Future",
     "about.projects.future.description":
       "Utilizing renewable energy to reduce carbon emissions and support a healthier environment. Expanding the electric vehicle (EV) market, making communities cleaner and transportation more affordable for everyone.",
-    "about.projects.charging.title": "Super Charge",
+    "about.projects.charging.title": "SuperCharge",
     "about.projects.charging.description":
       "We built a robust charging infrastructure to support the growing electric vehicle ecosystem while creating time-saving opportunities for businesses.",
     "about.offers.title": "What We Offer",
     "about.offers.motorcycles.title": "Electric Motorcycle Models",
     "about.offers.motorcycles.description":
       "We offer a range of electric motorcycle models, each designed to meet diverse customer needs and preferences.",
-    "about.offers.charging.title": "Super Charge Stations",
+    "about.offers.charging.title": "SuperCharge Stations",
     "about.offers.charging.description":
-      "We offer Super Charge stations, providing quick and convenient charging solutions, ensuring that electric motorcycle users can easily power up their vehicles and stay on the road longer.",
+      "We offer SuperCharge stations, providing quick and convenient charging solutions, ensuring that electric motorcycle users can easily power up their vehicles and stay on the road longer.",
     "about.joinUs": "Join Our Mission",
     "about.joinUsDescription":
       " Join us in our mission to create a sustainable future through  electric mobility. Together, we can make a difference.",
@@ -326,7 +332,7 @@ const translations = {
     "specs.category.battery.batteryCapacity": "Battery Capacity",
     "specs.category.battery.voltage": "Voltage",
     "specs.category.battery.chargingTimeSuperCharge":
-      "Charging Time with Super Charge (10-80%)",
+      "Charging Time with SuperCharge (10-80%)",
     "specs.category.battery.chargingTimeHome":
       "Charging Time with Home Charging (0-100%)",
     "specs.category.battery.range": "Cruising Range",
@@ -357,7 +363,7 @@ const translations = {
     "edmax.title":
       "EdPower – Powerful & Smart Electric Motorcycle from Wedison",
     "edmax.description":
-      "Edmax is Wedison's flagship electric motorcycle with 86km/h top speed, advanced headunit (CarPlay & Android Auto), and Super Charge support.",
+      "Edmax is Wedison's flagship electric motorcycle with 86km/h top speed, advanced headunit (CarPlay & Android Auto), and SuperCharge support.",
 
     "edmax.hero.tag": "Flagship Model",
     "edmax.hero.title": "Ride the Future with",
@@ -379,9 +385,9 @@ const translations = {
     "edmax.feature1.realtime": "Real-time",
     "edmax.feature1.rangeIndicator": "Range Indicator",
 
-    "edmax.feature2.tag": "Super Charge",
+    "edmax.feature2.tag": "SuperCharge",
     "edmax.feature2.title": "Power Up in Minutes",
-    "edmax.feature2.subtitle": "Super Charge Technology",
+    "edmax.feature2.subtitle": "SuperCharge Technology",
     "edmax.feature2.description":
       "From 10% to 80% in just 15 minutes. Because your time is too valuable to waste.",
     "edmax.feature2.charge": "10% to 80% Charge",
@@ -476,15 +482,15 @@ const translations = {
       "Go farther than ever. With up to 135 km on a single charge, EDPower is ready for city exploring or out-of-town adventures—no limits, just freedom.",
 
     "edpower.productPage.chargingOverview.imageAlt":
-      "EDPower parked at a Wedison showroom with Super Charge and home charger visible",
+      "EDPower parked at a Wedison showroom with SuperCharge and home charger visible",
     "edpower.productPage.chargingOverview.title":
       "Fast, Flexible Charging for Every Lifestyle",
     "edpower.productPage.chargingOverview.description":
-      "EDPower adapts to your schedule with two effortless charging options: ultra-fast Super Charge at Wedison showrooms, or convenient overnight home charging. Always powered, always ready.",
+      "EDPower adapts to your schedule with two effortless charging options: ultra-fast SuperCharge at Wedison showrooms, or convenient overnight home charging. Always powered, always ready.",
 
     "edpower.productPage.chargingHighlight1.imageAlt":
-      "EDPower connected to a Wedison Super Charge station",
-    "edpower.productPage.chargingHighlight1.title": "Wedison Super Charge",
+      "EDPower connected to a Wedison SuperCharge station",
+    "edpower.productPage.chargingHighlight1.title": "Wedison SuperCharge",
     "edpower.productPage.chargingHighlight1.description": (
       <>
         Charge from 10% to 80% in just 15 minutes. Perfect for quick top-ups on
@@ -637,19 +643,19 @@ const translations = {
       "Wide wheels, grippy tires, and hydraulic shock absorbers deliver natural, precise handling in every situation—perfect for fast-paced city life.",
 
     "victory.productPage.productHighlight3.imageAlt":
-      "Close-up of Super Charge port with Wedison branding",
-    "victory.productPage.productHighlight3.title": "Super Charge Ready",
+      "Close-up of SuperCharge port with Wedison branding",
+    "victory.productPage.productHighlight3.title": "SuperCharge Ready",
     "victory.productPage.productHighlight3.description":
-      "Recharge from 10% to 80% in just 15 minutes with Wedison Super Charge, or top up at home for total flexibility.",
+      "Recharge from 10% to 80% in just 15 minutes with Wedison SuperCharge, or top up at home for total flexibility.",
 
     "victory.productPage.chargingOverview.imageAlt":
-      "Victory parked at a Wedison showroom, Super Charge station in view",
+      "Victory parked at a Wedison showroom, SuperCharge station in view",
     "victory.productPage.chargingOverview.title": "Charge Your Way",
     "victory.productPage.chargingOverview.description":
-      "Power up in minutes with Super Charge at any Wedison showroom, or recharge conveniently at home. Victory adapts to your lifestyle—always ready for your next move.",
+      "Power up in minutes with SuperCharge at any Wedison showroom, or recharge conveniently at home. Victory adapts to your lifestyle—always ready for your next move.",
 
     "victory.productPage.chargingHighlight1.imageAlt":
-      "Victory at a Wedison Super Charge station, cable connected",
+      "Victory at a Wedison SuperCharge station, cable connected",
     "victory.productPage.chargingHighlight1.title": "Ultra-Fast SuperCharge",
     "victory.productPage.chargingHighlight1.description": (
       <>
@@ -755,7 +761,7 @@ const translations = {
     "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
     "athena.productPage.productHighlight2.title": "SuperCharge",
     "athena.productPage.productHighlight2.description":
-      "Power up from 10% to 80% in just 15 minutes with Wedison Super Charge (available at all showrooms), or conveniently charge at home with a full charge in under 4 hours. Athena is engineered for the non-stop city pace.",
+      "Power up from 10% to 80% in just 15 minutes with Wedison SuperCharge (available at all showrooms), or conveniently charge at home with a full charge in under 4 hours. Athena is engineered for the non-stop city pace.",
 
     "athena.productPage.productHighlight3.imageAlt":
       "CBS Breaking System Athena",
@@ -767,7 +773,7 @@ const translations = {
       "Green Athena with SuperCharge and Home Charging",
     "athena.productPage.chargingOverview.title": "Charging Made Effortless",
     "athena.productPage.chargingOverview.description":
-      "Stay in motion with Athena’s flexible charging solutions. Plug in at home for everyday convenience, or experience rapid Super Charge at any Wedison showroom. Athena gives you the freedom to choose—charge where you live, or power up fast when you're on the go.",
+      "Stay in motion with Athena’s flexible charging solutions. Plug in at home for everyday convenience, or experience rapid SuperCharge at any Wedison showroom. Athena gives you the freedom to choose—charge where you live, or power up fast when you're on the go.",
 
     "athena.productPage.chargingHighlight1.imageAlt": "Athena with SuperCharge",
     "athena.productPage.chargingHighlight1.title": "15-Minute SuperCharge",
@@ -816,112 +822,112 @@ const translations = {
     "athena.specs.suspension.rearSuspension": "Hydraulic Telescopic",
 
     //mini
-    "mini.hero.tag": "Entry-Level EV",
-    "mini.hero.title": "Affordable Mobility for",
-    "mini.hero.titleHighlight": "Everyday Commuting",
-    "mini.hero.description":
-      "Mini is Wedison’s lightest and most agile electric scooter — designed for students, workers, and anyone looking for a compact, budget-friendly ride.",
-    "mini.hero.orderNow": "Order Now",
-    "mini.hero.downloadBrochure": "Download Brochure",
+    "bees.hero.tag": "Entry-Level EV",
+    "bees.hero.title": "Affordable Mobility for",
+    "bees.hero.titleHighlight": "Everyday Commuting",
+    "bees.hero.description":
+      "Bees is Wedison's lightest and most agile electric scooter — designed for students, workers, and anyone looking for a compact, budget-friendly ride.",
+    "bees.hero.orderNow": "Order Now",
+    "bees.hero.downloadBrochure": "Download Brochure",
 
-    "mini.feature1.tag": "Compact and Nimble",
-    "mini.feature1.title": "Small Frame, Big Agility",
-    "mini.feature1.subtitle": "Lightweight design for crowded streets",
-    "mini.feature1.description":
-      "Its slim and light build makes Mini perfect for tight traffic and narrow lanes. Easy to ride, space-saving, and highly maneuverable.",
+    "bees.feature1.tag": "Compact and Nimble",
+    "bees.feature1.title": "Small Frame, Big Agility",
+    "bees.feature1.subtitle": "Lightweight design for crowded streets",
+    "bees.feature1.description":
+      "Its slim and light build makes Bees perfect for tight traffic and narrow lanes. Easy to ride, space-saving, and highly maneuverable.",
 
-    "mini.feature2.tag": "Budget-Friendly Ride",
-    "mini.feature2.title": "Super Affordable & Subsidy Eligible",
-    "mini.feature2.subtitle": "Lower cost, easy access",
-    "mini.feature2.description":
-      "Mini qualifies for government EV subsidy. It’s wallet-friendly, can be charged at home, and perfect for all kinds of daily users.",
+    "bees.feature2.tag": "Budget-Friendly Ride",
+    "bees.feature2.title": "Super Affordable & Subsidy Eligible",
+    "bees.feature2.subtitle": "Lower cost, easy access",
+    "bees.feature2.description":
+      "Bees qualifies for government EV subsidy. It's wallet-friendly, can be charged at home, and perfect for all kinds of daily users.",
 
-    "mini.color.description":
-      "Pick your favorite Mini color and see it in action.",
+    "bees.color.description":
+      "Pick your favorite Bees color and see it in action.",
 
     // ===
 
-    "mini.productPage.hero.imageAlt": "Red Mini and White Mini",
-    "mini.productPage.hero.title": "MINI",
-    "mini.productPage.hero.description": "Affordable Mobility for Every Ride",
-    "mini.productPage.hero.ctaPrimary": "Order Now",
-    "mini.productPage.hero.ctaSecondary": "Download Brochure",
+    "bees.productPage.hero.imageAlt": "Red Bees and White Bees",
+    "bees.productPage.hero.title": "BEES",
+    "bees.productPage.hero.description": "Affordable Mobility for Every Ride",
+    "bees.productPage.hero.ctaPrimary": "Order Now",
+    "bees.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "mini.productPage.techSpecs1.title": 65,
-    "mini.productPage.techSpecs1.unit": "km",
-    "mini.productPage.techSpecs1.desc": "Cruising Range",
+    "bees.productPage.techSpecs1.title": 65,
+    "bees.productPage.techSpecs1.unit": "km",
+    "bees.productPage.techSpecs1.desc": "Cruising Range",
 
-    "mini.productPage.techSpecs2.title": "LED",
-    "mini.productPage.techSpecs2.desc": "Head unit Display",
+    "bees.productPage.techSpecs2.title": "LED",
+    "bees.productPage.techSpecs2.desc": "Head unit Display",
 
-    "mini.productPage.techSpecs3.title": 55,
-    "mini.productPage.techSpecs3.unit": "km/h",
-    "mini.productPage.techSpecs3.desc": "Top Speed",
+    "bees.productPage.techSpecs3.title": 55,
+    "bees.productPage.techSpecs3.unit": "km/h",
+    "bees.productPage.techSpecs3.desc": "Top Speed",
 
-    "mini.productPage.productOverview.imageAlt": "Red Mini",
-    "mini.productPage.productOverview.title":
+    "bees.productPage.productOverview.imageAlt": "Red Bees",
+    "bees.productPage.productOverview.title":
       "Small in Size. Big on Experience.",
-    "mini.productPage.productOverview.description":
+    "bees.productPage.productOverview.description":
       "An updated wheel and tire package offers a smoother driving experience. Redesigned body castings reduce parts from 70 to 1 for fewer gaps. All to create a whisper-quiet ride.",
 
-    "mini.productPage.productHighlight1.imageAlt": "Mini Underseat storage",
-    "mini.productPage.productHighlight1.title": "XL Underseat Storage",
-    "mini.productPage.productHighlight1.description":
-      "Bring more along for every ride. Mini’s extra-large underseat compartment fits a backpack, groceries, or even a full-face helmet—more space, more possibilities.",
+    "bees.productPage.productHighlight1.imageAlt": "Bees Underseat storage",
+    "bees.productPage.productHighlight1.title": "XL Underseat Storage",
+    "bees.productPage.productHighlight1.description":
+      "Bring more along for every ride. Bees' extra-large underseat compartment fits a backpack, groceries, or even a full-face helmet—more space, more possibilities.",
 
-    "mini.productPage.productHighlight2.imageAlt": "Mini LED Display",
-    "mini.productPage.productHighlight2.title": "Digital LED Display",
-    "mini.productPage.productHighlight2.description":
+    "bees.productPage.productHighlight2.imageAlt": "Bees LED Display",
+    "bees.productPage.productHighlight2.title": "Digital LED Display",
+    "bees.productPage.productHighlight2.description":
       "Stay informed and in control with a crisp, modern digital LED display. Get real-time info on speed, battery, and more—all at a glance.",
 
-    "mini.productPage.productHighlight3.imageAlt": "Mini Disc Brakes",
-    "mini.productPage.productHighlight3.title": "Confident Dual Disc Brakes",
-    "mini.productPage.productHighlight3.description":
+    "bees.productPage.productHighlight3.imageAlt": "Bees Disc Brakes",
+    "bees.productPage.productHighlight3.title": "Confident Dual Disc Brakes",
+    "bees.productPage.productHighlight3.description":
       "Experience maximum stopping power and safety with disc brakes on both the front and rear wheels. Enjoy smooth, responsive braking in all riding conditions—so you can ride with complete peace of mind.",
 
-    "mini.productPage.chargingOverview.imageAlt":
-      "Red Mini charging at a home outlet",
-    "mini.productPage.chargingOverview.title": "Simple Home Charging",
-    "mini.productPage.chargingOverview.description":
-      "Recharge easily from any standard outlet. With the included home charger, Mini is always ready for your next ride—no fast-charging needed, just plug and go.",
+    "bees.productPage.chargingOverview.imageAlt":
+      "Red Bees charging at a home outlet",
+    "bees.productPage.chargingOverview.title": "Simple Home Charging",
+    "bees.productPage.chargingOverview.description":
+      "Recharge easily from any standard outlet. With the included home charger, Bees is always ready for your next ride—no fast-charging needed, just plug and go.",
 
     // ===
 
-    "mini.specs.engine.motorType": "Brusless DC Motor",
-    "mini.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
-    "mini.specs.engine.topSpeed": "55 km/hour",
-    "mini.specs.engine.acceleration": "9.3 seconds",
-    "mini.specs.battery.batteryType": "Lithium-ion (LFP)",
-    "mini.specs.battery.batteryCapacity": "1.6 kWh",
-    "mini.specs.battery.voltage": "64 Volt",
-    "mini.specs.battery.chargingTimeSuperCharge": "-",
-    "mini.specs.battery.chargingTimeHome": "4 hours",
-    "mini.specs.battery.range": "65 km",
-    "mini.specs.brake.frontBrake": "Disc Brake",
-    "mini.specs.brake.rearBrake": "Disc Brake",
-    "mini.specs.brake.cbsSupport": "No",
-    "mini.specs.dimension.length": "1.790 mm",
-    "mini.specs.dimension.width": "670 mm",
-    "mini.specs.dimension.height": "1.110 mm",
-    "mini.specs.dimension.wheelbase": "1.370 mm",
-    "mini.specs.dimension.groundClearance": "130 mm",
-    "mini.specs.dimension.seatHeight": "760 mm",
-    "mini.specs.dimension.weight": "78.5 kg",
-    "mini.specs.tire.frontTire": "90/90-10",
-    "mini.specs.tire.rearTire": "90/90-10",
-    "mini.specs.suspension.frontSuspension": "Hydraulic Telescopic",
-    "mini.specs.suspension.rearSuspension": "Hydraulic Telescopic",
+    "bees.specs.engine.motorType": "Brusless DC Motor",
+    "bees.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
+    "bees.specs.engine.topSpeed": "55 km/hour",
+    "bees.specs.engine.acceleration": "9.3 seconds",
+    "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "bees.specs.battery.batteryCapacity": "1.6 kWh",
+    "bees.specs.battery.voltage": "64 Volt",
+    "bees.specs.battery.chargingTimeSuperCharge": "-",
+    "bees.specs.battery.chargingTimeHome": "4 hours",
+    "bees.specs.battery.range": "65 km",
+    "bees.specs.brake.frontBrake": "Disc Brake",
+    "bees.specs.brake.rearBrake": "Disc Brake",
+    "bees.specs.brake.cbsSupport": "No",
+    "bees.specs.dimension.length": "1.790 mm",
+    "bees.specs.dimension.width": "670 mm",
+    "bees.specs.dimension.height": "1.110 mm",
+    "bees.specs.dimension.wheelbase": "1.370 mm",
+    "bees.specs.dimension.groundClearance": "130 mm",
+    "bees.specs.dimension.seatHeight": "760 mm",
+    "bees.specs.dimension.weight": "78.5 kg",
+    "bees.specs.tire.frontTire": "90/90-10",
+    "bees.specs.tire.rearTire": "90/90-10",
+    "bees.specs.suspension.frontSuspension": "Hydraulic Telescopic",
+    "bees.specs.suspension.rearSuspension": "Hydraulic Telescopic",
 
-    //super charge
+    //SuperCharge
     "supercharge.landing.title": "Your Trip",
     "supercharge.landing.description":
-      "Super Charge your ride with fast, reliable charging. Charge from 10% to 80% in just 15 minutes.",
+      "SuperCharge your ride with fast, reliable charging. Charge from 10% to 80% in just 15 minutes.",
 
     "supercharge.hero.tag": "Fast Charging",
     "supercharge.hero.title": "Charge from 10% to 80% in",
     "supercharge.hero.titleHighlight": "Just 15 Minutes",
     "supercharge.hero.description":
-      "Super Charge is Wedison’s exclusive fast-charging solution. Designed specifically for EdPower, Athena, and Victory — experience efficiency with no compromise.",
+      "SuperCharge is Wedison’s exclusive fast-charging solution. Designed specifically for EdPower, Athena, and Victory — experience efficiency with no compromise.",
     "supercharge.hero.ctaPrimary": "Find a Station",
     "supercharge.hero.ctaSecondary": "Learn the Tech",
 
@@ -929,13 +935,13 @@ const translations = {
     "supercharge.feature1.title": "Next-Gen Charging Technology",
     "supercharge.feature1.subtitle": "Less time, maximum performance",
     "supercharge.feature1.description":
-      "With cutting-edge fast charging, Super Charge powers your battery from 10% to 80% in just 15 minutes. Save time without sacrificing quality.",
+      "With cutting-edge fast charging, SuperCharge powers your battery from 10% to 80% in just 15 minutes. Save time without sacrificing quality.",
 
     "supercharge.feature2.tag": "Nationwide Coverage",
-    "supercharge.feature2.title": "100+ Super Charge Stations Across Indonesia",
+    "supercharge.feature2.title": "100+ SuperCharge Stations Across Indonesia",
     "supercharge.feature2.subtitle": "Wherever you ride, we’ve got your charge",
     "supercharge.feature2.description":
-      "With over 100 Super Charge stations across strategic locations in Indonesia, you’ll always stay powered — no matter where the road takes you.",
+      "With over 100 SuperCharge stations across strategic locations in Indonesia, you’ll always stay powered — no matter where the road takes you.",
 
     "supercharge.feature3.tag": "Reliable. Safe. Compliant.",
     "supercharge.feature3.title": "Built to Last",
@@ -1027,7 +1033,7 @@ const translations = {
     "faq.Battery.questions.1.question":
       "How long does it take to fully charge the battery?",
     "faq.Battery.questions.1.answer":
-      "Wedison Super Charge: 10% to 80% in 15 minutes / 10% to 95% in 20 minutes. Wedison Regular Charge: Varies depending on the adapter and battery size, with a duration ranging from approximately 2 to 10 hours.",
+      "Wedison SuperCharge: 10% to 80% in 15 minutes / 10% to 95% in 20 minutes. Wedison Regular Charge: Varies depending on the adapter and battery size, with a duration ranging from approximately 2 to 10 hours.",
     "faq.Battery.questions.2.question": "What type of battery do you use?",
     "faq.Battery.questions.2.answer":
       "Wedison EV uses Lithium-ion Battery (LFP), a type of rechargeable battery commonly used in devices like smartphones, laptops, and electric vehicles.\n\nThe characteristics of Lithium-ion Battery are as follow:\nA. High energy density: It can store a considerable amount of electrical energy in a smaller, lighter package.\nB. High temperature: It performs efficiently at high temperatures of up to 45 degrees celsius and can endure low temperatures without sustaining damage.\nC. Low self-discharge rate: The battery retains its energy effectively even when left unused for days or weeks.\nD. High number of charge cycles: It enables numerous charge cycles of more than 5,000 while maintaining nearly all of their original capacity.\nE. Charges quickly: Wedison EV can be fully charged in 30 mins at one of the super fast charging stations.",
@@ -1070,10 +1076,10 @@ const translations = {
     // Charging Questions
     "faq.Charging.questions.0.question": "Where can we charge our motorcycles?",
     "faq.Charging.questions.0.answer":
-      "SuperCharge\nAt Wedison super charge stations, which will progressively be rolled out countrywide.\nRegular Charge \nAt home/places with standard wall socket",
+      "SuperCharge\nAt Wedison SuperCharge stations, which will progressively be rolled out countrywide.\nRegular Charge \nAt home/places with standard wall socket",
     "faq.Charging.questions.1.question": "How can we charge our motorcycles?",
     "faq.Charging.questions.1.answer":
-      "Wedison EV comes with regular and super charge ports which can be charged at home and designated charging stations.",
+      "Wedison EV comes with regular and SuperCharge ports which can be charged at home and designated charging stations.",
     "faq.Charging.questions.2.question":
       "Can I use third-party power adapter to charge the EV?",
     "faq.Charging.questions.2.answer":
@@ -1102,7 +1108,7 @@ const translations = {
     "faq.Charging.questions.9.question":
       "What is the duration for regular charging? (1260W charger)",
     "faq.Charging.questions.9.answer":
-      "The charging time varies depending on model and battery capacity. \nCharging time with a 1260w charging adapter from 0-100%:\nMini: 3.5 hr (No change, can only use a 600w charger)\nRefer to Regular Charge Data",
+      "The charging time varies depending on model and battery capacity. \nCharging time with a 1260w charging adapter from 0-100%:\nBees: 3.5 hr (No change, can only use a 600w charger)\nRefer to Regular Charge Data",
     "faq.Charging.questions.10.question": "How do I perform regular charging?",
     "faq.Charging.questions.10.answer":
       "First connect the charger to the vehicle's charging port, then plug it into the power source. \nAfter charging is complete, unplug the power source first, then disconnect the charger from the vehicle.",
@@ -1130,7 +1136,7 @@ const translations = {
     "faq.Performance.questions.4.question":
       "Can the motorcycles travel uphill?",
     "faq.Performance.questions.4.answer":
-      "Yes, it can go uphill and the climbing ability depends on the model:\nMini, EdPower, & EdPro: 12%\nAthena and Victory: 15%",
+      "Yes, it can go uphill and the climbing ability depends on the model:\nBees, EdPower, & EdPro: 12%\nAthena and Victory: 15%",
     "faq.Performance.questions.5.question":
       "Does the battery degrade overtime?",
     "faq.Performance.questions.5.answer":
@@ -1142,10 +1148,10 @@ const translations = {
       "Wedison's proprietary batteries feature an advanced battery management system\nwith safety measures to prevent overheating, overcharging, and the risk of fire",
     "faq.Safety.questions.1.question": "What brakes do you use?",
     "faq.Safety.questions.1.answer":
-      "CBS (Combined Braking System), an efficient braking system that automatically distributes braking force between the front and rear brakes when the rider applies the brakes:\nAthena, Victory, & EdPower\n\nFront and rear disc brakes, providing enhanced control, safety, and braking performance:\nMini motorcycle",
+      "CBS (Combined Braking System), an efficient braking system that automatically distributes braking force between the front and rear brakes when the rider applies the brakes:\nAthena, Victory, & EdPower\n\nFront and rear disc brakes, providing enhanced control, safety, and braking performance:\nBees motorcycle",
     "faq.Safety.questions.2.question": "What motor do you use?",
     "faq.Safety.questions.2.answer":
-      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 95 km/hr. (Mini, Athena, Victory, EdPower)",
+      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 95 km/hr. (Bees, Athena, Victory, EdPower)",
 
     // Servicing Questions
     "faq.Servicing.questions.0.question":
@@ -1200,7 +1206,7 @@ const translations = {
     // Tires Questions
     "faq.Tires.questions.0.question": "What is the tire dimension?",
     "faq.Tires.questions.0.answer":
-      "Mini: Front: 90/90-10; Rear 90/90-10\nAthena: Front: 100/80-12; Rear 100/80-12\nVictory: Front: 90/90-14; Rear: 100/80-14\nEdPower: Front: 100/90-14; Rear: 120/70-14",
+      "Bees: Front: 90/90-10; Rear 90/90-10\nAthena: Front: 100/80-12; Rear 100/80-12\nVictory: Front: 90/90-14; Rear: 100/80-14\nEdPower: Front: 100/90-14; Rear: 120/70-14",
 
     // Language
     language: "English",
@@ -1210,11 +1216,17 @@ const translations = {
     //SEO Landing
     "landing.title": "Wedison - Masa Depan Mobilitas Listrik",
     "landing.description":
-      "Wedison adalah brand motor listrik yang ramah lingkungan dengan teknologi Super Charge terkini.",
+      "Wedison adalah brand motor listrik yang ramah lingkungan dengan teknologi SuperCharge terkini.",
 
     // compare table
     "compare.model": "Bandingkan Model",
     "compare.select.bike": "Pilih motor untuk bandingkan",
+    "compare.title": "Bandingkan Model Kami",
+    "compare.subtitle":
+      "Temukan motor listrik yang sempurna sesuai gaya hidupmu",
+    "compare.expandAll": "Buka Semua",
+    "compare.collapseAll": "Tutup Semua",
+    "compare.swipeHint": "Geser untuk lihat lebih",
 
     // buttons
     "btn.learn.more": "Pelajari Lebih Lanjut",
@@ -1236,7 +1248,7 @@ const translations = {
       "Dapatkan berita, rilis resmi, dan highlight terbaru tentang Wedison.",
     "nav.showroom": "Ruang Pamer",
     "nav.serviceLocation": "Lokasi Layanan",
-    "nav.superCharge": "Super Charge",
+    "nav.superCharge": "SuperCharge",
     "nav.corporate": "Perusahaan",
     "nav.corporate.leftCard.title": "Powering the Future",
     "nav.corporate.leftCard.description":
@@ -1268,27 +1280,25 @@ const translations = {
     "features.longRangeBattery": "Baterai Jarak Jauh sampai 120km",
     "features.longRangeBatteryDesc":
       "Jelajahi hingga 100 kilometer dengan sekali pengisian menggunakan teknologi baterai lithium-ion canggih kami.",
-    "features.rapidCharging": "Super Charge dalam 15 Menit",
+    "features.rapidCharging": "SuperCharge dalam 15 Menit",
     "features.rapidChargingDesc":
       "Isi daya dari 10% hingga 80% hanya dalam 15 menit dengan jaringan SuperCharge kami.",
     "features.impressivePerformance": "0-95km/jam dalam 3 Detik",
     "features.impressivePerformanceDesc":
       "Rasakan akselerasi 0-100 km/jam dalam waktu kurang dari 3 detik dengan torsi instan.",
-    "features.zeroEmissions": "Berkendara Listrik, Kurangi Emisi hingga 54%",
+    "features.zeroEmissions": "Tanpa Emisi, Udara Lebih Bersih",
     "features.zeroEmissionsDesc":
-      "Motor listrik bertenaga baterai menghasilkan emisi CO₂ 53,8% lebih sedikit dan dapat mengurangi emisi sepanjang siklus hidupnya hingga 80%, menghasilkan 14% udara lebih bersih.",
+      "Ditenagai listrik murni, Wedison membantu mengurangi polusi udara di perkotaan. Setiap perjalanan berarti udara yang lebih segar untuk kita semua.",
     "features.zeroEmissionsLink":
       "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
-    "features.healthBenefits":
-      "Mengurangi 11% Risiko penyakit Paru-paru, dan 3,2% kunjungan IGD terkait asma.",
+    "features.healthBenefits": "Solusi Energi yang Lebih Efisien dan Cerdas",
     "features.healthBenefitsDesc":
-      "Dibanding sepeda motor bensin, motor listrik menurunkan risiko penyakit paru-paru dan kunjungan IGD terkait asma sebesar 3,2%.",
+      "Untuk jarak yang sama, Wedison menggunakan energi lebih sedikit dibanding motor konvensional. Lebih hemat dan efisien.",
     "features.healthBenefitsLink":
       "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
-    "features.noiseFree":
-      "Nikmati Perjalanan 23% Lebih Senyap, Tanpa Emisi Knalpot",
+    "features.noiseFree": "Melaju Menuju Masa Depan Berkelanjutan",
     "features.noiseFreeDesc":
-      "Perjalanan dengan motor listrik hingga 23% lebih senyap dan tidak menghasilkan emisi knalpot, menghemat sekitar 46,5 gram CO₂ dan 1,95 gram CO per kilometer.",
+      "Setiap pilihan Anda pada Wedison adalah langkah nyata menuju mobilitas hijau yang ramah lingkungan dan berkelanjutan.",
     "features.noiseFreeLink":
       "https://www.sciencedirect.com/science/article/pii/S0160412023003896",
 
@@ -1417,16 +1427,16 @@ const translations = {
       "Menciptakan Masa Depan Hijau yang Lebih Cerah",
     "about.projects.future.description":
       "Memanfaatkan energi terbarukan untuk mengurangi emisi karbon dan mendukung lingkungan yang lebih sehat. Memperluas pasar kendaraan listrik (EV), menjadikan komunitas lebih bersih dan transportasi lebih terjangkau bagi semua orang.",
-    "about.projects.charging.title": "Pengisian Super Charge",
+    "about.projects.charging.title": "Pengisian SuperCharge",
     "about.projects.charging.description":
       "Kami membangun infrastruktur pengisian yang kuat untuk mendukung ekosistem kendaraan listrik yang berkembang sambil menciptakan peluang penghematan waktu bagi bisnis.",
     "about.offers.title": "Apa yang Kami Tawarkan",
     "about.offers.motorcycles.title": "Model Sepeda Motor Listrik",
     "about.offers.motorcycles.description":
       "Kami menawarkan berbagai model sepeda motor listrik, masing-masing dirancang untuk memenuhi kebutuhan dan preferensi pelanggan yang beragam.",
-    "about.offers.charging.title": "Stasiun Pengisian Super Charge",
+    "about.offers.charging.title": "Stasiun Pengisian SuperCharge",
     "about.offers.charging.description":
-      "Kami menawarkan stasiun pengisian Super Charge, menyediakan solusi pengisian yang cepat dan nyaman, memastikan bahwa pengguna sepeda motor listrik dapat dengan mudah mengisi daya kendaraan mereka dan tetap di jalan lebih lama.",
+      "Kami menawarkan stasiun pengisian SuperCharge, menyediakan solusi pengisian yang cepat dan nyaman, memastikan bahwa pengguna sepeda motor listrik dapat dengan mudah mengisi daya kendaraan mereka dan tetap di jalan lebih lama.",
     "about.joinUs": "Bergabunglah dengan Misi Kami",
     "about.joinUsDescription":
       "Bergabunglah dengan kami dalam misi kami untuk menciptakan masa depan yang berkelanjutan melalui mobilitas listrik. Bersama-sama, kita dapat membuat perbedaan.",
@@ -1495,7 +1505,7 @@ const translations = {
     "specs.category.battery.batteryCapacity": "Kapasitas Baterai",
     "specs.category.battery.voltage": "Tegangan Baterai (Volt)",
     "specs.category.battery.chargingTimeSuperCharge":
-      "Waktu Pengisian dengan Super Charge (10-80%)",
+      "Waktu Pengisian dengan SuperCharge (10-80%)",
     "specs.category.battery.chargingTimeHome":
       "Waktu Pengisian dengan Home Charging (0-100%)",
     "specs.category.battery.range": "Jarak Tempuh",
@@ -1526,7 +1536,7 @@ const translations = {
     //edmax
     "edmax.title": "Edmax – Motor Listrik Canggih dan Bertenaga dari Wedison",
     "edmax.description":
-      "Edmax adalah motor listrik flagship dari Wedison dengan top speed 86km/jam, headunit canggih (CarPlay & Android Auto), dan mendukung Super Charge.",
+      "Edmax adalah motor listrik flagship dari Wedison dengan top speed 86km/jam, headunit canggih (CarPlay & Android Auto), dan mendukung SuperCharge.",
 
     "edmax.hero.tag": "Model Unggulan",
     "edmax.hero.title": "Melaju ke Masa Depan dengan",
@@ -1648,15 +1658,15 @@ const translations = {
       "Jelajahi lebih jauh dari sebelumnya. Dengan jarak tempuh hingga 135 km dalam sekali pengisian, EDPower siap menjelajah kota maupun luar kota—tanpa batas, hanya kebebasan.",
 
     "edpower.productPage.chargingOverview.imageAlt":
-      "EDPower terparkir di showroom Wedison dengan stasiun Super Charge dan charger rumah yang terlihat",
+      "EDPower terparkir di showroom Wedison dengan stasiun SuperCharge dan charger rumah yang terlihat",
     "edpower.productPage.chargingOverview.title":
       "Pengisian Cepat & Fleksibel untuk Setiap Gaya Hidup",
     "edpower.productPage.chargingOverview.description":
-      "EDPower menyesuaikan jadwal Anda dengan dua pilihan pengisian daya yang mudah: Super Charge ultra-cepat di showroom Wedison, atau pengisian semalam yang praktis di rumah. Selalu bertenaga, selalu siap berangkat.",
+      "EDPower menyesuaikan jadwal Anda dengan dua pilihan pengisian daya yang mudah: SuperCharge ultra-cepat di showroom Wedison, atau pengisian semalam yang praktis di rumah. Selalu bertenaga, selalu siap berangkat.",
 
     "edpower.productPage.chargingHighlight1.imageAlt":
-      "EDPower terhubung ke stasiun Super Charge Wedison",
-    "edpower.productPage.chargingHighlight1.title": "Wedison Super Charge",
+      "EDPower terhubung ke stasiun SuperCharge Wedison",
+    "edpower.productPage.chargingHighlight1.title": "Wedison SuperCharge",
     "edpower.productPage.chargingHighlight1.description": (
       <>
         Isi daya dari 10% ke 80% hanya dalam 15 menit. Sempurna untuk isi cepat
@@ -1926,12 +1936,12 @@ const translations = {
     "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
     "athena.productPage.productHighlight1.title": "Layar Digital Canggih",
     "athena.productPage.productHighlight1.description":
-      "Athena dilengkapi head unit modern dengan layar sentuh intuitif, mendukung Apple CarPlay dan Android Auto. Nikmati navigasi, musik, dan notifikasi dengan mudah.",
+      "Panel instrumen LCD Athena yang jernih dan terang memberikan semua informasi penting tentang perjalanan secara sekilas. Sederhana, digital, dan andal, sehingga Anda dapat fokus pada jalan di depan, bebas dari gangguan.",
 
     "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
     "athena.productPage.productHighlight2.title": "SuperCharge",
     "athena.productPage.productHighlight2.description":
-      "Isi daya dari 10% hingga 80% hanya dalam 15 menit dengan Wedison Super Charge (tersedia di seluruh showroom), atau isi daya dengan mudah di rumah hingga penuh dalam kurang dari 4 jam. Athena dirancang untuk mengikuti ritme kota yang tak pernah berhenti.",
+      "Isi daya dari 10% hingga 80% hanya dalam 15 menit dengan Wedison SuperCharge (tersedia di seluruh showroom), atau isi daya dengan mudah di rumah hingga penuh dalam kurang dari 4 jam. Athena dirancang untuk mengikuti ritme kota yang tak pernah berhenti.",
 
     "athena.productPage.productHighlight3.imageAlt":
       "Sistem Pengereman CBS Athena",
@@ -1943,7 +1953,7 @@ const translations = {
       "Athena Hijau dengan SuperCharge dan Home Charging",
     "athena.productPage.chargingOverview.title": "Pengisian Daya Tanpa Ribet",
     "athena.productPage.chargingOverview.description":
-      "Tetap bergerak dengan solusi pengisian daya fleksibel dari Athena. Cukup colokkan di rumah untuk kenyamanan sehari-hari, atau nikmati kecepatan Super Charge di seluruh showroom Wedison. Athena memberi Anda kebebasan untuk memilih—isi daya di tempat tinggal, atau isi cepat saat sedang bepergian.",
+      "Tetap bergerak dengan solusi pengisian daya fleksibel dari Athena. Cukup colokkan di rumah untuk kenyamanan sehari-hari, atau nikmati kecepatan SuperCharge di seluruh showroom Wedison. Athena memberi Anda kebebasan untuk memilih—isi daya di tempat tinggal, atau isi cepat saat sedang bepergian.",
 
     "athena.productPage.chargingHighlight1.imageAlt":
       "Athena dengan SuperCharge",
@@ -1996,114 +2006,114 @@ const translations = {
 
     //mini
 
-    "mini.hero.tag": "Motor Entry-Level",
-    "mini.hero.title": "Solusi Terjangkau untuk",
-    "mini.hero.titleHighlight": "Mobilitas Harian",
-    "mini.hero.description":
-      "Mini hadir sebagai motor listrik paling ringan dan gesit dari Wedison. Cocok untuk pelajar, pekerja, atau siapa pun yang butuh kendaraan efisien dengan harga terjangkau.",
-    "mini.hero.orderNow": "Pesan Sekarang",
-    "mini.hero.downloadBrochure": "Unduh Brosur",
+    "bees.hero.tag": "Motor Entry-Level",
+    "bees.hero.title": "Solusi Terjangkau untuk",
+    "bees.hero.titleHighlight": "Mobilitas Harian",
+    "bees.hero.description":
+      "Bees hadir sebagai motor listrik paling ringan dan gesit dari Wedison. Cocok untuk pelajar, pekerja, atau siapa pun yang butuh kendaraan efisien dengan harga terjangkau.",
+    "bees.hero.orderNow": "Pesan Sekarang",
+    "bees.hero.downloadBrochure": "Unduh Brosur",
 
-    "mini.feature1.tag": "Ukuran Ringkas, Lincah",
-    "mini.feature1.title": "Desain Kompak, Manuver Maksimal",
-    "mini.feature1.subtitle": "Ringan dan gesit untuk kota padat",
-    "mini.feature1.description":
-      "Dengan bodi mungil dan bobot ringan, Mini ideal untuk selap-selip di jalanan sempit dan padat. Gerak cepat, hemat ruang, dan nyaman dikendarai.",
+    "bees.feature1.tag": "Ukuran Ringkas, Lincah",
+    "bees.feature1.title": "Desain Kompak, Manuver Maksimal",
+    "bees.feature1.subtitle": "Ringan dan gesit untuk kota padat",
+    "bees.feature1.description":
+      "Dengan bodi mungil dan bobot ringan, Bees ideal untuk selap-selip di jalanan sempit dan padat. Gerak cepat, hemat ruang, dan nyaman dikendarai.",
 
-    "mini.feature2.tag": "Terjangkau dan Praktis",
-    "mini.feature2.title": "Harga Ekonomis, Bisa Disubsidi",
-    "mini.feature2.subtitle": "Hemat biaya dan mudah diakses",
-    "mini.feature2.description":
-      "Mini termasuk kendaraan yang memenuhi syarat subsidi pemerintah. Biaya hemat, bisa charge di rumah, dan cocok untuk semua kalangan.",
+    "bees.feature2.tag": "Terjangkau dan Praktis",
+    "bees.feature2.title": "Harga Ekonomis, Bisa Disubsidi",
+    "bees.feature2.subtitle": "Hemat biaya dan mudah diakses",
+    "bees.feature2.description":
+      "Bees termasuk kendaraan yang memenuhi syarat subsidi pemerintah. Biaya hemat, bisa charge di rumah, dan cocok untuk semua kalangan.",
 
-    "mini.color.description":
-      "Pilih warna Mini favoritmu dan lihat tampilannya.",
+    "bees.color.description":
+      "Pilih warna Bees favoritmu dan lihat tampilannya.",
 
     // ===
 
-    "mini.productPage.hero.imageAlt": "Mini Merah dan Mini Putih",
-    "mini.productPage.hero.title": "MINI",
-    "mini.productPage.hero.description":
+    "bees.productPage.hero.imageAlt": "Bees Merah dan Bees Putih",
+    "bees.productPage.hero.title": "BEES",
+    "bees.productPage.hero.description":
       "Mobilitas Terjangkau untuk Setiap Perjalanan",
-    "mini.productPage.hero.ctaPrimary": "Pesan Sekarang",
-    "mini.productPage.hero.ctaSecondary": "Unduh Brosur",
+    "bees.productPage.hero.ctaPrimary": "Pesan Sekarang",
+    "bees.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "mini.productPage.techSpecs1.title": 65,
-    "mini.productPage.techSpecs1.unit": "km",
-    "mini.productPage.techSpecs1.desc": "Jarak Tempuh",
+    "bees.productPage.techSpecs1.title": 65,
+    "bees.productPage.techSpecs1.unit": "km",
+    "bees.productPage.techSpecs1.desc": "Jarak Tempuh",
 
-    "mini.productPage.techSpecs2.title": "LED",
-    "mini.productPage.techSpecs2.desc": "Tampilan Head Unit",
+    "bees.productPage.techSpecs2.title": "LED",
+    "bees.productPage.techSpecs2.desc": "Tampilan Head Unit",
 
-    "mini.productPage.techSpecs3.title": 55,
-    "mini.productPage.techSpecs3.unit": "km/jam",
-    "mini.productPage.techSpecs3.desc": "Kecepatan Maksimum",
+    "bees.productPage.techSpecs3.title": 55,
+    "bees.productPage.techSpecs3.unit": "km/jam",
+    "bees.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
-    "mini.productPage.productOverview.imageAlt": "Mini Merah",
-    "mini.productPage.productOverview.title":
+    "bees.productPage.productOverview.imageAlt": "Bees Merah",
+    "bees.productPage.productOverview.title":
       "Kecil Ukurannya, Besar Pengalamannya.",
-    "mini.productPage.productOverview.description":
+    "bees.productPage.productOverview.description":
       "Paket roda dan ban terbaru menghadirkan pengalaman berkendara yang lebih halus. Rangka bodi yang didesain ulang mengurangi jumlah komponen dari 70 menjadi 1 untuk menghilangkan celah. Semua itu untuk menciptakan perjalanan yang senyap dan nyaman.",
 
-    "mini.productPage.productHighlight1.imageAlt": "Bagasi Bawah Jok Mini",
-    "mini.productPage.productHighlight1.title": "Bagasi XL di Bawah Jok",
-    "mini.productPage.productHighlight1.description":
-      "Bawa lebih banyak di setiap perjalanan. Kompartemen bawah jok Mini yang ekstra luas bisa memuat ransel, belanjaan, bahkan helm full-face—lebih banyak ruang, lebih banyak kemungkinan.",
+    "bees.productPage.productHighlight1.imageAlt": "Bagasi Bawah Jok Bees",
+    "bees.productPage.productHighlight1.title": "Bagasi XL di Bawah Jok",
+    "bees.productPage.productHighlight1.description":
+      "Bawa lebih banyak di setiap perjalanan. Kompartemen bawah jok Bees yang ekstra luas bisa memuat ransel, belanjaan, bahkan helm full-face—lebih banyak ruang, lebih banyak kemungkinan.",
 
-    "mini.productPage.productHighlight2.imageAlt": "Tampilan LED Mini",
-    "mini.productPage.productHighlight2.title": "Tampilan Digital LED",
-    "mini.productPage.productHighlight2.description":
+    "bees.productPage.productHighlight2.imageAlt": "Tampilan LED Bees",
+    "bees.productPage.productHighlight2.title": "Tampilan Digital LED",
+    "bees.productPage.productHighlight2.description":
       "Tetap terinformasi dan terkendali dengan layar LED digital modern yang tajam. Lihat kecepatan, baterai, dan info lainnya secara real-time—cukup dengan sekali lirik.",
 
-    "mini.productPage.productHighlight3.imageAlt": "Rem Cakram Mini",
-    "mini.productPage.productHighlight3.title": "Rem Cakram Ganda yang Andal",
-    "mini.productPage.productHighlight3.description":
+    "bees.productPage.productHighlight3.imageAlt": "Rem Cakram Bees",
+    "bees.productPage.productHighlight3.title": "Rem Cakram Ganda yang Andal",
+    "bees.productPage.productHighlight3.description":
       "Nikmati kekuatan pengereman maksimal dan rasa aman dengan rem cakram di roda depan dan belakang. Memberikan pengereman yang halus dan responsif dalam segala kondisi—untuk perjalanan yang tenang dan percaya diri.",
 
-    "mini.productPage.chargingOverview.imageAlt":
-      "Mini Merah sedang diisi daya di colokan rumah",
-    "mini.productPage.chargingOverview.title":
+    "bees.productPage.chargingOverview.imageAlt":
+      "Bees Merah sedang diisi daya di colokan rumah",
+    "bees.productPage.chargingOverview.title":
       "Pengisian Daya di Rumah yang Simpel",
-    "mini.productPage.chargingOverview.description":
-      "Isi daya dengan mudah dari colokan listrik biasa. Dengan charger rumah bawaan, Mini selalu siap menemani perjalanan berikutnya—tanpa perlu fast-charging, cukup colokkan dan jalan.",
+    "bees.productPage.chargingOverview.description":
+      "Isi daya dengan mudah dari colokan listrik biasa. Dengan charger rumah bawaan, Bees selalu siap menemani perjalanan berikutnya—tanpa perlu fast-charging, cukup colokkan dan jalan.",
 
     // ===
 
-    "mini.specs.engine.motorType": "Brusless DC Motor",
-    "mini.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
-    "mini.specs.engine.topSpeed": "55 km/jam",
-    "mini.specs.engine.acceleration": "9.3 detik",
-    "mini.specs.battery.batteryType": "Lithium-ion (LFP)",
-    "mini.specs.battery.batteryCapacity": "1.6 kWh",
-    "mini.specs.battery.voltage": "64 Volt",
-    "mini.specs.battery.chargingTimeSuperCharge": "-",
-    "mini.specs.battery.chargingTimeHome": "4 jam",
-    "mini.specs.battery.range": "65 km",
-    "mini.specs.brake.frontBrake": "Rem Cakram",
-    "mini.specs.brake.rearBrake": "Rem Cakram",
-    "mini.specs.brake.cbsSupport": "Tidak",
-    "mini.specs.dimension.length": "1.790 mm",
-    "mini.specs.dimension.width": "670 mm",
-    "mini.specs.dimension.height": "1.110 mm",
-    "mini.specs.dimension.wheelbase": "1.370 mm",
-    "mini.specs.dimension.groundClearance": "130 mm",
-    "mini.specs.dimension.seatHeight": "760 mm",
-    "mini.specs.dimension.weight": "78.5 kg",
-    "mini.specs.tire.frontTire": "90/90-10",
-    "mini.specs.tire.rearTire": "90/90-10",
-    "mini.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
-    "mini.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
+    "bees.specs.engine.motorType": "Brusless DC Motor",
+    "bees.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
+    "bees.specs.engine.topSpeed": "55 km/jam",
+    "bees.specs.engine.acceleration": "9.3 detik",
+    "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
+    "bees.specs.battery.batteryCapacity": "1.6 kWh",
+    "bees.specs.battery.voltage": "64 Volt",
+    "bees.specs.battery.chargingTimeSuperCharge": "-",
+    "bees.specs.battery.chargingTimeHome": "4 jam",
+    "bees.specs.battery.range": "65 km",
+    "bees.specs.brake.frontBrake": "Rem Cakram",
+    "bees.specs.brake.rearBrake": "Rem Cakram",
+    "bees.specs.brake.cbsSupport": "Tidak",
+    "bees.specs.dimension.length": "1.790 mm",
+    "bees.specs.dimension.width": "670 mm",
+    "bees.specs.dimension.height": "1.110 mm",
+    "bees.specs.dimension.wheelbase": "1.370 mm",
+    "bees.specs.dimension.groundClearance": "130 mm",
+    "bees.specs.dimension.seatHeight": "760 mm",
+    "bees.specs.dimension.weight": "78.5 kg",
+    "bees.specs.tire.frontTire": "90/90-10",
+    "bees.specs.tire.rearTire": "90/90-10",
+    "bees.specs.suspension.frontSuspension": "Hidrolik Teleskopik",
+    "bees.specs.suspension.rearSuspension": "Hidrolik Teleskopik",
 
-    //super charge
+    //SuperCharge
 
     "supercharge.landing.title": "Perjalananmu",
     "supercharge.landing.description":
-      "Super Charge perjalananmu dengan pengisian cepat dan andal. Isi daya dari 10% ke 80% hanya dalam 15 menit.",
+      "SuperCharge perjalananmu dengan pengisian cepat dan andal. Isi daya dari 10% ke 80% hanya dalam 15 menit.",
     "supercharge.hero.tag": "Fast Charging",
     "supercharge.hero.title": "Isi Daya dari 10% ke 80% dalam",
     "supercharge.hero.titleHighlight": "Hanya 15 Menit",
     "supercharge.hero.description":
-      "Super Charge adalah solusi pengisian cepat eksklusif dari Wedison. Didesain khusus untuk Edmax, Athena, dan Victory — rasakan efisiensi tanpa kompromi.",
+      "SuperCharge adalah solusi pengisian cepat eksklusif dari Wedison. Didesain khusus untuk Edmax, Athena, dan Victory — rasakan efisiensi tanpa kompromi.",
     "supercharge.hero.ctaPrimary": "Temukan Lokasi",
     "supercharge.hero.ctaSecondary": "Pelajari Teknologi",
 
@@ -2111,14 +2121,14 @@ const translations = {
     "supercharge.feature1.title": "Teknologi Pengisian Generasi Baru",
     "supercharge.feature1.subtitle": "Waktu lebih singkat, performa maksimal",
     "supercharge.feature1.description":
-      "Dengan teknologi fast charge terbaru, Super Charge mampu mengisi baterai dari 10% ke 80% hanya dalam 15 menit. Hemat waktu, tanpa mengorbankan kualitas.",
+      "Dengan teknologi fast charge terbaru, SuperCharge mampu mengisi baterai dari 10% ke 80% hanya dalam 15 menit. Hemat waktu, tanpa mengorbankan kualitas.",
 
     "supercharge.feature2.tag": "Tersebar Nasional",
-    "supercharge.feature2.title": "Lebih dari 100 Titik Super Charge",
+    "supercharge.feature2.title": "Lebih dari 100 Titik SuperCharge",
     "supercharge.feature2.subtitle":
       "Dimanapun kamu berkendara, kami siap isi daya",
     "supercharge.feature2.description":
-      "Super Charge tersedia di lebih dari 100 titik strategis di Indonesia, memudahkan kamu untuk tetap bergerak tanpa harus khawatir kehabisan daya.",
+      "SuperCharge tersedia di lebih dari 100 titik strategis di Indonesia, memudahkan kamu untuk tetap bergerak tanpa harus khawatir kehabisan daya.",
 
     "supercharge.feature3.tag": "Andal. Aman. Patuh Regulasi.",
     "supercharge.feature3.title": "Dirancang untuk Tahan Lama",
@@ -2217,7 +2227,7 @@ const translations = {
     "faq.Battery.questions.1.question":
       "Berapa lama waktu yang dibutuhkan untuk mengisi baterai hingga penuh?",
     "faq.Battery.questions.1.answer":
-      "Wedison Super Charge: 10% hingga 80% dalam 15 menit/ 10% hingga 95% dalam 20 menit\nWedison Regular Charge: Bervariasi tergantung adaptor dan ukuran baterai, dengan durasi antara 2 hingga 10 jam.",
+      "Wedison SuperCharge: 10% hingga 80% dalam 15 menit/ 10% hingga 95% dalam 20 menit\nWedison Regular Charge: Bervariasi tergantung adaptor dan ukuran baterai, dengan durasi antara 2 hingga 10 jam.",
     "faq.Battery.questions.2.question": "Jenis baterai apa yang Anda gunakan?",
     "faq.Battery.questions.2.answer":
       "Wedison EV menggunakan Baterai Lithium-ion (LFP), jenis baterai isi ulang yang umum digunakan pada perangkat seperti smartphone, laptop, dan kendaraan listrik.\n\nKarakteristik Baterai Lithium-ion adalah sebagai berikut:\nA. Kepadatan energi tinggi: Dapat menyimpan energi listrik yang cukup besar dalam paket yang lebih kecil dan ringan.\nB. Tahan suhu tinggi: Berkinerja efisien pada suhu tinggi hingga 45 derajat celsius dan tahan terhadap suhu rendah tanpa mengalami kerusakan.\nC. Tingkat self-discharge rendah: Baterai mempertahankan energinya dengan efektif bahkan ketika tidak digunakan selama berhari-hari atau berminggu-minggu.\nD. Jumlah siklus pengisian tinggi: Memungkinkan lebih dari 5.000 siklus pengisian sambil mempertahankan hampir seluruh kapasitas aslinya.\nE. Pengisian cepat: Wedison EV dapat diisi penuh dalam 30 menit di salah satu stasiun pengisian super cepat.",
@@ -2264,7 +2274,7 @@ const translations = {
     "faq.Charging.questions.0.question":
       "Di mana kami dapat mengisi daya motor kami?",
     "faq.Charging.questions.0.answer":
-      "SuperCharge\nDi stasiun super charge Wedison, yang akan secara bertahap diluncurkan di seluruh negeri.\nRegular Charge \nDi rumah/tempat dengan stopkontak dinding standar",
+      "SuperCharge\nDi stasiun SuperCharge Wedison, yang akan secara bertahap diluncurkan di seluruh negeri.\nRegular Charge \nDi rumah/tempat dengan stopkontak dinding standar",
     "faq.Charging.questions.1.question":
       "Bagaimana kami dapat mengisi daya motor kami?",
     "faq.Charging.questions.1.answer":
@@ -2297,7 +2307,7 @@ const translations = {
     "faq.Charging.questions.9.question":
       "Berapa durasi pengisian reguler? (charger 1260W)",
     "faq.Charging.questions.9.answer":
-      "Waktu pengisian bervariasi tergantung model dan kapasitas baterai. \nWaktu pengisian dengan adaptor pengisian 1260w dari 0-100%:\nMini: 3,5 jam (Tidak berubah, hanya dapat menggunakan charger 600w)\nLihat Data Pengisian Reguler",
+      "Waktu pengisian bervariasi tergantung model dan kapasitas baterai. \nWaktu pengisian dengan adaptor pengisian 1260w dari 0-100%:\nBees: 3,5 jam (Tidak berubah, hanya dapat menggunakan charger 600w)\nLihat Data Pengisian Reguler",
     "faq.Charging.questions.10.question":
       "Bagaimana cara melakukan pengisian reguler?",
     "faq.Charging.questions.10.answer":
@@ -2322,7 +2332,7 @@ const translations = {
       "Motor, unit kontrol, dan baterai Wedison adalah IP67, yang telah diuji kedap air.\nMeskipun telah menjalani tes perendaman air pada 1 meter, perendaman yang diperpanjang tidak disarankan.",
     "faq.Performance.questions.4.question": "Bisakah motor menanjak?",
     "faq.Performance.questions.4.answer":
-      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nMini, EdPower, & EdPro: 12%\nAthena dan Victory: 15%",
+      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nBees, EdPower, & EdPro: 12%\nAthena dan Victory: 15%",
     "faq.Performance.questions.5.question":
       "Apakah baterai menurun seiring waktu?",
     "faq.Performance.questions.5.answer":
@@ -2334,10 +2344,10 @@ const translations = {
       "Baterai proprietary Wedison menampilkan sistem manajemen baterai canggih\ndengan langkah-langkah keamanan untuk mencegah overheating, overcharging, dan risiko kebakaran",
     "faq.Safety.questions.1.question": "Rem apa yang Anda gunakan?",
     "faq.Safety.questions.1.answer":
-      "CBS (Combined Braking System), sistem pengereman efisien yang secara otomatis mendistribusikan gaya pengereman antara rem depan dan belakang ketika pengendara mengerem:\nAthena, Victory, & EdPower\n\nRem cakram depan dan belakang, memberikan kontrol, keamanan, dan kinerja pengereman yang ditingkatkan:\nMotor Mini",
+      "CBS (Combined Braking System), sistem pengereman efisien yang secara otomatis mendistribusikan gaya pengereman antara rem depan dan belakang ketika pengendara mengerem:\nAthena, Victory, & EdPower\n\nRem cakram depan dan belakang, memberikan kontrol, keamanan, dan kinerja pengereman yang ditingkatkan:\nMotor Bees",
     "faq.Safety.questions.2.question": "Motor apa yang Anda gunakan?",
     "faq.Safety.questions.2.answer":
-      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 95 km/jam. (Mini, Athena, Victory, EdPower)",
+      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 95 km/jam. (Bees, Athena, Victory, EdPower)",
 
     // Servicing Questions
     "faq.Servicing.questions.0.question":
@@ -2391,7 +2401,7 @@ const translations = {
     // Tires Questions
     "faq.Tires.questions.0.question": "Apa dimensi ban?",
     "faq.Tires.questions.0.answer":
-      "Mini: Depan: 90/90-10; Belakang 90/90-10\nAthena: Depan: 100/80-12; Belakang 100/80-12\nVictory: Depan: 90/90-14; Belakang: 100/80-14\nEdPower: Depan: 100/90-14; Belakang: 120/70-14",
+      "Bees: Depan: 90/90-10; Belakang 90/90-10\nAthena: Depan: 100/80-12; Belakang 100/80-12\nVictory: Depan: 90/90-14; Belakang: 100/80-14\nEdPower: Depan: 100/90-14; Belakang: 120/70-14",
 
     // Language
     language: "Bahasa Indonesia",

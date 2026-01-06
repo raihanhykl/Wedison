@@ -18,10 +18,10 @@ const NavbarProduct = forwardRef<HTMLDivElement, Props>(
     // export default function NavbarProduct({ open, ref }: Props) {
     const product: Product[] = [
       {
-        name: "Mini",
-        image: "/navbar-product/mini.webp",
-        // image: "/mini-green.webp",
-        href: "/mini/",
+        name: "Bees",
+        image: "/navbar-product/bees.webp",
+        // image: "/bees-green.webp",
+        href: "/bees/",
       },
       {
         name: "Athena",
@@ -93,14 +93,10 @@ const NavbarProduct = forwardRef<HTMLDivElement, Props>(
                   <Image
                     src={item.image}
                     alt={item.name}
-                    width={1000}
-                    height={1000}
+                    width={128}
+                    height={128}
+                    sizes="(max-width: 1024px) 80px, 128px"
                     className={"object-contain lg:h-32 lg:w-32 h-20 w-20"}
-                    // className={
-                    //   item.name === "Victory" || item.name === "Athena"
-                    //     ? "lg:h-36 lg:w-36 h-20 w-20 object-contain scale-[1.1] object-[100%_40%] "
-                    //     : "object-contain lg:h-32 lg:w-32 h-20 w-20"
-                    // }
                   />
                 </div>
               </Link>
