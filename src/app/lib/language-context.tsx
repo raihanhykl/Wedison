@@ -2110,7 +2110,7 @@ const translations = {
     "supercharge.landing.description":
       "SuperCharge perjalananmu dengan pengisian cepat dan andal. Isi daya dari 10% ke 80% hanya dalam 15 menit.",
     "supercharge.hero.tag": "Fast Charging",
-    "supercharge.hero.title": "Isi Daya dari 10% ke 80% dalam",
+    "supercharge.hero.title": "Isi Daya dari 10% ke 80%",
     "supercharge.hero.titleHighlight": "Hanya 15 Menit",
     "supercharge.hero.description":
       "SuperCharge adalah solusi pengisian cepat eksklusif dari Wedison. Didesain khusus untuk Edmax, Athena, dan Victory — rasakan efisiensi tanpa kompromi.",
