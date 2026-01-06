@@ -225,3 +225,10 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom container class */
+@layer components {
+  .main-container {
+    @apply w-full px-8 md:px-16 max-w-[2480px] mx-auto;
+  }
+}

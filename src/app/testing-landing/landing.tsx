@@ -349,7 +349,7 @@ export default function Landing() {
           <SpecTable />
         </div> */}
 
-        <div className="container mx-auto my-24 px-4">
+        <div className="main-container my-24">
           <ComparisonTable mode="overview" primaryBikeId="" />
         </div>
 
