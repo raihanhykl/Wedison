@@ -35,6 +35,8 @@ export default function OjolClient() {
       image: "/ojol/wedison-bersama-ojol-desktop.webp",
       imageAlt: "EDPower in Gray",
       imageMobile: "/ojol/wedison-bersama-ojol-mobile.webp",
+      // imageMobile: "/promotions/subsidi-8-jt-mobile.webp",
+
       cardMobile: "/edpower/edpower-landing-card-mobile.webp",
       //   title: t("edpower.productPage.hero.title"),
       title: "Wedison Bersama",
@@ -51,9 +53,10 @@ export default function OjolClient() {
       link: "/athena/",
     },
     {
-      image: "/mini/mini-landing-hero.webp",
+      image: "/bees/bees-landing-hero.webp",
       imageAlt: "Mini in Gray",
-      imageMobile: "/mini/mini-landing-hero-mobile.webp",
+      imageMobile: "/promotions/subsidi-8-jt-mobile.webp",
+
       cardMobile: "/mini/mini-landing-card-mobile.webp",
 
       title: t("mini.productPage.hero.title"),
@@ -174,8 +177,9 @@ export default function OjolClient() {
                 contentWidth="wider"
                 backgroundStyle="object-cover md:object-[50%_50%] object-center"
                 textAlign="center"
-                backgroundImage={items[0].image}
-                backgroundImageMobile={items[0].imageMobile}
+                variant="empty"
+                backgroundImage={items[2].image}
+                backgroundImageMobile={items[2].imageMobile}
                 title={items[0].title}
                 titleHighlight="Ojol"
                 description={items[0].description}
@@ -184,66 +188,6 @@ export default function OjolClient() {
                 theme="dark"
                 contentClassName="w-[254px] h-[249px] lg:w-[781px] lg:h-[147px] md:w-full pt-8 md:pt-16 xl:pt-14  "
               />
-            </CarouselItem>
-
-            <CarouselItem className="w-full">
-              <HeroSlide
-                contentWidth="wider"
-                backgroundImage={items[1].image}
-                backgroundImageMobile={items[1].imageMobile}
-                height="screen"
-                overlay="none"
-                //   theme="dark"
-                overlayOpacity={0}
-                textAlign="center"
-                position="center"
-                contentClassName={"w-full pt-8"}
-              >
-                <div className=" flex w-full h-full">
-                  <div className="flex-1 flex"></div>
-                  <div className="w-fit flex-col items-start justify-start gap-4">
-                    {/* <div className="flex w-[40%] flex-col items-start justify-start gap-4 bg-amber-200/40"> */}
-                    <h2 className="pr-6 lg:pr-16 text-lg font-semibold w-full text-start text-white text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
-                      <span>Mulai dari</span>
-                      <br />
-                      <div className="text-[169px]/30 text-center font-extrabold text-primary ">
-                        50K
-                      </div>
-                      <div className="text-2xl font-[900] text-end w-full pt-2 text-white">
-                        /Hari
-                      </div>
-                      <div className=" flex flex-col justify-end items-end w-full  my-8 gap-1">
-                        <p className=" text-5xl font-extrabold">SEWA HARIAN</p>
-                        {/* <p>HARIAN</p> */}
-                        <p className=" text-3xl font-semibold">
-                          #JadiLebihMudah
-                        </p>
-                      </div>
-                      <div className=" w-full flex justify-end ">
-                        <Link
-                          href="https://wa.me/628581230128123"
-                          className="w-full h-full flex justify-end"
-                          target="_blank"
-                        >
-                          <Button
-                            className=" w-[80%] font-semibold tracking-wider text-2xl py-6 rounded-2xl shadow-[inset_0_2px_2px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.15),0_6px_12px_rgba(0,0,0,0.12)]
-                             border-[1px] border-black/10
-                              transition-all duration-200
-                                hover:shadow-[inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_6px_rgba(0,0,0,0.18),0_8px_16px_rgba(0,0,0,0.16)]
-                                active:translate-y-[1px]
-                                active:shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]
-                            "
-                            // className=" w-[80%] font-normal text-lg py-4 mx-auto bg-white/30 border-1 border-white text-white
-                            // "
-                          >
-                            Coba Gratis!
-                          </Button>
-                        </Link>
-                      </div>
-                    </h2>
-                  </div>
-                </div>
-              </HeroSlide>
             </CarouselItem>
 
             {/* ))} */}
