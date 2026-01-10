@@ -516,7 +516,7 @@ const translations = {
     "edpower.specs.battery.voltage": "76.8 Volt",
     "edpower.specs.battery.chargingTimeSuperCharge": "15 minutes",
     "edpower.specs.battery.chargingTimeHome": "4 hours",
-    "edpower.specs.battery.range": "135 km",
+    "edpower.specs.battery.range": "160 km",
     "edpower.specs.brake.frontBrake": "Disc Brake",
     "edpower.specs.brake.rearBrake": "Disc Brake",
     "edpower.specs.brake.cbsSupport": "Yes",
@@ -684,7 +684,7 @@ const translations = {
     "victory.specs.battery.chargingTimeSuperCharge": "15 minutes",
     "victory.specs.battery.chargingTimeHome": "4 hours",
     "victory.specs.battery.range":
-      "85 km (Regular Battery) / 115 km (Extended Battery)",
+      "85 km (Regular Battery) / 120 km (Extended Battery)",
     "victory.specs.brake.frontBrake": "Disc Brake",
     "victory.specs.brake.rearBrake": "Disc Brake",
     "victory.specs.brake.cbsSupport": "Yes",
@@ -805,7 +805,7 @@ const translations = {
     "athena.specs.battery.chargingTimeSuperCharge": "15 minutes",
     "athena.specs.battery.chargingTimeHome": "4 hour",
     "athena.specs.battery.range":
-      "85 km (Regular Battery) / 115 km (Extended Battery)",
+      "85 km (Regular Battery) / 120 km (Extended Battery)",
     "athena.specs.brake.frontBrake": "Disc Brake",
     "athena.specs.brake.rearBrake": "Disc Brake",
     "athena.specs.brake.cbsSupport": "Yes",
@@ -1693,7 +1693,7 @@ const translations = {
     "edpower.specs.battery.voltage": "76.8 Volt",
     "edpower.specs.battery.chargingTimeSuperCharge": "15 menit",
     "edpower.specs.battery.chargingTimeHome": "4 jam",
-    "edpower.specs.battery.range": "135 km",
+    "edpower.specs.battery.range": "160 km",
     "edpower.specs.brake.frontBrake": "Rem Cakram",
     "edpower.specs.brake.rearBrake": "Rem Cakram",
     "edpower.specs.brake.cbsSupport": "Ya",
@@ -1862,7 +1862,7 @@ const translations = {
     "victory.specs.battery.chargingTimeSuperCharge": "15 menit",
     "victory.specs.battery.chargingTimeHome": "4 jam",
     "victory.specs.battery.range":
-      "85 km (Baterai Regular) / 115 km (Baterai Extended)",
+      "85 km (Baterai Regular) / 120 km (Baterai Extended)",
     "victory.specs.brake.frontBrake": "Rem Cakram",
     "victory.specs.brake.rearBrake": "Rem Cakram",
     "victory.specs.brake.cbsSupport": "Ya",
@@ -1988,7 +1988,7 @@ const translations = {
     "athena.specs.battery.chargingTimeSuperCharge": "15 menit",
     "athena.specs.battery.chargingTimeHome": "4 jam",
     "athena.specs.battery.range":
-      "85 km (Baterai Regular) / 115 km (Baterai Extended)",
+      "85 km (Baterai Regular) / 120 km (Baterai Extended)",
     "athena.specs.brake.frontBrake": "Rem Cakram",
     "athena.specs.brake.rearBrake": "Rem Cakram",
     "athena.specs.brake.cbsSupport": "Ya",
