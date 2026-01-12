@@ -1,15 +1,17 @@
+"use client";
 import React from "react";
+import { useLanguage } from "../lib/language-context";
 
 export default function VideoSection() {
+  const { t } = useLanguage();
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center py-12 md:py-20 px-4 md:px-28">
       <div className=" flex items-start justify-start flex-col">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4">
-          SuperCharge: Solusi Charging Masa Depan
+          {t("supercharge.video.title")}
         </h2>
         <p className="text-base sm:text-lg text-gray-500  max-w-2xl w-full text-justify">
-          SuperCharge hadir untuk memberikan pengalaman isi daya yang lebih
-          cepat, aman, dan praktis bagi kendaraan listrik Anda.
+          {t("supercharge.video.description")}
         </p>
       </div>
       <div className="w-auto h-auto mt-10 px-12 aspect-video flex items-start justify-center bg-white">

@@ -1,8 +1,10 @@
+"use client";
 import FeatureSection2 from "@/app/components/feature-section";
 import HeroSection from "../components/hero-section";
-import { getSEOMetadata } from "../lib/seo1";
+// import { getSEOMetadata } from "../lib/seo1";
 import VideoSection from "./videoSection";
 import { Suspense } from "react";
+
 // import { generateSeoMetadata } from "../lib/seo";
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Super Charge - Wedison",
@@ -16,24 +18,24 @@ import { Suspense } from "react";
 // });
 
 // export { metadata };
-export const metadata = getSEOMetadata({
-  title: "SuperCharge - Stasiun Pengisian Cepat Motor Listrik | Wedison",
-  description:
-    "SuperCharge adalah teknologi stasiun pengisian super cepat dari Wedison, solusi terbaik untuk mengisi daya motor listrik dalam waktu singkat. Lihat lokasi dan keunggulan SuperCharge di sini.",
-  keywords: [
-    "wedison",
-    "supercharge",
-    "charging station",
-    "pengisian motor listrik",
-    "stasiun pengisian",
-    "motor listrik",
-    "EV",
-    "teknologi pengisian cepat",
-  ],
-  url: "https://wedison.co/super-charge/",
-  image: "https://wedison.co/supercharge-hero.webp",
-  lang: "id",
-});
+// export const metadata = getSEOMetadata({
+//   title: "SuperCharge - Stasiun Pengisian Cepat Motor Listrik | Wedison",
+//   description:
+//     "SuperCharge adalah teknologi stasiun pengisian super cepat dari Wedison, solusi terbaik untuk mengisi daya motor listrik dalam waktu singkat. Lihat lokasi dan keunggulan SuperCharge di sini.",
+//   keywords: [
+//     "wedison",
+//     "supercharge",
+//     "charging station",
+//     "pengisian motor listrik",
+//     "stasiun pengisian",
+//     "motor listrik",
+//     "EV",
+//     "teknologi pengisian cepat",
+//   ],
+//   url: "https://wedison.co/super-charge/",
+//   image: "https://wedison.co/supercharge-hero.webp",
+//   lang: "id",
+// });
 
 export default function EdmaxPage() {
   return (
@@ -46,6 +48,7 @@ export default function EdmaxPage() {
           imageStyle="object-[90%_10%] md:object-[100%_40%] 2xl:object-[0%_100%] "
           noButton={true}
         />
+
         <Suspense fallback={<p>Loading video...</p>}>
           <VideoSection />
         </Suspense>

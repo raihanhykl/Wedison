@@ -129,7 +129,7 @@ export default function ShowroomPageStructure() {
                       {t("showroom.hours")}
                     </h3>
                     <p className="text-gray-600">{t("showroom.weekdays")}</p>
-                    {/* <p className="text-gray-600">{t("showroom.weekend")}</p> */}
+                    <p className="text-gray-600">{t("showroom.weekend")}</p>
                   </div>
                 </div>
               </div>

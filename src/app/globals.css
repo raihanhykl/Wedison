@@ -232,3 +232,12 @@ html {
     @apply w-full px-8 md:px-16 max-w-[2480px] mx-auto;
   }
 }
+/* Carousel progress animation */
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
