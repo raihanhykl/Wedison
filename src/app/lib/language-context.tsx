@@ -210,7 +210,7 @@ const translations = {
     "showroom.address":
       "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
     "showroom.hours": "Opening Hours",
-    "showroom.weekdays": "Monday - Friday: 9:00 AM - 6:00 PM",
+    "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
     "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
     "showroom.whatYouCanDo": "What You Can Do at the Showroom",
     "showroom.testRide.title": "Electric Motorcycle Test Ride",
@@ -430,7 +430,7 @@ const translations = {
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": 135,
+    "edpower.productPage.techSpecs1.title": 160,
     "edpower.productPage.techSpecs1.unit": "km",
     "edpower.productPage.techSpecs1.desc": "Cruising Range",
 
@@ -440,7 +440,7 @@ const translations = {
       "Charge from 10% to 80% with SuperCharge",
 
     "edpower.productPage.techSpecs3.title": 80,
-    "edpower.productPage.techSpecs3.unit": "km/hour",
+    "edpower.productPage.techSpecs3.unit": "km/h",
     "edpower.productPage.techSpecs3.desc": "Top Speed",
 
     "edpower.productPage.productOverview.imageAlt":
@@ -448,7 +448,7 @@ const translations = {
     "edpower.productPage.productOverview.title":
       "Flagship Power, Unrivaled Comfort.",
     "edpower.productPage.productOverview.description":
-      "Meet EDPower—the ultimate electric scooter from Wedison. With its spacious saddle, futuristic styling, and best-in-class range up to 135 km, EDPower sets a new standard for electric two-wheelers. Enjoy advanced comfort, cutting-edge connectivity, and unstoppable power for the longest journeys. Engineered for those who demand the best.",
+      "Meet EDPower—the ultimate electric scooter from Wedison. With its spacious saddle, futuristic styling, and best-in-class range up to 160 km, EDPower sets a new standard for electric two-wheelers. Enjoy advanced comfort, cutting-edge connectivity, and unstoppable power for the longest journeys. Engineered for those who demand the best.",
 
     "edpower.productPage.productHighlight1.imageAlt":
       "Cockpit view showcasing the large TFT display with Apple CarPlay & Android Auto interface",
@@ -477,9 +477,9 @@ const translations = {
 
     "edpower.productPage.productHighlight5.imageAlt":
       " Battery/range indicator on the dashboard, close-up",
-    "edpower.productPage.productHighlight5.title": "Class-Leading 135 km Range",
+    "edpower.productPage.productHighlight5.title": "Class-Leading 160 km Range",
     "edpower.productPage.productHighlight5.description":
-      "Go farther than ever. With up to 135 km on a single charge, EDPower is ready for city exploring or out-of-town adventures—no limits, just freedom.",
+      "Go farther than ever. With up to 160 km on a single charge, EDPower is ready for city exploring or out-of-town adventures—no limits, just freedom.",
 
     "edpower.productPage.chargingOverview.imageAlt":
       "EDPower parked at a Wedison showroom with SuperCharge and home charger visible",
@@ -508,14 +508,14 @@ const translations = {
       "Plug in at home and start each day with a full battery. EDPower makes overnight charging effortless and worry-free.",
 
     "edpower.specs.engine.motorType": "Brusless DC Motor",
-    "edpower.specs.engine.motorPower": "3.000 Watt (3 kW)",
-    "edpower.specs.engine.topSpeed": "80 km/hour",
+    "edpower.specs.engine.motorPower": "5 kW",
+    "edpower.specs.engine.topSpeed": "80 km/h",
     "edpower.specs.engine.acceleration": "7.9 seconds",
     "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
     "edpower.specs.battery.batteryCapacity": "5 kWh",
     "edpower.specs.battery.voltage": "76.8 Volt",
     "edpower.specs.battery.chargingTimeSuperCharge": "15 minutes",
-    "edpower.specs.battery.chargingTimeHome": "4 hours",
+    "edpower.specs.battery.chargingTimeHome": "10.2 hours",
     "edpower.specs.battery.range": "160 km",
     "edpower.specs.brake.frontBrake": "Disc Brake",
     "edpower.specs.brake.rearBrake": "Disc Brake",
@@ -608,7 +608,7 @@ const translations = {
     "victory.productPage.hero.ctaPrimary": "Order Now",
     "victory.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "victory.productPage.techSpecs1.title": 115,
+    "victory.productPage.techSpecs1.title": 120,
     "victory.productPage.techSpecs1.unit": "km",
     "victory.productPage.techSpecs1.desc": (
       <>
@@ -629,7 +629,7 @@ const translations = {
     "victory.productPage.productOverview.imageAlt": "Gray Victory",
     "victory.productPage.productOverview.title": "Sporty, Agile, Unstoppable.",
     "victory.productPage.productOverview.description":
-      "Victory by Wedison brings a new level of sportiness and agility to electric mobility. Purpose-built for city riding, Victory combines aggressive styling, lightning-fast acceleration, and outstanding control. Its wide wheelbase and advanced CBS disc brakes give you confidence in every corner. Go further with up to 115 km range and charge up in minutes—Victory puts you ahead in every journey.",
+      "Victory by Wedison brings a new level of sportiness and agility to electric mobility. Purpose-built for city riding, Victory combines aggressive styling, lightning-fast acceleration, and outstanding control. Its wide wheelbase and advanced CBS disc brakes give you confidence in every corner. Go further with up to 120 km range and charge up in minutes—Victory puts you ahead in every journey.",
 
     "victory.productPage.productHighlight1.imageAlt": "Victory Front look",
     "victory.productPage.productHighlight1.title": "Signature Sporty Design",
@@ -674,17 +674,18 @@ const translations = {
       "Plug in at home and wake up fully charged. With the included home charger, Victory is always ready to go—simple, convenient, and reliable.",
 
     "victory.specs.engine.motorType": "Brusless DC Motor",
-    "victory.specs.engine.motorPower": "3.000 Watt (3 kW)",
-    "victory.specs.engine.topSpeed": "80 km/hour",
+    "victory.specs.engine.motorPower": "3.4 kW",
+    "victory.specs.engine.topSpeed": "80 km/h",
     "victory.specs.engine.acceleration": "6.5 seconds",
     "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
     "victory.specs.battery.batteryCapacity":
       "2.5 kWh (Regular Battery) / 3.4 kWh (Extended Battery)",
     "victory.specs.battery.voltage": "76.8 Volt",
     "victory.specs.battery.chargingTimeSuperCharge": "15 minutes",
-    "victory.specs.battery.chargingTimeHome": "4 hours",
+    "victory.specs.battery.chargingTimeHome":
+      "5 hours (Regular Battery) / 7 hours (Extended Battery)",
     "victory.specs.battery.range":
-      "85 km (Regular Battery) / 120 km (Extended Battery)",
+      "110 km (Regular Battery) / 120 km (Extended Battery)",
     "victory.specs.brake.frontBrake": "Disc Brake",
     "victory.specs.brake.rearBrake": "Disc Brake",
     "victory.specs.brake.cbsSupport": "Yes",
@@ -730,7 +731,7 @@ const translations = {
     "athena.productPage.hero.ctaPrimary": "Order Now",
     "athena.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "athena.productPage.techSpecs1.title": 115,
+    "athena.productPage.techSpecs1.title": 120,
     "athena.productPage.techSpecs1.unit": "km",
     "athena.productPage.techSpecs1.desc": (
       <>
@@ -751,7 +752,7 @@ const translations = {
     "athena.productPage.productOverview.imageAlt": "Green Athena",
     "athena.productPage.productOverview.title": "Timeless Elegance, Recharged",
     "athena.productPage.productOverview.description":
-      "Athena by Wedison combines timeless European scooter elegance with cutting-edge electric technology. Designed to stand out while staying quiet, Athena brings a fresh sophistication to city streets—delivering smooth, silent rides with every journey. With up to 115 km range per charge, robust CBS disc brakes, and advanced hydraulic suspension, Athena isn’t just a ride. It’s an experience, crafted for those who crave effortless style and next-generation performance. Fast-charge at any Wedison showroom or enjoy convenient home charging—Athena adapts perfectly to your modern lifestyle.",
+      "Athena by Wedison combines timeless European scooter elegance with cutting-edge electric technology. Designed to stand out while staying quiet, Athena brings a fresh sophistication to city streets—delivering smooth, silent rides with every journey. With up to 120 km range per charge, robust CBS disc brakes, and advanced hydraulic suspension, Athena isn’t just a ride. It’s an experience, crafted for those who crave effortless style and next-generation performance. Fast-charge at any Wedison showroom or enjoy convenient home charging—Athena adapts perfectly to your modern lifestyle.",
 
     "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
     "athena.productPage.productHighlight1.title": "Modern Digital Display",
@@ -795,17 +796,18 @@ const translations = {
       "Charge overnight, or anytime it suits you. Athena's included home charger delivers a full battery in under four hours—seamless, silent, and ready when you are.",
 
     "athena.specs.engine.motorType": "Brusless DC Motor",
-    "athena.specs.engine.motorPower": "2.500 Watt (2.5 kW)",
-    "athena.specs.engine.topSpeed": "80 km/hour",
+    "athena.specs.engine.motorPower": "3.4 kW",
+    "athena.specs.engine.topSpeed": "80 km/h",
     "athena.specs.engine.acceleration": "6.5 seconds",
     "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
     "athena.specs.battery.batteryCapacity":
       "2.5 kWh (Regular Battery) / 3.4 kWh (Extended Battery)",
     "athena.specs.battery.voltage": "76.8 Volt",
     "athena.specs.battery.chargingTimeSuperCharge": "15 minutes",
-    "athena.specs.battery.chargingTimeHome": "4 hour",
+    "athena.specs.battery.chargingTimeHome":
+      "5 hours (Regular Battery) / 7 hours (Extended Battery)",
     "athena.specs.battery.range":
-      "85 km (Regular Battery) / 120 km (Extended Battery)",
+      "110 km (Regular Battery) / 120 km (Extended Battery)",
     "athena.specs.brake.frontBrake": "Disc Brake",
     "athena.specs.brake.rearBrake": "Disc Brake",
     "athena.specs.brake.cbsSupport": "Yes",
@@ -853,7 +855,7 @@ const translations = {
     "bees.productPage.hero.ctaPrimary": "Order Now",
     "bees.productPage.hero.ctaSecondary": "Download Brochure",
 
-    "bees.productPage.techSpecs1.title": 65,
+    "bees.productPage.techSpecs1.title": 80,
     "bees.productPage.techSpecs1.unit": "km",
     "bees.productPage.techSpecs1.desc": "Cruising Range",
 
@@ -894,15 +896,15 @@ const translations = {
     // ===
 
     "bees.specs.engine.motorType": "Brusless DC Motor",
-    "bees.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
-    "bees.specs.engine.topSpeed": "55 km/hour",
+    "bees.specs.engine.motorPower": "1.2 kW",
+    "bees.specs.engine.topSpeed": "55 km/h",
     "bees.specs.engine.acceleration": "9.3 seconds",
     "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
     "bees.specs.battery.batteryCapacity": "1.6 kWh",
     "bees.specs.battery.voltage": "64 Volt",
     "bees.specs.battery.chargingTimeSuperCharge": "-",
-    "bees.specs.battery.chargingTimeHome": "4 hours",
-    "bees.specs.battery.range": "65 km",
+    "bees.specs.battery.chargingTimeHome": "4.1 hours",
+    "bees.specs.battery.range": "80 km",
     "bees.specs.brake.frontBrake": "Disc Brake",
     "bees.specs.brake.rearBrake": "Disc Brake",
     "bees.specs.brake.cbsSupport": "No",
@@ -930,6 +932,10 @@ const translations = {
       "SuperCharge is Wedison’s exclusive fast-charging solution. Designed specifically for EdPower, Athena, and Victory — experience efficiency with no compromise.",
     "supercharge.hero.ctaPrimary": "Find a Station",
     "supercharge.hero.ctaSecondary": "Learn the Tech",
+
+    "supercharge.video.title": "SuperCharge: The Solution for Future Charging",
+    "supercharge.video.description":
+      "SuperCharge provide a faster, safer, and more convenient charging experience for your electric vehicle.",
 
     "supercharge.feature1.tag": "Fast & Reliable",
     "supercharge.feature1.title": "Next-Gen Charging Technology",
@@ -1039,7 +1045,7 @@ const translations = {
       "Wedison EV uses Lithium-ion Battery (LFP), a type of rechargeable battery commonly used in devices like smartphones, laptops, and electric vehicles.\n\nThe characteristics of Lithium-ion Battery are as follow:\nA. High energy density: It can store a considerable amount of electrical energy in a smaller, lighter package.\nB. High temperature: It performs efficiently at high temperatures of up to 45 degrees celsius and can endure low temperatures without sustaining damage.\nC. Low self-discharge rate: The battery retains its energy effectively even when left unused for days or weeks.\nD. High number of charge cycles: It enables numerous charge cycles of more than 5,000 while maintaining nearly all of their original capacity.\nE. Charges quickly: Wedison EV can be fully charged in 30 mins at one of the super fast charging stations.",
     "faq.Battery.questions.3.question": "How many type of battery do you sell?",
     "faq.Battery.questions.3.answer":
-      "Wedison offers 2 battery variations for select models. \nTravelling at 50km/h, the basic and extended versions are capable of travelling up to 85 and 115 km respectively.",
+      "Wedison offers 2 battery variations for select models. \nTravelling at 50km/h, the basic and extended versions are capable of travelling up to 110 and 120 km respectively.",
     "faq.Battery.questions.4.question": "Where is the battery from?",
     "faq.Battery.questions.4.answer":
       "Wedison's proprietary battery is developed internally.",
@@ -1128,7 +1134,7 @@ const translations = {
     "faq.Performance.questions.2.question":
       "What is the range of the motorcycle?",
     "faq.Performance.questions.2.answer":
-      "The range varies between model and battery, ranging from 85 km to 135 km",
+      "The range varies between model and battery, ranging from 80 km to 160 km",
     "faq.Performance.questions.3.question":
       "Is Wedison EV safe to be used in rain and flood?",
     "faq.Performance.questions.3.answer":
@@ -1379,7 +1385,7 @@ const translations = {
     "showroom.address":
       "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
     "showroom.hours": "Jam Buka",
-    "showroom.weekdays": "Senin - Jumat: 9:00 - 18:00",
+    "showroom.weekdays": "Senin - Jumat: 10:00 - 19:00",
     "showroom.weekend": "Sabtu - Minggu: 10:00 - 17:00",
     "showroom.whatYouCanDo": "Apa yang Dapat Anda Lakukan di Ruang Pamer",
     "showroom.testRide.title": "Test Ride Sepeda Motor Listrik",
@@ -1603,7 +1609,7 @@ const translations = {
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": 135,
+    "edpower.productPage.techSpecs1.title": 160,
     "edpower.productPage.techSpecs1.unit": "km",
     "edpower.productPage.techSpecs1.desc": "Jarak Tempuh",
 
@@ -1621,7 +1627,7 @@ const translations = {
     "edpower.productPage.productOverview.title":
       "Kekuatan Utama, Kenyamanan Tak Tertandingi.",
     "edpower.productPage.productOverview.description":
-      "Inilah EDPower—skuter listrik andalan dari Wedison. Dengan jok luas, desain futuristik, dan jarak tempuh terbaik hingga 135 km, EDPower menetapkan standar baru untuk kendaraan roda dua listrik. Nikmati kenyamanan tingkat lanjut, konektivitas canggih, dan tenaga yang siap menjelajah jauh. Dirancang bagi mereka yang menuntut yang terbaik.",
+      "Inilah EDPower—skuter listrik andalan dari Wedison. Dengan jok luas, desain futuristik, dan jarak tempuh terbaik hingga 160 km, EDPower menetapkan standar baru untuk kendaraan roda dua listrik. Nikmati kenyamanan tingkat lanjut, konektivitas canggih, dan tenaga yang siap menjelajah jauh. Dirancang bagi mereka yang menuntut yang terbaik.",
 
     "edpower.productPage.productHighlight1.imageAlt":
       "Tampilan kokpit menampilkan layar TFT besar dengan antarmuka Apple CarPlay & Android Auto",
@@ -1653,9 +1659,9 @@ const translations = {
     "edpower.productPage.productHighlight5.imageAlt":
       "Indikator baterai/jarak tempuh pada dashboard, tampilan close-up",
     "edpower.productPage.productHighlight5.title":
-      "Jarak Tempuh Terbaik 135 km",
+      "Jarak Tempuh Terbaik 160 km",
     "edpower.productPage.productHighlight5.description":
-      "Jelajahi lebih jauh dari sebelumnya. Dengan jarak tempuh hingga 135 km dalam sekali pengisian, EDPower siap menjelajah kota maupun luar kota—tanpa batas, hanya kebebasan.",
+      "Jelajahi lebih jauh dari sebelumnya. Dengan jarak tempuh hingga 160 km dalam sekali pengisian, EDPower siap menjelajah kota maupun luar kota—tanpa batas, hanya kebebasan.",
 
     "edpower.productPage.chargingOverview.imageAlt":
       "EDPower terparkir di showroom Wedison dengan stasiun SuperCharge dan charger rumah yang terlihat",
@@ -1685,14 +1691,14 @@ const translations = {
       "Colokkan di rumah dan mulai hari Anda dengan baterai penuh. EDPower membuat pengisian semalam menjadi mudah dan tanpa khawatir.",
 
     "edpower.specs.engine.motorType": "Brusless DC Motor",
-    "edpower.specs.engine.motorPower": "3.000 Watt (3 kW)",
+    "edpower.specs.engine.motorPower": "5 kW",
     "edpower.specs.engine.topSpeed": "80 km/jam",
     "edpower.specs.engine.acceleration": "7.9 detik",
     "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
     "edpower.specs.battery.batteryCapacity": "5 kWh",
     "edpower.specs.battery.voltage": "76.8 Volt",
     "edpower.specs.battery.chargingTimeSuperCharge": "15 menit",
-    "edpower.specs.battery.chargingTimeHome": "4 jam",
+    "edpower.specs.battery.chargingTimeHome": "10.2 jam",
     "edpower.specs.battery.range": "160 km",
     "edpower.specs.brake.frontBrake": "Rem Cakram",
     "edpower.specs.brake.rearBrake": "Rem Cakram",
@@ -1783,7 +1789,7 @@ const translations = {
     "victory.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "victory.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "victory.productPage.techSpecs1.title": 115,
+    "victory.productPage.techSpecs1.title": 120,
     "victory.productPage.techSpecs1.unit": "km",
     "victory.productPage.techSpecs1.desc": (
       <>
@@ -1805,7 +1811,7 @@ const translations = {
     "victory.productPage.productOverview.title":
       "Sporty, Lincah, Tak Terhentikan.",
     "victory.productPage.productOverview.description":
-      "Victory dari Wedison menghadirkan tingkat sportiness dan kelincahan baru dalam mobilitas listrik. Dirancang khusus untuk berkendara di kota, Victory memadukan tampilan agresif, akselerasi super cepat, dan kendali yang luar biasa. Dengan wheelbase lebar dan rem cakram CBS canggih, Anda akan merasa percaya diri di setiap tikungan. Tempuh jarak hingga 115 km dan isi daya dalam hitungan menit—Victory selalu membawa Anda selangkah lebih maju di setiap perjalanan.",
+      "Victory dari Wedison menghadirkan tingkat sportiness dan kelincahan baru dalam mobilitas listrik. Dirancang khusus untuk berkendara di kota, Victory memadukan tampilan agresif, akselerasi super cepat, dan kendali yang luar biasa. Dengan wheelbase lebar dan rem cakram CBS canggih, Anda akan merasa percaya diri di setiap tikungan. Tempuh jarak hingga 120 km dan isi daya dalam hitungan menit—Victory selalu membawa Anda selangkah lebih maju di setiap perjalanan.",
 
     "victory.productPage.productHighlight1.imageAlt": "Tampilan Depan Victory",
     "victory.productPage.productHighlight1.title": "Desain Sporty yang Ikonik",
@@ -1852,7 +1858,7 @@ const translations = {
       "Colokkan di rumah dan bangun dengan baterai penuh. Dengan charger rumahan bawaan, Victory selalu siap diajak berangkat—praktis, mudah, dan bisa diandalkan.",
 
     "victory.specs.engine.motorType": "Brusless DC Motor",
-    "victory.specs.engine.motorPower": "3.000 Watt (3 kW)",
+    "victory.specs.engine.motorPower": "3.4 kW",
     "victory.specs.engine.topSpeed": "80 km/jam",
     "victory.specs.engine.acceleration": "6.5 detik",
     "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -1860,9 +1866,10 @@ const translations = {
       "2.5 kWh (Baterai Regular) / 3.4 kWh (Baterai Extended)",
     "victory.specs.battery.voltage": "76.8 Volt",
     "victory.specs.battery.chargingTimeSuperCharge": "15 menit",
-    "victory.specs.battery.chargingTimeHome": "4 jam",
+    "victory.specs.battery.chargingTimeHome":
+      "5 jam (Baterai Regular) / 7 jam (Baterai Extended)",
     "victory.specs.battery.range":
-      "85 km (Baterai Regular) / 120 km (Baterai Extended)",
+      "110 km (Baterai Regular) / 120 km (Baterai Extended)",
     "victory.specs.brake.frontBrake": "Rem Cakram",
     "victory.specs.brake.rearBrake": "Rem Cakram",
     "victory.specs.brake.cbsSupport": "Ya",
@@ -1909,7 +1916,7 @@ const translations = {
     "athena.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "athena.productPage.hero.ctaSecondary": "Download Brosur",
 
-    "athena.productPage.techSpecs1.title": 115,
+    "athena.productPage.techSpecs1.title": 120,
     "athena.productPage.techSpecs1.unit": "km",
     "athena.productPage.techSpecs1.desc": (
       <>
@@ -1931,7 +1938,7 @@ const translations = {
     "athena.productPage.productOverview.title":
       "Keanggunan Tak Lekang Waktu, Kini Teraliri Energi Baru",
     "athena.productPage.productOverview.description":
-      "Athena dari Wedison memadukan keanggunan klasik skuter Eropa dengan teknologi listrik terkini. Dirancang untuk mencuri perhatian tanpa mengundang bising, Athena menghadirkan sentuhan baru penuh gaya di jalanan kota—mengantar Anda melaju mulus dan senyap di setiap perjalanan. Dengan jangkauan hingga 115 km dalam sekali pengisian, rem cakram CBS yang tangguh, serta suspensi hidrolik canggih, Athena bukan sekadar kendaraan. Ini adalah sebuah pengalaman, dirancang bagi mereka yang mendambakan gaya tanpa usaha dan performa generasi baru. Isi daya cepat di showroom Wedison atau nikmati kemudahan charging di rumah—Athena siap menyesuaikan diri dengan gaya hidup modern Anda.",
+      "Athena dari Wedison memadukan keanggunan klasik skuter Eropa dengan teknologi listrik terkini. Dirancang untuk mencuri perhatian tanpa mengundang bising, Athena menghadirkan sentuhan baru penuh gaya di jalanan kota—mengantar Anda melaju mulus dan senyap di setiap perjalanan. Dengan jangkauan hingga 120 km dalam sekali pengisian, rem cakram CBS yang tangguh, serta suspensi hidrolik canggih, Athena bukan sekadar kendaraan. Ini adalah sebuah pengalaman, dirancang bagi mereka yang mendambakan gaya tanpa usaha dan performa generasi baru. Isi daya cepat di showroom Wedison atau nikmati kemudahan charging di rumah—Athena siap menyesuaikan diri dengan gaya hidup modern Anda.",
 
     "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
     "athena.productPage.productHighlight1.title": "Layar Digital Canggih",
@@ -1978,7 +1985,7 @@ const translations = {
       "Isi daya semalaman, atau kapan pun sesuai jadwal Anda. Charger rumahan bawaan Athena mampu mengisi penuh baterai dalam waktu kurang dari empat jam—tanpa suara, tanpa repot, dan selalu siap saat Anda butuh.",
 
     "athena.specs.engine.motorType": "Brusless DC Motor",
-    "athena.specs.engine.motorPower": "2.500 Watt (2.5 kW)",
+    "athena.specs.engine.motorPower": "3.4 kW",
     "athena.specs.engine.topSpeed": "80 km/jam",
     "athena.specs.engine.acceleration": "6.5 detik",
     "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -1986,9 +1993,10 @@ const translations = {
       "2.5 kWh (Baterai Regular) / 3.4 kWh (Baterai Extended)",
     "athena.specs.battery.voltage": "76.8 Volt",
     "athena.specs.battery.chargingTimeSuperCharge": "15 menit",
-    "athena.specs.battery.chargingTimeHome": "4 jam",
+    "athena.specs.battery.chargingTimeHome":
+      "5 jam (Baterai Regular) / 7 jam (Baterai Extended)",
     "athena.specs.battery.range":
-      "85 km (Baterai Regular) / 120 km (Baterai Extended)",
+      "110 km (Baterai Regular) / 120 km (Baterai Extended)",
     "athena.specs.brake.frontBrake": "Rem Cakram",
     "athena.specs.brake.rearBrake": "Rem Cakram",
     "athena.specs.brake.cbsSupport": "Ya",
@@ -2038,7 +2046,7 @@ const translations = {
     "bees.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "bees.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "bees.productPage.techSpecs1.title": 65,
+    "bees.productPage.techSpecs1.title": 80,
     "bees.productPage.techSpecs1.unit": "km",
     "bees.productPage.techSpecs1.desc": "Jarak Tempuh",
 
@@ -2080,15 +2088,15 @@ const translations = {
     // ===
 
     "bees.specs.engine.motorType": "Brusless DC Motor",
-    "bees.specs.engine.motorPower": "1.200 Watt (1.2 kW)",
+    "bees.specs.engine.motorPower": "1.2 kW",
     "bees.specs.engine.topSpeed": "55 km/jam",
     "bees.specs.engine.acceleration": "9.3 detik",
     "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
     "bees.specs.battery.batteryCapacity": "1.6 kWh",
     "bees.specs.battery.voltage": "64 Volt",
     "bees.specs.battery.chargingTimeSuperCharge": "-",
-    "bees.specs.battery.chargingTimeHome": "4 jam",
-    "bees.specs.battery.range": "65 km",
+    "bees.specs.battery.chargingTimeHome": "4.1 jam",
+    "bees.specs.battery.range": "80 km",
     "bees.specs.brake.frontBrake": "Rem Cakram",
     "bees.specs.brake.rearBrake": "Rem Cakram",
     "bees.specs.brake.cbsSupport": "Tidak",
@@ -2116,6 +2124,10 @@ const translations = {
       "SuperCharge adalah solusi pengisian cepat eksklusif dari Wedison. Didesain khusus untuk Edmax, Athena, dan Victory — rasakan efisiensi tanpa kompromi.",
     "supercharge.hero.ctaPrimary": "Temukan Lokasi",
     "supercharge.hero.ctaSecondary": "Pelajari Teknologi",
+
+    "supercharge.video.title": "SuperCharge: Solusi Charging Masa Depan",
+    "supercharge.video.description":
+      "SuperCharge hadir untuk memberikan pengalaman isi daya yang lebih cepat, aman, dan praktis bagi kendaraan listrik Anda.",
 
     "supercharge.feature1.tag": "Cepat dan Andal",
     "supercharge.feature1.title": "Teknologi Pengisian Generasi Baru",
@@ -2234,7 +2246,7 @@ const translations = {
     "faq.Battery.questions.3.question":
       "Berapa banyak jenis baterai yang Anda jual?",
     "faq.Battery.questions.3.answer":
-      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 85 dan 135 km.",
+      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 80 dan 160 km.",
     "faq.Battery.questions.4.question": "Baterai berasal dari mana?",
     "faq.Battery.questions.4.answer":
       "Baterai proprietary Wedison dikembangkan secara internal.",
@@ -2319,13 +2331,13 @@ const translations = {
     // Performance Questions
     "faq.Performance.questions.0.question": "Berapa kecepatan motor?",
     "faq.Performance.questions.0.answer":
-      "Tergantung model, kecepatan tertinggi berkisar dari 65 km/jam hingga 95 km/jam",
+      "Tergantung model, kecepatan tertinggi berkisar dari 55 km/jam hingga 95 km/jam",
     "faq.Performance.questions.1.question": "Berapa daya motor / BLDC motor?",
     "faq.Performance.questions.1.answer":
       "Daya motor bervariasi antar model, berkisar dari 1,2KW hingga 5KW",
     "faq.Performance.questions.2.question": "Berapa jarak tempuh motor?",
     "faq.Performance.questions.2.answer":
-      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 85 km hingga 135 km",
+      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 80 km hingga 160 km",
     "faq.Performance.questions.3.question":
       "Apakah Wedison EV aman digunakan dalam hujan dan banjir?",
     "faq.Performance.questions.3.answer":

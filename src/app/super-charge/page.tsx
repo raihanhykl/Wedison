@@ -4,8 +4,7 @@ import HeroSection from "../components/hero-section";
 // import { getSEOMetadata } from "../lib/seo1";
 import VideoSection from "./videoSection";
 import { Suspense } from "react";
-import { HeroSlide } from "@/components/hero";
-import { useLanguage } from "../lib/language-context";
+
 // import { generateSeoMetadata } from "../lib/seo";
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Super Charge - Wedison",
@@ -39,37 +38,17 @@ import { useLanguage } from "../lib/language-context";
 // });
 
 export default function EdmaxPage() {
-  const { t } = useLanguage();
   return (
     <>
       <main className="min-h-screen bg-white">
-        {/* <HeroSection
+        <HeroSection
           name="supercharge"
           imageAlt="SuperCharge Charging Station"
           theme="dark"
           imageStyle="object-[90%_10%] md:object-[100%_40%] 2xl:object-[0%_100%] "
           noButton={true}
-        /> */}
-        <HeroSlide
-          position="center-left"
-          contentWidth="wider"
-          textAlign="left"
-          backgroundImage="/super-charge/supercharge-hero-1.webp"
-          title={t("supercharge.hero.title")}
-          titleHighlight={t("supercharge.hero.titleHighlight")}
-          description={t("supercharge.hero.description")}
-          primaryCTA={{
-            label: t("edmax.hero.orderNow"),
-            icon: "arrow",
-            href: "/order",
-          }}
-          secondaryCTA={{
-            label: t("edmax.hero.downloadBrochure"),
-            icon: "download",
-            href: "/brochure/Wedison_Brochure_ID.pdf",
-          }}
-          height="screen"
         />
+
         <Suspense fallback={<p>Loading video...</p>}>
           <VideoSection />
         </Suspense>
