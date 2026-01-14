@@ -6,6 +6,16 @@ export interface EmailServiceResult {
   message: string;
 }
 
+export interface CareerApplicationData {
+  fullName: string;
+  phone: string;
+  address: string;
+  coverLetter: string;
+  jobTitle: string;
+  department: string;
+  resumeFileName?: string;
+}
+
 export class EmailService {
   private static prepareEmailData(
     formData: ContactFormData
@@ -58,6 +68,53 @@ export class EmailService {
         success: false,
         message:
           error instanceof Error ? error.message : "Failed to send email",
+      };
+    }
+  }
+
+  private static prepareCareerEmailData(
+    applicationData: CareerApplicationData
+  ): Record<string, string> {
+    return {
+      fullName: applicationData.fullName,
+      phone: applicationData.phone,
+      address: applicationData.address,
+      coverLetter: applicationData.coverLetter,
+      jobTitle: applicationData.jobTitle,
+      department: applicationData.department,
+      resumeFileName: applicationData.resumeFileName || "No file attached",
+    };
+  }
+
+  static async sendCareerApplication(
+    applicationData: CareerApplicationData
+  ): Promise<EmailServiceResult> {
+    try {
+      const emailData = this.prepareCareerEmailData(applicationData);
+
+      // Using dummy keys for now - user will replace with actual keys
+      const serviceId = process.env.NEXT_PUBLIC_CAREER_EMAIL_serviceId || "service_dummy_career";
+      const templateId = process.env.NEXT_PUBLIC_CAREER_EMAIL_templateId || "template_dummy_career";
+      const publicKey = process.env.NEXT_PUBLIC_CAREER_EMAIL_publicKey || "dummy_public_key_career";
+
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        emailData,
+        publicKey
+      );
+
+      return {
+        success: true,
+        message: "Career application sent successfully. Result: " + result,
+      };
+    } catch (error) {
+      console.error("Career email service error:", error);
+
+      return {
+        success: false,
+        message:
+          error instanceof Error ? error.message : "Failed to send career application",
       };
     }
   }

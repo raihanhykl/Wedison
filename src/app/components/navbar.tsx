@@ -150,6 +150,7 @@ export default function Navbar() {
           image: "",
         },
         { name: t("nav.contactUs"), href: "/corporate/contact/", image: "" },
+        { name: t("nav.careers"), href: "/career/", image: "" },
       ],
     },
   ];
@@ -541,7 +542,9 @@ export default function Navbar() {
                                 alt={item.name}
                                 width={64}
                                 height={64}
-                                className={cn("lg:h-32 lg:w-32 h-16 w-16 object-contain")}
+                                className={cn(
+                                  "lg:h-32 lg:w-32 h-16 w-16 object-contain"
+                                )}
                               />
                             </div>
                           </Link>
