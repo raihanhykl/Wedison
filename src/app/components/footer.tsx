@@ -6,19 +6,19 @@ import { useLanguage } from "../lib/language-context";
 export default function Footer() {
   const { t } = useLanguage();
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
-          <div className=" mr-6 col-span-2">
+    <footer className="text-white bg-gray-900">
+      <div className="container px-4 py-8 mx-auto sm:px-6 lg:px-8 md:py-12">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-6">
+          <div className="col-span-2 mr-6 ">
             <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent">
               Wedison Motors
             </h3>
-            <p className="text-sm md:text-base text-gray-400 mb-3 md:mb-4">
+            <p className="mb-3 text-sm text-gray-400 md:text-base md:mb-4">
               {/* Pioneering the future of electric mobility with cutting-edge
               technology and sustainable design. */}
               {t("footer.description")}
             </p>
-            <p className="text-gray-400 text-sm md:text-base">
+            <p className="text-sm text-gray-400 md:text-base">
               {/* © {new Date().getFullYear()} Wedison Motors. All rights reserved. */}
               {t("footer.copyright")}
             </p>
@@ -26,7 +26,7 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
+            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Products */}
               {t("footer.products")}
               <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
@@ -77,7 +77,7 @@ export default function Footer() {
 
           {/* experience */}
           <div>
-            <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
+            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Experience */}
               {t("footer.experience")}
               <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
@@ -120,7 +120,7 @@ export default function Footer() {
 
           {/* corporate */}
           <div>
-            <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
+            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Corporate */}
               {t("footer.corporate")}
               <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
@@ -174,15 +174,15 @@ export default function Footer() {
 
           {/* meet us */}
           <div>
-            <h4 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-white relative inline-block">
+            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Meet Us */}
               {t("footer.meetus")}
               <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
             </h4>
-            <div className="flex  max-md:justify-between b w-full mt-2 gap-3 md:gap-4">
-              {/* <div className="flex justify-between items-center space-x-4  w-full"> */}
-              <div className=" ">
-                <ul className="space-y-3 md:space-y-4 flex gap-3">
+            <div className="flex w-full gap-3 mt-2 max-md:justify-between b md:gap-4">
+              {/* <div className="flex items-center justify-between w-full space-x-4"> */}
+              <div className="">
+                <ul className="flex gap-3 space-y-3 md:space-y-4">
                   <li>
                     <Link
                       href="https://www.instagram.com/wedison.id/"
@@ -231,7 +231,7 @@ export default function Footer() {
                 </ul>
               </div>
               <div>
-                <ul className="space-y-3 md:space-y-4 flex gap-3">
+                <ul className="flex gap-3 space-y-3 md:space-y-4">
                   <li>
                     <Link
                       href="https://www.facebook.com/people/wedisonid/61562726390879/"
@@ -282,8 +282,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-xs md:text-sm mb-4 md:mb-0">
+        <div className="flex flex-col items-center justify-between pt-6 mt-8 border-t border-gray-800 md:mt-12 md:pt-8 md:flex-row">
+          <p className="mb-4 text-xs text-gray-400 md:text-sm md:mb-0">
             {/* Designed with sustainability in mind. Powered by renewable energy. */}
             {t("footer.tagline")}
           </p>
