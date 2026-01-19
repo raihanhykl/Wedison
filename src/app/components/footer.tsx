@@ -152,6 +152,15 @@ export default function Footer() {
                   {t("footer.contact")}
                 </a>
               </li>
+              <li>
+                <a
+                  href="/career"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                >
+                  {/* Contact Us */}
+                  {t("footer.career")}
+                </a>
+              </li>
               {/* <li>
                 <a
                   href="#"
