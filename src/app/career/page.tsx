@@ -425,14 +425,14 @@ export default function CareerClient() {
               {/* Email Apply Option - Featured */}
               <div className="mb-6">
                 <a
-                  href={`mailto:hr@wedison.co?subject=Lamaran%20Pekerjaan%20-%20${encodeURIComponent(
-                    selectedJob.jobTitle
+                  href={`mailto:aditya@wedison.co?subject=Lamaran%20Pekerjaan%20-%20${encodeURIComponent(
+                    selectedJob.jobTitle,
                   )}%20(${encodeURIComponent(
-                    selectedJob.department
+                    selectedJob.department,
                   )})&body=Yth.%20Tim%20HR%20Wedison%2C%0A%0ASaya%20tertarik%20untuk%20melamar%20posisi%20${encodeURIComponent(
-                    selectedJob.jobTitle
+                    selectedJob.jobTitle,
                   )}%20di%20departemen%20${encodeURIComponent(
-                    selectedJob.department
+                    selectedJob.department,
                   )}.%0A%0ABerikut%20saya%20lampirkan%20CV%20dan%20dokumen%20pendukung%20lainnya.%0A%0ANama%20Lengkap%3A%20%0ANomor%20Telepon%3A%20%0AAlamat%3A%20%0A%0ATerima%20kasih%20atas%20perhatiannya.%0A%0AHormat%20saya%2C`}
                   className="group w-full flex items-center gap-4 p-5 bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/20 hover:to-primary/10 border-2 border-primary rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
