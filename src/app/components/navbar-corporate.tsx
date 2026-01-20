@@ -22,7 +22,7 @@ const NavbarCorporate = forwardRef<HTMLDivElement, Props>(
             " sticky top-0 left-0 overflow-hidden bg-white md:transition-discrete duration-300 hidden md:flex justify-center items-center shadow-sm ",
             open
               ? // ? "h-full opacity-100 pointer-events-auto"
-                "max-h-60 h-60 opacity-100 pointer-events-auto"
+                "max-h-80 h-80 opacity-100 pointer-events-auto"
               : "max-h-0 pointer-events-none"
           )}
         >
@@ -86,6 +86,23 @@ const NavbarCorporate = forwardRef<HTMLDivElement, Props>(
                       </div>
                       <div className="text-gray-500 text-sm">
                         {t("nav.contactUs.description")}
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/career/"
+                      className={cn(
+                        " bg-white hover:bg-gray-100 px-4  rounded-lg py-2 flex-1 w-full",
+                        path === "/career/"
+                          ? "cursor-not-allowed bg-gray-100 "
+                          : ""
+                      )}
+                    >
+                      <div className=" text-black font-medium text-xl">
+                        {t("nav.careers")}
+                      </div>
+                      <div className="text-gray-500 text-sm">
+                        {t("nav.careers.description")}
                       </div>
                     </Link>
                   </div>

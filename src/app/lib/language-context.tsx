@@ -73,6 +73,8 @@ const translations = {
     "nav.aboutUs.description":
       "Discover Wedison’s vision, mission, and commitment to driving innovation in electric mobility for a sustainable future.",
     "nav.careers": "Careers",
+    "nav.careers.description":
+      "Join the Wedison team and build a career in the electric vehicle industry.",
     "nav.contactUs": "Contact Us",
     "nav.contactUs.description":
       "Need assistance or further information? The Wedison team is here to help you.",
@@ -1263,6 +1265,9 @@ const translations = {
     "nav.aboutUs.description":
       "Kenali visi, misi, dan komitmen Wedison dalam menghadirkan inovasi motor listrik untuk masa depan berkelanjutan.",
     "nav.careers": "Karir",
+    "nav.careers.description":
+      "Bergabung dengan tim Wedison dan bangun karier di industri kendaraan listrik.",
+
     "nav.contactUs": "Hubungi Kami",
     "nav.contactUs.description":
       "Butuh bantuan atau informasi lebih lanjut? Tim Wedison siap melayani Anda.",
