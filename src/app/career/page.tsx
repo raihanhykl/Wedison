@@ -425,7 +425,7 @@ export default function CareerClient() {
               {/* Email Apply Option - Featured */}
               <div className="mb-6">
                 <a
-                  href={`mailto:aditya@wedison.co?subject=Lamaran%20Pekerjaan%20-%20${encodeURIComponent(
+                  href={`mailto:career@wedison.co?subject=Lamaran%20Pekerjaan%20-%20${encodeURIComponent(
                     selectedJob.jobTitle,
                   )}%20(${encodeURIComponent(
                     selectedJob.department,
