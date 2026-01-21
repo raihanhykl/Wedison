@@ -215,11 +215,11 @@ export default function Navbar() {
         {/* <div className="container mx-auto"> */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
           {/* <div className="flex items-center justify-between"> */}
-          <div className="flex items-center justify-between h-12 sm:h-14 md:h-16 overflow-hidden">
-            <div className="flex-shrink-0 h-fit inset-0 p-0 ">
+          <div className="flex items-center justify-between h-12 overflow-hidden sm:h-14 md:h-16">
+            <div className="inset-0 flex-shrink-0 p-0 h-fit ">
               <Link
                 href="/"
-                className="flex items-center cursor-pointer shadow-xs h-full"
+                className="flex items-center h-full shadow-xs cursor-pointer"
               >
                 <Image
                   src={
@@ -243,7 +243,7 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
 
-            <nav className="hidden md:flex space-x-4 lg:space-x-8 items-center border-none outline-none ring-0">
+            <nav className="items-center hidden space-x-4 border-none outline-none md:flex lg:space-x-8 ring-0">
               {navItems.map((item) => (
                 <div key={item.name} className="relative group">
                   {item.subMenu ? (
@@ -410,7 +410,7 @@ export default function Navbar() {
             </nav>
 
             {/* Mobile menu button and language toggle */}
-            <div className="md:hidden flex items-center">
+            <div className="flex items-center md:hidden">
               {/* <LanguageToggle className="mr-2" /> */}
               <LanguageToggle2 />
 
@@ -501,7 +501,7 @@ export default function Navbar() {
                 </Link>
 
                 {item.subMenu && activeDropdown === item.name && (
-                  // <div className="pl-4 py-2 space-y-1 animate-slide-down bg-gray-50 rounded-md my-1">
+                  // <div className="py-2 pl-4 my-1 space-y-1 rounded-md animate-slide-down bg-gray-50">
                   //   {item.subMenu.map((subItem) => (
                   //     <Link
                   //       key={subItem.name}
@@ -532,11 +532,11 @@ export default function Navbar() {
                             href={item.href}
                             className="flex flex-col items-center justify-center "
                           >
-                            <p className=" w-full text-center text-sm font-bold tracking-widest">
+                            <p className="w-full text-sm font-bold tracking-widest text-center ">
                               {/* {item.name} */}
                               {item.name.toUpperCase()}
                             </p>
-                            <div className="overflow-hidden w-16 h-16 items-center justify-center flex">
+                            <div className="flex items-center justify-center w-16 h-16 overflow-hidden">
                               <Image
                                 src={item.image}
                                 alt={item.name}

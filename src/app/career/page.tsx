@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { jobListings, JobData } from "./data-job";
+import { useLanguage } from "../lib/language-context";
 
 export default function CareerClient() {
+  const { t } = useLanguage();
   const [selectedJob, setSelectedJob] = useState<JobData | null>(null);
   const [showJobDetail, setShowJobDetail] = useState(false);
   const [showJobPortals, setShowJobPortals] = useState(false);
@@ -72,13 +74,12 @@ export default function CareerClient() {
           <div className="max-w-[2480px] mx-auto px-8 md:px-16 w-full">
             <div className="max-w-3xl ">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
-                Bergabung Bersama
+                {t("career.banner.title")}
                 <br />
-                <span className="text-primary">Tim Wedison</span>
+                <span className="text-primary">{t("career.banner.titleHighlight")}</span>
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8">
-                Mari bersama membangun masa depan transportasi listrik yang
-                berkelanjutan di Indonesia
+                {t("career.banner.description")}
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
@@ -94,7 +95,7 @@ export default function CareerClient() {
                     />
                   </svg>
                   <span className="text-white text-sm font-medium">
-                    Work-Life Balance
+                    {t("career.banner.badge1")}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
@@ -110,7 +111,7 @@ export default function CareerClient() {
                     />
                   </svg>
                   <span className="text-white text-sm font-medium">
-                    Competitive Salary
+                    {t("career.banner.badge2")}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
@@ -126,7 +127,7 @@ export default function CareerClient() {
                     />
                   </svg>
                   <span className="text-white text-sm font-medium">
-                    Career Growth
+                    {t("career.banner.badge3")}
                   </span>
                 </div>
               </div>
@@ -140,10 +141,10 @@ export default function CareerClient() {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Posisi yang Tersedia
+            {t("career.section.title")}
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Temukan peran yang sesuai dengan passion dan keahlian Anda
+            {t("career.section.description")}
           </p>
         </div>
 
@@ -185,7 +186,7 @@ export default function CareerClient() {
                     <p className="text-sm leading-relaxed line-clamp-3">
                       {typeof job.jobOverview === "string"
                         ? job.jobOverview
-                        : "Klik untuk melihat detail posisi dan requirements"}
+                        : t("career.card.previewText")}
                     </p>
                   </div>
                 </div>
@@ -196,7 +197,7 @@ export default function CareerClient() {
                   className="w-full group/btn border-gray-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
                 >
                   <span className="flex items-center justify-center gap-2">
-                    Lihat Detail
+                    {t("career.card.viewDetails")}
                     <svg
                       className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
                       fill="none"
@@ -284,7 +285,7 @@ export default function CareerClient() {
                       />
                     </svg>
                   </span>
-                  Job Overview
+                  {t("career.detail.jobOverview")}
                 </h4>
                 <div className="text-gray-700 leading-relaxed">
                   {selectedJob.jobOverview}
@@ -309,7 +310,7 @@ export default function CareerClient() {
                       />
                     </svg>
                   </span>
-                  Key Responsibilities
+                  {t("career.detail.keyResponsibilities")}
                 </h4>
                 <div className="text-gray-700">
                   {selectedJob.keyResponsibilities}
@@ -334,7 +335,7 @@ export default function CareerClient() {
                       />
                     </svg>
                   </span>
-                  Qualifications & Requirements
+                  {t("career.detail.qualifications")}
                 </h4>
                 <div className="text-gray-700">
                   {selectedJob.qualificationsRequirement}
@@ -362,7 +363,7 @@ export default function CareerClient() {
                       d="M13 10V3L4 14h7v7l9-11h-7z"
                     />
                   </svg>
-                  Lamar Posisi Ini
+                  {t("career.detail.applyButton")}
                 </span>
               </Button>
             </div>
@@ -389,7 +390,7 @@ export default function CareerClient() {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl md:text-3xl font-bold mb-1">
-                    Pilih Platform Lamaran
+                    {t("career.portal.title")}
                   </h3>
                   <p className="text-white/80 text-sm md:text-base">
                     {selectedJob.jobTitle} - {selectedJob.department}
@@ -419,7 +420,7 @@ export default function CareerClient() {
             {/* Content */}
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
               <p className="text-gray-600 text-center mb-6">
-                Pilih platform untuk melanjutkan lamaran Anda
+                {t("career.portal.description")}
               </p>
 
               {/* Email Apply Option - Featured */}
@@ -568,9 +569,7 @@ export default function CareerClient() {
                     />
                   </svg>
                   <p className="text-sm text-blue-900">
-                    Anda akan diarahkan ke platform eksternal untuk melengkapi
-                    proses lamaran. Pastikan CV dan dokumen pendukung Anda sudah
-                    siap.
+                    {t("career.portal.infoText")}
                   </p>
                 </div>
               </div>

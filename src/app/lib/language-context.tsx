@@ -75,6 +75,31 @@ const translations = {
     "nav.careers": "Careers",
     "nav.careers.description":
       "Join the Wedison team and build a career in the electric vehicle industry.",
+
+    // Career Page
+    "career.banner.title": "Join the",
+    "career.banner.titleHighlight": "Wedison Team",
+    "career.banner.description":
+      "Together, let's build the future of sustainable electric transportation in Indonesia",
+    "career.banner.badge1": "Work-Life Balance",
+    "career.banner.badge2": "Competitive Salary",
+    "career.banner.badge3": "Career Growth",
+    "career.section.title": "Available Positions",
+    "career.section.description":
+      "Find a role that matches your passion and expertise",
+    "career.card.viewDetails": "View Details",
+    "career.card.previewText":
+      "Click to view position details and requirements",
+    "career.detail.jobOverview": "Job Overview",
+    "career.detail.keyResponsibilities": "Key Responsibilities",
+    "career.detail.qualifications": "Qualifications & Requirements",
+    "career.detail.applyButton": "Apply for This Position",
+    "career.portal.title": "Choose Application Platform",
+    "career.portal.description":
+      "Select a job portal platform to continue your application",
+    "career.portal.infoText":
+      "You will be redirected to an external platform to complete the application process. Make sure your CV and supporting documents are ready.",
+
     "nav.contactUs": "Contact Us",
     "nav.contactUs.description":
       "Need assistance or further information? The Wedison team is here to help you.",
@@ -200,6 +225,7 @@ const translations = {
     "footer.contact": "Contact Us",
     "footer.about": "About Us",
     "footer.meetus": "Meet Us",
+    "footer.career": "Career",
 
     // Showroom Page
     "showroom.title": "Visit Our",
@@ -509,8 +535,8 @@ const translations = {
     "edpower.productPage.chargingHighlight2.description":
       "Plug in at home and start each day with a full battery. EDPower makes overnight charging effortless and worry-free.",
 
-    "edpower.specs.engine.motorType": "Brusless DC Motor",
-    "edpower.specs.engine.motorPower": "5 kW",
+    "edpower.specs.engine.motorType": "Brushless DC Motor",
+    "edpower.specs.engine.motorPower": "3 kW",
     "edpower.specs.engine.topSpeed": "80 km/h",
     "edpower.specs.engine.acceleration": "7.9 seconds",
     "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -675,8 +701,8 @@ const translations = {
     "victory.productPage.chargingHighlight2.description":
       "Plug in at home and wake up fully charged. With the included home charger, Victory is always ready to go—simple, convenient, and reliable.",
 
-    "victory.specs.engine.motorType": "Brusless DC Motor",
-    "victory.specs.engine.motorPower": "3.4 kW",
+    "victory.specs.engine.motorType": "Brushless DC Motor",
+    "victory.specs.engine.motorPower": "3 kW",
     "victory.specs.engine.topSpeed": "80 km/h",
     "victory.specs.engine.acceleration": "6.5 seconds",
     "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -797,8 +823,8 @@ const translations = {
     "athena.productPage.chargingHighlight2.description":
       "Charge overnight, or anytime it suits you. Athena's included home charger delivers a full battery in under four hours—seamless, silent, and ready when you are.",
 
-    "athena.specs.engine.motorType": "Brusless DC Motor",
-    "athena.specs.engine.motorPower": "3.4 kW",
+    "athena.specs.engine.motorType": "Brushless DC Motor",
+    "athena.specs.engine.motorPower": "2.5 kW",
     "athena.specs.engine.topSpeed": "80 km/h",
     "athena.specs.engine.acceleration": "6.5 seconds",
     "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -897,7 +923,7 @@ const translations = {
 
     // ===
 
-    "bees.specs.engine.motorType": "Brusless DC Motor",
+    "bees.specs.engine.motorType": "Brushless DC Motor",
     "bees.specs.engine.motorPower": "1.2 kW",
     "bees.specs.engine.topSpeed": "55 km/h",
     "bees.specs.engine.acceleration": "9.3 seconds",
@@ -1268,6 +1294,30 @@ const translations = {
     "nav.careers.description":
       "Bergabung dengan tim Wedison dan bangun karier di industri kendaraan listrik.",
 
+    // Career Page
+    "career.banner.title": "Bergabung Bersama",
+    "career.banner.titleHighlight": "Tim Wedison",
+    "career.banner.description":
+      "Mari bersama membangun masa depan transportasi listrik yang berkelanjutan di Indonesia",
+    "career.banner.badge1": "Work-Life Balance",
+    "career.banner.badge2": "Gaji Kompetitif",
+    "career.banner.badge3": "Pertumbuhan Karir",
+    "career.section.title": "Posisi yang Tersedia",
+    "career.section.description":
+      "Temukan peran yang sesuai dengan passion dan keahlian Anda",
+    "career.card.viewDetails": "Lihat Detail",
+    "career.card.previewText":
+      "Klik untuk melihat detail posisi dan requirements",
+    "career.detail.jobOverview": "Job Overview",
+    "career.detail.keyResponsibilities": "Key Responsibilities",
+    "career.detail.qualifications": "Qualifications & Requirements",
+    "career.detail.applyButton": "Lamar Posisi Ini",
+    "career.portal.title": "Pilih Platform Lamaran",
+    "career.portal.description":
+      "Pilih platform job portal untuk melanjutkan lamaran Anda",
+    "career.portal.infoText":
+      "Anda akan diarahkan ke platform eksternal untuk melengkapi proses lamaran. Pastikan CV dan dokumen pendukung Anda sudah siap.",
+
     "nav.contactUs": "Hubungi Kami",
     "nav.contactUs.description":
       "Butuh bantuan atau informasi lebih lanjut? Tim Wedison siap melayani Anda.",
@@ -1377,6 +1427,7 @@ const translations = {
     "footer.terms": "Ketentuan",
     "footer.cookies": "Cookies",
     "footer.meetus": "Temukan Kami",
+    "footer.career": "Karir",
 
     //showroom
 
@@ -1695,8 +1746,8 @@ const translations = {
     "edpower.productPage.chargingHighlight2.description":
       "Colokkan di rumah dan mulai hari Anda dengan baterai penuh. EDPower membuat pengisian semalam menjadi mudah dan tanpa khawatir.",
 
-    "edpower.specs.engine.motorType": "Brusless DC Motor",
-    "edpower.specs.engine.motorPower": "5 kW",
+    "edpower.specs.engine.motorType": "Brushless DC Motor",
+    "edpower.specs.engine.motorPower": "3 kW",
     "edpower.specs.engine.topSpeed": "80 km/jam",
     "edpower.specs.engine.acceleration": "7.9 detik",
     "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -1862,8 +1913,8 @@ const translations = {
     "victory.productPage.chargingHighlight2.description":
       "Colokkan di rumah dan bangun dengan baterai penuh. Dengan charger rumahan bawaan, Victory selalu siap diajak berangkat—praktis, mudah, dan bisa diandalkan.",
 
-    "victory.specs.engine.motorType": "Brusless DC Motor",
-    "victory.specs.engine.motorPower": "3.4 kW",
+    "victory.specs.engine.motorType": "Brushless DC Motor",
+    "victory.specs.engine.motorPower": "3 kW",
     "victory.specs.engine.topSpeed": "80 km/jam",
     "victory.specs.engine.acceleration": "6.5 detik",
     "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -1989,8 +2040,8 @@ const translations = {
     "athena.productPage.chargingHighlight2.description":
       "Isi daya semalaman, atau kapan pun sesuai jadwal Anda. Charger rumahan bawaan Athena mampu mengisi penuh baterai dalam waktu kurang dari empat jam—tanpa suara, tanpa repot, dan selalu siap saat Anda butuh.",
 
-    "athena.specs.engine.motorType": "Brusless DC Motor",
-    "athena.specs.engine.motorPower": "3.4 kW",
+    "athena.specs.engine.motorType": "Brushless DC Motor",
+    "athena.specs.engine.motorPower": "2.5 kW",
     "athena.specs.engine.topSpeed": "80 km/jam",
     "athena.specs.engine.acceleration": "6.5 detik",
     "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
@@ -2092,7 +2143,7 @@ const translations = {
 
     // ===
 
-    "bees.specs.engine.motorType": "Brusless DC Motor",
+    "bees.specs.engine.motorType": "Brushless DC Motor",
     "bees.specs.engine.motorPower": "1.2 kW",
     "bees.specs.engine.topSpeed": "55 km/jam",
     "bees.specs.engine.acceleration": "9.3 detik",
