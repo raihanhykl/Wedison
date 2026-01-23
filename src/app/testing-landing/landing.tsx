@@ -28,7 +28,7 @@ const ComparisonTable = dynamic(
       </div>
     ),
     ssr: true,
-  }
+  },
 );
 
 export default function Landing() {
@@ -45,6 +45,7 @@ export default function Landing() {
     title: string;
     description: string;
     link: string;
+    brochure: string;
   }[] = [
     {
       image: "/edpower/edpower-landing-hero.webp",
@@ -54,6 +55,7 @@ export default function Landing() {
       title: t("edpower.productPage.hero.title"),
       description: t("edpower.productPage.hero.description"),
       link: "/edpower/",
+      brochure: "/brochure/brochure-edpower.pdf",
     },
     {
       image: "/athena/athena-landing-hero.webp",
@@ -63,6 +65,7 @@ export default function Landing() {
       title: t("athena.productPage.hero.title"),
       description: t("athena.productPage.hero.description"),
       link: "/athena/",
+      brochure: "/brochure/brochure-athena.pdf",
     },
     {
       image: "/bees/bees-landing-hero.webp",
@@ -73,6 +76,7 @@ export default function Landing() {
       title: t("bees.productPage.hero.title"),
       description: t("bees.productPage.hero.description"),
       link: "/bees/",
+      brochure: "/brochure/brochure-bees.pdf",
     },
     {
       image: "/victory/victory-landing-hero.webp",
@@ -82,6 +86,7 @@ export default function Landing() {
       title: t("victory.productPage.hero.title"),
       description: t("victory.productPage.hero.description"),
       link: "/victory/",
+      brochure: "/brochure/brochure-victory.pdf",
     },
   ];
   const features: any = [
@@ -125,7 +130,7 @@ export default function Landing() {
             setApi={(api: CarouselApi) => {
               carouselApi.current = api;
               api?.on("select", () =>
-                setSelectedIndex(api.selectedScrollSnap())
+                setSelectedIndex(api.selectedScrollSnap()),
               );
             }}
           >
@@ -169,7 +174,7 @@ export default function Landing() {
                             </Button>
                           </Link>
                           <Link
-                            href={"/brochure/brochure-wedison.pdf"}
+                            href={item.brochure}
                             target="_blank"
                             className="w-full sm:w-auto"
                           >
@@ -217,7 +222,7 @@ export default function Landing() {
               setApi={(api: CarouselApi) => {
                 carouselProductApi.current = api;
                 api?.on("select", () =>
-                  setSelectedProductIndex(api.selectedScrollSnap())
+                  setSelectedProductIndex(api.selectedScrollSnap()),
                 );
               }}
             >
