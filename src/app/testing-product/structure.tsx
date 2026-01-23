@@ -80,7 +80,7 @@ export default function ProductPageComponent({ motorType }: Props) {
               className={cn(
                 " object-cover object-center w-full h-full",
                 // " object-cover object-[50%_50%] lg:object-[90%_0%] w-full h-full",
-                product?.hero.className
+                product?.hero.className,
               )}
             />
           </div>
@@ -117,7 +117,10 @@ export default function ProductPageComponent({ motorType }: Props) {
                 </Button>
               </Link>
 
-              <Link href={`/brochure/brochure-wedison.pdf`} target="_blank">
+              <Link
+                href={`/brochure/brochure-${motorType}.pdf`}
+                target="_blank"
+              >
                 <Button
                   className=" text-white px-8 md:px-12 cursor-pointer font-medium rounded-sm border-white bg-white/15 hover:text-white hover:bg-white/20"
                   // className=" text-[var(--primary)] px-8 md:px-16 cursor-pointer font-medium rounded-sm"
@@ -204,7 +207,7 @@ export default function ProductPageComponent({ motorType }: Props) {
             height={1000}
             className={cn(
               "w-full h-full object-cover object-center xl:rounded-md",
-              product.productOverview.className
+              product.productOverview.className,
             )}
           />
         </div>
@@ -246,7 +249,7 @@ export default function ProductPageComponent({ motorType }: Props) {
               height={1000}
               className={cn(
                 "w-full h-full object-cover object-center xl:rounded-md ",
-                product.chargingOverview.className
+                product.chargingOverview.className,
               )}
             />
           </div>
