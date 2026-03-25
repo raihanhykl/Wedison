@@ -3,13 +3,16 @@ import Image from "next/image";
 import React from "react";
 import { LinkPreview } from "../lib/fetchPreview";
 import { NewsCard } from "./components/newsCard";
+import InstagramEmbed from "./components/instagramEmbed";
+import type { InstagramPostData } from "./components/fetchInstagram";
 import { useLanguage } from "../lib/language-context";
 
 type Props = {
   previews: LinkPreview[];
+  instagramPosts: InstagramPostData[];
 };
 
-export default function MediaCenterClient({ previews }: Props) {
+export default function MediaCenterClient({ previews, instagramPosts }: Props) {
   // const [previews, setPreviews] = useState<LinkPreview[]>([]);
   const { t } = useLanguage();
 
@@ -54,6 +57,30 @@ export default function MediaCenterClient({ previews }: Props) {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Instagram */}
+      <div className="main-container">
+        <div className="my-6 md:my-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+            Instagram
+          </h2>
+          <p className="mt-2 text-gray-500">
+            <a
+              href="https://www.instagram.com/wedison.id/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              @wedison.id
+            </a>
+          </p>
+          <div className="w-full h-[2px] mt-2 bg-gray-200"></div>
+        </div>
+
+        <div className="py-8">
+          <InstagramEmbed posts={instagramPosts} />
         </div>
       </div>
     </div>

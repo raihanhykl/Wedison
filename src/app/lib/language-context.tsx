@@ -1050,6 +1050,8 @@ const translations = {
 
     "mediaCenter.landing.h1": "Media Center",
     "mediaCenter.landing.news.title": "News",
+    "mediaCenter.landing.instagram.title": "Instagram",
+    "mediaCenter.landing.instagram.follow": "Follow us on Instagram",
 
     // FAQ
     "faq.category.Battery": "Battery",
@@ -2278,6 +2280,8 @@ const translations = {
     // Media Center
     "mediaCenter.landing.h1": "Media Center",
     "mediaCenter.landing.news.title": "Berita",
+    "mediaCenter.landing.instagram.title": "Instagram",
+    "mediaCenter.landing.instagram.follow": "Ikuti kami di Instagram",
 
     // FAQ
     "faq.category.Battery": "Baterai",

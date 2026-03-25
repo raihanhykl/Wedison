@@ -4,6 +4,10 @@ import { getSEOMetadata } from "../lib/seo1";
 import { fetchAllPreviews } from "../lib/fetchPreview";
 import MediaCenterClient from "./mediaCenterClient";
 import { PRESS_URLS } from "../../../public/data/press-urls";
+import {
+  INSTAGRAM_POSTS,
+  fetchAllInstagramPosts,
+} from "./components/fetchInstagram";
 // import { PRESS_URLS } from "../../../public/data/press-urls";
 // import Baru from "./components/baru";
 export const metadata = getSEOMetadata({
@@ -31,12 +35,14 @@ export default async function Page() {
     return db - da; // terbaru duluan
   });
 
+  const instagramPosts = await fetchAllInstagramPosts(INSTAGRAM_POSTS);
+
   const dev = true;
   if (!dev) return notFound();
   return (
     <div>
       <div className=" ">
-        <MediaCenterClient previews={previews} />
+        <MediaCenterClient previews={previews} instagramPosts={instagramPosts} />
       </div>
       {/* <Baru /> */}
     </div>
