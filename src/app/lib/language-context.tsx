@@ -62,6 +62,8 @@ const translations = {
       "Find answers to common questions about our products, services, and technology.",
     "nav.mediaCenter.description":
       "Get the latest news, official releases, and highlights about Wedison",
+    "nav.ojol.description":
+      "Exclusive electric motorbike rental programs for ride-hailing drivers. Start from 50K/day.",
     "nav.showroom": "Showroom",
     "nav.serviceLocation": "Service Location",
     "nav.superCharge": "SuperCharge",
@@ -1282,6 +1284,8 @@ const translations = {
       "Temukan jawaban atas pertanyaan seputar produk, layanan, dan teknologi kami.",
     "nav.mediaCenter.description":
       "Dapatkan berita, rilis resmi, dan highlight terbaru tentang Wedison.",
+    "nav.ojol.description":
+      "Program sewa motor listrik eksklusif untuk driver ojol. Mulai dari 50K/hari.",
     "nav.showroom": "Ruang Pamer",
     "nav.serviceLocation": "Lokasi Layanan",
     "nav.superCharge": "SuperCharge",

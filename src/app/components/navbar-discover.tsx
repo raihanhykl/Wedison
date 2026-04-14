@@ -22,7 +22,7 @@ const NavbarDiscover = forwardRef<HTMLDivElement, Props>(
             " sticky top-0 left-0 overflow-hidden bg-white md:transition-discrete duration-300 hidden md:flex justify-center items-center shadow-sm ",
             open
               ? // ? "h-full opacity-100 pointer-events-auto"
-                "max-h-[340px] h-[340px] opacity-100 pointer-events-auto"
+                "max-h-[420px] h-[420px] opacity-100 pointer-events-auto"
               : "max-h-0 pointer-events-none"
           )}
         >
@@ -92,9 +92,7 @@ const NavbarDiscover = forwardRef<HTMLDivElement, Props>(
                       className={cn(
                         " bg-white hover:bg-gray-100 px-4  rounded-lg py-2 flex-1 w-full",
                         path === "/media-center/"
-                          ? // ? "cursor-not-allowed bg-gray-100 shadow-[inset_0px_0px_36px_-15px_rgba(0,0,0,0.25)]"
-
-                            "cursor-not-allowed bg-gray-100 "
+                          ? "cursor-not-allowed bg-gray-100 "
                           : ""
                       )}
                     >
@@ -103,6 +101,23 @@ const NavbarDiscover = forwardRef<HTMLDivElement, Props>(
                       </div>
                       <div className="text-gray-500 text-sm">
                         {t("nav.mediaCenter.description")}
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/ojol/"
+                      className={cn(
+                        " bg-white hover:bg-gray-100 px-4  rounded-lg py-2 flex-1 w-full",
+                        path === "/ojol/"
+                          ? "cursor-not-allowed bg-gray-100 "
+                          : ""
+                      )}
+                    >
+                      <div className=" text-black font-medium text-xl">
+                        Wedison Ojol
+                      </div>
+                      <div className="text-gray-500 text-sm">
+                        {t("nav.ojol.description")}
                       </div>
                     </Link>
                   </div>
