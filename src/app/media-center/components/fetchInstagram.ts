@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 export type InstagramPostData = {
   url: string;
   thumbnail: string;
@@ -31,10 +34,49 @@ function normalizeUrl(url: string): string {
   return normalized.endsWith("/") ? normalized : normalized + "/";
 }
 
+function getShortcode(url: string): string {
+  const match = url.match(/\/(p|reel)\/([^/]+)/);
+  return match ? match[2] : "unknown";
+}
+
+async function downloadThumbnail(
+  imageUrl: string,
+  shortcode: string,
+): Promise<string> {
+  try {
+    const res = await fetch(imageUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+      },
+    });
+
+    if (!res.ok) return "";
+
+    const buffer = Buffer.from(await res.arrayBuffer());
+
+    // Save to public/instagram/
+    const dir = path.join(process.cwd(), "public", "instagram");
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    const filename = `${shortcode}.jpg`;
+    const filepath = path.join(dir, filename);
+    fs.writeFileSync(filepath, buffer);
+
+    // Return the public path (served statically)
+    return `/instagram/${filename}`;
+  } catch {
+    return "";
+  }
+}
+
 export async function fetchInstagramPost(
   post: InstagramPost,
 ): Promise<InstagramPostData> {
   const url = normalizeUrl(post.url);
+  const shortcode = getShortcode(url);
 
   try {
     const res = await fetch(url, {
@@ -42,7 +84,6 @@ export async function fetchInstagramPost(
         "User-Agent":
           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
       },
-      next: { revalidate: 86400 }, // revalidate daily
     });
 
     const html = await res.text();
@@ -52,8 +93,11 @@ export async function fetchInstagramPost(
     const rawThumbnail = ogImageMatch
       ? ogImageMatch[1].replace(/&amp;/g, "&")
       : "";
-    // Upgrade to highest resolution by replacing size param
-    const thumbnail = rawThumbnail.replace(/\/s\d+x\d+/, "/s1080x1080");
+    // Upgrade to highest resolution
+    const cdnUrl = rawThumbnail.replace(/\/s\d+x\d+/, "/s1080x1080");
+
+    // Download image to public/ so it's served locally (CDN URLs expire)
+    const thumbnail = cdnUrl ? await downloadThumbnail(cdnUrl, shortcode) : "";
 
     // Extract og:description (caption)
     const ogDescMatch = html.match(
