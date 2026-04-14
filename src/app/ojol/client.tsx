@@ -92,7 +92,7 @@ export default function OjolClient() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [openDialog, setOpenDialog] = React.useState<string | null>(null);
   const carouselApi = React.useRef<any>(null);
-  const { t } = useLanguage();
+  useLanguage();
   const items: {
     image: string;
     imageMobile: string;
@@ -117,18 +117,15 @@ export default function OjolClient() {
     responsiveTextAlign?: HeroSlideProps["responsiveTextAlign"];
   }[] = [
     {
-      //   image: "/edpower/edpower-landing-hero.webp",
       image: "/ojol/wedison-bersama-ojol-desktop.webp",
-      imageAlt: "EDPower in Gray",
+      imageAlt: "Wedison Bersama Ojol",
       imageMobile: "/ojol/wedison-bersama-ojol-mobile.webp",
-      // imageMobile: "/promotions/subsidi-8-jt-mobile.webp",
-
       cardMobile: "/edpower/edpower-landing-card-mobile.webp",
-      //   title: t("edpower.productPage.hero.title"),
       title: "Wedison Bersama",
       titleHighlight: "Ojol",
-      description: t("edpower.productPage.hero.description"),
-      link: "/edpower/",
+      description:
+        "Solusi motor listrik untuk driver ojol. Hemat biaya operasional, tanpa antre BBM!",
+      link: "/ojol/",
       position: "top-center",
       contentWidth: "wider",
       backgroundStyle: "object-cover md:object-[50%_50%] object-center",
@@ -141,106 +138,63 @@ export default function OjolClient() {
     },
     {
       image: "/ojol/wedison-hero-sewa-harian.webp",
-      imageAlt: "Athena in Gray",
+      imageAlt: "Sewa Harian Wedison Ojol",
       imageMobile: "/ojol/wedison-hero-sewa-harian-mobile.webp",
       cardMobile: "/athena/athena-landing-card-mobile.webp",
-      // title: t("athena.productPage.hero.title"),
-      // titleHighlight: "Ojol",
-      // description: t("athena.productPage.hero.description"),
-      link: "/athena/",
-      contentWidth: "wider",
+      link: "/ojol/",
+      contentWidth: "full",
       textAlign: "center",
       height: "screen",
       position: "center",
       overlay: "none",
       theme: "dark",
-      className: "w-full pt-0 sm:pt-8",
+      className: "w-full pt-0",
       responsivePosition: {
-        mobile: "top-left",
+        mobile: "top-center",
+        tablet: "center",
         desktop: "center",
       },
       children: (
-        <div>
-          <div className=" flex w-full h-full ">
-            <div className="flex-1 hidden sm:flex"></div>
-            <div className="w-fit flex-col items-start justify-start gap-4">
-              {/* <div className="flex w-[40%] flex-col items-start justify-start gap-4 bg-amber-200/40"> */}
-              <h2 className="pr-6 lg:pr-16 text-lg font-semibold w-full text-start text-white text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
-                <span>Mulai dari</span>
-                <br />
-                <div className="text-[169px]/30 text-center font-extrabold text-primary ">
-                  50K
-                </div>
-                <div className="text-2xl font-[900] text-end w-full pt-2 text-white">
-                  /Hari
-                </div>
-                <div className=" flex flex-col justify-end items-end w-full  my-8 gap-1">
-                  <p className=" text-5xl font-extrabold">SEWA HARIAN</p>
-                  {/* <p>HARIAN</p> */}
-                  <p className=" text-3xl font-semibold">#JadiLebihMudah</p>
-                </div>
-                <div className=" w-full flex justify-end ">
-                  <a
-                    href="#campaign"
-                    className="w-full h-full flex justify-end cursor-pointer"
-                    // target="_blank"
-                  >
-                    <Button
-                      className=" w-[80%] font-semibold tracking-wider cursor-pointer text-2xl py-6 rounded-2xl shadow-[inset_0_2px_2px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.15),0_6px_12px_rgba(0,0,0,0.12)]
-                             border-[1px] border-black/10
-                              transition-all duration-200
-                                hover:shadow-[inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_6px_rgba(0,0,0,0.18),0_8px_16px_rgba(0,0,0,0.16)]
-                                active:translate-y-[1px]
-                                active:shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]
-                            "
-                      // className=" w-[80%] font-normal text-lg py-4 mx-auto bg-white/30 border-1 border-white text-white
-                      // "
-                    >
-                      Coba Gratis!
-                    </Button>
-                  </a>
-                </div>
-              </h2>
-            </div>
-          </div>
+        <div className="flex w-full h-full justify-center md:justify-end">
+          {/* Tablet & Desktop: offset text to center of blur box */}
+          <div className="hidden md:flex md:w-[35%] lg:w-[40%]"></div>
 
-          {/* <div className=" flex md:hidden w-full h-full">
-            <div className="flex-1 flex"></div>
-            <div className="w-fit flex-col items-start justify-start gap-4">
-              <h2 className="pr-4 text-sm font-semibold w-full text-start text-white text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
-                <span>Mulai dari</span>
-                <br />
-                <div className="text-[100px]/20 text-center font-extrabold text-primary">
-                  50K
-                </div>
-                <div className="text-lg font-[900] text-end w-full pt-1 text-white">
-                  /Hari
-                </div>
-                <div className=" flex flex-col justify-end items-end w-full my-4 gap-1">
-                  <p className=" text-3xl font-extrabold">SEWA HARIAN</p>
-                  <p className=" text-xl font-semibold">#JadiLebihMudah</p>
-                </div>
-                <div className=" w-full flex justify-end ">
-                  <a
-                    href="#campaign"
-                    className="w-full h-full flex justify-end cursor-pointer"
-                  >
-                    <Button
-                      className=" w-[80%] font-semibold tracking-wider cursor-pointer text-lg py-4 rounded-xl shadow-[inset_0_2px_2px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.15),0_6px_12px_rgba(0,0,0,0.12)]
-                             border-[1px] border-black/10
-                              transition-all duration-200
-                                hover:shadow-[inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_6px_rgba(0,0,0,0.18),0_8px_16px_rgba(0,0,0,0.16)]
-                                active:translate-y-[1px]
-                                active:shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]
-                            "
-                    >
-                      Coba Gratis!
-                    </Button>
-                  </a>
-                </div>
-              </h2>
+          {/* Text content */}
+          <div className="w-full md:flex-1 flex flex-col items-center gap-0.5 sm:gap-1 md:gap-3 lg:gap-4 md:pr-8 lg:pr-12">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
+              Mulai dari
+            </p>
+            <div className="flex items-baseline justify-center w-full">
+              <span className="text-[72px]/[0.9] sm:text-[80px]/[0.9] md:text-[110px]/[0.85] lg:text-[160px]/[0.85] font-extrabold text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                50K
+              </span>
+              <span className="text-base sm:text-lg md:text-2xl lg:text-3xl font-[900] text-white ml-0.5 md:ml-1">
+                /Hari
+              </span>
             </div>
-          </div> */}
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold text-white text-shadow-[0px_2px_4px_rgb(0_0_0/_0.3)] mt-0.5 md:mt-2 lg:mt-4">
+              SEWA HARIAN
+            </p>
+            <p className="text-sm sm:text-base md:text-xl lg:text-3xl font-semibold text-white/90 text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
+              #JadiLebihMudah
+            </p>
+            <a
+              href="#campaign"
+              className="mt-1.5 sm:mt-2 md:mt-4 lg:mt-6 cursor-pointer"
+            >
+              <Button
+                className="px-8 sm:px-10 md:px-12 lg:px-14 font-semibold tracking-wider cursor-pointer text-sm sm:text-base md:text-xl lg:text-2xl py-2 sm:py-2.5 md:py-4 lg:py-6 rounded-lg md:rounded-xl lg:rounded-2xl shadow-[inset_0_2px_2px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.15),0_6px_12px_rgba(0,0,0,0.12)]
+                  border-[1px] border-black/10
+                  transition-all duration-200
+                  hover:shadow-[inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_6px_rgba(0,0,0,0.18),0_8px_16px_rgba(0,0,0,0.16)]
+                  active:translate-y-[1px]
+                  active:shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]
+                "
+              >
+                Coba Gratis!
+              </Button>
+            </a>
+          </div>
         </div>
       ),
     },
@@ -330,16 +284,15 @@ export default function OjolClient() {
             Tenang, Wedison solusinya! Irit biaya operasional, gak perlu antre,
             dan perawatan lebih ringan. Waktunya upgrade cara narik kamu!
           </p>
-          <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-0 md:gap-8 lg:gap-8 h-full">
-            {/* <div className="w-full flex flex-wrap justify-between"> */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 h-full">
             {[1, 2, 3].map((num) => (
               <div
                 key={num}
-                className=" aspect-square  w-[90%]  mx-auto lg:w-full rounded-lg overflow-hidden object-cover "
+                className="aspect-square w-full mx-auto rounded-lg overflow-hidden"
               >
                 <Image
                   key={num}
-                  className=" aspect-square object-cover w-full h-full bg-red-400 rounded-lg"
+                  className="aspect-square object-cover w-full h-full rounded-lg"
                   src={`/ojol/benefit-${num}.webp`}
                   width={1000}
                   height={1000}

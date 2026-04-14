@@ -134,6 +134,11 @@ export default function Navbar() {
           href: "/faq/",
           image: "",
         },
+        {
+          name: "Wedison Ojol",
+          href: "/ojol/",
+          image: "",
+        },
       ],
     },
     {
