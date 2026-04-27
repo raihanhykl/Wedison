@@ -985,6 +985,58 @@ const translations = {
     "supercharge.feature3.description":
       "Our DC charging station is designed to work in perfect harmony with your Wedison EV motorcycle, ensuring fast charging while enhancing battery longevity. Fully certified to IEC safety standards and compliant with EU Directives, it provides safe, efficient, and reliable power for your motorcycle—every time.",
 
+    // SuperCharge App Section
+    "supercharge.app.tag": "Mobile App",
+    "supercharge.app.teaser.title": "Find. Charge.",
+    "supercharge.app.teaser.titleHighlight": "Ride.",
+    "supercharge.app.teaser.description":
+      "Locate the nearest SuperCharge station, check real-time availability, and start charging — all from your phone.",
+    "supercharge.app.teaser.feature.find": "Find Stations",
+    "supercharge.app.teaser.feature.realtime": "Real-Time",
+    "supercharge.app.teaser.feature.charge": "Quick Charge",
+
+    "supercharge.app.hero.title": "Your Charging Companion,",
+    "supercharge.app.hero.titleHighlight": "Always In Your Pocket",
+    "supercharge.app.hero.description":
+      "Monitor charging status, find the nearest station, and manage your SuperCharge sessions — everything you need in one app.",
+
+    "supercharge.app.feature1.icon": "MapPin",
+    "supercharge.app.feature1.title": "Find Nearby Stations",
+    "supercharge.app.feature1.subtitle": "Locate charging points around you",
+    "supercharge.app.feature1.description":
+      "View all SuperCharge stations on an interactive map with real-time availability status.",
+    "supercharge.app.feature1.bullet1": "Interactive map with GPS navigation",
+    "supercharge.app.feature1.bullet2": "Filter by availability & distance",
+    "supercharge.app.feature1.bullet3": "Save favorite stations",
+
+    "supercharge.app.feature2.icon": "Activity",
+    "supercharge.app.feature2.title": "Real-Time Charging Status",
+    "supercharge.app.feature2.subtitle": "Know before you go",
+    "supercharge.app.feature2.description":
+      "Check station availability, queue status, and estimated wait times before heading out.",
+    "supercharge.app.feature2.bullet1": "Live availability updates",
+    "supercharge.app.feature2.bullet2": "Charging speed information",
+    "supercharge.app.feature2.bullet3": "Queue status & wait times",
+
+    "supercharge.app.feature3.icon": "Zap",
+    "supercharge.app.feature3.title": "Seamless Charging Experience",
+    "supercharge.app.feature3.subtitle": "Plug in, charge, and go",
+    "supercharge.app.feature3.description":
+      "Start and monitor your charging session right from the app with a single tap.",
+    "supercharge.app.feature3.bullet1": "One-tap charging start",
+    "supercharge.app.feature3.bullet2": "Real-time charge monitoring",
+    "supercharge.app.feature3.bullet3": "Session history & analytics",
+
+    "supercharge.app.stats.stations": "Stations",
+    "supercharge.app.stats.downloads": "Downloads",
+    "supercharge.app.stats.rating": "Rating",
+    "supercharge.app.stats.chargeTime": "Min Charge",
+
+    "supercharge.app.cta.title": "Ready to SuperCharge",
+    "supercharge.app.cta.titleHighlight": "Your Ride?",
+    "supercharge.app.cta.description":
+      "Download now and never worry about finding a charger again.",
+
     //form title
     "form.title.placeholder": "Select a topic to discuss",
     "form.title.productInfo": "Electric Motorcycle Product Info",
@@ -2210,6 +2262,58 @@ const translations = {
       "Keselamatan dan keandalan adalah prioritas",
     "supercharge.feature3.description":
       "Stasiun pengisian daya DC kami dirancang untuk bekerja secara sempurna dengan motor listrik Wedison Anda, memastikan pengisian daya cepat sekaligus menjaga umur baterai. Telah tersertifikasi penuh sesuai standar keselamatan IEC dan mematuhi Direktif Uni Eropa, memberikan daya yang aman, efisien, dan andal untuk motor Anda—setiap saat.",
+
+    // SuperCharge App Section
+    "supercharge.app.tag": "Aplikasi Mobile",
+    "supercharge.app.teaser.title": "Cari. Isi Daya.",
+    "supercharge.app.teaser.titleHighlight": "Jalan.",
+    "supercharge.app.teaser.description":
+      "Temukan stasiun SuperCharge terdekat, cek ketersediaan secara real-time, dan mulai pengisian daya — langsung dari ponselmu.",
+    "supercharge.app.teaser.feature.find": "Cari Stasiun",
+    "supercharge.app.teaser.feature.realtime": "Real-Time",
+    "supercharge.app.teaser.feature.charge": "Isi Cepat",
+
+    "supercharge.app.hero.title": "Teman Pengisian Dayamu,",
+    "supercharge.app.hero.titleHighlight": "Selalu di Genggaman",
+    "supercharge.app.hero.description":
+      "Pantau status pengisian daya, temukan stasiun terdekat, dan kelola sesi SuperCharge-mu — semua yang kamu butuhkan dalam satu aplikasi.",
+
+    "supercharge.app.feature1.icon": "MapPin",
+    "supercharge.app.feature1.title": "Temukan Stasiun Terdekat",
+    "supercharge.app.feature1.subtitle": "Cari titik pengisian di sekitarmu",
+    "supercharge.app.feature1.description":
+      "Lihat semua stasiun SuperCharge di peta interaktif dengan status ketersediaan real-time.",
+    "supercharge.app.feature1.bullet1": "Peta interaktif dengan navigasi GPS",
+    "supercharge.app.feature1.bullet2": "Filter berdasarkan ketersediaan & jarak",
+    "supercharge.app.feature1.bullet3": "Simpan stasiun favorit",
+
+    "supercharge.app.feature2.icon": "Activity",
+    "supercharge.app.feature2.title": "Status Pengisian Real-Time",
+    "supercharge.app.feature2.subtitle": "Ketahui sebelum berangkat",
+    "supercharge.app.feature2.description":
+      "Cek ketersediaan stasiun, status antrian, dan estimasi waktu tunggu sebelum kamu pergi.",
+    "supercharge.app.feature2.bullet1": "Update ketersediaan langsung",
+    "supercharge.app.feature2.bullet2": "Informasi kecepatan pengisian",
+    "supercharge.app.feature2.bullet3": "Status antrian & waktu tunggu",
+
+    "supercharge.app.feature3.icon": "Zap",
+    "supercharge.app.feature3.title": "Pengalaman Pengisian Mudah",
+    "supercharge.app.feature3.subtitle": "Colok, isi daya, dan jalan",
+    "supercharge.app.feature3.description":
+      "Mulai dan pantau sesi pengisian dayamu langsung dari aplikasi dengan satu ketukan.",
+    "supercharge.app.feature3.bullet1": "Mulai pengisian dengan satu ketukan",
+    "supercharge.app.feature3.bullet2": "Pemantauan pengisian real-time",
+    "supercharge.app.feature3.bullet3": "Riwayat sesi & analitik",
+
+    "supercharge.app.stats.stations": "Stasiun",
+    "supercharge.app.stats.downloads": "Unduhan",
+    "supercharge.app.stats.rating": "Rating",
+    "supercharge.app.stats.chargeTime": "Menit Isi Daya",
+
+    "supercharge.app.cta.title": "Siap SuperCharge",
+    "supercharge.app.cta.titleHighlight": "Perjalananmu?",
+    "supercharge.app.cta.description":
+      "Unduh sekarang dan tak perlu khawatir mencari charger lagi.",
 
     // form title
     "form.title.placeholder": "Pilih topik yang ingin dibahas",
