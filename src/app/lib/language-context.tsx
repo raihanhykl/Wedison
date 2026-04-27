@@ -1298,6 +1298,146 @@ const translations = {
     "faq.Tires.questions.0.answer":
       "Bees: Front: 90/90-10; Rear 90/90-10\nAthena: Front: 100/80-12; Rear 100/80-12\nVictory: Front: 90/90-14; Rear: 100/80-14\nEdPower: Front: 100/90-14; Rear: 120/70-14",
 
+    // Ojol Page
+    "ojol.hero.title": "Wedison With",
+    "ojol.hero.titleHighlight": "Ride-Hailing",
+    "ojol.hero.description":
+      "Electric motorcycle solutions for ride-hailing drivers. Lower operating costs, no fuel queues!",
+    "ojol.hero.startFrom": "Starting from",
+    "ojol.hero.perDay": "/Day",
+    "ojol.hero.dailyRental": "DAILY RENTAL",
+    "ojol.hero.tagline": "#MadeEasier",
+    "ojol.hero.tryFree": "Try It Free!",
+
+    "ojol.benefits.title": "Earn More, Work Smarter",
+    "ojol.benefits.description":
+      "Tired of fuel queues? Sick of rising gas prices? Relax, Wedison is the answer! Save on operating costs, skip the queues, and enjoy lighter maintenance. Time to upgrade the way you ride!",
+
+    "ojol.campaign.heading": "Hot Campaign",
+    "ojol.btn.register": "Register Now",
+    "ojol.btn.detail": "See Details",
+
+    "ojol.campaign.milik.title": "Rent-to-Own",
+    "ojol.campaign.milik.tagline": "Pay in Installments, Make It Yours!",
+    "ojol.campaign.milik.description":
+      "A rental program with an ownership option over 3.5 years (42 months). Once the contract ends, the motorcycle is yours!",
+    "ojol.campaign.milik.benefit.0":
+      "1x Free regular charging adapter (worth Rp 1,000,000)",
+    "ojol.campaign.milik.benefit.1":
+      "1x Free front and rear tire replacement (worth Rp 385,000)",
+    "ojol.campaign.milik.benefit.2":
+      "1x Free brake pad replacement (1 set front and rear)",
+    "ojol.campaign.milik.benefit.3": "2x Mechanical lock",
+    "ojol.campaign.milik.benefit.4": "3-year battery warranty",
+    "ojol.campaign.milik.benefit.5": "2-year motorcycle warranty",
+    "ojol.campaign.milik.term.0":
+      "The rent-to-own scheme runs for 3 years 6 months (42 months)",
+    "ojol.campaign.milik.term.1":
+      "Riders are entitled to 1 day off per week (maximum 48 days per year)",
+    "ojol.campaign.milik.term.2":
+      "After the 42-month contract ends, ownership of the motorcycle is transferred to the rider",
+    "ojol.campaign.milik.term.3":
+      "Savings will be used for insurance, service, spare parts, and BPKB (vehicle ownership document) costs. Any remaining savings at the end of the contract will be transferred to the rider",
+    "ojol.campaign.milik.term.4":
+      "The down payment is non-refundable once the rider is declared eligible",
+    "ojol.campaign.milik.term.5":
+      "Traffic fines and violations are the rider's responsibility",
+    "ojol.campaign.milik.term.6":
+      "Riders must complete the screening process from Wedison",
+    "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.milik.scheme.0.value": "Rp 58,000/day",
+    "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.milik.scheme.1.value": "Rp 63,000/day",
+    "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.milik.scheme.2.value": "Rp 83,000/day",
+    "ojol.campaign.milik.scheme.3.label": "Deposit",
+    "ojol.campaign.milik.scheme.3.value": "Rp 530,000 - Rp 780,000",
+
+    "ojol.campaign.harian.title": "Daily Rental",
+    "ojol.campaign.harian.tagline": "Ride Now, Flexible and Hassle-Free!",
+    "ojol.campaign.harian.description":
+      "Daily electric motorcycle rental with a 3-year contract. Perfect if you want to ride without worrying about installments!",
+    "ojol.campaign.harian.benefit.0": "1x Free regular charging adapter",
+    "ojol.campaign.harian.benefit.1":
+      "1x Free front and rear tire replacement (worth Rp 385,000)",
+    "ojol.campaign.harian.benefit.2":
+      "1x Free brake pad replacement (1 set front and rear)",
+    "ojol.campaign.harian.benefit.3": "1x Free routine service",
+    "ojol.campaign.harian.benefit.4": "2x Mechanical lock",
+    "ojol.campaign.harian.benefit.5": "3-year battery warranty",
+    "ojol.campaign.harian.benefit.6": "2-year motorcycle warranty",
+    "ojol.campaign.harian.term.0":
+      "The daily rental scheme runs for 3 years (36 months)",
+    "ojol.campaign.harian.term.1":
+      "Riders are entitled to 1 day off per week (maximum 48 days per year)",
+    "ojol.campaign.harian.term.2":
+      "The down payment is non-refundable once the rider is declared eligible",
+    "ojol.campaign.harian.term.3":
+      "The motorcycle remains fully owned by PT. Wedison Nusantara Energi",
+    "ojol.campaign.harian.term.4":
+      "Traffic fines and violations are the rider's responsibility",
+    "ojol.campaign.harian.term.5":
+      "Damage caused by negligence or accidents is the rider's responsibility",
+    "ojol.campaign.harian.term.6":
+      "Riders must complete the screening process from Wedison",
+    "ojol.campaign.harian.term.7": "Motorcycle color is assigned at random",
+    "ojol.campaign.harian.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.harian.scheme.0.value": "Rp 50,000/day",
+    "ojol.campaign.harian.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.harian.scheme.1.value": "Rp 55,000/day",
+    "ojol.campaign.harian.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.harian.scheme.2.value": "Rp 75,000/day",
+    "ojol.campaign.harian.scheme.3.label": "Deposit",
+    "ojol.campaign.harian.scheme.3.value": "Rp 500,000 - Rp 750,000",
+
+    "ojol.dialog.programBadge": "PROGRAM",
+    "ojol.dialog.scheme": "Payment Scheme",
+    "ojol.dialog.benefits": "Benefits",
+    "ojol.dialog.terms": "Terms & Conditions",
+    "ojol.dialog.registerNow": "Register for This Program Now",
+
+    "ojol.supercharge.badge": "10% to 80% in 15 Minutes",
+    "ojol.supercharge.descriptionPart1":
+      "Time is money, and Supercharge keeps you from wasting it! Just ",
+    "ojol.supercharge.descriptionBold": "15 minutes",
+    "ojol.supercharge.descriptionPart2":
+      " and your battery is back from 10% to 80%. Hit the road again right away, no long waits! A single charge can cover up to 165 km*. More orders, more earnings!",
+    "ojol.supercharge.disclaimer":
+      "*Range of 165 km applies to the EdPro Extended Battery model",
+    "ojol.supercharge.cta": "Learn More",
+
+    "ojol.models.title": "Pick the Right Motorcycle for You",
+    "ojol.models.subtitle":
+      "Want something nimble for tight alleys or strong for long distances? Wedison has the full lineup to match your riding style!",
+    "ojol.models.spec.range": "Range",
+    "ojol.models.spec.maxSpeed": "Top Speed",
+    "ojol.models.spec.battery": "Battery",
+    "ojol.models.spec.supercharge": "SuperCharge",
+    "ojol.models.spec.motor": "Motor",
+    "ojol.models.value.minutes": "15 minutes",
+    "ojol.models.bees.tagline": "Compact & Agile",
+    "ojol.models.bees.highlight": "Perfect for tight alleys",
+    "ojol.models.victory.tagline": "Stylish & Powerful",
+    "ojol.models.victory.highlight": "A balance of style and performance",
+    "ojol.models.athena.tagline": "Premium & Comfortable",
+    "ojol.models.athena.highlight": "Comfortable for all-day riding",
+    "ojol.models.edpower.tagline": "Tough & Long-Range",
+    "ojol.models.edpower.highlight": "King of long distances",
+    "ojol.models.cta": "See Details",
+    "ojol.models.footnote": "*Range with Extended Battery",
+
+    "ojol.cta.badge": "Special Driver Program",
+    "ojol.cta.headline.1": "Ready to Earn More",
+    "ojol.cta.headline.2": "with Wedison?",
+    "ojol.cta.description":
+      "Join now and enjoy a range of exclusive benefits: daily rental from 50K, free fast charging, and easy installment programs. Time to upgrade the way you ride!",
+    "ojol.cta.benefit.1": "Daily Rental from 50K",
+    "ojol.cta.benefit.2": "Free SuperCharge",
+    "ojol.cta.benefit.3": "Easy Installments",
+    "ojol.cta.benefit.4": "Priority Service",
+    "ojol.cta.button": "Contact Wedison Sales",
+    "ojol.cta.trust": "Fast response, free consultation!",
+
     // Language
     language: "English",
     switchLanguage: "Bahasa Indonesia",
@@ -2582,6 +2722,146 @@ const translations = {
     "faq.Tires.questions.0.question": "Apa dimensi ban?",
     "faq.Tires.questions.0.answer":
       "Bees: Depan: 90/90-10; Belakang 90/90-10\nAthena: Depan: 100/80-12; Belakang 100/80-12\nVictory: Depan: 90/90-14; Belakang: 100/80-14\nEdPower: Depan: 100/90-14; Belakang: 120/70-14",
+
+    // Ojol Page
+    "ojol.hero.title": "Wedison Bersama",
+    "ojol.hero.titleHighlight": "Ojol",
+    "ojol.hero.description":
+      "Solusi motor listrik untuk driver ojol. Hemat biaya operasional, tanpa antre BBM!",
+    "ojol.hero.startFrom": "Mulai dari",
+    "ojol.hero.perDay": "/Hari",
+    "ojol.hero.dailyRental": "SEWA HARIAN",
+    "ojol.hero.tagline": "#JadiLebihMudah",
+    "ojol.hero.tryFree": "Coba Gratis!",
+
+    "ojol.benefits.title": "Narik Lebih Banyak, Kerja Lebih Efisien",
+    "ojol.benefits.description":
+      "Bosen antre BBM? Capek mikirin biaya bensin yang makin mahal? Tenang, Wedison solusinya! Irit biaya operasional, gak perlu antre, dan perawatan lebih ringan. Waktunya upgrade cara narik kamu!",
+
+    "ojol.campaign.heading": "Hot Campaign",
+    "ojol.btn.register": "Daftar Sekarang",
+    "ojol.btn.detail": "Lihat Detail",
+
+    "ojol.campaign.milik.title": "Sewa Milik",
+    "ojol.campaign.milik.tagline": "Cicil Motor, Jadi Milik Sendiri!",
+    "ojol.campaign.milik.description":
+      "Program sewa dengan opsi kepemilikan selama 3,5 tahun (42 bulan). Setelah kontrak selesai, motor jadi milik kamu!",
+    "ojol.campaign.milik.benefit.0":
+      "1x Gratis charging adapter regular (senilai Rp 1.000.000)",
+    "ojol.campaign.milik.benefit.1":
+      "1x Gratis ganti ban depan & belakang (senilai Rp 385.000)",
+    "ojol.campaign.milik.benefit.2":
+      "1x Gratis ganti kampas rem (1 set depan & belakang)",
+    "ojol.campaign.milik.benefit.3": "2x Kunci mekanik",
+    "ojol.campaign.milik.benefit.4": "Garansi baterai 3 tahun",
+    "ojol.campaign.milik.benefit.5": "Garansi motor 2 tahun",
+    "ojol.campaign.milik.term.0":
+      "Skema sewa milik berlaku selama 3 tahun 6 bulan (42 bulan)",
+    "ojol.campaign.milik.term.1":
+      "Rider berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
+    "ojol.campaign.milik.term.2":
+      "Setelah kontrak 42 bulan selesai, kepemilikan motor akan dialihkan ke rider",
+    "ojol.campaign.milik.term.3":
+      "Tabungan akan digunakan untuk biaya asuransi, servis, sparepart, dan BPKB. Sisa tabungan di akhir kontrak akan ditransfer ke rider",
+    "ojol.campaign.milik.term.4":
+      "DP tidak dapat dikembalikan setelah dinyatakan eligible",
+    "ojol.campaign.milik.term.5":
+      "Denda tilang/pelanggaran lalu lintas ditanggung rider",
+    "ojol.campaign.milik.term.6":
+      "Rider wajib mengikuti proses screening dari Wedison",
+    "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.milik.scheme.0.value": "Rp 58.000/hari",
+    "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.milik.scheme.1.value": "Rp 63.000/hari",
+    "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.milik.scheme.2.value": "Rp 83.000/hari",
+    "ojol.campaign.milik.scheme.3.label": "Deposit",
+    "ojol.campaign.milik.scheme.3.value": "Rp 530.000 - Rp 780.000",
+
+    "ojol.campaign.harian.title": "Sewa Harian",
+    "ojol.campaign.harian.tagline": "Narik Dulu, Fleksibel Tanpa Beban!",
+    "ojol.campaign.harian.description":
+      "Sewa motor listrik harian dengan kontrak 3 tahun. Cocok buat kamu yang mau narik tanpa mikir cicilan!",
+    "ojol.campaign.harian.benefit.0": "1x Gratis charging adapter regular",
+    "ojol.campaign.harian.benefit.1":
+      "1x Gratis ganti ban depan & belakang (senilai Rp 385.000)",
+    "ojol.campaign.harian.benefit.2":
+      "1x Gratis ganti kampas rem (1 set depan & belakang)",
+    "ojol.campaign.harian.benefit.3": "1x Gratis servis berkala",
+    "ojol.campaign.harian.benefit.4": "2x Kunci mekanik",
+    "ojol.campaign.harian.benefit.5": "Garansi baterai 3 tahun",
+    "ojol.campaign.harian.benefit.6": "Garansi motor 2 tahun",
+    "ojol.campaign.harian.term.0":
+      "Skema sewa harian berlaku selama 3 tahun (36 bulan)",
+    "ojol.campaign.harian.term.1":
+      "Rider berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
+    "ojol.campaign.harian.term.2":
+      "DP tidak dapat dikembalikan setelah dinyatakan eligible",
+    "ojol.campaign.harian.term.3":
+      "Motor sepenuhnya milik PT. Wedison Nusantara Energi",
+    "ojol.campaign.harian.term.4":
+      "Denda tilang/pelanggaran lalu lintas ditanggung rider",
+    "ojol.campaign.harian.term.5":
+      "Kerusakan akibat kelalaian atau kecelakaan ditanggung rider",
+    "ojol.campaign.harian.term.6":
+      "Rider wajib mengikuti proses screening dari Wedison",
+    "ojol.campaign.harian.term.7": "Warna motor ditentukan secara acak",
+    "ojol.campaign.harian.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.harian.scheme.0.value": "Rp 50.000/hari",
+    "ojol.campaign.harian.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.harian.scheme.1.value": "Rp 55.000/hari",
+    "ojol.campaign.harian.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.harian.scheme.2.value": "Rp 75.000/hari",
+    "ojol.campaign.harian.scheme.3.label": "Deposit",
+    "ojol.campaign.harian.scheme.3.value": "Rp 500.000 - Rp 750.000",
+
+    "ojol.dialog.programBadge": "PROGRAM",
+    "ojol.dialog.scheme": "Skema Pembayaran",
+    "ojol.dialog.benefits": "Keuntungan",
+    "ojol.dialog.terms": "Syarat & Ketentuan",
+    "ojol.dialog.registerNow": "Daftar Program Ini Sekarang",
+
+    "ojol.supercharge.badge": "10% - 80% dalam 15 menit",
+    "ojol.supercharge.descriptionPart1":
+      "Waktu adalah uang, dan Supercharge bikin kamu gak buang-buang waktu! Cukup ",
+    "ojol.supercharge.descriptionBold": "15 menit",
+    "ojol.supercharge.descriptionPart2":
+      " aja, baterai langsung terisi dari 10% ke 80%. Langsung gas narik lagi, gak perlu nunggu lama! Sekali charge bisa tempuh hingga 165 km*. Lebih banyak orderan, cuan lebih banyak!",
+    "ojol.supercharge.disclaimer":
+      "*Jarak tempuh 165 km berlaku untuk model EdPro Extended Battery",
+    "ojol.supercharge.cta": "Pelajari Lebih Lanjut",
+
+    "ojol.models.title": "Pilih Motor yang Cocok Buat Kamu",
+    "ojol.models.subtitle":
+      "Mau yang gesit buat gang sempit atau yang kuat buat jarak jauh? Wedison punya pilihan lengkap yang pas buat gaya narik kamu!",
+    "ojol.models.spec.range": "Jarak Tempuh",
+    "ojol.models.spec.maxSpeed": "Kecepatan Max",
+    "ojol.models.spec.battery": "Baterai",
+    "ojol.models.spec.supercharge": "SuperCharge",
+    "ojol.models.spec.motor": "Motor",
+    "ojol.models.value.minutes": "15 menit",
+    "ojol.models.bees.tagline": "Compact & Lincah",
+    "ojol.models.bees.highlight": "Cocok buat gang sempit",
+    "ojol.models.victory.tagline": "Stylish & Bertenaga",
+    "ojol.models.victory.highlight": "Balance antara gaya & performa",
+    "ojol.models.athena.tagline": "Premium & Nyaman",
+    "ojol.models.athena.highlight": "Narik seharian tetap nyaman",
+    "ojol.models.edpower.tagline": "Tangguh & Jarak Jauh",
+    "ojol.models.edpower.highlight": "Raja jarak jauh",
+    "ojol.models.cta": "Lihat Detail",
+    "ojol.models.footnote": "*Jarak tempuh dengan Extended Battery",
+
+    "ojol.cta.badge": "Program Khusus Driver",
+    "ojol.cta.headline.1": "Siap Narik Lebih Cuan",
+    "ojol.cta.headline.2": "Bareng Wedison?",
+    "ojol.cta.description":
+      "Gabung sekarang dan nikmati berbagai keuntungan eksklusif: sewa harian mulai 50K, charging cepat gratis, hingga program cicilan ringan. Yuk, upgrade cara narik kamu!",
+    "ojol.cta.benefit.1": "Sewa Harian Mulai 50K",
+    "ojol.cta.benefit.2": "SuperCharge Gratis",
+    "ojol.cta.benefit.3": "Cicilan Ringan",
+    "ojol.cta.benefit.4": "Servis Prioritas",
+    "ojol.cta.button": "Hubungi Sales Wedison",
+    "ojol.cta.trust": "Respon cepat, konsultasi gratis!",
 
     // Language
     language: "Bahasa Indonesia",
