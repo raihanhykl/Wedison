@@ -16,75 +16,25 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
-// Campaign data
-const campaignData = [
+// Campaign meta (translatable strings live in language-context.tsx)
+const campaignMeta = [
   {
     id: "milik",
-    title: "Sewa Milik",
-    tagline: "Cicil Motor, Jadi Milik Sendiri!",
-    description:
-      "Program sewa dengan opsi kepemilikan selama 3,5 tahun (42 bulan). Setelah kontrak selesai, motor jadi milik kamu!",
     image: "/ojol/sewa-milik-banner.webp",
     waLink:
       "https://wa.me/6282124657804?text=Halo%20Wedison,%20saya%20tertarik%20dengan%20program%20Sewa%20Milik",
-    benefits: [
-      "1x Gratis charging adapter regular (senilai Rp 1.000.000)",
-      "1x Gratis ganti ban depan & belakang (senilai Rp 385.000)",
-      "1x Gratis ganti kampas rem (1 set depan & belakang)",
-      "2x Kunci mekanik",
-      "Garansi baterai 3 tahun",
-      "Garansi motor 2 tahun",
-    ],
-    terms: [
-      "Skema sewa milik berlaku selama 3 tahun 6 bulan (42 bulan)",
-      "Rider berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
-      "Setelah kontrak 42 bulan selesai, kepemilikan motor akan dialihkan ke rider",
-      "Tabungan akan digunakan untuk biaya asuransi, servis, sparepart, dan BPKB. Sisa tabungan di akhir kontrak akan ditransfer ke rider",
-      "DP tidak dapat dikembalikan setelah dinyatakan eligible",
-      "Denda tilang/pelanggaran lalu lintas ditanggung rider",
-      "Rider wajib mengikuti proses screening dari Wedison",
-    ],
-    scheme: [
-      { label: "Athena/Victory Regular", value: "Rp 58.000/hari" },
-      { label: "Athena/Victory Extended", value: "Rp 63.000/hari" },
-      { label: "EdPower Extended", value: "Rp 83.000/hari" },
-      { label: "Deposit", value: "Rp 530.000 - Rp 780.000" },
-    ],
+    benefitsCount: 6,
+    termsCount: 7,
+    schemeCount: 4,
   },
   {
     id: "harian",
-    title: "Sewa Harian",
-    tagline: "Narik Dulu, Fleksibel Tanpa Beban!",
-    description:
-      "Sewa motor listrik harian dengan kontrak 3 tahun. Cocok buat kamu yang mau narik tanpa mikir cicilan!",
     image: "/ojol/sewa-harian-banner.webp",
     waLink:
       "https://wa.me/6282124657804?text=Halo%20Wedison,%20saya%20tertarik%20dengan%20program%20Sewa%20Harian",
-    benefits: [
-      "1x Gratis charging adapter regular",
-      "1x Gratis ganti ban depan & belakang (senilai Rp 385.000)",
-      "1x Gratis ganti kampas rem (1 set depan & belakang)",
-      "1x Gratis servis berkala",
-      "2x Kunci mekanik",
-      "Garansi baterai 3 tahun",
-      "Garansi motor 2 tahun",
-    ],
-    terms: [
-      "Skema sewa harian berlaku selama 3 tahun (36 bulan)",
-      "Rider berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
-      "DP tidak dapat dikembalikan setelah dinyatakan eligible",
-      "Motor sepenuhnya milik PT. Wedison Nusantara Energi",
-      "Denda tilang/pelanggaran lalu lintas ditanggung rider",
-      "Kerusakan akibat kelalaian atau kecelakaan ditanggung rider",
-      "Rider wajib mengikuti proses screening dari Wedison",
-      "Warna motor ditentukan secara acak",
-    ],
-    scheme: [
-      { label: "Athena/Victory Regular", value: "Rp 50.000/hari" },
-      { label: "Athena/Victory Extended", value: "Rp 55.000/hari" },
-      { label: "EdPower Extended", value: "Rp 75.000/hari" },
-      { label: "Deposit", value: "Rp 500.000 - Rp 750.000" },
-    ],
+    benefitsCount: 7,
+    termsCount: 8,
+    schemeCount: 4,
   },
 ];
 
@@ -92,7 +42,9 @@ export default function OjolClient() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [openDialog, setOpenDialog] = React.useState<string | null>(null);
   const carouselApi = React.useRef<any>(null);
-  useLanguage();
+  const { t } = useLanguage();
+
+  const activeCampaign = campaignMeta.find((c) => c.id === openDialog);
   const items: {
     image: string;
     imageMobile: string;
@@ -121,10 +73,9 @@ export default function OjolClient() {
       imageAlt: "Wedison Bersama Ojol",
       imageMobile: "/ojol/wedison-bersama-ojol-mobile.webp",
       cardMobile: "/edpower/edpower-landing-card-mobile.webp",
-      title: "Wedison Bersama",
-      titleHighlight: "Ojol",
-      description:
-        "Solusi motor listrik untuk driver ojol. Hemat biaya operasional, tanpa antre BBM!",
+      title: t("ojol.hero.title"),
+      titleHighlight: t("ojol.hero.titleHighlight"),
+      description: t("ojol.hero.description"),
       link: "/ojol/",
       position: "top-center",
       contentWidth: "wider",
@@ -162,21 +113,21 @@ export default function OjolClient() {
           {/* Text content */}
           <div className="w-full md:flex-1 flex flex-col items-center gap-0.5 sm:gap-1 md:gap-3 lg:gap-4 md:pr-8 lg:pr-12">
             <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
-              Mulai dari
+              {t("ojol.hero.startFrom")}
             </p>
             <div className="flex items-baseline justify-center w-full">
               <span className="text-[72px]/[0.9] sm:text-[80px]/[0.9] md:text-[110px]/[0.85] lg:text-[160px]/[0.85] font-extrabold text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
                 50K
               </span>
               <span className="text-base sm:text-lg md:text-2xl lg:text-3xl font-[900] text-white ml-0.5 md:ml-1">
-                /Hari
+                {t("ojol.hero.perDay")}
               </span>
             </div>
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold text-white text-shadow-[0px_2px_4px_rgb(0_0_0/_0.3)] mt-0.5 md:mt-2 lg:mt-4">
-              SEWA HARIAN
+              {t("ojol.hero.dailyRental")}
             </p>
             <p className="text-sm sm:text-base md:text-xl lg:text-3xl font-semibold text-white/90 text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
-              #JadiLebihMudah
+              {t("ojol.hero.tagline")}
             </p>
             <a
               href="#campaign"
@@ -191,7 +142,7 @@ export default function OjolClient() {
                   active:shadow-[inset_0_4px_6px_rgba(0,0,0,0.2)]
                 "
               >
-                Coba Gratis!
+                {t("ojol.hero.tryFree")}
               </Button>
             </a>
           </div>
@@ -199,6 +150,67 @@ export default function OjolClient() {
       ),
     },
   ];
+
+  const models = [
+    {
+      name: "Bees",
+      taglineKey: "ojol.models.bees.tagline",
+      highlightKey: "ojol.models.bees.highlight",
+      image: "/bees/bees-grey.webp",
+      link: "/bees",
+      specs: [
+        { labelKey: "ojol.models.spec.range", value: "80 km" },
+        { labelKey: "ojol.models.spec.maxSpeed", value: "55 km/h" },
+        { labelKey: "ojol.models.spec.battery", value: "1600Wh" },
+      ],
+    },
+    {
+      name: "Victory",
+      taglineKey: "ojol.models.victory.tagline",
+      highlightKey: "ojol.models.victory.highlight",
+      image: "/victory/victory-grey.webp",
+      link: "/victory",
+      specs: [
+        { labelKey: "ojol.models.spec.range", value: "120 km*" },
+        {
+          labelKey: "ojol.models.spec.supercharge",
+          valueKey: "ojol.models.value.minutes",
+        },
+        { labelKey: "ojol.models.spec.motor", value: "3kW" },
+      ],
+    },
+    {
+      name: "Athena",
+      taglineKey: "ojol.models.athena.tagline",
+      highlightKey: "ojol.models.athena.highlight",
+      image: "/athena/athena-grey.webp",
+      link: "/athena",
+      specs: [
+        { labelKey: "ojol.models.spec.range", value: "120 km*" },
+        {
+          labelKey: "ojol.models.spec.supercharge",
+          valueKey: "ojol.models.value.minutes",
+        },
+        { labelKey: "ojol.models.spec.motor", value: "2.5kW" },
+      ],
+    },
+    {
+      name: "EdPower",
+      taglineKey: "ojol.models.edpower.tagline",
+      highlightKey: "ojol.models.edpower.highlight",
+      image: "/edpower/edpower-black.webp",
+      link: "/edpower",
+      specs: [
+        { labelKey: "ojol.models.spec.range", value: "160 km*" },
+        {
+          labelKey: "ojol.models.spec.supercharge",
+          valueKey: "ojol.models.value.minutes",
+        },
+        { labelKey: "ojol.models.spec.motor", value: "3kW" },
+      ],
+    },
+  ];
+
   return (
     <div className="w-full h-full">
       {/* Hero */}
@@ -277,12 +289,10 @@ export default function OjolClient() {
         {/* benefits */}
         <div className="w-full">
           <h2 className="text-4xl md:text-6xl font-bold text-center mb-4 md:mb-8">
-            Narik Lebih Banyak, Kerja Lebih Efisien
+            {t("ojol.benefits.title")}
           </h2>
           <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12 md:mb-0 text-md md:text-xl">
-            Bosen antre BBM? Capek mikirin biaya bensin yang makin mahal?
-            Tenang, Wedison solusinya! Irit biaya operasional, gak perlu antre,
-            dan perawatan lebih ringan. Waktunya upgrade cara narik kamu!
+            {t("ojol.benefits.description")}
           </p>
           <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 h-full">
             {[1, 2, 3].map((num) => (
@@ -296,9 +306,7 @@ export default function OjolClient() {
                   src={`/ojol/benefit-${num}.webp`}
                   width={1000}
                   height={1000}
-                  // fill
                   alt="benefit"
-                  // className="w-full h-full"
                 />
               </div>
             ))}
@@ -308,10 +316,10 @@ export default function OjolClient() {
         {/* hot campaign */}
         <div className="w-full" id="campaign">
           <h2 className="text-4xl md:text-6xl font-bold text-center my-8 md:my-16">
-            Hot Campaign
+            {t("ojol.campaign.heading")}
           </h2>
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
-            {campaignData.map((campaign) => (
+            {campaignMeta.map((campaign) => (
               <div
                 key={campaign.id}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
@@ -323,17 +331,14 @@ export default function OjolClient() {
                     src={campaign.image}
                     width={1000}
                     height={600}
-                    alt={campaign.title}
+                    alt={t(`ojol.campaign.${campaign.id}.title`)}
                   />
                   {/* Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   {/* Title on Image */}
                   <div className="absolute bottom-4 left-4 right-4">
-                    {/* <span className="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-2">
-                      PROMO
-                    </span> */}
                     <h3 className="text-2xl md:text-3xl font-bold text-white">
-                      {campaign.title}
+                      {t(`ojol.campaign.${campaign.id}.title`)}
                     </h3>
                   </div>
                 </div>
@@ -342,11 +347,13 @@ export default function OjolClient() {
                 <div className="p-6">
                   {/* Tagline */}
                   <p className="text-primary font-semibold text-lg mb-2">
-                    {campaign.tagline}
+                    {t(`ojol.campaign.${campaign.id}.tagline`)}
                   </p>
 
                   {/* Description */}
-                  <p className="text-gray-600 mb-6">{campaign.description}</p>
+                  <p className="text-gray-600 mb-6">
+                    {t(`ojol.campaign.${campaign.id}.description`)}
+                  </p>
 
                   {/* Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -365,7 +372,7 @@ export default function OjolClient() {
                           >
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                           </svg>
-                          Daftar Sekarang
+                          {t("ojol.btn.register")}
                         </span>
                       </Button>
                     </Link>
@@ -390,7 +397,7 @@ export default function OjolClient() {
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                        Lihat Detail
+                        {t("ojol.btn.detail")}
                       </span>
                     </Button>
                   </div>
@@ -402,7 +409,7 @@ export default function OjolClient() {
       </div>
 
       {/* Campaign Detail Dialog */}
-      {openDialog && (
+      {openDialog && activeCampaign && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           onClick={() => setOpenDialog(null)}
@@ -420,13 +427,13 @@ export default function OjolClient() {
               <div className="flex items-start justify-between">
                 <div>
                   <span className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-2">
-                    PROGRAM
+                    {t("ojol.dialog.programBadge")}
                   </span>
                   <h3 className="text-2xl md:text-3xl font-bold">
-                    {campaignData.find((c) => c.id === openDialog)?.title}
+                    {t(`ojol.campaign.${activeCampaign.id}.title`)}
                   </h3>
                   <p className="text-white/80 mt-1">
-                    {campaignData.find((c) => c.id === openDialog)?.tagline}
+                    {t(`ojol.campaign.${activeCampaign.id}.tagline`)}
                   </p>
                 </div>
                 <button
@@ -470,22 +477,28 @@ export default function OjolClient() {
                       />
                     </svg>
                   </span>
-                  Skema Pembayaran
+                  {t("ojol.dialog.scheme")}
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
-                  {campaignData
-                    .find((c) => c.id === openDialog)
-                    ?.scheme.map((item, idx) => (
+                  {Array.from({ length: activeCampaign.schemeCount }).map(
+                    (_, idx) => (
                       <div
                         key={idx}
                         className="bg-gray-50 rounded-xl p-4 border border-gray-100"
                       >
-                        <p className="text-gray-500 text-sm">{item.label}</p>
+                        <p className="text-gray-500 text-sm">
+                          {t(
+                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.label`
+                          )}
+                        </p>
                         <p className="text-gray-900 font-bold text-lg">
-                          {item.value}
+                          {t(
+                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.value`
+                          )}
                         </p>
                       </div>
-                    ))}
+                    )
+                  )}
                 </div>
               </div>
 
@@ -507,12 +520,11 @@ export default function OjolClient() {
                       />
                     </svg>
                   </span>
-                  Keuntungan
+                  {t("ojol.dialog.benefits")}
                 </h4>
                 <ul className="space-y-2">
-                  {campaignData
-                    .find((c) => c.id === openDialog)
-                    ?.benefits.map((benefit, idx) => (
+                  {Array.from({ length: activeCampaign.benefitsCount }).map(
+                    (_, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <svg
                           className="w-5 h-5 text-primary mt-0.5 flex-shrink-0"
@@ -525,9 +537,14 @@ export default function OjolClient() {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="text-gray-700">{benefit}</span>
+                        <span className="text-gray-700">
+                          {t(
+                            `ojol.campaign.${activeCampaign.id}.benefit.${idx}`
+                          )}
+                        </span>
                       </li>
-                    ))}
+                    )
+                  )}
                 </ul>
               </div>
 
@@ -549,19 +566,21 @@ export default function OjolClient() {
                       />
                     </svg>
                   </span>
-                  Syarat & Ketentuan
+                  {t("ojol.dialog.terms")}
                 </h4>
                 <ul className="space-y-2">
-                  {campaignData
-                    .find((c) => c.id === openDialog)
-                    ?.terms.map((term, idx) => (
+                  {Array.from({ length: activeCampaign.termsCount }).map(
+                    (_, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <span className="w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 mt-0.5 flex-shrink-0">
                           {idx + 1}
                         </span>
-                        <span className="text-gray-700">{term}</span>
+                        <span className="text-gray-700">
+                          {t(`ojol.campaign.${activeCampaign.id}.term.${idx}`)}
+                        </span>
                       </li>
-                    ))}
+                    )
+                  )}
                 </ul>
               </div>
             </div>
@@ -569,9 +588,7 @@ export default function OjolClient() {
             {/* Footer CTA */}
             <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
               <Link
-                href={
-                  campaignData.find((c) => c.id === openDialog)?.waLink || "#"
-                }
+                href={activeCampaign.waLink}
                 target="_blank"
                 onClick={() => setOpenDialog(null)}
               >
@@ -584,7 +601,7 @@ export default function OjolClient() {
                     >
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
-                    Daftar Program Ini Sekarang
+                    {t("ojol.dialog.registerNow")}
                   </span>
                 </Button>
               </Link>
@@ -617,7 +634,7 @@ export default function OjolClient() {
               {/* Badge */}
               <div className="inline-block mb-4">
                 <span className="bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
-                  10% - 80% dalam 15 menit
+                  {t("ojol.supercharge.badge")}
                 </span>
               </div>
 
@@ -630,43 +647,20 @@ export default function OjolClient() {
                   height={100}
                   className="h-16 md:h-20 lg:h-24 w-auto mx-auto lg:mx-0"
                 />
-                {/* <p className="text-xl md:text-2xl lg:text-3xl font-medium text-gray-600 mt-2">
-                  Penghasilan Kamu!
-                </p> */}
               </div>
 
               {/* Description */}
               <p className="text-gray-500 text-md md:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Waktu adalah uang, dan Supercharge bikin kamu gak buang-buang
-                waktu! Cukup{" "}
-                <span className="font-bold text-gray-700">15 menit</span> aja,
-                baterai langsung terisi dari 10% ke 80%. Langsung gas narik
-                lagi, gak perlu nunggu lama! Sekali charge bisa tempuh hingga
-                165 km*. Lebih banyak orderan, cuan lebih banyak!
+                {t("ojol.supercharge.descriptionPart1")}
+                <span className="font-bold text-gray-700">
+                  {t("ojol.supercharge.descriptionBold")}
+                </span>
+                {t("ojol.supercharge.descriptionPart2")}
               </p>
-
-              {/* Features List */}
-              {/* <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
-                {[
-                  { icon: "⚡", text: "Charging Cepat" },
-                  { icon: "🛣️", text: "Jarak Tempuh 165 km*" },
-                  { icon: "💰", text: "Hemat Waktu & Cuan" },
-                ].map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2 hover:bg-gray-200 transition-colors duration-300"
-                  >
-                    <span className="text-xl">{feature.icon}</span>
-                    <span className="text-gray-700 text-sm font-medium">
-                      {feature.text}
-                    </span>
-                  </div>
-                ))}
-              </div> */}
 
               {/* Disclaimer */}
               <p className="text-gray-400 text-xs mb-6 max-w-xl mx-auto lg:mx-0">
-                *Jarak tempuh 165 km berlaku untuk model EdPro Extended Battery
+                {t("ojol.supercharge.disclaimer")}
               </p>
 
               {/* CTA Button */}
@@ -679,7 +673,7 @@ export default function OjolClient() {
                     hover:scale-105 active:scale-95"
                 >
                   <span className="flex items-center gap-2">
-                    Pelajari Lebih Lanjut
+                    {t("ojol.supercharge.cta")}
                     <svg
                       className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"
@@ -707,66 +701,16 @@ export default function OjolClient() {
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-              Pilih Motor yang Cocok Buat Kamu
+              {t("ojol.models.title")}
             </h2>
             <p className="text-gray-500 text-lg md:text-xl max-w-3xl mx-auto">
-              Mau yang gesit buat gang sempit atau yang kuat buat jarak jauh?
-              Wedison punya pilihan lengkap yang pas buat gaya narik kamu!
+              {t("ojol.models.subtitle")}
             </p>
           </div>
 
           {/* Model Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {[
-              {
-                name: "Bees",
-                tagline: "Compact & Lincah",
-                image: "/bees/bees-grey.webp",
-                link: "/bees",
-                specs: [
-                  { label: "Jarak Tempuh", value: "80 km" },
-                  { label: "Kecepatan Max", value: "55 km/h" },
-                  { label: "Baterai", value: "1600Wh" },
-                ],
-                highlight: "Cocok buat gang sempit",
-              },
-              {
-                name: "Victory",
-                tagline: "Stylish & Bertenaga",
-                image: "/victory/victory-grey.webp",
-                link: "/victory",
-                specs: [
-                  { label: "Jarak Tempuh", value: "120 km*" },
-                  { label: "SuperCharge", value: "15 menit" },
-                  { label: "Motor", value: "3kW" },
-                ],
-                highlight: "Balance antara gaya & performa",
-              },
-              {
-                name: "Athena",
-                tagline: "Premium & Nyaman",
-                image: "/athena/athena-grey.webp",
-                link: "/athena",
-                specs: [
-                  { label: "Jarak Tempuh", value: "120 km*" },
-                  { label: "SuperCharge", value: "15 menit" },
-                  { label: "Motor", value: "2.5kW" },
-                ],
-                highlight: "Narik seharian tetap nyaman",
-              },
-              {
-                name: "EdPower",
-                tagline: "Tangguh & Jarak Jauh",
-                image: "/edpower/edpower-black.webp",
-                link: "/edpower",
-                specs: [
-                  { label: "Jarak Tempuh", value: "160 km*" },
-                  { label: "SuperCharge", value: "15 menit" },
-                  { label: "Motor", value: "3kW" },
-                ],
-                highlight: "Raja jarak jauh",
-              },
-            ].map((model, index) => (
+            {models.map((model, index) => (
               <div
                 key={model.name}
                 className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
@@ -784,7 +728,7 @@ export default function OjolClient() {
                   />
                   {/* Highlight Badge */}
                   <div className="absolute top-4 left-4 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    {model.highlight}
+                    {t(model.highlightKey)}
                   </div>
                 </div>
 
@@ -795,7 +739,9 @@ export default function OjolClient() {
                     <h3 className="text-2xl font-bold text-gray-900">
                       {model.name}
                     </h3>
-                    <p className="text-primary font-medium">{model.tagline}</p>
+                    <p className="text-primary font-medium">
+                      {t(model.taglineKey)}
+                    </p>
                   </div>
 
                   {/* Specs */}
@@ -805,9 +751,13 @@ export default function OjolClient() {
                         key={specIndex}
                         className="flex justify-between items-center text-sm"
                       >
-                        <span className="text-gray-500">{spec.label}</span>
+                        <span className="text-gray-500">
+                          {t(spec.labelKey)}
+                        </span>
                         <span className="font-semibold text-gray-800">
-                          {spec.value}
+                          {"valueKey" in spec && spec.valueKey
+                            ? t(spec.valueKey)
+                            : spec.value}
                         </span>
                       </div>
                     ))}
@@ -820,7 +770,7 @@ export default function OjolClient() {
                       className="w-full group/btn border-gray-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
                     >
                       <span className="flex items-center justify-center gap-2">
-                        Lihat Detail
+                        {t("ojol.models.cta")}
                         <svg
                           className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
                           fill="none"
@@ -844,7 +794,7 @@ export default function OjolClient() {
 
           {/* Footnote */}
           <p className="text-center text-gray-400 text-sm mt-8">
-            *Jarak tempuh dengan Extended Battery
+            {t("ojol.models.footnote")}
           </p>
         </div>
       </div>
@@ -862,31 +812,29 @@ export default function OjolClient() {
             {/* Badge */}
             <div className="inline-block mb-6">
               <span className="bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
-                Program Khusus Driver
+                {t("ojol.cta.badge")}
               </span>
             </div>
 
             {/* Headline */}
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Siap Narik Lebih Cuan
+              {t("ojol.cta.headline.1")}
               <br />
-              <span className="text-primary">Bareng Wedison?</span>
+              <span className="text-primary">{t("ojol.cta.headline.2")}</span>
             </h2>
 
             {/* Description */}
             <p className="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
-              Gabung sekarang dan nikmati berbagai keuntungan eksklusif: sewa
-              harian mulai 50K, charging cepat gratis, hingga program cicilan
-              ringan. Yuk, upgrade cara narik kamu!
+              {t("ojol.cta.description")}
             </p>
 
             {/* Benefits List */}
             <div className="flex flex-wrap justify-center gap-4 mb-10">
               {[
-                "Sewa Harian Mulai 50K",
-                "SuperCharge Gratis",
-                "Cicilan Ringan",
-                "Servis Prioritas",
+                t("ojol.cta.benefit.1"),
+                t("ojol.cta.benefit.2"),
+                t("ojol.cta.benefit.3"),
+                t("ojol.cta.benefit.4"),
               ].map((benefit, index) => (
                 <div
                   key={index}
@@ -931,7 +879,7 @@ export default function OjolClient() {
                   >
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
-                  Hubungi Sales Wedison
+                  {t("ojol.cta.button")}
                   <svg
                     className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"
@@ -951,7 +899,7 @@ export default function OjolClient() {
 
             {/* Trust Text */}
             <p className="text-gray-500 text-sm mt-6">
-              Respon cepat, konsultasi gratis!
+              {t("ojol.cta.trust")}
             </p>
           </div>
         </div>
