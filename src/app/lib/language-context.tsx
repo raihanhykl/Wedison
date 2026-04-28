@@ -235,10 +235,19 @@ const translations = {
     "showroom.description":
       "Experience our electric motorcycles in person and discover the future of mobility.",
     "showroom.tag": "Experience Center",
-    "showroom.location": "Showroom Location",
+    "showroom.location": "Our Locations",
     "showroom.findUs": "Find Us",
     "showroom.address":
       "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
+    "showroom.jakarta.name": "Wedison Jakarta",
+    "showroom.jakarta.address":
+      "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
+    "showroom.bandung.name": "Wedison Bandung",
+    "showroom.bandung.address":
+      "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.facility.showroom": "Showroom",
+    "showroom.facility.service": "Service Center",
+    "showroom.viewOnMaps": "View on Maps",
     "showroom.hours": "Opening Hours",
     "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
     "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
@@ -307,6 +316,7 @@ const translations = {
     "contact.page.findUs": "Find Us",
     "contact.page.openInMaps": "Open in Google Maps",
     "contact.page.hours": "Business Hours",
+    "contact.page.business.hours": "Monday - Friday: 09.00 AM - 06.00 PM",
     "contact.page.faqTitle": "Frequently Asked Questions",
     "contact.page.thankYou": "Thank You!",
     "contact.page.messageReceived":
@@ -1226,7 +1236,7 @@ const translations = {
     "faq.Performance.questions.4.question":
       "Can the motorcycles travel uphill?",
     "faq.Performance.questions.4.answer":
-      "Yes, it can go uphill and the climbing ability depends on the model:\nBees, EdPower, & EdPro: 12%\nAthena and Victory: 15%",
+      "Yes, it can go uphill and the climbing ability depends on the model:\nBees, EdPower: 12%\nAthena and Victory: 15%",
     "faq.Performance.questions.5.question":
       "Does the battery degrade overtime?",
     "faq.Performance.questions.5.answer":
@@ -1345,13 +1355,13 @@ const translations = {
     "ojol.campaign.milik.term.6":
       "Riders must complete the screening process from Wedison",
     "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
-    "ojol.campaign.milik.scheme.0.value": "Rp 58,000/day",
+    "ojol.campaign.milik.scheme.0.value": "Rp 55,000/day",
     "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
-    "ojol.campaign.milik.scheme.1.value": "Rp 63,000/day",
+    "ojol.campaign.milik.scheme.1.value": "Rp 60,000/day",
     "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
-    "ojol.campaign.milik.scheme.2.value": "Rp 83,000/day",
+    "ojol.campaign.milik.scheme.2.value": "Rp 80,000/day",
     "ojol.campaign.milik.scheme.3.label": "Deposit",
-    "ojol.campaign.milik.scheme.3.value": "Rp 530,000 - Rp 780,000",
+    "ojol.campaign.milik.scheme.3.value": "Rp 600,000 - Rp 800,000",
 
     "ojol.campaign.harian.title": "Daily Rental",
     "ojol.campaign.harian.tagline": "Ride Now, Flexible and Hassle-Free!",
@@ -1403,7 +1413,7 @@ const translations = {
     "ojol.supercharge.descriptionPart2":
       " and your battery is back from 10% to 80%. Hit the road again right away, no long waits! A single charge can cover up to 165 km*. More orders, more earnings!",
     "ojol.supercharge.disclaimer":
-      "*Range of 165 km applies to the EdPro Extended Battery model",
+      "*Range of 165 km applies to the EdPower Extended Battery model",
     "ojol.supercharge.cta": "Learn More",
 
     "ojol.models.title": "Pick the Right Motorcycle for You",
@@ -1478,7 +1488,7 @@ const translations = {
       "Dapatkan berita, rilis resmi, dan highlight terbaru tentang Wedison.",
     "nav.ojol.description":
       "Program sewa motor listrik eksklusif untuk driver ojol. Mulai dari 50K/hari.",
-    "nav.showroom": "Ruang Pamer",
+    "nav.showroom": "Showroom",
     "nav.serviceLocation": "Lokasi Layanan",
     "nav.superCharge": "SuperCharge",
     "nav.corporate": "Perusahaan",
@@ -1630,18 +1640,27 @@ const translations = {
     //showroom
 
     "showroom.title": "Kunjungi",
-    "showroom.titleHighlight": "Show Room Kami",
+    "showroom.titleHighlight": "Showroom Kami",
     "showroom.description":
       "Rasakan sepeda motor listrik kami secara langsung dan temukan masa depan mobilitas.",
     "showroom.tag": "Pusat Pengalaman",
-    "showroom.location": "Lokasi Ruang Pamer",
+    "showroom.location": "Lokasi Kami",
     "showroom.findUs": "Temukan Kami",
     "showroom.address":
       "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
+    "showroom.jakarta.name": "Wedison Jakarta",
+    "showroom.jakarta.address":
+      "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
+    "showroom.bandung.name": "Wedison Bandung",
+    "showroom.bandung.address":
+      "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.facility.showroom": "Showroom",
+    "showroom.facility.service": "Service Center",
+    "showroom.viewOnMaps": "Lihat di Maps",
     "showroom.hours": "Jam Buka",
     "showroom.weekdays": "Senin - Jumat: 10:00 - 19:00",
     "showroom.weekend": "Sabtu - Minggu: 10:00 - 17:00",
-    "showroom.whatYouCanDo": "Apa yang Dapat Anda Lakukan di Ruang Pamer",
+    "showroom.whatYouCanDo": "Apa yang Dapat Anda Lakukan di Showroom",
     "showroom.testRide.title": "Test Ride Sepeda Motor Listrik",
     "showroom.testRide.description":
       "Coba performa sepeda motor listrik Wedison langsung di area uji kami. Rasakan kenyamanan berkendara dengan teknologi terbaru.",
@@ -1708,6 +1727,7 @@ const translations = {
     "contact.page.findUs": "Temukan Kami",
     "contact.page.openInMaps": "Buka di Google Maps",
     "contact.page.hours": "Jam Kerja",
+    "contact.page.business.hours": "Senin - Jumat: 09.00 AM - 06.00 PM",
     "contact.page.faqTitle": "Pertanyaan yang Sering Diajukan",
     "contact.page.thankYou": "Terima Kasih!",
     "contact.page.messageReceived":
@@ -2424,7 +2444,8 @@ const translations = {
     "supercharge.app.feature1.description":
       "Lihat semua stasiun SuperCharge di peta interaktif dengan status ketersediaan real-time.",
     "supercharge.app.feature1.bullet1": "Peta interaktif dengan navigasi GPS",
-    "supercharge.app.feature1.bullet2": "Filter berdasarkan ketersediaan & jarak",
+    "supercharge.app.feature1.bullet2":
+      "Filter berdasarkan ketersediaan & jarak",
     "supercharge.app.feature1.bullet3": "Simpan stasiun favorit",
 
     "supercharge.app.feature2.icon": "Activity",
@@ -2652,7 +2673,7 @@ const translations = {
       "Motor, unit kontrol, dan baterai Wedison adalah IP67, yang telah diuji kedap air.\nMeskipun telah menjalani tes perendaman air pada 1 meter, perendaman yang diperpanjang tidak disarankan.",
     "faq.Performance.questions.4.question": "Bisakah motor menanjak?",
     "faq.Performance.questions.4.answer":
-      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nBees, EdPower, & EdPro: 12%\nAthena dan Victory: 15%",
+      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nBees, EdPower: 12%\nAthena dan Victory: 15%",
     "faq.Performance.questions.5.question":
       "Apakah baterai menurun seiring waktu?",
     "faq.Performance.questions.5.answer":
@@ -2770,13 +2791,13 @@ const translations = {
     "ojol.campaign.milik.term.6":
       "Rider wajib mengikuti proses screening dari Wedison",
     "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
-    "ojol.campaign.milik.scheme.0.value": "Rp 58.000/hari",
+    "ojol.campaign.milik.scheme.0.value": "Rp 55.000/hari",
     "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
-    "ojol.campaign.milik.scheme.1.value": "Rp 63.000/hari",
+    "ojol.campaign.milik.scheme.1.value": "Rp 60.000/hari",
     "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
-    "ojol.campaign.milik.scheme.2.value": "Rp 83.000/hari",
+    "ojol.campaign.milik.scheme.2.value": "Rp 80.000/hari",
     "ojol.campaign.milik.scheme.3.label": "Deposit",
-    "ojol.campaign.milik.scheme.3.value": "Rp 530.000 - Rp 780.000",
+    "ojol.campaign.milik.scheme.3.value": "Rp 600.000 - Rp 800.000",
 
     "ojol.campaign.harian.title": "Sewa Harian",
     "ojol.campaign.harian.tagline": "Narik Dulu, Fleksibel Tanpa Beban!",
@@ -2828,7 +2849,7 @@ const translations = {
     "ojol.supercharge.descriptionPart2":
       " aja, baterai langsung terisi dari 10% ke 80%. Langsung gas narik lagi, gak perlu nunggu lama! Sekali charge bisa tempuh hingga 165 km*. Lebih banyak orderan, cuan lebih banyak!",
     "ojol.supercharge.disclaimer":
-      "*Jarak tempuh 165 km berlaku untuk model EdPro Extended Battery",
+      "*Jarak tempuh 165 km berlaku untuk model EdPower Extended Battery",
     "ojol.supercharge.cta": "Pelajari Lebih Lanjut",
 
     "ojol.models.title": "Pilih Motor yang Cocok Buat Kamu",
@@ -2870,7 +2891,7 @@ const translations = {
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

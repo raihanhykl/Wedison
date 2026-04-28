@@ -488,16 +488,16 @@ export default function OjolClient() {
                       >
                         <p className="text-gray-500 text-sm">
                           {t(
-                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.label`
+                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.label`,
                           )}
                         </p>
                         <p className="text-gray-900 font-bold text-lg">
                           {t(
-                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.value`
+                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.value`,
                           )}
                         </p>
                       </div>
-                    )
+                    ),
                   )}
                 </div>
               </div>
@@ -539,11 +539,11 @@ export default function OjolClient() {
                         </svg>
                         <span className="text-gray-700">
                           {t(
-                            `ojol.campaign.${activeCampaign.id}.benefit.${idx}`
+                            `ojol.campaign.${activeCampaign.id}.benefit.${idx}`,
                           )}
                         </span>
                       </li>
-                    )
+                    ),
                   )}
                 </ul>
               </div>
@@ -579,7 +579,7 @@ export default function OjolClient() {
                           {t(`ojol.campaign.${activeCampaign.id}.term.${idx}`)}
                         </span>
                       </li>
-                    )
+                    ),
                   )}
                 </ul>
               </div>
@@ -620,7 +620,7 @@ export default function OjolClient() {
                 {/* Image Container */}
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
                   <Image
-                    src="/super-charge/supercharge-hero.webp"
+                    src="/super-charge/supercharge-ojol.webp"
                     alt="Wedison Supercharge"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -898,9 +898,7 @@ export default function OjolClient() {
             </Link>
 
             {/* Trust Text */}
-            <p className="text-gray-500 text-sm mt-6">
-              {t("ojol.cta.trust")}
-            </p>
+            <p className="text-gray-500 text-sm mt-6">{t("ojol.cta.trust")}</p>
           </div>
         </div>
       </div>
