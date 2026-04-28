@@ -235,10 +235,19 @@ const translations = {
     "showroom.description":
       "Experience our electric motorcycles in person and discover the future of mobility.",
     "showroom.tag": "Experience Center",
-    "showroom.location": "Showroom Location",
+    "showroom.location": "Our Locations",
     "showroom.findUs": "Find Us",
     "showroom.address":
       "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
+    "showroom.jakarta.name": "Wedison Jakarta",
+    "showroom.jakarta.address":
+      "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
+    "showroom.bandung.name": "Wedison Bandung",
+    "showroom.bandung.address":
+      "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.facility.showroom": "Showroom",
+    "showroom.facility.service": "Service Center",
+    "showroom.viewOnMaps": "View on Maps",
     "showroom.hours": "Opening Hours",
     "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
     "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
@@ -307,6 +316,7 @@ const translations = {
     "contact.page.findUs": "Find Us",
     "contact.page.openInMaps": "Open in Google Maps",
     "contact.page.hours": "Business Hours",
+    "contact.page.business.hours": "Monday - Friday: 09.00 AM - 06.00 PM",
     "contact.page.faqTitle": "Frequently Asked Questions",
     "contact.page.thankYou": "Thank You!",
     "contact.page.messageReceived":
@@ -985,6 +995,58 @@ const translations = {
     "supercharge.feature3.description":
       "Our DC charging station is designed to work in perfect harmony with your Wedison EV motorcycle, ensuring fast charging while enhancing battery longevity. Fully certified to IEC safety standards and compliant with EU Directives, it provides safe, efficient, and reliable power for your motorcycle—every time.",
 
+    // SuperCharge App Section
+    "supercharge.app.tag": "Mobile App",
+    "supercharge.app.teaser.title": "Find. Charge.",
+    "supercharge.app.teaser.titleHighlight": "Ride.",
+    "supercharge.app.teaser.description":
+      "Locate the nearest SuperCharge station, check real-time availability, and start charging — all from your phone.",
+    "supercharge.app.teaser.feature.find": "Find Stations",
+    "supercharge.app.teaser.feature.realtime": "Real-Time",
+    "supercharge.app.teaser.feature.charge": "Quick Charge",
+
+    "supercharge.app.hero.title": "Your Charging Companion,",
+    "supercharge.app.hero.titleHighlight": "Always In Your Pocket",
+    "supercharge.app.hero.description":
+      "Monitor charging status, find the nearest station, and manage your SuperCharge sessions — everything you need in one app.",
+
+    "supercharge.app.feature1.icon": "MapPin",
+    "supercharge.app.feature1.title": "Find Nearby Stations",
+    "supercharge.app.feature1.subtitle": "Locate charging points around you",
+    "supercharge.app.feature1.description":
+      "View all SuperCharge stations on an interactive map with real-time availability status.",
+    "supercharge.app.feature1.bullet1": "Interactive map with GPS navigation",
+    "supercharge.app.feature1.bullet2": "Filter by availability & distance",
+    "supercharge.app.feature1.bullet3": "Save favorite stations",
+
+    "supercharge.app.feature2.icon": "Activity",
+    "supercharge.app.feature2.title": "Real-Time Charging Status",
+    "supercharge.app.feature2.subtitle": "Know before you go",
+    "supercharge.app.feature2.description":
+      "Check station availability, queue status, and estimated wait times before heading out.",
+    "supercharge.app.feature2.bullet1": "Live availability updates",
+    "supercharge.app.feature2.bullet2": "Charging speed information",
+    "supercharge.app.feature2.bullet3": "Queue status & wait times",
+
+    "supercharge.app.feature3.icon": "Zap",
+    "supercharge.app.feature3.title": "Seamless Charging Experience",
+    "supercharge.app.feature3.subtitle": "Plug in, charge, and go",
+    "supercharge.app.feature3.description":
+      "Start and monitor your charging session right from the app with a single tap.",
+    "supercharge.app.feature3.bullet1": "One-tap charging start",
+    "supercharge.app.feature3.bullet2": "Real-time charge monitoring",
+    "supercharge.app.feature3.bullet3": "Session history & analytics",
+
+    "supercharge.app.stats.stations": "Stations",
+    "supercharge.app.stats.downloads": "Downloads",
+    "supercharge.app.stats.rating": "Rating",
+    "supercharge.app.stats.chargeTime": "Min Charge",
+
+    "supercharge.app.cta.title": "Ready to SuperCharge",
+    "supercharge.app.cta.titleHighlight": "Your Ride?",
+    "supercharge.app.cta.description":
+      "Download now and never worry about finding a charger again.",
+
     //form title
     "form.title.placeholder": "Select a topic to discuss",
     "form.title.productInfo": "Electric Motorcycle Product Info",
@@ -1174,7 +1236,7 @@ const translations = {
     "faq.Performance.questions.4.question":
       "Can the motorcycles travel uphill?",
     "faq.Performance.questions.4.answer":
-      "Yes, it can go uphill and the climbing ability depends on the model:\nBees, EdPower, & EdPro: 12%\nAthena and Victory: 15%",
+      "Yes, it can go uphill and the climbing ability depends on the model:\nBees, EdPower: 12%\nAthena and Victory: 15%",
     "faq.Performance.questions.5.question":
       "Does the battery degrade overtime?",
     "faq.Performance.questions.5.answer":
@@ -1246,6 +1308,146 @@ const translations = {
     "faq.Tires.questions.0.answer":
       "Bees: Front: 90/90-10; Rear 90/90-10\nAthena: Front: 100/80-12; Rear 100/80-12\nVictory: Front: 90/90-14; Rear: 100/80-14\nEdPower: Front: 100/90-14; Rear: 120/70-14",
 
+    // Ojol Page
+    "ojol.hero.title": "Wedison With",
+    "ojol.hero.titleHighlight": "Ride-Hailing",
+    "ojol.hero.description":
+      "Electric motorcycle solutions for ride-hailing drivers. Lower operating costs, no fuel queues!",
+    "ojol.hero.startFrom": "Starting from",
+    "ojol.hero.perDay": "/Day",
+    "ojol.hero.dailyRental": "DAILY RENTAL",
+    "ojol.hero.tagline": "#MadeEasier",
+    "ojol.hero.tryFree": "Try It Free!",
+
+    "ojol.benefits.title": "Earn More, Work Smarter",
+    "ojol.benefits.description":
+      "Tired of fuel queues? Sick of rising gas prices? Relax, Wedison is the answer! Save on operating costs, skip the queues, and enjoy lighter maintenance. Time to upgrade the way you ride!",
+
+    "ojol.campaign.heading": "Hot Campaign",
+    "ojol.btn.register": "Register Now",
+    "ojol.btn.detail": "See Details",
+
+    "ojol.campaign.milik.title": "Rent-to-Own",
+    "ojol.campaign.milik.tagline": "Pay in Installments, Make It Yours!",
+    "ojol.campaign.milik.description":
+      "A rental program with an ownership option over 3.5 years (42 months). Once the contract ends, the motorcycle is yours!",
+    "ojol.campaign.milik.benefit.0":
+      "1x Free regular charging adapter (worth Rp 1,000,000)",
+    "ojol.campaign.milik.benefit.1":
+      "1x Free front and rear tire replacement (worth Rp 385,000)",
+    "ojol.campaign.milik.benefit.2":
+      "1x Free brake pad replacement (1 set front and rear)",
+    "ojol.campaign.milik.benefit.3": "2x Mechanical lock",
+    "ojol.campaign.milik.benefit.4": "3-year battery warranty",
+    "ojol.campaign.milik.benefit.5": "2-year motorcycle warranty",
+    "ojol.campaign.milik.term.0":
+      "The rent-to-own scheme runs for 3 years 6 months (42 months)",
+    "ojol.campaign.milik.term.1":
+      "Riders are entitled to 1 day off per week (maximum 48 days per year)",
+    "ojol.campaign.milik.term.2":
+      "After the 42-month contract ends, ownership of the motorcycle is transferred to the rider",
+    "ojol.campaign.milik.term.3":
+      "Savings will be used for insurance, service, spare parts, and BPKB (vehicle ownership document) costs. Any remaining savings at the end of the contract will be transferred to the rider",
+    "ojol.campaign.milik.term.4":
+      "The down payment is non-refundable once the rider is declared eligible",
+    "ojol.campaign.milik.term.5":
+      "Traffic fines and violations are the rider's responsibility",
+    "ojol.campaign.milik.term.6":
+      "Riders must complete the screening process from Wedison",
+    "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.milik.scheme.0.value": "Rp 55,000/day",
+    "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.milik.scheme.1.value": "Rp 60,000/day",
+    "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.milik.scheme.2.value": "Rp 80,000/day",
+    "ojol.campaign.milik.scheme.3.label": "Deposit",
+    "ojol.campaign.milik.scheme.3.value": "Rp 600,000 - Rp 800,000",
+
+    "ojol.campaign.harian.title": "Daily Rental",
+    "ojol.campaign.harian.tagline": "Ride Now, Flexible and Hassle-Free!",
+    "ojol.campaign.harian.description":
+      "Daily electric motorcycle rental with a 3-year contract. Perfect if you want to ride without worrying about installments!",
+    "ojol.campaign.harian.benefit.0": "1x Free regular charging adapter",
+    "ojol.campaign.harian.benefit.1":
+      "1x Free front and rear tire replacement (worth Rp 385,000)",
+    "ojol.campaign.harian.benefit.2":
+      "1x Free brake pad replacement (1 set front and rear)",
+    "ojol.campaign.harian.benefit.3": "1x Free routine service",
+    "ojol.campaign.harian.benefit.4": "2x Mechanical lock",
+    "ojol.campaign.harian.benefit.5": "3-year battery warranty",
+    "ojol.campaign.harian.benefit.6": "2-year motorcycle warranty",
+    "ojol.campaign.harian.term.0":
+      "The daily rental scheme runs for 3 years (36 months)",
+    "ojol.campaign.harian.term.1":
+      "Riders are entitled to 1 day off per week (maximum 48 days per year)",
+    "ojol.campaign.harian.term.2":
+      "The down payment is non-refundable once the rider is declared eligible",
+    "ojol.campaign.harian.term.3":
+      "The motorcycle remains fully owned by PT. Wedison Nusantara Energi",
+    "ojol.campaign.harian.term.4":
+      "Traffic fines and violations are the rider's responsibility",
+    "ojol.campaign.harian.term.5":
+      "Damage caused by negligence or accidents is the rider's responsibility",
+    "ojol.campaign.harian.term.6":
+      "Riders must complete the screening process from Wedison",
+    "ojol.campaign.harian.term.7": "Motorcycle color is assigned at random",
+    "ojol.campaign.harian.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.harian.scheme.0.value": "Rp 50,000/day",
+    "ojol.campaign.harian.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.harian.scheme.1.value": "Rp 55,000/day",
+    "ojol.campaign.harian.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.harian.scheme.2.value": "Rp 75,000/day",
+    "ojol.campaign.harian.scheme.3.label": "Deposit",
+    "ojol.campaign.harian.scheme.3.value": "Rp 500,000 - Rp 750,000",
+
+    "ojol.dialog.programBadge": "PROGRAM",
+    "ojol.dialog.scheme": "Payment Scheme",
+    "ojol.dialog.benefits": "Benefits",
+    "ojol.dialog.terms": "Terms & Conditions",
+    "ojol.dialog.registerNow": "Register for This Program Now",
+
+    "ojol.supercharge.badge": "10% to 80% in 15 Minutes",
+    "ojol.supercharge.descriptionPart1":
+      "Time is money, and Supercharge keeps you from wasting it! Just ",
+    "ojol.supercharge.descriptionBold": "15 minutes",
+    "ojol.supercharge.descriptionPart2":
+      " and your battery is back from 10% to 80%. Hit the road again right away, no long waits! A single charge can cover up to 165 km*. More orders, more earnings!",
+    "ojol.supercharge.disclaimer":
+      "*Range of 165 km applies to the EdPower Extended Battery model",
+    "ojol.supercharge.cta": "Learn More",
+
+    "ojol.models.title": "Pick the Right Motorcycle for You",
+    "ojol.models.subtitle":
+      "Want something nimble for tight alleys or strong for long distances? Wedison has the full lineup to match your riding style!",
+    "ojol.models.spec.range": "Range",
+    "ojol.models.spec.maxSpeed": "Top Speed",
+    "ojol.models.spec.battery": "Battery",
+    "ojol.models.spec.supercharge": "SuperCharge",
+    "ojol.models.spec.motor": "Motor",
+    "ojol.models.value.minutes": "15 minutes",
+    "ojol.models.bees.tagline": "Compact & Agile",
+    "ojol.models.bees.highlight": "Perfect for tight alleys",
+    "ojol.models.victory.tagline": "Stylish & Powerful",
+    "ojol.models.victory.highlight": "A balance of style and performance",
+    "ojol.models.athena.tagline": "Premium & Comfortable",
+    "ojol.models.athena.highlight": "Comfortable for all-day riding",
+    "ojol.models.edpower.tagline": "Tough & Long-Range",
+    "ojol.models.edpower.highlight": "King of long distances",
+    "ojol.models.cta": "See Details",
+    "ojol.models.footnote": "*Range with Extended Battery",
+
+    "ojol.cta.badge": "Special Driver Program",
+    "ojol.cta.headline.1": "Ready to Earn More",
+    "ojol.cta.headline.2": "with Wedison?",
+    "ojol.cta.description":
+      "Join now and enjoy a range of exclusive benefits: daily rental from 50K, free fast charging, and easy installment programs. Time to upgrade the way you ride!",
+    "ojol.cta.benefit.1": "Daily Rental from 50K",
+    "ojol.cta.benefit.2": "Free SuperCharge",
+    "ojol.cta.benefit.3": "Easy Installments",
+    "ojol.cta.benefit.4": "Priority Service",
+    "ojol.cta.button": "Contact Wedison Sales",
+    "ojol.cta.trust": "Fast response, free consultation!",
+
     // Language
     language: "English",
     switchLanguage: "Bahasa Indonesia",
@@ -1286,7 +1488,7 @@ const translations = {
       "Dapatkan berita, rilis resmi, dan highlight terbaru tentang Wedison.",
     "nav.ojol.description":
       "Program sewa motor listrik eksklusif untuk driver ojol. Mulai dari 50K/hari.",
-    "nav.showroom": "Ruang Pamer",
+    "nav.showroom": "Showroom",
     "nav.serviceLocation": "Lokasi Layanan",
     "nav.superCharge": "SuperCharge",
     "nav.corporate": "Perusahaan",
@@ -1438,18 +1640,27 @@ const translations = {
     //showroom
 
     "showroom.title": "Kunjungi",
-    "showroom.titleHighlight": "Show Room Kami",
+    "showroom.titleHighlight": "Showroom Kami",
     "showroom.description":
       "Rasakan sepeda motor listrik kami secara langsung dan temukan masa depan mobilitas.",
     "showroom.tag": "Pusat Pengalaman",
-    "showroom.location": "Lokasi Ruang Pamer",
+    "showroom.location": "Lokasi Kami",
     "showroom.findUs": "Temukan Kami",
     "showroom.address":
       "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
+    "showroom.jakarta.name": "Wedison Jakarta",
+    "showroom.jakarta.address":
+      "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
+    "showroom.bandung.name": "Wedison Bandung",
+    "showroom.bandung.address":
+      "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.facility.showroom": "Showroom",
+    "showroom.facility.service": "Service Center",
+    "showroom.viewOnMaps": "Lihat di Maps",
     "showroom.hours": "Jam Buka",
     "showroom.weekdays": "Senin - Jumat: 10:00 - 19:00",
     "showroom.weekend": "Sabtu - Minggu: 10:00 - 17:00",
-    "showroom.whatYouCanDo": "Apa yang Dapat Anda Lakukan di Ruang Pamer",
+    "showroom.whatYouCanDo": "Apa yang Dapat Anda Lakukan di Showroom",
     "showroom.testRide.title": "Test Ride Sepeda Motor Listrik",
     "showroom.testRide.description":
       "Coba performa sepeda motor listrik Wedison langsung di area uji kami. Rasakan kenyamanan berkendara dengan teknologi terbaru.",
@@ -1516,6 +1727,7 @@ const translations = {
     "contact.page.findUs": "Temukan Kami",
     "contact.page.openInMaps": "Buka di Google Maps",
     "contact.page.hours": "Jam Kerja",
+    "contact.page.business.hours": "Senin - Jumat: 09.00 AM - 06.00 PM",
     "contact.page.faqTitle": "Pertanyaan yang Sering Diajukan",
     "contact.page.thankYou": "Terima Kasih!",
     "contact.page.messageReceived":
@@ -2211,6 +2423,59 @@ const translations = {
     "supercharge.feature3.description":
       "Stasiun pengisian daya DC kami dirancang untuk bekerja secara sempurna dengan motor listrik Wedison Anda, memastikan pengisian daya cepat sekaligus menjaga umur baterai. Telah tersertifikasi penuh sesuai standar keselamatan IEC dan mematuhi Direktif Uni Eropa, memberikan daya yang aman, efisien, dan andal untuk motor Anda—setiap saat.",
 
+    // SuperCharge App Section
+    "supercharge.app.tag": "Aplikasi Mobile",
+    "supercharge.app.teaser.title": "Cari. Isi Daya.",
+    "supercharge.app.teaser.titleHighlight": "Jalan.",
+    "supercharge.app.teaser.description":
+      "Temukan stasiun SuperCharge terdekat, cek ketersediaan secara real-time, dan mulai pengisian daya — langsung dari ponselmu.",
+    "supercharge.app.teaser.feature.find": "Cari Stasiun",
+    "supercharge.app.teaser.feature.realtime": "Real-Time",
+    "supercharge.app.teaser.feature.charge": "Isi Cepat",
+
+    "supercharge.app.hero.title": "Teman Pengisian Dayamu,",
+    "supercharge.app.hero.titleHighlight": "Selalu di Genggaman",
+    "supercharge.app.hero.description":
+      "Pantau status pengisian daya, temukan stasiun terdekat, dan kelola sesi SuperCharge-mu — semua yang kamu butuhkan dalam satu aplikasi.",
+
+    "supercharge.app.feature1.icon": "MapPin",
+    "supercharge.app.feature1.title": "Temukan Stasiun Terdekat",
+    "supercharge.app.feature1.subtitle": "Cari titik pengisian di sekitarmu",
+    "supercharge.app.feature1.description":
+      "Lihat semua stasiun SuperCharge di peta interaktif dengan status ketersediaan real-time.",
+    "supercharge.app.feature1.bullet1": "Peta interaktif dengan navigasi GPS",
+    "supercharge.app.feature1.bullet2":
+      "Filter berdasarkan ketersediaan & jarak",
+    "supercharge.app.feature1.bullet3": "Simpan stasiun favorit",
+
+    "supercharge.app.feature2.icon": "Activity",
+    "supercharge.app.feature2.title": "Status Pengisian Real-Time",
+    "supercharge.app.feature2.subtitle": "Ketahui sebelum berangkat",
+    "supercharge.app.feature2.description":
+      "Cek ketersediaan stasiun, status antrian, dan estimasi waktu tunggu sebelum kamu pergi.",
+    "supercharge.app.feature2.bullet1": "Update ketersediaan langsung",
+    "supercharge.app.feature2.bullet2": "Informasi kecepatan pengisian",
+    "supercharge.app.feature2.bullet3": "Status antrian & waktu tunggu",
+
+    "supercharge.app.feature3.icon": "Zap",
+    "supercharge.app.feature3.title": "Pengalaman Pengisian Mudah",
+    "supercharge.app.feature3.subtitle": "Colok, isi daya, dan jalan",
+    "supercharge.app.feature3.description":
+      "Mulai dan pantau sesi pengisian dayamu langsung dari aplikasi dengan satu ketukan.",
+    "supercharge.app.feature3.bullet1": "Mulai pengisian dengan satu ketukan",
+    "supercharge.app.feature3.bullet2": "Pemantauan pengisian real-time",
+    "supercharge.app.feature3.bullet3": "Riwayat sesi & analitik",
+
+    "supercharge.app.stats.stations": "Stasiun",
+    "supercharge.app.stats.downloads": "Unduhan",
+    "supercharge.app.stats.rating": "Rating",
+    "supercharge.app.stats.chargeTime": "Menit Isi Daya",
+
+    "supercharge.app.cta.title": "Siap SuperCharge",
+    "supercharge.app.cta.titleHighlight": "Perjalananmu?",
+    "supercharge.app.cta.description":
+      "Unduh sekarang dan tak perlu khawatir mencari charger lagi.",
+
     // form title
     "form.title.placeholder": "Pilih topik yang ingin dibahas",
 
@@ -2408,7 +2673,7 @@ const translations = {
       "Motor, unit kontrol, dan baterai Wedison adalah IP67, yang telah diuji kedap air.\nMeskipun telah menjalani tes perendaman air pada 1 meter, perendaman yang diperpanjang tidak disarankan.",
     "faq.Performance.questions.4.question": "Bisakah motor menanjak?",
     "faq.Performance.questions.4.answer":
-      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nBees, EdPower, & EdPro: 12%\nAthena dan Victory: 15%",
+      "Ya, bisa menanjak dan kemampuan mendaki tergantung pada model:\nBees, EdPower: 12%\nAthena dan Victory: 15%",
     "faq.Performance.questions.5.question":
       "Apakah baterai menurun seiring waktu?",
     "faq.Performance.questions.5.answer":
@@ -2479,6 +2744,146 @@ const translations = {
     "faq.Tires.questions.0.answer":
       "Bees: Depan: 90/90-10; Belakang 90/90-10\nAthena: Depan: 100/80-12; Belakang 100/80-12\nVictory: Depan: 90/90-14; Belakang: 100/80-14\nEdPower: Depan: 100/90-14; Belakang: 120/70-14",
 
+    // Ojol Page
+    "ojol.hero.title": "Wedison Bersama",
+    "ojol.hero.titleHighlight": "Ojol",
+    "ojol.hero.description":
+      "Solusi motor listrik untuk driver ojol. Hemat biaya operasional, tanpa antre BBM!",
+    "ojol.hero.startFrom": "Mulai dari",
+    "ojol.hero.perDay": "/Hari",
+    "ojol.hero.dailyRental": "SEWA HARIAN",
+    "ojol.hero.tagline": "#JadiLebihMudah",
+    "ojol.hero.tryFree": "Coba Gratis!",
+
+    "ojol.benefits.title": "Narik Lebih Banyak, Kerja Lebih Efisien",
+    "ojol.benefits.description":
+      "Bosen antre BBM? Capek mikirin biaya bensin yang makin mahal? Tenang, Wedison solusinya! Irit biaya operasional, gak perlu antre, dan perawatan lebih ringan. Waktunya upgrade cara narik kamu!",
+
+    "ojol.campaign.heading": "Hot Campaign",
+    "ojol.btn.register": "Daftar Sekarang",
+    "ojol.btn.detail": "Lihat Detail",
+
+    "ojol.campaign.milik.title": "Sewa Milik",
+    "ojol.campaign.milik.tagline": "Cicil Motor, Jadi Milik Sendiri!",
+    "ojol.campaign.milik.description":
+      "Program sewa dengan opsi kepemilikan selama 3,5 tahun (42 bulan). Setelah kontrak selesai, motor jadi milik kamu!",
+    "ojol.campaign.milik.benefit.0":
+      "1x Gratis charging adapter regular (senilai Rp 1.000.000)",
+    "ojol.campaign.milik.benefit.1":
+      "1x Gratis ganti ban depan & belakang (senilai Rp 385.000)",
+    "ojol.campaign.milik.benefit.2":
+      "1x Gratis ganti kampas rem (1 set depan & belakang)",
+    "ojol.campaign.milik.benefit.3": "2x Kunci mekanik",
+    "ojol.campaign.milik.benefit.4": "Garansi baterai 3 tahun",
+    "ojol.campaign.milik.benefit.5": "Garansi motor 2 tahun",
+    "ojol.campaign.milik.term.0":
+      "Skema sewa milik berlaku selama 3 tahun 6 bulan (42 bulan)",
+    "ojol.campaign.milik.term.1":
+      "Rider berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
+    "ojol.campaign.milik.term.2":
+      "Setelah kontrak 42 bulan selesai, kepemilikan motor akan dialihkan ke rider",
+    "ojol.campaign.milik.term.3":
+      "Tabungan akan digunakan untuk biaya asuransi, servis, sparepart, dan BPKB. Sisa tabungan di akhir kontrak akan ditransfer ke rider",
+    "ojol.campaign.milik.term.4":
+      "DP tidak dapat dikembalikan setelah dinyatakan eligible",
+    "ojol.campaign.milik.term.5":
+      "Denda tilang/pelanggaran lalu lintas ditanggung rider",
+    "ojol.campaign.milik.term.6":
+      "Rider wajib mengikuti proses screening dari Wedison",
+    "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.milik.scheme.0.value": "Rp 55.000/hari",
+    "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.milik.scheme.1.value": "Rp 60.000/hari",
+    "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.milik.scheme.2.value": "Rp 80.000/hari",
+    "ojol.campaign.milik.scheme.3.label": "Deposit",
+    "ojol.campaign.milik.scheme.3.value": "Rp 600.000 - Rp 800.000",
+
+    "ojol.campaign.harian.title": "Sewa Harian",
+    "ojol.campaign.harian.tagline": "Narik Dulu, Fleksibel Tanpa Beban!",
+    "ojol.campaign.harian.description":
+      "Sewa motor listrik harian dengan kontrak 3 tahun. Cocok buat kamu yang mau narik tanpa mikir cicilan!",
+    "ojol.campaign.harian.benefit.0": "1x Gratis charging adapter regular",
+    "ojol.campaign.harian.benefit.1":
+      "1x Gratis ganti ban depan & belakang (senilai Rp 385.000)",
+    "ojol.campaign.harian.benefit.2":
+      "1x Gratis ganti kampas rem (1 set depan & belakang)",
+    "ojol.campaign.harian.benefit.3": "1x Gratis servis berkala",
+    "ojol.campaign.harian.benefit.4": "2x Kunci mekanik",
+    "ojol.campaign.harian.benefit.5": "Garansi baterai 3 tahun",
+    "ojol.campaign.harian.benefit.6": "Garansi motor 2 tahun",
+    "ojol.campaign.harian.term.0":
+      "Skema sewa harian berlaku selama 3 tahun (36 bulan)",
+    "ojol.campaign.harian.term.1":
+      "Rider berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
+    "ojol.campaign.harian.term.2":
+      "DP tidak dapat dikembalikan setelah dinyatakan eligible",
+    "ojol.campaign.harian.term.3":
+      "Motor sepenuhnya milik PT. Wedison Nusantara Energi",
+    "ojol.campaign.harian.term.4":
+      "Denda tilang/pelanggaran lalu lintas ditanggung rider",
+    "ojol.campaign.harian.term.5":
+      "Kerusakan akibat kelalaian atau kecelakaan ditanggung rider",
+    "ojol.campaign.harian.term.6":
+      "Rider wajib mengikuti proses screening dari Wedison",
+    "ojol.campaign.harian.term.7": "Warna motor ditentukan secara acak",
+    "ojol.campaign.harian.scheme.0.label": "Athena/Victory Regular",
+    "ojol.campaign.harian.scheme.0.value": "Rp 50.000/hari",
+    "ojol.campaign.harian.scheme.1.label": "Athena/Victory Extended",
+    "ojol.campaign.harian.scheme.1.value": "Rp 55.000/hari",
+    "ojol.campaign.harian.scheme.2.label": "EdPower Extended",
+    "ojol.campaign.harian.scheme.2.value": "Rp 75.000/hari",
+    "ojol.campaign.harian.scheme.3.label": "Deposit",
+    "ojol.campaign.harian.scheme.3.value": "Rp 500.000 - Rp 750.000",
+
+    "ojol.dialog.programBadge": "PROGRAM",
+    "ojol.dialog.scheme": "Skema Pembayaran",
+    "ojol.dialog.benefits": "Keuntungan",
+    "ojol.dialog.terms": "Syarat & Ketentuan",
+    "ojol.dialog.registerNow": "Daftar Program Ini Sekarang",
+
+    "ojol.supercharge.badge": "10% - 80% dalam 15 menit",
+    "ojol.supercharge.descriptionPart1":
+      "Waktu adalah uang, dan Supercharge bikin kamu gak buang-buang waktu! Cukup ",
+    "ojol.supercharge.descriptionBold": "15 menit",
+    "ojol.supercharge.descriptionPart2":
+      " aja, baterai langsung terisi dari 10% ke 80%. Langsung gas narik lagi, gak perlu nunggu lama! Sekali charge bisa tempuh hingga 165 km*. Lebih banyak orderan, cuan lebih banyak!",
+    "ojol.supercharge.disclaimer":
+      "*Jarak tempuh 165 km berlaku untuk model EdPower Extended Battery",
+    "ojol.supercharge.cta": "Pelajari Lebih Lanjut",
+
+    "ojol.models.title": "Pilih Motor yang Cocok Buat Kamu",
+    "ojol.models.subtitle":
+      "Mau yang gesit buat gang sempit atau yang kuat buat jarak jauh? Wedison punya pilihan lengkap yang pas buat gaya narik kamu!",
+    "ojol.models.spec.range": "Jarak Tempuh",
+    "ojol.models.spec.maxSpeed": "Kecepatan Max",
+    "ojol.models.spec.battery": "Baterai",
+    "ojol.models.spec.supercharge": "SuperCharge",
+    "ojol.models.spec.motor": "Motor",
+    "ojol.models.value.minutes": "15 menit",
+    "ojol.models.bees.tagline": "Compact & Lincah",
+    "ojol.models.bees.highlight": "Cocok buat gang sempit",
+    "ojol.models.victory.tagline": "Stylish & Bertenaga",
+    "ojol.models.victory.highlight": "Balance antara gaya & performa",
+    "ojol.models.athena.tagline": "Premium & Nyaman",
+    "ojol.models.athena.highlight": "Narik seharian tetap nyaman",
+    "ojol.models.edpower.tagline": "Tangguh & Jarak Jauh",
+    "ojol.models.edpower.highlight": "Raja jarak jauh",
+    "ojol.models.cta": "Lihat Detail",
+    "ojol.models.footnote": "*Jarak tempuh dengan Extended Battery",
+
+    "ojol.cta.badge": "Program Khusus Driver",
+    "ojol.cta.headline.1": "Siap Narik Lebih Cuan",
+    "ojol.cta.headline.2": "Bareng Wedison?",
+    "ojol.cta.description":
+      "Gabung sekarang dan nikmati berbagai keuntungan eksklusif: sewa harian mulai 50K, charging cepat gratis, hingga program cicilan ringan. Yuk, upgrade cara narik kamu!",
+    "ojol.cta.benefit.1": "Sewa Harian Mulai 50K",
+    "ojol.cta.benefit.2": "SuperCharge Gratis",
+    "ojol.cta.benefit.3": "Cicilan Ringan",
+    "ojol.cta.benefit.4": "Servis Prioritas",
+    "ojol.cta.button": "Hubungi Sales Wedison",
+    "ojol.cta.trust": "Respon cepat, konsultasi gratis!",
+
     // Language
     language: "Bahasa Indonesia",
     switchLanguage: "English",
@@ -2486,7 +2891,7 @@ const translations = {
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

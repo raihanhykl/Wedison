@@ -41,6 +41,25 @@ export default function ShowroomPageStructure() {
     // },
   ];
 
+  // Active Experience Center locations (showroom + service center per location)
+  const locations = [
+    {
+      nameKey: "showroom.jakarta.name",
+      addressKey: "showroom.jakarta.address",
+      mapsUrl:
+        "https://www.google.com/maps/place/Wedison+Showroom/@-6.248464,106.7806209,19z/data=!4m10!1m2!2m1!1swedison+showroom!3m6!1s0x2e69f10019a26049:0xa59abd5e111a8a10!8m2!3d-6.248447!4d106.7810459!15sChB3ZWRpc29uIHNob3dyb29tWhIiEHdlZGlzb24gc2hvd3Jvb22SARplbGVjdHJpY19tb3RvcmN5Y2xlX2RlYWxlcqoBOBABMh4QASIa377C9bwSIpBp7hHS_qeMc_QbuBNmgIsWHu0yFBACIhB3ZWRpc29uIHNob3dyb29t4AEA!16s%2Fg%2F11x1nqm1sg!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDQyMi4wIKXMDSoASAFQAw%3D%3D",
+      lat: -6.2484,
+      lng: 106.781,
+    },
+    {
+      nameKey: "showroom.bandung.name",
+      addressKey: "showroom.bandung.address",
+      mapsUrl: "https://maps.app.goo.gl/T86DfRuAkHFBmhMs8",
+      lat: -6.86542,
+      lng: 107.514505,
+    },
+  ];
+
   // What you can do items
   const activities = [
     {
@@ -95,116 +114,91 @@ export default function ShowroomPageStructure() {
       {/* Location Section */}
       <section className="py-16 md:py-20 bg-gray-50">
         <div className="main-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-                <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
-                  {t("showroom.location")}
-                </span>
-              </h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
+            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
+              {t("showroom.location")}
+            </span>
+          </h2>
 
-              <div className="bg-white p-6 rounded-xl shadow-soft mb-8">
-                <div className="flex items-start mb-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                      <MapPin className="h-5 w-5 text-[var(--primary)]" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start">
+            {locations.map((location) => (
+              <div
+                key={location.nameKey}
+                className="bg-white rounded-xl shadow-soft overflow-hidden flex flex-col"
+              >
+                <div className="p-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                    {t(location.nameKey)}
+                  </h3>
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    <span className="inline-flex items-center text-xs font-medium px-3 py-1 rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)] border border-[var(--primary-lighter)]">
+                      {t("showroom.facility.showroom")}
+                    </span>
+                    <span className="inline-flex items-center text-xs font-medium px-3 py-1 rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)] border border-[var(--primary-lighter)]">
+                      {t("showroom.facility.service")}
+                    </span>
+                  </div>
+
+                  <div className="flex items-start mb-4">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
+                        <MapPin className="h-5 w-5 text-[var(--primary)]" />
+                      </div>
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="text-base font-semibold text-gray-900 mb-1">
+                        {t("showroom.findUs")}
+                      </h4>
+                      <p className="text-gray-600">
+                        {t(location.addressKey)}
+                      </p>
                     </div>
                   </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {t("showroom.findUs")}
-                    </h3>
-                    <p className="text-gray-600">{t("showroom.address")}</p>
+
+                  <div className="flex items-start mb-6">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
+                        <Clock className="h-5 w-5 text-[var(--primary)]" />
+                      </div>
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="text-base font-semibold text-gray-900 mb-1">
+                        {t("showroom.hours")}
+                      </h4>
+                      <p className="text-gray-600">
+                        {t("showroom.weekdays")}
+                      </p>
+                      <p className="text-gray-600">{t("showroom.weekend")}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    <Link href={"/corporate/contact/#contact"}>
+                      <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1">
+                        {t("showroom.bookVisit")}
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                    <Link href={location.mapsUrl} target="_blank">
+                      <Button
+                        variant="outline"
+                        className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1"
+                      >
+                        {t("showroom.viewOnMaps")}
+                      </Button>
+                    </Link>
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                      <Clock className="h-5 w-5 text-[var(--primary)]" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {t("showroom.hours")}
-                    </h3>
-                    <p className="text-gray-600">{t("showroom.weekdays")}</p>
-                    <p className="text-gray-600">{t("showroom.weekend")}</p>
-                  </div>
+                <div className="px-6 pb-6">
+                  <MapComponent
+                    latitude={location.lat}
+                    longitude={location.lng}
+                    zoom={15}
+                  />
                 </div>
               </div>
-
-              <div className="flex flex-wrap gap-4">
-                <Link href={"/corporate/contact/#contact"}>
-                  <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1">
-                    {t("showroom.bookVisit")}
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-                <Link
-                  href={
-                    "https://www.google.com/maps/place/Wedison+Showroom/@-6.248464,106.7806209,19z/data=!4m10!1m2!2m1!1swedison+showroom!3m6!1s0x2e69f10019a26049:0xa59abd5e111a8a10!8m2!3d-6.248447!4d106.7810459!15sChB3ZWRpc29uIHNob3dyb29tWhIiEHdlZGlzb24gc2hvd3Jvb22SARplbGVjdHJpY19tb3RvcmN5Y2xlX2RlYWxlcqoBOBABMh4QASIa377C9bwSIpBp7hHS_qeMc_QbuBNmgIsWHu0yFBACIhB3ZWRpc29uIHNob3dyb29t4AEA!16s%2Fg%2F11x1nqm1sg!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDQyMi4wIKXMDSoASAFQAw%3D%3D"
-                  }
-                  target="_blank"
-                >
-                  <Button
-                    variant="outline"
-                    className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1"
-                  >
-                    {t("showroom.viewModels")}
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <MapComponent latitude={-6.2484} longitude={106.781} zoom={15} />
-            </div>
-          </div>
-          {/* upcoming branch */}
-          <div className=" mt-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
-              <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
-                {/* {t("showroom.upcomingBranch")} */}
-                Up Coming Branch
-              </span>
-            </h2>
-            <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-12 items-start">
-              {/* bandung */}
-              <div className="bg-white p-6 rounded-xl shadow-soft">
-                <div className="flex items-start mb-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                      <MapPin className="h-5 w-5 text-[var(--primary)]" />
-                    </div>
-                  </div>
-                  <div className="ml-4 flex flex-col justify-center items-center">
-                    <h3 className="text-lg font-semibold text-gray-900 my-auto">
-                      {/* {t("showroom.findUs")} */}
-                      Wedison Bandung
-                    </h3>
-                    {/* <p className="text-gray-600">{t("showroom.address")}</p> */}
-                  </div>
-                </div>
-              </div>
-              {/* Kali Malang */}
-              <div className="bg-white p-6 rounded-xl shadow-soft">
-                <div className="flex items-start mb-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                      <MapPin className="h-5 w-5 text-[var(--primary)]" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {/* {t("showroom.findUs")} */}
-                      Wedison Kalimalang
-                    </h3>
-                    {/* <p className="text-gray-600">{t("showroom.address")}</p> */}
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
