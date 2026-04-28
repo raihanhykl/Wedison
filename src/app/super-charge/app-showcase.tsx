@@ -5,7 +5,6 @@ import { useInView } from "react-intersection-observer";
 import { MapPin, Activity, Zap, Check } from "lucide-react";
 import { useLanguage } from "../lib/language-context";
 import { cn } from "../lib/utils";
-import PhoneMockup from "../components/phone-mockup";
 import StoreBadges from "../components/store-badges";
 import Image from "next/image";
 
@@ -34,7 +33,7 @@ function AppIntro() {
                 alt="SuperCharge app home screen"
               /> */}
               <Image
-                src={"/super-charge/app/Screen-05.png"}
+                src={"/super-charge/app/Screen-05.webp"}
                 alt="Mockup"
                 height={300}
                 width={300}
@@ -123,7 +122,7 @@ function FeatureRow({
           >
             <div className="w-[220px] sm:w-[250px] md:w-[270px]">
               <Image
-                src={`/super-charge/app/${screenshot}.png`}
+                src={`/super-charge/app/${screenshot}.webp`}
                 alt="Mockup"
                 height={300}
                 width={300}
@@ -339,19 +338,26 @@ function DownloadCTA() {
           <div className="mt-14 flex items-end justify-center gap-6 md:gap-10">
             <div
               className={cn(
-                "w-[160px] sm:w-[190px] md:w-[220px] transition-all duration-1000",
+                "w-[260px] sm:w-[390px] md:w-[420px] transition-all duration-1000",
                 inView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8",
               )}
               style={{ transitionDelay: inView ? "200ms" : "0ms" }}
             >
-              <PhoneMockup
-                screenshot="/super-charge/app/screenshot-home.svg"
+              {/* <PhoneMockup
+                screenshot="/super-charge/app/mockup-supercharge-app.png"
                 alt="SuperCharge app home"
+              /> */}
+
+              <Image
+                src={"/super-charge/app/mockup-supercharge-app.png"}
+                alt="mockup"
+                width={500}
+                height={400}
               />
             </div>
-
+            {/* 
             <div
               className={cn(
                 "hidden sm:block w-[160px] sm:w-[190px] md:w-[220px] transition-all duration-1000",
@@ -365,7 +371,7 @@ function DownloadCTA() {
                 screenshot="/super-charge/app/screenshot-map.svg"
                 alt="SuperCharge app map"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Store badges */}
