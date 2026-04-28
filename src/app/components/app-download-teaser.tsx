@@ -2,7 +2,6 @@
 
 import { useInView } from "react-intersection-observer";
 import { useLanguage } from "../lib/language-context";
-import PhoneMockup from "./phone-mockup";
 import StoreBadges from "./store-badges";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
