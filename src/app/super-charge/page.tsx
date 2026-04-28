@@ -4,6 +4,7 @@ import HeroSection from "../components/hero-section";
 // import { getSEOMetadata } from "../lib/seo1";
 import VideoSection from "./videoSection";
 import { Suspense } from "react";
+import AppShowcase from "./app-showcase";
 
 // import { generateSeoMetadata } from "../lib/seo";
 // const { metadata, jsonLd } = generateSeoMetadata({
@@ -84,6 +85,9 @@ export default function EdmaxPage() {
           descColor="text-gray-600"
           tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
         />
+
+        {/* SuperCharge App Showcase */}
+        <AppShowcase />
       </main>
     </>
   );

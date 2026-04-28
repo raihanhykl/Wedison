@@ -17,6 +17,7 @@ import Link from "next/link";
 import Preloader from "../components/Preloader";
 import dynamic from "next/dynamic";
 import Autoplay from "embla-carousel-autoplay";
+import AppDownloadTeaser from "../components/app-download-teaser";
 
 // Lazy load ComparisonTable untuk mengurangi initial bundle size
 const ComparisonTable = dynamic(
@@ -353,6 +354,9 @@ export default function Landing() {
         {/* <div className="w-full my-14">
           <SpecTable />
         </div> */}
+
+        {/* SuperCharge App Download Teaser */}
+        <AppDownloadTeaser />
 
         <div className="main-container my-24">
           <ComparisonTable mode="overview" primaryBikeId="" />

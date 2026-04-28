@@ -55,7 +55,7 @@ export default function ContactPage() {
     {
       icon: <Clock className="h-6 w-6 text-[var(--primary)]" />,
       title: t("contact.page.hours"),
-      content: t("showroom.weekdays"),
+      content: t("contact.page.business.hours"),
       //   subContent: t("showroom.weekend"),
     },
   ];
@@ -116,7 +116,7 @@ export default function ContactPage() {
                   "bg-gray-50 rounded-xl p-6 shadow-soft transition-all duration-700 transform hover:shadow-soft-lg hover:-translate-y-1",
                   infoInView
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
+                    : "opacity-0 translate-y-10",
                 )}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
@@ -148,7 +148,7 @@ export default function ContactPage() {
               "mt-10 text-center transition-all duration-1000 transform",
               infoInView
                 ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
+                : "opacity-0 translate-y-10",
             )}
             style={{ transitionDelay: "500ms" }}
           >
@@ -223,7 +223,7 @@ export default function ContactPage() {
                 "transition-all duration-1000 transform",
                 mapInView
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
+                  : "opacity-0 translate-y-10",
               )}
               style={{ transitionDelay: "200ms" }}
             >
@@ -273,7 +273,7 @@ export default function ContactPage() {
                     "bg-gray-50 rounded-xl p-6 shadow-soft transition-all duration-700 transform",
                     faqInView
                       ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10"
+                      : "opacity-0 translate-y-10",
                   )}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >

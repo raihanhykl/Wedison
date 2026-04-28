@@ -53,11 +53,11 @@ export const PRESS_URLS: PRESS_URLS[] = [
     author: "Ahmad Ridho",
     slug: "motor-listrik-wedison-ramaikan-giias-2025-dibekali-teknologi-super-charge-dan-baterai-tahan-10-tahun",
   },
-  {
-    url: "https://teknobuzz.id/2025/08/04/ini-teknologi-canggih-yang-diusung-motor-listrik-wedison/",
-    author: "Donnie Pratama",
-    headLine:
-      "Brand motor listrik asal Singapura, Wedison, resmi memamerkan jajaran produknya di ajang GIIAS (GAIKINDO Indonesia International Auto Show) 2025 yang digelar di ICE BSD, Tangerang pada tanggal 24 Juli hingga 3 Agustus 2025 ini. Mengusung teknologi unggulan Supercharge, Wedison membidik pasar Indonesia dengan empat model motor listrik andalan, yakni Bees, Athena, Victory, dan EdPower.",
-    slug: "ini-teknologi-canggih-yang-diusung-motor-listrik-wedison",
-  },
+  // {
+  //   url: "https://teknobuzz.id/2025/08/04/ini-teknologi-canggih-yang-diusung-motor-listrik-wedison/",
+  //   author: "Donnie Pratama",
+  //   headLine:
+  //     "Brand motor listrik asal Singapura, Wedison, resmi memamerkan jajaran produknya di ajang GIIAS (GAIKINDO Indonesia International Auto Show) 2025 yang digelar di ICE BSD, Tangerang pada tanggal 24 Juli hingga 3 Agustus 2025 ini. Mengusung teknologi unggulan Supercharge, Wedison membidik pasar Indonesia dengan empat model motor listrik andalan, yakni Bees, Athena, Victory, dan EdPower.",
+  //   slug: "ini-teknologi-canggih-yang-diusung-motor-listrik-wedison",
+  // },
 ];
