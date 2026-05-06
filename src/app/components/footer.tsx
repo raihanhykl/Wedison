@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="text-white bg-gray-900">
       <div className="container px-4 py-8 mx-auto sm:px-6 lg:px-8 md:py-12">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-6">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-7">
           <div className="col-span-2 mr-6 ">
             <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent">
               Wedison Motors
@@ -115,6 +115,32 @@ export default function Footer() {
                   Test Ride
                 </a>
               </li> */}
+            </ul>
+          </div>
+
+          {/* support */}
+          <div>
+            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
+              {t("footer.support")}
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
+            </h4>
+            <ul className="space-y-1.5 md:space-y-2">
+              <li>
+                <a
+                  href="/faq#user-manual"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                >
+                  {t("footer.userManual")}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/faq"
+                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                >
+                  {t("footer.faq")}
+                </a>
+              </li>
             </ul>
           </div>
 
