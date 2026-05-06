@@ -17,8 +17,8 @@ const sizeMap = {
 };
 
 export default function StoreBadges({
-  appStoreUrl = "#",
-  googlePlayUrl = "#",
+  appStoreUrl = "https://apps.apple.com/id/app/wedison-supercharge/id6744643866",
+  googlePlayUrl = "https://play.google.com/store/apps/details?id=co.wedison.rider",
   size = "md",
   className,
 }: StoreBadgesProps) {
