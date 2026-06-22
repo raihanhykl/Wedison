@@ -58,6 +58,13 @@ export default function ShowroomPageStructure() {
       lat: -6.86542,
       lng: 107.514505,
     },
+    {
+      nameKey: "showroom.bali.name",
+      addressKey: "showroom.bali.address",
+      mapsUrl: "https://maps.app.goo.gl/og4ovnG2FgCAQAWt8",
+      lat: -8.6359263,
+      lng: 115.2213254,
+    },
   ];
 
   // What you can do items
