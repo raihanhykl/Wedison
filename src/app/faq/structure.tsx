@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import GetQuestions from "./questions";
 import { useLanguage } from "../lib/language-context";
+import UserManualSection from "../components/user-manual-section";
 
 export default function FaqStructure() {
   const { t } = useLanguage();
@@ -88,6 +89,12 @@ export default function FaqStructure() {
             </Link>
           </p>
         </div>
+      </div>
+
+      {/* User Manual hub */}
+      <UserManualSection variant="grid" />
+
+      <div className="main-container">
         {/* tabs */}
         <div className="flex justify-between border-b border-gray-200 mb-6 w-full my-10">
           <nav className="-mb-px flex space-x-8 overflow-x-auto">

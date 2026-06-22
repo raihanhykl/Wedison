@@ -50,6 +50,36 @@ const translations = {
     "btn.see.brochure": "See Brochure",
     "btn.order.now": "Order Now",
 
+    // user manual
+    "user.manual.tag": "Documentation",
+    "user.manual.section.title": "User Manual &",
+    "user.manual.section.titleHighlight": "Owner's Guide",
+    "user.manual.section.description":
+      "Everything you need to know about your Wedison — operation, charging, maintenance, and safety, all in one official document.",
+    "user.manual.faq.section.title": "Manuals for",
+    "user.manual.faq.section.titleHighlight": "Every Model",
+    "user.manual.faq.section.description":
+      "Pick your model below to view or download its official user manual.",
+    "user.manual.btn.view": "View Manual",
+    "user.manual.btn.download": "Download",
+    "user.manual.card.bees.title": "Wedison Bees",
+    "user.manual.card.bees.desc":
+      "Compact urban commuter — full operating, charging, and care instructions.",
+    "user.manual.card.athena.title": "Wedison Athena",
+    "user.manual.card.athena.desc":
+      "Retro-style scooter manual covering smart features and battery care.",
+    "user.manual.card.victory.title": "Wedison Victory",
+    "user.manual.card.victory.desc":
+      "Sport-class guide — riding modes, SuperCharge, and servicing.",
+    "user.manual.card.edpower.title": "Wedison EdPower",
+    "user.manual.card.edpower.desc":
+      "Long-range premium model — full documentation for daily and long trips.",
+
+    // footer support
+    "footer.support": "Support",
+    "footer.userManual": "User Manuals",
+    "footer.faq": "FAQ",
+
     // Navbar
     "nav.products": "Products",
     "nav.discover": "Discover",
@@ -245,6 +275,9 @@ const translations = {
     "showroom.bandung.name": "Wedison Bandung",
     "showroom.bandung.address":
       "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.bali.name": "Wedison Bali",
+    "showroom.bali.address":
+      "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
     "showroom.facility.showroom": "Showroom",
     "showroom.facility.service": "Service Center",
     "showroom.viewOnMaps": "View on Maps",
@@ -1474,6 +1507,36 @@ const translations = {
     "btn.see.brochure": "Lihat Brosur",
     "btn.order.now": "Pesan Sekarang",
 
+    // user manual
+    "user.manual.tag": "Dokumentasi",
+    "user.manual.section.title": "Buku Panduan &",
+    "user.manual.section.titleHighlight": "Petunjuk Pemilik",
+    "user.manual.section.description":
+      "Semua yang perlu kamu ketahui tentang Wedison — pengoperasian, pengisian daya, perawatan, dan keselamatan dalam satu dokumen resmi.",
+    "user.manual.faq.section.title": "Buku Panduan untuk",
+    "user.manual.faq.section.titleHighlight": "Setiap Model",
+    "user.manual.faq.section.description":
+      "Pilih model di bawah untuk melihat atau mengunduh buku panduan resminya.",
+    "user.manual.btn.view": "Lihat Panduan",
+    "user.manual.btn.download": "Unduh",
+    "user.manual.card.bees.title": "Wedison Bees",
+    "user.manual.card.bees.desc":
+      "Komuter urban yang ringkas — petunjuk pengoperasian, pengisian daya, dan perawatan.",
+    "user.manual.card.athena.title": "Wedison Athena",
+    "user.manual.card.athena.desc":
+      "Buku panduan skuter bergaya retro dengan fitur pintar dan perawatan baterai.",
+    "user.manual.card.victory.title": "Wedison Victory",
+    "user.manual.card.victory.desc":
+      "Panduan kelas sport — mode berkendara, SuperCharge, dan servis.",
+    "user.manual.card.edpower.title": "Wedison EdPower",
+    "user.manual.card.edpower.desc":
+      "Model premium jarak jauh — dokumentasi lengkap untuk perjalanan harian dan jauh.",
+
+    // footer support
+    "footer.support": "Bantuan",
+    "footer.userManual": "Buku Panduan",
+    "footer.faq": "FAQ",
+
     // Navbar
     "nav.products": "Produk",
     "nav.discover": "Jelajahi",
@@ -1654,6 +1717,9 @@ const translations = {
     "showroom.bandung.name": "Wedison Bandung",
     "showroom.bandung.address":
       "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.bali.name": "Wedison Bali",
+    "showroom.bali.address":
+      "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
     "showroom.facility.showroom": "Showroom",
     "showroom.facility.service": "Service Center",
     "showroom.viewOnMaps": "Lihat di Maps",
