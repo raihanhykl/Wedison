@@ -360,7 +360,7 @@ export default function OjolClient() {
                     {/* Daftar Button */}
                     <Link
                       href={campaign.waLink}
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       className="flex-1"
                     >
                       <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
@@ -589,7 +589,7 @@ export default function OjolClient() {
             <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
               <Link
                 href={activeCampaign.waLink}
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
                 onClick={() => setOpenDialog(null)}
               >
                 <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
@@ -861,7 +861,7 @@ export default function OjolClient() {
             {/* CTA Button */}
             <Link
               href="https://wa.me/6282124657804?text=Halo%20Wedison,%20saya%20tertarik%20dengan%20program%20untuk%20driver%20ojol"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
             >
               <Button
                 className="group relative px-10 py-7 text-lg md:text-xl font-bold rounded-2xl

@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.*
+# enforce single package manager (CI uses npm); avoid lockfile drift
+bun.lockb
+.flowbite-react/
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

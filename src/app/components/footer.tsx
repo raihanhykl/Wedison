@@ -212,7 +212,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="https://www.instagram.com/wedison.id/"
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                     >
                       <Image
@@ -227,7 +227,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="https://www.tiktok.com/@wedison.id"
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                     >
                       <Image
@@ -242,7 +242,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="https://www.youtube.com/channel/UCePP1fIil61GyQF4XFWGB2g"
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                     >
                       <Image
@@ -261,7 +261,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="https://www.facebook.com/people/wedisonid/61562726390879/"
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                     >
                       <Image
@@ -276,7 +276,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="https://wa.me/6282124657804"
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
                     >
                       <Image

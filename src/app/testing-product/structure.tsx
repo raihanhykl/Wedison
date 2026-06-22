@@ -98,7 +98,7 @@ export default function ProductPageComponent({ motorType }: Props) {
               {/* <Link href={`/corporate/contact/`}> */}
               <Link
                 href={`https://www.tokopedia.com/wedison-store`}
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Button
                   // className="px-4 md:px-4 rounded-sm cursor-pointer flex items-center justify-between font-semibold"
@@ -120,7 +120,7 @@ export default function ProductPageComponent({ motorType }: Props) {
 
               <Link
                 href={`/brochure/brochure-${motorType}.pdf`}
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
               >
                 <Button
                   className=" text-white px-8 md:px-12 cursor-pointer font-medium rounded-sm border-white bg-white/15 hover:text-white hover:bg-white/20"

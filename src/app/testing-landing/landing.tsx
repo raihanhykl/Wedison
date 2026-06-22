@@ -176,7 +176,7 @@ export default function Landing() {
                           </Link>
                           <Link
                             href={item.brochure}
-                            target="_blank"
+                            target="_blank" rel="noopener noreferrer"
                             className="w-full sm:w-auto"
                           >
                             <Button

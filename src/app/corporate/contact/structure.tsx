@@ -158,7 +158,7 @@ export default function ContactPage() {
             <div className="flex justify-center space-x-4">
               <a
                 href="https://www.facebook.com/profile.php?id=61562726390879"
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
                 className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
               >
                 <span className="sr-only">Facebook</span>
@@ -178,7 +178,7 @@ export default function ContactPage() {
               {/* Instagram */}
               <a
                 href="https://www.instagram.com/wedison.id/"
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
                 className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
               >
                 <span className="sr-only">Instagram</span>
@@ -195,7 +195,7 @@ export default function ContactPage() {
                   />
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@wedison.id" target="_blank">
+              <a href="https://www.tiktok.com/@wedison.id" target="_blank" rel="noopener noreferrer">
                 <Image
                   src="/logo-tiktok-svgrepo-com.svg"
                   alt="tiktok"
