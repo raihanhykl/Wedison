@@ -275,6 +275,9 @@ const translations = {
     "showroom.bandung.name": "Wedison Bandung",
     "showroom.bandung.address":
       "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.bali.name": "Wedison Bali",
+    "showroom.bali.address":
+      "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
     "showroom.facility.showroom": "Showroom",
     "showroom.facility.service": "Service Center",
     "showroom.viewOnMaps": "View on Maps",
@@ -1714,6 +1717,9 @@ const translations = {
     "showroom.bandung.name": "Wedison Bandung",
     "showroom.bandung.address":
       "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
+    "showroom.bali.name": "Wedison Bali",
+    "showroom.bali.address":
+      "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
     "showroom.facility.showroom": "Showroom",
     "showroom.facility.service": "Service Center",
     "showroom.viewOnMaps": "Lihat di Maps",
