@@ -1,4 +1,4 @@
-import { useLanguage } from "../lib/language-context";
+import { useLanguage } from "@/app/lib/language-context";
 
 export default function GetQuestions() {
   const { t } = useLanguage();

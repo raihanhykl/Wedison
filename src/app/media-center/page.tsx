@@ -1,14 +1,14 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { getSEOMetadata } from "../lib/seo1";
-import { fetchAllPreviews } from "../lib/fetchPreview";
+import { getSEOMetadata } from "@/app/lib/seo1";
+import { fetchAllPreviews } from "@/app/lib/fetchPreview";
 import MediaCenterClient from "./mediaCenterClient";
-import { PRESS_URLS } from "../../../public/data/press-urls";
+import { PRESS_URLS } from "@public/data/press-urls";
 import {
   INSTAGRAM_POSTS,
   fetchAllInstagramPosts,
 } from "./components/fetchInstagram";
-// import { PRESS_URLS } from "../../../public/data/press-urls";
+// import { PRESS_URLS } from "@public/data/press-urls";
 // import Baru from "./components/baru";
 export const metadata = getSEOMetadata({
   title: "Media Center - Berita & Update Wedison",

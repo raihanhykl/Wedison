@@ -1,6 +1,6 @@
 import React from "react";
-import Landing from "./_home/landing";
-import { getSEOMetadata } from "./lib/seo1";
+import Landing from "@/app/_home/landing";
+import { getSEOMetadata } from "@/app/lib/seo1";
 
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Wedison – Ride The Future With Wedison",

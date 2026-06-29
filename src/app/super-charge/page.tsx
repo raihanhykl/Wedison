@@ -3,7 +3,7 @@ import FeatureSection2 from "@/components/feature-section";
 import HeroSection from "@/components/hero-section";
 import VideoSection from "./videoSection";
 import AppShowcase from "./app-showcase";
-import { getSEOMetadata } from "../lib/seo1";
+import { getSEOMetadata } from "@/app/lib/seo1";
 
 export const metadata = getSEOMetadata({
   title: "SuperCharge - Stasiun Pengisian Cepat Motor Listrik | Wedison",

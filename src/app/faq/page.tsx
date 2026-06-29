@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import FaqStructure from "./structure";
-import { getSEOMetadata } from "../lib/seo1";
+import { getSEOMetadata } from "@/app/lib/seo1";
 // import Baru from "./components/baru";
 
 export const metadata = getSEOMetadata({

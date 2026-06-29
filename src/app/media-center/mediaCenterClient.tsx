@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { LinkPreview } from "../lib/fetchPreview";
+import { LinkPreview } from "@/app/lib/fetchPreview";
 import { NewsCard } from "./components/newsCard";
 import InstagramEmbed from "./components/instagramEmbed";
 import type { InstagramPostData } from "./components/fetchInstagram";
-import { useLanguage } from "../lib/language-context";
+import { useLanguage } from "@/app/lib/language-context";
 
 type Props = {
   previews: LinkPreview[];

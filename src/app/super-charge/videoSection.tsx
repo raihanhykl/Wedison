@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useLanguage } from "../lib/language-context";
+import { useLanguage } from "@/app/lib/language-context";
 
 export default function VideoSection() {
   const { t } = useLanguage();
