@@ -7,7 +7,7 @@ import MapComponent from "@/app/showroom/components/map-component";
 import { cn } from "@/lib/utils";
 import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import Image from "next/image";
-import Contact from "@/app/components/contact3";
+import Contact from "@/components/contact3";
 
 export default function ContactPage() {
   const { t } = useLanguage();

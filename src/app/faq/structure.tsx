@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import GetQuestions from "./questions";
 import { useLanguage } from "../lib/language-context";
-import UserManualSection from "../components/user-manual-section";
+import UserManualSection from "@/components/user-manual-section";
 
 export default function FaqStructure() {
   const { t } = useLanguage();

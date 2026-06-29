@@ -3,7 +3,7 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import { FileText, Eye, Download } from "lucide-react";
-import { useLanguage } from "../lib/language-context";
+import { useLanguage } from "@/app/lib/language-context";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

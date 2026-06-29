@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import FeatureSection2 from "@/app/components/feature-section";
-import HeroSection from "../components/hero-section";
+import FeatureSection2 from "@/components/feature-section";
+import HeroSection from "@/components/hero-section";
 import VideoSection from "./videoSection";
 import AppShowcase from "./app-showcase";
 import { getSEOMetadata } from "../lib/seo1";

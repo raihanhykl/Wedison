@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import HeadunitCarousel from "../edpower/components/headunit-carousel";
+import HeadunitCarousel from "@/app/edpower/components/headunit-carousel";
 
 type Props = {
   page: string;
