@@ -9,8 +9,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import NavbarProduct from "./navbar-product";
 import LanguageToggle2 from "./language-toggle2";
-import NavbarCorporate from "./navbar-corporate";
-import NavbarDiscover from "./navbar-discover";
+import NavbarDropdown from "./navbar-dropdown";
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -200,6 +199,47 @@ export default function Navbar() {
   const toggleDropdown = (name: string) => {
     setActiveDropdown(activeDropdown === name ? null : name);
   };
+
+  const corporateLinks = [
+    {
+      href: "/corporate/about/",
+      title: t("nav.aboutUs"),
+      description: t("nav.aboutUs.description"),
+    },
+    {
+      href: "/corporate/contact/",
+      title: t("nav.contactUs"),
+      description: t("nav.contactUs.description"),
+    },
+    {
+      href: "/career/",
+      title: t("nav.careers"),
+      description: t("nav.careers.description"),
+    },
+  ];
+
+  const discoverLinks = [
+    {
+      href: "/showroom/",
+      title: "Experience Center",
+      description: t("nav.experienceCenter.description"),
+    },
+    {
+      href: "/faq/",
+      title: "FAQ",
+      description: t("nav.faq.description"),
+    },
+    {
+      href: "/media-center/",
+      title: "Media Center",
+      description: t("nav.mediaCenter.description"),
+    },
+    {
+      href: "/ojol/",
+      title: "Wedison Ojol",
+      description: t("nav.ojol.description"),
+    },
+  ];
 
   return (
     <div className="relative">
@@ -574,9 +614,27 @@ export default function Navbar() {
 
         <NavbarProduct open={openProduct} ref={productRef} />
 
-        <NavbarCorporate open={openCorporate} ref={corporateRef} />
+        <NavbarDropdown
+          open={openCorporate}
+          ref={corporateRef}
+          heightClass="max-h-80 h-80"
+          leftCard={{
+            title: t("nav.corporate.leftCard.title"),
+            description: t("nav.corporate.leftCard.description"),
+          }}
+          links={corporateLinks}
+        />
 
-        <NavbarDiscover open={openDiscover} ref={discoverRef} />
+        <NavbarDropdown
+          open={openDiscover}
+          ref={discoverRef}
+          heightClass="max-h-[420px] h-[420px]"
+          leftCard={{
+            title: t("nav.discover.leftCard.title"),
+            description: t("nav.discover.leftCard.description"),
+          }}
+          links={discoverLinks}
+        />
       </header>
     </div>
   );
