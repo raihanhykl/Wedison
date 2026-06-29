@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useLanguage } from "@/app/lib/language-context";
-import ShowroomCarousel from "@/app/showroom/components/showroom-carousel";
-import MapComponent from "@/app/showroom/components/map-component";
+import ShowroomCarousel from "@/app/[locale]/showroom/components/showroom-carousel";
+import MapComponent from "@/app/[locale]/showroom/components/map-component";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,

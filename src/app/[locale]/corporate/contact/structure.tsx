@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useLanguage } from "@/app/lib/language-context";
 import { useInView } from "react-intersection-observer";
-import MapComponent from "@/app/showroom/components/map-component";
+import MapComponent from "@/app/[locale]/showroom/components/map-component";
 import { cn } from "@/lib/utils";
 import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import Image from "next/image";
