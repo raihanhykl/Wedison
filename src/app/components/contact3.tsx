@@ -26,7 +26,8 @@ import { cn } from "@/lib/utils";
 import { CheckCircle2, Send, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   ContactFormData,
   contactFormSchema,
@@ -34,11 +35,40 @@ import {
 } from "@/lib/contact-schema";
 import { EmailService } from "@/service/email-service";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  RecaptchaCheckbox,
+  type RecaptchaHandle,
+} from "@/app/components/recaptcha-checkbox";
 // Import our schema and service
+
+// Aktif hanya bila site key di-set (env). Tanpa key, form jalan seperti biasa.
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 export default function Contact() {
   const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<RecaptchaHandle>(null);
+  // Honeypot: field tersembunyi yang hanya diisi bot
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const recaptchaEnabled = Boolean(RECAPTCHA_SITE_KEY);
+
+  // Throttle anti-spam sisi client (1 kirim / 10 detik) + tolak headless browser
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAIL_CONFIG_publicKey;
+    if (publicKey) {
+      emailjs.init({
+        publicKey,
+        blockHeadless: true,
+        limitRate: { id: "contact_form", throttle: 10000 },
+      });
+    }
+  }, []);
+
+  const handleRecaptchaChange = useCallback(
+    (token: string | null) => setRecaptchaToken(token),
+    []
+  );
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -53,7 +83,7 @@ export default function Contact() {
       email: "",
       phone: "",
       title: "",
-      agreePrivacy: true,
+      agreePrivacy: false,
       otherTitle: "",
       message: "",
     },
@@ -71,11 +101,34 @@ export default function Contact() {
   }, [isOtherSelected, form]);
 
   const handleFormSubmit = async (data: ContactFormData) => {
+    // Honeypot: bila terisi, kemungkinan besar bot -> abaikan diam-diam
+    if (honeypotRef.current?.value) {
+      form.reset();
+      return;
+    }
+
+    // Wajib reCAPTCHA bila fitur diaktifkan
+    if (recaptchaEnabled && !recaptchaToken) {
+      toast(t("form.sending.error.title"), {
+        description: t("form.sending.error.description"),
+        icon: <AlertCircle className="text-red-500 mr-2" />,
+        duration: 4000,
+        position: "top-center",
+        style: { backgroundColor: "white", color: "black", gap: "1rem" },
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      const result = await EmailService.sendContactEmail(data);
+      const result = await EmailService.sendContactEmail(
+        data,
+        recaptchaToken ?? undefined
+      );
       if (result.success) {
         form.reset();
+        recaptchaRef.current?.reset();
+        setRecaptchaToken(null);
         toast(t("form.sending.success.title"), {
           description: t("form.sending.success.description"),
           descriptionClassName: "text-black/90",
@@ -93,6 +146,8 @@ export default function Contact() {
       }
     } catch (error) {
       console.error("Form submission error:", error);
+      recaptchaRef.current?.reset();
+      setRecaptchaToken(null);
 
       toast(t("form.sending.error.title"), {
         description: t("form.sending.error.description"),
@@ -289,9 +344,37 @@ export default function Contact() {
                   </FormItem>
                 )}
               />
+
+              {/* Honeypot anti-bot: tersembunyi dari user, hanya diisi bot */}
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] -top-[9999px] h-0 w-0 overflow-hidden"
+              >
+                <input
+                  type="text"
+                  ref={honeypotRef}
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* reCAPTCHA v2 (aktif hanya bila site key di-set) */}
+              {recaptchaEnabled && RECAPTCHA_SITE_KEY && (
+                <RecaptchaCheckbox
+                  siteKey={RECAPTCHA_SITE_KEY}
+                  onChange={handleRecaptchaChange}
+                  ref={recaptchaRef}
+                />
+              )}
+
               <Button
                 type="submit"
-                disabled={isSubmitting || !form.formState.isValid}
+                disabled={
+                  isSubmitting ||
+                  !form.formState.isValid ||
+                  (recaptchaEnabled && !recaptchaToken)
+                }
                 className={cn(
                   "w-full bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300",
                   !isSubmitting && "hover:-translate-y-1"

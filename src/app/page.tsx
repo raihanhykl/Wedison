@@ -1,5 +1,5 @@
 import React from "react";
-import Landing from "./testing-landing/landing";
+import Landing from "./_home/landing";
 import { getSEOMetadata } from "./lib/seo1";
 
 // const { metadata, jsonLd } = generateSeoMetadata({
