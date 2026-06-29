@@ -1,5 +1,5 @@
 // import React from "react";
-// import { PRESS_URLS } from "../../../../public/data/press-urls";
+// import { PRESS_URLS } from "@public/data/press-urls";
 // import NewsClient from "./pageClient";
 // import { fetchPreview } from "@/app/lib/fetchPreview";
 
@@ -38,11 +38,11 @@
 //   );
 // }
 import React from "react";
-// import { PRESS_URLS } from "../../../../public/data/press-urls";
+// import { PRESS_URLS } from "@public/data/press-urls";
 import NewsClient from "./pageClient";
 import { fetchPreview } from "@/app/lib/fetchPreview";
 import { notFound } from "next/navigation";
-import { PRESS_URLS } from "../../../../../public/data/press-urls";
+import { PRESS_URLS } from "@public/data/press-urls";
 
 // export const dynamic = "error";
 // export const fetchCache = "only-cache";

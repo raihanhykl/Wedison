@@ -1,6 +1,6 @@
 import React from "react";
-import ProductPageComponent from "../_product/structure";
-import { getSEOMetadata } from "../lib/seo1";
+import ProductPageComponent from "@/app/_product/structure";
+import { getSEOMetadata } from "@/app/lib/seo1";
 
 export const metadata = getSEOMetadata({
   title: "Victory - Motor Listrik Urban Modern | Wedison",

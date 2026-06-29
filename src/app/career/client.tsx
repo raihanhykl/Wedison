@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { jobListings, JobData } from "./data-job";
-import { useLanguage } from "../lib/language-context";
+import { useLanguage } from "@/app/lib/language-context";
 
 export default function CareerClient() {
   const { t } = useLanguage();

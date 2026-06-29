@@ -1,5 +1,5 @@
-// import { generateSeoMetadata } from "../lib/seo";
-import { getSEOMetadata } from "../lib/seo1";
+// import { generateSeoMetadata } from "@/app/lib/seo";
+import { getSEOMetadata } from "@/app/lib/seo1";
 import ShowroomPageStructure from "./components/structure";
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Showroom - Wedison",

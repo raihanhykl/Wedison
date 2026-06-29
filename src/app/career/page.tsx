@@ -1,4 +1,4 @@
-import { getSEOMetadata } from "../lib/seo1";
+import { getSEOMetadata } from "@/app/lib/seo1";
 import CareerClient from "./client";
 
 export const metadata = getSEOMetadata({

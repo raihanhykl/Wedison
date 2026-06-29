@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
-import { useLanguage } from "../lib/language-context";
+import { useLanguage } from "@/app/lib/language-context";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
