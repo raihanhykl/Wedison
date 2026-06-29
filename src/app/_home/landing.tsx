@@ -14,14 +14,14 @@ import Image from "next/image";
 import React from "react";
 import { useLanguage } from "../lib/language-context";
 import Link from "next/link";
-import Preloader from "../components/Preloader";
+import Preloader from "@/components/Preloader";
 import dynamic from "next/dynamic";
 import Autoplay from "embla-carousel-autoplay";
-import AppDownloadTeaser from "../components/app-download-teaser";
+import AppDownloadTeaser from "@/components/app-download-teaser";
 
 // Lazy load ComparisonTable untuk mengurangi initial bundle size
 const ComparisonTable = dynamic(
-  () => import("../components/comparison-table"),
+  () => import("@/components/comparison-table"),
   {
     loading: () => (
       <div className="w-full h-96 flex items-center justify-center">

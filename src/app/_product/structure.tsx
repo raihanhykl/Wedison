@@ -9,8 +9,8 @@ import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
 import GetProductData from "../lib/product-data";
 import { useLanguage } from "../lib/language-context";
-import ComparisonTable from "../components/comparison-table";
-import UserManualSection from "../components/user-manual-section";
+import ComparisonTable from "@/components/comparison-table";
+import UserManualSection from "@/components/user-manual-section";
 import { useInView } from "react-intersection-observer";
 
 type Props = {

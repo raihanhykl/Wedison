@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { X, ChevronDown, Check } from "lucide-react";
-import { ComparisonTableProps } from "../types/bike";
-import { useLanguage } from "../lib/language-context";
+import { ComparisonTableProps } from "@/app/types/bike";
+import { useLanguage } from "@/app/lib/language-context";
 import {
   createSpecifications,
   getSpecificationValue,

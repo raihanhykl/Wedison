@@ -38,7 +38,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   RecaptchaCheckbox,
   type RecaptchaHandle,
-} from "@/app/components/recaptcha-checkbox";
+} from "@/components/recaptcha-checkbox";
 // Import our schema and service
 
 // Aktif hanya bila site key di-set (env). Tanpa key, form jalan seperti biasa.
