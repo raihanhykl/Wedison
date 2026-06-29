@@ -186,7 +186,7 @@ export default function ShowroomPageStructure() {
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </Button>
                     </Link>
-                    <Link href={location.mapsUrl} target="_blank">
+                    <Link href={location.mapsUrl} target="_blank" rel="noopener noreferrer">
                       <Button
                         variant="outline"
                         className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1"

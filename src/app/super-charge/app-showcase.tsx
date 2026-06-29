@@ -4,7 +4,7 @@
 import { useInView } from "react-intersection-observer";
 import { MapPin, Activity, Zap, Check } from "lucide-react";
 import { useLanguage } from "../lib/language-context";
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 import StoreBadges from "../components/store-badges";
 import Image from "next/image";
 

@@ -106,7 +106,7 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
               <div className="text-foreground  my-8 leading-relaxed font-bold whitespace-pre-line">
                 <Link
                   href={preview.url}
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   className="  underline flex items-center"
                 >
                   {" "}
