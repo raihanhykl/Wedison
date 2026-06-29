@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/app/lib/language-context";
+import { stripLocale } from "@/app/lib/locale";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import NavbarProduct from "./navbar-product";
@@ -73,12 +74,13 @@ export default function Navbar() {
   }, [openProduct, openCorporate, openDiscover]);
 
   useEffect(() => {
+    const path = stripLocale(route); // toleran prefix /id|/en
     if (
-      route === "/corporate/about/" ||
-      route === "/corporate/contact/" ||
-      route === "/showroom/" ||
-      // route === "/super-charge/" ||
-      (route.startsWith("/media-center/") && route !== "/media-center/")
+      path === "/corporate/about/" ||
+      path === "/corporate/contact/" ||
+      path === "/showroom/" ||
+      // path === "/super-charge/" ||
+      (path.startsWith("/media-center/") && path !== "/media-center/")
     ) {
       setWhitePage(true);
     } else {

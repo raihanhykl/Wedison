@@ -5,6 +5,7 @@ import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/app/lib/locale";
 
 export default function LanguageToggle2({
   toggleOpen,
@@ -16,12 +17,13 @@ export default function LanguageToggle2({
   const [scrolled, setScrolled] = useState(false);
   const [whitePage, setWhitePage] = useState(false);
   useEffect(() => {
+    const path = stripLocale(route); // toleran prefix /id|/en
     if (
-      route === "/corporate/about/" ||
-      route === "/corporate/contact/" ||
-      route === "/showroom/" ||
-      // route === "/super-charge/" ||
-      (route.startsWith("/media-center/") && route !== "/media-center/")
+      path === "/corporate/about/" ||
+      path === "/corporate/contact/" ||
+      path === "/showroom/" ||
+      // path === "/super-charge/" ||
+      (path.startsWith("/media-center/") && path !== "/media-center/")
     ) {
       setWhitePage(true);
     } else {

@@ -43,19 +43,23 @@ import NewsClient from "./pageClient";
 import { fetchPreview } from "@/app/lib/fetchPreview";
 import { notFound } from "next/navigation";
 import { PRESS_URLS } from "@public/data/press-urls";
+import { LOCALES } from "@/app/lib/locale";
 
 // export const dynamic = "error";
 // export const fetchCache = "only-cache";
 export const dynamicParams = false; // <— WAJIB agar slug di luar daftar jadi 404
 
 export function generateStaticParams() {
-  return PRESS_URLS.map((data) => ({ slug: data.slug }));
+  // Nested [locale] x [slug] -> WAJIB cross-product, kalau tidak separuh kombinasi 404.
+  return LOCALES.flatMap((locale) =>
+    PRESS_URLS.map((data) => ({ locale, slug: data.slug })),
+  );
 }
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
 

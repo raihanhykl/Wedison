@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/app/lib/locale";
 
 export type NavbarDropdownLink = {
   href: string;
@@ -72,7 +73,8 @@ export default function NavbarDropdown({
                     href={link.href}
                     className={cn(
                       "bg-white hover:bg-gray-100 px-4 rounded-lg py-2 flex-1 w-full",
-                      path === link.href && "cursor-not-allowed bg-gray-100"
+                      stripLocale(path) === link.href &&
+                        "cursor-not-allowed bg-gray-100"
                     )}
                   >
                     <div className="text-black font-medium text-xl">
