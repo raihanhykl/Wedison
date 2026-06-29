@@ -26,10 +26,14 @@ export function middleware(req: NextRequest) {
   );
 
   if (hasLocale) {
-    // Path sudah ber-locale: teruskan, tapi refresh cookie agar link tanpa-locale
-    // (mis. yang tertanam di translations.tsx) ikut ke locale yang sedang dibuka.
     const current = pathname.split("/")[1];
-    const res = NextResponse.next();
+    // Teruskan locale sebagai REQUEST header agar Server Component (khususnya
+    // not-found, yang tak menerima params & ada di luar LanguageProvider) bisa
+    // merender bahasa yang benar per-request (bukan default static).
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-locale", current);
+    const res = NextResponse.next({ request: { headers: requestHeaders } });
+    // Refresh cookie agar link tanpa-locale ikut ke locale yang sedang dibuka.
     res.cookies.set("NEXT_LOCALE", current, {
       path: "/",
       maxAge: 31536000,
