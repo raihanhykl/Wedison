@@ -1,5 +1,5 @@
 import React from "react";
-import ProductPageComponent from "../testing-product/structure";
+import ProductPageComponent from "../_product/structure";
 import { getSEOMetadata } from "../lib/seo1";
 export const metadata = getSEOMetadata({
   title: "Bees - Motor Listrik Compact & Praktis | Wedison",
