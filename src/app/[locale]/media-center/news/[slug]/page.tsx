@@ -44,6 +44,7 @@ import { fetchPreview } from "@/app/lib/fetchPreview";
 import { notFound } from "next/navigation";
 import { PRESS_URLS } from "@public/data/press-urls";
 import { LOCALES } from "@/app/lib/locale";
+import { getSEOMetadata } from "@/app/lib/seo1";
 
 // export const dynamic = "error";
 // export const fetchCache = "only-cache";
@@ -54,6 +55,25 @@ export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
     PRESS_URLS.map((data) => ({ locale, slug: data.slug })),
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
+  const newsData = PRESS_URLS.find((item) => item.slug === slug);
+  if (!newsData) return {};
+  // Judul/deskripsi/gambar diambil dari preview (string), bukan headLine (JSX).
+  const preview = await fetchPreview(newsData);
+  return getSEOMetadata({
+    locale: locale as "id" | "en",
+    path: `/media-center/news/${slug}`,
+    title: preview.title,
+    description: preview.description || undefined,
+    image: preview.image || undefined,
+  });
 }
 
 export default async function Page({

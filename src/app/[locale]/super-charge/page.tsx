@@ -5,24 +5,14 @@ import VideoSection from "./videoSection";
 import AppShowcase from "./app-showcase";
 import { getSEOMetadata } from "@/app/lib/seo1";
 
-export const metadata = getSEOMetadata({
-  title: "SuperCharge - Stasiun Pengisian Cepat Motor Listrik | Wedison",
-  description:
-    "SuperCharge adalah teknologi stasiun pengisian super cepat dari Wedison, solusi terbaik untuk mengisi daya motor listrik dalam waktu singkat. Lihat lokasi dan keunggulan SuperCharge di sini.",
-  keywords: [
-    "wedison",
-    "supercharge",
-    "charging station",
-    "pengisian motor listrik",
-    "stasiun pengisian",
-    "motor listrik",
-    "EV",
-    "teknologi pengisian cepat",
-  ],
-  url: "https://wedison.co/super-charge/",
-  image: "https://wedison.co/super-charge/supercharge-testing.webp",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/super-charge" });
+}
 
 export default function SuperChargePage() {
   return (

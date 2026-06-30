@@ -10,23 +10,14 @@ import {
 } from "./components/fetchInstagram";
 // import { PRESS_URLS } from "@public/data/press-urls";
 // import Baru from "./components/baru";
-export const metadata = getSEOMetadata({
-  title: "Media Center - Berita & Update Wedison",
-  description:
-    "Ikuti berita terbaru, siaran pers, dan liputan media tentang Wedison. Dapatkan update seputar inovasi, produk baru, serta aktivitas perusahaan.",
-  keywords: [
-    "wedison",
-    "media center",
-    "berita wedison",
-    "press release",
-    "liputan media",
-    "update motor listrik",
-    "inovasi kendaraan listrik",
-  ],
-  url: "https://wedison.co/media-center/",
-  image: "https://wedison.co/wedison-sidebyside.png",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/media-center" });
+}
 export default async function Page() {
   // const previews = await fetchAllPreviews(PRESS_URLS);
   const previews = (await fetchAllPreviews(PRESS_URLS)).sort((a, b) => {

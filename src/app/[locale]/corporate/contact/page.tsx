@@ -14,23 +14,14 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 // });
 
 // export { metadata };
-export const metadata = getSEOMetadata({
-  title: "Kontak Wedison - Hubungi Kami",
-  description:
-    "Hubungi Wedison untuk informasi produk, layanan purna jual, kerjasama bisnis, atau pertanyaan seputar motor listrik dan SuperCharge. Tim kami siap membantu Anda.",
-  keywords: [
-    "wedison",
-    "kontak wedison",
-    "hubungi wedison",
-    "layanan pelanggan",
-    "motor listrik",
-    "supercharge",
-    "EV",
-  ],
-  url: "https://wedison.co/corporate/contact/",
-  image: "https://wedison.co/contact-us.webp",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/corporate/contact" });
+}
 
 export default function Page() {
   return (

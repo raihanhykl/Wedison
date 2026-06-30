@@ -12,23 +12,14 @@ import ShowroomPageStructure from "./components/structure";
 // });
 
 // export { metadata };
-export const metadata = getSEOMetadata({
-  title: "Showroom Wedison - Lihat & Test Motor Listrik Terbaru",
-  description:
-    "Kunjungi showroom Wedison untuk melihat dan mencoba motor listrik terbaru serta teknologi SuperCharge. Dapatkan informasi lokasi, jam buka, dan fasilitas lengkap di sini.",
-  keywords: [
-    "wedison",
-    "showroom motor listrik",
-    "test ride motor listrik",
-    "motor listrik terbaru",
-    "kendaraan listrik",
-    "supercharge",
-    "EV",
-  ],
-  url: "https://wedison.co/showroom/",
-  image: "https://wedison.co/Showroom-Receptionist.webp",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/showroom" });
+}
 
 export default function ShowroomPage() {
   return (
