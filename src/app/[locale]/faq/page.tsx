@@ -4,23 +4,14 @@ import FaqStructure from "./structure";
 import { getSEOMetadata } from "@/app/lib/seo1";
 // import Baru from "./components/baru";
 
-export const metadata = getSEOMetadata({
-  title: "FAQ - Pertanyaan Umum Motor Listrik | Wedison",
-  description:
-    "Temukan jawaban dari pertanyaan umum seputar motor listrik Wedison. Mulai dari cara pengisian daya, perawatan, garansi, hingga informasi pembelian.",
-  keywords: [
-    "wedison",
-    "faq motor listrik",
-    "pertanyaan umum",
-    "motor listrik",
-    "cara isi daya motor listrik",
-    "garansi motor listrik",
-    "perawatan kendaraan listrik",
-  ],
-  url: "https://wedison.co/faq/",
-  image: "https://wedison.co/wedison-sidebyside.png",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/faq" });
+}
 
 export default function Page() {
   const dev = true;

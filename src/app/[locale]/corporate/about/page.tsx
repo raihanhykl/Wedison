@@ -12,24 +12,14 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 //   jsonLdType: "organization",
 // });
 // export { metadata };
-export const metadata = getSEOMetadata({
-  title: "Tentang Wedison - Produsen Motor Listrik Indonesia",
-  description:
-    "Wedison adalah produsen motor listrik terkemuka di Indonesia yang berkomitmen menghadirkan solusi kendaraan listrik ramah lingkungan. Ketahui visi, misi, dan sejarah perusahaan kami.",
-  keywords: [
-    "wedison",
-    "tentang wedison",
-    "tentang kami",
-    "motor listrik",
-    "kendaraan listrik",
-    "perusahaan EV",
-    "visi misi",
-    "produsen motor listrik",
-  ],
-  url: "https://wedison.co/corporate/about/",
-  image: "https://wedison.co/about-us.webp",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/corporate/about" });
+}
 
 export default function Page() {
   return (

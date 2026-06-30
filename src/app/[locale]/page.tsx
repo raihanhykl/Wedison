@@ -13,25 +13,14 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 // });
 
 // export { metadata };
-export const metadata = getSEOMetadata({
-  title: "Wedison - Motor Listrik & SuperCharge Terdepan di Indonesia",
-  description:
-    "Wedison adalah produsen motor listrik terbaik di Indonesia dengan teknologi SuperCharge. Temukan produk motor listrik premium, stasiun pengisian cepat, dan solusi kendaraan listrik masa depan.",
-  keywords: [
-    "wedison",
-    "motor listrik",
-    "kendaraan listrik",
-    "EV",
-    "supercharge",
-    "motor listrik terbaik",
-    "electric motorcycle",
-    "charging station",
-    "otomotif",
-  ],
-  url: "https://wedison.co/",
-  image: "https://wedison.co/wedison-sidebyside.png",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/" });
+}
 
 export default function Page() {
   return (

@@ -7,10 +7,9 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next-sitemap",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "next-sitemap",
     "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
@@ -29,7 +28,6 @@
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.477.0",
     "next": "^15.5.19",
-    "next-sitemap": "^4.2.3",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

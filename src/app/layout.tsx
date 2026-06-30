@@ -2,24 +2,19 @@
 // <html>/<body>, fonts, providers, Navbar/Footer dipindah ke src/app/[locale]/layout.tsx
 // karena <html lang> harus mengikuti locale dari URL. Root cukup meneruskan children.
 // (Pola standar Next.js App Router untuk routing [locale].)
-import { getSEOMetadata } from "./lib/seo1";
+import type { Metadata } from "next";
 
-// Metadata default site-wide (di-override per-locale di Fase 4 via generateMetadata).
-export const metadata = getSEOMetadata({
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wedison.co";
+
+// Metadata default site-wide (fallback). Tiap halaman [locale] meng-override
+// via generateMetadata (canonical/hreflang/OG per-locale di seo1.ts).
+// metadataBase membuat URL relatif (OG/alternates) ter-resolve ke origin yang benar.
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE),
   title: "Wedison - Motor Listrik & SuperCharge Indonesia",
   description:
-    "Wedison adalah produsen motor listrik dan teknologi supercharger terdepan di Indonesia. Temukan produk, spesifikasi, dan solusi kendaraan listrik modern di sini.",
-  keywords: [
-    "wedison",
-    "motor listrik",
-    "supercharge",
-    "kendaraan listrik",
-    "EV",
-  ],
-  url: "https://wedison.co",
-  image: "https://wedison.co/wedison-sidebyside.png",
-  lang: "id",
-});
+    "Wedison adalah produsen motor listrik dan teknologi supercharger terdepan di Indonesia.",
+};
 
 export default function RootLayout({
   children,

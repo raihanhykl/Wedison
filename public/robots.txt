@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://wedison.co
-
-# Sitemaps
-Sitemap: https://wedison.co/sitemap.xml

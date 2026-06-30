@@ -1,24 +1,14 @@
 import React from "react";
 import ProductPageComponent from "@/app/_product/structure";
 import { getSEOMetadata } from "@/app/lib/seo1";
-export const metadata = getSEOMetadata({
-  title: "Bees - Motor Listrik Compact & Praktis | Wedison",
-  description:
-    "Bees adalah motor listrik compact dari Wedison, cocok untuk kebutuhan harian, desain praktis dan mudah digunakan. Lihat keunggulan dan spesifikasi lengkapnya di sini.",
-  keywords: [
-    "wedison",
-    "motor listrik",
-    "bees",
-    "motor listrik compact",
-    "kendaraan listrik",
-    "EV",
-    "motor listrik praktis",
-    "electric motorcycle",
-  ],
-  url: "https://wedison.co/bees/",
-  image: "https://wedison.co/bees-product-hero.webp",
-  lang: "id",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/bees" });
+}
 export default function Page() {
   return (
     <div>
