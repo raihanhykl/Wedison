@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useLanguage } from "@/app/lib/language-context";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <footer className="text-white bg-gray-900">
       <div className="container px-4 py-8 mx-auto sm:px-6 lg:px-8 md:py-12">
@@ -33,12 +33,9 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/bees/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/bees/`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   Bees
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
@@ -49,28 +46,19 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <a
-                  href="/athena/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/athena/`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   Athena
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/victory/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/victory/`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   Victory
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/edpower/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/edpower/`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   EdPower
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -84,12 +72,9 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/showroom"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/showroom`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   Showroom
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
@@ -100,12 +85,9 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <a
-                  href="/super-charge"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/super-charge`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   SuperCharge
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
@@ -126,20 +108,14 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/faq#user-manual"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/faq#user-manual`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   {t("footer.userManual")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/faq"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/faq`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   {t("footer.faq")}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -153,13 +129,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/corporate/about"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/corporate/about`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   {/* About Us */}
                   {t("footer.about")}
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
@@ -170,22 +143,16 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <a
-                  href="/corporate/contact"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/corporate/contact`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   {/* Contact Us */}
                   {t("footer.contact")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/career"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/career`} className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300">
                   {/* Contact Us */}
                   {t("footer.career")}
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
