@@ -46,6 +46,16 @@ export function middleware(req: NextRequest) {
   const locale = detectLocale(req);
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
+  // PENTING (di belakang nginx): req.nextUrl.host = bind internal (localhost:3002),
+  // sehingga redirect absolut bocor jadi https://localhost:3002/en/. Bangun ulang
+  // host/proto dari header X-Forwarded-* yang di-set nginx -> host publik yang benar.
+  const fwdHost = req.headers.get("x-forwarded-host");
+  if (fwdHost) {
+    const [hostname, port] = fwdHost.split(":");
+    url.hostname = hostname;
+    url.port = port ?? ""; // clear port internal (3002), kecuali proxy kirim port eksplisit
+    url.protocol = `${req.headers.get("x-forwarded-proto") ?? "https"}:`;
+  }
   return NextResponse.redirect(url);
 }
 
