@@ -1,0 +1,65 @@
+name: Deploy ssr-version -> VPS (testing)
+
+# Build standalone di GitHub Actions, lalu rsync artefak ramping ke VPS + pm2 reload.
+# Aman untuk VPS shared (n8n/novo/wedisense): build TIDAK jalan di VPS.
+on:
+  push:
+    branches: [ssr-version]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-ssr
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+  VPS_HOST: "76.13.22.124"
+  VPS_USER: "wedison"
+  DEPLOY_DIR: "/home/wedison/wedison-landing"
+  SITE_URL: "https://ssr.wedison.tech"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build (standalone)
+        run: npm run build
+        env:
+          # SITE_URL testing -> canonical/hreflang/sitemap pakai ssr.wedison.tech
+          NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
+          # NEXT_PUBLIC_* di-inline saat build (sama seperti CI lama)
+          NEXT_PUBLIC_EMAIL_CONFIG_serviceId: ${{ secrets.EMAIL_SERVICE_ID }}
+          NEXT_PUBLIC_EMAIL_CONFIG_templateId: ${{ secrets.EMAIL_TEMPLATE_ID }}
+          NEXT_PUBLIC_EMAIL_CONFIG_publicKey: ${{ secrets.EMAIL_PUBLIC_KEY }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Add VPS to known_hosts
+        run: ssh-keyscan -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Rsync standalone artifact
+        run: |
+          rsync -az --delete \
+            .next/standalone/ \
+            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/.next/standalone/
+
+      - name: Reload PM2 (zero-config; fork mode)
+        run: |
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
+            "cd ${{ env.DEPLOY_DIR }} && pm2 reload wedison-landing --update-env && pm2 save"
