@@ -15,6 +15,8 @@ import { useLanguage } from "@/app/lib/language-context";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 
 // Campaign meta (translatable strings live in language-context.tsx)
 const campaignMeta = [
@@ -85,7 +87,7 @@ export default function OjolClient() {
       overlay: "none",
       theme: "dark",
       className:
-        "w-[254px] h-[249px] lg:w-[781px] lg:h-[147px] md:w-full pt-8 md:pt-26 xl:pt-14 ",
+        "w-full max-w-[calc(100%-1.5rem)] lg:max-w-none lg:w-[781px] lg:h-[147px] md:w-full pt-8 md:pt-26 xl:pt-14 ",
     },
     {
       image: "/ojol/wedison-hero-sewa-harian.webp",
@@ -116,14 +118,14 @@ export default function OjolClient() {
               {t("ojol.hero.startFrom")}
             </p>
             <div className="flex items-baseline justify-center w-full">
-              <span className="text-[72px]/[0.9] sm:text-[80px]/[0.9] md:text-[110px]/[0.85] lg:text-[160px]/[0.85] font-extrabold text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+              <span className="font-display text-[clamp(3.5rem,14vw,7rem)]/[0.85] font-extrabold tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
                 50K
               </span>
               <span className="text-base sm:text-lg md:text-2xl lg:text-3xl font-[900] text-white ml-0.5 md:ml-1">
                 {t("ojol.hero.perDay")}
               </span>
             </div>
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold text-white text-shadow-[0px_2px_4px_rgb(0_0_0/_0.3)] mt-0.5 md:mt-2 lg:mt-4">
+            <p className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white text-shadow-[0px_2px_4px_rgb(0_0_0/_0.3)] mt-0.5 md:mt-2 lg:mt-4">
               {t("ojol.hero.dailyRental")}
             </p>
             <p className="text-sm sm:text-base md:text-xl lg:text-3xl font-semibold text-white/90 text-shadow-[0px_1px_2px_rgb(0_0_0/_0.3)]">
@@ -255,16 +257,16 @@ export default function OjolClient() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex absolute top-1/2 left-2 sm:left-4 md:left-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80" />
-          <CarouselNext className="hidden md:flex absolute top-1/2 right-2 sm:right-4 md:right-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80" />
+          <CarouselPrevious className="hidden md:flex absolute top-1/2 left-2 sm:left-4 md:left-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-black/30 text-white hover:text-white hover:bg-black/50" />
+          <CarouselNext className="hidden md:flex absolute top-1/2 right-2 sm:right-4 md:right-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-black/30 text-white hover:text-white hover:bg-black/50" />
           <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex justify-center items-center gap-2 sm:gap-3">
             {items.map((_, index) => (
               <button
                 key={index}
                 className={`h-2.5 sm:h-3 rounded-full cursor-pointer overflow-hidden transition-all duration-300 ${
                   selectedIndex === index
-                    ? "w-10 sm:w-12 bg-gray-400"
-                    : "w-2.5 sm:w-3 bg-gray-400 hover:bg-gray-400/50"
+                    ? "w-10 sm:w-12 bg-white"
+                    : "w-2.5 sm:w-3 bg-white/45 hover:bg-white/70"
                 }`}
                 onClick={() => carouselApi.current?.scrollTo(index)}
                 aria-label={`Go to slide ${index + 1}`}
@@ -285,49 +287,52 @@ export default function OjolClient() {
       </div>
 
       {/* Content */}
-      <div className="py-8 w-full px-8 md:px-16 md:my-16 max-w-[2480px] mx-auto">
+      <div className="main-container py-8 md:my-16">
         {/* benefits */}
         <div className="w-full">
-          <h2 className="text-4xl md:text-6xl font-bold text-center mb-4 md:mb-8">
-            {t("ojol.benefits.title")}
-          </h2>
-          <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12 md:mb-0 text-md md:text-xl">
-            {t("ojol.benefits.description")}
-          </p>
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 h-full">
+          <Reveal className="text-center">
+            <h2 className="mb-4 font-display text-4xl font-bold tracking-tight text-foreground md:mb-8 md:text-6xl">
+              {t("ojol.benefits.title")}
+            </h2>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-muted-foreground text-md md:mb-0 md:text-xl">
+              {t("ojol.benefits.description")}
+            </p>
+          </Reveal>
+          <Stagger className="grid h-full w-full grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
             {[1, 2, 3].map((num) => (
-              <div
+              <StaggerItem
                 key={num}
-                className="aspect-square w-full mx-auto rounded-lg overflow-hidden"
+                className="mx-auto aspect-square w-full overflow-hidden rounded-lg"
               >
                 <Image
-                  key={num}
-                  className="aspect-square object-cover w-full h-full rounded-lg"
+                  className="aspect-square h-full w-full rounded-lg object-cover"
                   src={`/ojol/benefit-${num}.webp`}
                   width={1000}
                   height={1000}
-                  alt="benefit"
+                  alt=""
                 />
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
 
         {/* hot campaign */}
         <div className="w-full" id="campaign">
-          <h2 className="text-4xl md:text-6xl font-bold text-center my-8 md:my-16">
-            {t("ojol.campaign.heading")}
-          </h2>
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
+          <Reveal>
+            <h2 className="my-8 text-center font-display text-4xl font-bold tracking-tight text-foreground md:my-16 md:text-6xl">
+              {t("ojol.campaign.heading")}
+            </h2>
+          </Reveal>
+          <Stagger className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:gap-10">
             {campaignMeta.map((campaign) => (
-              <div
+              <StaggerItem
                 key={campaign.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+                className="group overflow-hidden rounded-2xl bg-card shadow-lg transition-all duration-500 hover:shadow-2xl"
               >
                 {/* Banner Image */}
                 <div className="relative aspect-video w-full overflow-hidden">
                   <Image
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     src={campaign.image}
                     width={1000}
                     height={600}
@@ -337,7 +342,7 @@ export default function OjolClient() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   {/* Title on Image */}
                   <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white">
+                    <h3 className="font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
                       {t(`ojol.campaign.${campaign.id}.title`)}
                     </h3>
                   </div>
@@ -346,12 +351,12 @@ export default function OjolClient() {
                 {/* Content */}
                 <div className="p-6">
                   {/* Tagline */}
-                  <p className="text-primary font-semibold text-lg mb-2">
+                  <p className="mb-2 text-lg font-semibold text-primary">
                     {t(`ojol.campaign.${campaign.id}.tagline`)}
                   </p>
 
                   {/* Description */}
-                  <p className="text-gray-600 mb-6">
+                  <p className="mb-6 text-muted-foreground">
                     {t(`ojol.campaign.${campaign.id}.description`)}
                   </p>
 
@@ -363,7 +368,7 @@ export default function OjolClient() {
                       target="_blank" rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                      <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground font-semibold py-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
                         <span className="flex items-center justify-center gap-2">
                           <svg
                             className="w-5 h-5"
@@ -381,7 +386,7 @@ export default function OjolClient() {
                     <Button
                       variant="outline"
                       onClick={() => setOpenDialog(campaign.id)}
-                      className="flex-1 border-gray-300 hover:border-primary hover:bg-gray-50 font-semibold py-5 rounded-xl transition-all duration-300"
+                      className="flex-1 border-border hover:border-primary hover:bg-muted font-semibold py-5 rounded-xl transition-all duration-300"
                     >
                       <span className="flex items-center justify-center gap-2">
                         <svg
@@ -402,9 +407,9 @@ export default function OjolClient() {
                     </Button>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </div>
 
@@ -419,11 +424,11 @@ export default function OjolClient() {
 
           {/* Dialog Content */}
           <div
-            className="relative bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-in zoom-in-95 fade-in duration-300"
+            className="relative bg-card rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-in zoom-in-95 fade-in duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 bg-gradient-to-r from-primary to-primary/80 text-white p-6 z-10">
+            <div className="sticky top-0 bg-primary text-primary-foreground p-6 z-10">
               <div className="flex items-start justify-between">
                 <div>
                   <span className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-2">
@@ -461,7 +466,7 @@ export default function OjolClient() {
             <div className="overflow-y-auto max-h-[calc(90vh-180px)] p-6 space-y-6">
               {/* Scheme Section */}
               <div>
-                <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-primary"
@@ -484,14 +489,14 @@ export default function OjolClient() {
                     (_, idx) => (
                       <div
                         key={idx}
-                        className="bg-gray-50 rounded-xl p-4 border border-gray-100"
+                        className="bg-muted rounded-xl p-4 border border-border"
                       >
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-muted-foreground text-sm">
                           {t(
                             `ojol.campaign.${activeCampaign.id}.scheme.${idx}.label`,
                           )}
                         </p>
-                        <p className="text-gray-900 font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {t(
                             `ojol.campaign.${activeCampaign.id}.scheme.${idx}.value`,
                           )}
@@ -504,7 +509,7 @@ export default function OjolClient() {
 
               {/* Benefits Section */}
               <div>
-                <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-primary"
@@ -537,7 +542,7 @@ export default function OjolClient() {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="text-gray-700">
+                        <span className="text-foreground">
                           {t(
                             `ojol.campaign.${activeCampaign.id}.benefit.${idx}`,
                           )}
@@ -550,7 +555,7 @@ export default function OjolClient() {
 
               {/* Terms Section */}
               <div>
-                <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-primary"
@@ -572,10 +577,10 @@ export default function OjolClient() {
                   {Array.from({ length: activeCampaign.termsCount }).map(
                     (_, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <span className="w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 mt-0.5 flex-shrink-0">
+                        <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-xs font-bold text-primary mt-0.5 flex-shrink-0">
                           {idx + 1}
                         </span>
-                        <span className="text-gray-700">
+                        <span className="text-foreground">
                           {t(`ojol.campaign.${activeCampaign.id}.term.${idx}`)}
                         </span>
                       </li>
@@ -586,13 +591,13 @@ export default function OjolClient() {
             </div>
 
             {/* Footer CTA */}
-            <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
+            <div className="sticky bottom-0 bg-card border-t border-border p-4">
               <Link
                 href={activeCampaign.waLink}
                 target="_blank" rel="noopener noreferrer"
                 onClick={() => setOpenDialog(null)}
               >
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <span className="flex items-center justify-center gap-2">
                     <svg
                       className="w-5 h-5"
@@ -611,11 +616,11 @@ export default function OjolClient() {
       )}
 
       {/* Supercharge Section */}
-      <div className="w-full bg-white py-8 md:py-16 overflow-hidden border-1 border-b-gray-300 border-t-gray-300">
-        <div className="max-w-[2480px] mx-auto px-8 md:px-16">
+      <div className="w-full bg-card py-8 md:py-16 overflow-hidden border-y border-border">
+        <div className="main-container">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             {/* Image Section */}
-            <div className="w-full lg:w-1/2 relative group">
+            <Reveal className="w-full lg:w-1/2 relative group" y={0}>
               <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden">
                 {/* Image Container */}
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
@@ -627,13 +632,13 @@ export default function OjolClient() {
                   />
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Content Section */}
-            <div className="w-full lg:w-1/2 text-center lg:text-left">
+            <Reveal className="w-full lg:w-1/2 text-center lg:text-left" y={28} amount={0.3}>
               {/* Badge */}
               <div className="inline-block mb-4">
-                <span className="bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
+                <span className="bg-secondary text-primary px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
                   {t("ojol.supercharge.badge")}
                 </span>
               </div>
@@ -650,16 +655,16 @@ export default function OjolClient() {
               </div>
 
               {/* Description */}
-              <p className="text-gray-500 text-md md:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-muted-foreground text-md md:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 {t("ojol.supercharge.descriptionPart1")}
-                <span className="font-bold text-gray-700">
+                <span className="font-bold text-foreground">
                   {t("ojol.supercharge.descriptionBold")}
                 </span>
                 {t("ojol.supercharge.descriptionPart2")}
               </p>
 
               {/* Disclaimer */}
-              <p className="text-gray-400 text-xs mb-6 max-w-xl mx-auto lg:mx-0">
+              <p className="text-muted-foreground text-xs mb-6 max-w-xl mx-auto lg:mx-0">
                 {t("ojol.supercharge.disclaimer")}
               </p>
 
@@ -667,7 +672,7 @@ export default function OjolClient() {
               <Link href="/super-charge">
                 <Button
                   className="group relative px-8 py-6 text-lg font-semibold rounded-xl
-                    bg-primary hover:bg-primary/90 text-white
+                    bg-primary hover:bg-primary-hover text-primary-foreground
                     shadow-lg hover:shadow-xl
                     transition-all duration-300
                     hover:scale-105 active:scale-95"
@@ -690,36 +695,33 @@ export default function OjolClient() {
                   </span>
                 </Button>
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
 
       {/* Model Section */}
-      <div className="w-full bg-gray-50 py-16 md:py-24">
-        <div className="max-w-[2480px] mx-auto px-8 md:px-16">
+      <div className="w-full bg-muted py-16 md:py-24">
+        <div className="main-container">
           {/* Header */}
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+          <Reveal className="text-center mb-12 md:mb-16">
+            <h2 className="mb-4 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
               {t("ojol.models.title")}
             </h2>
-            <p className="text-gray-500 text-lg md:text-xl max-w-3xl mx-auto">
+            <p className="mx-auto max-w-3xl text-lg text-muted-foreground md:text-xl">
               {t("ojol.models.subtitle")}
             </p>
-          </div>
+          </Reveal>
 
           {/* Model Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {models.map((model, index) => (
-              <div
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {models.map((model) => (
+              <StaggerItem
                 key={model.name}
-                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                }}
+                className="group bg-card rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
               >
                 {/* Image */}
-                <div className="relative aspect-square bg-gradient-to-b from-gray-100 to-gray-200 overflow-hidden">
+                <div className="relative aspect-square bg-muted overflow-hidden">
                   <Image
                     src={model.image}
                     alt={model.name}
@@ -727,7 +729,7 @@ export default function OjolClient() {
                     className="object-contain p-4 transition-transform duration-500 group-hover:scale-110"
                   />
                   {/* Highlight Badge */}
-                  <div className="absolute top-4 left-4 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  <div className="absolute top-4 left-4 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
                     {t(model.highlightKey)}
                   </div>
                 </div>
@@ -736,7 +738,7 @@ export default function OjolClient() {
                 <div className="p-6">
                   {/* Name & Tagline */}
                   <div className="mb-4">
-                    <h3 className="text-2xl font-bold text-gray-900">
+                    <h3 className="font-display text-2xl font-bold tracking-tight text-foreground">
                       {model.name}
                     </h3>
                     <p className="text-primary font-medium">
@@ -751,10 +753,10 @@ export default function OjolClient() {
                         key={specIndex}
                         className="flex justify-between items-center text-sm"
                       >
-                        <span className="text-gray-500">
+                        <span className="text-muted-foreground">
                           {t(spec.labelKey)}
                         </span>
-                        <span className="font-semibold text-gray-800">
+                        <span className="font-semibold text-foreground">
                           {"valueKey" in spec && spec.valueKey
                             ? t(spec.valueKey)
                             : spec.value}
@@ -767,7 +769,7 @@ export default function OjolClient() {
                   <Link href={model.link}>
                     <Button
                       variant="outline"
-                      className="w-full group/btn border-gray-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
+                      className="w-full group/btn border-border hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                     >
                       <span className="flex items-center justify-center gap-2">
                         {t("ojol.models.cta")}
@@ -788,43 +790,37 @@ export default function OjolClient() {
                     </Button>
                   </Link>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {/* Footnote */}
-          <p className="text-center text-gray-400 text-sm mt-8">
+          <p className="text-center text-muted-foreground text-sm mt-8">
             {t("ojol.models.footnote")}
           </p>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 md:py-24 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-72 h-72 bg-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
-
-        <div className="max-w-[2480px] mx-auto px-8 md:px-16 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+      <div className="w-full bg-forest-deep py-16 md:py-24 relative overflow-hidden">
+        <div className="main-container relative z-10">
+          <Reveal className="max-w-4xl mx-auto text-center">
             {/* Badge */}
             <div className="inline-block mb-6">
-              <span className="bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
+              <span className="bg-white/10 text-on-forest-accent px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
                 {t("ojol.cta.badge")}
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h2 className="mb-6 font-display text-3xl font-bold leading-tight tracking-tight text-forest-foreground md:text-5xl lg:text-6xl">
               {t("ojol.cta.headline.1")}
               <br />
-              <span className="text-primary">{t("ojol.cta.headline.2")}</span>
+              <span className="text-on-forest-accent">{t("ojol.cta.headline.2")}</span>
             </h2>
 
             {/* Description */}
-            <p className="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-forest-muted text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
               {t("ojol.cta.description")}
             </p>
 
@@ -841,7 +837,7 @@ export default function OjolClient() {
                   className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2"
                 >
                   <svg
-                    className="w-5 h-5 text-primary"
+                    className="w-5 h-5 text-on-forest-accent"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -851,7 +847,7 @@ export default function OjolClient() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className="text-white text-sm font-medium">
+                  <span className="text-forest-foreground text-sm font-medium">
                     {benefit}
                   </span>
                 </div>
@@ -865,9 +861,8 @@ export default function OjolClient() {
             >
               <Button
                 className="group relative px-10 py-7 text-lg md:text-xl font-bold rounded-2xl
-                  bg-primary hover:bg-primary/90 text-white
-                  shadow-[0_0_30px_rgba(43,176,117,0.4)]
-                  hover:shadow-[0_0_50px_rgba(43,176,117,0.6)]
+                  bg-forest-foreground text-forest hover:bg-white
+                  shadow-lg
                   transition-all duration-300
                   hover:scale-105 active:scale-95"
               >
@@ -898,8 +893,8 @@ export default function OjolClient() {
             </Link>
 
             {/* Trust Text */}
-            <p className="text-gray-500 text-sm mt-6">{t("ojol.cta.trust")}</p>
-          </div>
+            <p className="text-forest-muted text-sm mt-6">{t("ojol.cta.trust")}</p>
+          </Reveal>
         </div>
       </div>
     </div>

@@ -309,7 +309,7 @@ const themeStyles = {
   dark: {
     title: "text-white",
     description: "text-gray-200",
-    tag: "border-teal-700 bg-teal-900/50 text-[var(--primary-light)]",
+    tag: "border-border bg-primary/50 text-[var(--primary-light)]",
   },
   light: {
     title: "text-gray-900",
@@ -387,7 +387,7 @@ const Title: React.FC<TitleProps> = ({
         {" "}
         <span
           className={cn(
-            "bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent relative",
+            "text-white relative",
             highlightClassName
           )}
         >
@@ -470,7 +470,7 @@ const CTAGroup: React.FC<CTAGroupProps> = ({
         <Button
           className={cn(
             baseClasses,
-            "bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white shadow-teal group",
+            "bg-primary hover:bg-[var(--primary-dark)] text-white shadow-teal group",
             button.className
           )}
           onClick={button.onClick}
@@ -498,7 +498,7 @@ const CTAGroup: React.FC<CTAGroupProps> = ({
         variant="outline"
         className={cn(
           baseClasses,
-          "border-[var(--primary)] text-[var(--primary-light)] hover:bg-teal-900/50",
+          "border-primary text-[var(--primary-light)] hover:bg-primary/50",
           button.className
         )}
         onClick={button.onClick}
@@ -594,7 +594,10 @@ export const HeroSlide = React.forwardRef<HTMLDivElement, HeroSlideProps>(
     },
     ref
   ) => {
-    const [isVisible, setIsVisible] = React.useState(!animated);
+    // SSR-safe: konten hero tampil sejak render awal (tidak digerbang JS/hydration).
+    // Transisi antar-slide carousel tetap menyediakan gerak; entrance fade-up dilepas demi
+    // memastikan judul/CTA above-the-fold tidak pernah tak terlihat bila JS gagal/lambat.
+    const [isVisible, setIsVisible] = React.useState(true);
     const [screenSize, setScreenSize] = React.useState<
       "mobile" | "tablet" | "desktop"
     >("desktop");
@@ -812,6 +815,7 @@ export const HeroSlide = React.forwardRef<HTMLDivElement, HeroSlideProps>(
             alt={backgroundAlt}
             fill
             priority
+            sizes="100vw"
             className={cn("object-cover", backgroundStyle)}
           />
         )}

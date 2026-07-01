@@ -1,10 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
 import GetProductData from "../lib/product-data";
@@ -12,6 +13,8 @@ import { useLanguage } from "../lib/language-context";
 import ComparisonTable from "@/components/comparison-table";
 import UserManualSection from "@/components/user-manual-section";
 import { useInView } from "react-intersection-observer";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 
 type Props = {
   motorType: string;
@@ -20,113 +23,109 @@ type Props = {
 export default function ProductPageComponent({ motorType }: Props) {
   const [isDesktop, setIsDesktop] = useState<boolean>(true);
   const product = GetProductData(motorType);
-  const [count1, setCount1] = useState<number | string>(0);
-  const [count2, setCount2] = useState<number | string>(0);
-  const [count3, setCount3] = useState<number | string>(0);
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-  });
-  const { t } = useLanguage();
-  useEffect(() => {
-    const incrementer = (num: any, countSetter: any) => {
-      if (typeof num !== "number") return countSetter(num);
-      const finalCount = num;
-      let currentCount = 0;
-      // const increment = Math.ceil(1);
-      const increment = Math.ceil(finalCount / 80);
-      const timer = setInterval(() => {
-        currentCount += increment;
-        if (currentCount >= finalCount) {
-          currentCount = finalCount;
-          clearInterval(timer);
-        }
-        countSetter(currentCount);
-      }, 20);
+  // Seed dengan nilai spesifikasi asli -> SSR/no-JS menampilkan angka benar (bukan 0).
+  const [counts, setCounts] = useState<(number | string)[]>(() =>
+    product ? product.techSpec.map((s) => s.title) : [0, 0, 0],
+  );
+  const { ref, inView } = useInView({ triggerOnce: true });
+  const { t, language } = useLanguage();
 
-      return () => clearInterval(timer);
-    };
+  useEffect(() => {
     const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
-    // const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
-    if (inView) {
-      incrementer(product?.techSpec[0].title, setCount1);
-      incrementer(product?.techSpec[1].title, setCount2);
-      incrementer(product?.techSpec[2].title, setCount3);
-    }
-    checkScreen(); // initial check
+    checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  // Client-only: turunkan angka numerik ke 0 (saat section masih di luar viewport) supaya
+  // count-up punya titik mulai; SSR tetap membawa nilai asli untuk aksesibilitas/crawler.
+  useEffect(() => {
+    if (!product) return;
+    setCounts(product.techSpec.map((s) => (typeof s.title === "number" ? 0 : s.title)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [motorType]);
+
+  useEffect(() => {
+    if (!inView || !product) return;
+    const timers: ReturnType<typeof setInterval>[] = [];
+    product.techSpec.forEach((s, i) => {
+      const target = s.title;
+      if (typeof target !== "number") {
+        setCounts((p) => p.map((v, j) => (j === i ? target : v)));
+        return;
+      }
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        setCounts((p) => p.map((v, j) => (j === i ? current : v)));
+      }, 22);
+      timers.push(timer);
+    });
+    return () => timers.forEach(clearInterval);
   }, [inView]);
 
-  // if (!product || isDesktop === undefined) return null;
   if (!product) return null;
+
+  const kicker = language === "id" ? "Motor Listrik Wedison" : "Wedison Electric";
 
   return (
     <div>
-      {/* hero */}
-      <div className=" relative w-full">
-        <div className="flex flex-col items-center justify-center w-full h-[100vh] md:h-[100vh] overflow-hidden">
-          {/* <div className="flex flex-col items-center justify-center w-full h-[90vh] md:h-[96vh] overflow-hidden"> */}
-          <div className="relative w-full h-full scale-100 md:scale-100">
-            <Image
-              src={
-                isDesktop
-                  ? product?.hero.imageUrl
-                  : product?.hero.imageUrlMobile || product?.hero.imageUrl
-              }
-              alt={product?.hero.imageAlt}
-              width={1000}
-              quality={100}
-              height={1000}
-              loading="eager"
-              className={cn(
-                " object-cover object-center w-full h-full",
-                // " object-cover object-[50%_50%] lg:object-[90%_0%] w-full h-full",
-                product?.hero.className,
-              )}
-            />
-          </div>
-        </div>
-        <div className="absolute top-0 left-0 w-full h-full flex items-start py-10 md:py-24">
-          <div className="mt-8 flex flex-col items-center justify-center items gap-2 w-full">
-            <h1 className="text-4xl md:text-6xl font-bold text-center text-white">
-              {product?.hero.title}
-            </h1>
-            <p className="text-sm md:text-lg text-center text-white">
-              {product?.hero.desc}
+      {/* ============ HERO ============ */}
+      <section className="relative h-[100svh] w-full overflow-hidden">
+        <Image
+          src={
+            isDesktop
+              ? product.hero.imageUrl
+              : product.hero.imageUrlMobile || product.hero.imageUrl
+          }
+          alt={product.hero.imageAlt}
+          fill
+          priority
+          sizes="100vw"
+          className={cn("object-cover object-center", product.hero.className)}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-24 sm:pb-28">
+          <div className="main-container flex flex-col items-center text-center">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/75">
+              {kicker}
             </p>
-            <div className="flex w-full justify-center gap-4 mt-2">
-              {/* <Link href={`/corporate/contact/`}> */}
+            <h1 className="mt-4 text-balance text-5xl font-extrabold leading-[1.02] tracking-tight text-white sm:text-7xl lg:text-8xl">
+              {product.hero.title}
+            </h1>
+            <p className="mt-4 max-w-[46ch] text-base text-white/85 sm:text-lg">
+              {product.hero.desc}
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
               <Link
-                href={`https://www.tokopedia.com/wedison-store`}
-                target="_blank" rel="noopener noreferrer"
+                href="https://www.tokopedia.com/wedison-store"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Button
-                  // className="px-4 md:px-4 rounded-sm cursor-pointer flex items-center justify-between font-semibold"
-                  className="px-4 md:px-4 rounded-sm cursor-pointer flex items-center justify-between font-semibold bg-white text-black border border-black w-full hover:bg-white hover:text-primary"
-                  size={"lg"}
-                >
+                <Button size="lg" className="gap-2 bg-white text-foreground hover:bg-white/90">
                   <Image
-                    // src="/icons/tokopedia.svg"
                     src="/icons/Tokopedia_Mascot.png"
-                    alt="Tokopedia Logo"
-                    width={100}
-                    height={100}
-                    loading="eager"
-                    className="w-6 h-6 md:w-8 md:h-8"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="h-6 w-6"
                   />
-                  <p>{t("btn.buy.on.tokopedia")}</p>
+                  {t("btn.buy.on.tokopedia")}
                 </Button>
               </Link>
-
               <Link
                 href={`/brochure/brochure-${motorType}.pdf`}
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Button
-                  className=" text-white px-8 md:px-12 cursor-pointer font-medium rounded-sm border-white bg-white/15 hover:text-white hover:bg-white/20"
-                  // className=" text-[var(--primary)] px-8 md:px-16 cursor-pointer font-medium rounded-sm"
-                  size={"lg"}
-                  variant={"outline"}
+                  size="lg"
+                  className="border border-white/40 bg-white/10 text-white hover:bg-white/20"
                 >
                   {t("btn.see.brochure")}
                 </Button>
@@ -134,170 +133,148 @@ export default function ProductPageComponent({ motorType }: Props) {
             </div>
           </div>
         </div>
-      </div>
-      {/* technical spec */}
-      <div className="py-26 w-full px-8 md:px-16 md:my-16 max-w-[2480px] mx-auto">
-        <div className="flex justify-center container mx-auto">
-          <div className="  flex items-center justify-center w-full max-w-6xl">
-            <div className=" flex flex-col md:flex-row items-center md:items-start md:justify-evenly h-full w-fit md:w-full">
-              <div className=" max-md:w-full">
-                <div className=" flex justify-start  w-full">
-                  <div
-                    ref={ref}
-                    className="text-6xl md:text-7xl font-medium md:font-bold "
-                  >
-                    {/* {product?.techSpec[0].title} */}
-                    {count1}
-                  </div>
-                  <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
-                    {product?.techSpec[0].unit}
-                  </div>
-                </div>
-                <div className="text-lg font-medium md:font-semibold">
-                  {product?.techSpec[0].desc}
-                </div>
-              </div>
-              <div className=" w-[80%] h-[1px] bg-gradient-to-r md:w-[1px] md:h-full my-3 md:my-0 md:bg-gradient-to-b from-white from-0% via-black/40 to-100% mx-[1px] to-white"></div>
+        <ChevronDown className="absolute bottom-8 left-1/2 h-6 w-6 -translate-x-1/2 animate-float text-white/70" />
+      </section>
 
-              <div className=" max-md:w-full">
-                <div className=" flex justify-start ">
-                  <div className="text-6xl md:text-7xl font-medium md:font-bold">
-                    {/* {product?.techSpec[1].title} */}
-                    {count2}
-                  </div>
-                  <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
-                    {product?.techSpec[1].unit}
-                  </div>
-                </div>
-                <div className="text-lg font-medium md:font-semibold">
-                  {product?.techSpec[1].desc}
-                </div>
-              </div>
-              <div className=" w-[80%] h-[1px] bg-gradient-to-r md:w-[1px] md:h-full my-3 md:my-0 md:bg-gradient-to-b from-white from-0% via-black/40 to-100% mx-[1px] to-white"></div>
-
-              <div className=" max-md:w-full">
-                <div className=" flex justify-start ">
-                  <div className="text-6xl md:text-7xl font-medium md:font-bold">
-                    {/* {product?.techSpec[2].title} */}
-                    {count3}
-                  </div>
-                  <div className=" flex items-end text-left text-2xl md:text-3xl font-medium md:font-semibold">
-                    {product?.techSpec[2].unit}
-                  </div>
-                </div>
-                <div className="text-lg font-medium md:font-semibold">
-                  {product?.techSpec[2].desc}
-                </div>
-              </div>
-            </div>
+      {/* ============ STICKY SUB-NAV ============ */}
+      <div className="sticky top-16 z-30 border-b border-border bg-background/95">
+        <div className="main-container flex items-center justify-between gap-4 py-3">
+          <span className="font-display text-lg font-bold tracking-tight text-foreground">
+            {product.hero.title}
+          </span>
+          <div className="flex items-center gap-2">
+            <Link
+              href={`/brochure/brochure-${motorType}.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:block"
+            >
+              <Button variant="ghost" size="sm">
+                {t("btn.see.brochure")}
+              </Button>
+            </Link>
+            <Link
+              href="https://www.tokopedia.com/wedison-store"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="sm">{t("btn.buy.on.tokopedia")}</Button>
+            </Link>
           </div>
         </div>
       </div>
-      {/* Product Overview */}
-      <div className="w-full xl:px-16 flex flex-col justify-center max-w-[2480px] mx-auto">
-        <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px] xl:h-[700px] max-w-[2480px] mx-auto">
-          <Image
-            src={
-              isDesktop
-                ? product?.productOverview.imageUrl
-                : product?.productOverview.imageUrlMobile ||
-                  product?.productOverview.imageUrl
-            }
-            alt={product?.productOverview.imageAlt}
-            width={1000}
-            height={1000}
-            className={cn(
-              "w-full h-full object-cover object-center xl:rounded-md",
-              product.productOverview.className,
-            )}
-          />
-        </div>
 
-        <div className=" w-full flex items-center justify-center ">
-          <div className="w-full sm:mt-14 mt-8 px-4 sm:mx-[72px]">
-            <h2 className="text-5xl xl:text-6xl font-medium mb-1">
-              {product?.productOverview.title}
-            </h2>
-            <p className="text-2xl xl:text-2xl text-justify font-normal mb-10 sm:mb-32  text-muted-foreground">
-              {product?.productOverview.desc}
-            </p>
-          </div>
-        </div>
-      </div>
-      {/* Product Highlight */}
-      <div className=" max-w-[2880px] mx-auto overflow-visible">
-        <PeekCarousel
-          data={product.productHighlight}
-          for={motorType}
-          perView={1.35}
-          // perView={1.35}
-        />
-      </div>
-
-      {/* Supercharge Overview */}
-      {product?.chargingOverview && (
-        <div className="w-full xl:px-16 flex flex-col justify-center max-w-[2480px] mx-auto">
-          <div className=" w-full h-[490px] sm:h-[576px] lg:h-[600px] xl:h-[700px] max-w-[2480px] mx-auto ">
-            <Image
-              src={
-                isDesktop
-                  ? product?.chargingOverview.imageUrl
-                  : product?.chargingOverview.imageUrlMobile ||
-                    product?.chargingOverview.imageUrl
-              }
-              alt={product?.chargingOverview.imageAlt}
-              width={1000}
-              height={1000}
+      {/* ============ TECH SPEC (mono counters) ============ */}
+      <section ref={ref} className="main-container py-16 sm:py-24">
+        <Stagger className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6">
+          {product.techSpec.map((s, i) => (
+            <StaggerItem
+              key={i}
               className={cn(
-                "w-full h-full object-cover object-center xl:rounded-md ",
-                product.chargingOverview.className,
+                "flex flex-col items-center text-center sm:items-start sm:text-left",
+                i > 0 && "sm:border-l sm:border-border sm:pl-6",
               )}
-            />
-          </div>
+            >
+              <div className="flex items-end gap-1">
+                <span className="font-mono text-6xl font-semibold leading-none tracking-tight text-foreground sm:text-7xl">
+                  {counts[i]}
+                </span>
+                {s.unit && (
+                  <span className="mb-1 font-mono text-xl font-medium text-primary sm:text-2xl">
+                    {s.unit}
+                  </span>
+                )}
+              </div>
+              <div className="mt-3 text-base font-medium text-muted-foreground">{s.desc}</div>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </section>
 
-          <div className=" w-full flex items-center justify-center ">
-            <div className="w-full sm:mt-14 mt-8 px-6 sm:mx-[72px]">
-              <h2 className="text-5xl xl:text-6xl font-medium mb-1">
-                {product?.chargingOverview.title}
-              </h2>
-              <p className="text-2xl xl:text-2xl text-justify font-normal mb-10 sm:mb-32  text-muted-foreground">
-                {product?.chargingOverview.desc}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* ============ PRODUCT OVERVIEW ============ */}
+      <FeatureBlock
+        image={
+          isDesktop
+            ? product.productOverview.imageUrl
+            : product.productOverview.imageUrlMobile || product.productOverview.imageUrl
+        }
+        imageClass={product.productOverview.className}
+        alt={product.productOverview.imageAlt}
+        title={product.productOverview.title}
+        desc={product.productOverview.desc}
+      />
 
-      {/* Supercharge Highlight */}
-      {product.chargingHighlight && (
-        <div className="max-w-[2880px] mx-auto overflow-visible">
-          <PeekCarousel
-            data={product.chargingHighlight}
-            for="supercharge"
-            perView={1.35}
-          />
-        </div>
-      )}
-
-      {/* Specification Accordion */}
-      {/* <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
-
-        <SpecificationsAccordion motorType={motorType} />
-      </div> */}
-
-      <div className="py-6 w-full px-8 md:px-16 md:my-6 max-w-[2480px] mx-auto flex items-center justify-center">
-        <ComparisonTable
-          // bikes={bikesData}
-          primaryBikeId={motorType}
-          mode="comparison"
-        />
+      {/* ============ PRODUCT HIGHLIGHT ============ */}
+      <div className="py-8 sm:py-12">
+        <PeekCarousel data={product.productHighlight} for={motorType} perView={1.35} />
       </div>
 
-      {/* User Manual */}
+      {/* ============ SUPERCHARGE OVERVIEW ============ */}
+      {product.chargingOverview && (
+        <FeatureBlock
+          image={
+            isDesktop
+              ? product.chargingOverview.imageUrl
+              : product.chargingOverview.imageUrlMobile || product.chargingOverview.imageUrl
+          }
+          imageClass={product.chargingOverview.className}
+          alt={product.chargingOverview.imageAlt}
+          title={product.chargingOverview.title}
+          desc={product.chargingOverview.desc}
+        />
+      )}
+
+      {/* ============ SUPERCHARGE HIGHLIGHT ============ */}
+      {product.chargingHighlight && (
+        <div className="py-8 sm:py-12">
+          <PeekCarousel data={product.chargingHighlight} for="supercharge" perView={1.35} />
+        </div>
+      )}
+
+      {/* ============ COMPARISON ============ */}
+      <div className="main-container py-16 sm:py-24">
+        <ComparisonTable primaryBikeId={motorType} mode="comparison" />
+      </div>
+
+      {/* ============ USER MANUAL ============ */}
       <UserManualSection
         variant="single"
         motorType={motorType as "bees" | "athena" | "victory" | "edpower"}
       />
     </div>
+  );
+}
+
+function FeatureBlock({
+  image,
+  imageClass,
+  alt,
+  title,
+  desc,
+}: {
+  image: string;
+  imageClass?: string;
+  alt: string;
+  title: string;
+  desc: any;
+}) {
+  return (
+    <section className="main-container py-16 sm:py-24">
+      <Reveal className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl sm:aspect-[16/8]" y={0}>
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes="(max-width: 1280px) 100vw, 1200px"
+          className={cn("object-cover object-center", imageClass)}
+        />
+      </Reveal>
+      <Reveal className="mt-8 max-w-3xl" y={28} amount={0.4}>
+        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          {title}
+        </h2>
+        <div className="mt-4 text-lg leading-relaxed text-muted-foreground">{desc}</div>
+      </Reveal>
+    </section>
   );
 }

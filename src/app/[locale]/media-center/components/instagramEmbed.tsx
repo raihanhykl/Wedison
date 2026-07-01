@@ -12,7 +12,7 @@ function InstagramCard({ post }: { post: InstagramPostData }) {
       href={post.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative block aspect-[3/4] w-[60vw] sm:w-auto flex-shrink-0 sm:flex-shrink rounded-xl overflow-hidden bg-gray-100"
+      className="group relative block aspect-[3/4] w-[60vw] sm:w-auto flex-shrink-0 sm:flex-shrink rounded-xl overflow-hidden bg-muted"
     >
       <Image
         src={post.thumbnail}
@@ -59,8 +59,8 @@ export default function InstagramEmbed({
       className="flex sm:grid sm:grid-cols-3 lg:grid-cols-6 gap-3 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0"
       style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
     >
-      {posts.map((post, i) => (
-        <div key={i} className="snap-start">
+      {posts.map((post) => (
+        <div key={post.url} className="snap-start">
           <InstagramCard post={post} />
         </div>
       ))}

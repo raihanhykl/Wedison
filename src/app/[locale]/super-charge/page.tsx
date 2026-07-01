@@ -17,7 +17,7 @@ export async function generateMetadata({
 export default function SuperChargePage() {
   return (
     <>
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-background">
         <HeroSection
           name="supercharge"
           imageAlt="SuperCharge Charging Station"
@@ -34,21 +34,20 @@ export default function SuperChargePage() {
           feature={1}
           alt="man riding dash electric motorcycle"
           image="/super-charge/supercharge-chip-1.webp"
-          style="bg-gray-100"
-          // style="bg-gradient-to-bl  from-[#1E1F22] from-60% to-[#3A3B3F]"
-          titleColor="text-black"
-          descColor="text-gray-600"
-          tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
+          style="bg-muted"
+          titleColor="text-foreground"
+          descColor="text-muted-foreground"
+          tagStyle="border-border bg-secondary text-primary"
         />
         <FeatureSection2
           page="supercharge"
           feature={2}
           alt="Victory in the golden hour"
           image="/super-charge/supercharge-location-1.webp"
-          style="bg-white object-[100%_0%] object-cover"
-          titleColor="text-black"
-          descColor="text-gray-600"
-          tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
+          style="bg-background object-[100%_0%] object-cover"
+          titleColor="text-foreground"
+          descColor="text-muted-foreground"
+          tagStyle="border-border bg-secondary text-primary"
         />
         <FeatureSection2
           page="supercharge"
@@ -56,10 +55,10 @@ export default function SuperChargePage() {
           alt="Victory in the golden hour"
           image="/super-charge/supercharge-charging.webp"
           imageStyle="object-[10%_100%]"
-          style="bg-gray-100"
-          titleColor="text-black"
-          descColor="text-gray-600"
-          tagStyle="border-[var(--primary-lighter)] bg-[var(--secondary-light)] text-[var(--primary-dark)]"
+          style="bg-muted"
+          titleColor="text-foreground"
+          descColor="text-muted-foreground"
+          tagStyle="border-border bg-secondary text-primary"
         />
 
         {/* SuperCharge App Showcase */}

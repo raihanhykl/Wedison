@@ -33,7 +33,7 @@ export default function HeroSection({
   const dark = {
     titleStyle: "text-white",
     descriptionStyle: "text-gray-200",
-    tagStyle: "border-teal-700 bg-teal-900/50 text-[var(--primary-light)]",
+    tagStyle: "border-border bg-primary/50 text-[var(--primary-light)]",
   };
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function HeroSection({
           >
             <div
               className={cn(
-                "hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-[var(--primary-light)]",
+                "hidden lg:inline-block px-4 py-1 mb-6 border border-border rounded-full bg-primary/50 text-[var(--primary-light)]",
                 isMobile
                   ? dark.tagStyle
                   : theme === "dark"
@@ -115,7 +115,7 @@ export default function HeroSection({
               )}
             >
               {t(`${name}.hero.title`)}{" "}
-              <span className="bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent relative">
+              <span className="text-white relative">
                 {t(`${name}.hero.titleHighlight`)}
                 <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
               </span>
@@ -137,14 +137,14 @@ export default function HeroSection({
 
             {!noButton && (
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
+                <Button className="bg-primary hover:bg-[var(--primary-dark)] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg shadow-teal transition-all duration-300 hover:-translate-y-1">
                   {t("edmax.hero.orderNow")}
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
 
                 <Button
                   variant="outline"
-                  className="border-[var(--primary)] text-[var(--primary-light)] hover:bg-teal-900/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
+                  className="border-primary text-[var(--primary-light)] hover:bg-primary/50 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-md text-base sm:text-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   <Download className="mr-2 h-5 w-5" />
                   {t("edmax.hero.downloadBrochure")}

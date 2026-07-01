@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { jobListings, JobData } from "./data-job";
 import { useLanguage } from "@/app/lib/language-context";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 
 export default function CareerClient() {
   const { t } = useLanguage();
@@ -50,7 +52,7 @@ export default function CareerClient() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-background">
       {/* Banner Section */}
       <div className="relative w-full h-[550px] md:h-[500px] lg:h-[600px] overflow-hidden">
         <Image
@@ -63,7 +65,7 @@ export default function CareerClient() {
             // Fallback to gradient if image fails to load
             e.target.style.display = "none";
             e.target.parentElement.style.background =
-              "linear-gradient(135deg, #2BB075 0%, #1a8a5a 100%)";
+              "linear-gradient(135deg, var(--primary) 0%, var(--forest) 100%)";
           }}
         />
         {/* Overlay */}
@@ -71,20 +73,22 @@ export default function CareerClient() {
 
         {/* Banner Content */}
         <div className="absolute inset-0 flex items-center">
-          <div className="max-w-[2480px] mx-auto px-8 md:px-16 w-full">
-            <div className="max-w-3xl ">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
+          <div className="main-container">
+            <Reveal as="div" className="max-w-3xl">
+              <h1 className="font-display font-bold tracking-tight text-white mb-4 md:mb-6 text-[clamp(2.4rem,5.6vw,4.5rem)]">
                 {t("career.banner.title")}
                 <br />
-                <span className="text-primary">{t("career.banner.titleHighlight")}</span>
+                <span className="text-on-forest-accent">
+                  {t("career.banner.titleHighlight")}
+                </span>
               </h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8">
+              <p className="text-lg md:text-xl lg:text-2xl text-white/80 mb-6 md:mb-8">
                 {t("career.banner.description")}
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
                   <svg
-                    className="w-5 h-5 text-primary"
+                    className="w-5 h-5 text-on-forest-accent"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -100,7 +104,7 @@ export default function CareerClient() {
                 </div>
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
                   <svg
-                    className="w-5 h-5 text-primary"
+                    className="w-5 h-5 text-on-forest-accent"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -116,7 +120,7 @@ export default function CareerClient() {
                 </div>
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
                   <svg
-                    className="w-5 h-5 text-primary"
+                    className="w-5 h-5 text-on-forest-accent"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -131,7 +135,7 @@ export default function CareerClient() {
                   </span>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
@@ -139,36 +143,46 @@ export default function CareerClient() {
       {/* Job Listings Section */}
       <div className="main-container py-12 md:py-16 lg:py-20">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <Reveal as="div" className="text-center mb-12 md:mb-16">
+          <h2 className="font-display font-bold tracking-tight text-foreground mb-4 text-[clamp(1.9rem,4vw,2.9rem)]">
             {t("career.section.title")}
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             {t("career.section.description")}
           </p>
-        </div>
+        </Reveal>
 
         {/* Job Cards Grid */}
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {jobListings.map((job) => (
-            <div
+            <StaggerItem
               key={job.id}
-              onClick={() => handleJobCardClick(job)}
-              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer hover:-translate-y-2 border border-gray-100"
+              className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 cursor-pointer hover:-translate-y-2 border border-border"
             >
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => handleJobCardClick(job)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleJobCardClick(job);
+                  }
+                }}
+              >
               {/* Card Header with Department Badge */}
-              <div className="relative bg-gradient-to-br from-primary/10 to-primary/5 p-6 border-b border-gray-100">
-                <span className="inline-block bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full mb-3">
+              <div className="relative bg-gradient-to-br from-primary/10 to-primary/5 p-6 border-b border-border">
+                <span className="inline-block bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full mb-3">
                   {job.department}
                 </span>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
+                <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
                   {job.jobTitle}
                 </h3>
               </div>
 
               {/* Card Body */}
               <div className="p-6">
-                <div className="flex items-start gap-3 text-gray-600 mb-4">
+                <div className="flex items-start gap-3 text-muted-foreground mb-4">
                   <svg
                     className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary"
                     fill="none"
@@ -194,7 +208,7 @@ export default function CareerClient() {
                 {/* View Details Button */}
                 <Button
                   variant="outline"
-                  className="w-full group/btn border-gray-300 hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
+                  className="w-full group/btn border-border hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 >
                   <span className="flex items-center justify-center gap-2">
                     {t("career.card.viewDetails")}
@@ -214,9 +228,10 @@ export default function CareerClient() {
                   </span>
                 </Button>
               </div>
-            </div>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
 
       {/* Job Detail Dialog */}
@@ -230,17 +245,17 @@ export default function CareerClient() {
 
           {/* Dialog Content */}
           <div
-            className="relative bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-hidden shadow-2xl animate-in zoom-in-95 fade-in duration-300"
+            className="relative bg-card rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-hidden shadow-2xl animate-in zoom-in-95 fade-in duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 bg-gradient-to-r from-primary to-primary/80 text-white p-6 z-10">
+            <div className="sticky top-0 bg-primary text-primary-foreground p-6 z-30">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-2">
+                  <span className="inline-block bg-white/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full mb-2">
                     {selectedJob.department}
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-bold">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
                     {selectedJob.jobTitle}
                   </h3>
                 </div>
@@ -269,7 +284,7 @@ export default function CareerClient() {
             <div className="overflow-y-auto max-h-[calc(90vh-200px)] p-6 space-y-6">
               {/* Job Overview */}
               <div>
-                <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h4 className="font-display text-lg font-bold tracking-tight text-foreground mb-3 flex items-center gap-2">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-primary"
@@ -287,14 +302,14 @@ export default function CareerClient() {
                   </span>
                   {t("career.detail.jobOverview")}
                 </h4>
-                <div className="text-gray-700 leading-relaxed">
+                <div className="text-foreground/80 leading-relaxed">
                   {selectedJob.jobOverview}
                 </div>
               </div>
 
               {/* Key Responsibilities */}
               <div>
-                <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h4 className="font-display text-lg font-bold tracking-tight text-foreground mb-3 flex items-center gap-2">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-primary"
@@ -312,14 +327,14 @@ export default function CareerClient() {
                   </span>
                   {t("career.detail.keyResponsibilities")}
                 </h4>
-                <div className="text-gray-700">
+                <div className="text-foreground/80">
                   {selectedJob.keyResponsibilities}
                 </div>
               </div>
 
               {/* Qualifications & Requirements */}
               <div>
-                <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h4 className="font-display text-lg font-bold tracking-tight text-foreground mb-3 flex items-center gap-2">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-primary"
@@ -337,17 +352,17 @@ export default function CareerClient() {
                   </span>
                   {t("career.detail.qualifications")}
                 </h4>
-                <div className="text-gray-700">
+                <div className="text-foreground/80">
                   {selectedJob.qualificationsRequirement}
                 </div>
               </div>
             </div>
 
             {/* Footer CTA */}
-            <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
+            <div className="sticky bottom-0 bg-card border-t border-border p-4">
               <Button
                 onClick={handleApplyClick}
-                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full bg-primary hover:bg-primary-hover text-primary-foreground font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <span className="flex items-center justify-center gap-2">
                   <svg
@@ -382,17 +397,17 @@ export default function CareerClient() {
 
           {/* Dialog Content */}
           <div
-            className="relative bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 fade-in duration-300"
+            className="relative bg-card rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 fade-in duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-primary to-primary/80 text-white p-6">
+            <div className="bg-primary text-primary-foreground p-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-1">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-1">
                     {t("career.portal.title")}
                   </h3>
-                  <p className="text-white/80 text-sm md:text-base">
+                  <p className="text-primary-foreground/80 text-sm md:text-base">
                     {selectedJob.jobTitle} - {selectedJob.department}
                   </p>
                 </div>
@@ -419,14 +434,14 @@ export default function CareerClient() {
 
             {/* Content */}
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
-              <p className="text-gray-600 text-center mb-6">
+              <p className="text-muted-foreground text-center mb-6">
                 {t("career.portal.description")}
               </p>
 
               {/* Email Apply Option - Featured */}
               <div className="mb-6">
                 <a
-                  href={`mailto:career@wedison.co?subject=Lamaran%20Pekerjaan%20-%20${encodeURIComponent(
+                  href={`mailto:hr@wedison.co?subject=Lamaran%20Pekerjaan%20-%20${encodeURIComponent(
                     selectedJob.jobTitle,
                   )}%20(${encodeURIComponent(
                     selectedJob.department,
@@ -440,7 +455,7 @@ export default function CareerClient() {
                   {/* Email Icon */}
                   <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                     <svg
-                      className="w-7 h-7 text-white"
+                      className="w-7 h-7 text-primary-foreground"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -456,11 +471,11 @@ export default function CareerClient() {
 
                   {/* Text */}
                   <div className="flex-1 text-left">
-                    <span className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors block">
-                      Lamar via Email
+                    <span className="text-lg font-bold text-foreground group-hover:text-primary transition-colors block">
+                      {t("career.apply.emailTitle")}
                     </span>
-                    <span className="text-sm text-gray-500">
-                      Kirim lamaran langsung ke hr@wedison.co
+                    <span className="text-sm text-muted-foreground">
+                      {t("career.apply.emailSubtitle")}
                     </span>
                   </div>
 
@@ -483,11 +498,11 @@ export default function CareerClient() {
 
               {/* Divider */}
               <div className="flex items-center gap-4 mb-6">
-                <div className="flex-1 h-px bg-gray-200"></div>
-                <span className="text-sm text-gray-400 font-medium">
-                  atau via Job Portal
+                <div className="flex-1 h-px bg-border"></div>
+                <span className="text-sm text-muted-foreground font-medium">
+                  {t("career.apply.orViaPortal")}
                 </span>
-                <div className="flex-1 h-px bg-gray-200"></div>
+                <div className="flex-1 h-px bg-border"></div>
               </div>
 
               {/* Job Portals Grid */}
@@ -496,10 +511,10 @@ export default function CareerClient() {
                   <button
                     key={index}
                     onClick={() => handleJobPortalClick(portal.url)}
-                    className="group flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 border-2 border-gray-200 hover:border-primary rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                    className="group flex items-center gap-4 p-4 bg-muted hover:bg-primary/5 border-2 border-border hover:border-primary rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                   >
                     {/* Portal Icon */}
-                    <div className="w-12 h-12 p-0 border-1 border-gray-300 rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+                    <div className="w-12 h-12 p-0 border border-border rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
                       {getJobPortalIcon(portal.name) ? (
                         <Image
                           // src={getJobPortalIcon(portal.name)}
@@ -531,11 +546,11 @@ export default function CareerClient() {
 
                     {/* Portal Name and Arrow */}
                     <div className="flex-1 flex items-center justify-between">
-                      <span className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
+                      <span className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                         {portal.name}
                       </span>
                       <svg
-                        className="w-5 h-5 text-gray-400 group-hover:text-primary transition-all duration-300 group-hover:translate-x-1"
+                        className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:translate-x-1"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -553,10 +568,10 @@ export default function CareerClient() {
               </div>
 
               {/* Info Text */}
-              <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl">
+              <div className="mt-6 p-4 bg-muted border border-border rounded-xl">
                 <div className="flex items-start gap-3">
                   <svg
-                    className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"
+                    className="w-5 h-5 text-primary mt-0.5 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -568,7 +583,7 @@ export default function CareerClient() {
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <p className="text-sm text-blue-900">
+                  <p className="text-sm text-foreground/80">
                     {t("career.portal.infoText")}
                   </p>
                 </div>

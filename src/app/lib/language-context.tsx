@@ -1,11 +1,6 @@
 "use client";
 
-import { translations } from "./translations";
-import {
-  createContext,
-  useContext,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 type Language = "en" | "id";
@@ -15,8 +10,7 @@ type LanguageContextType = {
   setLanguage: (language: Language) => void;
   // Catatan: sebagian nilai terjemahan sebenarnya JSX (ReactNode), tapi tipe
   // dipertahankan `string` (via cast di t()) agar ~ratusan call site yang
-  // menaruh t() ke field bertipe string tetap kompilasi. Membereskan tipe ini
-  // = fase tersendiri, di luar lingkup migrasi locale.
+  // menaruh t() ke field bertipe string tetap kompilasi.
   t: (key: string) => string;
 };
 
@@ -26,17 +20,19 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 export function LanguageProvider({
   locale,
+  dictionary,
   children,
 }: {
   locale: Language;
+  // Kamus locale AKTIF saja (di-inject oleh provider per-locale) -> hanya satu
+  // bahasa yang ikut ke bundle client, bukan keduanya sekaligus.
+  dictionary: Record<string, unknown>;
   children: ReactNode;
 }) {
   const router = useRouter();
   const pathname = usePathname();
 
   // URL = sumber kebenaran. `language` selalu mengikuti segmen [locale] di URL.
-  // Saat user pindah /id <-> /en, layout [locale] re-render dengan prop locale
-  // baru sehingga seluruh consumer ikut ter-update. Tidak perlu useState.
   const language: Language = locale;
 
   // Ganti bahasa = navigasi ke URL locale lain (pertahankan sisa path),
@@ -48,9 +44,7 @@ export function LanguageProvider({
   };
 
   const t = (key: string): string => {
-    return (
-      (translations[language] as unknown as Record<string, string>)[key] || key
-    );
+    return (dictionary as unknown as Record<string, string>)[key] || key;
   };
 
   return (

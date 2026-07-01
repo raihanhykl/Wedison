@@ -52,7 +52,7 @@ const NavbarProduct = forwardRef<HTMLDivElement, Props>(
         {/* desktop */}
         {/* <div
         className={cn(
-          " sticky top-0 left-0 w-full overflow-hidden bg-white md:transition-discrate duration-300 hidden md:flex justify-center items-center shadow-sm ",
+          " sticky top-0 left-0 w-full overflow-hidden bg-card md:transition-discrate duration-300 hidden md:flex justify-center items-center shadow-sm ",
           open
             ? "max-h-60 h-60 opacity-100 pointer-events-auto"
             : "max-h-0 pointer-events-none"
@@ -60,13 +60,13 @@ const NavbarProduct = forwardRef<HTMLDivElement, Props>(
         <div
           ref={ref}
           className={cn(
-            "sticky top-0 left-0 w-full overflow-hidden bg-white flex md:flex justify-center items-center shadow-sm transition-all duration-300",
+            "sticky top-0 left-0 w-full overflow-hidden bg-card flex md:flex justify-center items-center shadow-sm transition-all duration-300",
             open
               ? "max-h-60 h-60 opacity-100 pointer-events-auto"
               : "max-h-0 opacity-0 pointer-events-none"
           )}
           // className={cn(
-          //   "sticky top-0 left-0 w-full overflow-hidden bg-white transform origin-top transition-all duration-300 hidden md:flex justify-center items-center shadow-sm",
+          //   "sticky top-0 left-0 w-full overflow-hidden bg-card transform origin-top transition-all duration-300 hidden md:flex justify-center items-center shadow-sm",
           //   open
           //     ? "opacity-100 scale-y-100 pointer-events-auto"
           //     : "opacity-0 scale-y-0 pointer-events-none"

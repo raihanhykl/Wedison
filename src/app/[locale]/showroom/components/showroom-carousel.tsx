@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -19,7 +19,7 @@ export default function ShowroomCarousel({ images }: ShowroomCarouselProps) {
     if (isAnimating) return;
     setIsAnimating(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
     );
     setTimeout(() => setIsAnimating(false), 500);
   };
@@ -37,18 +37,25 @@ export default function ShowroomCarousel({ images }: ShowroomCarouselProps) {
     if (isAnimating) return;
     setIsAnimating(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1,
     );
     setTimeout(() => setIsAnimating(false), 500);
   }, [isAnimating, images.length]);
 
+  // Keep the latest goToNext in a ref so the autoplay interval stays stable
+  // (mounted once) and is not reset on every tick/navigation.
+  const goToNextRef = useRef(goToNext);
+  useEffect(() => {
+    goToNextRef.current = goToNext;
+  }, [goToNext]);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      goToNext();
+      goToNextRef.current();
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentIndex, goToNext]);
+  }, []);
 
   const goToSlide = (index: number) => {
     if (isAnimating || index === currentIndex) return;
@@ -66,7 +73,7 @@ export default function ShowroomCarousel({ images }: ShowroomCarouselProps) {
             key={index}
             className={cn(
               "absolute inset-0 w-full h-full transition-opacity duration-500",
-              index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+              index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0",
             )}
           >
             <Image
@@ -75,7 +82,8 @@ export default function ShowroomCarousel({ images }: ShowroomCarouselProps) {
               className="w-full h-full object-cover object-[10%_40%]"
               width={600}
               height={600}
-              quality={100}
+              // quality={100}
+              sizes="100vw"
             />
           </div>
         ))}
@@ -107,7 +115,7 @@ export default function ShowroomCarousel({ images }: ShowroomCarouselProps) {
               "w-3 h-3 rounded-full transition-all duration-300",
               index === currentIndex
                 ? "bg-white scale-125"
-                : "bg-white/50 hover:bg-white/80"
+                : "bg-white/50 hover:bg-white/80",
             )}
             aria-label={`Go to slide ${index + 1}`}
           />

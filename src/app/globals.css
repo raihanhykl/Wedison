@@ -3,175 +3,72 @@
 
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
+/* Single committed light theme (no user dark toggle). `dark` variant kept correct for
+   any library that toggles `.dark`, but no .dark palette is defined. */
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-/* :root {
-  --background: oklch(1 0 0); */
-/* --foreground: oklch(0.145 0 0); */ /*double comment*/
-/* --foreground: white;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.7 0.14 182.503);
-  --primary-light: oklch(0.78 0.152 181.912);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.7 0.14 182.503);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.7 0.14 182.503);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-} */
-
+/* =========================================================================
+   Wedison Design System — "Sage + Ink"  (see docs/redesign/DESIGN.md)
+   Primitives in :root, authored in OKLCH. Bridged to utilities via @theme inline.
+   Components consume SEMANTIC utilities only (bg-primary, text-muted-foreground, …).
+   ========================================================================= */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0); /* tetap gelap untuk kontras */
-
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-
+  /* Surfaces (light) */
+  --background: oklch(0.985 0.003 150);     /* Snow  #FAFAF7 */
+  --foreground: oklch(0.235 0.008 160);     /* Ink   #1A1F1C */
+  --card: oklch(1 0 0);                      /* White */
+  --card-foreground: oklch(0.235 0.008 160);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.235 0.008 160);
 
-  /* 🎯 Warna utama */
+  /* Brand — the ONLY accent */
+  --primary: oklch(0.455 0.085 159);        /* Deep Green #1E5B40 */
+  --primary-foreground: oklch(0.985 0.003 150);
+  --primary-hover: oklch(0.40 0.078 159);   /* #184A34 */
 
-  /* --primary: oklch(0.7 0.14 182.503); teal-500 */
-  /* --primary: oklch(69.6% 0.17 162.48); emerald-500 */
-  --primary: oklch(0.6731 0.1424 158.78); /* #2bb075 */
+  /* Legacy brand aliases — still consumed by not-yet-retokenized components.
+     Re-mapped onto the new deep-green palette so nothing breaks or goes off-brand.
+     Removed progressively during per-page repolish. */
+  --primary-light: oklch(0.55 0.09 159);     /* medium green */
+  --primary-lighter: oklch(0.80 0.05 158);   /* soft sage-green */
+  --primary-dark: oklch(0.38 0.078 159);     /* deep green */
+  --secondary-light: oklch(0.962 0.010 156); /* very light sage */
 
-  /* --primary-light: oklch(0.78 0.15 182.5); sedikit lebih terang teal-400 */
-  /* --primary-light: oklch(
-    76.5% 0.177 163.223
-  ); sedikit lebih terang emerald-400 */
-  --primary-light: oklch(0.7531 0.1524 158.78);
+  /* Supporting neutrals (green-tinted, never dead gray) */
+  --secondary: oklch(0.90 0.018 156);       /* Sage  #DCE4DA */
+  --secondary-foreground: oklch(0.235 0.008 160);
+  --muted: oklch(0.952 0.010 156);          /* Sage 50 #EFF2EC */
+  --muted-foreground: oklch(0.455 0.018 158); /* Slate Green #4F5E55 (>=4.5:1 on Snow) */
+  --accent: oklch(0.93 0.014 152);          /* Sage 100 #E7EDE3 */
+  --accent-foreground: oklch(0.235 0.008 160);
 
-  /* --primary-lighter: oklch(91% 0.096 180.426); lebih terang, teal-200 */
-  /* --primary-lighter: oklch(90.5% 0.093 164.15); lebih terang, emerald-200 */
-  --primary-lighter: oklch(0.91 0.0968 158.78);
+  --border: oklch(0.915 0.008 152);         /* Hairline #E3E7DE */
+  --input: oklch(0.915 0.008 152);
+  --ring: oklch(0.455 0.085 159);           /* = primary */
 
-  /* --primary-dark: oklch(0.58 0.13 182.5); sedikit lebih gelap, teal-600 */
-  /* --primary-dark: oklch(
-    59.6% 0.145 163.225
-  ); sedikit lebih gelap, emerald-600 */
-  --primary-dark: oklch(0.5531 0.1324 158.78);
+  --destructive: oklch(0.55 0.16 27);       /* Signal red #BE4139 */
+  --destructive-foreground: oklch(0.985 0.003 150);
 
-  --primary-foreground: oklch(0.98 0 0); /* tetap putih agar kontras */
+  /* Forest — inverse / dramatic sections (NOT a theme mode) */
+  --forest: oklch(0.34 0.055 160);          /* #123A28 */
+  --forest-deep: oklch(0.28 0.05 160);      /* #0E2C1E */
+  --forest-foreground: oklch(0.96 0.006 156); /* #EEF3EE */
+  --forest-muted: oklch(0.74 0.02 158);     /* #9FB3A4 */
+  --on-forest-accent: oklch(0.86 0.10 158); /* #9FE3B9 */
 
-  /* 🧩 Warna pendukung */
+  /* Charts — green-led with one gold tertiary (data only) */
+  --chart-1: oklch(0.455 0.085 159);
+  --chart-2: oklch(0.34 0.055 160);
+  --chart-3: oklch(0.66 0.03 158);
+  --chart-4: oklch(0.72 0.12 84);
+  --chart-5: oklch(0.90 0.018 156);
 
-  /* --secondary: oklch(
-    0.953 0.051 180.801
-  ); soft companion ke primary, teal-100 */
-  /* --secondary: oklch(
-    95% 0.052 163.051
-  ); soft companion ke primary, emerald-100 */
-  --secondary: oklch(0.9261 0.0534 158.78);
+  --radius: 0.625rem; /* 10px */
 
-  /* --secondary-light: oklch(
-    0.984 0.014 180.72
-  ); sedikit lebih terang, teal-50 */
-  /* --secondary-light: oklch(
-    97.9% 0.021 166.113
-  ); sedikit lebih terang, emerald-50 */
-  --secondary-light: oklch(0.9571 0.0164 158.78);
-
-  --secondary-foreground: oklch(0.18 0 0);
-
-  --muted: oklch(0.95 0.01 182.5);
-  --muted-foreground: oklch(0.44 0 0);
-
-  --accent: oklch(0.96 0.05 182.5);
-  --accent-foreground: oklch(0.2 0 0);
-
-  --outline-foreground: var(--input);
-
-  /* ❗ Button variant="outline" dan border */
-  --input: oklch(0.7 0.14 182.503); /* pakai warna primary agar senada */
-  --border: oklch(0.7 0.14 182.503);
-  --ring: oklch(0.7 0.14 182.503);
-
-  /* ❌ destructive button */
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-
-  /* chart tetap oke */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-
-  --radius: 0.625rem;
-
-  /* sidebar dan turunan */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.7 0.14 182.503); /* senadakan ring sidebar juga */
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  /* --foreground: oklch(0.985 0 0); */
-  --foreground: white;
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.7 0.14 182.503);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Shadows — green-tinted, subtle (premium, never glow) */
+  --shadow-sm: 0 1px 3px rgba(20, 31, 24, 0.06), 0 1px 2px rgba(20, 31, 24, 0.04);
+  --shadow-md: 0 6px 18px rgba(20, 31, 24, 0.07);
+  --shadow-lg: 0 16px 40px rgba(20, 31, 24, 0.10);
 }
 
 @theme inline {
@@ -183,6 +80,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -194,27 +92,43 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-forest-foreground: var(--forest-foreground);
+  --color-forest-muted: var(--forest-muted);
+  --color-on-forest-accent: var(--on-forest-accent);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
 
-html {
-  scroll-behavior: smooth;
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+    }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+    }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 @layer base {
@@ -223,21 +137,80 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  /* Smooth scroll only when motion is welcome */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  /* Reduced motion: collapse durations, keep subtle fades */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-/* Custom container class */
 @layer components {
+  /* Single container primitive (retires the 2400/2480/2880 drift) */
   .main-container {
-    @apply w-full px-8 md:px-16 max-w-[2480px] mx-auto;
+    @apply w-full mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Ather-style hero: full-bleed at top; once past a small scroll threshold it insets to
+     ~container width + rounds, in ONE smooth eased transition (not scroll-linked -> no flicker).
+     `calc` keeps the shrunk width container-aligned and resize-aware for free. */
+  .hero-shrink {
+    padding: 0;
+    transition: padding 650ms cubic-bezier(0.54, 0.46, 0.54, 0.94);
+  }
+  .hero-shrink[data-shrunk="true"] {
+    padding: 0.75rem max(0.875rem, calc((100vw - 1340px) / 2)) 0;
+  }
+  .hero-shrink-inner {
+    overflow: hidden;
+    border-radius: 0;
+    transition: border-radius 650ms cubic-bezier(0.54, 0.46, 0.54, 0.94);
+  }
+  .hero-shrink[data-shrunk="true"] .hero-shrink-inner {
+    border-radius: 1.75rem;
   }
 }
-/* Carousel progress animation */
+
+@layer utilities {
+  /* Real definitions for utilities the legacy pages reference (were undefined → flat). */
+  .shadow-soft { box-shadow: var(--shadow-sm); }
+  .shadow-soft-lg { box-shadow: var(--shadow-lg); }
+  .shadow-teal { box-shadow: var(--shadow-md); } /* legacy alias, no teal */
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-slide-down { animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+}
+
+/* Carousel progress animation (kept) */
 @keyframes progress {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
-  }
+  from { width: 0%; }
+  to { width: 100%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -59,7 +59,7 @@ export default function FeatureSection2({
           >
             <div
               className={cn(
-                "hidden lg:inline-block px-4 py-1 mb-6 border border-teal-700 rounded-full bg-teal-900/50 text-[var(--primary-light)]",
+                "hidden lg:inline-block px-4 py-1 mb-6 border border-border rounded-full bg-primary/50 text-[var(--primary-light)]",
                 tagStyle
               )}
             >

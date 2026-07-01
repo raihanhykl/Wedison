@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wedison — Design System: Sage + Ink (Opsi I)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Martian+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* ===== Surfaces (light) ===== */
+    --background:#FAFAF7;       /* Snow */
+    --foreground:#1A1F1C;       /* Ink */
+    --card:#FFFFFF;
+    --muted:#EFF2EC;            /* light sage fill */
+    --muted-foreground:#4F5E55; /* slate green, >=4.5:1 */
+    --secondary:#DCE4DA;        /* Sage panel */
+    --accent:#E7EDE3;
+    --border:#E3E7DE;           /* cool hairline */
+    /* ===== Brand ===== */
+    --primary:#1E5B40;          /* Deep Green (brand/CTA) */
+    --primary-foreground:#FAFAF7;
+    --primary-hover:#184A34;
+    --ring:#1E5B40;
+    --destructive:#BE4139;
+    /* ===== Forest (inverse sections) ===== */
+    --forest:#123A28;           /* deep forest section bg */
+    --forest-deep:#0E2C1E;
+    --forest-foreground:#EEF3EE;
+    --forest-muted:#9FB3A4;
+    --on-forest-accent:#9FE3B9; /* sage-bright for kickers on dark */
+    /* ===== Type ===== */
+    --display:"Schibsted Grotesk",system-ui,sans-serif;
+    --text:"Hanken Grotesk",system-ui,sans-serif;
+    --mono:"Martian Mono",ui-monospace,monospace;
+    /* ===== Radius / shadow ===== */
+    --radius:10px;
+    --shadow-sm:0 1px 3px rgba(20,31,24,.06),0 1px 2px rgba(20,31,24,.04);
+    --shadow-md:0 6px 18px rgba(20,31,24,.07);
+    --shadow-lg:0 16px 40px rgba(20,31,24,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--text);background:var(--background);color:var(--foreground);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  .kicker{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+  h1,h2,h3{font-family:var(--display);letter-spacing:-.025em;line-height:1.05;text-wrap:balance}
+  .display{font-size:clamp(2.4rem,5.6vw,4.4rem);font-weight:800}
+  .h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700}
+  .lead{font-size:clamp(1rem,1.6vw,1.18rem);color:var(--muted-foreground);max-width:52ch}
+
+  /* buttons */
+  .btn{font-family:var(--text);font-weight:600;font-size:15px;padding:13px 26px;border-radius:8px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--primary);color:var(--primary-foreground)}
+  .btn-primary:hover{background:var(--primary-hover)}
+  .btn-secondary{background:var(--secondary);color:var(--foreground)}
+  .btn-secondary:hover{background:#cfdac9}
+  .btn-ghost{background:transparent;border-color:var(--border);color:var(--foreground)}
+  .btn-ghost:hover{background:var(--muted)}
+  .btn-link{background:none;border:none;color:var(--primary);font-weight:700;padding:13px 4px}
+  .btn-link:hover{text-decoration:underline;text-underline-offset:4px}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+  .btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+
+  /* navbar */
+  .nav{position:sticky;top:0;z-index:40;background:rgba(250,250,247,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav .inner{max-width:1140px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em}
+  .brand .dot{color:var(--primary)}
+  .nav nav{display:flex;gap:26px}
+  .nav nav a{font-size:14.5px;color:var(--muted-foreground);text-decoration:none;font-weight:500}
+  .nav nav a:hover{color:var(--foreground)}
+  @media(max-width:760px){.nav nav{display:none}}
+
+  /* hero */
+  .hero{padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,72px)}
+  .hero .kicker{color:var(--primary)}
+  .hero .display{margin:18px 0 18px;max-width:16ch}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+  .specs{display:flex;gap:clamp(22px,5vw,64px);flex-wrap:wrap;margin-top:56px;padding-top:26px;border-top:1px solid var(--border)}
+  .spec .n{font-family:var(--mono);font-weight:600;font-size:clamp(26px,3.2vw,38px);letter-spacing:-.03em;color:var(--primary)}
+  .spec .l{font-size:12.5px;letter-spacing:.05em;color:var(--muted-foreground);margin-top:6px;text-transform:uppercase}
+
+  /* forest section */
+  .forest{background:var(--forest);color:var(--forest-foreground);border-radius:24px;overflow:hidden;position:relative}
+  .forest::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 85% 0%, rgba(159,227,185,.10), transparent 55%);pointer-events:none}
+  .forest .pad{padding:clamp(44px,7vw,84px) clamp(28px,5vw,72px);position:relative;z-index:1}
+  .forest .kicker{color:var(--on-forest-accent)}
+  .forest h2{color:#fff;margin:16px 0 14px;max-width:18ch}
+  .forest p{color:#cfe0d4;max-width:48ch}
+  .forest .btn-onfo{background:var(--forest-foreground);color:var(--forest)}
+  .forest .btn-onfo:hover{background:#fff}
+  .forest .btn-ghostfo{background:transparent;border-color:rgba(255,255,255,.28);color:#fff}
+
+  /* cards */
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:32px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--primary)}
+  .card h3{font-size:22px;font-weight:700;margin:10px 0 6px}
+  .card p{font-size:14.5px;color:var(--muted-foreground)}
+  .card .meta{font-family:var(--mono);font-size:13px;color:var(--foreground);margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+
+  /* section header */
+  section.block{padding:clamp(48px,7vw,84px) 0}
+  .seclabel{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-foreground)}
+  .block > .wrap > .h2{margin-top:10px}
+
+  /* component lab */
+  .lab{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:28px}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-sm)}
+  .panel h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground);margin-bottom:16px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+  label.fld{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+  input.fld{width:100%;font-family:var(--text);font-size:15px;padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--foreground)}
+  input.fld:focus{outline:2px solid var(--ring);outline-offset:1px;border-color:var(--ring)}
+  .help{font-size:12.5px;color:var(--muted-foreground);margin-top:6px}
+  .badge{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:var(--secondary);color:var(--primary);font-weight:600}
+
+  /* type scale */
+  .scale .r{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--border);align-items:baseline}
+  .scale .meta{font-family:var(--mono);font-size:11px;color:var(--muted-foreground)}
+  @media(max-width:640px){.scale .r{grid-template-columns:1fr;gap:4px}}
+
+  /* tokens */
+  .tok{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:24px}
+  .chip{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--card)}
+  .chip .c{height:62px}
+  .chip .t{padding:9px 11px}
+  .chip .nm{font-size:12.5px;font-weight:600}
+  .chip .hx{font-family:var(--mono);font-size:10.5px;color:var(--muted-foreground);margin-top:2px}
+  footer{padding:40px 28px 80px;text-align:center;color:var(--muted-foreground);font-size:13px;border-top:1px solid var(--border);margin-top:40px}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="nav"><div class="inner">
+  <div class="brand">WEDISON<span class="dot">.</span></div>
+  <nav><a>Commute</a><a>Performance</a><a>Fleet</a><a>SuperCharge</a><a>EDPower</a></nav>
+  <button class="btn btn-primary" style="padding:10px 20px;font-size:14px">Test Ride</button>
+</div></div>
+
+<!-- HERO (light) -->
+<section class="hero"><div class="wrap">
+  <div class="kicker">Athena · Motor Listrik</div>
+  <h1 class="display">Tenaga listrik, dengan sikap yang serius.</h1>
+  <p class="lead">Jangkauan harian tanpa kompromi. Diam, bertenaga, dan dibangun untuk jalanan Indonesia.</p>
+  <div class="cta">
+    <button class="btn btn-primary">Jelajahi Athena</button>
+    <button class="btn btn-ghost">Lihat Brosur</button>
+  </div>
+  <div class="specs">
+    <div class="spec"><div class="n">105<span style="font-size:.5em;color:var(--muted-foreground)"> km/j</span></div><div class="l">Top speed</div></div>
+    <div class="spec"><div class="n">120<span style="font-size:.5em;color:var(--muted-foreground)"> km</span></div><div class="l">Jangkauan</div></div>
+    <div class="spec"><div class="n">3.5<span style="font-size:.5em;color:var(--muted-foreground)"> jam</span></div><div class="l">Pengisian</div></div>
+    <div class="spec"><div class="n">4.2<span style="font-size:.5em;color:var(--muted-foreground)"> kWh</span></div><div class="l">Baterai</div></div>
+  </div>
+</div></section>
+
+<!-- FOREST (dramatic dark section) -->
+<section class="block" style="padding-top:0"><div class="wrap">
+  <div class="forest"><div class="pad">
+    <div class="kicker">SuperCharge Network</div>
+    <h2 class="h2">Isi daya 0–80% dalam 3,5 jam. Di mana pun di kota Anda.</h2>
+    <p>Jaringan pengisian Wedison tumbuh bersama Anda. Satu kartu, satu aplikasi, akses penuh.</p>
+    <div class="cta">
+      <button class="btn btn-onfo">Lihat Peta Jaringan</button>
+      <button class="btn btn-ghostfo">Pelajari SuperCharge</button>
+    </div>
+  </div></div>
+</div></section>
+
+<!-- MODEL LINEUP (cards) -->
+<section class="block" style="padding-top:0"><div class="wrap">
+  <div class="seclabel">The Lineup</div>
+  <h2 class="h2">Empat motor, satu standar.</h2>
+  <div class="grid3">
+    <div class="card"><div class="tag">Commute</div><h3>Athena</h3><p>Harian yang halus dan senyap untuk kota.</p><div class="meta">120 km · 105 km/j</div></div>
+    <div class="card"><div class="tag">Commute</div><h3>Bees</h3><p>Lincah, ringkas, hemat. Teman tiap lorong.</p><div class="meta">90 km · 90 km/j</div></div>
+    <div class="card"><div class="tag">Performance</div><h3>Victory</h3><p>Torsi instan untuk yang menuntut lebih.</p><div class="meta">150 km · 120 km/j</div></div>
+    <div class="card"><div class="tag">Fleet</div><h3>EDPower</h3><p>Dirancang untuk armada dan ojol.</p><div class="meta">Swap · 24/7</div></div>
+  </div>
+</div></section>
+
+<!-- COMPONENT LAB -->
+<section class="block" style="background:var(--muted)"><div class="wrap">
+  <div class="seclabel">Component Lab</div>
+  <h2 class="h2">Tombol, form, state.</h2>
+  <div class="lab">
+    <div class="panel">
+      <h4>Buttons</h4>
+      <div class="row"><button class="btn btn-primary">Primary</button><button class="btn btn-secondary">Secondary</button></div>
+      <div class="row"><button class="btn btn-ghost">Ghost</button><button class="btn btn-link">Link aksi →</button></div>
+      <div class="row"><button class="btn btn-primary" disabled>Disabled</button><button class="btn btn-primary" style="background:var(--primary-hover)">Hover</button></div>
+    </div>
+    <div class="panel">
+      <h4>Form field</h4>
+      <label class="fld" for="e">Email</label>
+      <input class="fld" id="e" placeholder="nama@email.com" />
+      <div class="help">Klik untuk lihat focus ring (hijau, offset).</div>
+      <div class="row" style="margin-top:16px"><span class="badge">Tersedia</span><span class="badge" style="background:#f3dcd9;color:var(--destructive)">Habis</span></div>
+    </div>
+    <div class="panel">
+      <h4>Numerals (Martian Mono)</h4>
+      <div style="font-family:var(--mono);font-size:30px;font-weight:600;letter-spacing:-.03em;color:var(--primary)">120<span style="font-size:.5em;color:var(--muted-foreground)"> km</span></div>
+      <div class="help" style="margin-top:8px">Tabular figures untuk spek, harga, jarak.</div>
+      <div style="font-family:var(--mono);font-size:14px;margin-top:14px;color:var(--foreground)">Rp 24.900.000</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- TYPE SCALE -->
+<section class="block"><div class="wrap scale">
+  <div class="seclabel">Type Scale</div>
+  <h2 class="h2" style="margin-bottom:14px">Skala tipografi fluid.</h2>
+  <div class="r"><div class="meta">Display · 800</div><div style="font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.03em;line-height:1.02">Wedison</div></div>
+  <div class="r"><div class="meta">H2 · 700</div><div style="font-family:var(--display);font-weight:700;font-size:2rem;letter-spacing:-.02em">Tenaga yang tenang</div></div>
+  <div class="r"><div class="meta">H3 · 600</div><div style="font-family:var(--display);font-weight:600;font-size:1.4rem">Jaringan SuperCharge</div></div>
+  <div class="r"><div class="meta">Body · 400</div><div class="sp-text" style="font-family:var(--text);font-size:1.0625rem;max-width:60ch">Wedison membangun motor listrik dan jaringan pengisian untuk mobilitas Indonesia yang lebih tenang dan bersih. Keterbacaan tinggi, hangat, dan jelas.</div></div>
+  <div class="r"><div class="meta">Mono · 500</div><div style="font-family:var(--mono);font-size:.95rem;color:var(--muted-foreground);letter-spacing:.02em">RANGE 120KM · TOP 105KM/J · CHARGE 3.5H</div></div>
+</div></section>
+
+<!-- TOKENS -->
+<section class="block" style="background:var(--muted)"><div class="wrap">
+  <div class="seclabel">Design Tokens</div>
+  <h2 class="h2">Palet final (light + forest).</h2>
+  <div class="tok">
+    <div class="chip"><div class="c" style="background:#FAFAF7"></div><div class="t"><div class="nm">background</div><div class="hx">Snow #FAFAF7</div></div></div>
+    <div class="chip"><div class="c" style="background:#FFFFFF"></div><div class="t"><div class="nm">card</div><div class="hx">White #FFFFFF</div></div></div>
+    <div class="chip"><div class="c" style="background:#1A1F1C"></div><div class="t"><div class="nm">foreground</div><div class="hx">Ink #1A1F1C</div></div></div>
+    <div class="chip"><div class="c" style="background:#1E5B40"></div><div class="t"><div class="nm">primary</div><div class="hx">Deep Green #1E5B40</div></div></div>
+    <div class="chip"><div class="c" style="background:#184A34"></div><div class="t"><div class="nm">primary-hover</div><div class="hx">#184A34</div></div></div>
+    <div class="chip"><div class="c" style="background:#DCE4DA"></div><div class="t"><div class="nm">secondary</div><div class="hx">Sage #DCE4DA</div></div></div>
+    <div class="chip"><div class="c" style="background:#EFF2EC"></div><div class="t"><div class="nm">muted</div><div class="hx">#EFF2EC</div></div></div>
+    <div class="chip"><div class="c" style="background:#4F5E55"></div><div class="t"><div class="nm">muted-foreground</div><div class="hx">Slate #4F5E55</div></div></div>
+    <div class="chip"><div class="c" style="background:#E3E7DE"></div><div class="t"><div class="nm">border</div><div class="hx">#E3E7DE</div></div></div>
+    <div class="chip"><div class="c" style="background:#123A28"></div><div class="t"><div class="nm">forest</div><div class="hx">#123A28</div></div></div>
+    <div class="chip"><div class="c" style="background:#0E2C1E"></div><div class="t"><div class="nm">forest-deep</div><div class="hx">#0E2C1E</div></div></div>
+    <div class="chip"><div class="c" style="background:#BE4139"></div><div class="t"><div class="nm">destructive</div><div class="hx">#BE4139</div></div></div>
+  </div>
+</div></section>
+
+<footer>Wedison · Design System Preview · Sage + Ink (Opsi I) · indikatif, dikalibrasi ulang di app</footer>
+
+</body>
+</html>

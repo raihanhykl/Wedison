@@ -52,7 +52,7 @@ import * as React from "react";
 
 export function NewsCard({ data }: { data: LinkPreview }) {
   return (
-    <Card className="mx-auto h-full flex flex-col overflow-hidden border-none outline-none p-0">
+    <Card className="group mx-auto h-full flex flex-col overflow-hidden rounded-xl border border-border bg-card p-0 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-lg">
       <Link
         // href={data.url}
         href={"/media-center/news/" + data.slug}
@@ -61,23 +61,27 @@ export function NewsCard({ data }: { data: LinkPreview }) {
       >
         {/* Bungkus gambar dgn aspect ratio tetap */}
         <div
-          className="relative w-full overflow-hidden rounded-[4px_4px_0_0]
+          className="relative w-full overflow-hidden
                         aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9]"
         >
-          <Image
-            src={data.image ?? "/placeholder.jpg"}
-            alt={data.title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width:1024px) 50vw, 33vw"
-            className="object-cover"
-            loading="lazy"
-            // optional: priority untuk item pertama
-          />
+          {data.image ? (
+            <Image
+              src={data.image}
+              alt={data.title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width:1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
+              loading="lazy"
+              // optional: priority untuk item pertama
+            />
+          ) : (
+            <div className="absolute inset-0 bg-muted" aria-hidden="true" />
+          )}
         </div>
 
         {/* Konten teks: pakai flex-1 agar mengisi sisa tinggi card */}
-        <div className="flex flex-col flex-1 p-3 gap-1 min-h-0">
-          <div className="text-xs sm:text-sm text-gray-500">
+        <div className="flex flex-col flex-1 p-4 gap-1 min-h-0">
+          <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
             {data.site}
             {data.published
               ? " • " +
@@ -89,13 +93,13 @@ export function NewsCard({ data }: { data: LinkPreview }) {
               : ""}
           </div>
 
-          <h3 className="text-base font-semibold leading-snug line-clamp-2 group-hover:underline">
+          <h3 className="font-display text-base font-bold leading-snug tracking-tight text-foreground line-clamp-2 group-hover:text-primary transition-colors">
             {data.title}
           </h3>
 
           {/* Spacer + deskripsi dibatasi agar tidak “mendorong” tinggi card */}
           {data.description && (
-            <p className="text-sm text-gray-600 line-clamp-4">
+            <p className="text-sm text-muted-foreground line-clamp-4">
               {data.description}
             </p>
           )}

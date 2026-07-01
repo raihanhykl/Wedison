@@ -16,6 +16,8 @@ import {
   Check,
 } from "lucide-react";
 import Link from "next/link";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 
 export default function ShowroomPageStructure() {
   const { t } = useLanguage();
@@ -70,93 +72,95 @@ export default function ShowroomPageStructure() {
   // What you can do items
   const activities = [
     {
-      icon: <Car className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <Car className="h-6 w-6 text-primary" />,
       title: t("showroom.testRide.title"),
       description: t("showroom.testRide.description"),
     },
     {
-      icon: <Users className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <Users className="h-6 w-6 text-primary" />,
       title: t("showroom.consultation.title"),
       description: t("showroom.consultation.description"),
     },
     {
-      icon: <CreditCard className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <CreditCard className="h-6 w-6 text-primary" />,
       title: t("showroom.financing.title"),
       description: t("showroom.financing.description"),
     },
     {
-      icon: <Wrench className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <Wrench className="h-6 w-6 text-primary" />,
       title: t("showroom.service.title"),
       description: t("showroom.service.description"),
     },
   ];
 
   return (
-    <main className="min-h-[70%] bg-white">
+    <main className="min-h-[70%] bg-background">
       {/* Hero Section with Carousel */}
       <section className="mt-20 md:mt-30">
         <div className="main-container">
-          <div className="text-center mb-8 md:mb-12">
-            <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
-              <span className="text-sm font-medium">{t("showroom.tag")}</span>
+          <Reveal className="text-center mb-8 md:mb-12">
+            <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-secondary font-mono text-xs uppercase tracking-wider text-primary">
+              <span>{t("showroom.tag")}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
               {t("showroom.title")}{" "}
-              <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
+              <span className="text-primary relative">
                 {t("showroom.titleHighlight")}
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/40"></span>
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
               {t("showroom.description")}
             </p>
-          </div>
+          </Reveal>
 
-          <ShowroomCarousel images={showroomImages} />
+          <Reveal y={0}>
+            <ShowroomCarousel images={showroomImages} />
+          </Reveal>
         </div>
       </section>
 
       {/* Location Section */}
-      <section className="py-16 md:py-20 bg-gray-50">
+      <section className="py-16 md:py-20 bg-muted">
         <div className="main-container">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
+          <Reveal>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-8 text-center">
               {t("showroom.location")}
-            </span>
-          </h2>
+            </h2>
+          </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start">
+          <Stagger className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start">
             {locations.map((location) => (
-              <div
+              <StaggerItem
                 key={location.nameKey}
-                className="bg-white rounded-xl shadow-soft overflow-hidden flex flex-col"
+                className="bg-card rounded-xl border border-border shadow-sm overflow-hidden flex flex-col"
               >
                 <div className="p-6">
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                  <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-3">
                     {t(location.nameKey)}
                   </h3>
                   <div className="flex flex-wrap gap-2 mb-5">
-                    <span className="inline-flex items-center text-xs font-medium px-3 py-1 rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)] border border-[var(--primary-lighter)]">
+                    <span className="inline-flex items-center text-xs font-medium px-3 py-1 rounded-full bg-secondary text-primary border border-border">
                       {t("showroom.facility.showroom")}
                     </span>
-                    <span className="inline-flex items-center text-xs font-medium px-3 py-1 rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)] border border-[var(--primary-lighter)]">
+                    <span className="inline-flex items-center text-xs font-medium px-3 py-1 rounded-full bg-secondary text-primary border border-border">
                       {t("showroom.facility.service")}
                     </span>
                   </div>
 
                   <div className="flex items-start mb-4">
                     <div className="flex-shrink-0 mt-1">
-                      <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                        <MapPin className="h-5 w-5 text-[var(--primary)]" />
+                      <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+                        <MapPin className="h-5 w-5 text-primary" />
                       </div>
                     </div>
                     <div className="ml-4">
-                      <h4 className="text-base font-semibold text-gray-900 mb-1">
+                      <h4 className="text-base font-semibold text-foreground mb-1">
                         {t("showroom.findUs")}
                       </h4>
-                      <p className="text-gray-600">
+                      <p className="text-muted-foreground">
                         {t(location.addressKey)}
                       </p>
                     </div>
@@ -164,33 +168,30 @@ export default function ShowroomPageStructure() {
 
                   <div className="flex items-start mb-6">
                     <div className="flex-shrink-0 mt-1">
-                      <div className="w-10 h-10 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                        <Clock className="h-5 w-5 text-[var(--primary)]" />
+                      <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+                        <Clock className="h-5 w-5 text-primary" />
                       </div>
                     </div>
                     <div className="ml-4">
-                      <h4 className="text-base font-semibold text-gray-900 mb-1">
+                      <h4 className="text-base font-semibold text-foreground mb-1">
                         {t("showroom.hours")}
                       </h4>
-                      <p className="text-gray-600">
+                      <p className="text-muted-foreground">
                         {t("showroom.weekdays")}
                       </p>
-                      <p className="text-gray-600">{t("showroom.weekend")}</p>
+                      <p className="text-muted-foreground">{t("showroom.weekend")}</p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap gap-3">
                     <Link href={"/corporate/contact/#contact"}>
-                      <Button className="bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1">
+                      <Button className="group">
                         {t("showroom.bookVisit")}
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </Button>
                     </Link>
                     <Link href={location.mapsUrl} target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1"
-                      >
+                      <Button variant="outline">
                         {t("showroom.viewOnMaps")}
                       </Button>
                     </Link>
@@ -204,46 +205,46 @@ export default function ShowroomPageStructure() {
                     zoom={15}
                   />
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* What You Can Do Section */}
       <section className="py-16 md:py-20">
         <div className="main-container">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
+          <Reveal>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-8 text-center">
               {t("showroom.whatYouCanDo")}
-            </span>
-          </h2>
+            </h2>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {activities.map((activity, index) => (
-              <div
+              <StaggerItem
                 key={index}
-                className="bg-gray-50 rounded-xl p-6 shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:-translate-y-1"
+                className="bg-muted rounded-xl p-6 border border-border shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:shadow-lg hover:-translate-y-1"
               >
                 <div className="flex items-start">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
                       {activity.icon}
                     </div>
                   </div>
                   <div className="ml-4">
                     <div className="flex items-center mb-2">
-                      <Check className="h-5 w-5 text-[var(--primary)] mr-2" />
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <Check className="h-5 w-5 text-primary mr-2" />
+                      <h3 className="font-display text-lg font-semibold tracking-tight text-foreground">
                         {activity.title}
                       </h3>
                     </div>
-                    <p className="text-gray-600">{activity.description}</p>
+                    <p className="text-muted-foreground">{activity.description}</p>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
     </main>

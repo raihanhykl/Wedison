@@ -248,13 +248,13 @@ export default function Navbar() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full",
-          // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-white",
+          // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-card",
           scrolled ||
             openProduct ||
             openCorporate ||
             openDiscover ||
             mobileMenuOpen
-            ? "bg-white backdrop-blur-md shadow-soft"
+            ? "bg-card/95 border-b border-border shadow-sm backdrop-blur-md"
             : "bg-transparent"
           // bgTone
         )}
@@ -303,12 +303,12 @@ export default function Navbar() {
                             openProduct ||
                             openCorporate ||
                             openDiscover
-                            ? "text-black hover:text-[var(--primary)]"
+                            ? "text-foreground hover:text-primary"
                             : whitePage
-                            ? "text-black"
+                            ? "text-foreground"
                             : "text-white",
                           activeDropdown === item.name &&
-                            "text-[var(--primary)]"
+                            "text-primary"
                           // tone
                         )}
                         onClick={() => toggleOpen("openProduct")}
@@ -322,15 +322,15 @@ export default function Navbar() {
                         />
                         <span
                           className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
-                            whitePage ? "bg-black" : "bg-white",
+                            "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
+                            whitePage ? "bg-foreground" : "bg-card",
 
-                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
+                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
                             (scrolled ||
                               openProduct ||
                               openCorporate ||
                               openDiscover) &&
-                              "bg-[var(--primary)]"
+                              "bg-primary"
                             // bgAccent
                           )}
                         />
@@ -340,16 +340,16 @@ export default function Navbar() {
                         ref={corporateOpenerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          whitePage ? "text-black" : "text-white",
-                          // "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
+                          whitePage ? "text-foreground" : "text-white",
+                          // "flex items-center text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium relative",
                           scrolled ||
                             openProduct ||
                             openCorporate ||
                             openDiscover
-                            ? "text-black hover:text-[var(--primary)]"
+                            ? "text-foreground hover:text-primary"
                             : "",
                           activeDropdown === item.name &&
-                            "text-[var(--primary)]"
+                            "text-primary"
                           // tone
                         )}
                         onClick={() => toggleOpen("openCorporate")}
@@ -363,15 +363,15 @@ export default function Navbar() {
                         />
                         <span
                           className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
-                            whitePage ? "bg-black" : "bg-white",
+                            "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
+                            whitePage ? "bg-foreground" : "bg-card",
 
-                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
+                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
                             (scrolled ||
                               openProduct ||
                               openCorporate ||
                               openDiscover) &&
-                              "bg-[var(--primary)]"
+                              "bg-primary"
                             // bgAccent
                           )}
                         />
@@ -381,16 +381,16 @@ export default function Navbar() {
                         ref={discoverOpenerRef}
                         className={cn(
                           "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          whitePage ? "text-black" : "text-white",
-                          // "flex items-center text-gray-800 hover:text-[var(--primary)] px-3 py-2 rounded-md text-sm font-medium relative",
+                          whitePage ? "text-foreground" : "text-white",
+                          // "flex items-center text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium relative",
                           scrolled ||
                             openProduct ||
                             openCorporate ||
                             openDiscover
-                            ? "text-black hover:text-[var(--primary)]"
+                            ? "text-foreground hover:text-primary"
                             : "",
                           activeDropdown === item.name &&
-                            "text-[var(--primary)]"
+                            "text-primary"
                           // tone
                         )}
                         onClick={() => toggleOpen("openDiscover")}
@@ -404,15 +404,15 @@ export default function Navbar() {
                         />
                         <span
                           className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
-                            whitePage ? "bg-black" : "bg-white",
+                            "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
+                            whitePage ? "bg-foreground" : "bg-card",
 
-                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
+                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
                             (scrolled ||
                               openProduct ||
                               openCorporate ||
                               openDiscover) &&
-                              "bg-[var(--primary)]"
+                              "bg-primary"
                             // bgAccent
                           )}
                         />
@@ -423,13 +423,13 @@ export default function Navbar() {
                       href={item.href}
                       className={cn(
                         "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                        whitePage ? "text-black" : "text-white",
+                        whitePage ? "text-foreground" : "text-white",
 
-                        // "flex items-center text-gray-800 hover:text-[var(--primary)] transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
+                        // "flex items-center text-foreground hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
                         // route == "/products/edmax" &&
                         //   "text-[var(--primary-light)]"
                         scrolled || openProduct || openCorporate || openDiscover
-                          ? "text-black hover:text-[var(--primary)]"
+                          ? "text-foreground hover:text-primary"
                           : ""
                         // tone
                       )}
@@ -437,11 +437,11 @@ export default function Navbar() {
                       {item.name}
                       <span
                         className={cn(
-                          "absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
-                          whitePage ? "bg-black" : "bg-white",
+                          "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
+                          whitePage ? "bg-foreground" : "bg-card",
 
-                          // "absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full",
-                          (scrolled || openProduct) && "bg-[var(--primary)]"
+                          // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
+                          (scrolled || openProduct) && "bg-primary"
                           // bgAccent
                         )}
                       />
@@ -464,11 +464,11 @@ export default function Navbar() {
               <button
                 type="button"
                 className={cn(
-                  "inline-flex bg-none items-center justify-center p-2 rounded-md text-gray-800 hover:scale-120 hover:bg-gray-100/0 transition-all duration-300 focus:outline-none",
+                  "inline-flex bg-none items-center justify-center p-2 rounded-md text-foreground hover:scale-120 hover:bg-muted/0 transition-all duration-300 focus:outline-none",
                   scrolled || mobileMenuOpen
-                    ? " text-black"
+                    ? " text-foreground"
                     : whitePage
-                    ? "text-black"
+                    ? "text-foreground"
                     : "text-white"
                   // tone
                 )}
@@ -514,9 +514,9 @@ export default function Navbar() {
         <div
           className={`${
             mobileMenuOpen ? "block" : "hidden"
-          } md:hidden bg-white shadow-soft absolute top-full left-0 right-0 z-20`}
+          } md:hidden bg-card shadow-soft absolute top-full left-0 right-0 z-20`}
         >
-          <div className="px-4 pt-2 pb-4 space-y-0 divide-y divide-gray-100">
+          <div className="px-4 pt-2 pb-4 space-y-0 divide-y divide-border">
             {navItems.map((item) => (
               <div key={item.name}>
                 <Link
@@ -532,7 +532,7 @@ export default function Navbar() {
                   }}
                 >
                   <button
-                    className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-[var(--primary)] hover:bg-gray-100"
+                    className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-muted"
                     onClick={() => toggleDropdown(item.name)}
                   >
                     {item.name}
@@ -554,7 +554,7 @@ export default function Navbar() {
                   //       key={subItem.name}
                   //       href={subItem.href}
                   //       onClick={() => setMobileMenuOpen(false)}
-                  //       className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
+                  //       className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted"
                   //     >
                   //       {subItem.name}
                   //     </Link>
@@ -564,7 +564,7 @@ export default function Navbar() {
                     className={` md:hidden ${
                       item.subMenu[0].image != "" &&
                       "grid grid-cols-2 gap-7 p-4"
-                    } p-4 bg-white shadow-sm`}
+                    } p-4 bg-card shadow-sm`}
                   >
                     {item.subMenu.map((item, index) =>
                       item.image != "" ? (
@@ -601,7 +601,7 @@ export default function Navbar() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-[var(--primary)] hover:bg-gray-50"
+                          className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted"
                         >
                           {item.name}
                         </Link>

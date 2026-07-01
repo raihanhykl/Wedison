@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { LinkPreview } from "@/app/lib/fetchPreview";
 import Link from "next/link";
+import { Reveal } from "@/components/motion/reveal";
 
 export default function NewsClient({ preview }: { preview: LinkPreview }) {
   const [copied, setCopied] = useState(false);
@@ -38,15 +39,15 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
           {/* Back Button */}
           <Link
             href={"/media-center"}
-            className="mb-3 hover:mb-[10px]  flex items-center justify-between w-fit gap-1 hover:border-b-[2px]  border-b-black"
+            className="mb-3 hover:mb-[10px]  flex items-center justify-between w-fit gap-1 text-muted-foreground hover:text-foreground hover:border-b-[2px]  border-b-foreground transition-colors"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             <p> Kembali ke Berita</p>
           </Link>
 
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
+          <Reveal className="mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight text-balance">
               {preview.title}
             </h1>
 
@@ -65,7 +66,7 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
                 variant="outline"
                 size="sm"
                 onClick={handleShare}
-                className="ml-auto border-black text-black hover:text-black hover:scale-105 transition-transform duration-200"
+                className="ml-auto hover:scale-105 transition-transform duration-200"
               >
                 {copied ? (
                   <>
@@ -80,21 +81,21 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
                 )}
               </Button>
             </div>
-          </div>
+          </Reveal>
 
           {/* Image */}
-          <div className="mb-8">
+          <Reveal className="mb-8" y={0}>
             <Image
               width={1000}
               height={800}
               src={preview.image || "/placeholder.svg"}
               alt={preview.title}
-              className="w-full h-full object-contain aspect-video shadow-lg rounded-xl bg-black/100"
+              className="w-full h-full object-contain aspect-video shadow-lg rounded-xl bg-muted"
             />
-          </div>
+          </Reveal>
 
           {/* Article */}
-          <Card className="mb-8 p-0 border-none shadow-lg">
+          <Card className="mb-8 p-0 border border-border bg-card shadow-lg">
             <CardContent className="p-6 sm:p-8">
               <div className="prose prose-lg max-w-none">
                 <div className="text-foreground leading-relaxed whitespace-pre-line">
@@ -118,7 +119,7 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
           </Card>
 
           {/* Footer */}
-          <div className="border-t border-black pt-6">
+          <div className="border-t border-border pt-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
                 <p className="text-sm text-muted-foreground">

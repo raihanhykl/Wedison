@@ -176,7 +176,7 @@ export default function Contact() {
           style={{ animationFillMode: "both" }}
         >
           <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">
-            <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
+            <span className="text-foreground">
               {t("contact.sendMessage")}
             </span>
           </h3>
@@ -376,7 +376,7 @@ export default function Contact() {
                   (recaptchaEnabled && !recaptchaToken)
                 }
                 className={cn(
-                  "w-full bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white group transition-all duration-300",
+                  "w-full bg-primary hover:bg-[var(--primary-dark)] text-white group transition-all duration-300",
                   !isSubmitting && "hover:-translate-y-1"
                 )}
               >

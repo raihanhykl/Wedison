@@ -8,6 +8,7 @@ import React from "react";
 // import { questions } from "./questions";
 // import { Button } from "@/components/ui/button";
 import GetQuestions from "./questions";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 
 type Props = {
   // title: keyof typeof questions;
@@ -20,28 +21,28 @@ export default function DropdownFAQ({ title }: Props) {
   const section = questions[title];
 
   return (
-    // <div className="w-full max-w-7xl mx-auto my-10">
-    <div className="w-full max-w-[2200px] mx-auto my-10">
-      {/* <h2 className="text-3xl fnt-bold border-b-3 w-fit border-primary "> */}
-      {/* <h2 className="text-3xl font-bold mb-6 uppercase">{section.title}</h2> */}
+    <div className="w-full mx-auto my-10">
       <div className=" w-full">
-        <Accordion type="single" collapsible defaultValue="item-1">
-          {section.questions.map((q, idx) => {
-            return (
-              <AccordionItem
-                key={idx}
-                value={`item-${idx + 1}`}
-                className=" border-none"
-              >
-                <AccordionTrigger className="font-medium text-xl tracking-wide">
-                  {q.question}
-                </AccordionTrigger>
-                <AccordionContent className=" tracking-wide ">
-                  {q.answer}
-                </AccordionContent>
-              </AccordionItem>
-            );
-          })}
+        <Accordion type="single" collapsible defaultValue="item-1" key={title}>
+          <Stagger>
+            {section.questions.map((q, idx) => {
+              return (
+                <StaggerItem key={idx}>
+                  <AccordionItem
+                    value={`item-${idx + 1}`}
+                    className="border-b border-border last:border-b-0"
+                  >
+                    <AccordionTrigger className="font-display font-semibold text-lg md:text-xl tracking-tight text-foreground">
+                      {q.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-base leading-relaxed text-muted-foreground">
+                      {q.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
         </Accordion>
       </div>
     </div>

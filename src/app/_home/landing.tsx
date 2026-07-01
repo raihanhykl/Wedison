@@ -1,410 +1,534 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  ArrowRight,
+  Bike,
+  GitCompareArrows,
+  Zap,
+  MapPin,
+  BatteryCharging,
+  Wallet,
+  Headphones,
+  Newspaper,
+  ChevronRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
-import { HeartPulse, Leaf, Wind } from "lucide-react";
-import Image from "next/image";
-import React from "react";
+import { Marquee } from "@/components/ui/marquee";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { useLanguage } from "../lib/language-context";
-import Link from "next/link";
-import Preloader from "@/components/Preloader";
-import dynamic from "next/dynamic";
-import Autoplay from "embla-carousel-autoplay";
 import AppDownloadTeaser from "@/components/app-download-teaser";
 
-// Lazy load ComparisonTable untuk mengurangi initial bundle size
-const ComparisonTable = dynamic(
-  () => import("@/components/comparison-table"),
+const ComparisonTable = dynamic(() => import("@/components/comparison-table"), {
+  loading: () => (
+    <div className="h-96 w-full animate-pulse rounded-xl bg-muted" />
+  ),
+  ssr: true,
+});
+
+type Lang = "id" | "en";
+
+const NAMES: Record<string, string> = {
+  athena: "Athena",
+  bees: "Bees",
+  victory: "Victory",
+  edpower: "EDPower",
+};
+
+const MODELS = [
   {
-    loading: () => (
-      <div className="w-full h-96 flex items-center justify-center">
-        <div className="animate-pulse bg-gray-200 rounded-lg w-full h-full" />
-      </div>
-    ),
-    ssr: true,
+    id: "athena",
+    line: "Commute",
+    // hero: "/athena/athena-landing-hero.webp",
+    hero: "/new-looks/HERO 1.webp",
+    productImage: "/new-looks/01-HERO CARD-LP.webp",
+    heroM: "/athena/athena-landing-hero-mobile.webp",
   },
-);
+  {
+    id: "bees",
+    line: "Commute",
+    // hero: "/bees/bees-landing-hero.webp",
+    hero: "/new-looks/HERO 3.webp",
+    productImage: "/new-looks/02-HERO CARD-LP.webp",
+
+    heroM: "/bees/bees-landing-hero-mobile.webp",
+  },
+  {
+    id: "victory",
+    line: "Performance",
+    // hero: "/victory/victory-landing-hero.webp",
+    hero: "/new-looks/test image.webp",
+    productImage: "/new-looks/03-HERO CARD-LP.webp",
+    heroM: "/victory/victory-landing-hero-mobile.webp",
+  },
+  {
+    id: "edpower",
+    line: "Fleet",
+    hero: "/edpower/edpower-landing-hero.webp",
+    productImage: "/new-looks/04-HERO CARD-LP.webp",
+    heroM: "/edpower/edpower-landing-hero-mobile.webp",
+  },
+] as const;
+
+const ACTIONS = [
+  { Icon: Bike, key: "testRide", href: "/corporate/contact/" },
+  { Icon: GitCompareArrows, key: "compare", href: "#compare" },
+  { Icon: Zap, key: "supercharge", href: "/super-charge/" },
+  { Icon: MapPin, key: "showroom", href: "/showroom/" },
+];
+
+const ADVANTAGE = [
+  { img: "/super-charge/supercharge-location.webp", Icon: Zap, key: "charge" },
+  { img: "/edmax-charging.webp", Icon: BatteryCharging, key: "battery" },
+  { img: "/Environtmental-Advantage.webp", Icon: Wallet, key: "cost" },
+  { img: "/ShowRoom-Receptionist.webp", Icon: Headphones, key: "service" },
+];
+
+const EXPLORE = [
+  { Icon: Newspaper, key: "media", href: "/media-center/" },
+  { Icon: GitCompareArrows, key: "compare", href: "#compare" },
+  { Icon: MapPin, key: "showroom", href: "/showroom/" },
+  { Icon: Zap, key: "charge", href: "/super-charge/" },
+];
+
+const COPY: Record<Lang, Record<string, string>> = {
+  id: {
+    heroCta: "Jelajahi",
+    range: "Jangkauan",
+    topSpeed: "Top speed",
+    charge: "Isi daya",
+    mq_athena: "Gaya retro, tenaga masa kini",
+    mq_bees: "Lincah untuk kota",
+    mq_victory: "Performa tanpa kompromi",
+    mqDefault: "Tenaga listrik Wedison",
+    a_testRide: "Test Ride",
+    a_compare: "Bandingkan Model",
+    a_supercharge: "SuperCharge",
+    a_showroom: "Showroom",
+    familyLabel: "Jajaran Model",
+    familyTitle: "Keluarga listrik Wedison.",
+    familySub: "Dari harian kota hingga armada — empat motor, satu standar.",
+    learn: "Jelajahi",
+    Commute: "Harian",
+    Performance: "Performa",
+    Fleet: "Armada",
+    superLabel: "Jaringan SuperCharge",
+    superTitle: "Isi daya cepat, di mana pun kota Anda bergerak.",
+    superCta: "Lihat SuperCharge",
+    advLabel: "Keunggulan Wedison",
+    advTitle: "Berkendara tenang. Kepemilikan tanpa cemas.",
+    adv_charge_t: "Jaringan SuperCharge",
+    adv_charge_d: "Isi daya cepat di titik-titik yang terus bertumbuh.",
+    adv_battery_t: "Garansi Baterai",
+    adv_battery_d: "Ketenangan jangka panjang untuk komponen paling penting.",
+    adv_cost_t: "Hemat Biaya Operasional",
+    adv_cost_d: "Tanpa bensin, perawatan minimal, lebih bersih.",
+    adv_service_t: "Layanan & Showroom",
+    adv_service_d: "Dukungan dan jaringan showroom di kota Anda.",
+    exLabel: "Lanjut Jelajahi",
+    exTitle: "Selangkah lebih dekat.",
+    ex_media_t: "Berita Wedison",
+    ex_media_d: "Cerita, peluncuran, dan liputan terbaru.",
+    ex_compare_t: "Bandingkan Model",
+    ex_compare_d: "Temukan motor yang paling cocok untuk Anda.",
+    ex_showroom_t: "Cari Showroom",
+    ex_showroom_d: "Alamat, kontak, dan jam operasional.",
+    ex_charge_t: "SuperCharge",
+    ex_charge_d: "Pelajari ekosistem pengisian Wedison.",
+  },
+  en: {
+    heroCta: "Explore",
+    range: "Range",
+    topSpeed: "Top speed",
+    charge: "Charge",
+    mq_athena: "Retro style, modern power",
+    mq_bees: "Built for the city",
+    mq_victory: "Performance, uncompromised",
+    mqDefault: "Wedison electric",
+    a_testRide: "Test Ride",
+    a_compare: "Compare Models",
+    a_supercharge: "SuperCharge",
+    a_showroom: "Showroom",
+    familyLabel: "The Lineup",
+    familyTitle: "The Wedison electric family.",
+    familySub:
+      "From city commuting to fleets — four motorcycles, one standard.",
+    learn: "Explore",
+    Commute: "Commute",
+    Performance: "Performance",
+    Fleet: "Fleet",
+    superLabel: "SuperCharge Network",
+    superTitle: "Fast charging, wherever your city moves.",
+    superCta: "See SuperCharge",
+    advLabel: "The Wedison Advantage",
+    advTitle: "Effortless riding. Worry-free ownership.",
+    adv_charge_t: "SuperCharge Network",
+    adv_charge_d: "Fast charging at a growing list of points.",
+    adv_battery_t: "Battery Warranty",
+    adv_battery_d: "Long-term peace of mind for the part that matters most.",
+    adv_cost_t: "Lower Running Costs",
+    adv_cost_d: "No petrol, minimal maintenance, cleaner miles.",
+    adv_service_t: "Service & Showroom",
+    adv_service_d: "Support and a showroom network in your city.",
+    exLabel: "Keep Exploring",
+    exTitle: "One step closer.",
+    ex_media_t: "Wedison News",
+    ex_media_d: "Stories, launches, and the latest coverage.",
+    ex_compare_t: "Compare Models",
+    ex_compare_d: "Find the motorcycle that fits you best.",
+    ex_showroom_t: "Find a Showroom",
+    ex_showroom_d: "Address, contact, and opening hours.",
+    ex_charge_t: "SuperCharge",
+    ex_charge_d: "Explore the Wedison charging ecosystem.",
+  },
+};
 
 export default function Landing() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const carouselApi = React.useRef<any>(null);
-  const [selectedProductIndex, setSelectedProductIndex] = React.useState(0);
-  const carouselProductApi = React.useRef<any>(null);
-  const { t } = useLanguage();
-  const items: {
-    image: string;
-    imageMobile: string;
-    imageAlt: string;
-    cardMobile: string;
-    title: string;
-    description: string;
-    link: string;
-    brochure: string;
-  }[] = [
-    {
-      image: "/edpower/edpower-landing-hero.webp",
-      imageAlt: "EDPower in Gray",
-      imageMobile: "/edpower/edpower-landing-hero-mobile.webp",
-      cardMobile: "/edpower/edpower-landing-card-mobile.webp",
-      title: t("edpower.productPage.hero.title"),
-      description: t("edpower.productPage.hero.description"),
-      link: "/edpower/",
-      brochure: "/brochure/brochure-edpower.pdf",
-    },
-    {
-      image: "/athena/athena-landing-hero.webp",
-      imageAlt: "Athena in Gray",
-      imageMobile: "/athena/athena-landing-hero-mobile.webp",
-      cardMobile: "/athena/athena-landing-card-mobile.webp",
-      title: t("athena.productPage.hero.title"),
-      description: t("athena.productPage.hero.description"),
-      link: "/athena/",
-      brochure: "/brochure/brochure-athena.pdf",
-    },
-    {
-      image: "/bees/bees-landing-hero.webp",
-      imageAlt: "Bees in Gray",
-      imageMobile: "/bees/bees-landing-hero-mobile.webp",
-      cardMobile: "/bees/bees-landing-card-mobile.webp",
+  const { t, language } = useLanguage();
+  const c = COPY[(language as Lang) ?? "id"];
 
-      title: t("bees.productPage.hero.title"),
-      description: t("bees.productPage.hero.description"),
-      link: "/bees/",
-      brochure: "/brochure/brochure-bees.pdf",
-    },
-    {
-      image: "/victory/victory-landing-hero.webp",
-      imageAlt: "Victory in Gray",
-      imageMobile: "/victory/victory-landing-hero-mobile.webp",
-      cardMobile: "/victory/victory-landing-card-mobile.webp",
-      title: t("victory.productPage.hero.title"),
-      description: t("victory.productPage.hero.description"),
-      link: "/victory/",
-      brochure: "/brochure/brochure-victory.pdf",
-    },
-  ];
-  const features: any = [
-    {
-      icon: <Leaf className="h-14 w-14 text-[var(--primary)]" />,
-      title: t("features.zeroEmissions"),
-      description: t("features.zeroEmissionsDesc"),
-      link: t("features.zeroEmissionsLink"),
-    },
-    {
-      icon: <HeartPulse className="h-14 w-14 text-[var(--primary)]" />,
-      title: t("features.healthBenefits"),
-      description: t("features.healthBenefitsDesc"),
-      link: t("features.healthBenefitsLink"),
-    },
-    {
-      icon: <Wind className="h-14 w-14 text-[var(--primary)]" />,
-      title: t("features.noiseFree"),
-      description: t("features.noiseFreeDesc"),
-      link: t("features.noiseFreeLink"),
-    },
-  ];
+  const spec = (bike: string, path: string): string | null => {
+    const key = `${bike}.specs.${path}`;
+    const v = t(key);
+    if (!v || v === key) return null;
+    if (/^[-–—\s]*$/.test(v)) return null;
+    return v;
+  };
+  const clean = (s: string) => s.split("(")[0].split(" / ")[0].trim();
+  const phrasesFor = (id: string): string[] => {
+    if (id === "edpower") return []; // intentionally no running text (matches Ather)
+    const out = [c[`mq_${id}`] || c.mqDefault];
+    const rng = spec(id, "battery.range");
+    const top = spec(id, "engine.topSpeed");
+    const chg = spec(id, "battery.chargingTimeSuperCharge");
+    if (rng) out.push(`${c.range} ${clean(rng)}`);
+    if (top) out.push(`${c.topSpeed} ${clean(top)}`);
+    if (chg) out.push(`${c.charge} ${clean(chg)}`);
+    return out;
+  };
+
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [selected, setSelected] = React.useState(0);
+  React.useEffect(() => {
+    if (!api) return;
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    onSelect();
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
 
   return (
     <>
-      <Preloader />
-
-      <div>
-        {/* Hero */}
-        <div className="relative">
+      {/* ============ HERO (scroll-linked shrink + per-slide running text) ============ */}
+      <section className="relative">
+        <ShrinkHero>
           <Carousel
-            opts={{
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-                stopOnFocusIn: true,
-              }),
-            ]}
-            setApi={(api: CarouselApi) => {
-              carouselApi.current = api;
-              api?.on("select", () =>
-                setSelectedIndex(api.selectedScrollSnap()),
-              );
-            }}
+            setApi={setApi}
+            opts={{ loop: true }}
+            plugins={[Autoplay({ delay: 5500, stopOnInteraction: false })]}
           >
-            <CarouselContent>
-              {items.map((item, index) => (
-                <CarouselItem key={index} className="w-full">
-                  <div className="relative w-full h-[100svh] sm:h-[100vh] overflow-hidden">
-                    {/* Desktop image */}
-                    <Image
-                      src={item.image}
-                      alt={item.imageAlt}
-                      fill
-                      priority={index === 0}
-                      sizes="100vw"
-                      className="object-cover object-center hidden sm:block"
-                    />
-                    {/* Mobile image */}
-                    <Image
-                      src={item.imageMobile}
-                      alt={item.imageAlt}
-                      fill
-                      priority={index === 0}
-                      sizes="100vw"
-                      className="object-cover object-center sm:hidden"
-                    />
-                    <div className="absolute inset-0 flex items-start justify-center pt-16 sm:pt-20 md:pt-24 lg:pt-28 px-4 sm:px-6 md:px-8">
-                      <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 w-full max-w-4xl">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-white leading-tight">
-                          {item.title}
-                        </h1>
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-center text-white font-semibold max-w-2xl px-2">
-                          {item.description}
+            <CarouselContent className="ml-0">
+              {MODELS.map((m, i) => {
+                const ph = phrasesFor(m.id);
+                return (
+                  <CarouselItem key={m.id} className="pl-0">
+                    <div className="relative h-[100svh] w-full overflow-hidden">
+                      <Image
+                        src={m.hero}
+                        alt={NAMES[m.id]}
+                        fill
+                        priority={i === 0}
+                        sizes="100vw"
+                        className="hidden object-cover object-center sm:block"
+                      />
+                      <Image
+                        src={m.heroM}
+                        alt={NAMES[m.id]}
+                        fill
+                        priority={i === 0}
+                        sizes="100vw"
+                        className="object-cover object-center sm:hidden"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/35" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+                        <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/80">
+                          {c[m.line]}
                         </p>
-                        <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center items-center gap-3 sm:gap-4 mt-2 sm:mt-4">
-                          <Link href={item.link} className="w-full sm:w-auto">
-                            <Button
-                              className="w-full sm:w-auto px-6 sm:px-8 md:px-12 lg:px-16 rounded-sm font-semibold cursor-pointer text-sm sm:text-base"
-                              size={"lg"}
-                            >
-                              {t("btn.learn.more")}
-                            </Button>
-                          </Link>
-                          <Link
-                            href={item.brochure}
-                            target="_blank" rel="noopener noreferrer"
-                            className="w-full sm:w-auto"
-                          >
-                            <Button
-                              className="w-full sm:w-auto text-[var(--primary)] px-6 sm:px-8 md:px-12 lg:px-16 rounded-sm cursor-pointer font-semibold text-sm sm:text-base"
-                              size={"lg"}
-                              variant={"outline"}
-                            >
-                              {t("btn.see.brochure")}
+                        <h1 className="mt-4 max-w-[14ch] text-balance text-5xl font-extrabold leading-[1.02] tracking-tight text-white sm:text-7xl lg:text-8xl">
+                          {NAMES[m.id]}
+                        </h1>
+                        <p className="mt-4 max-w-[40ch] text-base text-white/85 sm:text-lg">
+                          {t(`${m.id}.productPage.hero.description`)}
+                        </p>
+                        <div className="mt-8">
+                          <Link href={`/${m.id}/`}>
+                            <Button size="lg">
+                              {c.heroCta} {NAMES[m.id]}
                             </Button>
                           </Link>
                         </div>
                       </div>
+                      {ph.length > 0 && (
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45">
+                          <Marquee
+                            repeat={6}
+                            className="[--duration:34s] [--gap:0rem] py-3"
+                          >
+                            {ph.map((p, idx) => (
+                              <span
+                                key={idx}
+                                className="flex items-center font-mono text-[11px] uppercase tracking-[0.18em] text-white/85"
+                              >
+                                {p}
+                                <span className="mx-6 text-on-forest-accent">
+                                  /
+                                </span>
+                              </span>
+                            ))}
+                          </Marquee>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </CarouselItem>
-              ))}
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
-            <CarouselPrevious className="absolute top-1/2 left-2 sm:left-4 md:left-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80" />
-            <CarouselNext className="absolute top-1/2 right-2 sm:right-4 md:right-6 z-10 -translate-y-1/2 rounded-none border-white outline-none w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gray-300/50 text-white hover:text-white hover:bg-gray-300/80" />
-            <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex justify-center gap-2 sm:gap-3">
-              {items.map((_, index) => (
+            <div className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 gap-2.5">
+              {MODELS.map((m, i) => (
                 <button
-                  key={index}
-                  className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full cursor-pointer transition-colors ${
-                    selectedIndex === index
-                      ? "bg-black hover:bg-black/50"
-                      : "bg-gray-400 hover:bg-gray-400/50"
+                  key={m.id}
+                  onClick={() => api?.scrollTo(i)}
+                  aria-label={`Slide ${NAMES[m.id]}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    selected === i
+                      ? "w-7 bg-white"
+                      : "w-2 bg-white/45 hover:bg-white/70"
                   }`}
-                  onClick={() => carouselApi.current?.scrollTo(index)}
-                  aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>
           </Carousel>
-        </div>
+        </ShrinkHero>
+      </section>
 
-        {/* Product */}
-        <div className="py-6 my-6 *:select-none">
-          <div className="w-full overflow-x-auto">
-            <Carousel
-              opts={{
-                loop: true,
-              }}
-              setApi={(api: CarouselApi) => {
-                carouselProductApi.current = api;
-                api?.on("select", () =>
-                  setSelectedProductIndex(api.selectedScrollSnap()),
-                );
-              }}
+      {/* ============ STICKY QUICK-ACTION BAR ============ */}
+      <div className="sticky top-16 z-30 border-b border-border bg-background/95">
+        <div className="main-container flex items-stretch gap-2 overflow-x-auto py-2.5 sm:justify-center sm:gap-3">
+          {ACTIONS.map(({ Icon, key, href }) => (
+            <Link
+              key={key}
+              href={href}
+              className="group flex shrink-0 items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
             >
-              <CarouselContent className="-mx-4">
-                {" "}
-                {/* <- langkah penting */}
-                {items.map((item, index) => (
-                  <CarouselItem
-                    key={index}
-                    className="px-4 basis-[80%] md:basis-[60%]"
-                  >
-                    <div className="relative h-full rounded-lg shadow aspect-[2/3] md:aspect-[4/3] lg:aspect-[2/1]">
-                      {/* Desktop image */}
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt}
-                        fill
-                        sizes="(max-width: 768px) 80vw, 60vw"
-                        className="object-cover md:object-center rounded-xl hidden md:block"
-                        onClick={() =>
-                          index !== selectedProductIndex
-                            ? carouselProductApi.current?.scrollTo(index)
-                            : null
-                        }
-                      />
-                      {/* Mobile image */}
-                      <Image
-                        src={item.cardMobile}
-                        alt={item.imageAlt}
-                        fill
-                        sizes="80vw"
-                        className="object-cover rounded-xl md:hidden"
-                        onClick={() =>
-                          index !== selectedProductIndex
-                            ? carouselProductApi.current?.scrollTo(index)
-                            : null
-                        }
-                      />
-                      <div className="absolute bottom-0 left-0 w-fit gap-2  p-4 md:p-8">
-                        <div className=" flex flex-col items-start justify-center items w-fit  ">
-                          <h1 className="text-[40px] md:text-3xl font-[750] text-center text-white">
-                            {item.title}
-                          </h1>
-                          <p className="text-xs md:text-sm text-start text-white text font-medium">
-                            {item.description}
-                          </p>
-                          <div className="flex flex-col md:flex-row justify-start gap-2 mt-2 w-full">
-                            <Link href={item.link} className=" w-[50%]">
-                              <Button className="px-4 md:px-8 text-xs  md:text-sm rounded-sm cursor-pointer">
-                                {t("btn.learn.more")}
-                              </Button>
-                            </Link>
-
-                            {/* <Link
-                              href={"/corporate/contact/"}
-                              className=" w-[50%]"
-                            >
-                              <Button
-                                className=" text-[var(--primary)] px-4 text-xs  md:text-sm cursor-pointer md:px-8 rounded-sm"
-                                variant={"outline"}
-                              >
-                                {t("btn.book.test.ride")}
-                              </Button>
-                            </Link> */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-center gap-3 mt-4">
-                {items.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`h-3 w-3 rounded-full cursor-pointer ${
-                      selectedProductIndex === index
-                        ? "bg-black hover:bg-black/50"
-                        : "bg-gray-400 hover:bg-gray-400/50"
-                    }`}
-                    onClick={() => carouselProductApi.current?.scrollTo(index)}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </Carousel>
-          </div>
-        </div>
-
-        {/* supercharge */}
-        <div className="relative w-full h-[70vh] md:h-[70vh]">
-          <Image
-            src="/super-charge/supercharge-testing.png"
-            alt="supercharge"
-            fill
-            sizes="100vw"
-            className="object-cover object-[10%_50%] sm:object-[0%_50%] lg:object-[0%_37%]"
-          />
-          <div className="absolute top-0 right-0 w-full h-full flex items-end lg:items-center justify-center lg:justify-end lg:px-10 lg:py-24">
-            <div className=" flex flex-col items-center justify-center px-1 md:px-5 items gap-0 w-full lg:w-fill lg:max-w-[50%] xl:bg-none max-lg:bg-gradient-to-t max-lg:from-[#000000]/60 max-lg:from-15% max-lg:via-[#000000]/30 max-md:via-80% max-md:to-transparent p-5">
-              <h1 className="text-3xl md:text-5xl font-bold text-center text-white lg:flex text-nowrap">
-                <div className=" max-sm:px-3 flex flex-col xl:flex-row items-center justify-center gap-2 bg-red-100/0">
-                  <Image
-                    src="/super-charge/supercharge-typo-nobg.png"
-                    alt="SuperCharge"
-                    width={500}
-                    height={100}
-                    sizes="(max-width: 768px) 300px, 500px"
-                    className="p-0 w-auto h-auto max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
-                  />{" "}
-                </div>
-              </h1>
-              <p className="text-sm md:text-lg text-center text-white mb-4">
-                {t("supercharge.landing.description")}
-              </p>
-              <div className="md:flex w-full justify-center gap-4 mt-0 px-6 *:mt-3">
-                <Button
-                  className="px-6 md:px-16 rounded-sm max-sm:w-full"
-                  size={"lg"}
-                >
-                  <Link href="/super-charge">More Information</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="w-full my-14">
-          <SpecTable />
-        </div> */}
-
-        {/* SuperCharge App Download Teaser */}
-        <AppDownloadTeaser />
-
-        <div className="main-container my-24">
-          <ComparisonTable mode="overview" primaryBikeId="" />
-        </div>
-
-        {/* environmental advantage */}
-        <div className="relative w-full min-h-[100svh] sm:min-h-[90vh] md:min-h-[80vh] lg:min-h-[70vh]">
-          <Image
-            src="/Environtmental-Advantage.webp"
-            alt="environmental-advantage"
-            fill
-            sizes="100vw"
-            className="object-cover object-[30%_50%] md:object-[20%_50%] lg:object-[0%_55%]"
-          />
-          <div className="absolute inset-0 bg-black/60"></div>
-          <div className="relative z-10 w-full h-full flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8">
-            <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full max-w-7xl">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white">
-                Environmental Advantage
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl text-center text-white max-w-2xl px-2">
-                {t("features.title") + " " + t("features.titleHighlight")}
-              </p>
-              <div className="flex flex-col lg:flex-row flex-wrap items-center justify-center w-full gap-8 sm:gap-6 md:gap-8 lg:gap-12 mt-8 sm:mt-14 md:mt-24 lg:mt-16">
-                {features.map((feature: any, index: any) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center justify-start w-full  lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
-                    // className="flex flex-col items-center justify-start w-full sm:w-[45%] md:w-[30%] lg:w-[28%] xl:w-[22%] gap-2 sm:gap-3 px-2 sm:px-4"
-                  >
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-                      <div className="text-[var(--primary)]">
-                        {feature.icon}
-                      </div>
-                      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white text-center">
-                        {feature.title}
-                      </h2>
-                    </div>
-                    <p className="text-sm sm:text-base md:text-lg text-white text-center leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+              <Icon className="h-4 w-4 text-primary" />
+              {c[`a_${key}`]}
+              <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ))}
         </div>
       </div>
+
+      {/* ============ ELECTRIC FAMILY (immersive cards) ============ */}
+      <section
+        id="lineup"
+        className="main-container scroll-mt-24 py-16 sm:py-24"
+      >
+        <Reveal className="text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            {c.familyLabel}
+          </p>
+          <h2 className="mx-auto mt-3 max-w-[20ch] text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+            {c.familyTitle}
+          </h2>
+          <p className="mx-auto mt-4 max-w-[44ch] text-muted-foreground">
+            {c.familySub}
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
+          {MODELS.map((m) => (
+            <Link
+              key={m.id}
+              href={`/${m.id}/`}
+              className="group relative block aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[16/10]"
+            >
+              {/* Card image reveals on its own viewport entry (opacity) */}
+              <Reveal className="absolute inset-0" y={0}>
+                <Image
+                  src={m.productImage}
+                  alt={NAMES[m.id]}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              </Reveal>
+              {/* Text overlay reveals separately, when it enters view (rise + fade) */}
+              <Reveal
+                className="absolute inset-x-0 bottom-0 p-6 sm:p-8"
+                y={28}
+                amount={0.4}
+              >
+                <span className="rounded-full bg-white/15 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white backdrop-blur-sm">
+                  {c[m.line]}
+                </span>
+                <h3 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  {NAMES[m.id]}
+                </h3>
+                <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
+                  {c.learn}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </span>
+              </Reveal>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ SUPERCHARGE SPOTLIGHT (forest) ============ */}
+      <section className="main-container pb-16 sm:pb-24">
+        <Reveal>
+          <div className="relative min-h-[460px] overflow-hidden rounded-3xl bg-forest sm:min-h-[540px]">
+            <Image
+              src="/new-looks/SUPERCHARGE CARD-LP.webp"
+              alt="SuperCharge"
+              fill
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              className="object-cover object-[40%_100%]"
+            />
+            {/* Brand tint + right-side darkening so the text stays legible (subject is on the left) */}
+            {/* <div className="absolute inset-0 bg-forest/45" /> */}
+            {/* <div className="absolute inset-0 bg-gradient-to-l from-forest via-forest/70 to-transparent" /> */}
+            <div className="relative flex h-full min-h-[460px] items-center justify-end px-6 py-16 sm:min-h-[540px] sm:px-14 sm:py-24">
+              <div className="max-w-lg">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-on-forest-accent">
+                  {c.superLabel}
+                </p>
+                <h2 className="mt-4 max-w-[18ch] text-3xl font-bold tracking-tight text-white sm:text-5xl">
+                  {c.superTitle}
+                </h2>
+                <p className="mt-4 max-w-[48ch] text-white/80">
+                  {t("supercharge.landing.description")}
+                </p>
+                <div className="mt-8">
+                  <Link href="/super-charge/">
+                    <Button
+                      size="lg"
+                      className="bg-forest-foreground text-forest hover:bg-white"
+                    >
+                      {c.superCta}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ============ ADVANTAGE (image-overlay cards) ============ */}
+      <section className="bg-muted py-16 sm:py-24">
+        <div className="main-container">
+          <Reveal>
+            <span className="inline-block rounded-full bg-secondary px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-primary">
+              {c.advLabel}
+            </span>
+            <h2 className="mt-4 max-w-[22ch] text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+              {c.advTitle}
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {ADVANTAGE.map(({ img, Icon, key }) => (
+              <div
+                key={key}
+                className="group relative aspect-[4/5] overflow-hidden rounded-2xl"
+              >
+                <Reveal className="absolute inset-0" y={0}>
+                  <Image
+                    src={img}
+                    alt={c[`adv_${key}_t`]}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                </Reveal>
+                <Reveal
+                  className="absolute inset-x-0 bottom-0 p-5"
+                  y={24}
+                  amount={0.4}
+                >
+                  <Icon className="h-6 w-6 text-on-forest-accent" />
+                  <h3 className="mt-3 text-lg font-bold leading-snug tracking-tight text-white">
+                    {c[`adv_${key}_t`]}
+                  </h3>
+                  <p className="mt-1.5 text-sm text-white/80">
+                    {c[`adv_${key}_d`]}
+                  </p>
+                </Reveal>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ KEEP EXPLORING (icon cards) ============ */}
+      <section className="main-container py-16 sm:py-24">
+        <Reveal className="text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            {c.exLabel}
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            {c.exTitle}
+          </h2>
+        </Reveal>
+        <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {EXPLORE.map(({ Icon, key, href }) => (
+            <StaggerItem key={key} className="h-full">
+              <Link
+                href={href}
+                className="group flex h-full flex-col rounded-xl border border-border bg-card p-6 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-lg"
+              >
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-primary">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-lg font-bold tracking-tight text-foreground">
+                  {c[`ex_${key}_t`]}
+                </h3>
+                <p className="mt-1.5 flex-1 text-sm text-muted-foreground">
+                  {c[`ex_${key}_d`]}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                  {c.learn}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </section>
+
+      {/* ============ COMPARISON ============ */}
+      <div id="compare" className="main-container scroll-mt-24 pb-16 sm:pb-24">
+        <ComparisonTable mode="overview" primaryBikeId="" />
+      </div>
+
+      {/* ============ APP DOWNLOAD ============ */}
+      <AppDownloadTeaser />
     </>
   );
 }

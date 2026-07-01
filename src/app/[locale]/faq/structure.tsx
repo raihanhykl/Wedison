@@ -7,6 +7,7 @@ import Image from "next/image";
 import GetQuestions from "./questions";
 import { useLanguage } from "@/app/lib/language-context";
 import UserManualSection from "@/components/user-manual-section";
+import { Reveal } from "@/components/motion/reveal";
 
 export default function FaqStructure() {
   const { t } = useLanguage();
@@ -50,17 +51,15 @@ export default function FaqStructure() {
           src={"/faq-banner.webp"}
           height={400}
           width={1400}
-          alt="banner"
+          alt=""
           className=" h-full w-full object-cover object-[60%_100%] absolute inset-0 z-10"
         />
         <div className=" w-full h-full bg-black/50 absolute inset-0 z-20">
           <div className=" h-full w-full md:w-[50%] mr-auto text-white flex-col flex items-center justify-center">
             <div className=" flex flex-col items-center">
-              {/* <h2 className=" text-8xl tracking-wider font-bold"> */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white font-semibold tracking-wide px-4 text-center">
-
+              <h1 className="font-display font-bold tracking-tight text-white px-4 text-center text-[clamp(2.4rem,7vw,4.5rem)]">
                 FAQ
-                </h2>
+              </h1>
               {/* <p className="my-2 text-xl text-white">
                 Find answers to the most common questions about our services,
                 products, and general information. If you don&apos;t see the
@@ -79,8 +78,8 @@ export default function FaqStructure() {
 
       <div className="main-container">
         {/* header */}
-        <div className="mb-6 my-10">
-          <p className="my-4 md:my-16 text-xl text-gray-600">
+        <Reveal as="div" className="mb-6 my-10">
+          <p className="my-4 md:my-16 text-xl text-muted-foreground max-w-3xl">
             Find answers to the most common questions about our services,
             products, and general information. If you don&apos;t see the answer
             you&apos;re looking for, feel free to{" "}
@@ -88,7 +87,7 @@ export default function FaqStructure() {
               reach out to our team.
             </Link>
           </p>
-        </div>
+        </Reveal>
       </div>
 
       {/* User Manual hub */}
@@ -96,16 +95,16 @@ export default function FaqStructure() {
 
       <div className="main-container">
         {/* tabs */}
-        <div className="flex justify-between border-b border-gray-200 mb-6 w-full my-10">
+        <div className="flex justify-between border-b border-border mb-6 w-full my-10">
           <nav className="-mb-px flex space-x-8 overflow-x-auto">
             {sections.map((section, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveTab(section.title)}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-bold text-lg ${
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-display font-bold tracking-tight text-lg transition-colors ${
                   activeTab === section.title
                     ? "border-primary text-primary"
-                    : "border-transparent text-black hover:text-gray-700 hover:border-gray-300"
+                    : "border-transparent text-foreground hover:text-primary hover:border-border"
                 }`}
               >
                 {section.description}

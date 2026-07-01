@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 import { useLanguage } from "@/app/lib/language-context";
-import { useInView } from "react-intersection-observer";
 import MapComponent from "@/app/[locale]/showroom/components/map-component";
-import { cn } from "@/lib/utils";
 import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import Image from "next/image";
 import Contact from "@/components/contact3";
 
@@ -17,43 +17,27 @@ export default function ContactPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // InView hooks for animations
-  const { ref: infoRef, inView: infoInView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
-  const { ref: mapRef, inView: mapInView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
-  const { ref: faqRef, inView: faqInView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
   // Contact information
   const contactInfo = [
     {
-      icon: <MapPin className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <MapPin className="h-6 w-6 text-primary" />,
       title: t("contact.headquarters"),
       content: t("showroom.address"),
     },
     {
-      icon: <Phone className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <Phone className="h-6 w-6 text-primary" />,
       title: t("contact.phone"),
       content: "(+62) 821-2465-7804",
       subContent: t("contact.phoneHours"),
     },
     {
-      icon: <Mail className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <Mail className="h-6 w-6 text-primary" />,
       title: t("contact.emailLabel"),
       content: "support@wedison.co",
       subContent: t("contact.emailResponse"),
     },
     {
-      icon: <Clock className="h-6 w-6 text-[var(--primary)]" />,
+      icon: <Clock className="h-6 w-6 text-primary" />,
       title: t("contact.page.hours"),
       content: t("contact.page.business.hours"),
       //   subContent: t("showroom.weekend"),
@@ -81,85 +65,70 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="pt-16 2xl:pt-24 bg-gradient-to-b from-gray-50 to-white">
+      <section className="pt-16 2xl:pt-24 bg-gradient-to-b from-muted to-background">
         <div className="main-container py-0 2xl:py-20">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-1 mb-4 border border-[var(--primary-lighter)] rounded-full bg-[var(--secondary-light)] text-[var(--primary-dark)]">
+          <Reveal className="text-center max-w-3xl mx-auto">
+            <div className="inline-block px-4 py-1 mb-4 border border-border rounded-full bg-secondary text-primary">
               <span className="text-sm font-medium">{t("contact.tag")}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground text-balance mb-4">
               {t("contact.title")}{" "}
-              <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent relative">
+              <span className="text-primary relative">
                 {t("contact.titleHighlight")}
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--primary-light)]"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/40"></span>
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
               {t("contact.page.description")}
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Contact Information Section */}
-      <section ref={infoRef} className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-background">
         <div className="main-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {contactInfo.map((item, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "bg-gray-50 rounded-xl p-6 shadow-soft transition-all duration-700 transform hover:shadow-soft-lg hover:-translate-y-1",
-                  infoInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10",
-                )}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-12 h-12 rounded-lg bg-[var(--secondary-light)] flex items-center justify-center">
-                      {item.icon}
+              <StaggerItem key={index}>
+                <div className="h-full bg-card border border-border rounded-xl p-6 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:shadow-lg hover:-translate-y-1">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
+                        {item.icon}
+                      </div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="font-display text-lg font-semibold tracking-tight text-foreground mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground">{item.content}</p>
+                      {item.subContent && (
+                        <p className="text-muted-foreground text-sm mt-1">
+                          {item.subContent}
+                        </p>
+                      )}
                     </div>
                   </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-700">{item.content}</p>
-                    {item.subContent && (
-                      <p className="text-gray-500 text-sm mt-1">
-                        {item.subContent}
-                      </p>
-                    )}
-                  </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {/* Social Media Links */}
-          <div
-            className={cn(
-              "mt-10 text-center transition-all duration-1000 transform",
-              infoInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10",
-            )}
-            style={{ transitionDelay: "500ms" }}
-          >
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <Reveal delay={0.1} className="mt-10 text-center">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-foreground mb-4">
               {t("contact.followUs")}
             </h3>
             <div className="flex justify-center space-x-4">
               <a
                 href="https://www.facebook.com/profile.php?id=61562726390879"
                 target="_blank" rel="noopener noreferrer"
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
+                className="h-10 w-10 flex items-center justify-center rounded-full bg-muted hover:bg-secondary text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <span className="sr-only">Facebook</span>
                 <svg
@@ -179,7 +148,7 @@ export default function ContactPage() {
               <a
                 href="https://www.instagram.com/wedison.id/"
                 target="_blank" rel="noopener noreferrer"
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
+                className="h-10 w-10 flex items-center justify-center rounded-full bg-muted hover:bg-secondary text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <span className="sr-only">Instagram</span>
                 <svg
@@ -201,37 +170,26 @@ export default function ContactPage() {
                   alt="tiktok"
                   width={80}
                   height={80}
-                  className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[var(--secondary-light)] text-gray-600 hover:text-[var(--primary)] transition-colors duration-300"
+                  className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-muted hover:bg-secondary text-muted-foreground hover:text-primary transition-colors duration-300"
                 />
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Form and Map Section */}
-      <section id="contact" className="py-12 md:py-16 bg-gray-50">
+      <section id="contact" className="py-12 md:py-16 bg-muted">
         <div className="main-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Contact Form */}
             <Contact />
 
             {/* Map */}
-            <div
-              ref={mapRef}
-              className={cn(
-                "transition-all duration-1000 transform",
-                mapInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10",
-              )}
-              style={{ transitionDelay: "200ms" }}
-            >
-              <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
-                    {t("contact.page.findUs")}
-                  </span>
+            <Reveal delay={0.1}>
+              <div className="bg-card border border-border rounded-xl shadow-sm p-6 md:p-8">
+                <h2 className="font-display text-2xl font-bold tracking-tight text-foreground mb-6">
+                  {t("contact.page.findUs")}
                 </h2>
                 <div className="h-[400px] md:h-[450px]">
                   <MapComponent
@@ -240,50 +198,45 @@ export default function ContactPage() {
                     zoom={15}
                   />
                 </div>
-                <div className="mt-4 flex items-center text-gray-700">
-                  <ExternalLink className="h-5 w-5 text-[var(--primary)] mr-2" />
+                <div className="mt-4 flex items-center text-muted-foreground">
+                  <ExternalLink className="h-5 w-5 text-primary mr-2" />
                   <a
-                    href="https://maps.google.com/?q=123+Electric+Avenue,+Innovation+District,+San+Francisco,+CA+94102"
+                    href="https://www.google.com/maps/place/Wedison+Showroom/@-6.248464,106.7806209,19z/data=!4m10!1m2!2m1!1swedison+showroom!3m6!1s0x2e69f10019a26049:0xa59abd5e111a8a10!8m2!3d-6.248447!4d106.7810459!15sChB3ZWRpc29uIHNob3dyb29tWhIiEHdlZGlzb24gc2hvd3Jvb22SARplbGVjdHJpY19tb3RvcmN5Y2xlX2RlYWxlcqoBOBABMh4QASIa377C9bwSIpBp7hHS_qeMc_QbuBNmgIsWHu0yFBACIhB3ZWRpc29uIHNob3dyb29t4AEA!16s%2Fg%2F11x1nqm1sg!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDQyMi4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--primary)] hover:underline"
+                    className="text-primary hover:underline"
                   >
                     {t("contact.page.openInMaps")}
                   </a>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section ref={faqRef} className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-background">
         <div className="main-container">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] bg-clip-text text-transparent">
-              {t("contact.page.faqTitle")}
-            </h2>
+            <Reveal>
+              <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-center mb-8 text-foreground">
+                {t("contact.page.faqTitle")}
+              </h2>
+            </Reveal>
 
-            <div className="space-y-6">
+            <Stagger className="space-y-6">
               {faqItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    "bg-gray-50 rounded-xl p-6 shadow-soft transition-all duration-700 transform",
-                    faqInView
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10",
-                  )}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    {item.question}
-                  </h3>
-                  <p className="text-gray-700">{item.answer}</p>
-                </div>
+                <StaggerItem key={index}>
+                  <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+                    <h3 className="font-display text-lg font-semibold tracking-tight text-foreground mb-2">
+                      {item.question}
+                    </h3>
+                    <p className="text-muted-foreground">{item.answer}</p>
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         </div>
       </section>
