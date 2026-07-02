@@ -10,7 +10,7 @@ import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
 import GetProductData from "../lib/product-data";
 import { useLanguage } from "../lib/language-context";
-import ComparisonTable from "@/components/comparison-table";
+import CompareStructure from "@/app/[locale]/compare/structure";
 import UserManualSection from "@/components/user-manual-section";
 import { useInView } from "react-intersection-observer";
 import { Reveal } from "@/components/motion/reveal";
@@ -232,9 +232,7 @@ export default function ProductPageComponent({ motorType }: Props) {
       )}
 
       {/* ============ COMPARISON ============ */}
-      <div className="main-container py-16 sm:py-24">
-        <ComparisonTable primaryBikeId={motorType} mode="comparison" />
-      </div>
+      <CompareStructure embedded initialColumns={[motorType]} />
 
       {/* ============ USER MANUAL ============ */}
       <UserManualSection

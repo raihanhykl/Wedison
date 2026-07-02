@@ -21,12 +21,21 @@ export const id = {
     // compare table
     "compare.model": "Bandingkan Model",
     "compare.select.bike": "Pilih motor untuk bandingkan",
-    "compare.title": "Bandingkan Model Kami",
+    "compare.title": "Bandingkan Model Wedison",
     "compare.subtitle":
-      "Temukan motor listrik yang sempurna sesuai gaya hidupmu",
+      "Sandingkan spesifikasi tiap model berdampingan, dan temukan motor listrik yang paling pas buat kamu.",
     "compare.expandAll": "Buka Semua",
     "compare.collapseAll": "Tutup Semua",
     "compare.swipeHint": "Geser untuk lihat lebih",
+    "compare.page.kicker": "Bandingkan Motor Listrik",
+    "compare.page.addBike": "Tambah motor",
+    "compare.page.remove": "Hapus",
+    "compare.viewDetails": "Lihat Detail",
+    "compare.help.title": "Masih bingung memilih?",
+    "compare.help.subtitle":
+      "Tim kami siap membantu kamu menemukan motor listrik Wedison yang paling pas.",
+    "compare.help.whatsapp": "Konsultasi via WhatsApp",
+    "compare.help.showroom": "Kunjungi Showroom",
 
     // buttons
     "btn.learn.more": "Pelajari Lebih Lanjut",

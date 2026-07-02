@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import Autoplay from "embla-carousel-autoplay";
 import {
   ArrowRight,
@@ -16,6 +15,7 @@ import {
   Headphones,
   Newspaper,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,13 +30,6 @@ import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
-
-const ComparisonTable = dynamic(() => import("@/components/comparison-table"), {
-  loading: () => (
-    <div className="h-96 w-full animate-pulse rounded-xl bg-muted" />
-  ),
-  ssr: true,
-});
 
 type Lang = "id" | "en";
 
@@ -84,21 +77,27 @@ const MODELS = [
 
 const ACTIONS = [
   { Icon: Bike, key: "testRide", href: "/corporate/contact/" },
-  { Icon: GitCompareArrows, key: "compare", href: "#compare" },
+  { Icon: GitCompareArrows, key: "compare", href: "/compare/" },
   { Icon: Zap, key: "supercharge", href: "/super-charge/" },
   { Icon: MapPin, key: "showroom", href: "/showroom/" },
 ];
 
+// CATATAN: gambar Unsplash di bawah = PLACEHOLDER sementara (lisensi bebas, host
+// sudah di-allow di next.config). Ganti dengan aset final dari tim desain sesuai
+// spesifikasi (rasio 4:5, subjek di 2/3 atas, 1/3 bawah bersih untuk overlay teks).
+const UNSPLASH = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&crop=entropy&w=900&h=1125&q=80`;
+
 const ADVANTAGE = [
-  { img: "/super-charge/supercharge-location.webp", Icon: Zap, key: "charge" },
-  { img: "/edmax-charging.webp", Icon: BatteryCharging, key: "battery" },
-  { img: "/Environtmental-Advantage.webp", Icon: Wallet, key: "cost" },
-  { img: "/ShowRoom-Receptionist.webp", Icon: Headphones, key: "service" },
+  { img: UNSPLASH("1602918386084-58983c3bafac"), Icon: Zap, key: "charge" },
+  { img: UNSPLASH("1592318348310-f31b61a931c8"), Icon: BatteryCharging, key: "battery" },
+  { img: UNSPLASH("1579621970588-a35d0e7ab9b6"), Icon: Wallet, key: "cost" },
+  { img: UNSPLASH("1771402382481-de35db6c4159"), Icon: Headphones, key: "service" },
 ];
 
 const EXPLORE = [
   { Icon: Newspaper, key: "media", href: "/media-center/" },
-  { Icon: GitCompareArrows, key: "compare", href: "#compare" },
+  { Icon: GitCompareArrows, key: "compare", href: "/compare/" },
   { Icon: MapPin, key: "showroom", href: "/showroom/" },
   { Icon: Zap, key: "charge", href: "/super-charge/" },
 ];
@@ -147,6 +146,11 @@ const COPY: Record<Lang, Record<string, string>> = {
     ex_showroom_d: "Alamat, kontak, dan jam operasional.",
     ex_charge_t: "SuperCharge",
     ex_charge_d: "Pelajari ekosistem pengisian Wedison.",
+    chatBadge: "Asisten AI • Dion",
+    chatTitle: "Ada yang ingin ditanyakan? Ngobrol dengan Dion.",
+    chatSub:
+      "Dari spesifikasi, pembelian, sampai jadwal test ride — Dion, asisten kami, siap membantu kapan saja, atau langsung terhubung dengan tim kami.",
+    chatCta: "Mulai Ngobrol",
   },
   en: {
     heroCta: "Explore",
@@ -192,6 +196,11 @@ const COPY: Record<Lang, Record<string, string>> = {
     ex_showroom_d: "Address, contact, and opening hours.",
     ex_charge_t: "SuperCharge",
     ex_charge_d: "Explore the Wedison charging ecosystem.",
+    chatBadge: "AI Assistant • Dion",
+    chatTitle: "Got a question? Chat with Dion.",
+    chatSub:
+      "From specs to buying and booking a test ride — Dion, our assistant, is here anytime, or connect straight to our team.",
+    chatCta: "Start Chatting",
   },
 };
 
@@ -264,7 +273,7 @@ export default function Landing() {
                         className="object-cover object-center sm:hidden"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/35" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+                      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center *:select-none">
                         <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/80">
                           {c[m.line]}
                         </p>
@@ -286,7 +295,7 @@ export default function Landing() {
                         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45">
                           <Marquee
                             repeat={6}
-                            className="[--duration:34s] [--gap:0rem] py-3"
+                            className="[--duration:34s] [--gap:0rem] py-3 select-none"
                           >
                             {ph.map((p, idx) => (
                               <span
@@ -440,6 +449,9 @@ export default function Landing() {
         </Reveal>
       </section>
 
+      {/* ============ APP DOWNLOAD ============ */}
+      <AppDownloadTeaser />
+
       {/* ============ ADVANTAGE (image-overlay cards) ============ */}
       <section className="bg-muted py-16 sm:py-24">
         <div className="main-container">
@@ -487,7 +499,7 @@ export default function Landing() {
       </section>
 
       {/* ============ KEEP EXPLORING (icon cards) ============ */}
-      <section className="main-container py-16 sm:py-24">
+      {/* <section className="main-container py-16 sm:py-24">
         <Reveal className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             {c.exLabel}
@@ -520,15 +532,51 @@ export default function Landing() {
             </StaggerItem>
           ))}
         </Stagger>
+      </section> */}
+
+      {/* ============ TALK TO DION (chat CTA) — section terakhir ============ */}
+      <section className="relative w-full overflow-hidden">
+        {/* GANTI src dengan aset CTA final dari desainer (spesifikasi ada di catatan).
+            Sementara pakai foto showroom sebagai placeholder. */}
+        <Image
+          src="/new-looks/Banner Footer.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-[95%_100%]"
+        />
+        {/* Scrim: jaga kontras teks putih di atas gambar apa pun (WCAG AA). */}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+
+        <div className="relative main-container flex flex-col items-center py-14 text-center sm:py-16 md:py-20">
+          <Reveal className="flex w-full flex-col items-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-white/90 backdrop-blur-sm">
+              <Sparkles className="h-3.5 w-3.5 text-on-forest-accent" />
+              {c.chatBadge}
+            </span>
+            <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+              {c.chatTitle}
+            </h2>
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+              {c.chatSub}
+            </p>
+            <Link
+              href={`https://wa.me/6282124657804?text=${encodeURIComponent(
+                language === "id"
+                  ? "Halo Dion, saya ingin tahu lebih lanjut tentang motor listrik Wedison."
+                  : "Hi Dion, I'd like to know more about Wedison electric motorcycles.",
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-on-forest-accent px-7 py-3.5 text-base font-semibold text-forest-deep shadow-lg transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              {c.chatCta}
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+          </Reveal>
+        </div>
       </section>
-
-      {/* ============ COMPARISON ============ */}
-      <div id="compare" className="main-container scroll-mt-24 pb-16 sm:pb-24">
-        <ComparisonTable mode="overview" primaryBikeId="" />
-      </div>
-
-      {/* ============ APP DOWNLOAD ============ */}
-      <AppDownloadTeaser />
     </>
   );
 }

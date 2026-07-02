@@ -21,12 +21,21 @@ export const en = {
     // compare table
     "compare.model": "Compare Models",
     "compare.select.bike": "Select a bike to compare",
-    "compare.title": "Compare Our Models",
+    "compare.title": "Compare Wedison Models",
     "compare.subtitle":
-      "Find the perfect electric motorcycle that suits your lifestyle",
+      "See every model's specs side by side and find the electric bike that fits you best.",
     "compare.expandAll": "Expand All",
     "compare.collapseAll": "Collapse All",
     "compare.swipeHint": "Swipe to see more",
+    "compare.page.kicker": "Compare Electric Bikes",
+    "compare.page.addBike": "Add bike",
+    "compare.page.remove": "Remove",
+    "compare.viewDetails": "View Details",
+    "compare.help.title": "Still deciding which one?",
+    "compare.help.subtitle":
+      "Our team is ready to help you find the Wedison electric bike that fits you best.",
+    "compare.help.whatsapp": "Chat on WhatsApp",
+    "compare.help.showroom": "Visit a Showroom",
 
     // buttons
     "btn.learn.more": "Learn More",

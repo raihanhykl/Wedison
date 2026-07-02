@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "wedison.co" },
       { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "radarbanyumas.disway.id" },
+      { protocol: "https", hostname: "imgx.gridoto.com" },
+      { protocol: "https", hostname: "asset.kompas.com" },
+      { protocol: "https", hostname: "otorider.com" },
     ],
     // Server image optimization ON (sharp ada di dependencies). Menyajikan AVIF/WebP
     // yang di-resize sesuai prop `sizes` -> decode jauh lebih ringan saat scroll.
@@ -23,7 +27,10 @@ const nextConfig: NextConfig = {
   },
   // Migrasi SSG -> SSR: hasilkan server mandiri (.next/standalone/server.js)
   // untuk deploy ramping ke VPS (Node). Menggantikan output:"export".
-  output: "standalone",
+  // Hanya di produksi: `next build` selalu NODE_ENV=production, jadi standalone
+  // tetap dihasilkan saat deploy; di `next dev` dimatikan agar module tracing
+  // tidak mengganggu (sumber error "Cannot find module './xxx.js'").
+  output: process.env.NODE_ENV === "production" ? "standalone" : undefined,
   trailingSlash: true, // <== ini penting (jaga kontinuitas URL/SEO)
 };
 

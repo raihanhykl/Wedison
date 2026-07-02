@@ -287,6 +287,38 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
+  "/compare": {
+    image: "/wedison-sidebyside.png",
+    id: {
+      title: "Bandingkan Motor Listrik Wedison - Spesifikasi Lengkap",
+      description:
+        "Bandingkan spesifikasi lengkap motor listrik Wedison (Bees, Athena, Victory, EdPower) berdampingan: performa, baterai, jarak tempuh, dimensi, dan pengereman. Temukan yang paling pas untukmu.",
+      keywords: [
+        "bandingkan motor listrik",
+        "spesifikasi wedison",
+        "wedison bees",
+        "wedison athena",
+        "wedison victory",
+        "wedison edpower",
+        "perbandingan motor listrik",
+      ],
+    },
+    en: {
+      title: "Compare Wedison Electric Motorcycles - Full Specs",
+      description:
+        "Compare full specifications of Wedison electric motorcycles (Bees, Athena, Victory, EdPower) side by side: performance, battery, range, dimensions, and brakes. Find the one that fits you.",
+      keywords: [
+        "compare electric motorcycle",
+        "wedison specs",
+        "wedison bees",
+        "wedison athena",
+        "wedison victory",
+        "wedison edpower",
+        "electric motorcycle comparison",
+      ],
+    },
+  },
+
   "/showroom": {
     image: "/Showroom-Receptionist.webp",
     id: {
