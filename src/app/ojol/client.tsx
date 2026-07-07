@@ -201,7 +201,7 @@ export default function OjolClient() {
       image: "/edpower/edpower-black.webp",
       link: "/edpower",
       specs: [
-        { labelKey: "ojol.models.spec.range", value: "160 km*" },
+        { labelKey: "ojol.models.spec.range", value: "200 km*" },
         {
           labelKey: "ojol.models.spec.supercharge",
           valueKey: "ojol.models.value.minutes",

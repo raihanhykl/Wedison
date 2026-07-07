@@ -503,7 +503,7 @@ const translations = {
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": 160,
+    "edpower.productPage.techSpecs1.title": 200,
     "edpower.productPage.techSpecs1.unit": "km",
     "edpower.productPage.techSpecs1.desc": "Cruising Range",
 
@@ -521,7 +521,7 @@ const translations = {
     "edpower.productPage.productOverview.title":
       "Flagship Power, Unrivaled Comfort.",
     "edpower.productPage.productOverview.description":
-      "Meet EDPower—the ultimate electric scooter from Wedison. With its spacious saddle, futuristic styling, and best-in-class range up to 160 km, EDPower sets a new standard for electric two-wheelers. Enjoy advanced comfort, cutting-edge connectivity, and unstoppable power for the longest journeys. Engineered for those who demand the best.",
+      "Meet EDPower—the ultimate electric scooter from Wedison. With its spacious saddle, futuristic styling, and best-in-class range up to 200 km, EDPower sets a new standard for electric two-wheelers. Enjoy advanced comfort, cutting-edge connectivity, and unstoppable power for the longest journeys. Engineered for those who demand the best.",
 
     "edpower.productPage.productHighlight1.imageAlt":
       "Cockpit view showcasing the large TFT display with Apple CarPlay & Android Auto interface",
@@ -550,9 +550,9 @@ const translations = {
 
     "edpower.productPage.productHighlight5.imageAlt":
       " Battery/range indicator on the dashboard, close-up",
-    "edpower.productPage.productHighlight5.title": "Class-Leading 160 km Range",
+    "edpower.productPage.productHighlight5.title": "Class-Leading 200 km Range",
     "edpower.productPage.productHighlight5.description":
-      "Go farther than ever. With up to 160 km on a single charge, EDPower is ready for city exploring or out-of-town adventures—no limits, just freedom.",
+      "Go farther than ever. With up to 200 km on a single charge, EDPower is ready for city exploring or out-of-town adventures—no limits, just freedom.",
 
     "edpower.productPage.chargingOverview.imageAlt":
       "EDPower parked at a Wedison showroom with SuperCharge and home charger visible",
@@ -589,7 +589,7 @@ const translations = {
     "edpower.specs.battery.voltage": "76.8 Volt",
     "edpower.specs.battery.chargingTimeSuperCharge": "15 minutes",
     "edpower.specs.battery.chargingTimeHome": "10.2 hours",
-    "edpower.specs.battery.range": "160 km",
+    "edpower.specs.battery.range": "200 km",
     "edpower.specs.brake.frontBrake": "Disc Brake",
     "edpower.specs.brake.rearBrake": "Disc Brake",
     "edpower.specs.brake.cbsSupport": "Yes",
@@ -1261,7 +1261,7 @@ const translations = {
     "faq.Performance.questions.2.question":
       "What is the range of the motorcycle?",
     "faq.Performance.questions.2.answer":
-      "The range varies between model and battery, ranging from 80 km to 160 km",
+      "The range varies between model and battery, ranging from 80 km to 200 km",
     "faq.Performance.questions.3.question":
       "Is Wedison EV safe to be used in rain and flood?",
     "faq.Performance.questions.3.answer":
@@ -1444,9 +1444,9 @@ const translations = {
       "Time is money, and Supercharge keeps you from wasting it! Just ",
     "ojol.supercharge.descriptionBold": "15 minutes",
     "ojol.supercharge.descriptionPart2":
-      " and your battery is back from 10% to 80%. Hit the road again right away, no long waits! A single charge can cover up to 165 km*. More orders, more earnings!",
+      " and your battery is back from 10% to 80%. Hit the road again right away, no long waits! A single charge can cover up to 200 km*. More orders, more earnings!",
     "ojol.supercharge.disclaimer":
-      "*Range of 165 km applies to the EdPower Extended Battery model",
+      "*Range of 200 km applies to the EdPower Extended Battery model",
     "ojol.supercharge.cta": "Learn More",
 
     "ojol.models.title": "Pick the Right Motorcycle for You",
@@ -1949,7 +1949,7 @@ const translations = {
     "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
     "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-    "edpower.productPage.techSpecs1.title": 160,
+    "edpower.productPage.techSpecs1.title": 200,
     "edpower.productPage.techSpecs1.unit": "km",
     "edpower.productPage.techSpecs1.desc": "Jarak Tempuh",
 
@@ -1967,7 +1967,7 @@ const translations = {
     "edpower.productPage.productOverview.title":
       "Kekuatan Utama, Kenyamanan Tak Tertandingi.",
     "edpower.productPage.productOverview.description":
-      "Inilah EDPower—skuter listrik andalan dari Wedison. Dengan jok luas, desain futuristik, dan jarak tempuh terbaik hingga 160 km, EDPower menetapkan standar baru untuk kendaraan roda dua listrik. Nikmati kenyamanan tingkat lanjut, konektivitas canggih, dan tenaga yang siap menjelajah jauh. Dirancang bagi mereka yang menuntut yang terbaik.",
+      "Inilah EDPower—skuter listrik andalan dari Wedison. Dengan jok luas, desain futuristik, dan jarak tempuh terbaik hingga 200 km, EDPower menetapkan standar baru untuk kendaraan roda dua listrik. Nikmati kenyamanan tingkat lanjut, konektivitas canggih, dan tenaga yang siap menjelajah jauh. Dirancang bagi mereka yang menuntut yang terbaik.",
 
     "edpower.productPage.productHighlight1.imageAlt":
       "Tampilan kokpit menampilkan layar TFT besar dengan antarmuka Apple CarPlay & Android Auto",
@@ -1999,9 +1999,9 @@ const translations = {
     "edpower.productPage.productHighlight5.imageAlt":
       "Indikator baterai/jarak tempuh pada dashboard, tampilan close-up",
     "edpower.productPage.productHighlight5.title":
-      "Jarak Tempuh Terbaik 160 km",
+      "Jarak Tempuh Terbaik 200 km",
     "edpower.productPage.productHighlight5.description":
-      "Jelajahi lebih jauh dari sebelumnya. Dengan jarak tempuh hingga 160 km dalam sekali pengisian, EDPower siap menjelajah kota maupun luar kota—tanpa batas, hanya kebebasan.",
+      "Jelajahi lebih jauh dari sebelumnya. Dengan jarak tempuh hingga 200 km dalam sekali pengisian, EDPower siap menjelajah kota maupun luar kota—tanpa batas, hanya kebebasan.",
 
     "edpower.productPage.chargingOverview.imageAlt":
       "EDPower terparkir di showroom Wedison dengan stasiun SuperCharge dan charger rumah yang terlihat",
@@ -2039,7 +2039,7 @@ const translations = {
     "edpower.specs.battery.voltage": "76.8 Volt",
     "edpower.specs.battery.chargingTimeSuperCharge": "15 menit",
     "edpower.specs.battery.chargingTimeHome": "10.2 jam",
-    "edpower.specs.battery.range": "160 km",
+    "edpower.specs.battery.range": "200 km",
     "edpower.specs.brake.frontBrake": "Rem Cakram",
     "edpower.specs.brake.rearBrake": "Rem Cakram",
     "edpower.specs.brake.cbsSupport": "Ya",
@@ -2641,7 +2641,7 @@ const translations = {
     "faq.Battery.questions.3.question":
       "Berapa banyak jenis baterai yang Anda jual?",
     "faq.Battery.questions.3.answer":
-      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 80 dan 160 km.",
+      "Wedison menawarkan 2 variasi baterai untuk model tertentu. \nBerkendara dengan kecepatan 50km/jam, versi dasar dan extended mampu menempuh jarak masing-masing hingga 80 dan 200 km.",
     "faq.Battery.questions.4.question": "Baterai berasal dari mana?",
     "faq.Battery.questions.4.answer":
       "Baterai proprietary Wedison dikembangkan secara internal.",
@@ -2732,7 +2732,7 @@ const translations = {
       "Daya motor bervariasi antar model, berkisar dari 1,2KW hingga 5KW",
     "faq.Performance.questions.2.question": "Berapa jarak tempuh motor?",
     "faq.Performance.questions.2.answer":
-      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 80 km hingga 160 km",
+      "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 80 km hingga 200 km",
     "faq.Performance.questions.3.question":
       "Apakah Wedison EV aman digunakan dalam hujan dan banjir?",
     "faq.Performance.questions.3.answer":
@@ -2913,9 +2913,9 @@ const translations = {
       "Waktu adalah uang, dan Supercharge bikin kamu gak buang-buang waktu! Cukup ",
     "ojol.supercharge.descriptionBold": "15 menit",
     "ojol.supercharge.descriptionPart2":
-      " aja, baterai langsung terisi dari 10% ke 80%. Langsung gas narik lagi, gak perlu nunggu lama! Sekali charge bisa tempuh hingga 165 km*. Lebih banyak orderan, cuan lebih banyak!",
+      " aja, baterai langsung terisi dari 10% ke 80%. Langsung gas narik lagi, gak perlu nunggu lama! Sekali charge bisa tempuh hingga 200 km*. Lebih banyak orderan, cuan lebih banyak!",
     "ojol.supercharge.disclaimer":
-      "*Jarak tempuh 165 km berlaku untuk model EdPower Extended Battery",
+      "*Jarak tempuh 200 km berlaku untuk model EdPower Extended Battery",
     "ojol.supercharge.cta": "Pelajari Lebih Lanjut",
 
     "ojol.models.title": "Pilih Motor yang Cocok Buat Kamu",
