@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 export default function VideoSection() {
   const { t } = useLanguage();
   return (
-    <div className="main-container flex h-auto w-full flex-col items-center justify-center py-12 md:py-20">
+    <div className="main-container flex h-auto w-full flex-col items-center justify-center py-16 sm:py-24">
       <Reveal className="flex flex-col items-start justify-start">
         <h2 className="mb-4 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           {t("supercharge.video.title")}

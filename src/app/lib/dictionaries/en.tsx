@@ -1003,6 +1003,25 @@ export const en = {
     "supercharge.hero.ctaPrimary": "Find a Station",
     "supercharge.hero.ctaSecondary": "Learn the Tech",
 
+    "supercharge.speed.kicker": "Speed",
+    "supercharge.speed.lead": "Charging from 10% to 80% takes just",
+    "supercharge.speed.unit": "minutes",
+    "supercharge.speed.caption":
+      "About the length of a coffee break. Then you're back on the road, range anxiety gone.",
+
+    "supercharge.network.kicker": "SuperCharge Network",
+    "supercharge.network.title": "Growing across your cities",
+    "supercharge.network.description":
+      "SuperCharge fast-charging points keep expanding from Jakarta to cities across Indonesia — so your ride always has somewhere to charge.",
+    "supercharge.network.stationsLabel": "Charging points",
+    "supercharge.network.citiesLabel": "Cities & counting",
+
+    "supercharge.finalCta.title": "Ready to feel SuperCharge?",
+    "supercharge.finalCta.description":
+      "Find your nearest location, book a test ride, or ask us anything.",
+    "supercharge.finalCta.ctaPrimary": "Find Locations",
+    "supercharge.finalCta.ctaSecondary": "Explore the Bikes",
+
     "supercharge.video.title": "SuperCharge: The Solution for Future Charging",
     "supercharge.video.description":
       "SuperCharge provide a faster, safer, and more convenient charging experience for your electric vehicle.",

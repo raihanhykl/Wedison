@@ -1,8 +1,10 @@
-import { Suspense } from "react";
-import FeatureSection2 from "@/components/feature-section";
-import HeroSection from "@/components/hero-section";
+import SuperChargeHero from "./hero";
+import SuperChargeSpeed from "./speed";
+import SuperChargeNetwork from "./network";
+import SuperChargeFeature from "./features";
+import SuperChargeCta from "./cta";
 import VideoSection from "./videoSection";
-import AppShowcase from "./app-showcase";
+import AppSection from "./app-section";
 import { getSEOMetadata } from "@/app/lib/seo1";
 
 export async function generateMetadata({
@@ -16,54 +18,53 @@ export async function generateMetadata({
 
 export default function SuperChargePage() {
   return (
-    <>
-      <main className="min-h-screen bg-background">
-        <HeroSection
-          name="supercharge"
-          imageAlt="SuperCharge Charging Station"
-          theme="dark"
-          imageStyle="object-[90%_10%] md:object-[100%_40%] 2xl:object-[0%_100%] "
-          noButton={true}
-        />
+    <main className="bg-background">
+      {/* 1 — Hero (gelap) */}
+      <SuperChargeHero />
 
-        <Suspense fallback={<p>Loading video...</p>}>
-          <VideoSection />
-        </Suspense>
-        <FeatureSection2
-          page="supercharge"
+      {/* 2 — Kecepatan: angka bahasa-manusia (terang) */}
+      <SuperChargeSpeed />
+
+      {/* 3 — Video overview (terang) */}
+      <VideoSection />
+
+      {/* 4 — Living Network: peta + counter (forest, signature #1) */}
+      <SuperChargeNetwork />
+
+      {/* 5 — Teknologi charging */}
+      <div id="teknologi" className="scroll-mt-16">
+        <SuperChargeFeature
           feature={1}
-          alt="man riding dash electric motorcycle"
+          icon="Zap"
           image="/super-charge/supercharge-chip-1.webp"
-          style="bg-muted"
-          titleColor="text-foreground"
-          descColor="text-muted-foreground"
-          tagStyle="border-border bg-secondary text-primary"
+          alt="Modul pengisian cepat Wedison SuperCharge"
+          bg="bg-muted"
+          reverse
         />
-        <FeatureSection2
-          page="supercharge"
+        <SuperChargeFeature
           feature={2}
-          alt="Victory in the golden hour"
+          icon="MapPin"
           image="/super-charge/supercharge-location-1.webp"
-          style="bg-background object-[100%_0%] object-cover"
-          titleColor="text-foreground"
-          descColor="text-muted-foreground"
-          tagStyle="border-border bg-secondary text-primary"
+          alt="Motor listrik Wedison di stasiun SuperCharge"
+          bg="bg-background"
+          imagePosition="object-[70%_25%]"
         />
-        <FeatureSection2
-          page="supercharge"
+        <SuperChargeFeature
           feature={3}
-          alt="Victory in the golden hour"
+          icon="ShieldCheck"
           image="/super-charge/supercharge-charging.webp"
-          imageStyle="object-[10%_100%]"
-          style="bg-muted"
-          titleColor="text-foreground"
-          descColor="text-muted-foreground"
-          tagStyle="border-border bg-secondary text-primary"
+          alt="Proses pengisian daya di stasiun Wedison SuperCharge"
+          bg="bg-muted"
+          reverse
+          imagePosition="object-[30%_75%]"
         />
+      </div>
 
-        {/* SuperCharge App Showcase */}
-        <AppShowcase />
-      </main>
-    </>
+      {/* 6 — App: scrollytelling (signature #2) */}
+      <AppSection />
+
+      {/* 7 — CTA penutup (forest-deep) */}
+      <SuperChargeCta />
+    </main>
   );
 }

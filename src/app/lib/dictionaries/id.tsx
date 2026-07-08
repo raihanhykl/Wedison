@@ -1005,6 +1005,25 @@ export const id = {
     "supercharge.hero.ctaPrimary": "Temukan Lokasi",
     "supercharge.hero.ctaSecondary": "Pelajari Teknologi",
 
+    "supercharge.speed.kicker": "Kecepatan",
+    "supercharge.speed.lead": "Isi daya dari 10% ke 80% cuma butuh",
+    "supercharge.speed.unit": "menit",
+    "supercharge.speed.caption":
+      "Secepat rehat kopi. Setelah itu, lanjut jalan tanpa cemas kehabisan daya.",
+
+    "supercharge.network.kicker": "Jaringan SuperCharge",
+    "supercharge.network.title": "Tumbuh di kota-kotamu",
+    "supercharge.network.description":
+      "Titik pengisian cepat SuperCharge terus bertambah dari Jakarta hingga berbagai kota di Indonesia — supaya perjalananmu selalu punya tempat mengisi daya.",
+    "supercharge.network.stationsLabel": "Titik pengisian",
+    "supercharge.network.citiesLabel": "Kota & terus bertambah",
+
+    "supercharge.finalCta.title": "Siap merasakan SuperCharge?",
+    "supercharge.finalCta.description":
+      "Temukan lokasi terdekat, jadwalkan test ride, atau tanya apa pun ke tim kami.",
+    "supercharge.finalCta.ctaPrimary": "Temukan Lokasi",
+    "supercharge.finalCta.ctaSecondary": "Lihat Motor Listrik",
+
     "supercharge.video.title": "SuperCharge: Solusi Charging Masa Depan",
     "supercharge.video.description":
       "SuperCharge hadir untuk memberikan pengalaman isi daya yang lebih cepat, aman, dan praktis bagi kendaraan listrik Anda.",

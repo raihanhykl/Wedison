@@ -155,6 +155,13 @@
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
   }
+  /* Scroll-snap lembut per-beat untuk section App scrollytelling — DESKTOP saja,
+     hanya saat motion dipersilakan. Class `.snap-beats` di-toggle oleh AppSection saat
+     mount (scoped ke route super-charge). `proximity` (bukan mandatory) = tak menjebak
+     momentum; hanya beats (.snap-center) yang jadi target → section lain scroll normal. */
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    html.snap-beats { scroll-snap-type: y proximity; }
+  }
   /* Reduced motion: collapse durations, keep subtle fades */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
