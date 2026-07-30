@@ -14,7 +14,7 @@ import { Reveal } from "@/components/motion/reveal";
  * saat scroll) agar konsisten dengan landing. Token Sage+Ink, motion.dev (Reveal, SSR-safe).
  */
 export default function SuperChargeHero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <ShrinkHero>
@@ -50,7 +50,7 @@ export default function SuperChargeHero() {
                 size="lg"
                 className="bg-white text-forest hover:bg-white/90"
               >
-                <Link href="#jaringan">
+                <Link href={`/${language}/super-charge/lokasi/`}>
                   <MapPin className="h-5 w-5" />
                   {t("supercharge.hero.ctaPrimary")}
                 </Link>

@@ -1,6 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import { MapPin } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { DottedMap, type Marker } from "@/components/ui/dotted-map";
@@ -39,7 +42,7 @@ const INDONESIA = { lat: { min: -11, max: 7 }, lng: { min: 94, max: 142 } };
  * bermarker berdenyut + counter (NumberTicker). Menegaskan skala & jangkauan jaringan.
  */
 export default function SuperChargeNetwork() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section
@@ -85,6 +88,19 @@ export default function SuperChargeNetwork() {
                   {t("supercharge.network.citiesLabel")}
                 </p>
               </div>
+            </div>
+
+            <div className="mt-8">
+              <Button
+                asChild
+                size="lg"
+                className="bg-on-forest-accent text-forest-deep hover:bg-white"
+              >
+                <Link href={`/${language}/super-charge/lokasi/`}>
+                  <MapPin className="h-5 w-5" />
+                  {t("supercharge.locator.viewAll")}
+                </Link>
+              </Button>
             </div>
           </Reveal>
 

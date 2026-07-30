@@ -286,6 +286,38 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
   },
+  "/super-charge/lokasi": {
+    image: "/super-charge/supercharge-testing.webp",
+    id: {
+      title:
+        "Lokasi SuperCharge - Peta Stasiun Pengisian Motor Listrik | Wedison",
+      description:
+        "Temukan lokasi stasiun SuperCharge Wedison terdekat lewat peta interaktif — lihat kapasitas charger, jam operasional, dan fasilitas tiap titik pengisian motor listrik.",
+      keywords: [
+        "wedison",
+        "supercharge",
+        "lokasi charging",
+        "peta stasiun pengisian",
+        "SPKLU motor listrik",
+        "charging station",
+        "EV",
+      ],
+    },
+    en: {
+      title: "SuperCharge Locations - Charging Station Map | Wedison",
+      description:
+        "Find your nearest Wedison SuperCharge station on an interactive map — see charger capacity, opening hours and amenities at every electric-motorcycle charging point.",
+      keywords: [
+        "wedison",
+        "supercharge",
+        "charging locations",
+        "charging map",
+        "ev charging station",
+        "electric motorcycle",
+        "EV",
+      ],
+    },
+  },
 
   "/compare": {
     image: "/wedison-sidebyside.png",
