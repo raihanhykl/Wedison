@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/app/lib/language-context";
 import { Reveal } from "@/components/motion/reveal";
 import { applyFilters } from "./lib";
@@ -32,16 +32,26 @@ export default function Locator({ sites }: { sites: Site[] }) {
     [filtered, selectedId],
   );
 
+  const mapWrapRef = useRef<HTMLDivElement>(null);
+
   const handleSelect = (id: string) => {
     setSelectedId(id);
-    if (typeof document !== "undefined") {
-      const reduced = window.matchMedia?.(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      document.getElementById(`station-${id}`)?.scrollIntoView({
-        block: "nearest",
-        behavior: reduced ? "auto" : "smooth",
-      });
+    if (typeof document === "undefined") return;
+
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")
+      .matches;
+    const behavior: ScrollBehavior = reduced ? "auto" : "smooth";
+    const isMobile = window.innerWidth < 1024;
+
+    if (isMobile) {
+      // Mobile: peta ada DI ATAS list, jadi bawa user kembali ke peta supaya pin +
+      // bottom-sheet langsung terlihat (tanpa perlu scroll manual ke atas).
+      mapWrapRef.current?.scrollIntoView({ block: "start", behavior });
+    } else {
+      // Desktop: cukup pastikan kartu terpilih terlihat di kolom list.
+      document
+        .getElementById(`station-${id}`)
+        ?.scrollIntoView({ block: "nearest", behavior });
     }
   };
 
@@ -59,7 +69,7 @@ export default function Locator({ sites }: { sites: Site[] }) {
   };
 
   return (
-    <section className="bg-background">
+    <section className="bg-background pt-12 xl:pt-16">
       {/* Header + kontrol */}
       <div className="border-b border-border bg-muted/40">
         <div className="main-container py-8 sm:py-10">
@@ -101,7 +111,10 @@ export default function Locator({ sites }: { sites: Site[] }) {
           </div>
 
           {/* Peta (lazy, client-only) */}
-          <div className="relative order-1 h-[55vh] overflow-hidden rounded-2xl border border-border lg:order-2 lg:sticky lg:top-20 lg:h-[72vh]">
+          <div
+            ref={mapWrapRef}
+            className="relative order-1 h-[55vh] scroll-mt-20 overflow-hidden rounded-2xl border border-border lg:order-2 lg:sticky lg:top-20 lg:h-[72vh]"
+          >
             <MapClient
               sites={filtered}
               selectedId={selectedId}

@@ -1043,6 +1043,8 @@ export const en = {
   "supercharge.locator.tier.mitra": "Partner",
   "supercharge.locator.filter.allTiers": "All types",
   "supercharge.locator.filter.allStatus": "All status",
+  "supercharge.locator.filter.tierLabel": "Location type",
+  "supercharge.locator.filter.statusLabel": "Status",
   "supercharge.locator.amenity.toilet": "Toilet",
   "supercharge.locator.amenity.kafe": "Café",
   "supercharge.locator.amenity.musala": "Prayer room",

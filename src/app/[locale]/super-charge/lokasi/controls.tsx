@@ -95,37 +95,67 @@ export default function Controls({
         </p>
       )}
 
-      <div className="flex flex-wrap items-center gap-2">
-        {TIERS.map((tier) => (
-          <Chip
-            key={tier}
-            active={filters.tier === tier}
-            onClick={() => setFilters({ ...filters, tier })}
-          >
-            {tier === "all"
-              ? t("supercharge.locator.filter.allTiers")
-              : t(`supercharge.locator.tier.${tier}`)}
-          </Chip>
-        ))}
-        <span className="mx-1 hidden h-4 w-px bg-border sm:block" aria-hidden />
-        {STATUSES.map((s) => (
-          <Chip
-            key={s}
-            active={filters.status === s}
-            onClick={() => setFilters({ ...filters, status: s })}
-          >
-            {s === "all"
-              ? t("supercharge.locator.filter.allStatus")
-              : t(`supercharge.locator.status.${s}`)}
-          </Chip>
-        ))}
+      {/* Filter: di mobile tiap grup jadi satu baris ber-label yang bisa di-scroll
+          horizontal (tidak menumpuk); di desktop dua grup sejajar. */}
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-8">
+        <FilterGroup label={t("supercharge.locator.filter.tierLabel")}>
+          {TIERS.map((tier) => (
+            <Chip
+              key={tier}
+              active={filters.tier === tier}
+              onClick={() => setFilters({ ...filters, tier })}
+            >
+              {tier === "all"
+                ? t("supercharge.locator.filter.allTiers")
+                : t(`supercharge.locator.tier.${tier}`)}
+            </Chip>
+          ))}
+        </FilterGroup>
+
+        <FilterGroup label={t("supercharge.locator.filter.statusLabel")}>
+          {STATUSES.map((s) => (
+            <Chip
+              key={s}
+              active={filters.status === s}
+              onClick={() => setFilters({ ...filters, status: s })}
+            >
+              {s === "all"
+                ? t("supercharge.locator.filter.allStatus")
+                : t(`supercharge.locator.status.${s}`)}
+            </Chip>
+          ))}
+        </FilterGroup>
+
         <span
           role="status"
           aria-live="polite"
-          className="ml-auto text-sm text-muted-foreground"
+          className="text-sm text-muted-foreground lg:ml-auto lg:self-end lg:pb-1"
         >
           {resultCount} {t("supercharge.locator.results")}
         </span>
+      </div>
+    </div>
+  );
+}
+
+function FilterGroup({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="min-w-0">
+      <p className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </p>
+      <div
+        role="group"
+        aria-label={label}
+        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:overflow-visible"
+      >
+        {children}
       </div>
     </div>
   );
@@ -146,7 +176,7 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-3 py-1 text-sm transition-colors",
+        "shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm transition-colors",
         active
           ? "border-primary bg-primary text-primary-foreground"
           : "border-border bg-card text-foreground hover:bg-muted",

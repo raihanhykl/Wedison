@@ -24,7 +24,9 @@ export default function StationCard({
   const { t } = useLanguage();
   const p = site.properties;
   const st = STATUS_META[p.status];
-  const dist = userLocation ? haversineKm(userLocation, siteLatLng(site)) : null;
+  const dist = userLocation
+    ? haversineKm(userLocation, siteLatLng(site))
+    : null;
 
   return (
     <button

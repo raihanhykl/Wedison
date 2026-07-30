@@ -1044,6 +1044,8 @@ export const id = {
   "supercharge.locator.tier.mitra": "Mitra",
   "supercharge.locator.filter.allTiers": "Semua Tipe",
   "supercharge.locator.filter.allStatus": "Semua Status",
+  "supercharge.locator.filter.tierLabel": "Tipe lokasi",
+  "supercharge.locator.filter.statusLabel": "Status",
   "supercharge.locator.amenity.toilet": "Toilet",
   "supercharge.locator.amenity.kafe": "Kafe",
   "supercharge.locator.amenity.musala": "Musala",

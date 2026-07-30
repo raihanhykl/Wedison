@@ -1,20 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Map, {
   Marker,
   Popup,
   NavigationControl,
   type MapRef,
 } from "react-map-gl/maplibre";
+import type { StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/app/lib/language-context";
 import type { Site, LatLng } from "./types";
 import { STATUS_META } from "./lib";
+import { MAP_STYLE_URL, loadSageMapStyle } from "./map-style";
 
-const MAP_STYLE = "https://tiles.openfreemap.org/styles/positron";
 const INDONESIA = { longitude: 113.5, latitude: -2.2, zoom: 4.2 };
 
 export type MapProps = {
@@ -44,15 +45,36 @@ export default function SuperChargeMap({
     typeof window !== "undefined" &&
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-  // flyTo site terpilih
+  // Style bergaya Wedison (positron di-tint Sage). Fallback ke style asli bila fetch gagal.
+  const [sageStyle, setSageStyle] = useState<StyleSpecification | null>(null);
+  useEffect(() => {
+    let alive = true;
+    loadSageMapStyle()
+      .then((s) => alive && setSageStyle(s))
+      .catch(() => {
+        /* biarkan fallback URL style asli */
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // flyTo site terpilih. Di mobile beri padding bawah supaya pin tidak tertutup bottom-sheet.
   useEffect(() => {
     if (!selectedId) return;
     const s = sitesRef.current.find((x) => x.properties.id === selectedId);
     if (!s) return;
+    const isMobile =
+      typeof window !== "undefined" && window.innerWidth < 1024;
+    // `padding` HANYA disertakan saat dipakai — mengirim `padding: undefined` membuat
+    // MapLibre tetap membandingkannya (isPaddingEqual) lalu throw "reading 'top'".
     mapRef.current?.flyTo({
       center: s.geometry.coordinates,
       zoom: 13,
       duration: reduced ? 0 : 1200,
+      ...(isMobile
+        ? { padding: { top: 0, bottom: 190, left: 0, right: 0 } }
+        : {}),
     });
   }, [selectedId, reduced]);
 
@@ -72,7 +94,7 @@ export default function SuperChargeMap({
     <Map
       ref={mapRef}
       initialViewState={INDONESIA}
-      mapStyle={MAP_STYLE}
+      mapStyle={sageStyle ?? MAP_STYLE_URL}
       style={{ width: "100%", height: "100%" }}
     >
       <NavigationControl position="top-right" showCompass={false} />
