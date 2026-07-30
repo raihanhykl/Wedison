@@ -11,16 +11,16 @@
 
 Snapshot of what exists today (so the redesign knows what to change):
 
-| Area | Current state | Verdict |
-| --- | --- | --- |
-| **Font** | `Geist` + `Geist_Mono` via `next/font/google`, wired to `--font-geist-sans`/`--font-geist-mono` in `src/app/[locale]/layout.tsx` and `@theme` in `globals.css` | ❌ Geist is explicitly on the user's ban list. Replace. The wiring pattern itself is correct and reusable. |
-| **Image optimization** | `images.unoptimized: true` in `next.config.ts`; `sharp@0.34.5` already in `dependencies` | ❌ Optimization is OFF. This ships full-size originals → bad LCP/PageSpeed. Re-enable (see §3). |
-| **Raw `<img>`** | One in `src/components/hero-section.tsx` (the LCP hero) | ❌ Worst possible place for a raw `<img>`. Must be `next/image` with `priority`. |
-| **Color tokens** | Primary `#2bb075` green (`oklch(0.6731 0.1424 158.78)`); `--border`/`--input`/`--ring` hardcode a *different* teal `oklch(0.7 0.14 182.5)` that doesn't match primary | ❌ User wants to drop green. Token system also has a mismatch bug + ~130 lines of commented dead code in `globals.css`. Rebuild tokens (see §2). |
-| **Dark mode** | `@custom-variant dark (&:is(.dark *))`, `next-themes` installed | ⚠️ Works, but `:is(.dark *)` excludes the `.dark` element *itself*. Use `:where(.dark, .dark *)` (see §2.4). |
-| **Caching headers** | nginx caches `/_next/static/` immutable only | ⚠️ Missing `/_next/image`, `/public` static assets, font caching, and gzip/brotli (see §5). |
-| **Motion** | No library; `html { scroll-behavior: smooth }` set globally and unconditionally | ⚠️ Smooth scroll ignores `prefers-reduced-motion`; no motion system yet (see §6). |
-| **`trailingSlash: true`** | set | ✅ Keep — SEO continuity. Just make sure nginx/redirects agree. |
+| Area                      | Current state                                                                                                                                                         | Verdict                                                                                                                                          |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Font**                  | `Geist` + `Geist_Mono` via `next/font/google`, wired to `--font-geist-sans`/`--font-geist-mono` in `src/app/[locale]/layout.tsx` and `@theme` in `globals.css`        | ❌ Geist is explicitly on the user's ban list. Replace. The wiring pattern itself is correct and reusable.                                       |
+| **Image optimization**    | `images.unoptimized: true` in `next.config.ts`; `sharp@0.34.5` already in `dependencies`                                                                              | ❌ Optimization is OFF. This ships full-size originals → bad LCP/PageSpeed. Re-enable (see §3).                                                  |
+| **Raw `<img>`**           | One in `src/components/hero-section.tsx` (the LCP hero)                                                                                                               | ❌ Worst possible place for a raw `<img>`. Must be `next/image` with `priority`.                                                                 |
+| **Color tokens**          | Primary `#2bb075` green (`oklch(0.6731 0.1424 158.78)`); `--border`/`--input`/`--ring` hardcode a _different_ teal `oklch(0.7 0.14 182.5)` that doesn't match primary | ❌ User wants to drop green. Token system also has a mismatch bug + ~130 lines of commented dead code in `globals.css`. Rebuild tokens (see §2). |
+| **Dark mode**             | `@custom-variant dark (&:is(.dark *))`, `next-themes` installed                                                                                                       | ⚠️ Works, but `:is(.dark *)` excludes the `.dark` element _itself_. Use `:where(.dark, .dark *)` (see §2.4).                                     |
+| **Caching headers**       | nginx caches `/_next/static/` immutable only                                                                                                                          | ⚠️ Missing `/_next/image`, `/public` static assets, font caching, and gzip/brotli (see §5).                                                      |
+| **Motion**                | No library; `html { scroll-behavior: smooth }` set globally and unconditionally                                                                                       | ⚠️ Smooth scroll ignores `prefers-reduced-motion`; no motion system yet (see §6).                                                                |
+| **`trailingSlash: true`** | set                                                                                                                                                                   | ✅ Keep — SEO continuity. Just make sure nginx/redirects agree.                                                                                  |
 
 ---
 
@@ -37,7 +37,7 @@ all available on Google Fonts (so `next/font/google` self-hosts them automatical
 
 - **Body / UI:** `Hanken Grotesk`, `Onest`, `Instrument Sans`, `Schibsted Grotesk`, or `Figtree` — humanist grotesks with high x-height and excellent screen legibility, none of which read as "default AI font."
 - **Display / headlines (pairing):** `Bricolage Grotesque` (characterful, editorial), `Clash Display` (via local font), `Unbounded`, or `Fraunces` (variable serif) for an Awwwards-grade contrast against a clean body face.
-- **Mono (specs tables, EDPower data):** `Geist Mono` is banned by association — use `JetBrains Mono`, `Spline Sans Mono`, or `Martian Mono`.
+- **Mono (specs tables, EdPower data):** `Geist Mono` is banned by association — use `JetBrains Mono`, `Spline Sans Mono`, or `Martian Mono`.
 
 > Indonesian copy is full Latin — `subsets: ['latin']` covers it. Add `'latin-ext'` only if you use
 > currency/typographic glyphs outside basic Latin. Do **not** preload subsets you don't use (each adds a `<link rel=preload>`).
@@ -48,13 +48,17 @@ Put font defs in **one file** (`src/app/fonts.ts`) so each face is instantiated 
 
 ```ts
 // src/app/fonts.ts
-import { Hanken_Grotesk, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import {
+  Hanken_Grotesk,
+  Bricolage_Grotesque,
+  JetBrains_Mono,
+} from "next/font/google";
 
 // Variable font → DO NOT pass `weight`; you get the whole 100–900 range in one file.
 export const sans = Hanken_Grotesk({
   subsets: ["latin"],
-  display: "swap",          // default; render fallback immediately, swap when ready
-  variable: "--font-sans",  // exposes a CSS var Tailwind can consume
+  display: "swap", // default; render fallback immediately, swap when ready
+  variable: "--font-sans", // exposes a CSS var Tailwind can consume
   fallback: ["system-ui", "arial"], // metric-matched fallback list
   // adjustFontFallback: true (default) → auto size-adjust to kill CLS. Leave on.
   // preload: true (default) → injects <link rel=preload> for the latin subset.
@@ -78,14 +82,17 @@ Wire the variables on `<html>`/`<body>` in `src/app/[locale]/layout.tsx`:
 ```tsx
 import { sans, display, mono } from "@/app/fonts";
 // ...
-<html lang={locale} className={`${sans.variable} ${display.variable} ${mono.variable}`}>
+<html
+  lang={locale}
+  className={`${sans.variable} ${display.variable} ${mono.variable}`}
+>
   <body className="font-sans antialiased">{/* ... */}</body>
-</html>
+</html>;
 ```
 
 ### 1.3 Self-hosted / local variable font (`next/font/local`)
 
-Use this for a *purchased or custom* display face (e.g. Clash Display, a foundry licence). Prefer a
+Use this for a _purchased or custom_ display face (e.g. Clash Display, a foundry licence). Prefer a
 single **variable `.woff2`** file. Co-locate it under `src/app/fonts/`.
 
 ```ts
@@ -93,7 +100,7 @@ import localFont from "next/font/local";
 
 export const display = localFont({
   src: "./fonts/ClashDisplay-Variable.woff2", // single variable file = best
-  weight: "200 700",        // declare the variable axis range
+  weight: "200 700", // declare the variable axis range
   display: "swap",
   variable: "--font-display",
   // For local fonts, adjustFontFallback is 'Arial' by default; set the closest
@@ -144,23 +151,23 @@ Two layers. **Layer 1 = raw palette in `:root`** (semantic-neutral, theme-able).
   /* Pick a NON-GREEN brand hue. "Wedison = Edison/electric" → an electric
      blue-violet or amber/voltage-yellow reads as energy without the green.
      Examples (tune in a perceptual picker like oklch.com):           */
-  --brand:        oklch(0.62 0.20 264);   /* electric indigo  */
-  --brand-hover:  oklch(0.56 0.21 264);
+  --brand: oklch(0.62 0.2 264); /* electric indigo  */
+  --brand-hover: oklch(0.56 0.21 264);
   --brand-subtle: oklch(0.95 0.04 264);
-  --accent-volt:  oklch(0.86 0.17 95);    /* voltage amber accent (sparingly) */
+  --accent-volt: oklch(0.86 0.17 95); /* voltage amber accent (sparingly) */
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.18 0.01 264);
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
   --muted: oklch(0.97 0.005 264);
-  --muted-foreground: oklch(0.50 0.01 264);
+  --muted-foreground: oklch(0.5 0.01 264);
 
   /* FIX the repo bug: border/input/ring must derive from neutrals or brand,
      not a leftover teal. */
   --border: oklch(0.92 0.004 264);
-  --input:  oklch(0.92 0.004 264);
-  --ring:   var(--brand);
+  --input: oklch(0.92 0.004 264);
+  --ring: var(--brand);
 
   --destructive: oklch(0.58 0.22 27);
   --radius: 0.625rem;
@@ -169,12 +176,12 @@ Two layers. **Layer 1 = raw palette in `:root`** (semantic-neutral, theme-able).
 .dark {
   --background: oklch(0.16 0.01 264);
   --foreground: oklch(0.98 0 0);
-  --card: oklch(0.20 0.01 264);
+  --card: oklch(0.2 0.01 264);
   --muted: oklch(0.26 0.01 264);
   --muted-foreground: oklch(0.72 0.01 264);
   --border: oklch(1 0 0 / 10%);
-  --input:  oklch(1 0 0 / 12%);
-  --brand:  oklch(0.68 0.18 264);  /* lift L in dark for contrast */
+  --input: oklch(1 0 0 / 12%);
+  --brand: oklch(0.68 0.18 264); /* lift L in dark for contrast */
 }
 
 /* ---- Layer 2: bridge to utilities (inline so dark-mode vars resolve) ---- */
@@ -208,7 +215,7 @@ already oklch, so brand tokens should match. Author colors at oklch.com.
 
 ### 2.4 Dark mode — exact v4 syntax
 
-The repo's `@custom-variant dark (&:is(.dark *))` is subtly wrong: `.dark *` matches *descendants*
+The repo's `@custom-variant dark (&:is(.dark *))` is subtly wrong: `.dark *` matches _descendants_
 of `.dark` but **not the `.dark` element itself**. Use the official selector-list form so the toggled
 element is included:
 
@@ -249,10 +256,10 @@ const nextConfig: NextConfig = {
   images: {
     // unoptimized: true,  ← DELETE THIS LINE
     formats: ["image/avif", "image/webp"], // AVIF first (≈20% smaller), WebP fallback
-    minimumCacheTTL: 2678400,              // 31d — long TTL = fewer re-encodes on the VPS
-    qualities: [60, 75, 90],               // Next 16 requires whitelisting qualities used by `quality`
+    minimumCacheTTL: 2678400, // 31d — long TTL = fewer re-encodes on the VPS
+    qualities: [60, 75, 90], // Next 16 requires whitelisting qualities used by `quality`
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840], // default; trim if you never serve 4K
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],            // default; for sub-viewport images
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // default; for sub-viewport images
     remotePatterns: [
       { protocol: "https", hostname: "wedison.co" },
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -272,8 +279,15 @@ the Next server, or every browser gets the same (wrong) format — see §5.
 - **LCP hero** (`hero-section.tsx`, currently a raw `<img>`): convert to `next/image` with `priority`
   (preloads, disables lazy-load). One `priority` image per page max.
   ```tsx
-  <Image src="/hero.jpg" alt="Wedison Athena" fill priority
-         sizes="100vw" placeholder="blur" blurDataURL={heroBlur} />
+  <Image
+    src="/hero.jpg"
+    alt="Wedison Athena"
+    fill
+    priority
+    sizes="100vw"
+    placeholder="blur"
+    blurDataURL={heroBlur}
+  />
   ```
 - **`sizes` is mandatory for `fill` images.** Without it the browser downloads the largest candidate.
   The repo's `_home/landing.tsx` already does this well (`sizes="(max-width:768px) 80vw, 60vw"`) — replicate that everywhere, fix anything using `fill` without `sizes`.
@@ -289,26 +303,33 @@ the Next server, or every browser gets the same (wrong) format — see §5.
 Targets (web.dev, 75th percentile): **LCP ≤ 2.5s · CLS ≤ 0.1 · INP ≤ 200ms** (INP "needs improvement" 201–500ms, "poor" >500ms).
 
 ### 4.1 LCP
+
 - LCP is almost always the hero image or hero heading. Use `next/image` + `priority` on it; self-hosted fonts via `next/font` (no render-blocking Google request).
 - Keep the hero **server-rendered** (RSC) — no client JS needed before paint.
 - Preload only what's above the fold; `next/font` preloads the brand subset automatically.
 
 ### 4.2 CLS
+
 - `next/font` + `adjustFontFallback` → no font-swap shift. `next/image` with dimensions → no image shift.
 - Reserve space for anything async (carousels, embeds). The repo's `embla`/`keen-slider` hero is a CLS risk — give the track a fixed aspect-ratio container.
 
 ### 4.3 INP (the one most sites fail now)
+
 Three phases: **input delay → processing → presentation**. Fixes:
-- **Ship less JS.** Default to **React Server Components**; add `"use client"` only at the leaf that needs interactivity. The landing pages are mostly static content + a few interactive widgets (navbar, language toggle, carousel, contact form) — those should be the *only* client components.
+
+- **Ship less JS.** Default to **React Server Components**; add `"use client"` only at the leaf that needs interactivity. The landing pages are mostly static content + a few interactive widgets (navbar, language toggle, carousel, contact form) — those should be the _only_ client components.
 - **`next/dynamic`** for heavy, below-the-fold or interaction-gated client widgets (e.g. the contact form with `react-hook-form`/`zod`, the comparison table, recaptcha):
   ```tsx
-  const ContactForm = dynamic(() => import("@/components/contact3"), { ssr: false });
+  const ContactForm = dynamic(() => import("@/components/contact3"), {
+    ssr: false,
+  });
   ```
 - **Yield to the main thread** in any long handler; debounce scroll/resize listeners; avoid synchronous layout thrash.
 - **`content-visibility: auto`** on long off-screen sections (FAQ list, media grid) to skip rendering work until scrolled near.
-- **Trim the bundle:** `react-intersection-observer`, two carousel libs (`embla` *and* `keen-slider` are both installed — pick one), and `@emailjs/browser` should all be code-split or removed. Run `next build` and watch the per-route first-load JS; keep shared JS lean.
+- **Trim the bundle:** `react-intersection-observer`, two carousel libs (`embla` _and_ `keen-slider` are both installed — pick one), and `@emailjs/browser` should all be code-split or removed. Run `next build` and watch the per-route first-load JS; keep shared JS lean.
 
 ### 4.4 RSC vs Client — the discipline
+
 Server by default. A component needs `"use client"` only if it uses state/effects, browser APIs, or event handlers. Pass server-fetched data down as props; never fetch in a client component what a server component could fetch.
 
 ---
@@ -316,7 +337,9 @@ Server by default. A component needs `"use client"` only if it uses state/effect
 ## 5. Caching — Next 15 model + nginx/VPS headers
 
 ### 5.1 Next 15 caching model (changed from 14)
+
 In Next 15+, **less is cached by default**:
+
 - `fetch()` is **not cached** by default (`cache: 'force-cache'` to opt in; `next: { revalidate: N }` for ISR-style; `next: { tags: [...] }` + `revalidateTag()` for on-demand).
 - **GET Route Handlers** and the **client Router Cache** for page segments are uncached by default.
 - For DB/ORM (no `fetch`): wrap in `unstable_cache(fn, keys, { revalidate, tags })` or React `cache()` for per-request dedupe.
@@ -329,6 +352,7 @@ request, which is fine. **Do not sprinkle `force-dynamic`** — it would needles
 and hurt TTFB. If/when you add a real data source, opt **into** caching explicitly with `revalidate`/tags.
 
 ### 5.2 Static-asset / nginx headers (VPS)
+
 Current nginx caches `/_next/static/` immutable only. Add the rest:
 
 ```nginx
@@ -366,6 +390,7 @@ Keep `proxy_http_version 1.1`. The HSTS/nosniff/Referrer-Policy headers already 
 `Content-Security-Policy` when the design settles.
 
 ### 5.3 Caching rules (must-follow)
+
 1. Marketing pages = **static prerender**; don't force dynamic.
 2. Re-enabled image optimizer caches to `.next/cache` — ensure write perms and **a long `minimumCacheTTL`**.
 3. nginx: immutable for `/_next/static/`, forward `Accept` to `/_next/image`, 30d for `/public`, gzip/brotli on text.
@@ -378,36 +403,48 @@ Keep `proxy_http_version 1.1`. The HSTS/nosniff/Referrer-Policy headers already 
 Hierarchy of cost (cheapest → most expensive): **CSS transitions/keyframes → View Transitions API → Motion One (Web Animations) → Framer/`motion`**.
 
 ### 6.1 Default to CSS / compositor-only props
+
 Animate **only `transform` and `opacity`** (compositor thread, no layout/paint). Tailwind v4 has
 native transition/animation utilities; `tailwindcss-animate` is already available. Reserve JS animation
 for genuinely stateful, interruptible, gesture-driven UI.
 
 ### 6.2 View Transitions API (the 2025/26 sweet spot)
+
 Reached **Baseline "newly available" Oct 2025** (Chrome/Edge 111+, Firefox 144+, Safari 18+ ≈ 89% traffic).
 Runs on the **compositor thread**; the browser snapshots old/new states and interpolates — JS can't
 match it for cost (typically 1–5ms overhead). Use it for page/section transitions. Pair with the
 Speculation Rules API (prerender next page) to remove the LCP penalty entirely. CSS opt-in:
+
 ```css
 @media (prefers-reduced-motion: no-preference) {
-  @view-transition { navigation: auto; }
+  @view-transition {
+    navigation: auto;
+  }
 }
 ```
+
 > Next.js has an experimental `ViewTransition` component; on a mostly-MPA marketing site, the native
 > CSS `@view-transition` for cross-document navigations is simpler and dependency-free — prefer it.
 
 ### 6.3 When a JS motion library is worth it
+
 - **Motion One** (`motion` package, ~5KB, uses the native Web Animations API) for occasional scroll-linked or spring micro-interactions — far lighter than Framer.
 - **Framer Motion / `motion/react`** only if you need orchestrated layout animations, drag, or shared-element choreography that CSS can't express. It pulls real JS weight (hurts INP/first-load) — gate it behind `next/dynamic`, use on client leaves only, and never on the hero/above-the-fold path.
 - The repo currently has **no** motion lib — keep it that way until a specific interaction demands one.
 
 ### 6.4 `prefers-reduced-motion` (accessibility, non-negotiable)
+
 - The repo's global `html { scroll-behavior: smooth }` ignores the user preference. Gate it:
   ```css
   @media (prefers-reduced-motion: no-preference) {
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;

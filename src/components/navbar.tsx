@@ -79,7 +79,7 @@ export default function Navbar() {
       path === "/corporate/about/" ||
       path === "/corporate/contact/" ||
       path === "/showroom/" ||
-      // path === "/super-charge/" ||
+      path === "/super-charge/lokasi/" ||
       (path.startsWith("/media-center/") && path !== "/media-center/")
     ) {
       setWhitePage(true);
@@ -255,7 +255,7 @@ export default function Navbar() {
             openDiscover ||
             mobileMenuOpen
             ? "bg-card/95 border-b border-border shadow-sm backdrop-blur-md"
-            : "bg-transparent"
+            : "bg-transparent",
           // bgTone
         )}
       >
@@ -277,8 +277,8 @@ export default function Navbar() {
                     mobileMenuOpen
                       ? "/wedison-sidebyside.png"
                       : whitePage
-                      ? "/wedison-sidebyside.png"
-                      : "/wedison-sidebyside-white.png"
+                        ? "/wedison-sidebyside.png"
+                        : "/wedison-sidebyside-white.png"
                   }
                   alt="Wedison Logo"
                   width={150}
@@ -305,10 +305,9 @@ export default function Navbar() {
                             openDiscover
                             ? "text-foreground hover:text-primary"
                             : whitePage
-                            ? "text-foreground"
-                            : "text-white",
-                          activeDropdown === item.name &&
-                            "text-primary"
+                              ? "text-foreground"
+                              : "text-white",
+                          activeDropdown === item.name && "text-primary",
                           // tone
                         )}
                         onClick={() => toggleOpen("openProduct")}
@@ -317,7 +316,7 @@ export default function Navbar() {
                         <ChevronDown
                           className={cn(
                             "ml-1 h-4 w-4 transition-transform duration-200",
-                            openProduct && "rotate-180"
+                            openProduct && "rotate-180",
                           )}
                         />
                         <span
@@ -330,7 +329,7 @@ export default function Navbar() {
                               openProduct ||
                               openCorporate ||
                               openDiscover) &&
-                              "bg-primary"
+                              "bg-primary",
                             // bgAccent
                           )}
                         />
@@ -348,8 +347,7 @@ export default function Navbar() {
                             openDiscover
                             ? "text-foreground hover:text-primary"
                             : "",
-                          activeDropdown === item.name &&
-                            "text-primary"
+                          activeDropdown === item.name && "text-primary",
                           // tone
                         )}
                         onClick={() => toggleOpen("openCorporate")}
@@ -358,7 +356,7 @@ export default function Navbar() {
                         <ChevronDown
                           className={cn(
                             "ml-1 h-4 w-4 transition-transform duration-200",
-                            openCorporate && "rotate-180"
+                            openCorporate && "rotate-180",
                           )}
                         />
                         <span
@@ -371,7 +369,7 @@ export default function Navbar() {
                               openProduct ||
                               openCorporate ||
                               openDiscover) &&
-                              "bg-primary"
+                              "bg-primary",
                             // bgAccent
                           )}
                         />
@@ -389,8 +387,7 @@ export default function Navbar() {
                             openDiscover
                             ? "text-foreground hover:text-primary"
                             : "",
-                          activeDropdown === item.name &&
-                            "text-primary"
+                          activeDropdown === item.name && "text-primary",
                           // tone
                         )}
                         onClick={() => toggleOpen("openDiscover")}
@@ -399,7 +396,7 @@ export default function Navbar() {
                         <ChevronDown
                           className={cn(
                             "ml-1 h-4 w-4 transition-transform duration-200",
-                            openDiscover && "rotate-180"
+                            openDiscover && "rotate-180",
                           )}
                         />
                         <span
@@ -412,7 +409,7 @@ export default function Navbar() {
                               openProduct ||
                               openCorporate ||
                               openDiscover) &&
-                              "bg-primary"
+                              "bg-primary",
                             // bgAccent
                           )}
                         />
@@ -430,7 +427,7 @@ export default function Navbar() {
                         //   "text-[var(--primary-light)]"
                         scrolled || openProduct || openCorporate || openDiscover
                           ? "text-foreground hover:text-primary"
-                          : ""
+                          : "",
                         // tone
                       )}
                     >
@@ -441,7 +438,7 @@ export default function Navbar() {
                           whitePage ? "bg-foreground" : "bg-card",
 
                           // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
-                          (scrolled || openProduct) && "bg-primary"
+                          (scrolled || openProduct) && "bg-primary",
                           // bgAccent
                         )}
                       />
@@ -468,8 +465,8 @@ export default function Navbar() {
                   scrolled || mobileMenuOpen
                     ? " text-foreground"
                     : whitePage
-                    ? "text-foreground"
-                    : "text-white"
+                      ? "text-foreground"
+                      : "text-white",
                   // tone
                 )}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -523,7 +520,7 @@ export default function Navbar() {
                   href={item.href}
                   className={cn(
                     "flex items-center",
-                    item.subMenu && "justify-between w-full"
+                    item.subMenu && "justify-between w-full",
                   )}
                   onClick={() => {
                     if (item.subMenu) return;
@@ -540,7 +537,7 @@ export default function Navbar() {
                       <ChevronDown
                         className={cn(
                           "ml-1 h-4 w-4 transition-transform duration-200",
-                          activeDropdown === item.name && "rotate-180"
+                          activeDropdown === item.name && "rotate-180",
                         )}
                       />
                     )}
@@ -572,7 +569,7 @@ export default function Navbar() {
                           key={index}
                           className={cn(
                             "flex flex-col items-center justify-center hover:scale-105 h-16 w-16 mx-auto",
-                            item.name === "Victory" && ""
+                            item.name === "Victory" && "",
                           )}
                         >
                           <Link
@@ -590,7 +587,7 @@ export default function Navbar() {
                                 width={64}
                                 height={64}
                                 className={cn(
-                                  "lg:h-32 lg:w-32 h-16 w-16 object-contain"
+                                  "lg:h-32 lg:w-32 h-16 w-16 object-contain",
                                 )}
                               />
                             </div>
@@ -605,7 +602,7 @@ export default function Navbar() {
                         >
                           {item.name}
                         </Link>
-                      )
+                      ),
                     )}
                   </div>
                 )}

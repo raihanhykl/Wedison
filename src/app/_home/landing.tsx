@@ -37,13 +37,13 @@ const NAMES: Record<string, string> = {
   athena: "Athena",
   bees: "Bees",
   victory: "Victory",
-  edpower: "EDPower",
+  edpower: "EdPower",
 };
 
 const MODELS = [
   {
     id: "athena",
-    line: "Commute",
+    line: "Style",
     // hero: "/athena/athena-landing-hero.webp",
     hero: "/new-looks/HERO 1.webp",
     productImage: "/new-looks/01-HERO CARD-LP.webp",
@@ -60,17 +60,17 @@ const MODELS = [
   },
   {
     id: "victory",
-    line: "Performance",
+    line: "Fleet",
     // hero: "/victory/victory-landing-hero.webp",
     hero: "/new-looks/test image.webp",
-    productImage: "/new-looks/03-HERO CARD-LP.webp",
+    productImage: "/new-looks/04-HERO CARD-LP.webp",
     heroM: "/victory/victory-landing-hero-mobile.webp",
   },
   {
     id: "edpower",
-    line: "Fleet",
+    line: "Performance",
     hero: "/edpower/edpower-landing-hero.webp",
-    productImage: "/new-looks/04-HERO CARD-LP.webp",
+    productImage: "/new-looks/03-HERO CARD-LP.webp",
     heroM: "/edpower/edpower-landing-hero-mobile.webp",
   },
 ] as const;
@@ -90,9 +90,17 @@ const UNSPLASH = (id: string) =>
 
 const ADVANTAGE = [
   { img: UNSPLASH("1602918386084-58983c3bafac"), Icon: Zap, key: "charge" },
-  { img: UNSPLASH("1592318348310-f31b61a931c8"), Icon: BatteryCharging, key: "battery" },
+  {
+    img: UNSPLASH("1592318348310-f31b61a931c8"),
+    Icon: BatteryCharging,
+    key: "battery",
+  },
   { img: UNSPLASH("1579621970588-a35d0e7ab9b6"), Icon: Wallet, key: "cost" },
-  { img: UNSPLASH("1771402382481-de35db6c4159"), Icon: Headphones, key: "service" },
+  {
+    img: UNSPLASH("1771402382481-de35db6c4159"),
+    Icon: Headphones,
+    key: "service",
+  },
 ];
 
 const EXPLORE = [
@@ -121,6 +129,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     familySub: "Dari harian kota hingga armada — empat motor, satu standar.",
     learn: "Jelajahi",
     Commute: "Harian",
+    Style: "Gaya",
     Performance: "Performa",
     Fleet: "Armada",
     superLabel: "Jaringan SuperCharge",
@@ -171,6 +180,7 @@ const COPY: Record<Lang, Record<string, string>> = {
       "From city commuting to fleets — four motorcycles, one standard.",
     learn: "Explore",
     Commute: "Commute",
+    Style: "Style",
     Performance: "Performance",
     Fleet: "Fleet",
     superLabel: "SuperCharge Network",

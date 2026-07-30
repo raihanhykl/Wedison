@@ -5,8 +5,8 @@
 > 05 tech stack · 06 typography). This is the single source the Art Director and
 > implementation team work from. Full detail lives in `01..06` alongside this file.
 >
-> **Project register:** *Brand* — this is a consumer EV landing site; the design
-> *is* the product. Brand-register rules apply (committed color, fluid type,
+> **Project register:** _Brand_ — this is a consumer EV landing site; the design
+> _is_ the product. Brand-register rules apply (committed color, fluid type,
 > distinctive fonts, imagery-led), not product-register defaults.
 >
 > **Stack:** Next.js 15.5 (App Router, `/[locale]` = `id|en`), React 19, Tailwind
@@ -16,7 +16,7 @@
 > **North-star goals (verbatim user intent):** escape AI-slop · ONE consistent
 > design guideline across all pages · a non-generic, highly-readable brand font
 > (NOT Geist/Inter/Roboto/Poppins/Montserrat) · mobile-first · interactive but
-> light-speed fast · a consistent palette moving *away from green `#2bb075`* ·
+> light-speed fast · a consistent palette moving _away from green `#2bb075`_ ·
 > maintainable code · high PageSpeed · Awwwards-caliber result.
 
 ---
@@ -26,11 +26,13 @@
 Ordered by leverage. Each is specific and file-referenced so it can be ticketed.
 
 ### P0 — Green `#2bb075` is structural, not just "the primary color"
+
 The user's #1 dislike is entangled across the whole token layer, not isolated to one
 variable.
+
 - `globals.css:64` — `--primary: oklch(0.6731 0.1424 158.78)` = `#2bb075`, referenced
   **158×** as raw `var(--primary)` and **312×** total as `primary`.
-- `globals.css:113–115` — `--border`/`--input`/`--ring` are hardcoded to a *different*
+- `globals.css:113–115` — `--border`/`--input`/`--ring` are hardcoded to a _different_
   teal (`oklch(0.7 0.14 182.5)`, hue 182) than primary (hue 158). So borders don't
   even match fills, **and the "neutrals" are themselves green.** `--muted`/`--accent`
   also sit on the hue-182 teal.
@@ -43,33 +45,37 @@ variable.
   a find-replace. Do it first; it unblocks everything else.
 
 ### P1 — Font is Geist: a banned, generic, brand-register miss
+
 - `[locale]/layout.tsx:1,10–20` + `globals.css:9–11` — `Geist`/`Geist_Mono` wired to
   `--font-sans`. Geist is on the user's explicit ban list and is the canonical "modern
   AI geometric sans." No brand personality, no contrast-axis pairing, no metric-matched
   fallback → CLS risk. There is **no type scale** at all — every heading hand-rolls its
   own responsive ladder (home hero `text-3xl…xl:text-7xl`, product hero `text-4xl
-  md:text-6xl`, etc.) and weights disagree (`font-bold/semibold/medium/[750]/[900]`).
+md:text-6xl`, etc.) and weights disagree (`font-bold/semibold/medium/[750]/[900]`).
 
 ### P1 — 18 gradient-text headings (absolute Impeccable ban + a green carrier)
+
 `npx impeccable@latest detect src/ --json` → exit 2, **18 findings, all `gradient-text`.**
 Concentrated in `corporate/about/structure.tsx` (×7), `corporate/contact` (×3),
 `showroom/components/structure.tsx` (×3), plus `not-found.tsx`, `contact3.tsx`,
 `footer.tsx`, `hero/HeroSlide.tsx`, `hero-section.tsx`. Every one is
-`from-[var(--primary)]…to-teal-300` clipped to text — banned *and* a green carrier, so
+`from-[var(--primary)]…to-teal-300` clipped to text — banned _and_ a green carrier, so
 fixing them serves two goals at once. Latent bug: `about/structure.tsx:71` uses
 `bg-clip-text` **without** `text-transparent`, so it renders nothing.
 
 ### P1 — Motion is an accessibility and SSR liability
+
 - **Zero `prefers-reduced-motion` coverage** in `src/**` (grep = 0). Global
   `html{scroll-behavior:smooth}` is unconditional; carousels, reveals, and
   `@keyframes progress` have no reduce alternative — an accessibility violation.
 - **Scroll-reveals gate content visibility on a class transition** (`opacity-0
-  translate-y-10` in 11 files) with **0 `IntersectionObserver`** — driven by state/timer
+translate-y-10` in 11 files) with **0 `IntersectionObserver`** — driven by state/timer
   flags. On a headless renderer or backgrounded tab the transition never fires and the
   section **ships blank** (SSR/SEO risk on this SSR build). It is also the uniform
   fade-rise-on-every-section reflex — the textbook AI-grammar tell.
 
 ### P1 — Image optimization is OFF (the biggest PageSpeed liability)
+
 - `next.config.ts` — `images.unoptimized: true`, so every image ships full-res in its
   original format: no resize, no AVIF/WebP, no `srcset`. `sharp@0.34.5` is already
   installed; standalone uses it automatically.
@@ -78,6 +84,7 @@ fixing them serves two goals at once. Latent bug: `about/structure.tsx:71` uses
   (`Preloader.tsx`) that blocks perceived load, fighting "light-speed fast."
 
 ### P1 — Client-heavy architecture ships too much JS
+
 - **39/69 components are `"use client"`.** The home page (`_home/landing.tsx`) is 100%
   client (two embla carousels, one autoplaying, + lazy comparison table) with near-zero
   static HTML. Navbar (643-line client mega-component, scroll listener) + Footer (client)
@@ -88,6 +95,7 @@ fixing them serves two goals at once. Latent bug: `about/structure.tsx:71` uses
   `useLanguage()` / `useInView()`.
 
 ### P1 — Hardcoded grays bypass tokens and fail contrast
+
 - **185 hardcoded `text-gray-*`** classes; **68** of them are `gray-300/400/500` on
   white. `gray-400` ≈ 3.0:1 → **fails the 4.5:1 body minimum**; `gray-300` is far worse.
   Theming drift (they won't move with the new palette) + the "light gray for elegance"
@@ -95,6 +103,7 @@ fixing them serves two goals at once. Latent bug: `about/structure.tsx:71` uses
   lack `role="dialog"`, focus trap, and Esc handling despite `alert-dialog` being available.
 
 ### P2 — The "design system" is a graveyard of half-abandoned experiments
+
 - `globals.css` opens with a 37-line fully commented-out `:root`, then a live `:root`
   where every color carries 2–3 commented predecessors (teal→emerald→green).
 - **No spacing, shadow, or typography tokens** exist. Undefined utilities `shadow-soft`,
@@ -108,7 +117,7 @@ fixing them serves two goals at once. Latent bug: `about/structure.tsx:71` uses
 > authoring · clean locale routing + per-page `generateMetadata` + `sitemap`/`robots`/
 > hreflang (SEO is a genuine strength) · shadcn primitives (button/card/dialog/accordion/
 > form/select) · the thoughtful comparison table UX · data/content separation
-> (`product-data`, `data-job`). The platform is sound; most perf wins are *config*, not
+> (`product-data`, `data-job`). The platform is sound; most perf wins are _config_, not
 > rewrites.
 
 ---
@@ -122,6 +131,7 @@ a strict two-font system, choreographed (not decorative) motion, and one token s
 every page reads as one guideline.
 
 ### Typography
+
 - **Two-font system, max** (display + text), optional mono accent. Pair on a contrast
   axis (engineered display + humanist body) — never two similar geometric sans.
 - **Fluid `clamp()` display scale**, ratio ≥1.25, **hero ceiling ≤ 6rem (~96px)** — cap
@@ -133,16 +143,17 @@ every page reads as one guideline.
 - Metric-matched fallback + `font-display: swap`; preload only the above-fold weight.
 
 ### Color
+
 - **OKLCH throughout** (already the case — keep it). Reduce chroma near white/black.
 - **Pick a strategy first, then colors: Restrained-to-Committed** — a near-monochrome
-  base (one ink/charcoal *or* one warm-white/editorial-light) + **exactly ONE saturated
+  base (one ink/charcoal _or_ one warm-white/editorial-light) + **exactly ONE saturated
   accent** used on CTAs, active states, and key data — almost nowhere else. Confine all
   saturation to that single accent; "dopamine"/high-saturation everywhere cheapens a
   vehicle brand.
 - **Name a real reference before committing** (e.g. "Rimac teal-on-black restraint";
   "Rivian warm-premium without green"). Unnamed ambition decays to beige.
 - **Two-layer tokens** (primitive `:root`/`.dark` → semantic `@theme inline` bridge).
-  **Tinted neutrals**: push 0.005–0.015 chroma toward *this brand's* hue (pure gray is
+  **Tinted neutrals**: push 0.005–0.015 chroma toward _this brand's_ hue (pure gray is
   dead) — but avoid the cream/sand/beige warm-neutral that is the 2026 AI default, and
   avoid `--paper`/`--sand`/`--linen` token names (themselves tells).
 - Contrast: body ≥4.5:1, large/UI ≥3:1. **Never gray text on a colored background.**
@@ -150,6 +161,7 @@ every page reads as one guideline.
   overlay tokens.
 
 ### Spacing / layout
+
 - **4pt base scale** (4/8/12/16/24/32/48/64/96) from a defined set — no arbitrary values.
   **Vary rhythm:** tight grouping (8–12px) + generous section separation (48–96px).
   Generous whitespace is a luxury signal.
@@ -157,10 +169,11 @@ every page reads as one guideline.
   Grid for 2D; responsive grids via `repeat(auto-fit, minmax(…,1fr))`. Use `gap`, not
   margins. Semantic z-index scale (never 999/9999). Touch targets ≥44×44px.
 - **Bento grid** for the model lineup + a "why electric" feature cluster; allow
-  *intentional* asymmetric breakouts on hero/story sections; full-bleed cinematic
+  _intentional_ asymmetric breakouts on hero/story sections; full-bleed cinematic
   sections alternating with tight editorial columns.
 
 ### Motion
+
 - **`prefers-reduced-motion` is non-negotiable** — one global `@media` block collapses
   durations and gates the smooth-scroll; reduced ≠ none (keep subtle fades, drop
   slide/zoom/parallax).
@@ -178,6 +191,7 @@ every page reads as one guideline.
   Reserve WebGL/Three.js for at most ONE hero moment, lazy-loaded with a static fallback.
 
 ### Interaction
+
 - Design all **8 states** (default/hover/focus/active/disabled/loading/error/success);
   hover ≠ focus. **Never `outline:none` without a `:focus-visible` replacement** (2–3px
   ring, ≥3:1, offset). Fix the broken `button` outline hover (`hover:bg-background/90`).
@@ -186,6 +200,7 @@ every page reads as one guideline.
   (focus trap, role, Esc). Dropdowns via Popover/portal/fixed so they don't clip.
 
 ### Anti-AI craft markers (the user's core fear)
+
 Real art-directed product photography (the single biggest anti-slop move) · one committed
 color world + a distinctive licensed/non-default display font · intentional asymmetry and
 variable-timing motion · a real bilingual editorial voice (not template filler) · spacing
@@ -232,7 +247,7 @@ preloader. Keep the hero server-rendered.
 **Caching** — Marketing pages stay **static prerender** (Next 15 caches less by default;
 **do not** sprinkle `force-dynamic`). nginx: immutable `/_next/static/`; **forward the
 `Accept` header to `/_next/image`** (else AVIF/WebP negotiation breaks behind the proxy);
-30d on `/public`; enable gzip/brotli on text. Opt *into* data caching explicitly
+30d on `/public`; enable gzip/brotli on text. Opt _into_ data caching explicitly
 (`revalidate`/tags) only when a CMS lands.
 
 **Motion** — CSS transform/opacity first; native `@view-transition` for nav; Motion
@@ -248,14 +263,14 @@ Concentrate personality in headings/numerals, keep paragraphs maximally readable
 
 1. **Space Grotesk (display) + Hanken Grotesk (text) + Space/Martian Mono (accent)** —
    **TOP PICK.** Space Grotesk's monospace-derived, engineered character reads as
-   *precision instrumentation* (battery %, range, kW) — a near-perfect metaphor for an
+   _precision instrumentation_ (battery %, range, kW) — a near-perfect metaphor for an
    electric brand, distinctive and Awwwards-credible without the geometric-roundness
    cliché. Hanken Grotesk is the strongest free screen-body grotesk (open apertures, warm,
    Bahasa-legible). All three OFL, all `next/font/google` (self-hosted at build), all
    variable, all with tabular figures. Role map: `--font-display` = Space Grotesk (H1–H3,
    hero, stat numerals, CTA labels); `--font-sans` = Hanken Grotesk (all body/UI);
    `--font-mono` = Space/Martian Mono (spec tables, kW/Wh/km, sparingly).
-   - *Risk:* Space Grotesk headlines can feel quirky on corporate/B2B pages → see #2.
+   - _Risk:_ Space Grotesk headlines can feel quirky on corporate/B2B pages → see #2.
 
 2. **Schibsted Grotesk (single OFL superfamily, display → body in one variable file)** —
    **SAFE SECOND.** One family, zero pairing risk — directly serves "one consistent design
@@ -273,7 +288,7 @@ Concentrate personality in headings/numerals, keep paragraphs maximally readable
 > **Explicitly avoid as headline face:** Bricolage Grotesque — high quality but now the
 > single most over-deployed "designer" font on SaaS landings; it undercuts the
 > "non-generic" goal. Backup display only.
-> **Mono note:** use mono as a functional *accent* only (spec/kW/Wh figures), never a
+> **Mono note:** use mono as a functional _accent_ only (spec/kW/Wh figures), never a
 > primary face. (Geist Mono is banned by association.)
 
 ---
@@ -281,54 +296,60 @@ Concentrate personality in headings/numerals, keep paragraphs maximally readable
 ## 5. Color strategy options (NON-green) — three territories for the Art Director
 
 **The single most important finding from competitor research (03):** green/mint/lime is the
-*category default cliché* — Ola `#16AA51`, Cake `#42BA7F`, Alva mint `#33FFC9`, Volta lime
+_category default cliché_ — Ola `#16AA51`, Cake `#42BA7F`, Alva mint `#33FFC9`, Volta lime
 `#BCF164`, Electrum teal `#40C0C0`, and Wedison's own `#2bb075` all live in the same family.
 **Moving off green is the single clearest differentiation lever available.** Nobody local
 owns a calm, premium "energy/electricity" aesthetic — that is Wedison's open lane, and the
 **Wedison → Edison** equity (light · filament/glow · voltage · spark/bolt) gives an ownable
 system with nothing to do with green leaves.
 
-Each territory below is a *Restrained-to-Committed strategy*: near-monochrome base + ONE
+Each territory below is a _Restrained-to-Committed strategy_: near-monochrome base + ONE
 saturated accent. Author in OKLCH; reduce chroma near white/black; tint neutrals toward the
 chosen hue.
 
 ### Territory A — "Filament / Tungsten": warm amber-gold accent on ink/charcoal + warm-white
+
 **The lead recommendation (04).** Edison's incandescent filament made literal. A single warm
 amber accent (~`oklch(0.86 0.17 95)`, e.g. `#E8A23D`/`#F2B544`) on a charcoal/ink base with a
 warm-white editorial body; everything else is ink + paper + 3–4 neutral grays.
-- *Why:* most ownable (ties directly to the Edison story), warmest/most premium, and
+
+- _Why:_ most ownable (ties directly to the Edison story), warmest/most premium, and
   **maximally differentiated** from both the old green and the blue-heavy Indonesian set
   (Electrum/Alva/Volta). Echoes Rivian's proof that "clean/sustainable" can be warm, not
-  cold-tech, without going green. Named reference: *Rivian warm-premium without green.*
-- *Watch:* keep the warm neutrals from drifting into the cream/sand/beige AI-default —
+  cold-tech, without going green. Named reference: _Rivian warm-premium without green._
+- _Watch:_ keep the warm neutrals from drifting into the cream/sand/beige AI-default —
   push the base toward true charcoal/ink, not latte.
 
 ### Territory B — "Voltage": single electric blue/cyan accent on near-black (cinematic)
+
 Reads as energy, charging, tech, premium EV — closest to Rimac's strategy but a committed
-blue/cyan (pick ONE: an electric blue ~`oklch(0.62 0.20 264)` *or* a cyan `#19B6FF`) so it
+blue/cyan (pick ONE: an electric blue ~`oklch(0.62 0.20 264)` _or_ a cyan `#19B6FF`) so it
 never drifts back toward green. Base `#0A0A0B`→`#121214`, warm-white paper, accent on CTAs/
 active/key data only.
-- *Why:* proven "energy" aesthetic (Gogoro electric-blue-on-black, Rimac teal-on-black);
-  dark-canvas confidence = perceived premium via subtraction. Named reference: *Gogoro/Rimac
-  dark cinematic, one accent.*
-- *Watch:* Electrum already owns navy/blue locally and Gogoro owns electric-blue globally —
+
+- _Why:_ proven "energy" aesthetic (Gogoro electric-blue-on-black, Rimac teal-on-black);
+  dark-canvas confidence = perceived premium via subtraction. Named reference: _Gogoro/Rimac
+  dark cinematic, one accent._
+- _Watch:_ Electrum already owns navy/blue locally and Gogoro owns electric-blue globally —
   push toward a distinctive cyan/indigo and a darker, more cinematic base to avoid reading as
   "Electrum-adjacent."
 
 ### Territory C — "Spark / Indigo-Volt": electric indigo primary + a restrained voltage-amber as the rare second accent
+
 A two-accent variant for a more expressive consumer feel: electric indigo
 (~`oklch(0.62 0.20 264)`) as the brand color carrying CTAs, with a voltage-amber
-(~`oklch(0.86 0.17 95)`) used *very* sparingly for energy/charging highlights and data.
+(~`oklch(0.86 0.17 95)`) used _very_ sparingly for energy/charging highlights and data.
 Near-monochrome ink/paper base underneath.
-- *Why:* keeps a confident modern-tech primary while the amber spark nods to the
+
+- _Why:_ keeps a confident modern-tech primary while the amber spark nods to the
   filament/electricity story — distinctive without going full dark-cinematic; flexible across
   consumer + B2B + corporate.
-- *Watch:* discipline is everything — amber must stay ≤10% or this collapses into a
+- _Watch:_ discipline is everything — amber must stay ≤10% or this collapses into a
   full-palette look. If in doubt, drop to one accent (Territory A or B).
 
 > **Recommendation to the Art Director:** explore **A first** (most ownable, most
 > differentiated, strongest brand story), with **B** as the cinematic alternative and **C**
-> as the more expressive consumer hybrid. Whichever wins, it must be the *only* saturated
+> as the more expressive consumer hybrid. Whichever wins, it must be the _only_ saturated
 > color, defined once in the Tailwind v4 `@theme` tokens — consistency across consumer, B2B,
 > and corporate pages is itself the premium signal.
 
@@ -339,6 +360,7 @@ Near-monochrome ink/paper base underneath.
 Inventory and structure derived from 01 (per-page sections) and 03/04 (best-in-class patterns).
 
 ### Remove / fix
+
 - **Carousel heroes → kill.** Replace home + ojol carousel heroes with one giant headline +
   a single floating product on a near-monochrome set (Ather/Gogoro template) — premium via
   subtraction, and faster. (03/04)
@@ -353,17 +375,19 @@ Inventory and structure derived from 01 (per-page sections) and 03/04 (best-in-c
   `corporate/contact`. Replace with real locations. (01)
 
 ### Keep (retokenize only)
+
 - The **comparison table** UX (mobile horizontal-scroll vs desktop grid, expand/collapse,
   primary-bike highlight) — genuinely good; just swap the green tokens. (01)
 - Per-page SEO scaffolding, locale routing, product-data/data-job separation. (01)
 
 ### Add (award-grade differentiators)
+
 - **One signature hero moment** — a single scroll-reveal or a lazy-loaded 360°/explode
   sequence of the bike, with a static fallback + `prefers-reduced-motion`. (04)
-- **Bento model-lineup section** (Athena/Bees/Victory/EDPower) with hover reveals + animated
+- **Bento model-lineup section** (Athena/Bees/Victory/EdPower) with hover reveals + animated
   tabular spec counters (range, top speed, charge time). (04)
 - **Use-case / model-line nav IA** segmenting the lineup — **Commute** (Athena/Bees) ·
-  **Performance** (Victory) · **Fleet/Ojol** (B2B) · **EDPower** — à la Cake/Zero, fitting
+  **Performance** (Victory) · **Fleet/Ojol** (B2B) · **EdPower** — à la Cake/Zero, fitting
   the consumer + B2B split and replacing the route-coupled navbar logic. (03)
 - **"Build your Wedison" configurator** — color/spec/accessory live preview with live pricing
   (Zero/Tesla pattern) — a real award + conversion differentiator and a foundation for the
@@ -393,7 +417,7 @@ Inventory and structure derived from 01 (per-page sections) and 03/04 (best-in-c
 5. **Dark mode:** ship a real light/dark toggle (next-themes is installed), or commit to a
    single committed mode? The dead `.dark` block must be either wired or deleted.
 6. **Nav IA change:** OK to restructure navigation by **use-case/line** (Commute · Performance
-   · Fleet/Ojol · EDPower) rather than the current page-coupled structure?
+   · Fleet/Ojol · EdPower) rather than the current page-coupled structure?
 7. **Brand mark:** appetite for leaning into a **lightning/bolt or filament** mark to cement
    the Edison/electricity equity (Super73-style), and is logo work in scope?
 8. **Motion ceiling:** how far on signature motion — native CSS + View Transitions + Lenis
@@ -402,4 +426,7 @@ Inventory and structure derived from 01 (per-page sections) and 03/04 (best-in-c
    and move static pages server-side (touches most pages but is the core perf + INP win)?
 10. **Existing green:** fully retire `#2bb075`, or retain it only as a tertiary chart/data
     color in deep spec views?
+
+```
+
 ```

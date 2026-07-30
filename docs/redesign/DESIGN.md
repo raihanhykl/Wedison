@@ -10,7 +10,7 @@
 ## 1. Brand essence
 
 - **Personality:** tenang, serius, premium, bersih (quiet-luxury, not loud-tech).
-- **Story:** Wedison → Edison → energi/listrik. Energi yang *tenang*, bukan dingin/agresif.
+- **Story:** Wedison → Edison → energi/listrik. Energi yang _tenang_, bukan dingin/agresif.
 - **Differentiation:** kompetitor lokal pakai hijau terang/mint/lime. Wedison memakai **hijau-tua serius** = tetap "hijau logo" tapi premium dan tak terlihat murah.
 
 ## 2. Color tokens
@@ -19,30 +19,32 @@ Two surface worlds on **one** committed light theme (no user dark toggle). "Fore
 section tokens for full-bleed dramatic blocks (hero/product/SuperCharge/footer), not a theme mode.
 
 ### Light (default)
-| Token | Name | Hex | OKLCH | Usage |
-|---|---|---|---|---|
-| `background` | Snow | `#FAFAF7` | `oklch(.985 .003 150)` | page background |
-| `card` / `popover` | White | `#FFFFFF` | `oklch(1 0 0)` | cards, panels, menus |
-| `foreground` | Ink | `#1A1F1C` | `oklch(.235 .008 160)` | primary text |
-| `primary` | Deep Green | `#1E5B40` | `oklch(.455 .085 159)` | CTAs, links, brand, active, key data — the ONLY accent |
-| `primary-hover` | — | `#184A34` | `oklch(.40 .078 159)` | primary hover/active |
-| `primary-foreground` | Snow | `#FAFAF7` | `oklch(.985 .003 150)` | text on primary |
-| `secondary` | Sage | `#DCE4DA` | `oklch(.90 .018 156)` | tinted surface, secondary button |
-| `muted` | Sage 50 | `#EFF2EC` | `oklch(.952 .010 156)` | subtle fills, alt sections |
-| `muted-foreground` | Slate Green | `#4F5E55` | `oklch(.455 .018 158)` | secondary text (≥4.5:1 on Snow) |
-| `accent` | Sage 100 | `#E7EDE3` | `oklch(.93 .014 152)` | hover surface, chips |
-| `border` / `input` | Hairline | `#E3E7DE` | `oklch(.915 .008 152)` | borders, dividers, inputs |
-| `ring` | = primary | `#1E5B40` | — | focus ring |
-| `destructive` | Signal | `#BE4139` | `oklch(.55 .16 27)` | errors only |
+
+| Token                | Name        | Hex       | OKLCH                  | Usage                                                  |
+| -------------------- | ----------- | --------- | ---------------------- | ------------------------------------------------------ |
+| `background`         | Snow        | `#FAFAF7` | `oklch(.985 .003 150)` | page background                                        |
+| `card` / `popover`   | White       | `#FFFFFF` | `oklch(1 0 0)`         | cards, panels, menus                                   |
+| `foreground`         | Ink         | `#1A1F1C` | `oklch(.235 .008 160)` | primary text                                           |
+| `primary`            | Deep Green  | `#1E5B40` | `oklch(.455 .085 159)` | CTAs, links, brand, active, key data — the ONLY accent |
+| `primary-hover`      | —           | `#184A34` | `oklch(.40 .078 159)`  | primary hover/active                                   |
+| `primary-foreground` | Snow        | `#FAFAF7` | `oklch(.985 .003 150)` | text on primary                                        |
+| `secondary`          | Sage        | `#DCE4DA` | `oklch(.90 .018 156)`  | tinted surface, secondary button                       |
+| `muted`              | Sage 50     | `#EFF2EC` | `oklch(.952 .010 156)` | subtle fills, alt sections                             |
+| `muted-foreground`   | Slate Green | `#4F5E55` | `oklch(.455 .018 158)` | secondary text (≥4.5:1 on Snow)                        |
+| `accent`             | Sage 100    | `#E7EDE3` | `oklch(.93 .014 152)`  | hover surface, chips                                   |
+| `border` / `input`   | Hairline    | `#E3E7DE` | `oklch(.915 .008 152)` | borders, dividers, inputs                              |
+| `ring`               | = primary   | `#1E5B40` | —                      | focus ring                                             |
+| `destructive`        | Signal      | `#BE4139` | `oklch(.55 .16 27)`    | errors only                                            |
 
 ### Forest (inverse sections)
-| Token | Hex | OKLCH | Usage |
-|---|---|---|---|
-| `forest` | `#123A28` | `oklch(.34 .055 160)` | dramatic section bg |
-| `forest-deep` | `#0E2C1E` | `oklch(.28 .05 160)` | deepest bg / footer |
-| `forest-foreground` | `#EEF3EE` | `oklch(.96 .006 156)` | text on forest |
-| `forest-muted` | `#9FB3A4` | `oklch(.74 .02 158)` | secondary text on forest |
-| `on-forest-accent` | `#9FE3B9` | `oklch(.86 .10 158)` | kickers/highlights on forest |
+
+| Token               | Hex       | OKLCH                 | Usage                        |
+| ------------------- | --------- | --------------------- | ---------------------------- |
+| `forest`            | `#123A28` | `oklch(.34 .055 160)` | dramatic section bg          |
+| `forest-deep`       | `#0E2C1E` | `oklch(.28 .05 160)`  | deepest bg / footer          |
+| `forest-foreground` | `#EEF3EE` | `oklch(.96 .006 156)` | text on forest               |
+| `forest-muted`      | `#9FB3A4` | `oklch(.74 .02 158)`  | secondary text on forest     |
+| `on-forest-accent`  | `#9FE3B9` | `oklch(.86 .10 158)`  | kickers/highlights on forest |
 
 **Rules:** never gray text on the green; never convey meaning by color alone; neutrals are
 green-tinted (no dead gray, no cream/beige); confine saturation to `primary`. On Forest, CTAs are
@@ -56,6 +58,7 @@ green-tinted (no dead gray, no cream/beige); confine saturation to `primary`. On
 - All variable, OFL, via `next/font/google` (self-hosted at build, `display:swap`, `subsets:['latin']`).
 
 **Scale (fluid `clamp`, ratio ~1.25):**
+
 - display: `clamp(2.4rem,5.6vw,4.4rem)` / 800 — hero only, cap ≤ ~4.5rem
 - h1: `clamp(1.9rem,4vw,2.9rem)` / 800
 - h2: `clamp(1.5rem,3vw,2.1rem)` / 700
@@ -112,7 +115,7 @@ delete · 18 gradient-text headings → solid · hand-rolled dialogs → `alert-
 `shadow-soft*`/`animate-float` → real tokens · "123 Electric Avenue, San Francisco" → real ID locations.
 **Keep (retokenize):** comparison table, SEO/locale routing, shadcn primitives.
 **Add:** one signature hero moment (reduced-motion-safe) · bento model-lineup + animated tabular spec
-counters · use-case nav IA (Commute/Performance/Fleet-Ojol/EDPower) · "Build your Wedison" colorway switcher ·
+counters · use-case nav IA (Commute/Performance/Fleet-Ojol/EdPower) · "Build your Wedison" colorway switcher ·
 SuperCharge ecosystem story · native View Transitions.
 
 ## 10. Implementation mapping
