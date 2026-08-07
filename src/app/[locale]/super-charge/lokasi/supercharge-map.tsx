@@ -64,8 +64,7 @@ export default function SuperChargeMap({
     if (!selectedId) return;
     const s = sitesRef.current.find((x) => x.properties.id === selectedId);
     if (!s) return;
-    const isMobile =
-      typeof window !== "undefined" && window.innerWidth < 1024;
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
     // `padding` HANYA disertakan saat dipakai — mengirim `padding: undefined` membuat
     // MapLibre tetap membandingkannya (isPaddingEqual) lalu throw "reading 'top'".
     mapRef.current?.flyTo({
@@ -126,7 +125,7 @@ export default function SuperChargeMap({
           >
             <button
               type="button"
-              aria-label={`${p.name} — ${t(STATUS_META[p.status].labelKey)}`}
+              aria-label={`${p.name}, ${t(STATUS_META[p.status].labelKey)}`}
               onClick={(e) => {
                 e.stopPropagation();
                 onSelect(p.id);

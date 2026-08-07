@@ -44,34 +44,54 @@ const MODELS = [
   {
     id: "athena",
     line: "Style",
-    // hero: "/athena/athena-landing-hero.webp",
-    hero: "/new-looks/HERO 1.webp",
     productImage: "/new-looks/01-HERO CARD-LP.webp",
-    heroM: "/athena/athena-landing-hero-mobile.webp",
   },
   {
     id: "bees",
     line: "Commute",
-    // hero: "/bees/bees-landing-hero.webp",
-    hero: "/new-looks/HERO 3.webp",
     productImage: "/new-looks/02-HERO CARD-LP.webp",
-
-    heroM: "/bees/bees-landing-hero-mobile.webp",
   },
   {
     id: "victory",
     line: "Fleet",
-    // hero: "/victory/victory-landing-hero.webp",
-    hero: "/new-looks/test image.webp",
     productImage: "/new-looks/04-HERO CARD-LP.webp",
-    heroM: "/victory/victory-landing-hero-mobile.webp",
   },
   {
     id: "edpower",
     line: "Performance",
-    hero: "/edpower/edpower-landing-hero.webp",
     productImage: "/new-looks/03-HERO CARD-LP.webp",
-    heroM: "/edpower/edpower-landing-hero-mobile.webp",
+  },
+] as const;
+
+/**
+ * Hero = 3 babak BRAND (bukan per-model — jajaran model punya section `#lineup` sendiri).
+ * Copy diturunkan dari isi gambar, satu CTA per slide dengan tujuan yang berbeda.
+ * `pos` = object-position agar subjek selamat saat gambar 16:9 di-crop jadi potret di mobile.
+ */
+const HERO_SLIDES = [
+  {
+    // 4 motor + 4 orang di distrik perkantoran -> keluasan jajaran
+    id: "lineup",
+    img: "/new-looks/HERO 1.webp",
+    pos: "object-center",
+    href: "#lineup",
+    logo: false,
+  },
+  {
+    // Charging pile ber-brand + pengguna membuka aplikasi -> jaringan SuperCharge
+    id: "charge",
+    img: "/new-looks/HERO 3.webp",
+    pos: "object-[58%_center]",
+    href: "/super-charge/lokasi/",
+    logo: true,
+  },
+  {
+    // Berboncengan di taman rimbun -> berkendara senyap & bersih
+    id: "green",
+    img: "/new-looks/test image.webp",
+    pos: "object-[28%_center]",
+    href: "/corporate/contact/",
+    logo: false,
   },
 ] as const;
 
@@ -112,90 +132,123 @@ const EXPLORE = [
 
 const COPY: Record<Lang, Record<string, string>> = {
   id: {
-    heroCta: "Jelajahi",
-    range: "Jangkauan",
-    topSpeed: "Top speed",
-    charge: "Isi daya",
-    mq_athena: "Gaya retro, tenaga masa kini",
-    mq_bees: "Lincah untuk kota",
-    mq_victory: "Performa tanpa kompromi",
-    mqDefault: "Tenaga listrik Wedison",
+    // ── Hero: 3 babak brand (kicker / judul / sub / CTA / running text) ──
+    h_lineup_kicker: "Motor Listrik Wedison",
+    h_lineup_title: "Motor listrik untuk cara kamu bergerak.",
+    h_lineup_sub:
+      "Dari harian di kota sampai kebutuhan armada, ada satu yang paling pas buat kamu.",
+    h_lineup_cta: "Jelajahi Model",
+    h_lineup_mq: "Athena|Bees|Victory|EdPower",
+
+    h_charge_kicker: "Jaringan Pengisian",
+    h_charge_title: "Isi daya cepat di jaringan",
+    h_charge_titleFull: "Isi daya cepat di jaringan SuperCharge",
+    h_charge_sub:
+      "Cari stasiun terdekat lewat peta, mulai pengisian dari aplikasi, lalu lanjut jalan.",
+    h_charge_cta: "Temukan Lokasi",
+    h_charge_mq: "Cari stasiun di peta|Mulai dari aplikasi|Paket isi daya",
+
+    h_green_kicker: "Nol Emisi",
+    h_green_title: "Senyap di jalan. Bersih untuk kota.",
+    h_green_sub:
+      "Tanpa bensin, tanpa asap, dan perawatannya sedikit. Perjalanan harian jadi terasa lebih tenang.",
+    h_green_cta: "Jadwalkan Test Ride",
+    h_green_mq: "Nol emisi|Tanpa bensin|Perawatan minimal",
+
     a_testRide: "Test Ride",
     a_compare: "Bandingkan Model",
     a_supercharge: "SuperCharge",
     a_showroom: "Showroom",
     familyLabel: "Jajaran Model",
-    familyTitle: "Keluarga listrik Wedison.",
-    familySub: "Dari harian kota hingga armada — empat motor, satu standar.",
+    familyTitle: "Empat motor, satu standar.",
+    familySub:
+      "Beda karakter, beda kebutuhan, tapi semuanya dirakit dengan patokan yang sama.",
     learn: "Jelajahi",
     Commute: "Harian",
     Style: "Gaya",
     Performance: "Performa",
     Fleet: "Armada",
     superLabel: "Jaringan SuperCharge",
-    superTitle: "Isi daya cepat, di mana pun kota Anda bergerak.",
+    superTitle: "Isi daya cepat, di kota tempat kamu berkendara.",
     superCta: "Lihat SuperCharge",
     advLabel: "Keunggulan Wedison",
-    advTitle: "Berkendara tenang. Kepemilikan tanpa cemas.",
+    advTitle: "Enak dipakai harian, tenang dimiliki jangka panjang.",
     adv_charge_t: "Jaringan SuperCharge",
-    adv_charge_d: "Isi daya cepat di titik-titik yang terus bertumbuh.",
+    adv_charge_d: "Isi daya 15 menit di titik yang terus bertambah.",
     adv_battery_t: "Garansi Baterai",
-    adv_battery_d: "Ketenangan jangka panjang untuk komponen paling penting.",
-    adv_cost_t: "Hemat Biaya Operasional",
-    adv_cost_d: "Tanpa bensin, perawatan minimal, lebih bersih.",
-    adv_service_t: "Layanan & Showroom",
-    adv_service_d: "Dukungan dan jaringan showroom di kota Anda.",
+    adv_battery_d: "Baterai bergaransi 3 tahun, motornya 2 tahun.",
+    adv_cost_t: "Biaya Harian Lebih Ringan",
+    adv_cost_d: "Tanpa bensin, servisnya sedikit, ongkosnya jauh menurun.",
+    adv_service_t: "Servis & Showroom",
+    adv_service_d: "Bengkel resmi dan showroom yang terus bertambah.",
     exLabel: "Lanjut Jelajahi",
     exTitle: "Selangkah lebih dekat.",
     ex_media_t: "Berita Wedison",
     ex_media_d: "Cerita, peluncuran, dan liputan terbaru.",
     ex_compare_t: "Bandingkan Model",
-    ex_compare_d: "Temukan motor yang paling cocok untuk Anda.",
+    ex_compare_d: "Temukan motor yang paling cocok buat kamu.",
     ex_showroom_t: "Cari Showroom",
     ex_showroom_d: "Alamat, kontak, dan jam operasional.",
     ex_charge_t: "SuperCharge",
-    ex_charge_d: "Pelajari ekosistem pengisian Wedison.",
+    ex_charge_d: "Pelajari cara kerja pengisian Wedison.",
     chatBadge: "Asisten AI • Dion",
-    chatTitle: "Ada yang ingin ditanyakan? Ngobrol dengan Dion.",
+    chatTitle: "Ada yang mau ditanyakan? Ngobrol dengan Dion.",
     chatSub:
-      "Dari spesifikasi, pembelian, sampai jadwal test ride — Dion, asisten kami, siap membantu kapan saja, atau langsung terhubung dengan tim kami.",
+      "Soal spesifikasi, harga, atau jadwal test ride, Dion siap menjawab kapan saja. Kalau perlu, kamu bisa langsung terhubung ke tim kami.",
     chatCta: "Mulai Ngobrol",
   },
   en: {
-    heroCta: "Explore",
-    range: "Range",
-    topSpeed: "Top speed",
-    charge: "Charge",
-    mq_athena: "Retro style, modern power",
-    mq_bees: "Built for the city",
-    mq_victory: "Performance, uncompromised",
-    mqDefault: "Wedison electric",
+    // ── Hero: 3 brand beats (kicker / title / sub / CTA / running text) ──
+    h_lineup_kicker: "Wedison Electric",
+    h_lineup_title: "Electric motorcycles for the way you move.",
+    h_lineup_sub:
+      "From daily city rides to fleet duty, there is one built to fit you.",
+    h_lineup_cta: "Explore the Lineup",
+    h_lineup_mq: "Athena|Bees|Victory|EdPower",
+
+    h_charge_kicker: "Charging Network",
+    h_charge_title: "Fast charging, powered by",
+    h_charge_titleFull: "Fast charging, powered by SuperCharge",
+    h_charge_sub:
+      "Find the nearest station on the map, start charging from the app, then get moving.",
+    h_charge_cta: "Find a Station",
+    h_charge_mq:
+      "Find stations on the map|Start from the app|Charging packages",
+
+    h_green_kicker: "Zero Emission",
+    h_green_title: "Quiet on the road. Clean for the city.",
+    h_green_sub:
+      "No petrol, no fumes, and very little servicing. Daily riding just gets calmer.",
+    h_green_cta: "Book a Test Ride",
+    h_green_mq: "Zero emission|No petrol|Minimal maintenance",
+
     a_testRide: "Test Ride",
     a_compare: "Compare Models",
     a_supercharge: "SuperCharge",
     a_showroom: "Showroom",
     familyLabel: "The Lineup",
-    familyTitle: "The Wedison electric family.",
+    familyTitle: "Four motorcycles, one standard.",
     familySub:
-      "From city commuting to fleets — four motorcycles, one standard.",
+      "Different characters for different needs, all built to the same benchmark.",
     learn: "Explore",
     Commute: "Commute",
     Style: "Style",
     Performance: "Performance",
     Fleet: "Fleet",
     superLabel: "SuperCharge Network",
-    superTitle: "Fast charging, wherever your city moves.",
+    superTitle: "Fast charging, in the cities you actually ride in.",
     superCta: "See SuperCharge",
     advLabel: "The Wedison Advantage",
-    advTitle: "Effortless riding. Worry-free ownership.",
+    advTitle: "Easy to ride daily, easy to own for years.",
     adv_charge_t: "SuperCharge Network",
-    adv_charge_d: "Fast charging at a growing list of points.",
+    adv_charge_d: "A 15-minute charge at a growing number of points.",
     adv_battery_t: "Battery Warranty",
-    adv_battery_d: "Long-term peace of mind for the part that matters most.",
+    adv_battery_d: "Three years on the battery, two on the motorcycle.",
     adv_cost_t: "Lower Running Costs",
-    adv_cost_d: "No petrol, minimal maintenance, cleaner miles.",
+    adv_cost_d: "No petrol, few service visits, much cheaper per kilometer.",
     adv_service_t: "Service & Showroom",
-    adv_service_d: "Support and a showroom network in your city.",
+    adv_service_d:
+      "Official workshops and a showroom network that keeps growing.",
     exLabel: "Keep Exploring",
     exTitle: "One step closer.",
     ex_media_t: "Wedison News",
@@ -205,11 +258,11 @@ const COPY: Record<Lang, Record<string, string>> = {
     ex_showroom_t: "Find a Showroom",
     ex_showroom_d: "Address, contact, and opening hours.",
     ex_charge_t: "SuperCharge",
-    ex_charge_d: "Explore the Wedison charging ecosystem.",
+    ex_charge_d: "See how Wedison charging works.",
     chatBadge: "AI Assistant • Dion",
     chatTitle: "Got a question? Chat with Dion.",
     chatSub:
-      "From specs to buying and booking a test ride — Dion, our assistant, is here anytime, or connect straight to our team.",
+      "Specs, pricing, or booking a test ride, Dion can answer any time. If you need a person, you can reach our team straight away.",
     chatCta: "Start Chatting",
   },
 };
@@ -217,26 +270,6 @@ const COPY: Record<Lang, Record<string, string>> = {
 export default function Landing() {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
-
-  const spec = (bike: string, path: string): string | null => {
-    const key = `${bike}.specs.${path}`;
-    const v = t(key);
-    if (!v || v === key) return null;
-    if (/^[-–—\s]*$/.test(v)) return null;
-    return v;
-  };
-  const clean = (s: string) => s.split("(")[0].split(" / ")[0].trim();
-  const phrasesFor = (id: string): string[] => {
-    if (id === "edpower") return []; // intentionally no running text (matches Ather)
-    const out = [c[`mq_${id}`] || c.mqDefault];
-    const rng = spec(id, "battery.range");
-    const top = spec(id, "engine.topSpeed");
-    const chg = spec(id, "battery.chargingTimeSuperCharge");
-    if (rng) out.push(`${c.range} ${clean(rng)}`);
-    if (top) out.push(`${c.topSpeed} ${clean(top)}`);
-    if (chg) out.push(`${c.charge} ${clean(chg)}`);
-    return out;
-  };
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [selected, setSelected] = React.useState(0);
@@ -261,77 +294,92 @@ export default function Landing() {
             plugins={[Autoplay({ delay: 5500, stopOnInteraction: false })]}
           >
             <CarouselContent className="ml-0">
-              {MODELS.map((m, i) => {
-                const ph = phrasesFor(m.id);
+              {HERO_SLIDES.map((s, i) => {
+                const ph = c[`h_${s.id}_mq`].split("|");
                 return (
-                  <CarouselItem key={m.id} className="pl-0">
+                  <CarouselItem key={s.id} className="pl-0">
                     <div className="relative h-[100svh] w-full overflow-hidden">
+                      {/* Satu sumber gambar untuk semua breakpoint; `pos` menjaga subjek
+                          tetap terlihat saat 16:9 di-crop jadi potret di mobile. */}
                       <Image
-                        src={m.hero}
-                        alt={NAMES[m.id]}
+                        src={s.img}
+                        alt=""
+                        aria-hidden
                         fill
                         priority={i === 0}
                         sizes="100vw"
-                        className="hidden object-cover object-center sm:block"
+                        className={`object-cover ${s.pos}`}
                       />
-                      <Image
-                        src={m.heroM}
-                        alt={NAMES[m.id]}
-                        fill
-                        priority={i === 0}
-                        sizes="100vw"
-                        className="object-cover object-center sm:hidden"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/35" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/45" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center *:select-none">
                         <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/80">
-                          {c[m.line]}
+                          {c[`h_${s.id}_kicker`]}
                         </p>
-                        <h1 className="mt-4 max-w-[14ch] text-balance text-5xl font-extrabold leading-[1.02] tracking-tight text-white sm:text-7xl lg:text-8xl">
-                          {NAMES[m.id]}
-                        </h1>
-                        <p className="mt-4 max-w-[40ch] text-base text-white/85 sm:text-lg">
-                          {t(`${m.id}.productPage.hero.description`)}
+                        {s.logo ? (
+                          // Sebutan SuperCharge dibawakan oleh wordmark-nya sendiri, bukan teks.
+                          <h1 className="mt-4 flex flex-col items-center">
+                            <span className="sr-only">
+                              {c.h_charge_titleFull}
+                            </span>
+                            <span
+                              aria-hidden
+                              className="max-w-[26ch] text-balance text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+                            >
+                              {c.h_charge_title}
+                            </span>
+                            <Image
+                              src="/super-charge/supercharge-typo-nobg.webp"
+                              alt=""
+                              aria-hidden
+                              width={1920}
+                              height={143}
+                              priority={i === 0}
+                              className="mt-4 h-auto w-[min(84vw,340px)] sm:mt-5 sm:w-[500px] lg:w-[640px]"
+                            />
+                          </h1>
+                        ) : (
+                          <h1 className="mt-4 max-w-[18ch] text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                            {c[`h_${s.id}_title`]}
+                          </h1>
+                        )}
+                        <p className="mt-5 max-w-[46ch] text-base text-white/85 sm:text-lg">
+                          {c[`h_${s.id}_sub`]}
                         </p>
                         <div className="mt-8">
-                          <Link href={`/${m.id}/`}>
-                            <Button size="lg">
-                              {c.heroCta} {NAMES[m.id]}
-                            </Button>
+                          <Link href={s.href}>
+                            <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
                           </Link>
                         </div>
                       </div>
-                      {ph.length > 0 && (
-                        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45">
-                          <Marquee
-                            repeat={6}
-                            className="[--duration:34s] [--gap:0rem] py-3 select-none"
-                          >
-                            {ph.map((p, idx) => (
-                              <span
-                                key={idx}
-                                className="flex items-center font-mono text-[11px] uppercase tracking-[0.18em] text-white/85"
-                              >
-                                {p}
-                                <span className="mx-6 text-on-forest-accent">
-                                  /
-                                </span>
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45">
+                        <Marquee
+                          repeat={6}
+                          className="[--duration:34s] [--gap:0rem] py-3 select-none"
+                        >
+                          {ph.map((p, idx) => (
+                            <span
+                              key={idx}
+                              className="flex items-center font-mono text-[11px] uppercase tracking-[0.18em] text-white/85"
+                            >
+                              {p}
+                              <span className="mx-6 text-on-forest-accent">
+                                /
                               </span>
-                            ))}
-                          </Marquee>
-                        </div>
-                      )}
+                            </span>
+                          ))}
+                        </Marquee>
+                      </div>
                     </div>
                   </CarouselItem>
                 );
               })}
             </CarouselContent>
             <div className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 gap-2.5">
-              {MODELS.map((m, i) => (
+              {HERO_SLIDES.map((s, i) => (
                 <button
-                  key={m.id}
+                  key={s.id}
                   onClick={() => api?.scrollTo(i)}
-                  aria-label={`Slide ${NAMES[m.id]}`}
+                  aria-label={c[`h_${s.id}_kicker`]}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     selected === i
                       ? "w-7 bg-white"

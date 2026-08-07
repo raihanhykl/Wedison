@@ -273,7 +273,7 @@ export const seoContent: Record<string, PageSEO> = {
       title:
         "SuperCharge - Fast Charging Stations for Electric Motorcycles | Wedison",
       description:
-        "SuperCharge is Wedison's ultra-fast charging station technology — the best way to charge your electric motorcycle in minutes. See SuperCharge locations and benefits here.",
+        "SuperCharge is Wedison's fast-charging network for electric motorcycles, taking a battery from 10% to 80% in 15 minutes. See the locations and how it works.",
       keywords: [
         "wedison",
         "supercharge",
@@ -292,7 +292,7 @@ export const seoContent: Record<string, PageSEO> = {
       title:
         "Lokasi SuperCharge - Peta Stasiun Pengisian Motor Listrik | Wedison",
       description:
-        "Temukan lokasi stasiun SuperCharge Wedison terdekat lewat peta interaktif — lihat kapasitas charger, jam operasional, dan fasilitas tiap titik pengisian motor listrik.",
+        "Cari stasiun SuperCharge Wedison terdekat lewat peta interaktif. Lihat jumlah charger, jam operasional, dan fasilitas di tiap titik pengisian motor listrik.",
       keywords: [
         "wedison",
         "supercharge",
@@ -306,7 +306,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "SuperCharge Locations - Charging Station Map | Wedison",
       description:
-        "Find your nearest Wedison SuperCharge station on an interactive map — see charger capacity, opening hours and amenities at every electric-motorcycle charging point.",
+        "Find your nearest Wedison SuperCharge station on an interactive map. See the number of chargers, opening hours, and amenities at every charging point.",
       keywords: [
         "wedison",
         "supercharge",
@@ -402,7 +402,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "FAQ - Common Electric Motorcycle Questions | Wedison",
       description:
-        "Find answers to common questions about Wedison electric motorcycles — from charging and maintenance to warranty and purchasing information.",
+        "Answers to common questions about Wedison electric motorcycles, covering charging, maintenance, warranty, and buying.",
       keywords: [
         "wedison",
         "electric motorcycle faq",
@@ -450,7 +450,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Sewa Motor Listrik untuk Ojol | Wedison",
       description:
-        "Solusi sewa motor listrik Wedison untuk mitra ojek online — hemat biaya operasional, ramah lingkungan, dan didukung jaringan SuperCharge.",
+        "Sewa motor listrik Wedison untuk driver ojek online. Biaya operasional lebih ringan, tanpa antre BBM, dan didukung jaringan SuperCharge.",
       keywords: [
         "wedison",
         "sewa motor listrik",
@@ -463,7 +463,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Electric Motorcycle Rental for Ride-Hailing | Wedison",
       description:
-        "Wedison electric motorcycle rental for ride-hailing (ojol) partners — lower operating costs, eco-friendly, and backed by the SuperCharge network.",
+        "Wedison electric motorcycle rental for ride-hailing drivers. Lower running costs, no fuel queues, and backed by the SuperCharge network.",
       keywords: [
         "wedison",
         "electric motorcycle rental",

@@ -17,17 +17,17 @@ import { Home, ArrowLeft, Search } from "lucide-react";
 const translations = {
   en: {
     title: "Page Not Found",
-    description: "Sorry, we couldn't find the page you're looking for.",
+    description: "We could not find the page you were looking for.",
     suggestion:
-      "The page might have been moved, deleted, or perhaps you mistyped the URL.",
+      "It may have been moved or removed, or the address might have a typo.",
     homeButton: "Back to Home",
     exploreButton: "Explore Our Models",
   },
   id: {
     title: "Halaman Tidak Ditemukan",
-    description: "Maaf, kami tidak dapat menemukan halaman yang Anda cari.",
+    description: "Halaman yang kamu cari tidak ketemu.",
     suggestion:
-      "Halaman mungkin telah dipindahkan, dihapus, atau mungkin Anda salah mengetik URL.",
+      "Mungkin halamannya sudah dipindah atau dihapus, atau ada salah ketik di alamatnya.",
     homeButton: "Kembali ke Beranda",
     exploreButton: "Jelajahi Model Kami",
   },
@@ -68,7 +68,9 @@ export default async function NotFound() {
                     </div>
                   </div>
 
-                  <p className="text-xl text-gray-700 mb-3">{text.description}</p>
+                  <p className="text-xl text-gray-700 mb-3">
+                    {text.description}
+                  </p>
                   <p className="text-gray-600 mb-8">{text.suggestion}</p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
