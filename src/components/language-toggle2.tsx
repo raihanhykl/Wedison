@@ -22,7 +22,7 @@ export default function LanguageToggle2({
       path === "/corporate/about/" ||
       path === "/corporate/contact/" ||
       path === "/showroom/" ||
-      // path === "/super-charge/" ||
+      path === "/super-charge/lokasi/" ||
       (path.startsWith("/media-center/") && path !== "/media-center/")
     ) {
       setWhitePage(true);
@@ -59,7 +59,7 @@ export default function LanguageToggle2({
         //   : whitePage
         //   ? "border-black"
         //   : "border-white"
-        scrolled || toggleOpen || whitePage ? "border-black" : "border-white"
+        scrolled || toggleOpen || whitePage ? "border-black" : "border-white",
       )}
     >
       <div
@@ -79,8 +79,8 @@ export default function LanguageToggle2({
             scrolled || toggleOpen
               ? "text-black"
               : whitePage
-              ? "text-black"
-              : "text-white"
+                ? "text-black"
+                : "text-white",
           )}
         >
           <Globe className="h-full mx-auto" />
@@ -98,8 +98,8 @@ export default function LanguageToggle2({
               scrolled || toggleOpen
                 ? "text-black"
                 : whitePage
-                ? "text-black"
-                : "text-white"
+                  ? "text-black"
+                  : "text-white",
             )
             // scrolled ? "text-black" : "text-white"
           }
@@ -107,7 +107,7 @@ export default function LanguageToggle2({
           <span
             className={cn(
               "absolute transition-opacity duration-300 text-center w-full",
-              language === "id" ? "opacity-100" : "opacity-0"
+              language === "id" ? "opacity-100" : "opacity-0",
             )}
           >
             EN
@@ -117,7 +117,7 @@ export default function LanguageToggle2({
           <span
             className={cn(
               "absolute transition-opacity duration-300 mx-auto w-full text-center",
-              language === "en" ? "opacity-100" : "opacity-0"
+              language === "en" ? "opacity-100" : "opacity-0",
             )}
           >
             ID
