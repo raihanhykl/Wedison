@@ -158,9 +158,9 @@ const translations = {
     "features.rapidCharging": "SuperCharge in 15 Minutes",
     "features.rapidChargingDesc":
       "Charge from 10% to 80% in just 15 minutes with our SuperCharge network.",
-    "features.impressivePerformance": "0-95km/h in 3 Seconds",
+    "features.impressivePerformance": "0-90km/h in 3 Seconds",
     "features.impressivePerformanceDesc":
-      "Experience 0-95 km/h in under 3 seconds with instant torque delivery.",
+      "Experience 0-90 km/h in under 3 seconds with instant torque delivery.",
     // "features.zeroEmissions": "Cut the Carbon, Ride Electric",
     // "features.zeroEmissions": "Ride Electric, Cut Emissions by 54%",
     // "features.zeroEmissionsDesc":
@@ -398,7 +398,7 @@ const translations = {
     "specs.category.engine.motorType": "Motor Type",
     "specs.category.engine.motorPower": "Motor Power",
     "specs.category.engine.topSpeed": "Top Speed",
-    "specs.category.engine.acceleration": "Acceleration (0-60 km/h)",
+    "specs.category.engine.acceleration": "Acceleration (0-50 km/h)",
 
     "specs.category.battery": "Battery",
     "specs.category.battery.batteryType": "Battery Type",
@@ -512,7 +512,7 @@ const translations = {
     "edpower.productPage.techSpecs2.desc":
       "Charge from 10% to 80% with SuperCharge",
 
-    "edpower.productPage.techSpecs3.title": 80,
+    "edpower.productPage.techSpecs3.title": 90,
     "edpower.productPage.techSpecs3.unit": "km/h",
     "edpower.productPage.techSpecs3.desc": "Top Speed",
 
@@ -582,7 +582,7 @@ const translations = {
 
     "edpower.specs.engine.motorType": "Brushless DC Motor",
     "edpower.specs.engine.motorPower": "3 kW",
-    "edpower.specs.engine.topSpeed": "80 km/h",
+    "edpower.specs.engine.topSpeed": "90 km/h",
     "edpower.specs.engine.acceleration": "7.9 seconds",
     "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
     "edpower.specs.battery.batteryCapacity": "5 kWh",
@@ -695,7 +695,7 @@ const translations = {
     "victory.productPage.techSpecs2.desc":
       "Charge from 10% to 80% with SuperCharge",
 
-    "victory.productPage.techSpecs3.title": 80,
+    "victory.productPage.techSpecs3.title": 85,
     "victory.productPage.techSpecs3.unit": "km/h",
     "victory.productPage.techSpecs3.desc": "Top Speed",
 
@@ -748,7 +748,7 @@ const translations = {
 
     "victory.specs.engine.motorType": "Brushless DC Motor",
     "victory.specs.engine.motorPower": "3 kW",
-    "victory.specs.engine.topSpeed": "80 km/h",
+    "victory.specs.engine.topSpeed": "85 km/h",
     "victory.specs.engine.acceleration": "6.5 seconds",
     "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
     "victory.specs.battery.batteryCapacity":
@@ -818,7 +818,7 @@ const translations = {
     "athena.productPage.techSpecs2.desc":
       "Charge from 10% to 80% with SuperCharge",
 
-    "athena.productPage.techSpecs3.title": 80,
+    "athena.productPage.techSpecs3.title": 85,
     "athena.productPage.techSpecs3.unit": "km/h",
     "athena.productPage.techSpecs3.desc": "Top Speed",
 
@@ -870,7 +870,7 @@ const translations = {
 
     "athena.specs.engine.motorType": "Brushless DC Motor",
     "athena.specs.engine.motorPower": "2.5 kW",
-    "athena.specs.engine.topSpeed": "80 km/h",
+    "athena.specs.engine.topSpeed": "85 km/h",
     "athena.specs.engine.acceleration": "6.5 seconds",
     "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
     "athena.specs.battery.batteryCapacity":
@@ -935,7 +935,7 @@ const translations = {
     "bees.productPage.techSpecs2.title": "LED",
     "bees.productPage.techSpecs2.desc": "Head unit Display",
 
-    "bees.productPage.techSpecs3.title": 55,
+    "bees.productPage.techSpecs3.title": 60,
     "bees.productPage.techSpecs3.unit": "km/h",
     "bees.productPage.techSpecs3.desc": "Top Speed",
 
@@ -970,8 +970,8 @@ const translations = {
 
     "bees.specs.engine.motorType": "Brushless DC Motor",
     "bees.specs.engine.motorPower": "1.2 kW",
-    "bees.specs.engine.topSpeed": "55 km/h",
-    "bees.specs.engine.acceleration": "9.3 seconds",
+    "bees.specs.engine.topSpeed": "60 km/h",
+    "bees.specs.engine.acceleration": "19.3 seconds",
     "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
     "bees.specs.battery.batteryCapacity": "1.6 kWh",
     "bees.specs.battery.voltage": "64 Volt",
@@ -985,8 +985,8 @@ const translations = {
     "bees.specs.dimension.width": "670 mm",
     "bees.specs.dimension.height": "1.110 mm",
     "bees.specs.dimension.wheelbase": "1.370 mm",
-    "bees.specs.dimension.groundClearance": "130 mm",
-    "bees.specs.dimension.seatHeight": "760 mm",
+    "bees.specs.dimension.groundClearance": "160 mm",
+    "bees.specs.dimension.seatHeight": "765 mm",
     "bees.specs.dimension.weight": "78.5 kg",
     "bees.specs.tire.frontTire": "90/90-10",
     "bees.specs.tire.rearTire": "90/90-10",
@@ -1253,11 +1253,11 @@ const translations = {
     "faq.Performance.questions.0.question":
       "What is the speed of the motorcycle?",
     "faq.Performance.questions.0.answer":
-      "Depending on the model, the top speed ranges from 60 km/hr to 95 km/hr",
+      "Depending on the model, the top speed ranges from 60 km/hr to 90 km/hr",
     "faq.Performance.questions.1.question":
       "What is the motor power / BLDC of the motorcycle?",
     "faq.Performance.questions.1.answer":
-      "The motor power varies between models, ranging from 1,2KW to 5KW",
+      "The motor power varies between models, ranging from 1,2KW to 6KW",
     "faq.Performance.questions.2.question":
       "What is the range of the motorcycle?",
     "faq.Performance.questions.2.answer":
@@ -1284,7 +1284,7 @@ const translations = {
       "CBS (Combined Braking System), an efficient braking system that automatically distributes braking force between the front and rear brakes when the rider applies the brakes:\nAthena, Victory, & EdPower\n\nFront and rear disc brakes, providing enhanced control, safety, and braking performance:\nBees motorcycle",
     "faq.Safety.questions.2.question": "What motor do you use?",
     "faq.Safety.questions.2.answer":
-      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 95 km/hr. (Bees, Athena, Victory, EdPower)",
+      "Wedison motorcycles are equipped with a brushless DC motor (BLDC), known for its performance, efficiency, torque, and long lifespan.\n\nThere are 1 version available: \n1. DC Brushless Rear Hub Motor: motor speed up to 90 km/hr. (Bees, Athena, Victory, EdPower)",
 
     // Servicing Questions
     "faq.Servicing.questions.0.question":
@@ -1615,9 +1615,9 @@ const translations = {
     "features.rapidCharging": "SuperCharge dalam 15 Menit",
     "features.rapidChargingDesc":
       "Isi daya dari 10% hingga 80% hanya dalam 15 menit dengan jaringan SuperCharge kami.",
-    "features.impressivePerformance": "0-95km/jam dalam 3 Detik",
+    "features.impressivePerformance": "0-90km/jam dalam 3 Detik",
     "features.impressivePerformanceDesc":
-      "Rasakan akselerasi 0-100 km/jam dalam waktu kurang dari 3 detik dengan torsi instan.",
+      "Rasakan akselerasi 0-90 km/jam dalam waktu kurang dari 3 detik dengan torsi instan.",
     "features.zeroEmissions": "Tanpa Emisi, Udara Lebih Bersih",
     "features.zeroEmissionsDesc":
       "Ditenagai listrik murni, Wedison membantu mengurangi polusi udara di perkotaan. Setiap perjalanan berarti udara yang lebih segar untuk kita semua.",
@@ -1958,7 +1958,7 @@ const translations = {
     "edpower.productPage.techSpecs2.desc":
       "Isi daya dari 10% ke 80% dengan SuperCharge",
 
-    "edpower.productPage.techSpecs3.title": 80,
+    "edpower.productPage.techSpecs3.title": 90,
     "edpower.productPage.techSpecs3.unit": "km/jam",
     "edpower.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -2032,7 +2032,7 @@ const translations = {
 
     "edpower.specs.engine.motorType": "Brushless DC Motor",
     "edpower.specs.engine.motorPower": "3 kW",
-    "edpower.specs.engine.topSpeed": "80 km/jam",
+    "edpower.specs.engine.topSpeed": "90 km/jam",
     "edpower.specs.engine.acceleration": "7.9 detik",
     "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
     "edpower.specs.battery.batteryCapacity": "5 kWh",
@@ -2143,7 +2143,7 @@ const translations = {
     "victory.productPage.techSpecs2.desc":
       "Isi daya dari 10% ke 80% dengan SuperCharge",
 
-    "victory.productPage.techSpecs3.title": 80,
+    "victory.productPage.techSpecs3.title": 85,
     "victory.productPage.techSpecs3.unit": "km/jam",
     "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -2199,7 +2199,7 @@ const translations = {
 
     "victory.specs.engine.motorType": "Brushless DC Motor",
     "victory.specs.engine.motorPower": "3 kW",
-    "victory.specs.engine.topSpeed": "80 km/jam",
+    "victory.specs.engine.topSpeed": "85 km/jam",
     "victory.specs.engine.acceleration": "6.5 detik",
     "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
     "victory.specs.battery.batteryCapacity":
@@ -2270,7 +2270,7 @@ const translations = {
     "athena.productPage.techSpecs2.desc":
       "Charge dari 10% ke 80% dengan SuperCharge",
 
-    "athena.productPage.techSpecs3.title": 80,
+    "athena.productPage.techSpecs3.title": 85,
     "athena.productPage.techSpecs3.unit": "km/jam",
     "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -2326,7 +2326,7 @@ const translations = {
 
     "athena.specs.engine.motorType": "Brushless DC Motor",
     "athena.specs.engine.motorPower": "2.5 kW",
-    "athena.specs.engine.topSpeed": "80 km/jam",
+    "athena.specs.engine.topSpeed": "85 km/jam",
     "athena.specs.engine.acceleration": "6.5 detik",
     "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
     "athena.specs.battery.batteryCapacity":
@@ -2393,7 +2393,7 @@ const translations = {
     "bees.productPage.techSpecs2.title": "LED",
     "bees.productPage.techSpecs2.desc": "Tampilan Head Unit",
 
-    "bees.productPage.techSpecs3.title": 55,
+    "bees.productPage.techSpecs3.title": 60,
     "bees.productPage.techSpecs3.unit": "km/jam",
     "bees.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -2429,8 +2429,8 @@ const translations = {
 
     "bees.specs.engine.motorType": "Brushless DC Motor",
     "bees.specs.engine.motorPower": "1.2 kW",
-    "bees.specs.engine.topSpeed": "55 km/jam",
-    "bees.specs.engine.acceleration": "9.3 detik",
+    "bees.specs.engine.topSpeed": "60 km/jam",
+    "bees.specs.engine.acceleration": "19.3 detik",
     "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
     "bees.specs.battery.batteryCapacity": "1.6 kWh",
     "bees.specs.battery.voltage": "64 Volt",
@@ -2444,8 +2444,8 @@ const translations = {
     "bees.specs.dimension.width": "670 mm",
     "bees.specs.dimension.height": "1.110 mm",
     "bees.specs.dimension.wheelbase": "1.370 mm",
-    "bees.specs.dimension.groundClearance": "130 mm",
-    "bees.specs.dimension.seatHeight": "760 mm",
+    "bees.specs.dimension.groundClearance": "160 mm",
+    "bees.specs.dimension.seatHeight": "765 mm",
     "bees.specs.dimension.weight": "78.5 kg",
     "bees.specs.tire.frontTire": "90/90-10",
     "bees.specs.tire.rearTire": "90/90-10",
@@ -2726,10 +2726,10 @@ const translations = {
     // Performance Questions
     "faq.Performance.questions.0.question": "Berapa kecepatan motor?",
     "faq.Performance.questions.0.answer":
-      "Tergantung model, kecepatan tertinggi berkisar dari 55 km/jam hingga 95 km/jam",
+      "Tergantung model, kecepatan tertinggi berkisar dari 60 km/jam hingga 90 km/jam",
     "faq.Performance.questions.1.question": "Berapa daya motor / BLDC motor?",
     "faq.Performance.questions.1.answer":
-      "Daya motor bervariasi antar model, berkisar dari 1,2KW hingga 5KW",
+      "Daya motor bervariasi antar model, berkisar dari 1,2KW hingga 6KW",
     "faq.Performance.questions.2.question": "Berapa jarak tempuh motor?",
     "faq.Performance.questions.2.answer":
       "Jarak tempuh bervariasi antara model dan baterai, berkisar dari 80 km hingga 200 km",
@@ -2754,7 +2754,7 @@ const translations = {
       "CBS (Combined Braking System), sistem pengereman efisien yang secara otomatis mendistribusikan gaya pengereman antara rem depan dan belakang ketika pengendara mengerem:\nAthena, Victory, & EdPower\n\nRem cakram depan dan belakang, memberikan kontrol, keamanan, dan kinerja pengereman yang ditingkatkan:\nMotor Bees",
     "faq.Safety.questions.2.question": "Motor apa yang Anda gunakan?",
     "faq.Safety.questions.2.answer":
-      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 95 km/jam. (Bees, Athena, Victory, EdPower)",
+      "Motor Wedison dilengkapi dengan motor DC brushless (BLDC), dikenal karena kinerja, efisiensi, torsi, dan masa pakai yang panjang.\n\nTersedia 1 versi: \n1. DC Brushless Rear Hub Motor: kecepatan motor hingga 90 km/jam. (Bees, Athena, Victory, EdPower)",
 
     // Servicing Questions
     "faq.Servicing.questions.0.question":

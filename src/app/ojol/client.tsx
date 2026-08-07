@@ -160,7 +160,7 @@ export default function OjolClient() {
       link: "/bees",
       specs: [
         { labelKey: "ojol.models.spec.range", value: "80 km" },
-        { labelKey: "ojol.models.spec.maxSpeed", value: "55 km/h" },
+        { labelKey: "ojol.models.spec.maxSpeed", value: "60 km/h" },
         { labelKey: "ojol.models.spec.battery", value: "1600Wh" },
       ],
     },
