@@ -6,7 +6,6 @@ import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 import {
   ArrowRight,
-  Bike,
   GitCompareArrows,
   Zap,
   MapPin,
@@ -14,7 +13,6 @@ import {
   Wallet,
   Headphones,
   Newspaper,
-  ChevronRight,
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -95,13 +93,6 @@ const HERO_SLIDES = [
   },
 ] as const;
 
-const ACTIONS = [
-  { Icon: Bike, key: "testRide", href: "/corporate/contact/" },
-  { Icon: GitCompareArrows, key: "compare", href: "/compare/" },
-  { Icon: Zap, key: "supercharge", href: "/super-charge/" },
-  { Icon: MapPin, key: "showroom", href: "/showroom/" },
-];
-
 // CATATAN: gambar Unsplash di bawah = PLACEHOLDER sementara (lisensi bebas, host
 // sudah di-allow di next.config). Ganti dengan aset final dari tim desain sesuai
 // spesifikasi (rasio 4:5, subjek di 2/3 atas, 1/3 bawah bersih untuk overlay teks).
@@ -155,10 +146,6 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_cta: "Jadwalkan Test Ride",
     h_green_mq: "Nol emisi|Tanpa bensin|Perawatan minimal",
 
-    a_testRide: "Test Ride",
-    a_compare: "Bandingkan Model",
-    a_supercharge: "SuperCharge",
-    a_showroom: "Showroom",
     familyLabel: "Jajaran Model",
     familyTitle: "Empat motor, satu standar.",
     familySub:
@@ -222,10 +209,6 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_cta: "Book a Test Ride",
     h_green_mq: "Zero emission|No petrol|Minimal maintenance",
 
-    a_testRide: "Test Ride",
-    a_compare: "Compare Models",
-    a_supercharge: "SuperCharge",
-    a_showroom: "Showroom",
     familyLabel: "The Lineup",
     familyTitle: "Four motorcycles, one standard.",
     familySub:
@@ -392,22 +375,8 @@ export default function Landing() {
         </ShrinkHero>
       </section>
 
-      {/* ============ STICKY QUICK-ACTION BAR ============ */}
-      <div className="sticky top-16 z-30 border-b border-border bg-background/95">
-        <div className="main-container flex items-stretch gap-2 overflow-x-auto py-2.5 sm:justify-center sm:gap-3">
-          {ACTIONS.map(({ Icon, key, href }) => (
-            <Link
-              key={key}
-              href={href}
-              className="group flex shrink-0 items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
-            >
-              <Icon className="h-4 w-4 text-primary" />
-              {c[`a_${key}`]}
-              <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          ))}
-        </div>
-      </div>
+      {/* Sticky quick-action bar dihapus: keempat tautannya (Test Ride, Bandingkan,
+          SuperCharge, Showroom) kini semuanya sudah ada di navbar. */}
 
       {/* ============ ELECTRIC FAMILY (immersive cards) ============ */}
       <section

@@ -205,10 +205,31 @@
        data-tone=bone -> floating over dark hero imagery
        data-tone=ink  -> over Snow / white panel / light page
      ======================================================================= */
-  .nav-root {
+  /* Metrik navbar dipublikasikan di :root, bukan hanya di header, supaya elemen
+     sticky lain (sub-nav halaman produk, header tabel compare) bisa menempel
+     persis di bawah navbar DAN ikut naik saat navbar menyembunyikan diri.
+     Atribut `data-nav-*` ditulis ke <html> oleh komponen Navbar. */
+  :root {
     --nav-ease: cubic-bezier(0.16, 1, 0.3, 1);
     --nav-h: 4rem;
+    --nav-offset: var(--nav-h);
+  }
+  [data-nav-condensed="true"] { --nav-h: 3.5rem; }
+  [data-nav-hidden="true"] { --nav-offset: 0px; }
+  @media (min-width: 768px) {
+    :root { --nav-h: 5rem; }
+    [data-nav-condensed="true"] { --nav-h: 4rem; }
+  }
 
+  /* Dipasangkan dengan `sticky` (atau `sm:sticky`) milik Tailwind: menempel tepat
+     di bawah navbar dan ikut naik saat navbar menyembunyikan diri. `top` diabaikan
+     saat elemennya belum sticky, jadi aman dipakai bersama varian breakpoint. */
+  .nav-sticky {
+    top: var(--nav-offset);
+    transition: top 460ms var(--nav-ease);
+  }
+
+  .nav-root {
     --nav-ink: var(--forest-foreground);
     --nav-ink-dim: color-mix(in oklab, var(--forest-foreground) 72%, transparent);
     --nav-hover: color-mix(in oklab, var(--forest-foreground) 15%, transparent);
@@ -234,14 +255,6 @@
   /* Auto-hide on scroll-down: the only property animated is transform. */
   .nav-root[data-hidden="true"] {
     transform: translate3d(0, -101%, 0);
-  }
-
-  /* Tinggi bar: mobile 64 -> 56 saat mengecil, desktop 80 -> 64.
-     Urutan penting — deklarasi dasar dulu, baru media query. */
-  .nav-root[data-condensed="true"] { --nav-h: 3.5rem; }
-  @media (min-width: 768px) {
-    .nav-root { --nav-h: 5rem; }
-    .nav-root[data-condensed="true"] { --nav-h: 4rem; }
   }
 
   .nav-bar {

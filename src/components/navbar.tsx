@@ -98,6 +98,19 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", onKey);
   }, [openKey, sheetOpen, closePanel]);
 
+  // Publikasikan state navbar ke <html> supaya elemen sticky lain di halaman
+  // (sub-nav produk, header tabel compare) bisa menempel di bawah navbar lewat
+  // `--nav-offset` dan ikut naik saat navbar menyembunyikan diri.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.navCondensed = String(condensed);
+    root.dataset.navHidden = String(hidden && !openKey && !sheetOpen);
+    return () => {
+      delete root.dataset.navCondensed;
+      delete root.dataset.navHidden;
+    };
+  }, [condensed, hidden, openKey, sheetOpen]);
+
   // Kunci scroll halaman selama sheet terbuka.
   useEffect(() => {
     if (!sheetOpen) return;

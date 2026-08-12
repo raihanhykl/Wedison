@@ -250,7 +250,7 @@ export default function CompareStructure({
           <div
             className={cn(
               "z-30 grid grid-cols-2 gap-3 border-b border-border bg-background/95 py-3 backdrop-blur-sm",
-              !embedded && "sticky top-16",
+              !embedded && "nav-sticky sticky",
             )}
           >
             {mobileColumns.map((bike, i) => (
@@ -310,7 +310,7 @@ export default function CompareStructure({
           <div
             className={cn(
               "z-30 grid gap-4 border-b border-border bg-background/95 py-4 backdrop-blur-sm",
-              !embedded && "sm:sticky sm:top-16",
+              !embedded && "nav-sticky sm:sticky",
             )}
             style={desktopGrid}
           >
