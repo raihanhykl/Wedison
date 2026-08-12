@@ -189,7 +189,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_lineup_kicker: "Wedison Electric",
     h_lineup_title: "Electric motorcycles for the way you move.",
     h_lineup_sub:
-      "From daily city rides to fleet duty, there is one built to fit you.",
+      "From daily city commuting to fleet duty, there is a model built to suit you.",
     h_lineup_cta: "Explore the Lineup",
     h_lineup_mq: "Athena|Bees|Victory|EdPower",
 
@@ -197,7 +197,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_charge_title: "Fast charging, powered by",
     h_charge_titleFull: "Fast charging, powered by SuperCharge",
     h_charge_sub:
-      "Find the nearest station on the map, start charging from the app, then get moving.",
+      "Locate the nearest station on the map, begin charging from the app, then continue your journey.",
     h_charge_cta: "Find a Station",
     h_charge_mq:
       "Find stations on the map|Start from the app|Charging packages",
@@ -205,33 +205,34 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_kicker: "Zero Emission",
     h_green_title: "Quiet on the road. Clean for the city.",
     h_green_sub:
-      "No petrol, no fumes, and very little servicing. Daily riding just gets calmer.",
+      "No petrol, no fumes, and minimal servicing. Daily riding becomes considerably calmer.",
     h_green_cta: "Book a Test Ride",
     h_green_mq: "Zero emission|No petrol|Minimal maintenance",
 
     familyLabel: "The Lineup",
     familyTitle: "Four motorcycles, one standard.",
     familySub:
-      "Different characters for different needs, all built to the same benchmark.",
+      "Distinct characters for different needs, all built to the same standard.",
     learn: "Explore",
     Commute: "Commute",
     Style: "Style",
     Performance: "Performance",
     Fleet: "Fleet",
     superLabel: "SuperCharge Network",
-    superTitle: "Fast charging, in the cities you actually ride in.",
+    superTitle: "Fast charging, in the cities where you ride.",
     superCta: "See SuperCharge",
     advLabel: "The Wedison Advantage",
-    advTitle: "Easy to ride daily, easy to own for years.",
+    advTitle: "Effortless to ride daily, dependable to own for years.",
     adv_charge_t: "SuperCharge Network",
-    adv_charge_d: "A 15-minute charge at a growing number of points.",
+    adv_charge_d: "A 15-minute charge at a growing number of locations.",
     adv_battery_t: "Battery Warranty",
     adv_battery_d: "Three years on the battery, two on the motorcycle.",
     adv_cost_t: "Lower Running Costs",
-    adv_cost_d: "No petrol, few service visits, much cheaper per kilometer.",
+    adv_cost_d:
+      "No petrol, fewer service visits, and a substantially lower cost per kilometer.",
     adv_service_t: "Service & Showroom",
     adv_service_d:
-      "Official workshops and a showroom network that keeps growing.",
+      "Official workshops and a steadily expanding showroom network.",
     exLabel: "Keep Exploring",
     exTitle: "One step closer.",
     ex_media_t: "Wedison News",
@@ -241,11 +242,11 @@ const COPY: Record<Lang, Record<string, string>> = {
     ex_showroom_t: "Find a Showroom",
     ex_showroom_d: "Address, contact, and opening hours.",
     ex_charge_t: "SuperCharge",
-    ex_charge_d: "See how Wedison charging works.",
+    ex_charge_d: "Understand how Wedison charging works.",
     chatBadge: "AI Assistant • Dion",
-    chatTitle: "Got a question? Chat with Dion.",
+    chatTitle: "Have a question? Speak with Dion.",
     chatSub:
-      "Specs, pricing, or booking a test ride, Dion can answer any time. If you need a person, you can reach our team straight away.",
+      "Whether the question concerns specifications, pricing, or booking a test ride, Dion is available at any hour. Should you prefer to speak with someone, our team is reachable directly.",
     chatCta: "Start Chatting",
   },
 };

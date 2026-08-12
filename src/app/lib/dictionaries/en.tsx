@@ -20,20 +20,20 @@ export const en = {
 
   // compare table
   "compare.model": "Compare Models",
-  "compare.select.bike": "Select a bike to compare",
+  "compare.select.bike": "Select a motorcycle to compare",
   "compare.title": "Compare Wedison Models",
   "compare.subtitle":
-    "Put the specs side by side, then pick the one that fits how you ride.",
+    "Compare the specifications side by side and identify the model that suits your riding.",
   "compare.expandAll": "Expand All",
   "compare.collapseAll": "Collapse All",
   "compare.swipeHint": "Swipe to see more",
   "compare.page.kicker": "Compare Electric Bikes",
-  "compare.page.addBike": "Add bike",
+  "compare.page.addBike": "Add motorcycle",
   "compare.page.remove": "Remove",
   "compare.viewDetails": "View Details",
   "compare.help.title": "Still deciding?",
   "compare.help.subtitle":
-    "Tell us how you ride and our team will point you to the right model.",
+    "Tell us how you ride and our team will recommend the right model.",
   "compare.help.whatsapp": "Chat on WhatsApp",
   "compare.help.showroom": "Visit a Showroom",
 
@@ -48,7 +48,7 @@ export const en = {
   "user.manual.section.title": "User Manual &",
   "user.manual.section.titleHighlight": "Owner's Guide",
   "user.manual.section.description":
-    "How to ride it, charge it, look after it, and stay safe. It is all in one official document.",
+    "Operation, charging, maintenance, and safety, documented in a single official manual.",
   "user.manual.faq.section.title": "Manuals for",
   "user.manual.faq.section.titleHighlight": "Every Model",
   "user.manual.faq.section.description":
@@ -98,7 +98,8 @@ export const en = {
     "A Wedison motorcycle charging at a SuperCharge station at night",
   "nav.feature.superCharge.caption":
     "SuperCharge points across Greater Jakarta, Bandung, and Bali.",
-  "nav.feature.services.alt": "The reception desk at a Wedison Experience Center",
+  "nav.feature.services.alt":
+    "The reception desk at a Wedison Experience Center",
   "nav.feature.services.caption":
     "Everything you need before and after you take one home.",
   "nav.feature.company.alt": "The Wedison facility seen from above",
@@ -108,28 +109,28 @@ export const en = {
   "nav.discover": "Discover",
   "nav.discover.leftCard.title": "Discover Wedison",
   "nav.discover.leftCard.description":
-    "Drop by the Experience Center, find answers in the FAQ, or catch up in the Media Center.",
+    "Visit the Experience Center, find answers in the FAQ, or follow the latest in the Media Center.",
   "nav.experienceCenter.description":
-    "Visit a Wedison showroom and try the 15-minute charge yourself.",
+    "Visit a Wedison showroom and experience the 15-minute charge for yourself.",
   "nav.faq.description":
-    "Answers to the questions people ask most about our products and services.",
+    "Answers to the most common questions about our products and services.",
   "nav.mediaCenter.description":
-    "News, official releases, and the latest from Wedison.",
+    "News, official releases, and the latest updates from Wedison.",
   "nav.ojol.description":
-    "Electric motorcycle rental built for ride-hailing drivers. From 50K a day.",
+    "Electric motorcycle rental for ride-hailing drivers, from 50K per day.",
   "nav.showroom": "Showroom",
   "nav.serviceLocation": "Service Location",
   "nav.superCharge": "SuperCharge",
   "nav.corporate": "Corporate",
   "nav.corporate.leftCard.title": "Powering the Future",
   "nav.corporate.leftCard.description":
-    "Electric motorcycles that charge in 15 minutes, backed by a network Wedison builds and runs itself.",
+    "Electric motorcycles that charge in 15 minutes, supported by a network Wedison builds and operates itself.",
   "nav.aboutUs": "About Us",
   "nav.aboutUs.description":
-    "Who Wedison is, what we build, and where we are headed.",
+    "Who Wedison is, what we build, and the direction we are taking.",
   "nav.careers": "Careers",
   "nav.careers.description":
-    "Open roles at Wedison and in Indonesia's electric vehicle industry.",
+    "Open positions at Wedison and across Indonesia's electric vehicle industry.",
 
   // Career Page
   "career.banner.title": "Join the",
@@ -142,7 +143,7 @@ export const en = {
   "career.section.description": "Find the role that matches your expertise",
   "career.card.viewDetails": "View Details",
   "career.card.previewText":
-    "Click to see the full role description and requirements",
+    "Click to view the full role description and requirements",
   "career.detail.jobOverview": "Job Overview",
   "career.detail.keyResponsibilities": "Key Responsibilities",
   "career.detail.qualifications": "Qualifications & Requirements",
@@ -151,7 +152,7 @@ export const en = {
   "career.portal.description":
     "Choose a job portal to continue your application",
   "career.portal.infoText":
-    "You will be taken to a third-party site to finish your application. Have your CV and supporting documents ready first.",
+    "You will be directed to a third-party site to complete your application. Please have your CV and supporting documents prepared beforehand.",
   "career.apply.emailTitle": "Apply via Email",
   "career.apply.emailSubtitle":
     "Send your application directly to hr@wedison.co",
@@ -159,7 +160,7 @@ export const en = {
 
   "nav.contactUs": "Contact Us",
   "nav.contactUs.description":
-    "Got a question or need a hand? The Wedison team is here to help.",
+    "Have a question or need assistance? The Wedison team is here to help.",
   "nav.helpCenter": "Help Center",
 
   // Hero
@@ -167,7 +168,7 @@ export const en = {
   "hero.title": "The Future of",
   "hero.titleHighlight": "Electric Mobility",
   "hero.description":
-    "Wedison electric motorcycles: enough power for daily riding, quick to charge, and no exhaust.",
+    "Wedison electric motorcycles deliver the power daily riding demands, charge quickly, and produce no exhaust.",
   "hero.exploreModels": "Explore Models",
   "hero.bookTestRide": "Book Test Ride",
 
@@ -176,16 +177,16 @@ export const en = {
   "features.title": "Why Choose",
   "features.titleHighlight": "Wedison",
   "features.description":
-    "Four models, one charging network, and running costs that are far lighter than petrol.",
+    "Four models, one charging network, and running costs substantially lower than petrol.",
   "features.longRangeBattery": "Up to 160 km of Range",
   "features.longRangeBatteryDesc":
-    "One charge covers several days of city riding, depending on the model and battery you pick.",
+    "A single charge covers several days of city riding, depending on the model and battery selected.",
   "features.rapidCharging": "SuperCharge in 15 Minutes",
   "features.rapidChargingDesc":
     "Charge from 10% to 80% in 15 minutes at any Wedison SuperCharge station.",
   "features.impressivePerformance": "Full Torque From a Standstill",
   "features.impressivePerformanceDesc":
-    "Electric motors deliver full torque the moment you twist the throttle, so the pull off the line is immediate.",
+    "An electric motor delivers full torque from the first turn of the throttle, making initial acceleration immediate.",
   // "features.zeroEmissions": "Cut the Carbon, Ride Electric",
   // "features.zeroEmissions": "Ride Electric, Cut Emissions by 54%",
   // "features.zeroEmissionsDesc":
@@ -194,7 +195,7 @@ export const en = {
   //   "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
   "features.zeroEmissions": "Zero Emission, Cleaner Air",
   "features.zeroEmissionsDesc":
-    "No exhaust pipe, no fumes. The more riders who switch, the cleaner city air gets.",
+    "No exhaust, no fumes. Every rider who switches contributes to cleaner air in the city.",
   "features.zeroEmissionsLink":
     "https://www.sciencedirect.com/science/article/pii/S0967070X21003401",
   // "features.healthBenefits": "Cleaner Air, Healthier Life",
@@ -204,7 +205,7 @@ export const en = {
   //   "Compared to gasoline motorcycles, electric motorcycles lower your risk of lung diseases and reduce asthma-related ER visits by 3.2%.",
   "features.healthBenefits": "Less Energy Per Kilometer",
   "features.healthBenefitsDesc":
-    "Wedison uses far less energy than a petrol motorcycle to cover the same distance, and your running costs drop with it.",
+    "Wedison covers the same distance on considerably less energy than a petrol motorcycle, and running costs fall accordingly.",
   // "Electric motorcycle cuts city fine particulate pollution by 14% on average, reduces asthma-related ER visits by 3.2%, helping you and your loved ones breathe easier every day.",
   "features.healthBenefitsLink":
     "https://www.sciencedirect.com/science/article/pii/S016041202031970X",
@@ -214,7 +215,7 @@ export const en = {
   //   "Electric motorcycle rides are up to 23% quieter and emit no exhaust, saving about 46.5 g of CO₂ and 1.95 g of CO per kilometer.",
   "features.noiseFree": "Quiet on the Road",
   "features.noiseFreeDesc":
-    "Electric motors run almost silently. Streets stay calmer, and so does the ride.",
+    "An electric motor runs almost silently, leaving both the street and the ride noticeably calmer.",
   "features.noiseFreeLink":
     "https://www.sciencedirect.com/science/article/pii/S0160412023003896",
 
@@ -223,7 +224,7 @@ export const en = {
   "products.title": "Wedison",
   "products.titleHighlight": "Electric Motorcycles",
   "products.description":
-    "Four models for four kinds of riding, from tight city lanes to longer trips out of town.",
+    "Four models for four kinds of riding, from narrow city lanes to longer journeys out of town.",
   "products.learnMore": "Learn More",
   "products.orderNow": "Order Now",
   "products.range": "Range",
@@ -264,7 +265,7 @@ export const en = {
   "contact.phone": "Phone",
   "contact.phoneHours": "Monday to Friday, 9am to 6pm",
   "contact.emailLabel": "Email",
-  "contact.emailResponse": "We reply as soon as we can",
+  "contact.emailResponse": "We respond as soon as possible",
   "contact.followUs": "Follow Us",
 
   // Footer
@@ -274,7 +275,7 @@ export const en = {
   "footer.experience": "Experience",
   "footer.corporate": "Corporate",
   "footer.copyright": "© 2025 Wedison. All rights reserved.",
-  "footer.tagline": "Built to last, and to run on electricity.",
+  "footer.tagline": "Built to last, and built to run on electricity.",
   "footer.privacy": "Privacy",
   "footer.terms": "Terms",
   "footer.cookies": "Cookies",
@@ -287,7 +288,7 @@ export const en = {
   "showroom.title": "Visit Our",
   "showroom.titleHighlight": "Showroom",
   "showroom.description":
-    "See them, sit on them, and ride one yourself before you decide.",
+    "See the range in person and ride one yourself before making a decision.",
   "showroom.tag": "Experience Center",
   "showroom.location": "Our Locations",
   "showroom.findUs": "Find Us",
@@ -311,16 +312,16 @@ export const en = {
   "showroom.whatYouCanDo": "What You Can Do at the Showroom",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
-    "Ride one in our test area and judge the pull and the comfort for yourself before buying.",
+    "Ride in our test area and assess the acceleration and comfort for yourself before buying.",
   "showroom.consultation.title": "Product Consultation",
   "showroom.consultation.description":
-    "Not sure which model suits you? Tell our team how you ride and they will narrow it down.",
+    "Unsure which model suits you? Describe how you ride and our team will narrow down the options.",
   "showroom.financing.title": "Financing Simulation",
   "showroom.financing.description":
-    "Work out the monthly payment and see which plan fits your budget.",
+    "Calculate the monthly payment and review the plan that best fits your budget.",
   "showroom.service.title": "Service and After-Sales",
   "showroom.service.description":
-    "Official servicing and genuine parts, handled by technicians who know these bikes.",
+    "Official servicing and genuine parts, carried out by technicians trained on Wedison motorcycles.",
   "showroom.bookVisit": "Book a Visit",
   "showroom.viewModels": "Go to Showroom",
 
@@ -331,9 +332,9 @@ export const en = {
   "about.overview.title":
     "Wedison: The Motorcycles and the Network Behind Them",
   "about.overview.p1":
-    "Wedison is Indonesia's first fast-charging electric motorcycle company. We do not stop at selling motorcycles. We also build the charging network that makes owning one practical day to day.",
+    "Wedison is Indonesia's first fast-charging electric motorcycle company. Our work does not end at selling motorcycles. We also build the charging network that makes owning one practical day to day.",
   "about.overview.p2":
-    "The motorcycles and the charging stations are designed as one system, so ownership makes sense from day one.",
+    "The motorcycles and the charging stations are designed as a single system, so ownership is coherent from the first day.",
   "about.mission.title": "Our Mission",
   "about.mission.p1":
     "To build an electric vehicle ecosystem that is complete, affordable, and genuinely dependable.",
@@ -342,35 +343,35 @@ export const en = {
   "about.values.title": "Our Core Values",
   "about.values.innovation.title": "Electric Vehicle Innovation",
   "about.values.innovation.description":
-    "Building energy-efficient electric vehicles at a price ordinary buyers can actually reach, not just a small few.",
+    "Developing energy-efficient electric vehicles at a price the wider market can reach, rather than a select few.",
   "about.values.partnerships.title": "Partnerships and Collaborations",
   "about.values.partnerships.description":
-    "Working across industries to speed up charging infrastructure and battery development.",
+    "Working across industries to accelerate charging infrastructure and battery development.",
   "about.values.experience.title": "Ownership That Holds Together",
   "about.values.experience.description":
-    "Motorcycles that are easy for anyone to ride, with features people actually use every day.",
+    "Motorcycles that are straightforward to ride, equipped with features owners use every day.",
   "about.projects.title": "Our Projects",
-  "about.projects.future.title": "Cutting Emissions From City Transport",
+  "about.projects.future.title": "Reducing Emissions From Urban Transport",
   "about.projects.future.description":
-    "Using renewable energy to bring carbon emissions down, and widening the electric vehicle market so clean transport gets more affordable.",
+    "Drawing on renewable energy to lower carbon emissions, and broadening the electric vehicle market so clean transport becomes more affordable.",
   "about.projects.charging.title": "SuperCharge",
   "about.projects.charging.description":
-    "Building a charging network reliable enough that owners stop counting their remaining range every day.",
+    "Building a charging network dependable enough that owners no longer need to monitor their remaining range daily.",
   "about.offers.title": "What We Offer",
   "about.offers.motorcycles.title": "Electric Motorcycle Models",
   "about.offers.motorcycles.description":
     "Several models with distinct characters, from a compact commuter to a long-range maxi-scooter.",
   "about.offers.charging.title": "SuperCharge Stations",
   "about.offers.charging.description":
-    "Fast-charging stations that take a battery from 10% to 80% in 15 minutes, so stops stay short.",
+    "Fast-charging stations that bring a battery from 10% to 80% in 15 minutes, keeping stops brief.",
   "about.joinUs": "Join Our Mission",
   "about.joinUsDescription":
-    "We are building electric transport in Indonesia that is worth keeping for the long run. Come build it with us.",
+    "We are building electric transport in Indonesia designed for the long term. We would welcome your part in it.",
   "about.contactUs": "Contact Us",
 
   // Contact Page
   "contact.page.description":
-    "Got a question or need help? Reach us through any of the channels below.",
+    "Have a question or need assistance? Reach us through any of the channels below.",
   "contact.page.findUs": "Find Us",
   "contact.page.openInMaps": "Open in Google Maps",
   "contact.page.hours": "Business Hours",
@@ -378,28 +379,28 @@ export const en = {
   "contact.page.faqTitle": "Frequently Asked Questions",
   "contact.page.thankYou": "Thank You!",
   "contact.page.messageReceived":
-    "We have your message. Our team will get back to you shortly.",
+    "We have received your message. Our team will contact you shortly.",
   "contact.page.sendAnother": "Send Another Message",
   "contact.page.sending": "Sending...",
   "contact.page.faq.q1": "How do I book a test ride?",
   "contact.page.faq.a1":
-    "Come straight to one of our showrooms, or book a slot first through this site. Our team will be with you for the ride.",
+    "Visit any of our showrooms directly, or reserve a slot in advance through this site. Our team will accompany you throughout the ride.",
   "contact.page.faq.q2": "What warranty comes with a Wedison motorcycle?",
   "contact.page.faq.a2":
     "Every Wedison motorcycle carries a 2-year warranty, and the battery carries a 3-year warranty. Both cover manufacturing defects.",
   "contact.page.faq.q3": "How long does charging take?",
   "contact.page.faq.a3":
-    "At a SuperCharge station, most models go from 10% to 80% in 15 minutes. On a home outlet, a full charge takes roughly 4 to 10 hours depending on the model and battery size.",
-  "contact.page.faq.q4": "Are there financing options?",
+    "At a SuperCharge station, most models charge from 10% to 80% in 15 minutes. On a household outlet, a full charge takes approximately 4 to 10 hours, depending on the model and battery capacity.",
+  "contact.page.faq.q4": "Are financing options available?",
   "contact.page.faq.a4":
-    "Yes. We offer several installment plans, and our team can help you pick the one that fits your budget.",
+    "Yes. We offer several installment plans, and our team can help you select the one best suited to your budget.",
 
   // calculator
   "calculator.page.tag": "Saving Calculator",
   "calculator.page.title": "Calculate ",
   "calculator.page.titleHighlight": "Your Savings Now",
   "calculator.page.description":
-    "Move the slider, compare what you spend each month on petrol against a Wedison, and see the gap for yourself.",
+    "Adjust the slider to compare your current monthly petrol costs against a Wedison, and see the difference for yourself.",
   "calculator.page.battery": "Battery",
   "calculator.page.monthlyTitle": "Monthly Expenses",
   "calculator.page.monthlyCostType": "Cost Type",
@@ -465,16 +466,16 @@ export const en = {
   "edmax.hero.title": "Ride the Future with",
   "edmax.hero.titleHighlight": "EdPower",
   "edmax.hero.description":
-    "Strong, quick to charge, and fully electric. Built for riders who cover longer distances.",
+    "Powerful, quick to charge, and fully electric. Built for riders who cover longer distances.",
   "edmax.hero.orderNow": "Order Now",
   "edmax.hero.downloadBrochure": "Download Brochure",
 
   "edmax.feature1.tag": "Smart Display",
-  "edmax.feature1.title": "A Touchscreen That Talks to Your Phone",
+  "edmax.feature1.title": "A Touchscreen Paired to Your Phone",
   "edmax.feature1.subtitle":
     "Wireless Apple CarPlay & Android Auto, Full Touchscreen Display",
   "edmax.feature1.description":
-    "Navigation, music, and calls appear on the color touchscreen. Apple CarPlay and Android Auto connect without a cable.",
+    "Navigation, music, and calls are displayed on the color touchscreen. Apple CarPlay and Android Auto connect without a cable.",
   "edmax.feature1.range": "Range",
   "edmax.feature1.efficient": "Efficient",
   "edmax.feature1.energyUse": "Energy Use",
@@ -485,7 +486,7 @@ export const en = {
   "edmax.feature2.title": "Power Up in Minutes",
   "edmax.feature2.subtitle": "SuperCharge Technology",
   "edmax.feature2.description":
-    "From 10% to 80% in 15 minutes. About as long as a coffee, then you are moving again.",
+    "From 10% to 80% in 15 minutes, roughly the length of a coffee break before you are on the road again.",
   "edmax.feature2.charge": "10% to 80% Charge",
   "edmax.feature2.universal": "Universal",
   "edmax.feature2.chargingPort": "Charging Port",
@@ -495,7 +496,7 @@ export const en = {
   "edmax.feature3.title": "Designed to Turn Heads",
   "edmax.feature3.subtitle": "Edgy. Sporty. Iconic.",
   "edmax.feature3.description":
-    "Firm body lines and sharp angles make EdPower easy to recognize from a distance.",
+    "Defined body lines and sharp angles make EdPower recognizable from a distance.",
   "edmax.feature3.aerodynamic": "Aerodynamic",
   "edmax.feature3.design": "Design",
   "edmax.feature3.led": "LED",
@@ -505,7 +506,8 @@ export const en = {
 
   "edmax.color.title": "Choose Your",
   "edmax.color.titleHighlight": "Style",
-  "edmax.color.description": "Pick your favorite EdPower color and see it.",
+  "edmax.color.description":
+    "Select your preferred EdPower color and view it here.",
 
   "edmax.specs.title": "Specifications",
   "edmax.specs.description":
@@ -543,52 +545,53 @@ export const en = {
   "edpower.productPage.productOverview.title":
     "Flagship Power, Unrivaled Comfort.",
   "edpower.productPage.productOverview.description":
-    "EdPower is the biggest bike Wedison makes. The saddle is wide, the riding position is relaxed, and the range reaches 160 km on a single charge. The display pairs with your phone, the underseat storage swallows two helmets, and there is enough power left over for trips out of town.",
+    "EdPower is the largest motorcycle in the Wedison range. The saddle is wide, the riding position is relaxed, and range reaches 160 km on a single charge. The display pairs with your phone, the underseat compartment holds two helmets, and there is power in reserve for trips beyond the city.",
 
   "edpower.productPage.productHighlight1.imageAlt":
     "Cockpit view showcasing the large TFT display with Apple CarPlay & Android Auto interface",
   "edpower.productPage.productHighlight1.title":
     "Wireless Apple CarPlay & Android Auto",
   "edpower.productPage.productHighlight1.description":
-    "Pair your phone over wireless Apple CarPlay or Android Auto. Navigation, calls, and music all show up on the EdPower display.",
+    "Pair your phone via wireless Apple CarPlay or Android Auto. Navigation, calls, and music are all presented on the EdPower display.",
 
   "edpower.productPage.productHighlight2.imageAlt":
     "Underseat storage, lid open, revealing extra-large compartment",
   "edpower.productPage.productHighlight2.title": "XXL Underseat Storage",
   "edpower.productPage.productHighlight2.description":
-    "The underseat compartment holds two helmets at once, or a full bag of groceries. No extra luggage needed.",
+    "The underseat compartment accommodates two helmets at once, or a full bag of groceries, with no additional luggage required.",
 
   "edpower.productPage.productHighlight3.imageAlt":
     "Rear three-quarter angle highlighting EdPower’s broad stance and wide seat",
   "edpower.productPage.productHighlight3.title": "Wide Seat, Relaxed Position",
   "edpower.productPage.productHighlight3.description":
-    "A wide, well-padded seat and an upright riding position keep long rides from wearing you out, and the pillion gets the same treatment.",
+    "A wide, well-padded seat and an upright riding position make long rides far less tiring, for the pillion as much as the rider.",
 
   "edpower.productPage.productHighlight4.imageAlt":
     "Front shot showing advanced LED headlamps and modern bodywork",
-  "edpower.productPage.productHighlight4.title": "A Shape People Notice",
+  "edpower.productPage.productHighlight4.title":
+    "A Design That Draws Attention",
   "edpower.productPage.productHighlight4.description":
-    "A firm front end, full LED lighting, and a neatly sculpted tail. EdPower stands out even parked.",
+    "An assertive front end, full LED lighting, and a cleanly sculpted tail. EdPower stands out even at a standstill.",
 
   "edpower.productPage.productHighlight5.imageAlt":
     " Battery/range indicator on the dashboard, close-up",
   "edpower.productPage.productHighlight5.title": "Class-Leading 160 km Range",
   "edpower.productPage.productHighlight5.description":
-    "One charge takes EdPower up to 160 km. That covers a week of city riding, or a single run out of town.",
+    "A single charge takes EdPower up to 160 km, enough for a week of city riding or one journey out of town.",
 
   "edpower.productPage.chargingOverview.imageAlt":
     "EdPower parked at a Wedison showroom with SuperCharge and home charger visible",
   "edpower.productPage.chargingOverview.title": "Two Ways to Charge",
   "edpower.productPage.chargingOverview.description":
-    "In a hurry? Stop at a SuperCharge station in a Wedison showroom and be done in 15 minutes. Not in a hurry? Plug in at home overnight and wake up full.",
+    "When time is short, a SuperCharge station at any Wedison showroom completes the job in 15 minutes. When it is not, an overnight charge at home leaves the battery full by morning.",
 
   "edpower.productPage.chargingHighlight1.imageAlt":
     "EdPower connected to a Wedison SuperCharge station",
   "edpower.productPage.chargingHighlight1.title": "Wedison SuperCharge",
   "edpower.productPage.chargingHighlight1.description": (
     <>
-      Charge from 10% to 80% in 15 minutes, ideal for a quick stop mid-errand.
-      Available at every Wedison showroom.{" "}
+      Charge from 10% to 80% in 15 minutes, suited to a brief stop between
+      errands. Available at every Wedison showroom.{" "}
       <Link href="/super-charge" className="underline text-primary">
         Learn More
       </Link>
@@ -599,7 +602,7 @@ export const en = {
     "EdPower plugged into a home charger in a clean, modern garage",
   "edpower.productPage.chargingHighlight2.title": "Charging at Home",
   "edpower.productPage.chargingHighlight2.description":
-    "Plug in before bed and the battery is full by morning. An ordinary household socket is all you need.",
+    "Connect the charger overnight and the battery is full by morning. A standard household socket is all that is required.",
 
   "edpower.specs.engine.motorType": "Brushless DC Motor",
   "edpower.specs.engine.motorPower": "3 kW",
@@ -635,7 +638,7 @@ export const en = {
   "dash.hero.title": "Maximum Efficiency for ",
   "dash.hero.titleHighlight": "Every Delivery",
   "dash.hero.description":
-    "An electric motorcycle built for work: tough enough for all-day use, cheap enough to run every day.",
+    "An electric motorcycle built for work: durable enough for all-day use, and inexpensive to run.",
   "dash.hero.orderNow": "Order Now",
   "dash.hero.downloadBrochure": "Download Brochure",
 
@@ -643,17 +646,18 @@ export const en = {
   "dash.feature1.title": "Designed for Limitless Delivery",
   "dash.feature1.subtitle": "Flexible rear slot for any box type",
   "dash.feature1.description":
-    "The rear slot takes a coolbox, a container, or whatever box your deliveries need. It mounts firmly and stays put on the road.",
+    "The rear mount accepts a coolbox, a container, or whichever case your deliveries require. It fastens securely and stays stable on the road.",
 
   "dash.feature2.tag": "Built for Delivery",
   "dash.feature2.title": "One Seat, Endless Destinations",
   "dash.feature2.subtitle": "Compact, efficient, and purpose-built",
   "dash.feature2.description":
-    "Dropping the passenger seat makes Dash lighter and easier on the battery. Good for food, parcels, and light logistics.",
+    "Omitting the passenger seat makes Dash lighter and gentler on the battery. Well suited to food delivery, parcels, and light logistics.",
 
   "dash.color.title": "Choose Your",
   "dash.color.titleHighlight": "Color",
-  "dash.color.description": "Pick your favorite Dash color and see it.",
+  "dash.color.description":
+    "Select your preferred Dash color and view it here.",
 
   "dash.specs.title": "Specifications",
   "dash.specs.description":
@@ -671,7 +675,7 @@ export const en = {
   "victory.hero.title": "Own the Streets with",
   "victory.hero.titleHighlight": "Style and Performance",
   "victory.hero.description":
-    "A sporty electric scooter with a slim body. Easy to live with day to day, and good to look at.",
+    "A sporty electric scooter with a slim body. Straightforward to live with day to day, and distinctive to look at.",
   "victory.hero.orderNow": "Order Now",
   "victory.hero.downloadBrochure": "Download Brochure",
 
@@ -679,13 +683,13 @@ export const en = {
   "victory.feature1.title": "Perfect Size for Urban Roads",
   "victory.feature1.subtitle": "Not too small, not too bulky",
   "victory.feature1.description":
-    "The proportions suit city use: narrow enough to slip through tight streets, still planted when you open it up.",
+    "The proportions suit city use: narrow enough for tight streets, yet stable at higher speeds.",
 
   "victory.feature2.tag": "Sporty Design",
   "victory.feature2.title": "Bold Looks, Modern Feel",
   "victory.feature2.subtitle": "Inspired by performance scooters",
   "victory.feature2.description":
-    "The bodywork borrows its lines from sport scooters, for riders who want to stand out without giving up efficiency.",
+    "The bodywork draws its lines from sport scooters, for riders who want a distinctive presence without sacrificing efficiency.",
 
   "victory.color.title": "Choose Your",
   "victory.color.titleHighlight": "Style",
@@ -722,30 +726,30 @@ export const en = {
   "victory.productPage.productOverview.imageAlt": "Gray Victory",
   "victory.productPage.productOverview.title": "Sporty and Agile in the City.",
   "victory.productPage.productOverview.description":
-    "Victory is built for city streets. The long wheelbase keeps it steady, CBS disc brakes at both ends make stopping more predictable, and the range reaches 120 km on a charge. When it runs low, SuperCharge fills it back up in 15 minutes.",
+    "Victory is built for city streets. The long wheelbase keeps it composed, CBS disc brakes at both ends make stopping more predictable, and range reaches 120 km on a charge. When the battery runs low, SuperCharge restores it in 15 minutes.",
 
   "victory.productPage.productHighlight1.imageAlt": "Victory Front look",
   "victory.productPage.productHighlight1.title": "Signature Sporty Design",
   "victory.productPage.productHighlight1.description":
-    "An aerodynamic body with firm lines and angular LED lighting. Victory is easy to pick out, even in a queue at the lights.",
+    "An aerodynamic body with defined lines and angular LED lighting makes Victory easy to identify, even among traffic at the lights.",
 
   "victory.productPage.productHighlight2.imageAlt":
     "Front three-quarter view showing wide tire profile and suspension",
   "victory.productPage.productHighlight2.title": "Steady on Rough Roads",
   "victory.productPage.productHighlight2.description":
-    "Wide tires with plenty of grip and hydraulic suspension keep Victory settled, whether the surface is smooth or full of potholes.",
+    "Wide, high-grip tires and hydraulic suspension keep Victory settled, whether the surface is smooth or heavily potholed.",
 
   "victory.productPage.productHighlight3.imageAlt":
     "Close-up of SuperCharge port with Wedison branding",
   "victory.productPage.productHighlight3.title": "SuperCharge Ready",
   "victory.productPage.productHighlight3.description":
-    "Charge from 10% to 80% in 15 minutes at a SuperCharge station, or plug in at home when you are not in a rush.",
+    "Charge from 10% to 80% in 15 minutes at a SuperCharge station, or charge at home when time allows.",
 
   "victory.productPage.chargingOverview.imageAlt":
     "Victory parked at a Wedison showroom, SuperCharge station in view",
   "victory.productPage.chargingOverview.title": "Charge However Suits You",
   "victory.productPage.chargingOverview.description":
-    "Stop at a SuperCharge station in a Wedison showroom when you are in a hurry, or charge slowly at home overnight. Both are simple.",
+    "Use a SuperCharge station at a Wedison showroom when time is short, or charge gradually at home overnight. Either approach is straightforward.",
 
   "victory.productPage.chargingHighlight1.imageAlt":
     "Victory at a Wedison SuperCharge station, cable connected",
@@ -764,7 +768,7 @@ export const en = {
     "Victory plugged into a home charger in a modern garage setting",
   "victory.productPage.chargingHighlight2.title": "Everyday Home Charging",
   "victory.productPage.chargingHighlight2.description":
-    "Plug in at night and it is full by morning. The home charger comes with the bike.",
+    "Charge overnight and the battery is full by morning. The home charger is supplied with the motorcycle.",
 
   "victory.specs.engine.motorType": "Brushless DC Motor",
   "victory.specs.engine.motorPower": "3 kW",
@@ -845,28 +849,28 @@ export const en = {
   "athena.productPage.productOverview.imageAlt": "Green Athena",
   "athena.productPage.productOverview.title": "Timeless Elegance, Recharged",
   "athena.productPage.productOverview.description":
-    "Athena takes the shape of a classic European scooter and swaps in an electric drivetrain. The result draws attention without making noise. Range reaches 120 km on a charge, there are CBS disc brakes at both ends, and the suspension is hydraulic. Charge it quickly at a Wedison showroom, or slowly at home.",
+    "Athena adopts the form of a classic European scooter and replaces the engine with an electric drivetrain. The result draws attention without generating noise. Range reaches 120 km on a charge, CBS disc brakes are fitted at both ends, and the suspension is hydraulic. Charge rapidly at a Wedison showroom, or gradually at home.",
 
   "athena.productPage.productHighlight1.imageAlt": "Head unit Athena",
   "athena.productPage.productHighlight1.title": "Modern Digital Display",
   "athena.productPage.productHighlight1.description":
-    "Athena's LCD panel is bright and easy to read at a glance, even in daylight. It shows what matters and nothing more, so your eyes stay on the road.",
+    "The Athena LCD panel is bright and legible at a glance, even in daylight. It presents only the essentials, keeping your attention on the road.",
 
   "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
   "athena.productPage.productHighlight2.title": "SuperCharge",
   "athena.productPage.productHighlight2.description":
-    "At a SuperCharge station, Athena goes from 10% to 80% in 15 minutes. At home, a full charge takes about 5 hours on the Regular battery and 7 on the Extended.",
+    "At a SuperCharge station, Athena charges from 10% to 80% in 15 minutes. At home, a full charge takes approximately 5 hours with the Regular battery and 7 hours with the Extended.",
 
   "athena.productPage.productHighlight3.imageAlt": "CBS Breaking System Athena",
   "athena.productPage.productHighlight3.title": "Designed for the City",
   "athena.productPage.productHighlight3.description":
-    "CBS disc brakes at both wheels split the braking force automatically, and the wide tires keep the bike steady when you have to stop in a hurry.",
+    "CBS disc brakes at both wheels distribute braking force automatically, while wide tires keep the motorcycle stable under sudden braking.",
 
   "athena.productPage.chargingOverview.imageAlt":
     "Green Athena with SuperCharge and Home Charging",
   "athena.productPage.chargingOverview.title": "Charging Made Effortless",
   "athena.productPage.chargingOverview.description":
-    "For daily use, just plug Athena in at home. When you are out and short on time, stop at a SuperCharge station in a Wedison showroom.",
+    "For everyday use, charge Athena at home. When you are out and time is limited, stop at a SuperCharge station in any Wedison showroom.",
 
   "athena.productPage.chargingHighlight1.imageAlt": "Athena with SuperCharge",
   "athena.productPage.chargingHighlight1.title": "15-Minute SuperCharge",
@@ -883,7 +887,7 @@ export const en = {
   "athena.productPage.chargingHighlight2.imageAlt": "Athena with Home Charger",
   "athena.productPage.chargingHighlight2.title": "Charging at Home",
   "athena.productPage.chargingHighlight2.description":
-    "Charge overnight, or whenever it suits you. The home charger is included, and it works silently.",
+    "Charge overnight, or at whatever hour suits you. The home charger is included and operates silently.",
 
   "athena.specs.engine.motorType": "Brushless DC Motor",
   "athena.specs.engine.motorPower": "2.5 kW",
@@ -918,7 +922,7 @@ export const en = {
   "bees.hero.title": "Affordable Mobility for",
   "bees.hero.titleHighlight": "Everyday Commuting",
   "bees.hero.description":
-    "The lightest and cheapest model Wedison makes. Suited to students, commuters, and anyone who wants low running costs.",
+    "The lightest and most affordable model in the Wedison range. Well suited to students, commuters, and anyone prioritizing low running costs.",
   "bees.hero.orderNow": "Order Now",
   "bees.hero.downloadBrochure": "Download Brochure",
 
@@ -926,16 +930,16 @@ export const en = {
   "bees.feature1.title": "Small Frame, Big Agility",
   "bees.feature1.subtitle": "Lightweight design for crowded streets",
   "bees.feature1.description":
-    "At 78.5 kg with a compact body, Bees threads through heavy traffic easily and takes up almost no room when parked.",
+    "At 78.5 kg with a compact body, Bees moves through heavy traffic with ease and requires minimal space when parked.",
 
   "bees.feature2.tag": "Budget-Friendly Ride",
   "bees.feature2.title": "Super Affordable & Subsidy Eligible",
   "bees.feature2.subtitle": "Lower cost, easy access",
   "bees.feature2.description":
-    "Bees qualifies for the government EV subsidy. Running costs are low, and a household socket is enough to charge it.",
+    "Bees qualifies for the government EV subsidy. Running costs are low, and a household socket is sufficient to charge it.",
 
   "bees.color.description":
-    "Pick your favorite Bees color and see it in action.",
+    "Select your preferred Bees color and view it here.",
 
   // ===
 
@@ -959,28 +963,28 @@ export const en = {
   "bees.productPage.productOverview.imageAlt": "Red Bees",
   "bees.productPage.productOverview.title": "Small on the Road, Big Underseat.",
   "bees.productPage.productOverview.description":
-    "The body is compact, but the equipment is not stripped back. Underseat storage is roomy, the display is digital LED, and there are disc brakes at both wheels. A household socket charges it.",
+    "The body is compact, yet the specification is not reduced. Underseat storage is generous, the display is digital LED, and disc brakes are fitted at both wheels. A household socket is all it needs.",
 
   "bees.productPage.productHighlight1.imageAlt": "Bees Underseat storage",
   "bees.productPage.productHighlight1.title": "XL Underseat Storage",
   "bees.productPage.productHighlight1.description":
-    "The underseat compartment holds a backpack, a load of groceries, or one full-face helmet. Generous for a bike this small.",
+    "The underseat compartment accommodates a backpack, a load of groceries, or a single full-face helmet. Generous for a motorcycle of this size.",
 
   "bees.productPage.productHighlight2.imageAlt": "Bees LED Display",
   "bees.productPage.productHighlight2.title": "Digital LED Display",
   "bees.productPage.productHighlight2.description":
-    "Speed, battery level, and distance all sit on a sharp LED display. One glance tells you everything.",
+    "Speed, battery level, and distance are presented on a crisp LED display, readable at a single glance.",
 
   "bees.productPage.productHighlight3.imageAlt": "Bees Disc Brakes",
   "bees.productPage.productHighlight3.title": "Confident Dual Disc Brakes",
   "bees.productPage.productHighlight3.description":
-    "Disc brakes front and rear give smooth, predictable stopping power, including on wet roads.",
+    "Disc brakes front and rear deliver smooth, predictable stopping power, including on wet surfaces.",
 
   "bees.productPage.chargingOverview.imageAlt":
     "Red Bees charging at a home outlet",
   "bees.productPage.chargingOverview.title": "A Household Socket Is Enough",
   "bees.productPage.chargingOverview.description":
-    "Bees charges from an ordinary outlet and fills up in about 4 hours. The charger is included, so there is nothing else to buy.",
+    "Bees charges from a standard outlet and reaches full capacity in approximately 4 hours. The charger is included, with nothing further to purchase.",
 
   // ===
 
@@ -1012,13 +1016,13 @@ export const en = {
   //SuperCharge
   "supercharge.landing.title": "Your Trip",
   "supercharge.landing.description":
-    "Wedison's own fast-charging network. Charge from 10% to 80% in 15 minutes.",
+    "The Wedison fast-charging network. Charge from 10% to 80% in 15 minutes.",
 
   "supercharge.hero.tag": "Fast Charging",
   "supercharge.hero.title": "Charge from 10% to 80% in",
   "supercharge.hero.titleHighlight": "Just 15 Minutes",
   "supercharge.hero.description":
-    "SuperCharge is the fast-charging network Wedison builds and runs itself, compatible with Athena, Victory, and EdPower.",
+    "SuperCharge is the fast-charging network Wedison builds and operates itself, compatible with Athena, Victory, and EdPower.",
   "supercharge.hero.ctaPrimary": "Find a Station",
   "supercharge.hero.ctaSecondary": "Learn the Tech",
 
@@ -1026,33 +1030,33 @@ export const en = {
   "supercharge.speed.lead": "Charging from 10% to 80% takes just",
   "supercharge.speed.unit": "minutes",
   "supercharge.speed.caption":
-    "About as long as queuing for coffee. After that, you are back on the road.",
+    "Approximately the length of a coffee break, after which you are back on the road.",
 
   "supercharge.network.kicker": "SuperCharge Network",
   "supercharge.network.title": "Growing across your cities",
   "supercharge.network.description":
-    "SuperCharge points keep spreading, from Jakarta out to other cities across Indonesia.",
+    "SuperCharge points continue to expand, from Jakarta to cities across Indonesia.",
   "supercharge.network.stationsLabel": "Charging points",
   "supercharge.network.citiesLabel": "Cities & counting",
 
   "supercharge.finalCta.title": "Ready to feel SuperCharge?",
   "supercharge.finalCta.description":
-    "Find the nearest station, book a test ride, or put a question to our team.",
+    "Find the nearest station, book a test ride, or submit a question to our team.",
   "supercharge.finalCta.ctaPrimary": "Find Locations",
   "supercharge.finalCta.ctaSecondary": "Explore the Bikes",
 
   "supercharge.locator.kicker": "SuperCharge Network",
   "supercharge.locator.title": "Find a SuperCharge Station",
   "supercharge.locator.subtitle":
-    "Find the nearest SuperCharge point, check its chargers, opening hours, and amenities, then navigate straight there.",
+    "Locate the nearest SuperCharge point, review its chargers, opening hours, and amenities, then navigate directly there.",
   "supercharge.locator.searchPlaceholder": "Search city or location name…",
   "supercharge.locator.nearMe": "Near me",
   "supercharge.locator.results": "locations",
   "supercharge.locator.listHeading": "SuperCharge locations list",
   "supercharge.locator.geoError":
-    "We could not find your location. Try again, or type your city in the search box.",
+    "Your location could not be determined. Please try again, or enter your city in the search field.",
   "supercharge.locator.geoDenied":
-    "Location access is blocked. Turn it on in your browser, or type your city in the search box.",
+    "Location access is blocked. Enable it in your browser, or enter your city in the search field.",
   "supercharge.locator.charger": "Nozzle(s)",
   "supercharge.locator.piles": "SuperCharge(s)",
   "supercharge.locator.amenities": "Amenities",
@@ -1077,27 +1081,28 @@ export const en = {
   "supercharge.locator.amenity.minimarket": "Minimarket",
   "supercharge.locator.empty.title": "No matching locations",
   "supercharge.locator.empty.desc":
-    "Try different keywords, or loosen the filters.",
+    "Try different keywords, or broaden the filters.",
 
   "supercharge.video.title": "How SuperCharge Works",
   "supercharge.video.description":
-    "From plugging in to riding away, here is what charging at a SuperCharge station looks like.",
+    "From connecting the charger to riding away, this is what charging at a SuperCharge station involves.",
 
   "supercharge.feature1.tag": "Fast & Reliable",
   "supercharge.feature1.title": "Fifteen Minutes, Not Five Hours",
-  "supercharge.feature1.subtitle": "Less waiting, battery still healthy",
+  "supercharge.feature1.subtitle":
+    "Less waiting, without compromising battery health",
   "supercharge.feature1.description":
-    "SuperCharge takes a battery from 10% to 80% in 15 minutes. The current is managed automatically, so the speed does not cost you battery life.",
+    "SuperCharge brings a battery from 10% to 80% in 15 minutes. The current is regulated automatically, so the speed comes at no cost to battery life.",
 
   "supercharge.feature2.tag": "In More Cities Every Month",
   "supercharge.feature2.title": "A Network That Keeps Growing",
-  "supercharge.feature2.subtitle": "Check the nearest point before you set off",
+  "supercharge.feature2.subtitle": "Check the nearest point before setting off",
   "supercharge.feature2.description":
-    "SuperCharge points sit in Wedison showrooms and partner locations, and more keep opening. You can see every one of them on the map.",
+    "SuperCharge points are located in Wedison showrooms and partner sites, with new locations opening regularly. All of them are listed on the map.",
 
   "supercharge.feature3.tag": "Safe and Certified",
   "supercharge.feature3.title": "Built to Last for Years",
-  "supercharge.feature3.subtitle": "Safety first, then speed",
+  "supercharge.feature3.subtitle": "Safety first, speed second",
   "supercharge.feature3.description":
     "Our DC stations are designed specifically for Wedison motorcycles, certified to IEC safety standards, and compliant with EU Directives.",
 
@@ -1106,7 +1111,7 @@ export const en = {
   "supercharge.app.teaser.title": "Find. Charge.",
   "supercharge.app.teaser.titleHighlight": "Ride.",
   "supercharge.app.teaser.description":
-    "Find the nearest SuperCharge station, start the session, and watch it progress from your phone.",
+    "Locate the nearest SuperCharge station, begin the session, and follow its progress from your phone.",
   "supercharge.app.teaser.feature.find": "Find Stations",
   "supercharge.app.teaser.feature.realtime": "Track Session",
   "supercharge.app.teaser.feature.charge": "Quick Charge",
@@ -1114,33 +1119,33 @@ export const en = {
   "supercharge.app.hero.title": "Everything About Charging,",
   "supercharge.app.hero.titleHighlight": "In One App",
   "supercharge.app.hero.description":
-    "Find a station, start charging, follow the progress, and manage your charging package. All in one place.",
+    "Locate a station, begin charging, follow the progress, and manage your charging package, all in one place.",
 
   "supercharge.app.feature1.icon": "MapPin",
   "supercharge.app.feature1.title": "Find Nearby Stations",
   "supercharge.app.feature1.subtitle": "Locate charging points around you",
   "supercharge.app.feature1.description":
-    "Every SuperCharge station appears on the map, with its address, opening hours, and how many chargers it has.",
+    "Every SuperCharge station appears on the map, with its address, opening hours, and number of chargers.",
   "supercharge.app.feature1.bullet1": "Interactive map with GPS navigation",
-  "supercharge.app.feature1.bullet2": "Sort by nearest first",
+  "supercharge.app.feature1.bullet2": "Sorted by proximity",
   "supercharge.app.feature1.bullet3": "Save favorite stations",
 
   "supercharge.app.feature2.icon": "Activity",
-  "supercharge.app.feature2.title": "Track Charging From Your Phone",
-  "supercharge.app.feature2.subtitle": "No need to wait beside the bike",
+  "supercharge.app.feature2.title": "Monitor Charging From Your Phone",
+  "supercharge.app.feature2.subtitle": "No need to wait beside the motorcycle",
   "supercharge.app.feature2.description":
-    "Watch the charge climb and see how much time is left, while you get on with something else.",
+    "Follow the charge level and remaining time while you attend to other things.",
   "supercharge.app.feature2.bullet1": "Battery percentage while charging",
   "supercharge.app.feature2.bullet2": "Estimated time remaining",
-  "supercharge.app.feature2.bullet3": "Notification when charging finishes",
+  "supercharge.app.feature2.bullet3": "Notification when charging is complete",
 
   "supercharge.app.feature3.icon": "Zap",
-  "supercharge.app.feature3.title": "Start With One Tap",
-  "supercharge.app.feature3.subtitle": "Plug in, tap, walk away",
+  "supercharge.app.feature3.title": "Start With a Single Tap",
+  "supercharge.app.feature3.subtitle": "Connect, confirm, and carry on",
   "supercharge.app.feature3.description":
-    "Plug in the connector, start the session in the app, and charging begins straight away.",
+    "Connect the cable, start the session in the app, and charging begins immediately.",
   "supercharge.app.feature3.bullet1": "One-tap charging start",
-  "supercharge.app.feature3.bullet2": "Pay with your charging package",
+  "supercharge.app.feature3.bullet2": "Payment via your charging package",
   "supercharge.app.feature3.bullet3": "Charging session history",
 
   "supercharge.app.stats.stations": "Stations",
@@ -1151,7 +1156,7 @@ export const en = {
   "supercharge.app.cta.title": "Ready to SuperCharge",
   "supercharge.app.cta.titleHighlight": "Your Ride?",
   "supercharge.app.cta.description":
-    "Download the app, then check the nearest station before you head out.",
+    "Download the app and check the nearest station before setting off.",
 
   //form title
   "form.title.placeholder": "Select a topic to discuss",
@@ -1182,8 +1187,8 @@ export const en = {
     "Thank you for reaching out to us. We will get back to you as soon as possible.",
   "form.sending.error.title": "Message Not Sent",
   "form.sending.error.description":
-    "Your message could not be sent. Please try again later, or reach us through another channel.",
-  "form.sending.sending": "Sending your message, please wait a moment.",
+    "Your message could not be sent. Please try again later, or contact us through another channel.",
+  "form.sending.sending": "Sending your message, please wait.",
   "form.agreePrivacy.description": (
     <>
       Allow PT Wedison to use the above information and contact me via email
@@ -1241,7 +1246,7 @@ export const en = {
     "SuperCharge: 10% to 80% in 15 minutes, or 10% to 95% in 20 minutes.\nHome charging: roughly 2 to 10 hours, depending on the adapter and battery size.",
   "faq.Battery.questions.2.question": "What type of battery does Wedison use?",
   "faq.Battery.questions.2.answer":
-    "Wedison uses a Lithium-ion (LFP) battery, the same chemistry family found in smartphones, laptops, and electric cars.\n\nWhat that gives you:\nA. High energy density: a lot of stored energy in a small, light pack.\nB. Heat tolerance: it works efficiently at temperatures up to 45 degrees Celsius.\nC. Low self-discharge: it holds its charge even when the bike sits unused for days.\nD. Long life: more than 5,000 charge cycles while keeping nearly all of its original capacity.\nE. Quick charging: 10% to 80% in 15 minutes at a SuperCharge station.",
+    "Wedison uses a Lithium-ion (LFP) battery, the same chemistry family found in smartphones, laptops, and electric cars.\n\nThe resulting benefits:\nA. High energy density: substantial stored energy in a small, light pack.\nB. Heat tolerance: it operates efficiently at temperatures up to 45 degrees Celsius.\nC. Low self-discharge: it retains its charge even when the motorcycle is left unused for days.\nD. Long life: more than 5,000 charge cycles while keeping nearly all of its original capacity.\nE. Quick charging: 10% to 80% in 15 minutes at a SuperCharge station.",
   "faq.Battery.questions.3.question":
     "How many battery options does Wedison sell?",
   "faq.Battery.questions.3.answer":
@@ -1270,9 +1275,9 @@ export const en = {
   "faq.Battery.questions.11.question":
     "How often should I charge if I rarely ride?",
   "faq.Battery.questions.11.answer":
-    "If the bike goes unused for more than a week, still charge it at least once a month.",
+    "If the motorcycle is left unused for more than a week, charge it at least once a month.",
   "faq.Battery.questions.12.question":
-    "What should I do if the bike sits unused for a long time?",
+    "What should be done if the motorcycle is left unused for an extended period?",
   "faq.Battery.questions.12.answer":
     "Switch off the MCB (circuit breaker), and keep charging the battery at least once a month to preserve its condition.",
 
@@ -1286,80 +1291,80 @@ export const en = {
   "faq.Charging.questions.2.question":
     "Can I use a third-party charging adapter?",
   "faq.Charging.questions.2.answer":
-    "Better not to. Stick to genuine Wedison chargers and parts to keep the battery in good shape.",
+    "We advise against it. Use genuine Wedison chargers and parts to keep the battery in good condition.",
   "faq.Charging.questions.3.question": "Can I charge at home?",
   "faq.Charging.questions.3.answer":
     "Yes. Every Wedison model has a port for the home charger.",
   "faq.Charging.questions.4.question": "Does fast charging damage the battery?",
   "faq.Charging.questions.4.answer":
-    "No. Wedison batteries are built for fast charging, and the current is managed automatically so cycle life stays long.",
+    "No. Wedison batteries are designed for fast charging, and the current is regulated automatically to preserve cycle life.",
   "faq.Charging.questions.5.question": "Is fast charging dangerous?",
   "faq.Charging.questions.5.answer":
     "No. Wedison fast charging does not shorten battery life, and it carries no risk of explosion.",
   "faq.Charging.questions.6.question": "Is overcharging dangerous?",
   "faq.Charging.questions.6.answer":
-    "Wedison batteries have a built-in management system.\nIf the battery gets too hot while charging, it cuts the power automatically.",
+    "Wedison batteries include a built-in management system.\nIf the battery temperature rises too high during charging, the system cuts the power automatically.",
   "faq.Charging.questions.7.question":
-    "Why does charging slow down near the top?",
+    "Why does charging slow down as the battery nears full?",
   "faq.Charging.questions.7.answer":
-    "That is deliberate. Charging runs fast up to about 95%, then slows to a controlled rate to protect the cells.\n\nYou still get back on the road quickly, and the battery lasts longer for it.",
+    "This is intentional. Charging proceeds rapidly to approximately 95%, then moves to a slower, controlled rate to protect the cells.\n\nYou return to the road quickly, and battery life is extended as a result.",
   "faq.Charging.questions.8.question":
     "How long does home charging take with a 600W charger?",
   "faq.Charging.questions.8.answer":
-    "It depends on the model and battery capacity.\nCharging time from 0 to 100% with a 600W adapter:\nRefer to Regular Charge Data",
+    "This depends on the model and battery capacity.\nCharging time from 0 to 100% with a 600W adapter:\nRefer to Regular Charge Data",
   "faq.Charging.questions.9.question":
     "How long does home charging take with a 1260W charger?",
   "faq.Charging.questions.9.answer":
-    "It depends on the model and battery capacity.\nCharging time from 0 to 100% with a 1260W adapter:\nBees: 3.5 hours (unchanged, Bees only takes a 600W charger)\nRefer to Regular Charge Data",
+    "This depends on the model and battery capacity.\nCharging time from 0 to 100% with a 1260W adapter:\nBees: 3.5 hours (unchanged, as Bees accepts only a 600W charger)\nRefer to Regular Charge Data",
   "faq.Charging.questions.10.question":
-    "What is the right order for charging at home?",
+    "What is the correct sequence for charging at home?",
   "faq.Charging.questions.10.answer":
-    "Connect the charger to the bike first, then plug it into the wall.\nWhen you are done, unplug it from the wall first, then disconnect it from the bike.",
+    "Connect the charger to the motorcycle first, then plug it into the socket.\nOnce charging is complete, disconnect from the socket first, then from the motorcycle.",
   "faq.Charging.questions.11.question": "Is charging at SuperCharge free?",
   "faq.Charging.questions.11.answer":
-    "No. Charging at SuperCharge runs on a package system, which you buy through the Wedison app.",
+    "No. Charging at SuperCharge operates on a package system, purchased through the Wedison app.",
 
   // Performance Questions
   "faq.Performance.questions.0.question":
     "What is the speed of the motorcycle?",
   "faq.Performance.questions.0.answer":
     "Depending on the model, top speed ranges from 55 km/h to 95 km/h.",
-  "faq.Performance.questions.1.question": "How much motor power is there?",
+  "faq.Performance.questions.1.question": "What is the motor power?",
   "faq.Performance.questions.1.answer":
-    "Motor power differs by model, from 1.2 kW up to 5 kW.",
+    "Motor power varies by model, from 1.2 kW up to 5 kW.",
   "faq.Performance.questions.2.question": "What is the range?",
   "faq.Performance.questions.2.answer":
-    "Depending on the model and battery you pick, range runs from 80 km to 160 km.",
+    "Depending on the model and battery selected, range extends from 80 km to 160 km.",
   "faq.Performance.questions.3.question":
-    "Is it safe to ride in rain or through puddles?",
+    "Is it safe to ride in rain or through standing water?",
   "faq.Performance.questions.3.answer":
-    "The motor, control unit, and battery are all rated IP67 and have passed water immersion testing.\nEven so, avoid deep floodwater and do not leave the bike submerged.",
-  "faq.Performance.questions.4.question": "Can it handle hills?",
+    "The motor, control unit, and battery are all rated IP67 and have passed water immersion testing.\nEven so, avoid deep floodwater and do not leave the motorcycle submerged.",
+  "faq.Performance.questions.4.question": "What gradient can it climb?",
   "faq.Performance.questions.4.answer":
-    "Yes, and the gradient it manages depends on the model:\nBees and EdPower: up to 12%\nAthena and Victory: up to 15%",
+    "Climbing ability varies by model:\nBees and EdPower: up to 12%\nAthena and Victory: up to 15%",
   "faq.Performance.questions.5.question": "Does the battery degrade over time?",
   "faq.Performance.questions.5.answer":
-    "Yes, as with every lithium-ion device. Capacity drops a little with each charge and discharge cycle.\nHow fast depends on cycle count, battery age, and operating temperature.\n\nThat is why every Wedison battery carries a 3-year warranty.",
+    "Yes, as with any lithium-ion device. Capacity declines slightly with each charge and discharge cycle.\nThe rate depends on cycle count, battery age, and operating temperature.\n\nFor that reason, every Wedison battery carries a 3-year warranty.",
 
   // Safety Questions
   "faq.Safety.questions.0.question": "Is the battery safe?",
   "faq.Safety.questions.0.answer":
-    "Wedison batteries have a built-in management system that watches temperature and charging current,\nwhich guards against overheating, overcharging, and fire risk.",
+    "Wedison batteries include a management system that monitors temperature and charging current,\nguarding against overheating, overcharging, and fire risk.",
   "faq.Safety.questions.1.question": "What braking system is fitted?",
   "faq.Safety.questions.1.answer":
-    "CBS (Combined Braking System), which splits braking force between the front and rear wheels automatically when you pull the lever:\nAthena, Victory, and EdPower\n\nFront and rear disc brakes:\nBees",
-  "faq.Safety.questions.2.question": "What kind of motor is used?",
+    "CBS (Combined Braking System), which distributes braking force between the front and rear wheels automatically when the brake lever is applied:\nAthena, Victory, and EdPower\n\nFront and rear disc brakes:\nBees",
+  "faq.Safety.questions.2.question": "What type of motor is used?",
   "faq.Safety.questions.2.answer":
-    "Every Wedison model uses a brushless DC motor (BLDC), known for efficiency, strong torque, and long service life.\n\nThere is one type:\nDC Brushless Rear Hub Motor, with speeds up to 95 km/h (Bees, Athena, Victory, EdPower).",
+    "Every Wedison model uses a brushless DC motor (BLDC), recognized for its efficiency, torque, and long service life.\n\nOne type is fitted:\nDC Brushless Rear Hub Motor, with speeds up to 95 km/h (Bees, Athena, Victory, EdPower).",
 
   // Servicing Questions
-  "faq.Servicing.questions.0.question": "Is there free servicing?",
+  "faq.Servicing.questions.0.question": "Is complimentary servicing included?",
   "faq.Servicing.questions.0.answer":
-    "Yes. Every Wedison motorcycle gets 3 free service visits at a Wedison workshop or an authorized partner workshop.\nThey are scheduled by distance: 1,000 km, 5,000 km, and 10,000 km.",
+    "Yes. Every Wedison motorcycle includes 3 complimentary service visits at a Wedison workshop or an authorized partner workshop.\nThese are scheduled by distance: 1,000 km, 5,000 km, and 10,000 km.",
   "faq.Servicing.questions.1.question":
-    "At what mileage are the free services?",
+    "At what mileage are the complimentary services scheduled?",
   "faq.Servicing.questions.1.answer": "At 1,000 km, 5,000 km, and 10,000 km.",
-  "faq.Servicing.questions.2.question": "Where can I get my bike serviced?",
+  "faq.Servicing.questions.2.question": "Where can the motorcycle be serviced?",
   "faq.Servicing.questions.2.answer":
     "At a Wedison workshop or the nearest authorized Wedison partner workshop.",
   "faq.Servicing.questions.3.question": "Are spare parts available?",
@@ -1372,27 +1377,28 @@ export const en = {
   "faq.Servicing.questions.5.answer":
     "Yes, the motorcycle carries a 2-year warranty.",
   "faq.Servicing.questions.6.question":
-    "What does it cost to repair the motor, dynamo, or other parts?",
+    "What does it cost to repair the motor, dynamo, or other components?",
   "faq.Servicing.questions.6.answer":
-    "Costs vary with the part being replaced and how bad the damage is.\n\nAsk your nearest authorized workshop for an estimate.",
+    "Costs vary according to the component being replaced and the extent of the damage.\n\nContact your nearest authorized workshop for an estimate.",
   "faq.Servicing.questions.7.question":
-    "How should I look after a Wedison motorcycle?",
+    "How should a Wedison motorcycle be maintained?",
   "faq.Servicing.questions.7.answer":
-    "Regular servicing and sensible riding will extend the life of the bike. You do not need to charge it every day:\n- Charge as needed, and try to keep the battery between 20% and 80%.\n- If the bike sits unused, still charge it at least once a month.\n- Charge at SuperCharge stations and service at authorized workshops to keep the battery in good condition.",
-  "faq.Servicing.questions.8.question": "Can I modify the bike?",
+    "Regular servicing and considered riding will extend the life of the motorcycle. Daily charging is not necessary:\n- Charge as required, and keep the battery between 20% and 80% where possible.\n- If the motorcycle is left unused, charge it at least once a month.\n- Charge at SuperCharge stations and service at authorized workshops to maintain battery condition.",
+  "faq.Servicing.questions.8.question": "Can the motorcycle be modified?",
   "faq.Servicing.questions.8.answer":
-    "The Wedison warranty only covers the bike in its original configuration, design, and specification.\nDamage caused by misuse, tampering, negligence, or modification is not covered.",
+    "The Wedison warranty covers the motorcycle only in its original configuration, design, and specification.\nDamage caused by misuse, tampering, negligence, or modification is not covered.",
   "faq.Servicing.questions.9.question": "What voids the warranty?",
   "faq.Servicing.questions.9.answer":
-    "Damage caused by non-genuine spare parts, or by modifications made without Wedison approval.\n\nDamage from events outside anyone's control is also excluded, for example earthquakes, typhoons, floods, chemical exposure, or corrosion.",
+    "Damage caused by non-genuine spare parts, or by modifications made without Wedison approval.\n\nDamage arising from events beyond reasonable control is also excluded, for example earthquakes, typhoons, floods, chemical exposure, or corrosion.",
   "faq.Servicing.questions.10.question": "What are the limits of the warranty?",
   "faq.Servicing.questions.10.answer":
-    "No component carries a lifetime warranty.\nParts replaced under warranty are covered only for what remains of the original warranty period.\nFor parts bought or replaced outside warranty service, the warranty starts from the date of purchase or replacement.",
+    "No component carries a lifetime warranty.\nParts replaced under warranty are covered only for the remainder of the original warranty period.\nFor parts purchased or replaced outside warranty service, the warranty begins from the date of purchase or replacement.",
 
   // Smart Features Questions
-  "faq.SmartFeatures.questions.0.question": "What smart features are there?",
+  "faq.SmartFeatures.questions.0.question":
+    "Which smart features are available?",
   "faq.SmartFeatures.questions.0.answer":
-    "Through the Wedison app, selected models can be switched on and off from your phone over Bluetooth.\nMore features are coming in later app updates.",
+    "Through the Wedison app, selected models can be switched on and off from your phone over Bluetooth.\nFurther features will follow in subsequent app updates.",
 
   // Tires Questions
   "faq.Tires.questions.0.question": "What size are the tires?",
@@ -1403,7 +1409,7 @@ export const en = {
   "ojol.hero.title": "Wedison With",
   "ojol.hero.titleHighlight": "Ride-Hailing",
   "ojol.hero.description":
-    "Electric motorcycles for ride-hailing drivers. Running costs drop, and the fuel queue disappears.",
+    "Electric motorcycles for ride-hailing drivers. Running costs fall, and fuel queues are no longer part of the day.",
   "ojol.hero.startFrom": "Starting from",
   "ojol.hero.perDay": "/Day",
   "ojol.hero.dailyRental": "DAILY RENTAL",
@@ -1412,16 +1418,16 @@ export const en = {
 
   "ojol.benefits.title": "More Trips, Lower Costs",
   "ojol.benefits.description":
-    "Tired of queuing for fuel and watching petrol prices climb? An electric bike costs far less to run, needs less maintenance, and gives you back the time you used to spend at the pump.",
+    "Fuel queues and rising petrol prices take a real toll on daily earnings. An electric motorcycle costs considerably less to run, requires less maintenance, and returns the time otherwise spent at the pump.",
 
   "ojol.campaign.heading": "Hot Campaign",
   "ojol.btn.register": "Register Now",
   "ojol.btn.detail": "See Details",
 
   "ojol.campaign.milik.title": "Rent-to-Own",
-  "ojol.campaign.milik.tagline": "Ride While You Pay, Then Keep It",
+  "ojol.campaign.milik.tagline": "Ride While You Pay, Then Own It",
   "ojol.campaign.milik.description":
-    "Rent for 3.5 years (42 months) with an ownership option. Once the contract ends, the motorcycle is yours.",
+    "A 3.5-year (42-month) rental with an ownership option. Once the contract concludes, the motorcycle becomes yours.",
   "ojol.campaign.milik.benefit.0":
     "1x Free regular charging adapter (worth Rp 1,000,000)",
   "ojol.campaign.milik.benefit.1":
@@ -1438,7 +1444,7 @@ export const en = {
   "ojol.campaign.milik.term.2":
     "After the 42-month contract ends, ownership of the motorcycle is transferred to the rider",
   "ojol.campaign.milik.term.3":
-    "Savings go toward insurance, service, spare parts, and BPKB (vehicle ownership document) costs. Whatever is left goes to the rider at the end of the contract",
+    "Savings are applied to insurance, servicing, spare parts, and BPKB (vehicle ownership document) costs. Any remaining balance is transferred to the rider at the end of the contract",
   "ojol.campaign.milik.term.4":
     "The down payment is non-refundable once the rider is declared eligible",
   "ojol.campaign.milik.term.5":
@@ -1455,9 +1461,9 @@ export const en = {
   "ojol.campaign.milik.scheme.3.value": "Rp 600,000 - Rp 800,000",
 
   "ojol.campaign.harian.title": "Daily Rental",
-  "ojol.campaign.harian.tagline": "Pay Daily, No Installments Hanging Over You",
+  "ojol.campaign.harian.tagline": "Pay Daily, Without Installments",
   "ojol.campaign.harian.description":
-    "Daily rental on a 3-year contract. A good fit if you want to start riding without taking on installments.",
+    "Daily rental on a 3-year contract. Suited to riders who want to begin earning without committing to installments.",
   "ojol.campaign.harian.benefit.0": "1x Free regular charging adapter",
   "ojol.campaign.harian.benefit.1":
     "1x Free front and rear tire replacement (worth Rp 385,000)",
@@ -1499,17 +1505,17 @@ export const en = {
 
   "ojol.supercharge.badge": "10% to 80% in 15 Minutes",
   "ojol.supercharge.descriptionPart1":
-    "For a driver, downtime is expensive. At SuperCharge it takes ",
+    "For a driver, downtime is costly. At SuperCharge it takes ",
   "ojol.supercharge.descriptionBold": "15 minutes",
   "ojol.supercharge.descriptionPart2":
-    " to bring the battery from 10% to 80%, then you are back out. One charge covers up to 160 km*, which means more time on the road and more orders.",
+    " to bring the battery from 10% to 80% before you return to the road. A single charge covers up to 160 km*, which means more hours available and more orders completed.",
   "ojol.supercharge.disclaimer":
     "*Range of 160 km applies to EdPower with the Extended battery",
   "ojol.supercharge.cta": "Learn More",
 
   "ojol.models.title": "Pick the Right Motorcycle for You",
   "ojol.models.subtitle":
-    "Nimble for tight alleys, or strong for long distances? Match it to your area and how you ride.",
+    "Nimble for narrow alleys, or capable over long distances. Choose according to your area and how you ride.",
   "ojol.models.spec.range": "Range",
   "ojol.models.spec.maxSpeed": "Top Speed",
   "ojol.models.spec.battery": "Battery",
@@ -1531,13 +1537,13 @@ export const en = {
   "ojol.cta.headline.1": "Ready to Earn More",
   "ojol.cta.headline.2": "with Wedison?",
   "ojol.cta.description":
-    "Daily rental from 50K, free SuperCharge, and light installment options. Register now and our team will walk you through it.",
+    "Daily rental from 50K, complimentary SuperCharge, and manageable installment options. Register now and our team will guide you through the process.",
   "ojol.cta.benefit.1": "Daily Rental from 50K",
   "ojol.cta.benefit.2": "Free SuperCharge",
   "ojol.cta.benefit.3": "Easy Installments",
   "ojol.cta.benefit.4": "Priority Service",
   "ojol.cta.button": "Contact Wedison Sales",
-  "ojol.cta.trust": "Quick replies, free consultation",
+  "ojol.cta.trust": "Prompt response, no consultation fee",
 
   // Language
   language: "English",
