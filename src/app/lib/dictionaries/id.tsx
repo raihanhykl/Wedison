@@ -74,6 +74,36 @@ export const id = {
   "footer.faq": "FAQ",
 
   // Navbar
+  "nav.primary": "Navigasi utama",
+  "nav.openMenu": "Buka menu",
+  "nav.closeMenu": "Tutup menu",
+  "nav.skipToContent": "Lewati ke konten",
+  "nav.cta.testRide": "Test Ride",
+  "nav.menu.models": "Motor",
+  "nav.menu.services": "Layanan",
+  "nav.menu.company": "Perusahaan",
+  "nav.models.hint": "Empat model, satu jaringan pengisian yang sama.",
+  "nav.models.compare": "Bandingkan semua model",
+  "nav.model.bees.tagline": "Ringkas dan lincah",
+  "nav.model.athena.tagline": "Premium dan nyaman",
+  "nav.model.victory.tagline": "Gaya dan tenaga",
+  "nav.model.edpower.tagline": "Tangguh, jarak jauh",
+  "nav.superCharge.network": "Jaringan SuperCharge",
+  "nav.superCharge.network.description":
+    "Isi daya 15 menit di jaringan yang dibangun dan dikelola Wedison sendiri.",
+  "nav.superCharge.map": "Peta Lokasi",
+  "nav.superCharge.map.description":
+    "Cari titik terdekat lengkap dengan jam buka dan fasilitasnya.",
+  "nav.feature.superCharge.alt":
+    "Motor Wedison mengisi daya di stasiun SuperCharge pada malam hari",
+  "nav.feature.superCharge.caption":
+    "Titik SuperCharge di Jabodetabek, Bandung, dan Bali.",
+  "nav.feature.services.alt": "Meja resepsionis di Experience Center Wedison",
+  "nav.feature.services.caption":
+    "Semua yang kamu butuhkan sebelum dan sesudah membawa pulang motornya.",
+  "nav.feature.company.alt": "Fasilitas Wedison dilihat dari udara",
+  "nav.feature.company.caption":
+    "Perusahaannya, orang-orangnya, dan kabar terbarunya.",
   "nav.products": "Produk",
   "nav.discover": "Jelajahi",
   "nav.discover.leftCard.title": "Jelajahi Wedison",

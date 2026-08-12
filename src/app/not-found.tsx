@@ -17,9 +17,9 @@ import { Home, ArrowLeft, Search } from "lucide-react";
 const translations = {
   en: {
     title: "Page Not Found",
-    description: "We could not find the page you were looking for.",
+    description: "The page you requested could not be found.",
     suggestion:
-      "It may have been moved or removed, or the address might have a typo.",
+      "It may have been moved or removed, or the address may contain an error.",
     homeButton: "Back to Home",
     exploreButton: "Explore Our Models",
   },

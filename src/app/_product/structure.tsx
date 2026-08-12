@@ -137,7 +137,7 @@ export default function ProductPageComponent({ motorType }: Props) {
       </section>
 
       {/* ============ STICKY SUB-NAV ============ */}
-      <div className="sticky top-16 z-30 border-b border-border bg-background/95">
+      <div className="nav-sticky sticky z-30 border-b border-border bg-background/95 backdrop-blur-sm">
         <div className="main-container flex items-center justify-between gap-4 py-3">
           <span className="font-display text-lg font-bold tracking-tight text-foreground">
             {product.hero.title}

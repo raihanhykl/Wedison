@@ -273,7 +273,7 @@ export const seoContent: Record<string, PageSEO> = {
       title:
         "SuperCharge - Fast Charging Stations for Electric Motorcycles | Wedison",
       description:
-        "SuperCharge is Wedison's fast-charging network for electric motorcycles, taking a battery from 10% to 80% in 15 minutes. See the locations and how it works.",
+        "SuperCharge is the Wedison fast-charging network for electric motorcycles, bringing a battery from 10% to 80% in 15 minutes. View the locations and how it works.",
       keywords: [
         "wedison",
         "supercharge",
@@ -306,7 +306,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "SuperCharge Locations - Charging Station Map | Wedison",
       description:
-        "Find your nearest Wedison SuperCharge station on an interactive map. See the number of chargers, opening hours, and amenities at every charging point.",
+        "Locate your nearest Wedison SuperCharge station on an interactive map. Review the number of chargers, opening hours, and amenities at every charging point.",
       keywords: [
         "wedison",
         "supercharge",
@@ -402,7 +402,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "FAQ - Common Electric Motorcycle Questions | Wedison",
       description:
-        "Answers to common questions about Wedison electric motorcycles, covering charging, maintenance, warranty, and buying.",
+        "Answers to common questions about Wedison electric motorcycles, covering charging, maintenance, warranty, and purchasing.",
       keywords: [
         "wedison",
         "electric motorcycle faq",
@@ -463,7 +463,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Electric Motorcycle Rental for Ride-Hailing | Wedison",
       description:
-        "Wedison electric motorcycle rental for ride-hailing drivers. Lower running costs, no fuel queues, and backed by the SuperCharge network.",
+        "Wedison electric motorcycle rental for ride-hailing drivers. Lower running costs, no fuel queues, and support from the SuperCharge network.",
       keywords: [
         "wedison",
         "electric motorcycle rental",

@@ -43,7 +43,11 @@ export default async function LocaleLayout({
         <LanguageProvider locale={locale} dictionary={dictionary}>
           <Navbar />
           <LazyMotionProvider>
-            <div>{children}</div>
+            {/* Target skip-link di navbar. Sengaja <div>, bukan <main>: sebagian
+                halaman sudah punya <main> sendiri dan <main> bersarang itu invalid. */}
+            <div id="konten" tabIndex={-1}>
+              {children}
+            </div>
           </LazyMotionProvider>
           <Footer />
         </LanguageProvider>

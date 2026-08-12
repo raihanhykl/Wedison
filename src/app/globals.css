@@ -197,6 +197,227 @@
   .hero-shrink[data-shrunk="true"] .hero-shrink-inner {
     border-radius: 1.75rem;
   }
+
+  /* =======================================================================
+     NAVBAR — tone system + morphing megamenu   (src/components/nav/*)
+     One attribute on <header data-tone> drives EVERY colour inside, so no
+     component branches on tone in JS and every change transitions for free.
+       data-tone=bone -> floating over dark hero imagery
+       data-tone=ink  -> over Snow / white panel / light page
+     ======================================================================= */
+  /* Metrik navbar dipublikasikan di :root, bukan hanya di header, supaya elemen
+     sticky lain (sub-nav halaman produk, header tabel compare) bisa menempel
+     persis di bawah navbar DAN ikut naik saat navbar menyembunyikan diri.
+     Atribut `data-nav-*` ditulis ke <html> oleh komponen Navbar. */
+  :root {
+    --nav-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --nav-h: 4rem;
+    --nav-offset: var(--nav-h);
+  }
+  [data-nav-condensed="true"] { --nav-h: 3.5rem; }
+  [data-nav-hidden="true"] { --nav-offset: 0px; }
+  @media (min-width: 768px) {
+    :root { --nav-h: 5rem; }
+    [data-nav-condensed="true"] { --nav-h: 4rem; }
+  }
+
+  /* Dipasangkan dengan `sticky` (atau `sm:sticky`) milik Tailwind: menempel tepat
+     di bawah navbar dan ikut naik saat navbar menyembunyikan diri. `top` diabaikan
+     saat elemennya belum sticky, jadi aman dipakai bersama varian breakpoint. */
+  .nav-sticky {
+    top: var(--nav-offset);
+    transition: top 460ms var(--nav-ease);
+  }
+
+  .nav-root {
+    --nav-ink: var(--forest-foreground);
+    --nav-ink-dim: color-mix(in oklab, var(--forest-foreground) 72%, transparent);
+    --nav-hover: color-mix(in oklab, var(--forest-foreground) 15%, transparent);
+    --nav-rule: color-mix(in oklab, var(--forest-foreground) 26%, transparent);
+    --nav-mark: var(--forest-foreground);
+    --nav-cta-bg: var(--forest-foreground);
+    --nav-cta-fg: var(--forest-deep);
+    --nav-cta-hover: oklch(1 0 0);
+
+    transform: translate3d(0, 0, 0);
+    transition: transform 420ms var(--nav-ease);
+  }
+  .nav-root[data-tone="ink"] {
+    --nav-ink: var(--foreground);
+    --nav-ink-dim: var(--muted-foreground);
+    --nav-hover: var(--accent);
+    --nav-rule: var(--border);
+    --nav-mark: var(--primary);
+    --nav-cta-bg: var(--primary);
+    --nav-cta-fg: var(--primary-foreground);
+    --nav-cta-hover: var(--primary-hover);
+  }
+  /* Auto-hide on scroll-down: the only property animated is transform. */
+  .nav-root[data-hidden="true"] {
+    transform: translate3d(0, -101%, 0);
+  }
+
+  .nav-bar {
+    height: var(--nav-h);
+    transition: height 460ms var(--nav-ease);
+  }
+  /* Background plate. Kept as its own layer so the bar can cross-fade from
+     fully transparent to solid without re-painting the text on top of it. */
+  .nav-scrim {
+    opacity: 0;
+    transition: opacity 340ms var(--nav-ease);
+  }
+  .nav-root[data-surface="solid"] .nav-scrim { opacity: 1; }
+
+  .nav-ink { color: var(--nav-ink); transition: color 340ms var(--nav-ease); }
+  .nav-ink-dim { color: var(--nav-ink-dim); transition: color 340ms var(--nav-ease); }
+  .nav-rule {
+    border-color: var(--nav-rule);
+    transition: border-color 340ms var(--nav-ease);
+  }
+  .nav-seg-plate {
+    background-color: var(--nav-hover);
+    transition:
+      transform 380ms var(--nav-ease),
+      background-color 340ms var(--nav-ease);
+  }
+  .nav-cta {
+    background-color: var(--nav-cta-bg);
+    color: var(--nav-cta-fg);
+    transition:
+      background-color 340ms var(--nav-ease),
+      color 340ms var(--nav-ease),
+      transform 200ms var(--nav-ease);
+  }
+  .nav-cta:hover {
+    background-color: var(--nav-cta-hover);
+    transform: translateY(-1px);
+  }
+  .nav-cta:active { transform: translateY(0); }
+
+  /* Sliding hover/open chip behind the desktop nav labels. */
+  .nav-marker {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2.25rem;
+    margin-top: -1.125rem;
+    width: var(--marker-w, 0px);
+    border-radius: calc(var(--radius) - 2px);
+    background-color: var(--nav-hover);
+    transform: translate3d(var(--marker-x, 0px), 0, 0);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 420ms var(--nav-ease),
+      width 420ms var(--nav-ease),
+      background-color 340ms var(--nav-ease),
+      opacity 180ms linear;
+  }
+  .nav-marker[data-on="true"] { opacity: 1; }
+  /* First paint of the chip must not slide in from x=0. */
+  .nav-marker[data-instant="true"] { transition: none; }
+
+  /* 2px rule under the top-level item matching the current route. */
+  .nav-current::after {
+    content: "";
+    position: absolute;
+    left: 0.875rem;
+    right: 0.875rem;
+    bottom: -0.4rem;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--nav-mark);
+    transition: background-color 340ms var(--nav-ease);
+  }
+
+  /* ---- Morphing megamenu ------------------------------------------------
+     Height is the only box property that animates, and it animates on a
+     fixed-position card, so the document never reflows. Panel bodies are
+     absolutely positioned at their natural height and merely clipped, so
+     nothing inside relayouts frame by frame either. */
+  .nav-panel {
+    height: var(--panel-h, 0px);
+    opacity: 0;
+    transform: translateY(-6px) scale(0.99);
+    transform-origin: top center;
+    overflow: hidden;
+    pointer-events: none;
+    transition:
+      height 420ms var(--nav-ease),
+      opacity 190ms var(--nav-ease),
+      transform 280ms var(--nav-ease);
+  }
+  .nav-panel[data-open="true"] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .nav-panel-body {
+    position: absolute;
+    inset: 0 0 auto 0;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition:
+      opacity 200ms var(--nav-ease),
+      transform 320ms var(--nav-ease);
+  }
+  .nav-panel-body[data-active="true"] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: 60ms;
+  }
+
+  /* ---- Mobile sheet ----------------------------------------------------- */
+  /* `.nav-root` dipasangi transform (untuk auto-hide), jadi ia menjadi containing
+     block bagi anak `position: fixed`. Karena itu tinggi sheet dihitung eksplisit,
+     bukan lewat `bottom: 0` yang akan mengacu ke tinggi bar. */
+  .nav-sheet {
+    top: var(--nav-h);
+    height: calc(100vh - var(--nav-h));
+    height: calc(100dvh - var(--nav-h));
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-1rem);
+    transition:
+      opacity 260ms var(--nav-ease),
+      transform 420ms var(--nav-ease),
+      visibility 0s linear 420ms;
+  }
+  .nav-sheet[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .nav-stagger > * {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 360ms var(--nav-ease),
+      transform 480ms var(--nav-ease);
+  }
+  .nav-sheet[data-open="true"] .nav-stagger > * {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--i, 0) * 45ms + 80ms);
+  }
+  .nav-acc {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 380ms var(--nav-ease);
+  }
+  .nav-acc[data-open="true"] { grid-template-rows: 1fr; }
+  .nav-acc > * { overflow: hidden; min-height: 0; }
+
+  .nav-burger-line {
+    transition:
+      transform 420ms var(--nav-ease),
+      background-color 340ms var(--nav-ease);
+    transform-origin: center;
+  }
 }
 
 @layer utilities {
