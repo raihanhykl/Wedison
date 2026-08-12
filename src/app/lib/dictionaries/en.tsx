@@ -74,6 +74,36 @@ export const en = {
   "footer.faq": "FAQ",
 
   // Navbar
+  "nav.primary": "Primary navigation",
+  "nav.openMenu": "Open menu",
+  "nav.closeMenu": "Close menu",
+  "nav.skipToContent": "Skip to content",
+  "nav.cta.testRide": "Test Ride",
+  "nav.menu.models": "Motorcycles",
+  "nav.menu.services": "Services",
+  "nav.menu.company": "Company",
+  "nav.models.hint": "Four models, one shared charging network.",
+  "nav.models.compare": "Compare all models",
+  "nav.model.bees.tagline": "Compact and agile",
+  "nav.model.athena.tagline": "Premium and comfortable",
+  "nav.model.victory.tagline": "Style and power",
+  "nav.model.edpower.tagline": "Tough, long range",
+  "nav.superCharge.network": "SuperCharge Network",
+  "nav.superCharge.network.description":
+    "A 15-minute charge on a network Wedison builds and runs itself.",
+  "nav.superCharge.map": "Location Map",
+  "nav.superCharge.map.description":
+    "Find the nearest point, with opening hours and amenities.",
+  "nav.feature.superCharge.alt":
+    "A Wedison motorcycle charging at a SuperCharge station at night",
+  "nav.feature.superCharge.caption":
+    "SuperCharge points across Greater Jakarta, Bandung, and Bali.",
+  "nav.feature.services.alt": "The reception desk at a Wedison Experience Center",
+  "nav.feature.services.caption":
+    "Everything you need before and after you take one home.",
+  "nav.feature.company.alt": "The Wedison facility seen from above",
+  "nav.feature.company.caption":
+    "The company, the people, and the latest news.",
   "nav.products": "Products",
   "nav.discover": "Discover",
   "nav.discover.leftCard.title": "Discover Wedison",

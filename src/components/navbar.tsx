@@ -1,640 +1,374 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/app/lib/language-context";
 import { stripLocale } from "@/app/lib/locale";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import NavbarProduct from "./navbar-product";
-import LanguageToggle2 from "./language-toggle2";
-import NavbarDropdown from "./navbar-dropdown";
+import LanguageSwitch from "./nav/language-switch";
+import NavSheet from "./nav/nav-sheet";
+import { NavPanelBody } from "./nav/nav-panels";
+import { activeNavKey, buildNav } from "./nav/nav-config";
+import { useNavChrome } from "./nav/use-nav-chrome";
+
+const CTA_HREF = "/showroom/";
+const OPEN_DELAY = 90; // ms — hover-intent, biar tak "meletup" saat kursor lewat
+const CLOSE_DELAY = 190; // ms — masa tenggang menyeberang ke panel
 
 export default function Navbar() {
-  const { t } = useLanguage();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const route = usePathname();
-  const [openProduct, setOpenProduct] = useState(false);
-  const [openCorporate, setOpenCorporate] = useState(false);
-  const [openDiscover, setOpenDiscover] = useState(false);
-  // const [tone, setTone] = useState("");
-  // const [bgTone, setBgTone] = useState("");
-  // const [bgAccent, setBgAccent] = useState("");
-  const [whitePage, setWhitePage] = useState(false);
-  const productRef = useRef<HTMLDivElement>(null);
-  const productOpenerRef = useRef<HTMLButtonElement>(null);
-  const discoverRef = useRef<HTMLDivElement>(null);
-  const discoverOpenerRef = useRef<HTMLButtonElement>(null);
-  const corporateRef = useRef<HTMLDivElement>(null);
-  const corporateOpenerRef = useRef<HTMLButtonElement>(null);
+  const { t, language } = useLanguage();
+  const pathname = usePathname();
+  const path = stripLocale(pathname);
+  const base = `/${language}`;
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node;
+  const items = useMemo(() => buildNav(t), [t]);
+  const activeKey = useMemo(() => activeNavKey(items, path), [items, path]);
 
-      if (
-        productRef.current &&
-        !productRef.current.contains(target) &&
-        productOpenerRef.current &&
-        !productOpenerRef.current.contains(target)
-      ) {
-        setOpenProduct(false);
-      }
-      if (
-        discoverRef.current &&
-        !discoverRef.current.contains(target) &&
-        discoverOpenerRef.current &&
-        !discoverOpenerRef.current.contains(target)
-      ) {
-        setOpenDiscover(false);
-      }
-      if (
-        corporateRef.current &&
-        !corporateRef.current.contains(target) &&
-        corporateOpenerRef.current &&
-        !corporateOpenerRef.current.contains(target)
-      ) {
-        setOpenCorporate(false);
-      }
-    };
+  const [openKey, setOpenKey] = useState<string | null>(null);
+  const [hoverKey, setHoverKey] = useState<string | null>(null);
+  const [mounted, setMounted] = useState<string[]>([]);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const { condensed, hidden, lightSurface } = useNavChrome(pathname);
 
-    if (openProduct || openCorporate || openDiscover) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("touchstart", handleClickOutside);
-    }
+  const solid = condensed || openKey !== null || sheetOpen;
+  const tone = solid || lightSurface ? "ink" : "bone";
+  const markerKey = hoverKey ?? openKey;
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, [openProduct, openCorporate, openDiscover]);
-
-  useEffect(() => {
-    const path = stripLocale(route); // toleran prefix /id|/en
-    if (
-      path === "/corporate/about/" ||
-      path === "/corporate/contact/" ||
-      path === "/showroom/" ||
-      path === "/super-charge/lokasi/" ||
-      (path.startsWith("/media-center/") && path !== "/media-center/")
-    ) {
-      setWhitePage(true);
-    } else {
-      setWhitePage(false);
-    }
-    setOpenProduct(false);
-    setOpenCorporate(false);
-    setOpenDiscover(false);
-    setMobileMenuOpen(false);
-  }, [route]);
-
-  const navItems = [
-    {
-      name: t("nav.products"),
-      href: "#",
-      subMenu: [
-        { name: "Bees", href: "/bees/", image: "/navbar-product/bees.webp" },
-        {
-          name: "Athena",
-          href: "/athena/",
-          image: "/navbar-product/athena.webp",
-        },
-        {
-          name: "Victory",
-          href: "/victory/",
-          image: "/navbar-product/victory.webp",
-        },
-        // { name: "Dash", href: "/dash" },
-        {
-          name: "EdPower",
-          href: "/edpower/",
-          image: "/navbar-product/edpower.webp",
-        },
-      ],
-    },
-    {
-      name: t("nav.discover"),
-      href: "#",
-      subMenu: [
-        {
-          name: "Experience Center",
-          href: "/showroom/",
-          image: "",
-        },
-        {
-          name: "Media Center",
-          href: "/media-center/",
-          image: "",
-        },
-        {
-          name: "FAQ",
-          href: "/faq/",
-          image: "",
-        },
-        {
-          name: "Wedison Ojol",
-          href: "/ojol/",
-          image: "",
-        },
-      ],
-    },
-    {
-      name: t("nav.superCharge"),
-      href: "/super-charge/",
-    },
-    {
-      name: t("nav.corporate"),
-      href: "#",
-      subMenu: [
-        {
-          name: t("nav.aboutUs"),
-          href: "/corporate/about/",
-          image: "",
-        },
-        { name: t("nav.contactUs"), href: "/corporate/contact/", image: "" },
-        { name: t("nav.careers"), href: "/career/", image: "" },
-      ],
-    },
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrolled, route]);
-
-  const toggleOpen = (state: string) => {
-    if (state === "openProduct") {
-      if (openCorporate || openDiscover) {
-        setOpenCorporate(false);
-        setOpenDiscover(false);
-      }
-      setOpenProduct(!openProduct);
-    } else if (state === "openCorporate") {
-      if (openProduct || openDiscover) {
-        setOpenProduct(false);
-        setOpenDiscover(false);
-      }
-      setOpenCorporate(!openCorporate);
-    } else {
-      if (openProduct || openCorporate) {
-        setOpenProduct(false);
-        setOpenCorporate(false);
-      }
-      setOpenDiscover(!openDiscover);
-    }
+  // ---- buka/tutup panel dengan hover-intent -------------------------------
+  const timer = useRef<number | undefined>(undefined);
+  const clearTimer = () => {
+    if (timer.current) window.clearTimeout(timer.current);
+    timer.current = undefined;
   };
 
-  const toggleDropdown = (name: string) => {
-    setActiveDropdown(activeDropdown === name ? null : name);
+  const openPanel = useCallback((key: string, immediate = false) => {
+    clearTimer();
+    setMounted((prev) => (prev.includes(key) ? prev : [...prev, key]));
+    if (immediate) {
+      setOpenKey(key);
+      return;
+    }
+    timer.current = window.setTimeout(() => setOpenKey(key), OPEN_DELAY);
+  }, []);
+
+  const closePanel = useCallback((immediate = false) => {
+    clearTimer();
+    if (immediate) {
+      setOpenKey(null);
+      return;
+    }
+    timer.current = window.setTimeout(() => setOpenKey(null), CLOSE_DELAY);
+  }, []);
+
+  useEffect(() => clearTimer, []);
+
+  // Pindah halaman -> semua tertutup.
+  useEffect(() => {
+    clearTimer();
+    setOpenKey(null);
+    setHoverKey(null);
+    setSheetOpen(false);
+  }, [pathname]);
+
+  // Escape menutup dan mengembalikan fokus ke pemicunya.
+  useEffect(() => {
+    if (!openKey && !sheetOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (openKey) {
+        const trigger = navRef.current?.querySelector<HTMLElement>(
+          `[data-nav-key="${openKey}"]`,
+        );
+        closePanel(true);
+        trigger?.focus();
+      }
+      setSheetOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [openKey, sheetOpen, closePanel]);
+
+  // Kunci scroll halaman selama sheet terbuka.
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [sheetOpen]);
+
+  // ---- chip penanda yang meluncur -----------------------------------------
+  const navRef = useRef<HTMLDivElement>(null);
+  const [marker, setMarker] = useState<{ x: number; w: number } | null>(null);
+  const [primed, setPrimed] = useState(false);
+
+  const measureMarker = useCallback((key: string | null) => {
+    if (!key || !navRef.current) return;
+    const el = navRef.current.querySelector<HTMLElement>(`[data-nav-key="${key}"]`);
+    if (el) setMarker({ x: el.offsetLeft, w: el.offsetWidth });
+  }, []);
+
+  useLayoutEffect(() => {
+    measureMarker(markerKey);
+  }, [markerKey, measureMarker, language]);
+
+  useEffect(() => {
+    if (!marker || primed) return;
+    // Kemunculan pertama harus langsung di tempat, bukan meluncur dari x=0.
+    const frame = requestAnimationFrame(() => setPrimed(true));
+    return () => cancelAnimationFrame(frame);
+  }, [marker, primed]);
+
+  useEffect(() => {
+    const onResize = () => measureMarker(markerKey);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [markerKey, measureMarker]);
+
+  // ---- tinggi panel yang bertransformasi ----------------------------------
+  const bodyRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [panelH, setPanelH] = useState(0);
+
+  useLayoutEffect(() => {
+    if (!openKey) return;
+    const el = bodyRefs.current[openKey];
+    if (el) setPanelH(el.offsetHeight);
+  }, [openKey, mounted, language]);
+
+  useEffect(() => {
+    if (!openKey) return;
+    const el = bodyRefs.current[openKey];
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(() => setPanelH(el.offsetHeight));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [openKey]);
+
+  const onTriggerKeyDown = (event: React.KeyboardEvent, key: string) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      openPanel(key, true);
+      window.setTimeout(() => {
+        bodyRefs.current[key]?.querySelector<HTMLElement>("a")?.focus();
+      }, 60);
+    }
   };
-
-  const corporateLinks = [
-    {
-      href: "/corporate/about/",
-      title: t("nav.aboutUs"),
-      description: t("nav.aboutUs.description"),
-    },
-    {
-      href: "/corporate/contact/",
-      title: t("nav.contactUs"),
-      description: t("nav.contactUs.description"),
-    },
-    {
-      href: "/career/",
-      title: t("nav.careers"),
-      description: t("nav.careers.description"),
-    },
-  ];
-
-  const discoverLinks = [
-    {
-      href: "/showroom/",
-      title: "Experience Center",
-      description: t("nav.experienceCenter.description"),
-    },
-    {
-      href: "/faq/",
-      title: "FAQ",
-      description: t("nav.faq.description"),
-    },
-    {
-      href: "/media-center/",
-      title: "Media Center",
-      description: t("nav.mediaCenter.description"),
-    },
-    {
-      href: "/ojol/",
-      title: "Wedison Ojol",
-      description: t("nav.ojol.description"),
-    },
-  ];
 
   return (
-    <div className="relative">
-      <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full",
-          // "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full bg-card",
-          scrolled ||
-            openProduct ||
-            openCorporate ||
-            openDiscover ||
-            mobileMenuOpen
-            ? "bg-card/95 border-b border-border shadow-sm backdrop-blur-md"
-            : "bg-transparent",
-          // bgTone
-        )}
+    <header
+      className="nav-root fixed inset-x-0 top-0 z-40"
+      data-tone={tone}
+      data-surface={solid ? "solid" : "clear"}
+      data-condensed={condensed}
+      data-hidden={hidden && !openKey && !sheetOpen}
+    >
+      <a
+        href="#konten"
+        className="sr-only rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50"
       >
-        {/* <div className="container mx-auto"> */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[2400px]">
-          {/* <div className="flex items-center justify-between"> */}
-          <div className="flex items-center justify-between h-12 overflow-hidden sm:h-14 md:h-16">
-            <div className="inset-0 flex-shrink-0 p-0 h-fit ">
-              <Link
-                href="/"
-                className="flex items-center h-full shadow-xs cursor-pointer"
-              >
-                <Image
-                  src={
-                    scrolled ||
-                    openProduct ||
-                    openCorporate ||
-                    openDiscover ||
-                    mobileMenuOpen
-                      ? "/wedison-sidebyside.png"
-                      : whitePage
-                        ? "/wedison-sidebyside.png"
-                        : "/wedison-sidebyside-white.png"
-                  }
-                  alt="Wedison Logo"
-                  width={150}
-                  height={40}
-                  priority
-                />
-              </Link>
+        {t("nav.skipToContent")}
+      </a>
+
+      {/* Pelat latar terpisah supaya bisa cross-fade tanpa mengecat ulang teks di atasnya. */}
+      <div
+        aria-hidden
+        className="nav-scrim absolute inset-0 border-b border-border bg-card/85 backdrop-blur-xl"
+      />
+
+      <div className="main-container relative">
+        <div className="nav-bar grid grid-cols-[auto_1fr_auto] items-center gap-4">
+          {/* Logo — dua varian ditumpuk, saling silih ganti mengikuti nada. */}
+          <Link
+            href={`${base}/`}
+            aria-label="Wedison"
+            className="relative block h-5 w-[137px] shrink-0 sm:h-[22px] sm:w-[151px] lg:h-6 lg:w-[165px]"
+          >
+            <Image
+              src="/logo/wedison-wordmark.webp"
+              alt="Wedison"
+              fill
+              sizes="170px"
+              priority
+              className={cn(
+                "object-contain object-left transition-opacity duration-[340ms]",
+                tone === "ink" ? "opacity-100" : "opacity-0",
+              )}
+            />
+            <Image
+              src="/logo/wedison-wordmark-white.webp"
+              alt=""
+              fill
+              sizes="170px"
+              priority
+              className={cn(
+                "object-contain object-left transition-opacity duration-[340ms]",
+                tone === "ink" ? "opacity-0" : "opacity-100",
+              )}
+            />
+          </Link>
+
+          {/* Navigasi desktop — di tengah, jadi logo dan aksi jadi dua jangkar seimbang. */}
+          <nav
+            aria-label={t("nav.primary")}
+            className="hidden justify-center lg:flex"
+            onPointerLeave={(event) => {
+              if (event.pointerType !== "mouse") return;
+              setHoverKey(null);
+              closePanel();
+            }}
+          >
+            <div ref={navRef} className="relative flex items-center">
+              <span
+                aria-hidden
+                className="nav-marker"
+                data-on={markerKey !== null}
+                data-instant={!primed}
+                style={
+                  {
+                    "--marker-x": `${marker?.x ?? 0}px`,
+                    "--marker-w": `${marker?.w ?? 0}px`,
+                  } as CSSProperties
+                }
+              />
+              {items.map((item) => {
+                const isOpen = openKey === item.key;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    data-nav-key={item.key}
+                    aria-expanded={isOpen}
+                    aria-controls={`nav-panel-${item.key}`}
+                    aria-haspopup="true"
+                    onPointerEnter={(event) => {
+                      if (event.pointerType !== "mouse") return;
+                      setHoverKey(item.key);
+                      openPanel(item.key, openKey !== null);
+                    }}
+                    onClick={() => (isOpen ? closePanel(true) : openPanel(item.key, true))}
+                    onKeyDown={(event) => onTriggerKeyDown(event, item.key)}
+                    onFocus={() => setHoverKey(item.key)}
+                    className={cn(
+                      "nav-ink relative rounded-md px-3.5 py-2 font-display text-[15px] font-medium tracking-[-0.01em]",
+                      activeKey === item.key && "nav-current",
+                    )}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
             </div>
+          </nav>
 
-            {/* Desktop Navigation */}
+          {/* Aksi kanan */}
+          <div className="flex items-center justify-end gap-2 sm:gap-3">
+            <LanguageSwitch className="hidden sm:flex" />
+            <LanguageSwitch size="sm" className="flex sm:hidden" />
 
-            <nav className="items-center hidden space-x-4 border-none outline-none md:flex lg:space-x-8 ring-0">
-              {navItems.map((item) => (
-                <div key={item.name} className="relative group">
-                  {item.subMenu ? (
-                    item.name === t("nav.products") ? (
-                      <button
-                        ref={productOpenerRef}
-                        className={cn(
-                          "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          scrolled ||
-                            openProduct ||
-                            openCorporate ||
-                            openDiscover
-                            ? "text-foreground hover:text-primary"
-                            : whitePage
-                              ? "text-foreground"
-                              : "text-white",
-                          activeDropdown === item.name && "text-primary",
-                          // tone
-                        )}
-                        onClick={() => toggleOpen("openProduct")}
-                      >
-                        {item.name}
-                        <ChevronDown
-                          className={cn(
-                            "ml-1 h-4 w-4 transition-transform duration-200",
-                            openProduct && "rotate-180",
-                          )}
-                        />
-                        <span
-                          className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
-                            whitePage ? "bg-foreground" : "bg-card",
+            <Link
+              href={`${base}${CTA_HREF}`}
+              className="nav-cta hidden h-10 items-center rounded-md px-5 font-display text-sm font-semibold tracking-[-0.01em] md:inline-flex"
+            >
+              {t("nav.cta.testRide")}
+            </Link>
 
-                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
-                            (scrolled ||
-                              openProduct ||
-                              openCorporate ||
-                              openDiscover) &&
-                              "bg-primary",
-                            // bgAccent
-                          )}
-                        />
-                      </button>
-                    ) : item.name === t("nav.corporate") ? (
-                      <button
-                        ref={corporateOpenerRef}
-                        className={cn(
-                          "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          whitePage ? "text-foreground" : "text-white",
-                          // "flex items-center text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium relative",
-                          scrolled ||
-                            openProduct ||
-                            openCorporate ||
-                            openDiscover
-                            ? "text-foreground hover:text-primary"
-                            : "",
-                          activeDropdown === item.name && "text-primary",
-                          // tone
-                        )}
-                        onClick={() => toggleOpen("openCorporate")}
-                      >
-                        {item.name}
-                        <ChevronDown
-                          className={cn(
-                            "ml-1 h-4 w-4 transition-transform duration-200",
-                            openCorporate && "rotate-180",
-                          )}
-                        />
-                        <span
-                          className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
-                            whitePage ? "bg-foreground" : "bg-card",
-
-                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
-                            (scrolled ||
-                              openProduct ||
-                              openCorporate ||
-                              openDiscover) &&
-                              "bg-primary",
-                            // bgAccent
-                          )}
-                        />
-                      </button>
-                    ) : (
-                      <button
-                        ref={discoverOpenerRef}
-                        className={cn(
-                          "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                          whitePage ? "text-foreground" : "text-white",
-                          // "flex items-center text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium relative",
-                          scrolled ||
-                            openProduct ||
-                            openCorporate ||
-                            openDiscover
-                            ? "text-foreground hover:text-primary"
-                            : "",
-                          activeDropdown === item.name && "text-primary",
-                          // tone
-                        )}
-                        onClick={() => toggleOpen("openDiscover")}
-                      >
-                        {item.name}
-                        <ChevronDown
-                          className={cn(
-                            "ml-1 h-4 w-4 transition-transform duration-200",
-                            openDiscover && "rotate-180",
-                          )}
-                        />
-                        <span
-                          className={cn(
-                            "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
-                            whitePage ? "bg-foreground" : "bg-card",
-
-                            // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
-                            (scrolled ||
-                              openProduct ||
-                              openCorporate ||
-                              openDiscover) &&
-                              "bg-primary",
-                            // bgAccent
-                          )}
-                        />
-                      </button>
-                    )
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex items-center text-white  px-3 py-2 rounded-md text-sm font-bold relative",
-                        whitePage ? "text-foreground" : "text-white",
-
-                        // "flex items-center text-foreground hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium relative",
-                        // route == "/products/edmax" &&
-                        //   "text-[var(--primary-light)]"
-                        scrolled || openProduct || openCorporate || openDiscover
-                          ? "text-foreground hover:text-primary"
-                          : "",
-                        // tone
-                      )}
-                    >
-                      {item.name}
-                      <span
-                        className={cn(
-                          "absolute bottom-0 left-0 w-0 h-0.5 bg-card transition-all duration-300 group-hover:w-full",
-                          whitePage ? "bg-foreground" : "bg-card",
-
-                          // "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full",
-                          (scrolled || openProduct) && "bg-primary",
-                          // bgAccent
-                        )}
-                      />
-                    </Link>
+            <button
+              type="button"
+              aria-expanded={sheetOpen}
+              aria-controls="nav-sheet"
+              aria-label={sheetOpen ? t("nav.closeMenu") : t("nav.openMenu")}
+              onClick={() => setSheetOpen((prev) => !prev)}
+              className="nav-ink -mr-2 flex h-11 w-11 items-center justify-center lg:hidden"
+            >
+              <span aria-hidden className="relative block h-4 w-6">
+                <span
+                  className={cn(
+                    "nav-burger-line absolute left-0 h-[1.5px] w-6 rounded-full bg-current",
+                    sheetOpen
+                      ? "top-1/2 -translate-y-1/2 rotate-45"
+                      : "top-[3px] rotate-0",
                   )}
+                />
+                <span
+                  className={cn(
+                    "nav-burger-line absolute left-0 h-[1.5px] w-6 rounded-full bg-current",
+                    sheetOpen
+                      ? "top-1/2 -translate-y-1/2 -rotate-45"
+                      : "bottom-[3px] rotate-0",
+                  )}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Megamenu: SATU kartu yang tingginya berubah antar panel, isinya saling silang-pudar. */}
+        <div
+          className="absolute left-12 right-12 top-full hidden pt-2 lg:block"
+          style={{ pointerEvents: openKey ? "auto" : "none" }}
+          onPointerEnter={() => {
+            if (openKey) clearTimer();
+          }}
+          onPointerLeave={(event) => {
+            if (event.pointerType !== "mouse") return;
+            setHoverKey(null);
+            closePanel();
+          }}
+        >
+          <div
+            className="nav-panel relative mx-auto max-w-[1040px] rounded-xl border border-border bg-card shadow-[var(--shadow-lg)]"
+            data-open={openKey !== null}
+            style={{ "--panel-h": `${panelH}px` } as CSSProperties}
+          >
+            {items
+              .filter((item) => mounted.includes(item.key))
+              .map((item) => (
+                <div
+                  key={item.key}
+                  id={`nav-panel-${item.key}`}
+                  ref={(node) => {
+                    bodyRefs.current[item.key] = node;
+                  }}
+                  className="nav-panel-body"
+                  data-active={openKey === item.key}
+                  // Panel yang sudah pernah dibuka tetap ter-mount (biar tak ada
+                  // flash saat dibuka lagi); `inert` menjaganya keluar dari urutan
+                  // tab dan dari a11y tree selama tidak aktif.
+                  inert={openKey !== item.key}
+                >
+                  <NavPanelBody
+                    item={item}
+                    base={base}
+                    current={path}
+                    onNavigate={() => closePanel(true)}
+                  />
                 </div>
               ))}
-
-              {/* <LanguageToggle /> */}
-              <LanguageToggle2
-                toggleOpen={openProduct || openCorporate || openDiscover}
-              />
-            </nav>
-
-            {/* Mobile menu button and language toggle */}
-            <div className="flex items-center md:hidden">
-              {/* <LanguageToggle className="mr-2" /> */}
-              <LanguageToggle2 />
-
-              <button
-                type="button"
-                className={cn(
-                  "inline-flex bg-none items-center justify-center p-2 rounded-md text-foreground hover:scale-120 hover:bg-muted/0 transition-all duration-300 focus:outline-none",
-                  scrolled || mobileMenuOpen
-                    ? " text-foreground"
-                    : whitePage
-                      ? "text-foreground"
-                      : "text-white",
-                  // tone
-                )}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <span className="sr-only">Open main menu</span>
-                <svg
-                  className={`${mobileMenuOpen ? "hidden" : "block"} h-6 w-6`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-                <svg
-                  className={`${mobileMenuOpen ? "block" : "hidden"} h-6 w-6`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
           </div>
         </div>
+      </div>
 
-        {/* Mobile menu */}
-        <div
-          className={`${
-            mobileMenuOpen ? "block" : "hidden"
-          } md:hidden bg-card shadow-soft absolute top-full left-0 right-0 z-20`}
-        >
-          <div className="px-4 pt-2 pb-4 space-y-0 divide-y divide-border">
-            {navItems.map((item) => (
-              <div key={item.name}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex items-center",
-                    item.subMenu && "justify-between w-full",
-                  )}
-                  onClick={() => {
-                    if (item.subMenu) return;
-                    setMobileMenuOpen(false);
-                    setActiveDropdown(null);
-                  }}
-                >
-                  <button
-                    className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-muted"
-                    onClick={() => toggleDropdown(item.name)}
-                  >
-                    {item.name}
-                    {item.subMenu && (
-                      <ChevronDown
-                        className={cn(
-                          "ml-1 h-4 w-4 transition-transform duration-200",
-                          activeDropdown === item.name && "rotate-180",
-                        )}
-                      />
-                    )}
-                  </button>
-                </Link>
-
-                {item.subMenu && activeDropdown === item.name && (
-                  // <div className="py-2 pl-4 my-1 space-y-1 rounded-md animate-slide-down bg-gray-50">
-                  //   {item.subMenu.map((subItem) => (
-                  //     <Link
-                  //       key={subItem.name}
-                  //       href={subItem.href}
-                  //       onClick={() => setMobileMenuOpen(false)}
-                  //       className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted"
-                  //     >
-                  //       {subItem.name}
-                  //     </Link>
-                  //   ))}
-                  // </div>
-                  <div
-                    className={` md:hidden ${
-                      item.subMenu[0].image != "" &&
-                      "grid grid-cols-2 gap-7 p-4"
-                    } p-4 bg-card shadow-sm`}
-                  >
-                    {item.subMenu.map((item, index) =>
-                      item.image != "" ? (
-                        <div
-                          key={index}
-                          className={cn(
-                            "flex flex-col items-center justify-center hover:scale-105 h-16 w-16 mx-auto",
-                            item.name === "Victory" && "",
-                          )}
-                        >
-                          <Link
-                            href={item.href}
-                            className="flex flex-col items-center justify-center "
-                          >
-                            <p className="w-full text-sm font-bold tracking-widest text-center ">
-                              {/* {item.name} */}
-                              {item.name.toUpperCase()}
-                            </p>
-                            <div className="flex items-center justify-center w-16 h-16 overflow-hidden">
-                              <Image
-                                src={item.image}
-                                alt={item.name}
-                                width={64}
-                                height={64}
-                                className={cn(
-                                  "lg:h-32 lg:w-32 h-16 w-16 object-contain",
-                                )}
-                              />
-                            </div>
-                          </Link>
-                        </div>
-                      ) : (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted"
-                        >
-                          {item.name}
-                        </Link>
-                      ),
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <NavbarProduct open={openProduct} ref={productRef} />
-
-        <NavbarDropdown
-          open={openCorporate}
-          ref={corporateRef}
-          heightClass="max-h-80 h-80"
-          leftCard={{
-            title: t("nav.corporate.leftCard.title"),
-            description: t("nav.corporate.leftCard.description"),
-          }}
-          links={corporateLinks}
-        />
-
-        <NavbarDropdown
-          open={openDiscover}
-          ref={discoverRef}
-          heightClass="max-h-[420px] h-[420px]"
-          leftCard={{
-            title: t("nav.discover.leftCard.title"),
-            description: t("nav.discover.leftCard.description"),
-          }}
-          links={discoverLinks}
-        />
-      </header>
-    </div>
+      <NavSheet
+        open={sheetOpen}
+        items={items}
+        base={base}
+        current={path}
+        activeKey={activeKey}
+        ctaLabel={t("nav.cta.testRide")}
+        ctaHref={CTA_HREF}
+        onNavigate={() => setSheetOpen(false)}
+      />
+    </header>
   );
 }
