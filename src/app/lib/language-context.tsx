@@ -278,6 +278,11 @@ const translations = {
     "showroom.bali.name": "Wedison Bali",
     "showroom.bali.address":
       "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
+    "showroom.bekasi.name": "Wedison Bekasi",
+    "showroom.bekasi.address":
+      "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, East Bekasi, Bekasi City, West Java 17113",
+    "showroom.locationDescription":
+      "Choose a showroom to see its location on the map. Every location includes a showroom and an official service center.",
     "showroom.facility.showroom": "Showroom",
     "showroom.facility.service": "Service Center",
     "showroom.viewOnMaps": "View on Maps",
@@ -1720,6 +1725,11 @@ const translations = {
     "showroom.bali.name": "Wedison Bali",
     "showroom.bali.address":
       "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
+    "showroom.bekasi.name": "Wedison Bekasi",
+    "showroom.bekasi.address":
+      "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, Kec. Bekasi Timur, Kota Bekasi, Jawa Barat 17113",
+    "showroom.locationDescription":
+      "Pilih showroom untuk melihat lokasinya di peta. Setiap lokasi dilengkapi showroom dan service center resmi.",
     "showroom.facility.showroom": "Showroom",
     "showroom.facility.service": "Service Center",
     "showroom.viewOnMaps": "Lihat di Maps",

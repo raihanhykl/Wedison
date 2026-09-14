@@ -40,7 +40,7 @@ export default function ShowroomPage() {
         />
       )} */}
       {/* Main content of the showroom page */}
-      <ShowroomPageStructure />;
+      <ShowroomPageStructure />
     </>
   );
 }
