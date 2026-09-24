@@ -1,0 +1,270 @@
+// Wedison Admin — skema database (PostgreSQL, Prisma 7).
+// Modul: Auth/Users, CMS (Article, Category, Tag, PressCoverage, SocialPost, Media),
+// SuperCharge (Station), ActivityLog, Setting.
+// Konvensi: id = cuid, soft delete via deletedAt hanya di Article (konten editorial).
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  runtime      = "nodejs"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ───────────────────────── Auth & Users ─────────────────────────
+
+enum UserRole {
+  SUPER_ADMIN // kelola user + semua modul
+  ADMIN       // semua modul konten, tanpa kelola user
+  EDITOR      // tulis/edit konten, tidak bisa hapus permanen
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         UserRole  @default(EDITOR)
+  isActive     Boolean   @default(true)
+  avatarUrl    String?
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  articles     Article[]
+  media        Media[]
+  activityLogs ActivityLog[]
+
+  @@index([role])
+}
+
+// ───────────────────────── CMS: Artikel ─────────────────────────
+
+enum ContentStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum Locale {
+  id
+  en
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  nameId      String
+  nameEn      String?
+  description String?
+  color       String? // token/hex opsional untuk badge
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  articles Article[]
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  createdAt DateTime  @default(now())
+
+  articles Article[]
+}
+
+model Article {
+  id           String        @id @default(cuid())
+  status       ContentStatus @default(DRAFT)
+  isFeatured   Boolean       @default(false)
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  viewCount    Int           @default(0)
+  coverImageId String?
+  coverImage   Media?        @relation("ArticleCover", fields: [coverImageId], references: [id], onDelete: SetNull)
+  /// Gambar khusus untuk Open Graph/Twitter card (opsional; default = cover)
+  ogImageId    String?
+  ogImage      Media?        @relation("ArticleOgImage", fields: [ogImageId], references: [id], onDelete: SetNull)
+  /// SEO: true = <meta name="robots" content="noindex">
+  noIndex      Boolean       @default(false)
+  categoryId   String?
+  category     Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  authorId     String?
+  author       User?         @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  tags         Tag[]
+  translations ArticleTranslation[]
+  deletedAt    DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([categoryId])
+  @@index([deletedAt])
+}
+
+model ArticleTranslation {
+  id             String   @id @default(cuid())
+  articleId      String
+  article        Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  locale         Locale
+  title          String
+  slug           String
+  excerpt        String?
+  content        Json     // dokumen Tiptap (ProseMirror JSON) — sumber kebenaran editor
+  contentHtml    String   @default("") // HTML tersanitasi, dipakai render publik
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?  // dipisah koma
+  canonicalUrl   String?  // override canonical (mis. artikel repost)
+  ogTitle        String?
+  ogDescription  String?
+  readingTime    Int      @default(1) // menit
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([articleId, locale])
+  @@unique([locale, slug])
+}
+
+// ───────────────────────── CMS: Liputan Pers (berita eksternal) ─────────────────────────
+
+model PressCoverage {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  url         String        @unique
+  title       String
+  excerpt     String?       // headline/kutipan yang ditampilkan di halaman detail
+  description String?       // og:description hasil scrape
+  imageUrl    String?
+  siteName    String?
+  author      String?
+  publishedAt DateTime?
+  status      ContentStatus @default(PUBLISHED)
+  sortOrder   Int           @default(0)
+  fetchedAt   DateTime?     // kapan metadata terakhir di-scrape
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+// ───────────────────────── CMS: Sosial Media ─────────────────────────
+
+enum SocialPlatform {
+  INSTAGRAM
+  TIKTOK
+  YOUTUBE
+  X
+  FACEBOOK
+  LINKEDIN
+}
+
+model SocialPost {
+  id           String         @id @default(cuid())
+  platform     SocialPlatform @default(INSTAGRAM)
+  url          String         @unique
+  externalId   String?        // shortcode/ID post di platform
+  caption      String?
+  thumbnailUrl String?        // URL lokal hasil unduh (CDN IG kedaluwarsa)
+  isActive     Boolean        @default(true)
+  sortOrder    Int            @default(0)
+  publishedAt  DateTime?
+  fetchedAt    DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([platform, isActive, sortOrder])
+}
+
+// ───────────────────────── CMS: Media Library ─────────────────────────
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String   @unique // nama file di disk
+  originalName String
+  mimeType     String
+  size         Int
+  width        Int?
+  height       Int?
+  url          String   // path publik, mis. /api/uploads/2026/09/abc.webp
+  alt          String?
+  caption      String?
+  folder       String   @default("general")
+  uploadedById String?
+  uploadedBy   User?    @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())
+
+  articlesAsCover Article[] @relation("ArticleCover")
+  articlesAsOg    Article[] @relation("ArticleOgImage")
+
+  @@index([folder, createdAt])
+}
+
+// ───────────────────────── SuperCharge: Lokasi ─────────────────────────
+
+enum StationStatus {
+  OPERATIONAL
+  COMING_SOON
+  MAINTENANCE
+  CLOSED
+}
+
+enum StationTier {
+  HUB
+  SHOWROOM
+  MITRA
+}
+
+model Station {
+  id         String        @id // kode stasiun, mis. ST0045
+  slug       String        @unique
+  name       String
+  status     StationStatus @default(COMING_SOON)
+  tier       StationTier   @default(MITRA)
+  address    String
+  city       String
+  province   String
+  lat        Float
+  lng        Float
+  pilesTotal Int           @default(1) // 1 pile = 2 charger
+  powerKw    Int           @default(40)
+  hours      String        @default("24 jam")
+  amenities  String[]      @default([])
+  photoUrl   String?
+  notes      String?
+  isActive   Boolean       @default(true)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([status, tier])
+  @@index([province, city])
+}
+
+// ───────────────────────── Sistem ─────────────────────────
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String   // create | update | delete | publish | login | ...
+  entity    String   // article | press | social | media | user | station | ...
+  entityId  String?
+  summary   String?  // ringkasan yang bisa dibaca manusia
+  meta      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
