@@ -285,6 +285,11 @@ export const id = {
   "showroom.bandung.address":
     "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
   "showroom.bali.name": "Wedison Bali",
+  "showroom.bekasi.name": "Wedison Bekasi",
+  "showroom.bekasi.address":
+    "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, Kec. Bekasi Timur, Kota Bekasi, Jawa Barat 17113",
+  "showroom.locationDescription":
+    "Pilih showroom untuk melihat lokasinya di peta. Setiap lokasi dilengkapi showroom dan service center resmi.",
   "showroom.bali.address":
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
   "showroom.facility.showroom": "Showroom",
@@ -510,7 +515,7 @@ export const id = {
   "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
   "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-  "edpower.productPage.techSpecs1.title": 160,
+  "edpower.productPage.techSpecs1.title": 200,
   "edpower.productPage.techSpecs1.unit": "km",
   "edpower.productPage.techSpecs1.desc": "Jarak Tempuh",
 
@@ -519,7 +524,7 @@ export const id = {
   "edpower.productPage.techSpecs2.desc":
     "Isi daya dari 10% ke 80% dengan SuperCharge",
 
-  "edpower.productPage.techSpecs3.title": 80,
+  "edpower.productPage.techSpecs3.title": 90,
   "edpower.productPage.techSpecs3.unit": "km/jam",
   "edpower.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -528,7 +533,7 @@ export const id = {
   "edpower.productPage.productOverview.title":
     "Bertenaga, Lapang, Siap Jarak Jauh.",
   "edpower.productPage.productOverview.description":
-    "EdPower adalah model terbesar Wedison. Joknya lapang, posisi duduknya santai, dan jarak tempuhnya mencapai 160 km sekali isi. Layarnya terhubung ke ponsel, bagasinya muat dua helm, dan tenaganya tetap enak dipakai sampai luar kota.",
+    "EdPower adalah model terbesar Wedison. Joknya lapang, posisi duduknya santai, dan jarak tempuhnya mencapai 200 km sekali isi. Layarnya terhubung ke ponsel, bagasinya muat dua helm, dan tenaganya tetap enak dipakai sampai luar kota.",
 
   "edpower.productPage.productHighlight1.imageAlt":
     "Tampilan kokpit menampilkan layar TFT besar dengan antarmuka Apple CarPlay & Android Auto",
@@ -557,9 +562,9 @@ export const id = {
 
   "edpower.productPage.productHighlight5.imageAlt":
     "Indikator baterai/jarak tempuh pada dashboard, tampilan close-up",
-  "edpower.productPage.productHighlight5.title": "Jarak Tempuh Terbaik 160 km",
+  "edpower.productPage.productHighlight5.title": "Jarak Tempuh Terbaik 200 km",
   "edpower.productPage.productHighlight5.description":
-    "Sekali isi, EdPower sanggup menempuh sampai 160 km. Cukup untuk seminggu pemakaian dalam kota, atau sekali jalan ke luar kota.",
+    "Sekali isi, EdPower sanggup menempuh sampai 200 km. Cukup untuk seminggu pemakaian dalam kota, atau sekali jalan ke luar kota.",
 
   "edpower.productPage.chargingOverview.imageAlt":
     "EdPower terparkir di showroom Wedison dengan stasiun SuperCharge dan charger rumah yang terlihat",
@@ -588,14 +593,14 @@ export const id = {
 
   "edpower.specs.engine.motorType": "Brushless DC Motor",
   "edpower.specs.engine.motorPower": "3 kW",
-  "edpower.specs.engine.topSpeed": "80 km/jam",
+  "edpower.specs.engine.topSpeed": "90 km/jam",
   "edpower.specs.engine.acceleration": "7.9 detik",
   "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
   "edpower.specs.battery.batteryCapacity": "5 kWh",
   "edpower.specs.battery.voltage": "76.8 Volt",
   "edpower.specs.battery.chargingTimeSuperCharge": "15 menit",
   "edpower.specs.battery.chargingTimeHome": "10.2 jam",
-  "edpower.specs.battery.range": "160 km",
+  "edpower.specs.battery.range": "200 km",
   "edpower.specs.brake.frontBrake": "Rem Cakram",
   "edpower.specs.brake.rearBrake": "Rem Cakram",
   "edpower.specs.brake.cbsSupport": "Ya",
@@ -697,7 +702,7 @@ export const id = {
   "victory.productPage.techSpecs2.desc":
     "Isi daya dari 10% ke 80% dengan SuperCharge",
 
-  "victory.productPage.techSpecs3.title": 80,
+  "victory.productPage.techSpecs3.title": 85,
   "victory.productPage.techSpecs3.unit": "km/jam",
   "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -750,7 +755,7 @@ export const id = {
 
   "victory.specs.engine.motorType": "Brushless DC Motor",
   "victory.specs.engine.motorPower": "3 kW",
-  "victory.specs.engine.topSpeed": "80 km/jam",
+  "victory.specs.engine.topSpeed": "85 km/jam",
   "victory.specs.engine.acceleration": "6.5 detik",
   "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
   "victory.specs.battery.batteryCapacity":
@@ -821,7 +826,7 @@ export const id = {
   "athena.productPage.techSpecs2.desc":
     "Charge dari 10% ke 80% dengan SuperCharge",
 
-  "athena.productPage.techSpecs3.title": 80,
+  "athena.productPage.techSpecs3.title": 85,
   "athena.productPage.techSpecs3.unit": "km/jam",
   "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -872,7 +877,7 @@ export const id = {
 
   "athena.specs.engine.motorType": "Brushless DC Motor",
   "athena.specs.engine.motorPower": "2.5 kW",
-  "athena.specs.engine.topSpeed": "80 km/jam",
+  "athena.specs.engine.topSpeed": "85 km/jam",
   "athena.specs.engine.acceleration": "6.5 detik",
   "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
   "athena.specs.battery.batteryCapacity":
@@ -938,7 +943,7 @@ export const id = {
   "bees.productPage.techSpecs2.title": "LED",
   "bees.productPage.techSpecs2.desc": "Tampilan Head Unit",
 
-  "bees.productPage.techSpecs3.title": 55,
+  "bees.productPage.techSpecs3.title": 60,
   "bees.productPage.techSpecs3.unit": "km/jam",
   "bees.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -972,8 +977,8 @@ export const id = {
 
   "bees.specs.engine.motorType": "Brushless DC Motor",
   "bees.specs.engine.motorPower": "1.2 kW",
-  "bees.specs.engine.topSpeed": "55 km/jam",
-  "bees.specs.engine.acceleration": "9.3 detik",
+  "bees.specs.engine.topSpeed": "60 km/jam",
+  "bees.specs.engine.acceleration": "19.3 detik",
   "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
   "bees.specs.battery.batteryCapacity": "1.6 kWh",
   "bees.specs.battery.voltage": "64 Volt",
@@ -987,8 +992,8 @@ export const id = {
   "bees.specs.dimension.width": "670 mm",
   "bees.specs.dimension.height": "1.110 mm",
   "bees.specs.dimension.wheelbase": "1.370 mm",
-  "bees.specs.dimension.groundClearance": "130 mm",
-  "bees.specs.dimension.seatHeight": "760 mm",
+  "bees.specs.dimension.groundClearance": "160 mm",
+  "bees.specs.dimension.seatHeight": "765 mm",
   "bees.specs.dimension.weight": "78.5 kg",
   "bees.specs.tire.frontTire": "90/90-10",
   "bees.specs.tire.rearTire": "90/90-10",
@@ -1237,7 +1242,7 @@ export const id = {
   "faq.Battery.questions.3.question":
     "Ada berapa pilihan baterai yang dijual Wedison?",
   "faq.Battery.questions.3.answer":
-    "Untuk model tertentu tersedia 2 pilihan baterai, Regular dan Extended.\nJarak tempuhnya berbeda tergantung model, mulai dari 80 km sampai 160 km sekali isi.",
+    "Untuk model tertentu tersedia 2 pilihan baterai, Regular dan Extended.\nJarak tempuhnya berbeda tergantung model, mulai dari 80 km sampai 200 km sekali isi.",
   "faq.Battery.questions.4.question": "Baterainya buatan siapa?",
   "faq.Battery.questions.4.answer":
     "Baterai Wedison dikembangkan sendiri secara internal.",
@@ -1320,13 +1325,13 @@ export const id = {
   // Performance Questions
   "faq.Performance.questions.0.question": "Berapa kecepatan maksimalnya?",
   "faq.Performance.questions.0.answer":
-    "Tergantung model, kecepatan maksimalnya berkisar antara 55 km/jam sampai 95 km/jam.",
+    "Tergantung model, kecepatan maksimalnya berkisar antara 60 km/jam sampai 90 km/jam.",
   "faq.Performance.questions.1.question": "Berapa besar daya motornya?",
   "faq.Performance.questions.1.answer":
-    "Daya motor berbeda tiap model, mulai dari 1,2 kW sampai 5 kW.",
+    "Daya motor berbeda tiap model, mulai dari 1,2 kW sampai 6 kW.",
   "faq.Performance.questions.2.question": "Berapa jarak tempuhnya?",
   "faq.Performance.questions.2.answer":
-    "Tergantung model dan pilihan baterainya, jarak tempuhnya berkisar antara 80 km sampai 160 km.",
+    "Tergantung model dan pilihan baterainya, jarak tempuhnya berkisar antara 80 km sampai 200 km.",
   "faq.Performance.questions.3.question":
     "Aman tidak dipakai saat hujan atau melewati genangan?",
   "faq.Performance.questions.3.answer":
@@ -1348,7 +1353,7 @@ export const id = {
     "CBS (Combined Braking System), yang membagi daya pengereman antara roda depan dan belakang secara otomatis saat kamu menarik tuas rem:\nAthena, Victory, dan EdPower\n\nRem cakram di roda depan dan belakang:\nBees",
   "faq.Safety.questions.2.question": "Motor penggeraknya jenis apa?",
   "faq.Safety.questions.2.answer":
-    "Semua model Wedison memakai motor DC brushless (BLDC), yang dikenal efisien, bertorsi besar, dan berumur panjang.\n\nTipenya satu:\nDC Brushless Rear Hub Motor, dengan kecepatan sampai 95 km/jam (Bees, Athena, Victory, EdPower).",
+    "Semua model Wedison memakai motor DC brushless (BLDC), yang dikenal efisien, bertorsi besar, dan berumur panjang.\n\nTipenya satu:\nDC Brushless Rear Hub Motor, dengan kecepatan sampai 90 km/jam (Bees, Athena, Victory, EdPower).",
 
   // Servicing Questions
   "faq.Servicing.questions.0.question": "Apakah ada servis gratis?",
@@ -1497,9 +1502,9 @@ export const id = {
     "Buat driver, waktu berhenti itu mahal. Di SuperCharge cukup ",
   "ojol.supercharge.descriptionBold": "15 menit",
   "ojol.supercharge.descriptionPart2":
-    " untuk mengisi baterai dari 10% ke 80%, lalu langsung narik lagi. Sekali isi bisa menempuh sampai 160 km*, jadi lebih banyak waktu di jalan dan lebih banyak orderan.",
+    " untuk mengisi baterai dari 10% ke 80%, lalu langsung narik lagi. Sekali isi bisa menempuh sampai 200 km*, jadi lebih banyak waktu di jalan dan lebih banyak orderan.",
   "ojol.supercharge.disclaimer":
-    "*Jarak tempuh 160 km berlaku untuk EdPower dengan baterai Extended",
+    "*Jarak tempuh 200 km berlaku untuk EdPower dengan baterai Extended",
   "ojol.supercharge.cta": "Pelajari Lebih Lanjut",
 
   "ojol.models.title": "Pilih Motor yang Cocok Buat Kamu",
