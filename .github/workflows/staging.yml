@@ -56,6 +56,8 @@ jobs:
           NEXT_PUBLIC_EMAIL_CONFIG_templateId: ${{ secrets.EMAIL_TEMPLATE_ID }}
           NEXT_PUBLIC_EMAIL_CONFIG_publicKey: ${{ secrets.EMAIL_PUBLIC_KEY }}
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+          # ID container GTM testing (publik) — terpisah dari produksi
+          NEXT_PUBLIC_GTM_ID: GTM-MBLHDFJ2
 
       - name: Copy sitemap/robots to out (post-build)
         shell: bash
