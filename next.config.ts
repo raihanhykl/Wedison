@@ -32,6 +32,17 @@ const nextConfig: NextConfig = {
   // tidak mengganggu (sumber error "Cannot find module './xxx.js'").
   output: process.env.NODE_ENV === "production" ? "standalone" : undefined,
   trailingSlash: true, // <== ini penting (jaga kontinuitas URL/SEO)
+  // Backend Express (server/) diakses lewat origin yang sama: /api/* -> API_INTERNAL_URL.
+  // Browser tidak perlu CORS/cookie lintas origin; di VPS nginx bisa mengambil alih rule ini.
+  // Route handler milik Next (mis. /api/revalidate) tetap menang karena rewrite = afterFiles.
+  async rewrites() {
+    const api = process.env.API_INTERNAL_URL ?? "http://127.0.0.1:4000";
+    return [
+      { source: "/api/v1/:path*", destination: `${api}/api/v1/:path*` },
+      { source: "/api/uploads/:path*", destination: `${api}/api/uploads/:path*` },
+      { source: "/api/health", destination: `${api}/api/health` },
+    ];
+  },
 };
 
 export default nextConfig;

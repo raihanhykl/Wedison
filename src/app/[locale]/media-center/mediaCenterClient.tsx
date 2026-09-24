@@ -8,13 +8,17 @@ import type { InstagramPostData } from "./components/fetchInstagram";
 import { useLanguage } from "@/app/lib/language-context";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { ArticleCard } from "./components/articleCard";
+import type { PublicArticle } from "@/lib/cms/api";
 
 type Props = {
   previews: LinkPreview[];
   instagramPosts: InstagramPostData[];
+  articles?: PublicArticle[];
+  locale?: "id" | "en";
 };
 
-export default function MediaCenterClient({ previews, instagramPosts }: Props) {
+export default function MediaCenterClient({ previews, instagramPosts, articles = [], locale = "id" }: Props) {
   // const [previews, setPreviews] = useState<LinkPreview[]>([]);
   const { t } = useLanguage();
 
@@ -43,6 +47,27 @@ export default function MediaCenterClient({ previews, instagramPosts }: Props) {
           </Reveal>
         </div>
       </div>
+
+      {/* Artikel Wedison (dari CMS) — hanya tampil bila ada */}
+      {articles.length > 0 && (
+        <div className="main-container">
+          <Reveal className="my-6 md:my-8">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+              {locale === "en" ? "Articles" : "Artikel"}
+            </h2>
+            <div className="w-full h-[2px] mt-2 bg-border"></div>
+          </Reveal>
+          <div className="py-8">
+            <Stagger className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {articles.map((a) => (
+                <StaggerItem key={a.id} className="rounded-xl">
+                  <ArticleCard article={a} locale={locale} />
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </div>
+      )}
 
       {/* Berita */}
       <div className="main-container">

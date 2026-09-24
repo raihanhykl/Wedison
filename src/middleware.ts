@@ -18,8 +18,30 @@ function detectLocale(req: NextRequest): string {
   return DEFAULT_LOCALE;
 }
 
+const ADMIN_COOKIE = process.env.ADMIN_COOKIE_NAME ?? "wd_admin_token";
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // Admin dashboard: tidak dilokalisasi (tanpa /id /en). Guard ringan di edge: tanpa cookie
+  // sesi -> ke halaman login. Verifikasi token sesungguhnya dilakukan layout admin ke API.
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+    const isLogin = pathname.startsWith("/admin/login");
+    const hasSession = !!req.cookies.get(ADMIN_COOKIE)?.value;
+    if (!isLogin && !hasSession) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/admin/login/";
+      url.searchParams.set("next", pathname);
+      return NextResponse.redirect(url);
+    }
+    if (isLogin && hasSession) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/admin/";
+      url.search = "";
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.next();
+  }
 
   const hasLocale = LOCALES.some(
     (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
