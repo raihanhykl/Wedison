@@ -48,6 +48,10 @@ jobs:
 
       - name: Build (Next.js SSG + next-sitemap)
         run: npm run build
+        env:
+          # NEXT_PUBLIC_* di-inline ke bundle saat build.
+          # ID container GTM produksi (publik, bukan secret).
+          NEXT_PUBLIC_GTM_ID: GTM-TGNBLQ37
 
       - name: Copy sitemap/robots to out (post-build)
         shell: bash
