@@ -301,6 +301,11 @@ export const en = {
   "showroom.bandung.address":
     "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
   "showroom.bali.name": "Wedison Bali",
+  "showroom.bekasi.name": "Wedison Bekasi",
+  "showroom.bekasi.address":
+    "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, East Bekasi, Bekasi City, West Java 17113",
+  "showroom.locationDescription":
+    "Choose a showroom to see its location on the map. Every location includes a showroom and an official service center.",
   "showroom.bali.address":
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
   "showroom.facility.showroom": "Showroom",
@@ -423,7 +428,7 @@ export const en = {
   "specs.category.engine.motorType": "Motor Type",
   "specs.category.engine.motorPower": "Motor Power",
   "specs.category.engine.topSpeed": "Top Speed",
-  "specs.category.engine.acceleration": "Acceleration (0-60 km/h)",
+  "specs.category.engine.acceleration": "Acceleration (0-50 km/h)",
 
   "specs.category.battery": "Battery",
   "specs.category.battery.batteryType": "Battery Type",
@@ -527,7 +532,7 @@ export const en = {
   "edpower.productPage.hero.ctaPrimary": "Pesan Sekarang",
   "edpower.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-  "edpower.productPage.techSpecs1.title": 160,
+  "edpower.productPage.techSpecs1.title": 200,
   "edpower.productPage.techSpecs1.unit": "km",
   "edpower.productPage.techSpecs1.desc": "Cruising Range",
 
@@ -536,7 +541,7 @@ export const en = {
   "edpower.productPage.techSpecs2.desc":
     "Charge from 10% to 80% with SuperCharge",
 
-  "edpower.productPage.techSpecs3.title": 80,
+  "edpower.productPage.techSpecs3.title": 90,
   "edpower.productPage.techSpecs3.unit": "km/h",
   "edpower.productPage.techSpecs3.desc": "Top Speed",
 
@@ -545,7 +550,7 @@ export const en = {
   "edpower.productPage.productOverview.title":
     "Flagship Power, Unrivaled Comfort.",
   "edpower.productPage.productOverview.description":
-    "EdPower is the largest motorcycle in the Wedison range. The saddle is wide, the riding position is relaxed, and range reaches 160 km on a single charge. The display pairs with your phone, the underseat compartment holds two helmets, and there is power in reserve for trips beyond the city.",
+    "EdPower is the largest motorcycle in the Wedison range. The saddle is wide, the riding position is relaxed, and range reaches 200 km on a single charge. The display pairs with your phone, the underseat compartment holds two helmets, and there is power in reserve for trips beyond the city.",
 
   "edpower.productPage.productHighlight1.imageAlt":
     "Cockpit view showcasing the large TFT display with Apple CarPlay & Android Auto interface",
@@ -575,9 +580,9 @@ export const en = {
 
   "edpower.productPage.productHighlight5.imageAlt":
     " Battery/range indicator on the dashboard, close-up",
-  "edpower.productPage.productHighlight5.title": "Class-Leading 160 km Range",
+  "edpower.productPage.productHighlight5.title": "Class-Leading 200 km Range",
   "edpower.productPage.productHighlight5.description":
-    "A single charge takes EdPower up to 160 km, enough for a week of city riding or one journey out of town.",
+    "A single charge takes EdPower up to 200 km, enough for a week of city riding or one journey out of town.",
 
   "edpower.productPage.chargingOverview.imageAlt":
     "EdPower parked at a Wedison showroom with SuperCharge and home charger visible",
@@ -606,14 +611,14 @@ export const en = {
 
   "edpower.specs.engine.motorType": "Brushless DC Motor",
   "edpower.specs.engine.motorPower": "3 kW",
-  "edpower.specs.engine.topSpeed": "80 km/h",
+  "edpower.specs.engine.topSpeed": "90 km/h",
   "edpower.specs.engine.acceleration": "7.9 seconds",
   "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
   "edpower.specs.battery.batteryCapacity": "5 kWh",
   "edpower.specs.battery.voltage": "76.8 Volt",
   "edpower.specs.battery.chargingTimeSuperCharge": "15 minutes",
   "edpower.specs.battery.chargingTimeHome": "10.2 hours",
-  "edpower.specs.battery.range": "160 km",
+  "edpower.specs.battery.range": "200 km",
   "edpower.specs.brake.frontBrake": "Disc Brake",
   "edpower.specs.brake.rearBrake": "Disc Brake",
   "edpower.specs.brake.cbsSupport": "Yes",
@@ -719,7 +724,7 @@ export const en = {
   "victory.productPage.techSpecs2.desc":
     "Charge from 10% to 80% with SuperCharge",
 
-  "victory.productPage.techSpecs3.title": 80,
+  "victory.productPage.techSpecs3.title": 85,
   "victory.productPage.techSpecs3.unit": "km/h",
   "victory.productPage.techSpecs3.desc": "Top Speed",
 
@@ -772,7 +777,7 @@ export const en = {
 
   "victory.specs.engine.motorType": "Brushless DC Motor",
   "victory.specs.engine.motorPower": "3 kW",
-  "victory.specs.engine.topSpeed": "80 km/h",
+  "victory.specs.engine.topSpeed": "85 km/h",
   "victory.specs.engine.acceleration": "6.5 seconds",
   "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
   "victory.specs.battery.batteryCapacity":
@@ -842,7 +847,7 @@ export const en = {
   "athena.productPage.techSpecs2.desc":
     "Charge from 10% to 80% with SuperCharge",
 
-  "athena.productPage.techSpecs3.title": 80,
+  "athena.productPage.techSpecs3.title": 85,
   "athena.productPage.techSpecs3.unit": "km/h",
   "athena.productPage.techSpecs3.desc": "Top Speed",
 
@@ -891,7 +896,7 @@ export const en = {
 
   "athena.specs.engine.motorType": "Brushless DC Motor",
   "athena.specs.engine.motorPower": "2.5 kW",
-  "athena.specs.engine.topSpeed": "80 km/h",
+  "athena.specs.engine.topSpeed": "85 km/h",
   "athena.specs.engine.acceleration": "6.5 seconds",
   "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
   "athena.specs.battery.batteryCapacity":
@@ -956,7 +961,7 @@ export const en = {
   "bees.productPage.techSpecs2.title": "LED",
   "bees.productPage.techSpecs2.desc": "Head unit Display",
 
-  "bees.productPage.techSpecs3.title": 55,
+  "bees.productPage.techSpecs3.title": 60,
   "bees.productPage.techSpecs3.unit": "km/h",
   "bees.productPage.techSpecs3.desc": "Top Speed",
 
@@ -990,8 +995,8 @@ export const en = {
 
   "bees.specs.engine.motorType": "Brushless DC Motor",
   "bees.specs.engine.motorPower": "1.2 kW",
-  "bees.specs.engine.topSpeed": "55 km/h",
-  "bees.specs.engine.acceleration": "9.3 seconds",
+  "bees.specs.engine.topSpeed": "60 km/h",
+  "bees.specs.engine.acceleration": "19.3 seconds",
   "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
   "bees.specs.battery.batteryCapacity": "1.6 kWh",
   "bees.specs.battery.voltage": "64 Volt",
@@ -1005,8 +1010,8 @@ export const en = {
   "bees.specs.dimension.width": "670 mm",
   "bees.specs.dimension.height": "1.110 mm",
   "bees.specs.dimension.wheelbase": "1.370 mm",
-  "bees.specs.dimension.groundClearance": "130 mm",
-  "bees.specs.dimension.seatHeight": "760 mm",
+  "bees.specs.dimension.groundClearance": "160 mm",
+  "bees.specs.dimension.seatHeight": "765 mm",
   "bees.specs.dimension.weight": "78.5 kg",
   "bees.specs.tire.frontTire": "90/90-10",
   "bees.specs.tire.rearTire": "90/90-10",
@@ -1250,7 +1255,7 @@ export const en = {
   "faq.Battery.questions.3.question":
     "How many battery options does Wedison sell?",
   "faq.Battery.questions.3.answer":
-    "Selected models come with 2 battery options, Regular and Extended.\nRange differs by model, from 80 km up to 160 km on a single charge.",
+    "Selected models come with 2 battery options, Regular and Extended.\nRange differs by model, from 80 km up to 200 km on a single charge.",
   "faq.Battery.questions.4.question": "Who makes the battery?",
   "faq.Battery.questions.4.answer": "Wedison develops its batteries in-house.",
   "faq.Battery.questions.5.question": "How long will the battery last?",
@@ -1328,13 +1333,13 @@ export const en = {
   "faq.Performance.questions.0.question":
     "What is the speed of the motorcycle?",
   "faq.Performance.questions.0.answer":
-    "Depending on the model, top speed ranges from 55 km/h to 95 km/h.",
+    "Depending on the model, top speed ranges from 55 km/h to 90 km/h.",
   "faq.Performance.questions.1.question": "What is the motor power?",
   "faq.Performance.questions.1.answer":
-    "Motor power varies by model, from 1.2 kW up to 5 kW.",
+    "Motor power varies by model, from 1.2 kW up to 6 kW.",
   "faq.Performance.questions.2.question": "What is the range?",
   "faq.Performance.questions.2.answer":
-    "Depending on the model and battery selected, range extends from 80 km to 160 km.",
+    "Depending on the model and battery selected, range extends from 80 km to 200 km.",
   "faq.Performance.questions.3.question":
     "Is it safe to ride in rain or through standing water?",
   "faq.Performance.questions.3.answer":
@@ -1355,7 +1360,7 @@ export const en = {
     "CBS (Combined Braking System), which distributes braking force between the front and rear wheels automatically when the brake lever is applied:\nAthena, Victory, and EdPower\n\nFront and rear disc brakes:\nBees",
   "faq.Safety.questions.2.question": "What type of motor is used?",
   "faq.Safety.questions.2.answer":
-    "Every Wedison model uses a brushless DC motor (BLDC), recognized for its efficiency, torque, and long service life.\n\nOne type is fitted:\nDC Brushless Rear Hub Motor, with speeds up to 95 km/h (Bees, Athena, Victory, EdPower).",
+    "Every Wedison model uses a brushless DC motor (BLDC), recognized for its efficiency, torque, and long service life.\n\nOne type is fitted:\nDC Brushless Rear Hub Motor, with speeds up to 90 km/h (Bees, Athena, Victory, EdPower).",
 
   // Servicing Questions
   "faq.Servicing.questions.0.question": "Is complimentary servicing included?",
@@ -1508,9 +1513,9 @@ export const en = {
     "For a driver, downtime is costly. At SuperCharge it takes ",
   "ojol.supercharge.descriptionBold": "15 minutes",
   "ojol.supercharge.descriptionPart2":
-    " to bring the battery from 10% to 80% before you return to the road. A single charge covers up to 160 km*, which means more hours available and more orders completed.",
+    " to bring the battery from 10% to 80% before you return to the road. A single charge covers up to 200 km*, which means more hours available and more orders completed.",
   "ojol.supercharge.disclaimer":
-    "*Range of 160 km applies to EdPower with the Extended battery",
+    "*Range of 200 km applies to EdPower with the Extended battery",
   "ojol.supercharge.cta": "Learn More",
 
   "ojol.models.title": "Pick the Right Motorcycle for You",
