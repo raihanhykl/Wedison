@@ -7,6 +7,10 @@ import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { notFound } from "next/navigation";
 import { LOCALES, isLocale } from "@/app/lib/locale";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/gtm";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -34,6 +38,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${fontVariables} antialiased`}>
+        <GoogleTagManagerNoScript />
         {/* Tanpa JS/observer, konten yang dibungkus <Reveal>/<StaggerItem> harus tetap terlihat
             (motion menulis opacity:0 ke HTML SSR). noscript ini memaksa visible saat scripting mati. */}
         <noscript>
@@ -58,6 +63,7 @@ export default async function LocaleLayout({
             },
           }}
         />
+        <GoogleTagManager />
       </body>
     </html>
   );
