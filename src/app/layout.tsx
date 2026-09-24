@@ -12,6 +12,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/gtm";
+import { MetaPixel, MetaPixelNoScript } from "@/components/meta-pixel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <GoogleTagManagerNoScript />
+        <MetaPixelNoScript />
 
         <LanguageProvider>
           <Navbar />
@@ -74,6 +76,7 @@ export default function RootLayout({
         />
 
         <GoogleTagManager />
+        <MetaPixel />
       </body>
     </html>
   );
