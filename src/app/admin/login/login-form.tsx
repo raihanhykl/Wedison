@@ -13,8 +13,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { api, errorMessage } from "@/lib/admin/api";
 
 const schema = z.object({
-  email: z.string().email("Format email tidak valid"),
-  password: z.string().min(1, "Kata sandi wajib diisi"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
 });
 type Values = z.infer<typeof schema>;
 
@@ -51,7 +51,7 @@ export function LoginForm({ next }: { next?: string }) {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" autoComplete="email" placeholder="nama@wedison.co" {...field} />
+                <Input type="email" autoComplete="email" placeholder="name@wedison.co" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -62,7 +62,7 @@ export function LoginForm({ next }: { next?: string }) {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Kata sandi</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input type={show ? "text" : "password"} autoComplete="current-password" className="pr-10" {...field} />
@@ -70,7 +70,7 @@ export function LoginForm({ next }: { next?: string }) {
                     type="button"
                     onClick={() => setShow((s) => !s)}
                     className="absolute inset-y-0 right-0 px-3 text-muted-foreground hover:text-foreground"
-                    aria-label={show ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+                    aria-label={show ? "Hide password" : "Show password"}
                   >
                     {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
@@ -82,7 +82,7 @@ export function LoginForm({ next }: { next?: string }) {
         />
         <Button type="submit" className="w-full" size="lg" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting && <Loader2 className="animate-spin" />}
-          Masuk
+          Sign in
         </Button>
       </form>
     </Form>

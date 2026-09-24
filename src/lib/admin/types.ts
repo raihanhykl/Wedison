@@ -1,4 +1,5 @@
-// Tipe data yang dikembalikan backend (server/prisma/schema.prisma). Dijaga sinkron manual.
+// Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
+// "Topics" in the UI map to the Category model in the database.
 export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR";
 export type ContentStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED" | "ARCHIVED";
 export type Locale = "id" | "en";
@@ -61,6 +62,10 @@ export type ArticleTranslation = {
   contentHtml: string;
   seoTitle: string | null;
   seoDescription: string | null;
+  seoKeywords: string | null;
+  canonicalUrl: string | null;
+  ogTitle: string | null;
+  ogDescription: string | null;
   readingTime?: number;
 };
 
@@ -73,6 +78,9 @@ export type Article = {
   viewCount: number;
   coverImageId: string | null;
   coverImage: Media | null;
+  ogImageId: string | null;
+  ogImage: Media | null;
+  noIndex: boolean;
   categoryId: string | null;
   category: Category | null;
   author: { id: string; name: string; email: string; avatarUrl: string | null } | null;
@@ -173,10 +181,10 @@ export type DashboardStats = {
 };
 
 export const STATUS_LABEL: Record<ContentStatus, string> = {
-  DRAFT: "Draf",
-  SCHEDULED: "Terjadwal",
-  PUBLISHED: "Tayang",
-  ARCHIVED: "Arsip",
+  DRAFT: "Draft",
+  SCHEDULED: "Scheduled",
+  PUBLISHED: "Published",
+  ARCHIVED: "Archived",
 };
 
 export const ROLE_LABEL: Record<UserRole, string> = {
@@ -195,10 +203,10 @@ export const PLATFORM_LABEL: Record<SocialPlatform, string> = {
 };
 
 export const STATION_STATUS_LABEL: Record<StationStatus, string> = {
-  OPERATIONAL: "Beroperasi",
-  COMING_SOON: "Segera",
-  MAINTENANCE: "Perawatan",
-  CLOSED: "Tutup",
+  OPERATIONAL: "Operational",
+  COMING_SOON: "Coming soon",
+  MAINTENANCE: "Maintenance",
+  CLOSED: "Closed",
 };
 
-export const STATION_TIER_LABEL: Record<StationTier, string> = { HUB: "Hub", SHOWROOM: "Showroom", MITRA: "Mitra" };
+export const STATION_TIER_LABEL: Record<StationTier, string> = { HUB: "Hub", SHOWROOM: "Showroom", MITRA: "Partner" };

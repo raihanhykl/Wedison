@@ -42,7 +42,7 @@ Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `np
 | Publik (cache) | Admin (cookie JWT) |
 |---|---|
 | `GET /public/articles?locale=&page=&category=&tag=` | `GET/POST /admin/articles`, `PUT/DELETE /admin/articles/:id`, `PATCH /admin/articles/:id/status`, `POST /admin/articles/bulk` |
-| `GET /public/articles/:slug?locale=` | `GET/POST/PATCH/DELETE /admin/categories`, `/admin/tags` |
+| `GET /public/articles/:slug?locale=` | `GET/POST/PATCH/DELETE /admin/topics` (alias `/admin/categories`), `/admin/tags` |
 | `GET /public/press`, `GET /public/press/:slug` | `/admin/press` + `POST /admin/press/fetch-metadata`, `POST /admin/press/:id/refresh`, `POST /admin/press/reorder` |
 | `GET /public/social?platform=` | `/admin/social` + `fetch-metadata`, `:id/refresh`, `reorder` |
 | `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD) |
@@ -59,7 +59,10 @@ Role: `SUPER_ADMIN` (semua + kelola user) · `ADMIN` (semua konten, hapus perman
 
 ## Roadmap modul
 
-- [x] CMS: artikel dwibahasa (Tiptap, cover, kategori, tag, SEO, jadwal, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), kategori/tag.
+- [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.
+- [x] SEO artikel: SEO title/meta description (+ preview snippet Google), keywords, canonical override, OG title/description + gambar share khusus, noindex, hreflang per locale tersedia, JSON-LD NewsArticle.
+- [x] Scheduler: `server/src/lib/scheduler.ts` menayangkan artikel/liputan berstatus SCHEDULED tiap 60 detik (dan saat daftar admin dibuka).
+- [x] UI admin berbahasa Inggris; "Kategori" ditampilkan sebagai **Topics** (model DB tetap `Category`, API tersedia di `/admin/topics` dan `/admin/categories`).
 - [x] Sistem: login/role, pengguna, log aktivitas, akun saya, dashboard statistik.
 - [ ] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta (API CRUD sudah siap; UI baru daftar/pencarian).
 - [ ] Modul berikutnya (menyusul).

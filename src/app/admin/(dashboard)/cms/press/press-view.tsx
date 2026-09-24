@@ -29,8 +29,8 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { STATUS_LABEL, type ContentStatus, type Paginated, type Press } from "@/lib/admin/types";
 
 const schema = z.object({
-  url: z.string().url("URL tidak valid"),
-  title: z.string().trim().min(3, "Minimal 3 karakter").max(300),
+  url: z.string().url("Invalid URL"),
+  title: z.string().trim().min(3, "At least 3 characters").max(300),
   slug: z.string().trim().max(200).optional(),
   excerpt: z.string().trim().max(2000).optional(),
   description: z.string().trim().max(1000).optional(),
@@ -65,7 +65,7 @@ export function PressView() {
 
   const refresh = useMutation({
     mutationFn: (id: string) => api(`/admin/press/${id}/refresh`, { method: "POST" }),
-    onSuccess: () => { toast.success("Metadata diperbarui dari sumber"); invalidate(); },
+    onSuccess: () => { toast.success("Metadata refreshed from the source"); invalidate(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const setStatus = useMutation({
@@ -75,13 +75,13 @@ export function PressView() {
   });
   const remove = useMutation({
     mutationFn: (id: string) => api(`/admin/press/${id}`, { method: "DELETE" }),
-    onSuccess: () => { toast.success("Liputan dihapus"); setToDelete(null); invalidate(); },
+    onSuccess: () => { toast.success("Press coverage deleted"); setToDelete(null); invalidate(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
   const columns = useMemo<ColumnDef<Press, unknown>[]>(() => [
     {
-      id: "title", header: "Liputan",
+      id: "title", header: "Coverage",
       cell: ({ row }) => {
         const p = row.original;
         return (
@@ -101,25 +101,25 @@ export function PressView() {
       },
     },
     { id: "status", header: "Status", size: 110, cell: ({ row }) => <StatusBadge status={row.original.status} /> },
-    { id: "publishedAt", header: "Terbit", size: 120, cell: ({ row }) => <span className="text-xs">{formatDate(row.original.publishedAt)}</span> },
-    { id: "fetched", header: "Metadata", size: 120, cell: ({ row }) => <span className="text-xs text-muted-foreground">{row.original.fetchedAt ? formatDate(row.original.fetchedAt) : "belum diambil"}</span> },
+    { id: "publishedAt", header: "Published", size: 120, cell: ({ row }) => <span className="text-xs">{formatDate(row.original.publishedAt)}</span> },
+    { id: "fetched", header: "Metadata", size: 120, cell: ({ row }) => <span className="text-xs text-muted-foreground">{row.original.fetchedAt ? formatDate(row.original.fetchedAt) : "not fetched"}</span> },
     {
       id: "actions", size: 48,
       cell: ({ row }) => {
         const p = row.original;
         return (
           <DropdownMenu>
-            <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="size-8" aria-label="Aksi"><MoreHorizontal /></Button></DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="size-8" aria-label="Actions"><MoreHorizontal /></Button></DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => setEditing(p)}><Pencil /> Edit</DropdownMenuItem>
-              <DropdownMenuItem asChild><a href={p.url} target="_blank" rel="noreferrer"><ExternalLink /> Buka sumber</a></DropdownMenuItem>
-              <DropdownMenuItem asChild><a href={`/id/media-center/news/${p.slug}/`} target="_blank" rel="noreferrer"><ExternalLink /> Lihat di situs</a></DropdownMenuItem>
-              <DropdownMenuItem onClick={() => refresh.mutate(p.id)}><RefreshCw /> Ambil ulang metadata</DropdownMenuItem>
+              <DropdownMenuItem asChild><a href={p.url} target="_blank" rel="noreferrer"><ExternalLink /> Open source</a></DropdownMenuItem>
+              <DropdownMenuItem asChild><a href={`/id/media-center/news/${p.slug}/`} target="_blank" rel="noreferrer"><ExternalLink /> View on site</a></DropdownMenuItem>
+              <DropdownMenuItem onClick={() => refresh.mutate(p.id)}><RefreshCw /> Refresh metadata</DropdownMenuItem>
               <DropdownMenuSeparator />
-              {p.status !== "PUBLISHED" && <DropdownMenuItem onClick={() => setStatus.mutate({ id: p.id, status: "PUBLISHED" })}>Tayangkan</DropdownMenuItem>}
-              {p.status === "PUBLISHED" && <DropdownMenuItem onClick={() => setStatus.mutate({ id: p.id, status: "DRAFT" })}>Sembunyikan (draf)</DropdownMenuItem>}
-              {p.status !== "ARCHIVED" && <DropdownMenuItem onClick={() => setStatus.mutate({ id: p.id, status: "ARCHIVED" })}>Arsipkan</DropdownMenuItem>}
-              {can.deleteHard && (<><DropdownMenuSeparator /><DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setToDelete(p)}><Trash2 /> Hapus</DropdownMenuItem></>)}
+              {p.status !== "PUBLISHED" && <DropdownMenuItem onClick={() => setStatus.mutate({ id: p.id, status: "PUBLISHED" })}>Publish</DropdownMenuItem>}
+              {p.status === "PUBLISHED" && <DropdownMenuItem onClick={() => setStatus.mutate({ id: p.id, status: "DRAFT" })}>Unpublish (draft)</DropdownMenuItem>}
+              {p.status !== "ARCHIVED" && <DropdownMenuItem onClick={() => setStatus.mutate({ id: p.id, status: "ARCHIVED" })}>Archive</DropdownMenuItem>}
+              {can.deleteHard && (<><DropdownMenuSeparator /><DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setToDelete(p)}><Trash2 /> Delete</DropdownMenuItem></>)}
             </DropdownMenuContent>
           </DropdownMenu>
         );
@@ -130,19 +130,19 @@ export function PressView() {
   return (
     <>
       <PageHeader
-        title="Liputan Pers"
-        description="Berita tentang Wedison dari media eksternal. Tempel URL, metadata (judul, gambar, tanggal) diambil otomatis."
-        actions={<Button onClick={() => setEditing("new")}><Plus /> Tambah liputan</Button>}
+        title="Press Coverage"
+        description="News about Wedison from external media. Paste a URL and the metadata (title, image, date) is fetched automatically."
+        actions={<Button onClick={() => setEditing("new")}><Plus /> Add coverage</Button>}
       />
       <Tabs value={tab} onValueChange={(v) => { setTab(v as typeof tab); setPage(1); }}>
         <TabsList className="flex-wrap h-auto">
-          <TabsTrigger value="all">Semua</TabsTrigger>
-          <TabsTrigger value="PUBLISHED">Tayang</TabsTrigger>
-          <TabsTrigger value="DRAFT">Draf</TabsTrigger>
-          <TabsTrigger value="ARCHIVED">Arsip</TabsTrigger>
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="PUBLISHED">Published</TabsTrigger>
+          <TabsTrigger value="DRAFT">Drafts</TabsTrigger>
+          <TabsTrigger value="ARCHIVED">Archived</TabsTrigger>
         </TabsList>
       </Tabs>
-      <Input placeholder="Cari judul / media…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
+      <Input placeholder="Search title / outlet…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
       <DataTable
         columns={columns}
         data={data?.items ?? []}
@@ -150,7 +150,7 @@ export function PressView() {
         meta={data?.meta}
         onPageChange={setPage}
         onLimitChange={(l) => { setLimit(l); setPage(1); }}
-        emptyState={<EmptyState icon={Newspaper} title="Belum ada liputan" description="Tambahkan URL artikel media untuk ditampilkan di Media Center." action={<Button onClick={() => setEditing("new")}><Plus /> Tambah liputan</Button>} />}
+        emptyState={<EmptyState icon={Newspaper} title="No press coverage yet" description="Add a media article URL to feature it on the Media Center." action={<Button onClick={() => setEditing("new")}><Plus /> Add coverage</Button>} />}
       />
 
       <Sheet open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
@@ -158,7 +158,7 @@ export function PressView() {
           {editing && <PressForm key={editing === "new" ? "new" : editing.id} press={editing === "new" ? null : editing} onDone={() => { setEditing(null); invalidate(); }} />}
         </SheetContent>
       </Sheet>
-      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Hapus liputan?" description={toDelete?.title} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
+      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Delete press coverage?" description={toDelete?.title} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
     </>
   );
 }
@@ -185,7 +185,7 @@ function PressForm({ press, onDone }: { press: Press | null; onDone: () => void 
         author: cur.author || m.author || "",
         publishedAt: m.publishedAt ? toLocalInput(m.publishedAt) : cur.publishedAt,
       });
-      toast.success("Metadata terisi. Periksa lalu simpan.");
+      toast.success("Metadata filled in. Review, then save.");
     },
     onError: (e) => toast.error(errorMessage(e)),
   });
@@ -200,7 +200,7 @@ function PressForm({ press, onDone }: { press: Press | null; onDone: () => void 
       };
       return press ? api(`/admin/press/${press.id}`, { method: "PATCH", body }) : api("/admin/press", { method: "POST", body });
     },
-    onSuccess: () => { toast.success("Liputan disimpan"); onDone(); },
+    onSuccess: () => { toast.success("Press coverage saved"); onDone(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -210,17 +210,17 @@ function PressForm({ press, onDone }: { press: Press | null; onDone: () => void 
     <Form {...form}>
       <form onSubmit={form.handleSubmit((v) => save.mutate(v))} className="flex h-full flex-col">
         <SheetHeader>
-          <SheetTitle>{press ? "Edit liputan" : "Tambah liputan"}</SheetTitle>
-          <SheetDescription>Tempel URL artikel, lalu klik “Ambil metadata”.</SheetDescription>
+          <SheetTitle>{press ? "Edit coverage" : "Add coverage"}</SheetTitle>
+          <SheetDescription>Paste the article URL, then click “Fetch”.</SheetDescription>
         </SheetHeader>
         <div className="flex-1 space-y-4 px-4">
           <FormField control={form.control} name="url" render={({ field }) => (
             <FormItem>
-              <FormLabel>URL sumber</FormLabel>
+              <FormLabel>Source URL</FormLabel>
               <div className="flex gap-2">
                 <FormControl><Input placeholder="https://…" {...field} /></FormControl>
                 <Button type="button" variant="outline" onClick={() => form.trigger("url").then((ok) => ok && fetchMeta.mutate(field.value))} disabled={fetchMeta.isPending}>
-                  {fetchMeta.isPending ? <Loader2 className="animate-spin" /> : <Sparkles />} Ambil
+                  {fetchMeta.isPending ? <Loader2 className="animate-spin" /> : <Sparkles />} Fetch
                 </Button>
               </div>
               <FormMessage />
@@ -231,14 +231,14 @@ function PressForm({ press, onDone }: { press: Press | null; onDone: () => void 
               <Image src={imageUrl} alt="" fill sizes="500px" className="object-cover" unoptimized />
             </div>
           )}
-          <FormField control={form.control} name="title" render={({ field }) => (<FormItem><FormLabel>Judul</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-          <FormField control={form.control} name="slug" render={({ field }) => (<FormItem><FormLabel>Slug</FormLabel><FormControl><Input className="font-mono text-xs" placeholder="otomatis dari judul" {...field} /></FormControl><FormDescription>URL: /media-center/news/&lt;slug&gt;</FormDescription><FormMessage /></FormItem>)} />
-          <FormField control={form.control} name="excerpt" render={({ field }) => (<FormItem><FormLabel>Kutipan (tampil di halaman detail)</FormLabel><FormControl><Textarea rows={5} placeholder="Paragraf pembuka / kutipan dari artikel sumber" {...field} /></FormControl><FormMessage /></FormItem>)} />
-          <FormField control={form.control} name="description" render={({ field }) => (<FormItem><FormLabel>Deskripsi singkat (kartu)</FormLabel><FormControl><Textarea rows={2} {...field} /></FormControl><FormMessage /></FormItem>)} />
+          <FormField control={form.control} name="title" render={({ field }) => (<FormItem><FormLabel>Title</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+          <FormField control={form.control} name="slug" render={({ field }) => (<FormItem><FormLabel>Slug</FormLabel><FormControl><Input className="font-mono text-xs" placeholder="generated from the title" {...field} /></FormControl><FormDescription>URL: /media-center/news/&lt;slug&gt;</FormDescription><FormMessage /></FormItem>)} />
+          <FormField control={form.control} name="excerpt" render={({ field }) => (<FormItem><FormLabel>Quote (shown on the detail page)</FormLabel><FormControl><Textarea rows={5} placeholder="Opening paragraph / quote from the source article" {...field} /></FormControl><FormMessage /></FormItem>)} />
+          <FormField control={form.control} name="description" render={({ field }) => (<FormItem><FormLabel>Short description (card)</FormLabel><FormControl><Textarea rows={2} {...field} /></FormControl><FormMessage /></FormItem>)} />
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField control={form.control} name="siteName" render={({ field }) => (<FormItem><FormLabel>Nama media</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-            <FormField control={form.control} name="author" render={({ field }) => (<FormItem><FormLabel>Penulis</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-            <FormField control={form.control} name="publishedAt" render={({ field }) => (<FormItem><FormLabel>Tanggal terbit</FormLabel><FormControl><Input type="datetime-local" {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="siteName" render={({ field }) => (<FormItem><FormLabel>Outlet name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="author" render={({ field }) => (<FormItem><FormLabel>Author</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="publishedAt" render={({ field }) => (<FormItem><FormLabel>Publish date</FormLabel><FormControl><Input type="datetime-local" {...field} /></FormControl><FormMessage /></FormItem>)} />
             <FormField control={form.control} name="status" render={({ field }) => (
               <FormItem>
                 <FormLabel>Status</FormLabel>
@@ -250,10 +250,10 @@ function PressForm({ press, onDone }: { press: Press | null; onDone: () => void 
               </FormItem>
             )} />
           </div>
-          <FormField control={form.control} name="imageUrl" render={({ field }) => (<FormItem><FormLabel>URL gambar</FormLabel><FormControl><Input className="font-mono text-xs" {...field} /></FormControl><FormMessage /></FormItem>)} />
+          <FormField control={form.control} name="imageUrl" render={({ field }) => (<FormItem><FormLabel>Image URL</FormLabel><FormControl><Input className="font-mono text-xs" {...field} /></FormControl><FormMessage /></FormItem>)} />
         </div>
         <SheetFooter>
-          <Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />} Simpan</Button>
+          <Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />} Save</Button>
         </SheetFooter>
       </form>
     </Form>

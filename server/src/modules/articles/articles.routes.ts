@@ -10,6 +10,7 @@ import { logActivity } from "../../lib/activity.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
 import { sanitizeArticleHtml, stripHtml, readingTimeMinutes } from "../../lib/sanitize.js";
 import { notFound, badRequest } from "../../lib/errors.js";
+import { promoteScheduled } from "../../lib/scheduler.js";
 
 const STATUS = z.enum(["DRAFT", "SCHEDULED", "PUBLISHED", "ARCHIVED"]);
 const LOCALE = z.enum(["id", "en"]);
@@ -23,6 +24,10 @@ const translationSchema = z.object({
   contentHtml: z.string().default(""),
   seoTitle: z.string().trim().max(70).nullable().optional(),
   seoDescription: z.string().trim().max(170).nullable().optional(),
+  seoKeywords: z.string().trim().max(300).nullable().optional(),
+  canonicalUrl: z.string().trim().url().nullable().optional().or(z.literal("").transform(() => null)),
+  ogTitle: z.string().trim().max(100).nullable().optional(),
+  ogDescription: z.string().trim().max(200).nullable().optional(),
 });
 
 const articleSchema = z.object({
@@ -31,13 +36,16 @@ const articleSchema = z.object({
   publishedAt: z.coerce.date().nullable().optional(),
   scheduledAt: z.coerce.date().nullable().optional(),
   coverImageId: z.string().nullable().optional(),
+  ogImageId: z.string().nullable().optional(),
+  noIndex: z.boolean().default(false),
   categoryId: z.string().nullable().optional(),
   tagIds: z.array(z.string()).default([]),
-  translations: z.array(translationSchema).min(1, "Minimal satu bahasa (ID) wajib diisi"),
+  translations: z.array(translationSchema).min(1, "At least one language (ID) is required"),
 });
 
 const adminInclude = {
   coverImage: true,
+  ogImage: true,
   category: true,
   tags: true,
   author: { select: { id: true, name: true, email: true, avatarUrl: true } },
@@ -65,6 +73,10 @@ async function buildTranslations(
       contentHtml: html,
       seoTitle: t.seoTitle ?? null,
       seoDescription: t.seoDescription ?? null,
+      seoKeywords: t.seoKeywords ?? null,
+      canonicalUrl: t.canonicalUrl ?? null,
+      ogTitle: t.ogTitle ?? null,
+      ogDescription: t.ogDescription ?? null,
       readingTime: readingTimeMinutes(text),
     });
   }
@@ -74,7 +86,7 @@ async function buildTranslations(
 function resolvePublishedAt(data: { status: string; publishedAt?: Date | null; scheduledAt?: Date | null }, existing?: Date | null) {
   if (data.status === "PUBLISHED") return data.publishedAt ?? existing ?? new Date();
   if (data.status === "SCHEDULED") {
-    if (!data.scheduledAt) throw badRequest("Tanggal jadwal wajib diisi untuk status Terjadwal");
+    if (!data.scheduledAt) throw badRequest("A schedule date is required for the Scheduled status");
     return data.scheduledAt;
   }
   return data.publishedAt ?? existing ?? null;
@@ -94,6 +106,7 @@ const listQuery = paginationQuery.extend({
 
 articlesRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {
   try {
+    await promoteScheduled();
     const q = getValidated<typeof listQuery>(req, "query");
     const where: Prisma.ArticleWhereInput = {
       deletedAt: q.trashed ? { not: null } : null,
@@ -117,8 +130,9 @@ articlesRouter.get("/", validate(listQuery, "query"), async (req, res, next) => 
 
 articlesRouter.get("/:id", async (req, res, next) => {
   try {
+    await promoteScheduled();
     const item = await prisma.article.findUnique({ where: { id: req.params.id as string }, include: adminInclude });
-    if (!item) throw notFound("Artikel tidak ditemukan");
+    if (!item) throw notFound("Article not found");
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -136,6 +150,8 @@ articlesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(articleSchema)
         publishedAt: resolvePublishedAt(data),
         scheduledAt: data.scheduledAt ?? null,
         coverImageId: data.coverImageId ?? null,
+        ogImageId: data.ogImageId ?? null,
+        noIndex: data.noIndex,
         categoryId: data.categoryId ?? null,
         authorId: req.user!.id,
         tags: { connect: data.tagIds.map((id) => ({ id })) },
@@ -144,7 +160,7 @@ articlesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(articleSchema)
       include: adminInclude,
     });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
-    logActivity(req, { action: "create", entity: "article", entityId: item.id, summary: `Buat artikel "${translations[0].title}"` });
+    logActivity(req, { action: "create", entity: "article", entityId: item.id, summary: `Created article "${translations[0].title}"` });
     res.status(201).json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -156,7 +172,7 @@ articlesRouter.put("/:id", requireRole("ADMIN", "EDITOR"), validate(articleSchem
     const id = req.params.id as string;
     const data = getValidated<typeof articleSchema>(req);
     const existing = await prisma.article.findUnique({ where: { id } });
-    if (!existing) throw notFound("Artikel tidak ditemukan");
+    if (!existing) throw notFound("Article not found");
     const translations = await buildTranslations(id, data.translations);
     const keepLocales = translations.map((t) => t.locale);
 
@@ -177,6 +193,8 @@ articlesRouter.put("/:id", requireRole("ADMIN", "EDITOR"), validate(articleSchem
           publishedAt: resolvePublishedAt(data, existing.publishedAt),
           scheduledAt: data.scheduledAt ?? null,
           coverImageId: data.coverImageId ?? null,
+          ogImageId: data.ogImageId ?? null,
+          noIndex: data.noIndex,
           categoryId: data.categoryId ?? null,
           tags: { set: data.tagIds.map((tid) => ({ id: tid })) },
         },
@@ -184,7 +202,7 @@ articlesRouter.put("/:id", requireRole("ADMIN", "EDITOR"), validate(articleSchem
       });
     });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
-    logActivity(req, { action: "update", entity: "article", entityId: id, summary: `Ubah artikel "${translations[0].title}"` });
+    logActivity(req, { action: "update", entity: "article", entityId: id, summary: `Updated article "${translations[0].title}"` });
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -198,14 +216,14 @@ articlesRouter.patch("/:id/status", requireRole("ADMIN", "EDITOR"), validate(sta
     const id = req.params.id as string;
     const { status, scheduledAt } = getValidated<typeof statusSchema>(req);
     const existing = await prisma.article.findUnique({ where: { id } });
-    if (!existing) throw notFound("Artikel tidak ditemukan");
+    if (!existing) throw notFound("Article not found");
     const item = await prisma.article.update({
       where: { id },
       data: { status, scheduledAt: scheduledAt ?? existing.scheduledAt, publishedAt: resolvePublishedAt({ status, scheduledAt: scheduledAt ?? existing.scheduledAt }, existing.publishedAt) },
       include: adminInclude,
     });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
-    logActivity(req, { action: status === "PUBLISHED" ? "publish" : "update", entity: "article", entityId: id, summary: `Status artikel -> ${status}` });
+    logActivity(req, { action: status === "PUBLISHED" ? "publish" : "update", entity: "article", entityId: id, summary: `Article status -> ${status}` });
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -220,7 +238,7 @@ const bulkSchema = z.object({
 articlesRouter.post("/bulk", requireRole("ADMIN", "EDITOR"), validate(bulkSchema), async (req, res, next) => {
   try {
     const { ids, action } = getValidated<typeof bulkSchema>(req);
-    if (action === "delete" && req.user!.role === "EDITOR") throw badRequest("Editor tidak bisa menghapus permanen");
+    if (action === "delete" && req.user!.role === "EDITOR") throw badRequest("Editors cannot delete permanently");
     const where = { id: { in: ids } };
     let count = 0;
     switch (action) {
@@ -232,7 +250,7 @@ articlesRouter.post("/bulk", requireRole("ADMIN", "EDITOR"), validate(bulkSchema
       case "delete": count = (await prisma.article.deleteMany({ where })).count; break;
     }
     invalidate([CacheTags.articles, CacheTags.dashboard]);
-    logActivity(req, { action, entity: "article", summary: `Aksi massal ${action} pada ${count} artikel`, meta: { ids } });
+    logActivity(req, { action, entity: "article", summary: `Bulk ${action} on ${count} articles`, meta: { ids } });
     res.json({ ok: true, count });
   } catch (e) {
     next(e);
@@ -244,11 +262,11 @@ articlesRouter.delete("/:id", requireRole("ADMIN", "EDITOR"), async (req, res, n
   try {
     const id = req.params.id as string;
     const force = req.query.force === "true";
-    if (force && req.user!.role === "EDITOR") throw badRequest("Editor tidak bisa menghapus permanen");
+    if (force && req.user!.role === "EDITOR") throw badRequest("Editors cannot delete permanently");
     if (force) await prisma.article.delete({ where: { id } });
     else await prisma.article.update({ where: { id }, data: { deletedAt: new Date() } });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
-    logActivity(req, { action: "delete", entity: "article", entityId: id, summary: force ? "Hapus permanen artikel" : "Pindahkan artikel ke sampah" });
+    logActivity(req, { action: "delete", entity: "article", entityId: id, summary: force ? "Permanently deleted article" : "Moved article to trash" });
     res.json({ ok: true });
   } catch (e) {
     next(e);
@@ -260,7 +278,7 @@ articlesRouter.post("/:id/restore", requireRole("ADMIN", "EDITOR"), async (req, 
     const id = req.params.id as string;
     await prisma.article.update({ where: { id }, data: { deletedAt: null } });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
-    logActivity(req, { action: "restore", entity: "article", entityId: id, summary: "Pulihkan artikel dari sampah" });
+    logActivity(req, { action: "restore", entity: "article", entityId: id, summary: "Restored article from trash" });
     res.json({ ok: true });
   } catch (e) {
     next(e);
@@ -302,6 +320,13 @@ function toPublic(a: Prisma.ArticleGetPayload<{ include: typeof adminInclude }>,
     readingTime: t.readingTime,
     seoTitle: t.seoTitle,
     seoDescription: t.seoDescription,
+    seoKeywords: t.seoKeywords,
+    canonicalUrl: t.canonicalUrl,
+    ogTitle: t.ogTitle,
+    ogDescription: t.ogDescription,
+    noIndex: a.noIndex,
+    ogImage: a.ogImage ? { url: a.ogImage.url, alt: a.ogImage.alt, width: a.ogImage.width, height: a.ogImage.height } : null,
+    updatedAt: a.updatedAt,
     publishedAt: a.publishedAt,
     isFeatured: a.isFeatured,
     coverImage: a.coverImage ? { url: a.coverImage.url, alt: a.coverImage.alt, width: a.coverImage.width, height: a.coverImage.height } : null,
@@ -350,7 +375,7 @@ publicArticlesRouter.get("/:slug", async (req, res, next) => {
       if (!visible) return null;
       return { ...toPublic(a, locale), contentHtml: t.contentHtml };
     });
-    if (!data) throw notFound("Artikel tidak ditemukan");
+    if (!data) throw notFound("Article not found");
     // view count: fire-and-forget, tidak ikut cache
     prisma.article.update({ where: { id: data.id }, data: { viewCount: { increment: 1 } } }).catch(() => {});
     res.json({ ok: true, data });

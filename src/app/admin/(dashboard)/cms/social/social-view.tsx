@@ -27,7 +27,7 @@ import { PLATFORM_LABEL, type Paginated, type SocialPlatform, type SocialPost } 
 
 const schema = z.object({
   platform: z.enum(["INSTAGRAM", "TIKTOK", "YOUTUBE", "X", "FACEBOOK", "LINKEDIN"]),
-  url: z.string().url("URL tidak valid"),
+  url: z.string().url("Invalid URL"),
   caption: z.string().trim().max(2200).optional(),
   thumbnailUrl: z.string().trim().max(1000).optional(),
   isActive: z.boolean(),
@@ -55,7 +55,7 @@ export function SocialView() {
   });
   const refresh = useMutation({
     mutationFn: (id: string) => api(`/admin/social/${id}/refresh`, { method: "POST" }),
-    onSuccess: () => { toast.success("Thumbnail & caption diperbarui"); invalidate(); },
+    onSuccess: () => { toast.success("Thumbnail & caption refreshed"); invalidate(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const reorder = useMutation({
@@ -65,7 +65,7 @@ export function SocialView() {
   });
   const remove = useMutation({
     mutationFn: (id: string) => api(`/admin/social/${id}`, { method: "DELETE" }),
-    onSuccess: () => { toast.success("Post dihapus"); setToDelete(null); invalidate(); },
+    onSuccess: () => { toast.success("Post deleted"); setToDelete(null); invalidate(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -80,14 +80,14 @@ export function SocialView() {
   return (
     <>
       <PageHeader
-        title="Sosial Media"
-        description="Post yang ditampilkan di bagian Instagram Media Center. Urutan di sini = urutan di situs."
-        actions={<Button onClick={() => setEditing("new")}><Plus /> Tambah post</Button>}
+        title="Social Media"
+        description="Posts shown in the Instagram section of the Media Center. The order here is the order on the site."
+        actions={<Button onClick={() => setEditing("new")}><Plus /> Add post</Button>}
       />
       <Select value={platform} onValueChange={(v) => setPlatform(v as typeof platform)}>
         <SelectTrigger className="sm:w-[200px]"><SelectValue /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Semua platform</SelectItem>
+          <SelectItem value="all">All platforms</SelectItem>
           {(Object.keys(PLATFORM_LABEL) as SocialPlatform[]).map((p) => <SelectItem key={p} value={p}>{PLATFORM_LABEL[p]}</SelectItem>)}
         </SelectContent>
       </Select>
@@ -102,22 +102,22 @@ export function SocialView() {
                 {p.thumbnailUrl ? <Image src={p.thumbnailUrl} alt="" fill sizes="300px" className="object-cover" unoptimized /> : <Share2 className="absolute inset-0 m-auto size-6 text-muted-foreground" />}
                 <Badge className="absolute left-2 top-2" variant="secondary">{PLATFORM_LABEL[p.platform]}</Badge>
                 <div className="absolute right-2 top-2 flex gap-1">
-                  <Button size="icon" variant="secondary" className="size-7" disabled={idx === 0 || reorder.isPending} onClick={() => move(idx, -1)} aria-label="Naik"><ArrowUp /></Button>
-                  <Button size="icon" variant="secondary" className="size-7" disabled={idx === items.length - 1 || reorder.isPending} onClick={() => move(idx, 1)} aria-label="Turun"><ArrowDown /></Button>
+                  <Button size="icon" variant="secondary" className="size-7" disabled={idx === 0 || reorder.isPending} onClick={() => move(idx, -1)} aria-label="Move up"><ArrowUp /></Button>
+                  <Button size="icon" variant="secondary" className="size-7" disabled={idx === items.length - 1 || reorder.isPending} onClick={() => move(idx, 1)} aria-label="Move down"><ArrowDown /></Button>
                 </div>
               </div>
               <div className="space-y-3 p-3">
-                <p className="line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">{p.caption || <span className="italic">Tanpa caption</span>}</p>
+                <p className="line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">{p.caption || <span className="italic">No caption</span>}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs">
-                    <Switch checked={p.isActive} onCheckedChange={(v) => toggle.mutate({ id: p.id, isActive: v })} aria-label="Tampilkan" />
-                    <span>{p.isActive ? "Tampil" : "Sembunyi"}</span>
+                    <Switch checked={p.isActive} onCheckedChange={(v) => toggle.mutate({ id: p.id, isActive: v })} aria-label="Visible" />
+                    <span>{p.isActive ? "Visible" : "Hidden"}</span>
                   </div>
                   <div className="flex gap-0.5">
-                    <Button size="icon" variant="ghost" className="size-7" onClick={() => refresh.mutate(p.id)} aria-label="Ambil ulang"><RefreshCw className={cn(refresh.isPending && refresh.variables === p.id && "animate-spin")} /></Button>
+                    <Button size="icon" variant="ghost" className="size-7" onClick={() => refresh.mutate(p.id)} aria-label="Refresh"><RefreshCw className={cn(refresh.isPending && refresh.variables === p.id && "animate-spin")} /></Button>
                     <Button size="icon" variant="ghost" className="size-7" onClick={() => setEditing(p)} aria-label="Edit"><Pencil /></Button>
-                    <Button size="icon" variant="ghost" className="size-7" asChild><a href={p.url} target="_blank" rel="noreferrer" aria-label="Buka"><ExternalLink /></a></Button>
-                    {can.deleteHard && <Button size="icon" variant="ghost" className="size-7 text-destructive" onClick={() => setToDelete(p)} aria-label="Hapus"><Trash2 /></Button>}
+                    <Button size="icon" variant="ghost" className="size-7" asChild><a href={p.url} target="_blank" rel="noreferrer" aria-label="Open"><ExternalLink /></a></Button>
+                    {can.deleteHard && <Button size="icon" variant="ghost" className="size-7 text-destructive" onClick={() => setToDelete(p)} aria-label="Delete"><Trash2 /></Button>}
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export function SocialView() {
           ))}
         </div>
       ) : (
-        <EmptyState icon={Share2} title="Belum ada post" description="Tempel URL post Instagram; thumbnail & caption diambil otomatis." action={<Button onClick={() => setEditing("new")}><Plus /> Tambah post</Button>} />
+        <EmptyState icon={Share2} title="No posts yet" description="Paste an Instagram post URL; the thumbnail & caption are fetched automatically." action={<Button onClick={() => setEditing("new")}><Plus /> Add post</Button>} />
       )}
 
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
@@ -133,7 +133,7 @@ export function SocialView() {
           {editing && <SocialForm key={editing === "new" ? "new" : editing.id} post={editing === "new" ? null : editing} onDone={() => { setEditing(null); invalidate(); }} />}
         </DialogContent>
       </Dialog>
-      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Hapus post?" description={toDelete?.url} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
+      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Delete post?" description={toDelete?.url} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
     </>
   );
 }
@@ -149,7 +149,7 @@ function SocialForm({ post, onDone }: { post: SocialPost | null; onDone: () => v
       form.setValue("url", m.url);
       if (m.caption) form.setValue("caption", m.caption);
       if (m.thumbnailUrl) form.setValue("thumbnailUrl", m.thumbnailUrl);
-      toast.success(m.thumbnailUrl ? "Thumbnail & caption terisi" : "Caption terisi; thumbnail tidak tersedia");
+      toast.success(m.thumbnailUrl ? "Thumbnail & caption filled in" : "Caption filled in; thumbnail unavailable");
     },
     onError: (e) => toast.error(errorMessage(e)),
   });
@@ -158,7 +158,7 @@ function SocialForm({ post, onDone }: { post: SocialPost | null; onDone: () => v
       const body = { ...v, caption: v.caption || null, thumbnailUrl: v.thumbnailUrl || null };
       return post ? api(`/admin/social/${post.id}`, { method: "PATCH", body }) : api("/admin/social", { method: "POST", body });
     },
-    onSuccess: () => { toast.success("Post disimpan"); onDone(); },
+    onSuccess: () => { toast.success("Post saved"); onDone(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const thumb = form.watch("thumbnailUrl");
@@ -167,8 +167,8 @@ function SocialForm({ post, onDone }: { post: SocialPost | null; onDone: () => v
     <Form {...form}>
       <form onSubmit={form.handleSubmit((v) => save.mutate(v))} className="space-y-4">
         <DialogHeader>
-          <DialogTitle>{post ? "Edit post" : "Tambah post"}</DialogTitle>
-          <DialogDescription>Format URL Instagram: https://www.instagram.com/p/KODE/ atau /reel/KODE/</DialogDescription>
+          <DialogTitle>{post ? "Edit post" : "Add post"}</DialogTitle>
+          <DialogDescription>Instagram URL format: https://www.instagram.com/p/CODE/ or /reel/CODE/</DialogDescription>
         </DialogHeader>
         <FormField control={form.control} name="platform" render={({ field }) => (
           <FormItem>
@@ -181,11 +181,11 @@ function SocialForm({ post, onDone }: { post: SocialPost | null; onDone: () => v
         )} />
         <FormField control={form.control} name="url" render={({ field }) => (
           <FormItem>
-            <FormLabel>URL post</FormLabel>
+            <FormLabel>Post URL</FormLabel>
             <div className="flex gap-2">
               <FormControl><Input placeholder="https://www.instagram.com/reel/…" {...field} /></FormControl>
               <Button type="button" variant="outline" disabled={fetchMeta.isPending} onClick={() => form.trigger("url").then((ok) => ok && fetchMeta.mutate(field.value))}>
-                {fetchMeta.isPending ? <Loader2 className="animate-spin" /> : <Sparkles />} Ambil
+                {fetchMeta.isPending ? <Loader2 className="animate-spin" /> : <Sparkles />} Fetch
               </Button>
             </div>
             <FormMessage />
@@ -193,15 +193,15 @@ function SocialForm({ post, onDone }: { post: SocialPost | null; onDone: () => v
         )} />
         {thumb && <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-muted"><Image src={thumb} alt="" fill sizes="480px" className="object-cover" unoptimized /></div>}
         <FormField control={form.control} name="caption" render={({ field }) => (<FormItem><FormLabel>Caption</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>)} />
-        <FormField control={form.control} name="thumbnailUrl" render={({ field }) => (<FormItem><FormLabel>URL thumbnail</FormLabel><FormControl><Input className="font-mono text-xs" {...field} /></FormControl><FormMessage /></FormItem>)} />
+        <FormField control={form.control} name="thumbnailUrl" render={({ field }) => (<FormItem><FormLabel>Thumbnail URL</FormLabel><FormControl><Input className="font-mono text-xs" {...field} /></FormControl><FormMessage /></FormItem>)} />
         <FormField control={form.control} name="isActive" render={({ field }) => (
           <FormItem className="flex items-center justify-between rounded-lg border border-border p-3">
-            <FormLabel className="font-normal">Tampilkan di situs</FormLabel>
+            <FormLabel className="font-normal">Show on the site</FormLabel>
             <FormControl><Switch checked={field.value} onCheckedChange={field.onChange} /></FormControl>
           </FormItem>
         )} />
         <DialogFooter>
-          <Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />} Simpan</Button>
+          <Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />} Save</Button>
         </DialogFooter>
       </form>
     </Form>

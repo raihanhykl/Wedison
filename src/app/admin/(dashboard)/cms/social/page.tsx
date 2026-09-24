@@ -1,6 +1,6 @@
 import { SocialView } from "./social-view";
 
-export const metadata = { title: "Sosial Media" };
+export const metadata = { title: "Social Media" };
 
 export default function SocialPage() {
   return <SocialView />;

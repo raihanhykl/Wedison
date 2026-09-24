@@ -12,7 +12,7 @@ export function ConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = "Hapus",
+  confirmLabel = "Delete",
   destructive = true,
   loading,
   onConfirm,
@@ -34,7 +34,7 @@ export function ConfirmDialog({
           {description && <AlertDialogDescription>{description}</AlertDialogDescription>}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={loading}>Batal</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={loading}
             className={cn(destructive && buttonVariants({ variant: "destructive" }))}
@@ -43,7 +43,7 @@ export function ConfirmDialog({
               void onConfirm();
             }}
           >
-            {loading ? "Memproses…" : confirmLabel}
+            {loading ? "Working…" : confirmLabel}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

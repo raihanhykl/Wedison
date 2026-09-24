@@ -24,7 +24,7 @@ import { api, errorMessage } from "@/lib/admin/api";
 import type { Category, Tag } from "@/lib/admin/types";
 
 const categorySchema = z.object({
-  nameId: z.string().trim().min(2, "Minimal 2 karakter").max(80),
+  nameId: z.string().trim().min(2, "At least 2 characters").max(80),
   nameEn: z.string().trim().max(80).optional(),
   slug: z.string().trim().max(120).optional(),
   description: z.string().trim().max(500).optional(),
@@ -32,28 +32,28 @@ const categorySchema = z.object({
 });
 type CategoryValues = z.infer<typeof categorySchema>;
 
-export function TaxonomyView() {
+export function TopicsView() {
   return (
     <>
-      <PageHeader title="Kategori & Tag" description="Kategori mengelompokkan artikel (satu per artikel); tag bebas dan bisa banyak." />
-      <Tabs defaultValue="categories">
+      <PageHeader title="Topics & Tags" description="Topics group articles (one per article); tags are free-form and unlimited." />
+      <Tabs defaultValue="topics">
         <TabsList>
-          <TabsTrigger value="categories">Kategori</TabsTrigger>
-          <TabsTrigger value="tags">Tag</TabsTrigger>
+          <TabsTrigger value="topics">Topics</TabsTrigger>
+          <TabsTrigger value="tags">Tags</TabsTrigger>
         </TabsList>
-        <TabsContent value="categories" className="mt-4"><CategoriesPanel /></TabsContent>
+        <TabsContent value="topics" className="mt-4"><TopicsPanel /></TabsContent>
         <TabsContent value="tags" className="mt-4"><TagsPanel /></TabsContent>
       </Tabs>
     </>
   );
 }
 
-function CategoriesPanel() {
+function TopicsPanel() {
   const qc = useQueryClient();
   const can = useCan();
   const [editing, setEditing] = useState<Category | null | "new">(null);
   const [toDelete, setToDelete] = useState<Category | null>(null);
-  const { data, isLoading } = useQuery({ queryKey: ["categories"], queryFn: () => api<{ items: Category[] }>("/admin/categories").then((r) => r.items) });
+  const { data, isLoading } = useQuery({ queryKey: ["topics"], queryFn: () => api<{ items: Category[] }>("/admin/topics").then((r) => r.items) });
 
   const form = useForm<CategoryValues>({ resolver: zodResolver(categorySchema), defaultValues: { nameId: "", nameEn: "", slug: "", description: "", sortOrder: 0 } });
 
@@ -66,32 +66,32 @@ function CategoriesPanel() {
     mutationFn: (v: CategoryValues) => {
       const body = { ...v, nameEn: v.nameEn || null, description: v.description || null, slug: v.slug || undefined };
       return editing && editing !== "new"
-        ? api(`/admin/categories/${editing.id}`, { method: "PATCH", body })
-        : api("/admin/categories", { method: "POST", body });
+        ? api(`/admin/topics/${editing.id}`, { method: "PATCH", body })
+        : api("/admin/topics", { method: "POST", body });
     },
-    onSuccess: () => { toast.success("Kategori disimpan"); setEditing(null); qc.invalidateQueries({ queryKey: ["categories"] }); },
+    onSuccess: () => { toast.success("Topic saved"); setEditing(null); qc.invalidateQueries({ queryKey: ["topics"] }); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const remove = useMutation({
-    mutationFn: (id: string) => api(`/admin/categories/${id}`, { method: "DELETE" }),
-    onSuccess: () => { toast.success("Kategori dihapus"); setToDelete(null); qc.invalidateQueries({ queryKey: ["categories"] }); qc.invalidateQueries({ queryKey: ["articles"] }); },
+    mutationFn: (id: string) => api(`/admin/topics/${id}`, { method: "DELETE" }),
+    onSuccess: () => { toast.success("Topic deleted"); setToDelete(null); qc.invalidateQueries({ queryKey: ["topics"] }); qc.invalidateQueries({ queryKey: ["articles"] }); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
   return (
     <div className="space-y-3">
       <div className="flex justify-end">
-        <Button onClick={() => openForm("new")}><Plus /> Kategori baru</Button>
+        <Button onClick={() => openForm("new")}><Plus /> New topic</Button>
       </div>
       <div className="overflow-hidden rounded-xl border border-border bg-card">
         <Table>
           <TableHeader className="bg-muted/60">
             <TableRow>
-              <TableHead className="w-12">Urutan</TableHead>
-              <TableHead>Nama (ID)</TableHead>
-              <TableHead>Nama (EN)</TableHead>
+              <TableHead className="w-12">Order</TableHead>
+              <TableHead>Name (ID)</TableHead>
+              <TableHead>Name (EN)</TableHead>
               <TableHead>Slug</TableHead>
-              <TableHead className="text-right">Artikel</TableHead>
+              <TableHead className="text-right">Articles</TableHead>
               <TableHead className="w-24" />
             </TableRow>
           </TableHeader>
@@ -109,13 +109,13 @@ function CategoriesPanel() {
                   <TableCell>
                     <div className="flex justify-end gap-1">
                       <Button variant="ghost" size="icon" className="size-8" onClick={() => openForm(c)} aria-label="Edit"><Pencil /></Button>
-                      {can.deleteHard && <Button variant="ghost" size="icon" className="size-8 text-destructive" onClick={() => setToDelete(c)} aria-label="Hapus"><Trash2 /></Button>}
+                      {can.deleteHard && <Button variant="ghost" size="icon" className="size-8 text-destructive" onClick={() => setToDelete(c)} aria-label="Delete"><Trash2 /></Button>}
                     </div>
                   </TableCell>
                 </TableRow>
               ))
             ) : (
-              <TableRow><TableCell colSpan={6} className="p-0"><EmptyState icon={Tags} title="Belum ada kategori" /></TableCell></TableRow>
+              <TableRow><TableCell colSpan={6} className="p-0"><EmptyState icon={Tags} title="No topics yet" /></TableCell></TableRow>
             )}
           </TableBody>
         </Table>
@@ -123,26 +123,26 @@ function CategoriesPanel() {
 
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
         <DialogContent>
-          <DialogHeader><DialogTitle>{editing === "new" ? "Kategori baru" : "Edit kategori"}</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>{editing === "new" ? "New topic" : "Edit topic"}</DialogTitle></DialogHeader>
           <Form {...form}>
             <form className="space-y-4" onSubmit={form.handleSubmit((v) => save.mutate(v))}>
               <div className="grid gap-4 sm:grid-cols-2">
-                <FormField control={form.control} name="nameId" render={({ field }) => (<FormItem><FormLabel>Nama (ID)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-                <FormField control={form.control} name="nameEn" render={({ field }) => (<FormItem><FormLabel>Nama (EN)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+                <FormField control={form.control} name="nameId" render={({ field }) => (<FormItem><FormLabel>Name (ID)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+                <FormField control={form.control} name="nameEn" render={({ field }) => (<FormItem><FormLabel>Name (EN)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
               </div>
-              <FormField control={form.control} name="slug" render={({ field }) => (<FormItem><FormLabel>Slug</FormLabel><FormControl><Input className="font-mono" placeholder="otomatis dari nama" {...field} /></FormControl><FormDescription>Dipakai di URL filter kategori.</FormDescription><FormMessage /></FormItem>)} />
-              <FormField control={form.control} name="description" render={({ field }) => (<FormItem><FormLabel>Deskripsi</FormLabel><FormControl><Textarea rows={2} {...field} /></FormControl><FormMessage /></FormItem>)} />
-              <FormField control={form.control} name="sortOrder" render={({ field }) => (<FormItem><FormLabel>Urutan</FormLabel><FormControl><Input type="number" className="w-28" {...field} /></FormControl><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="slug" render={({ field }) => (<FormItem><FormLabel>Slug</FormLabel><FormControl><Input className="font-mono" placeholder="generated from the name" {...field} /></FormControl><FormDescription>Used in the topic filter URL.</FormDescription><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="description" render={({ field }) => (<FormItem><FormLabel>Description</FormLabel><FormControl><Textarea rows={2} {...field} /></FormControl><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="sortOrder" render={({ field }) => (<FormItem><FormLabel>Order</FormLabel><FormControl><Input type="number" className="w-28" {...field} /></FormControl><FormMessage /></FormItem>)} />
               <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setEditing(null)}>Batal</Button>
-                <Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />} Simpan</Button>
+                <Button type="button" variant="outline" onClick={() => setEditing(null)}>Cancel</Button>
+                <Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />} Save</Button>
               </DialogFooter>
             </form>
           </Form>
         </DialogContent>
       </Dialog>
 
-      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title={`Hapus kategori “${toDelete?.nameId}”?`} description="Artikel di kategori ini akan menjadi tanpa kategori." loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
+      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title={`Delete topic “${toDelete?.nameId}”?`} description="Articles in this topic will have no topic." loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
     </div>
   );
 }
@@ -163,20 +163,20 @@ function TagsPanel() {
   });
   const rename = useMutation({
     mutationFn: (v: { id: string; name: string }) => api(`/admin/tags/${v.id}`, { method: "PATCH", body: { name: v.name } }),
-    onSuccess: () => { setEditing(null); qc.invalidateQueries({ queryKey: ["tags"] }); toast.success("Tag diperbarui"); },
+    onSuccess: () => { setEditing(null); qc.invalidateQueries({ queryKey: ["tags"] }); toast.success("Tag updated"); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const remove = useMutation({
     mutationFn: (id: string) => api(`/admin/tags/${id}`, { method: "DELETE" }),
-    onSuccess: () => { setToDelete(null); qc.invalidateQueries({ queryKey: ["tags"] }); toast.success("Tag dihapus"); },
+    onSuccess: () => { setToDelete(null); qc.invalidateQueries({ queryKey: ["tags"] }); toast.success("Tag deleted"); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
   return (
     <div className="space-y-4">
       <form className="flex gap-2 max-w-md" onSubmit={(e) => { e.preventDefault(); if (name.trim()) create.mutate(name.trim()); }}>
-        <Input placeholder="Nama tag baru" value={name} onChange={(e) => setName(e.target.value)} />
-        <Button type="submit" disabled={!name.trim() || create.isPending}><Plus /> Tambah</Button>
+        <Input placeholder="New tag name" value={name} onChange={(e) => setName(e.target.value)} />
+        <Button type="submit" disabled={!name.trim() || create.isPending}><Plus /> Add</Button>
       </form>
       {isLoading ? (
         <div className="flex flex-wrap gap-2">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-7 w-20 rounded-full" />)}</div>
@@ -186,26 +186,26 @@ function TagsPanel() {
             <Badge key={t.id} variant="outline" className="h-8 gap-1.5 rounded-full pl-3 pr-1 text-sm font-normal">
               {t.name}
               <span className="font-mono text-[10px] text-muted-foreground">{t._count?.articles ?? 0}</span>
-              <button type="button" className="rounded-full p-1 hover:bg-muted" onClick={() => { setEditing(t); setEditName(t.name); }} aria-label="Ubah nama"><Pencil className="size-3" /></button>
-              {can.deleteHard && <button type="button" className="rounded-full p-1 text-destructive hover:bg-destructive/10" onClick={() => setToDelete(t)} aria-label="Hapus"><Trash2 className="size-3" /></button>}
+              <button type="button" className="rounded-full p-1 hover:bg-muted" onClick={() => { setEditing(t); setEditName(t.name); }} aria-label="Rename"><Pencil className="size-3" /></button>
+              {can.deleteHard && <button type="button" className="rounded-full p-1 text-destructive hover:bg-destructive/10" onClick={() => setToDelete(t)} aria-label="Delete"><Trash2 className="size-3" /></button>}
             </Badge>
           ))}
         </div>
       ) : (
-        <EmptyState icon={Tags} title="Belum ada tag" description="Tag juga bisa dibuat langsung dari editor artikel." />
+        <EmptyState icon={Tags} title="No tags yet" description="Tags can also be created directly from the article editor." />
       )}
 
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
         <DialogContent className="sm:max-w-sm">
-          <DialogHeader><DialogTitle>Ubah nama tag</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>Rename tag</DialogTitle></DialogHeader>
           <Input value={editName} onChange={(e) => setEditName(e.target.value)} />
           <DialogFooter>
-            <Button variant="outline" onClick={() => setEditing(null)}>Batal</Button>
-            <Button disabled={!editName.trim() || rename.isPending} onClick={() => editing && rename.mutate({ id: editing.id, name: editName.trim() })}>Simpan</Button>
+            <Button variant="outline" onClick={() => setEditing(null)}>Cancel</Button>
+            <Button disabled={!editName.trim() || rename.isPending} onClick={() => editing && rename.mutate({ id: editing.id, name: editName.trim() })}>Save</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title={`Hapus tag “${toDelete?.name}”?`} description="Tag akan dilepas dari semua artikel." loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
+      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title={`Delete tag “${toDelete?.name}”?`} description="The tag will be removed from all articles." loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
     </div>
   );
 }

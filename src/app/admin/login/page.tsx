@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { LoginForm } from "./login-form";
 
-export const metadata = { title: "Masuk" };
+export const metadata = { title: "Sign in" };
 
 export default async function AdminLoginPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
   const { next } = await searchParams;
@@ -16,11 +16,11 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
         </div>
         <div className="relative max-w-md">
           <h1 className="font-display text-4xl font-bold tracking-tight text-balance">
-            Satu panel untuk konten dan jaringan SuperCharge.
+            One panel for content and the SuperCharge network.
           </h1>
           <p className="mt-4 text-forest-muted leading-relaxed">
-            Kelola artikel, liputan pers, sosial media, media library, dan lokasi SuperCharge. Perubahan langsung
-            tayang di wedison.co.
+            Manage articles, press coverage, social media, the media library and SuperCharge stations. Changes go
+            live on wedison.co right away.
           </p>
         </div>
         <p className="relative font-mono text-xs text-forest-muted">© {new Date().getFullYear()} Wedison</p>
@@ -31,8 +31,8 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
           <div className="mb-8 lg:hidden">
             <Image src="/logo/wedison-wordmark.webp" alt="Wedison" width={140} height={36} className="h-8 w-auto" priority />
           </div>
-          <h2 className="font-display text-2xl font-bold tracking-tight">Masuk ke Admin</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Gunakan akun yang diberikan oleh Super Admin.</p>
+          <h2 className="font-display text-2xl font-bold tracking-tight">Sign in to Admin</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Use the account provided by your Super Admin.</p>
           <div className="mt-8">
             <LoginForm next={next} />
           </div>

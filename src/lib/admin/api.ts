@@ -61,17 +61,17 @@ export async function api<T = unknown>(
     if (res.status === 401 && typeof window !== "undefined" && !window.location.pathname.startsWith("/admin/login")) {
       window.location.assign(`/admin/login?next=${encodeURIComponent(window.location.pathname)}`);
     }
-    throw new ApiError(res.status, j.message ?? `Permintaan gagal (${res.status})`, j.code, j.details);
+    throw new ApiError(res.status, j.message ?? `Request failed (${res.status})`, j.code, j.details);
   }
   return json as T;
 }
 
-/** Pesan error yang ramah untuk toast. */
+/** Friendly error message for toasts. */
 export function errorMessage(err: unknown): string {
   if (err instanceof ApiError) {
     if (err.details?.length) return `${err.message}: ${err.details.map((d) => `${d.path} ${d.message}`).join(", ")}`;
     return err.message;
   }
   if (err instanceof Error) return err.message;
-  return "Terjadi kesalahan";
+  return "Something went wrong";
 }

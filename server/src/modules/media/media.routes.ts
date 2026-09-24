@@ -25,7 +25,7 @@ const upload = multer({
   limits: { fileSize: env.MAX_UPLOAD_MB * 1024 * 1024, files: 10 },
   fileFilter: (_req, file, cb) => {
     if (ALLOWED.has(file.mimetype)) cb(null, true);
-    else cb(badRequest(`Tipe file ${file.mimetype} tidak didukung`));
+    else cb(badRequest(`File type ${file.mimetype} is not supported`));
   },
 });
 
@@ -106,7 +106,7 @@ mediaRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {
 mediaRouter.post("/upload", requireRole("ADMIN", "EDITOR"), upload.array("files", 10), async (req, res, next) => {
   try {
     const files = (req.files as Express.Multer.File[] | undefined) ?? [];
-    if (!files.length) throw badRequest("Tidak ada file yang diunggah");
+    if (!files.length) throw badRequest("No files were uploaded");
     const folder = typeof req.body.folder === "string" && req.body.folder.trim() ? safeBase(req.body.folder) : "general";
     const alt = typeof req.body.alt === "string" ? req.body.alt : null;
     const created = [];
@@ -130,7 +130,7 @@ mediaRouter.post("/upload", requireRole("ADMIN", "EDITOR"), upload.array("files"
       );
     }
     invalidate([CacheTags.media], { notifyFrontend: false });
-    logActivity(req, { action: "upload", entity: "media", summary: `Unggah ${created.length} file ke ${folder}` });
+    logActivity(req, { action: "upload", entity: "media", summary: `Uploaded ${created.length} file(s) to ${folder}` });
     res.status(201).json({ ok: true, items: created });
   } catch (e) {
     next(e);
@@ -163,11 +163,11 @@ mediaRouter.delete("/:id", requireRole("ADMIN", "EDITOR"), async (req, res, next
     const item = await prisma.media.findUnique({ where: { id }, include: { _count: { select: { articlesAsCover: true } } } });
     if (!item) throw notFound();
     if (item._count.articlesAsCover > 0 && req.query.force !== "true")
-      throw badRequest(`Media dipakai sebagai cover ${item._count.articlesAsCover} artikel. Lepas dulu atau hapus paksa.`);
+      throw badRequest(`This media is used as the cover of ${item._count.articlesAsCover} article(s). Detach it first or force delete.`);
     await prisma.media.delete({ where: { id } });
     await fs.rm(path.join(uploadRoot, item.filename), { force: true });
     invalidate([CacheTags.media, CacheTags.articles], { notifyFrontend: item._count.articlesAsCover > 0 });
-    logActivity(req, { action: "delete", entity: "media", entityId: id, summary: `Hapus media ${item.originalName}` });
+    logActivity(req, { action: "delete", entity: "media", entityId: id, summary: `Deleted media ${item.originalName}` });
     res.json({ ok: true });
   } catch (e) {
     next(e);

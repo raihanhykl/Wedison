@@ -15,14 +15,14 @@ import { useAdminUser } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
 import { ROLE_LABEL } from "@/lib/admin/types";
 
-const profileSchema = z.object({ name: z.string().trim().min(2, "Minimal 2 karakter").max(80) });
+const profileSchema = z.object({ name: z.string().trim().min(2, "At least 2 characters").max(80) });
 const passwordSchema = z
   .object({
-    currentPassword: z.string().min(1, "Wajib diisi"),
-    newPassword: z.string().min(8, "Minimal 8 karakter"),
+    currentPassword: z.string().min(1, "Required"),
+    newPassword: z.string().min(8, "At least 8 characters"),
     confirm: z.string(),
   })
-  .refine((v) => v.newPassword === v.confirm, { message: "Konfirmasi tidak sama", path: ["confirm"] });
+  .refine((v) => v.newPassword === v.confirm, { message: "Passwords do not match", path: ["confirm"] });
 
 export function SettingsView() {
   const user = useAdminUser();
@@ -35,12 +35,12 @@ export function SettingsView() {
 
   return (
     <>
-      <PageHeader title="Akun Saya" description={`${user.email} · ${ROLE_LABEL[user.role]}`} />
+      <PageHeader title="My Account" description={`${user.email} · ${ROLE_LABEL[user.role]}`} />
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Profil</CardTitle>
-            <CardDescription>Nama yang tampil sebagai penulis artikel.</CardDescription>
+            <CardTitle>Profile</CardTitle>
+            <CardDescription>The name shown as the article author.</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...profile}>
@@ -49,7 +49,7 @@ export function SettingsView() {
                 onSubmit={profile.handleSubmit(async (v) => {
                   try {
                     await api("/auth/profile", { method: "PATCH", body: v });
-                    toast.success("Profil disimpan");
+                    toast.success("Profile saved");
                     router.refresh();
                   } catch (e) {
                     toast.error(errorMessage(e));
@@ -58,13 +58,13 @@ export function SettingsView() {
               >
                 <FormField control={profile.control} name="name" render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nama</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl><Input {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <Button type="submit" disabled={profile.formState.isSubmitting}>
-                  {profile.formState.isSubmitting && <Loader2 className="animate-spin" />} Simpan
+                  {profile.formState.isSubmitting && <Loader2 className="animate-spin" />} Save
                 </Button>
               </form>
             </Form>
@@ -73,8 +73,8 @@ export function SettingsView() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Ganti kata sandi</CardTitle>
-            <CardDescription>Minimal 8 karakter. Sesi lain tidak otomatis keluar.</CardDescription>
+            <CardTitle>Change password</CardTitle>
+            <CardDescription>At least 8 characters. Other sessions are not signed out automatically.</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...pwd}>
@@ -83,7 +83,7 @@ export function SettingsView() {
                 onSubmit={pwd.handleSubmit(async (v) => {
                   try {
                     await api("/auth/change-password", { method: "POST", body: { currentPassword: v.currentPassword, newPassword: v.newPassword } });
-                    toast.success("Kata sandi diperbarui");
+                    toast.success("Password updated");
                     pwd.reset();
                   } catch (e) {
                     toast.error(errorMessage(e));
@@ -93,14 +93,14 @@ export function SettingsView() {
                 {(["currentPassword", "newPassword", "confirm"] as const).map((name) => (
                   <FormField key={name} control={pwd.control} name={name} render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{name === "currentPassword" ? "Kata sandi saat ini" : name === "newPassword" ? "Kata sandi baru" : "Ulangi kata sandi baru"}</FormLabel>
+                      <FormLabel>{name === "currentPassword" ? "Current password" : name === "newPassword" ? "New password" : "Repeat new password"}</FormLabel>
                       <FormControl><Input type="password" autoComplete={name === "currentPassword" ? "current-password" : "new-password"} {...field} /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
                 ))}
                 <Button type="submit" variant="outline" disabled={pwd.formState.isSubmitting}>
-                  {pwd.formState.isSubmitting && <Loader2 className="animate-spin" />} Perbarui kata sandi
+                  {pwd.formState.isSubmitting && <Loader2 className="animate-spin" />} Update password
                 </Button>
               </form>
             </Form>

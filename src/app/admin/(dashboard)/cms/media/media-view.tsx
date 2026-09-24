@@ -44,12 +44,12 @@ export function MediaView() {
 
   const patch = useMutation({
     mutationFn: (v: { id: string; alt: string; caption: string; folder: string }) => api<{ data: Media }>(`/admin/media/${v.id}`, { method: "PATCH", body: { alt: v.alt || null, caption: v.caption || null, folder: v.folder || undefined } }),
-    onSuccess: (r) => { toast.success("Detail media disimpan"); setActive(r.data); qc.invalidateQueries({ queryKey: ["media"] }); },
+    onSuccess: (r) => { toast.success("Media details saved"); setActive(r.data); qc.invalidateQueries({ queryKey: ["media"] }); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const remove = useMutation({
     mutationFn: (m: Media) => api(`/admin/media/${m.id}`, { method: "DELETE" }),
-    onSuccess: () => { toast.success("Media dihapus"); setToDelete(null); setActive(null); qc.invalidateQueries({ queryKey: ["media"] }); },
+    onSuccess: () => { toast.success("Media deleted"); setToDelete(null); setActive(null); qc.invalidateQueries({ queryKey: ["media"] }); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -62,23 +62,23 @@ export function MediaView() {
     <>
       <PageHeader
         title="Media Library"
-        description="Gambar untuk artikel dan halaman. Raster dikonversi ke WebP (maks. 2000px) agar ringan."
+        description="Images for articles and pages. Raster files are converted to WebP (max 2000px) to keep them light."
         actions={
           <>
             <input ref={fileRef} type="file" accept="image/*" multiple hidden onChange={(e) => { handleFiles(e.target.files); e.target.value = ""; }} />
             <Button onClick={() => fileRef.current?.click()} disabled={upload.isPending}>
-              {upload.isPending ? <Loader2 className="animate-spin" /> : <Upload />} Unggah
+              {upload.isPending ? <Loader2 className="animate-spin" /> : <Upload />} Upload
             </Button>
           </>
         }
       />
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <Input placeholder="Cari nama file / alt…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
+        <Input placeholder="Search file name / alt text…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
         <Select value={folder} onValueChange={(v) => { setFolder(v); setPage(1); }}>
           <SelectTrigger className="sm:w-[200px]"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Semua folder</SelectItem>
+            <SelectItem value="all">All folders</SelectItem>
             {data?.folders.map((f) => <SelectItem key={f.name} value={f.name}>{f.name} ({f.count})</SelectItem>)}
           </SelectContent>
         </Select>
@@ -104,15 +104,15 @@ export function MediaView() {
             ))}
           </div>
         ) : (
-          <EmptyState icon={Images} title="Belum ada media" description="Seret & lepas gambar ke sini, atau klik Unggah." />
+          <EmptyState icon={Images} title="No media yet" description="Drag & drop images here, or click Upload." />
         )}
       </div>
 
       {data?.meta && data.meta.totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 text-sm">
-          <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Sebelumnya</Button>
+          <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Previous</Button>
           <span className="font-mono text-xs">{data.meta.page}/{data.meta.totalPages}</span>
-          <Button variant="outline" size="sm" disabled={page >= data.meta.totalPages} onClick={() => setPage((p) => p + 1)}>Berikutnya</Button>
+          <Button variant="outline" size="sm" disabled={page >= data.meta.totalPages} onClick={() => setPage((p) => p + 1)}>Next</Button>
         </div>
       )}
 
@@ -122,7 +122,7 @@ export function MediaView() {
         </SheetContent>
       </Sheet>
 
-      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Hapus media?" description="File dihapus dari server. Artikel yang memakainya sebagai sampul akan kehilangan gambar." loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete); }} />
+      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Delete media?" description="The file is removed from the server. Articles using it as a cover will lose the image." loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete); }} />
     </>
   );
 }
@@ -131,7 +131,7 @@ function MediaDetail({ media, onSave, saving, onDelete }: { media: Media; onSave
   const [alt, setAlt] = useState(media.alt ?? "");
   const [caption, setCaption] = useState(media.caption ?? "");
   const [folder, setFolder] = useState(media.folder);
-  const copy = () => { navigator.clipboard.writeText(window.location.origin + media.url); toast.success("URL disalin"); };
+  const copy = () => { navigator.clipboard.writeText(window.location.origin + media.url); toast.success("URL copied"); };
   return (
     <>
       <SheetHeader>
@@ -146,25 +146,25 @@ function MediaDetail({ media, onSave, saving, onDelete }: { media: Media; onSave
         </div>
         <div className="flex gap-2">
           <Input readOnly value={media.url} className="font-mono text-xs" />
-          <Button variant="outline" size="icon" onClick={copy} aria-label="Salin URL"><Copy /></Button>
+          <Button variant="outline" size="icon" onClick={copy} aria-label="Copy URL"><Copy /></Button>
         </div>
         <div className="space-y-1.5">
-          <Label>Teks alternatif (alt)</Label>
-          <Input value={alt} onChange={(e) => setAlt(e.target.value)} placeholder="Deskripsi singkat gambar untuk aksesibilitas & SEO" />
+          <Label>Alt text</Label>
+          <Input value={alt} onChange={(e) => setAlt(e.target.value)} placeholder="Short description of the image for accessibility & SEO" />
         </div>
         <div className="space-y-1.5">
-          <Label>Keterangan</Label>
+          <Label>Caption</Label>
           <Textarea rows={2} value={caption} onChange={(e) => setCaption(e.target.value)} />
         </div>
         <div className="space-y-1.5">
           <Label>Folder</Label>
           <Input value={folder} onChange={(e) => setFolder(e.target.value)} className="font-mono text-xs" />
         </div>
-        <p className="text-xs text-muted-foreground">Diunggah {formatDateTime(media.createdAt)}{media.uploadedBy ? ` oleh ${media.uploadedBy.name}` : ""}</p>
+        <p className="text-xs text-muted-foreground">Uploaded {formatDateTime(media.createdAt)}{media.uploadedBy ? ` by ${media.uploadedBy.name}` : ""}</p>
       </div>
       <SheetFooter className="flex-row justify-between">
-        <Button variant="ghost" className="text-destructive" onClick={onDelete}><Trash2 /> Hapus</Button>
-        <Button onClick={() => onSave({ alt, caption, folder })} disabled={saving}>{saving && <Loader2 className="animate-spin" />} Simpan</Button>
+        <Button variant="ghost" className="text-destructive" onClick={onDelete}><Trash2 /> Delete</Button>
+        <Button onClick={() => onSave({ alt, caption, folder })} disabled={saving}>{saving && <Loader2 className="animate-spin" />} Save</Button>
       </SheetFooter>
     </>
   );

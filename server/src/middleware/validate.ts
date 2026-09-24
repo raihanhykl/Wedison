@@ -16,7 +16,7 @@ export function validate<T extends ZodTypeAny>(schema: T, source: Source = "body
         path: i.path.join("."),
         message: i.message,
       }));
-      return next(badRequest("Validasi gagal", details));
+      return next(badRequest("Validation failed", details));
     }
     (req as Request & { validated: Record<Source, unknown> }).validated ??= {
       body: undefined,

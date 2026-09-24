@@ -26,7 +26,7 @@ export function ArticleEditLoader({ id }: { id: string }) {
   if (error || !data) {
     return (
       <Alert variant="destructive">
-        <AlertTitle>Artikel tidak dapat dimuat</AlertTitle>
+        <AlertTitle>The article could not be loaded</AlertTitle>
         <AlertDescription>{errorMessage(error)}</AlertDescription>
       </Alert>
     );

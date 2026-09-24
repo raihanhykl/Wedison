@@ -46,13 +46,13 @@ export async function requireAuth(req: Request, _res: Response, next: NextFuncti
   try {
     payload = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
   } catch {
-    return next(unauthorized("Sesi tidak valid atau kedaluwarsa"));
+    return next(unauthorized("Session is invalid or has expired"));
   }
   const user = await prisma.user.findUnique({
     where: { id: payload.sub },
     select: { id: true, email: true, name: true, role: true, avatarUrl: true, isActive: true },
   });
-  if (!user || !user.isActive) return next(unauthorized("Akun tidak aktif"));
+  if (!user || !user.isActive) return next(unauthorized("Account is inactive"));
   const { isActive: _ignored, ...rest } = user;
   req.user = rest;
   next();

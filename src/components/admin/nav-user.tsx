@@ -56,17 +56,17 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href="/admin/settings">
-                <Settings /> Akun saya
+                <Settings /> My account
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a href="/id/" target="_blank" rel="noreferrer">
-                <ExternalLink /> Buka situs
+                <ExternalLink /> Open website
               </a>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout} className="text-destructive focus:text-destructive">
-              <LogOut /> Keluar
+              <LogOut /> Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

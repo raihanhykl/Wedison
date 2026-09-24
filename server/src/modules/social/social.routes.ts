@@ -52,7 +52,7 @@ socialRouter.post("/fetch-metadata", validate(fetchSchema), async (req, res, nex
     const meta = await fetchSocialMetadata(url);
     res.json({ ok: true, data: meta });
   } catch (e) {
-    next(badRequest(`Gagal mengambil metadata: ${(e as Error).message}`));
+    next(badRequest(`Failed to fetch metadata: ${(e as Error).message}`));
   }
 });
 
@@ -64,7 +64,7 @@ socialRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(socialSchema), a
       data: { ...data, url, externalId: data.platform === "INSTAGRAM" ? instagramShortcode(url) : null, fetchedAt: data.thumbnailUrl ? new Date() : null },
     });
     invalidate([CacheTags.social, CacheTags.dashboard]);
-    logActivity(req, { action: "create", entity: "social", entityId: item.id, summary: `Tambah post ${item.platform}` });
+    logActivity(req, { action: "create", entity: "social", entityId: item.id, summary: `Added ${item.platform} post` });
     res.status(201).json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -77,7 +77,7 @@ socialRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(socialSchema
     const id = req.params.id as string;
     const item = await prisma.socialPost.update({ where: { id }, data });
     invalidate([CacheTags.social, CacheTags.dashboard]);
-    logActivity(req, { action: "update", entity: "social", entityId: id, summary: `Ubah post ${item.platform}` });
+    logActivity(req, { action: "update", entity: "social", entityId: id, summary: `Updated ${item.platform} post` });
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -124,7 +124,7 @@ socialRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
     const id = req.params.id as string;
     await prisma.socialPost.delete({ where: { id } });
     invalidate([CacheTags.social, CacheTags.dashboard]);
-    logActivity(req, { action: "delete", entity: "social", entityId: id, summary: "Hapus post sosial media" });
+    logActivity(req, { action: "delete", entity: "social", entityId: id, summary: "Deleted social media post" });
     res.json({ ok: true });
   } catch (e) {
     next(e);

@@ -57,7 +57,7 @@ pressRouter.post("/fetch-metadata", validate(fetchSchema), async (req, res, next
     const meta = await fetchPageMetadata(url);
     res.json({ ok: true, data: { ...meta, slug: slugify(meta.title).slice(0, 120) } });
   } catch (e) {
-    next(badRequest(`Gagal mengambil metadata: ${(e as Error).message}`));
+    next(badRequest(`Failed to fetch metadata: ${(e as Error).message}`));
   }
 });
 
@@ -77,7 +77,7 @@ pressRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(pressSchema), asy
     const slug = await uniqueSlug(data.slug || data.title, async (s) => !!(await prisma.pressCoverage.findUnique({ where: { slug: s } })));
     const item = await prisma.pressCoverage.create({ data: { ...data, slug, fetchedAt: new Date() } });
     invalidate([CacheTags.press, CacheTags.dashboard]);
-    logActivity(req, { action: "create", entity: "press", entityId: item.id, summary: `Tambah liputan "${item.title}"` });
+    logActivity(req, { action: "create", entity: "press", entityId: item.id, summary: `Added press coverage "${item.title}"` });
     res.status(201).json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -90,7 +90,7 @@ pressRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(pressSchema.p
     const id = req.params.id as string;
     const item = await prisma.pressCoverage.update({ where: { id }, data: { ...data, ...(data.slug ? { slug: slugify(data.slug) } : {}) } });
     invalidate([CacheTags.press, CacheTags.dashboard]);
-    logActivity(req, { action: "update", entity: "press", entityId: id, summary: `Ubah liputan "${item.title}"` });
+    logActivity(req, { action: "update", entity: "press", entityId: id, summary: `Updated press coverage "${item.title}"` });
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -140,7 +140,7 @@ pressRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
     const id = req.params.id as string;
     const item = await prisma.pressCoverage.delete({ where: { id } });
     invalidate([CacheTags.press, CacheTags.dashboard]);
-    logActivity(req, { action: "delete", entity: "press", entityId: id, summary: `Hapus liputan "${item.title}"` });
+    logActivity(req, { action: "delete", entity: "press", entityId: id, summary: `Deleted press coverage "${item.title}"` });
     res.json({ ok: true });
   } catch (e) {
     next(e);
@@ -177,7 +177,7 @@ publicPressRouter.get("/:slug", async (req, res, next) => {
     const item = await cached(`public:press:slug:${slug}`, [CacheTags.press], () =>
       prisma.pressCoverage.findFirst({ where: { slug, status: "PUBLISHED" }, select: publicSelect }),
     );
-    if (!item) throw notFound("Liputan tidak ditemukan");
+    if (!item) throw notFound("Press coverage not found");
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);

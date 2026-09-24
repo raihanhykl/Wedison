@@ -86,7 +86,12 @@ model Article {
   scheduledAt  DateTime?
   viewCount    Int           @default(0)
   coverImageId String?
-  coverImage   Media?        @relation(fields: [coverImageId], references: [id], onDelete: SetNull)
+  coverImage   Media?        @relation("ArticleCover", fields: [coverImageId], references: [id], onDelete: SetNull)
+  /// Gambar khusus untuk Open Graph/Twitter card (opsional; default = cover)
+  ogImageId    String?
+  ogImage      Media?        @relation("ArticleOgImage", fields: [ogImageId], references: [id], onDelete: SetNull)
+  /// SEO: true = <meta name="robots" content="noindex">
+  noIndex      Boolean       @default(false)
   categoryId   String?
   category     Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   authorId     String?
@@ -114,6 +119,10 @@ model ArticleTranslation {
   contentHtml    String   @default("") // HTML tersanitasi, dipakai render publik
   seoTitle       String?
   seoDescription String?
+  seoKeywords    String?  // dipisah koma
+  canonicalUrl   String?  // override canonical (mis. artikel repost)
+  ogTitle        String?
+  ogDescription  String?
   readingTime    Int      @default(1) // menit
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -190,7 +199,8 @@ model Media {
   uploadedBy   User?    @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
   createdAt    DateTime @default(now())
 
-  articlesAsCover Article[]
+  articlesAsCover Article[] @relation("ArticleCover")
+  articlesAsOg    Article[] @relation("ArticleOgImage")
 
   @@index([folder, createdAt])
 }

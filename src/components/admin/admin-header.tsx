@@ -46,7 +46,7 @@ export function AdminHeader() {
       <div className="ml-auto">
         <Button variant="ghost" size="sm" asChild>
           <a href="/id/media-center/" target="_blank" rel="noreferrer">
-            <ExternalLink /> <span className="hidden sm:inline">Lihat situs</span>
+            <ExternalLink /> <span className="hidden sm:inline">View site</span>
           </a>
         </Button>
       </div>

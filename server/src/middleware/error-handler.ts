@@ -4,7 +4,7 @@ import { logger } from "../lib/logger.js";
 import { isProd } from "../config/env.js";
 
 export function notFoundHandler(_req: Request, res: Response) {
-  res.status(404).json({ ok: false, code: "NOT_FOUND", message: "Endpoint tidak ditemukan" });
+  res.status(404).json({ ok: false, code: "NOT_FOUND", message: "Endpoint not found" });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,12 +20,12 @@ export function errorHandler(err: unknown, req: Request, res: Response, _next: N
     return res.status(409).json({
       ok: false,
       code: "CONFLICT",
-      message: "Data dengan nilai unik yang sama sudah ada",
+      message: "A record with the same unique value already exists",
       details: e.meta,
     });
   }
   if (e?.code === "P2025") {
-    return res.status(404).json({ ok: false, code: "NOT_FOUND", message: "Data tidak ditemukan" });
+    return res.status(404).json({ ok: false, code: "NOT_FOUND", message: "Not found" });
   }
   if (e?.name === "MulterError") {
     return res.status(400).json({ ok: false, code: "UPLOAD_ERROR", message: e.message });
@@ -34,6 +34,6 @@ export function errorHandler(err: unknown, req: Request, res: Response, _next: N
   res.status(500).json({
     ok: false,
     code: "INTERNAL",
-    message: isProd ? "Terjadi kesalahan pada server" : (e?.message ?? "Internal error"),
+    message: isProd ? "Internal server error" : (e?.message ?? "Internal error"),
   });
 }

@@ -18,6 +18,7 @@ api.use("/auth", authRouter);
 api.use("/admin/users", usersRouter);
 api.use("/admin/activity", activityRouter);
 api.use("/admin/dashboard", dashboardRouter);
+api.use("/admin/topics", categoriesRouter); // "Topics" in the UI (DB model: Category)
 api.use("/admin/categories", categoriesRouter);
 api.use("/admin/tags", tagsRouter);
 api.use("/admin/articles", articlesRouter);

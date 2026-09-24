@@ -48,7 +48,7 @@ usersRouter.post("/", validate(createSchema), async (req, res, next) => {
       data: { ...rest, passwordHash: await bcrypt.hash(password, 12) },
       select,
     });
-    logActivity(req, { action: "create", entity: "user", entityId: user.id, summary: `Tambah user ${user.email}` });
+    logActivity(req, { action: "create", entity: "user", entityId: user.id, summary: `Added user ${user.email}` });
     res.status(201).json({ ok: true, data: user });
   } catch (e) {
     next(e);
@@ -62,14 +62,14 @@ usersRouter.patch("/:id", validate(updateSchema), async (req, res, next) => {
     const { password, ...rest } = getValidated<typeof updateSchema>(req);
     const id = req.params.id as string;
     if (id === req.user!.id && rest.role && rest.role !== "SUPER_ADMIN")
-      throw badRequest("Tidak bisa menurunkan role akun sendiri");
-    if (id === req.user!.id && rest.isActive === false) throw badRequest("Tidak bisa menonaktifkan akun sendiri");
+      throw badRequest("You cannot lower your own role");
+    if (id === req.user!.id && rest.isActive === false) throw badRequest("You cannot deactivate your own account");
     const user = await prisma.user.update({
       where: { id },
       data: { ...rest, ...(password ? { passwordHash: await bcrypt.hash(password, 12) } : {}) },
       select,
     });
-    logActivity(req, { action: "update", entity: "user", entityId: user.id, summary: `Ubah user ${user.email}` });
+    logActivity(req, { action: "update", entity: "user", entityId: user.id, summary: `Updated user ${user.email}` });
     res.json({ ok: true, data: user });
   } catch (e) {
     next(e);
@@ -79,9 +79,9 @@ usersRouter.patch("/:id", validate(updateSchema), async (req, res, next) => {
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id as string;
-    if (id === req.user!.id) throw badRequest("Tidak bisa menghapus akun sendiri");
+    if (id === req.user!.id) throw badRequest("You cannot delete your own account");
     const user = await prisma.user.delete({ where: { id }, select: { email: true } });
-    logActivity(req, { action: "delete", entity: "user", entityId: id, summary: `Hapus user ${user.email}` });
+    logActivity(req, { action: "delete", entity: "user", entityId: id, summary: `Deleted user ${user.email}` });
     res.json({ ok: true });
   } catch (e) {
     next(e);

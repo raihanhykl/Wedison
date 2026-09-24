@@ -27,7 +27,7 @@ type Props<T> = {
   className?: string;
 };
 
-/** Tabel data server-side (pagination dari API) berbasis TanStack Table + shadcn Table. */
+/** Server-side data table (pagination from the API) built on TanStack Table + shadcn Table. */
 export function DataTable<T>({
   columns, data, loading, meta, onPageChange, onLimitChange, rowSelection, onRowSelectionChange, getRowId, emptyState, className,
 }: Props<T>) {
@@ -84,7 +84,7 @@ export function DataTable<T>({
             ) : (
               <TableRow>
                 <TableCell colSpan={colCount} className="p-0">
-                  {emptyState ?? <div className="py-12 text-center text-sm text-muted-foreground">Tidak ada data.</div>}
+                  {emptyState ?? <div className="py-12 text-center text-sm text-muted-foreground">No data.</div>}
                 </TableCell>
               </TableRow>
             )}
@@ -96,7 +96,7 @@ export function DataTable<T>({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-sm text-muted-foreground">
           <div className="flex items-center gap-3">
             <span>
-              {meta.total === 0 ? "0" : `${(meta.page - 1) * meta.limit + 1}–${Math.min(meta.page * meta.limit, meta.total)}`} dari {meta.total}
+              {meta.total === 0 ? "0" : `${(meta.page - 1) * meta.limit + 1}–${Math.min(meta.page * meta.limit, meta.total)}`} of {meta.total}
             </span>
             {onLimitChange && (
               <Select value={String(meta.limit)} onValueChange={(v) => onLimitChange(Number(v))}>
@@ -106,7 +106,7 @@ export function DataTable<T>({
                 <SelectContent>
                   {[10, 20, 50, 100].map((n) => (
                     <SelectItem key={n} value={String(n)}>
-                      {n} / hal
+                      {n} / page
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -114,19 +114,19 @@ export function DataTable<T>({
             )}
           </div>
           <div className="flex items-center gap-1">
-            <Button variant="outline" size="icon" className="size-8" disabled={meta.page <= 1} onClick={() => onPageChange?.(1)} aria-label="Halaman pertama">
+            <Button variant="outline" size="icon" className="size-8" disabled={meta.page <= 1} onClick={() => onPageChange?.(1)} aria-label="First page">
               <ChevronsLeft />
             </Button>
-            <Button variant="outline" size="icon" className="size-8" disabled={meta.page <= 1} onClick={() => onPageChange?.(meta.page - 1)} aria-label="Sebelumnya">
+            <Button variant="outline" size="icon" className="size-8" disabled={meta.page <= 1} onClick={() => onPageChange?.(meta.page - 1)} aria-label="Previous">
               <ChevronLeft />
             </Button>
             <span className="px-2 font-mono text-xs">
               {meta.page} / {meta.totalPages}
             </span>
-            <Button variant="outline" size="icon" className="size-8" disabled={meta.page >= meta.totalPages} onClick={() => onPageChange?.(meta.page + 1)} aria-label="Berikutnya">
+            <Button variant="outline" size="icon" className="size-8" disabled={meta.page >= meta.totalPages} onClick={() => onPageChange?.(meta.page + 1)} aria-label="Next">
               <ChevronRight />
             </Button>
-            <Button variant="outline" size="icon" className="size-8" disabled={meta.page >= meta.totalPages} onClick={() => onPageChange?.(meta.totalPages)} aria-label="Halaman terakhir">
+            <Button variant="outline" size="icon" className="size-8" disabled={meta.page >= meta.totalPages} onClick={() => onPageChange?.(meta.totalPages)} aria-label="Last page">
               <ChevronsRight />
             </Button>
           </div>

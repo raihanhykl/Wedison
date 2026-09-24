@@ -21,6 +21,13 @@ export type PublicArticle = {
   readingTime: number;
   seoTitle: string | null;
   seoDescription: string | null;
+  seoKeywords: string | null;
+  canonicalUrl: string | null;
+  ogTitle: string | null;
+  ogDescription: string | null;
+  noIndex: boolean;
+  ogImage: { url: string; alt: string | null; width: number | null; height: number | null } | null;
+  updatedAt: string;
   publishedAt: string | null;
   isFeatured: boolean;
   coverImage: { url: string; alt: string | null; width: number | null; height: number | null } | null;

@@ -41,17 +41,17 @@ export function DashboardView() {
   });
   const c = data?.counts;
   const hour = new Date().getHours();
-  const greet = hour < 11 ? "Selamat pagi" : hour < 15 ? "Selamat siang" : hour < 18 ? "Selamat sore" : "Selamat malam";
+  const greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
 
   return (
     <>
       <PageHeader
         title={`${greet}, ${user.name.split(" ")[0]}`}
-        description="Ringkasan konten Media Center dan jaringan SuperCharge."
+        description="Overview of Media Center content and the SuperCharge network."
         actions={
           <Button asChild>
             <Link href="/admin/cms/articles/new">
-              <Plus /> Tulis artikel
+              <Plus /> Write article
             </Link>
           </Button>
         }
@@ -65,20 +65,20 @@ export function DashboardView() {
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <StatCard title="Artikel" value={c.articles} hint={`${c.articlesByStatus.PUBLISHED ?? 0} tayang · ${c.articlesByStatus.DRAFT ?? 0} draf`} icon={FileText} href="/admin/cms/articles" />
-          <StatCard title="Liputan pers" value={c.press} hint="tayang di Media Center" icon={Newspaper} href="/admin/cms/press" />
-          <StatCard title="Post sosial media" value={c.social} hint="aktif" icon={Share2} href="/admin/cms/social" />
-          <StatCard title="Lokasi SuperCharge" value={c.stations} hint={`${c.stationsByStatus.OPERATIONAL ?? 0} beroperasi · ${c.stationsByStatus.COMING_SOON ?? 0} segera`} icon={MapPin} href="/admin/supercharge/stations" />
+          <StatCard title="Articles" value={c.articles} hint={`${c.articlesByStatus.PUBLISHED ?? 0} published · ${c.articlesByStatus.DRAFT ?? 0} drafts`} icon={FileText} href="/admin/cms/articles" />
+          <StatCard title="Press coverage" value={c.press} hint="live on Media Center" icon={Newspaper} href="/admin/cms/press" />
+          <StatCard title="Social posts" value={c.social} hint="active" icon={Share2} href="/admin/cms/social" />
+          <StatCard title="SuperCharge stations" value={c.stations} hint={`${c.stationsByStatus.OPERATIONAL ?? 0} operational · ${c.stationsByStatus.COMING_SOON ?? 0} coming soon`} icon={MapPin} href="/admin/supercharge/stations" />
         </div>
       )}
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="font-display text-lg">Artikel terbaru</CardTitle>
+            <CardTitle className="font-display text-lg">Recent articles</CardTitle>
             <Button variant="ghost" size="sm" asChild>
               <Link href="/admin/cms/articles">
-                Semua <ArrowRight />
+                View all <ArrowRight />
               </Link>
             </Button>
           </CardHeader>
@@ -91,9 +91,9 @@ export function DashboardView() {
                 return (
                   <Link key={a.id} href={`/admin/cms/articles/${a.id}`} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0 hover:bg-muted/40 -mx-2 px-2 rounded-md">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-medium">{t?.title ?? "(tanpa judul)"}</p>
+                      <p className="truncate font-medium">{t?.title ?? "(untitled)"}</p>
                       <p className="text-xs text-muted-foreground">
-                        {a.author?.name ?? "—"} · diubah {timeAgo(a.updatedAt)}
+                        {a.author?.name ?? "—"} · updated {timeAgo(a.updatedAt)}
                       </p>
                     </div>
                     <StatusBadge status={a.status} />
@@ -102,9 +102,9 @@ export function DashboardView() {
               })
             ) : (
               <div className="py-8 text-center text-sm text-muted-foreground">
-                Belum ada artikel.{" "}
+                No articles yet.{" "}
                 <Link href="/admin/cms/articles/new" className="text-primary underline underline-offset-4">
-                  Tulis yang pertama
+                  Write the first one
                 </Link>
                 .
               </div>
@@ -115,7 +115,7 @@ export function DashboardView() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="font-display text-lg">Aktivitas terakhir</CardTitle>
+              <CardTitle className="font-display text-lg">Recent activity</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {isLoading ? (
@@ -129,7 +129,7 @@ export function DashboardView() {
                     </Avatar>
                     <div className="min-w-0 flex-1 text-sm">
                       <p className="truncate">
-                        <span className="font-medium">{log.user?.name ?? "Sistem"}</span>{" "}
+                        <span className="font-medium">{log.user?.name ?? "System"}</span>{" "}
                         <span className="text-muted-foreground">{log.summary ?? `${log.action} ${log.entity}`}</span>
                       </p>
                       <p className="text-xs text-muted-foreground">{timeAgo(log.createdAt)}</p>
@@ -137,7 +137,7 @@ export function DashboardView() {
                   </div>
                 ))
               ) : (
-                <p className="text-sm text-muted-foreground">Belum ada aktivitas.</p>
+                <p className="text-sm text-muted-foreground">No activity yet.</p>
               )}
             </CardContent>
           </Card>
@@ -146,20 +146,20 @@ export function DashboardView() {
             <Card className="bg-forest text-forest-foreground border-transparent">
               <CardContent className="grid grid-cols-2 gap-4 pt-6">
                 <div>
-                  <p className="flex items-center gap-1.5 text-xs text-forest-muted"><Eye className="size-3.5" /> Total baca</p>
-                  <p className="mt-1 font-mono text-2xl font-semibold">{c.totalViews.toLocaleString("id-ID")}</p>
+                  <p className="flex items-center gap-1.5 text-xs text-forest-muted"><Eye className="size-3.5" /> Total reads</p>
+                  <p className="mt-1 font-mono text-2xl font-semibold">{c.totalViews.toLocaleString("en-US")}</p>
                 </div>
                 <div>
-                  <p className="flex items-center gap-1.5 text-xs text-forest-muted"><Zap className="size-3.5" /> Tayang 30 hari</p>
+                  <p className="flex items-center gap-1.5 text-xs text-forest-muted"><Zap className="size-3.5" /> Published (30d)</p>
                   <p className="mt-1 font-mono text-2xl font-semibold">{c.publishedLast30Days}</p>
                 </div>
                 <div>
-                  <p className="flex items-center gap-1.5 text-xs text-forest-muted"><Images className="size-3.5" /> File media</p>
+                  <p className="flex items-center gap-1.5 text-xs text-forest-muted"><Images className="size-3.5" /> Media files</p>
                   <p className="mt-1 font-mono text-2xl font-semibold">{c.media}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-forest-muted">Cache API</p>
-                  <p className="mt-1 font-mono text-2xl font-semibold">{data?.cache.size ?? 0}<span className="text-sm text-forest-muted"> entri</span></p>
+                  <p className="text-xs text-forest-muted">API cache</p>
+                  <p className="mt-1 font-mono text-2xl font-semibold">{data?.cache.size ?? 0}<span className="text-sm text-forest-muted"> entries</span></p>
                 </div>
               </CardContent>
             </Card>

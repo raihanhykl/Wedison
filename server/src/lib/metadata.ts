@@ -100,7 +100,7 @@ export async function fetchPageMetadata(url: string, timeoutMs = 15000): Promise
     signal: AbortSignal.timeout(timeoutMs),
     redirect: "follow",
   });
-  if (!res.ok) throw new Error(`Sumber merespons ${res.status}`);
+  if (!res.ok) throw new Error(`Source responded with ${res.status}`);
   const html = await res.text();
 
   const title =

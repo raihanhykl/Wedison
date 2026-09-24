@@ -38,7 +38,7 @@ categoriesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(categorySche
     const slug = await uniqueSlug(data.slug || data.nameId, async (s) => !!(await prisma.category.findUnique({ where: { slug: s } })));
     const item = await prisma.category.create({ data: { ...data, slug } });
     invalidate([CacheTags.categories, CacheTags.articles]);
-    logActivity(req, { action: "create", entity: "category", entityId: item.id, summary: `Tambah kategori "${item.nameId}"` });
+    logActivity(req, { action: "create", entity: "topic", entityId: item.id, summary: `Added topic "${item.nameId}"` });
     res.status(201).json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -54,7 +54,7 @@ categoriesRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(category
       data: { ...data, ...(data.slug ? { slug: slugify(data.slug) } : {}) },
     });
     invalidate([CacheTags.categories, CacheTags.articles]);
-    logActivity(req, { action: "update", entity: "category", entityId: id, summary: `Ubah kategori "${item.nameId}"` });
+    logActivity(req, { action: "update", entity: "topic", entityId: id, summary: `Updated topic "${item.nameId}"` });
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -66,7 +66,7 @@ categoriesRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => 
     const id = req.params.id as string;
     const item = await prisma.category.delete({ where: { id } });
     invalidate([CacheTags.categories, CacheTags.articles]);
-    logActivity(req, { action: "delete", entity: "category", entityId: id, summary: `Hapus kategori "${item.nameId}"` });
+    logActivity(req, { action: "delete", entity: "topic", entityId: id, summary: `Deleted topic "${item.nameId}"` });
     res.json({ ok: true });
   } catch (e) {
     next(e);

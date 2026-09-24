@@ -16,8 +16,8 @@ import { api } from "@/lib/admin/api";
 import { useDebounce } from "@/hooks/use-debounce";
 import { STATION_STATUS_LABEL, STATION_TIER_LABEL, type Paginated, type Station, type StationStatus } from "@/lib/admin/types";
 
-// Modul SuperCharge — iterasi 1: daftar & pencarian (API CRUD sudah tersedia di backend).
-// Form tambah/edit + peta pemilih koordinat menyusul di iterasi modul SuperCharge.
+// SuperCharge module — iteration 1: list & search (the CRUD API already exists in the backend).
+// Add/edit form with a map coordinate picker follows in the SuperCharge iteration.
 export function StationsView() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
@@ -32,34 +32,34 @@ export function StationsView() {
   });
 
   const columns = useMemo<ColumnDef<Station, unknown>[]>(() => [
-    { id: "id", header: "Kode", size: 90, cell: ({ row }) => <span className="font-mono text-xs">{row.original.id}</span> },
-    { id: "name", header: "Lokasi", cell: ({ row }) => (<div className="min-w-[240px]"><p className="font-medium">{row.original.name}</p><p className="line-clamp-1 text-xs text-muted-foreground">{row.original.city}, {row.original.province}</p></div>) },
+    { id: "id", header: "Code", size: 90, cell: ({ row }) => <span className="font-mono text-xs">{row.original.id}</span> },
+    { id: "name", header: "Station", cell: ({ row }) => (<div className="min-w-[240px]"><p className="font-medium">{row.original.name}</p><p className="line-clamp-1 text-xs text-muted-foreground">{row.original.city}, {row.original.province}</p></div>) },
     { id: "status", header: "Status", size: 110, cell: ({ row }) => <StationStatusBadge status={row.original.status} /> },
-    { id: "tier", header: "Tipe", size: 100, cell: ({ row }) => <Badge variant="outline">{STATION_TIER_LABEL[row.original.tier]}</Badge> },
-    { id: "capacity", header: "Charger", size: 90, cell: ({ row }) => <span className="font-mono text-xs">{row.original.pilesTotal * 2} <span className="text-muted-foreground">({row.original.pilesTotal} pile)</span></span> },
-    { id: "power", header: "Daya", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original.powerKw} kW</span> },
-    { id: "hours", header: "Jam", size: 110, cell: ({ row }) => <span className="text-xs">{row.original.hours}</span> },
+    { id: "tier", header: "Tier", size: 100, cell: ({ row }) => <Badge variant="outline">{STATION_TIER_LABEL[row.original.tier]}</Badge> },
+    { id: "capacity", header: "Chargers", size: 90, cell: ({ row }) => <span className="font-mono text-xs">{row.original.pilesTotal * 2} <span className="text-muted-foreground">({row.original.pilesTotal} pile)</span></span> },
+    { id: "power", header: "Power", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original.powerKw} kW</span> },
+    { id: "hours", header: "Hours", size: 110, cell: ({ row }) => <span className="text-xs">{row.original.hours}</span> },
   ], []);
 
   return (
     <>
-      <PageHeader title="Lokasi SuperCharge" description="Data lokasi yang tampil di peta /super-charge/lokasi." />
+      <PageHeader title="SuperCharge Stations" description="Station data shown on the /super-charge/lokasi map." />
       <Alert>
         <MapPin className="size-4" />
-        <AlertTitle>Modul SuperCharge — tahap 1</AlertTitle>
-        <AlertDescription>Daftar & pencarian sudah aktif dan API CRUD tersedia. Form tambah/edit lokasi dengan pemilih koordinat di peta dikerjakan di iterasi berikutnya.</AlertDescription>
+        <AlertTitle>SuperCharge module — phase 1</AlertTitle>
+        <AlertDescription>List and search are live and the CRUD API is ready. The add/edit form with a map coordinate picker is planned for the next iteration.</AlertDescription>
       </Alert>
       <div className="flex flex-col gap-2 sm:flex-row">
-        <Input placeholder="Cari nama / kota / kode…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
+        <Input placeholder="Search name / city / code…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
         <Select value={status} onValueChange={(v) => { setStatus(v as typeof status); setPage(1); }}>
           <SelectTrigger className="sm:w-[180px]"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Semua status</SelectItem>
+            <SelectItem value="all">All statuses</SelectItem>
             {(Object.keys(STATION_STATUS_LABEL) as StationStatus[]).map((s) => <SelectItem key={s} value={s}>{STATION_STATUS_LABEL[s]}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
-      <DataTable columns={columns} data={data?.items ?? []} loading={isLoading} meta={data?.meta} onPageChange={setPage} onLimitChange={(l) => { setLimit(l); setPage(1); }} emptyState={<EmptyState icon={MapPin} title="Tidak ada lokasi" />} />
+      <DataTable columns={columns} data={data?.items ?? []} loading={isLoading} meta={data?.meta} onPageChange={setPage} onLimitChange={(l) => { setLimit(l); setPage(1); }} emptyState={<EmptyState icon={MapPin} title="No stations" />} />
     </>
   );
 }

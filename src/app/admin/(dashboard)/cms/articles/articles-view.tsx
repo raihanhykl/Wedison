@@ -55,7 +55,7 @@ export function ArticlesView() {
   });
   const { data: categories } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => api<{ items: Category[] }>("/admin/categories").then((r) => r.items),
+    queryFn: () => api<{ items: Category[] }>("/admin/topics").then((r) => r.items),
   });
 
   const invalidate = () => {
@@ -67,7 +67,7 @@ export function ArticlesView() {
     mutationFn: (v: { ids: string[]; action: "publish" | "draft" | "archive" | "trash" | "restore" | "delete" }) =>
       api<{ count: number }>("/admin/articles/bulk", { method: "POST", body: v }),
     onSuccess: (r, v) => {
-      toast.success(`${r.count} artikel: ${LABEL[v.action]}`);
+      toast.success(`${r.count} article(s) ${LABEL[v.action]}`);
       setSelection({});
       setConfirm(null);
       invalidate();
@@ -75,7 +75,7 @@ export function ArticlesView() {
     onError: (e) => toast.error(errorMessage(e)),
   });
 
-  const LABEL = { publish: "ditayangkan", draft: "jadi draf", archive: "diarsipkan", trash: "ke sampah", restore: "dipulihkan", delete: "dihapus permanen" };
+  const LABEL = { publish: "published", draft: "moved to drafts", archive: "archived", trash: "moved to trash", restore: "restored", delete: "permanently deleted" };
   const selectedIds = Object.keys(selection).filter((k) => selection[k]);
 
   const columns = useMemo<ColumnDef<Article, unknown>[]>(
@@ -87,14 +87,14 @@ export function ArticlesView() {
           <Checkbox
             checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
             onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)}
-            aria-label="Pilih semua"
+            aria-label="Select all"
           />
         ),
-        cell: ({ row }) => <Checkbox checked={row.getIsSelected()} onCheckedChange={(v) => row.toggleSelected(!!v)} aria-label="Pilih" />,
+        cell: ({ row }) => <Checkbox checked={row.getIsSelected()} onCheckedChange={(v) => row.toggleSelected(!!v)} aria-label="Select" />,
       },
       {
         id: "title",
-        header: "Judul",
+        header: "Title",
         cell: ({ row }) => {
           const a = row.original;
           const t = a.translations.find((x) => x.locale === "id") ?? a.translations[0];
@@ -105,13 +105,13 @@ export function ArticlesView() {
               </div>
               <div className="min-w-0">
                 <Link href={`/admin/cms/articles/${a.id}`} className="line-clamp-1 font-medium hover:text-primary">
-                  {t?.title ?? "(tanpa judul)"}
+                  {t?.title ?? "(untitled)"}
                 </Link>
                 <div className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
                   {a.translations.map((x) => (
                     <Badge key={x.locale} variant="outline" className="h-4 px-1 font-mono text-[10px] uppercase">{x.locale}</Badge>
                   ))}
-                  {a.isFeatured && <Badge className="h-4 px-1.5 text-[10px]">Unggulan</Badge>}
+                  {a.isFeatured && <Badge className="h-4 px-1.5 text-[10px]">Featured</Badge>}
                   <span className="truncate">/{t?.slug}</span>
                 </div>
               </div>
@@ -119,16 +119,16 @@ export function ArticlesView() {
           );
         },
       },
-      { id: "category", header: "Kategori", size: 130, cell: ({ row }) => <span className="text-sm">{row.original.category?.nameId ?? <span className="text-muted-foreground">—</span>}</span> },
+      { id: "category", header: "Topic", size: 130, cell: ({ row }) => <span className="text-sm">{row.original.category?.nameId ?? <span className="text-muted-foreground">—</span>}</span> },
       { id: "status", header: "Status", size: 110, cell: ({ row }) => <StatusBadge status={row.original.status} /> },
-      { id: "author", header: "Penulis", size: 140, cell: ({ row }) => <span className="text-sm">{row.original.author?.name ?? "—"}</span> },
-      { id: "views", header: "Dibaca", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount}</span> },
+      { id: "author", header: "Author", size: 140, cell: ({ row }) => <span className="text-sm">{row.original.author?.name ?? "—"}</span> },
+      { id: "views", header: "Reads", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount}</span> },
       {
-        id: "date", header: "Tanggal", size: 150,
+        id: "date", header: "Date", size: 150,
         cell: ({ row }) => (
           <div className="text-xs">
-            <div>{row.original.publishedAt ? formatDate(row.original.publishedAt) : <span className="text-muted-foreground">belum tayang</span>}</div>
-            <div className="text-muted-foreground">diubah {timeAgo(row.original.updatedAt)}</div>
+            <div>{row.original.publishedAt ? formatDate(row.original.publishedAt) : <span className="text-muted-foreground">not published</span>}</div>
+            <div className="text-muted-foreground">updated {timeAgo(row.original.updatedAt)}</div>
           </div>
         ),
       },
@@ -141,7 +141,7 @@ export function ArticlesView() {
           return (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="size-8" aria-label="Aksi"><MoreHorizontal /></Button>
+                <Button variant="ghost" size="icon" className="size-8" aria-label="Actions"><MoreHorizontal /></Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 {!trashed && (
@@ -149,22 +149,22 @@ export function ArticlesView() {
                     <DropdownMenuItem asChild><Link href={`/admin/cms/articles/${a.id}`}><Pencil /> Edit</Link></DropdownMenuItem>
                     {a.status === "PUBLISHED" && t && (
                       <DropdownMenuItem asChild>
-                        <a href={`/${t.locale}/media-center/artikel/${t.slug}/`} target="_blank" rel="noreferrer"><Eye /> Lihat di situs</a>
+                        <a href={`/${t.locale}/media-center/artikel/${t.slug}/`} target="_blank" rel="noreferrer"><Eye /> View on site</a>
                       </DropdownMenuItem>
                     )}
                     <DropdownMenuSeparator />
-                    {a.status !== "PUBLISHED" && <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "publish" })}><Send /> Tayangkan</DropdownMenuItem>}
-                    {a.status === "PUBLISHED" && <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "draft" })}><Undo2 /> Tarik ke draf</DropdownMenuItem>}
-                    {a.status !== "ARCHIVED" && <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "archive" })}><Archive /> Arsipkan</DropdownMenuItem>}
+                    {a.status !== "PUBLISHED" && <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "publish" })}><Send /> Publish</DropdownMenuItem>}
+                    {a.status === "PUBLISHED" && <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "draft" })}><Undo2 /> Revert to draft</DropdownMenuItem>}
+                    {a.status !== "ARCHIVED" && <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "archive" })}><Archive /> Archive</DropdownMenuItem>}
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setConfirm({ ids: [a.id], action: "trash" })}><Trash2 /> Ke sampah</DropdownMenuItem>
+                    <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setConfirm({ ids: [a.id], action: "trash" })}><Trash2 /> Move to trash</DropdownMenuItem>
                   </>
                 )}
                 {trashed && (
                   <>
-                    <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "restore" })}><ArchiveRestore /> Pulihkan</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => bulk.mutate({ ids: [a.id], action: "restore" })}><ArchiveRestore /> Restore</DropdownMenuItem>
                     {can.deleteHard && (
-                      <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setConfirm({ ids: [a.id], action: "delete" })}><Trash2 /> Hapus permanen</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setConfirm({ ids: [a.id], action: "delete" })}><Trash2 /> Delete permanently</DropdownMenuItem>
                     )}
                   </>
                 )}
@@ -182,48 +182,48 @@ export function ArticlesView() {
   return (
     <>
       <PageHeader
-        title="Artikel"
-        description="Tulisan orisinal Wedison di Media Center. Dua bahasa (ID wajib, EN opsional)."
+        title="Articles"
+        description="Original Wedison stories on the Media Center. Bilingual (ID required, EN optional)."
         actions={
           <Button asChild>
-            <Link href="/admin/cms/articles/new"><Plus /> Tulis artikel</Link>
+            <Link href="/admin/cms/articles/new"><Plus /> Write article</Link>
           </Button>
         }
       />
 
       <Tabs value={tab} onValueChange={(v) => { setTab(v as Tab); setPage(1); setSelection({}); }}>
         <TabsList className="flex-wrap h-auto">
-          <TabsTrigger value="all">Semua</TabsTrigger>
-          <TabsTrigger value="PUBLISHED">Tayang</TabsTrigger>
-          <TabsTrigger value="DRAFT">Draf</TabsTrigger>
-          <TabsTrigger value="SCHEDULED">Terjadwal</TabsTrigger>
-          <TabsTrigger value="ARCHIVED">Arsip</TabsTrigger>
-          <TabsTrigger value="trash">Sampah</TabsTrigger>
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="PUBLISHED">Published</TabsTrigger>
+          <TabsTrigger value="DRAFT">Drafts</TabsTrigger>
+          <TabsTrigger value="SCHEDULED">Scheduled</TabsTrigger>
+          <TabsTrigger value="ARCHIVED">Archived</TabsTrigger>
+          <TabsTrigger value="trash">Trash</TabsTrigger>
         </TabsList>
       </Tabs>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-        <Input placeholder="Cari judul…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
+        <Input placeholder="Search title…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
         <Select value={categoryId} onValueChange={(v) => { setCategoryId(v); setPage(1); }}>
-          <SelectTrigger className="sm:w-[200px]"><SelectValue placeholder="Kategori" /></SelectTrigger>
+          <SelectTrigger className="sm:w-[200px]"><SelectValue placeholder="Topic" /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Semua kategori</SelectItem>
+            <SelectItem value="all">All topics</SelectItem>
             {categories?.map((c) => <SelectItem key={c.id} value={c.id}>{c.nameId}</SelectItem>)}
           </SelectContent>
         </Select>
         {selectedIds.length > 0 && (
           <div className="flex flex-wrap items-center gap-2 sm:ml-auto rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-sm">
-            <span className="font-medium">{selectedIds.length} dipilih</span>
+            <span className="font-medium">{selectedIds.length} selected</span>
             {tab !== "trash" ? (
               <>
-                <Button size="sm" variant="outline" onClick={() => bulk.mutate({ ids: selectedIds, action: "publish" })}>Tayangkan</Button>
-                <Button size="sm" variant="outline" onClick={() => bulk.mutate({ ids: selectedIds, action: "archive" })}>Arsipkan</Button>
-                <Button size="sm" variant="destructive" onClick={() => setConfirm({ ids: selectedIds, action: "trash" })}>Ke sampah</Button>
+                <Button size="sm" variant="outline" onClick={() => bulk.mutate({ ids: selectedIds, action: "publish" })}>Publish</Button>
+                <Button size="sm" variant="outline" onClick={() => bulk.mutate({ ids: selectedIds, action: "archive" })}>Archive</Button>
+                <Button size="sm" variant="destructive" onClick={() => setConfirm({ ids: selectedIds, action: "trash" })}>Move to trash</Button>
               </>
             ) : (
               <>
-                <Button size="sm" variant="outline" onClick={() => bulk.mutate({ ids: selectedIds, action: "restore" })}>Pulihkan</Button>
-                {can.deleteHard && <Button size="sm" variant="destructive" onClick={() => setConfirm({ ids: selectedIds, action: "delete" })}>Hapus permanen</Button>}
+                <Button size="sm" variant="outline" onClick={() => bulk.mutate({ ids: selectedIds, action: "restore" })}>Restore</Button>
+                {can.deleteHard && <Button size="sm" variant="destructive" onClick={() => setConfirm({ ids: selectedIds, action: "delete" })}>Delete permanently</Button>}
               </>
             )}
           </div>
@@ -243,9 +243,9 @@ export function ArticlesView() {
         emptyState={
           <EmptyState
             icon={FileText}
-            title={tab === "trash" ? "Sampah kosong" : counts === 0 && !dq ? "Belum ada artikel" : "Tidak ada hasil"}
-            description={tab === "trash" ? undefined : "Tulis artikel pertama Anda untuk tampil di Media Center."}
-            action={tab !== "trash" && !dq ? <Button asChild><Link href="/admin/cms/articles/new"><Plus /> Tulis artikel</Link></Button> : undefined}
+            title={tab === "trash" ? "Trash is empty" : counts === 0 && !dq ? "No articles yet" : "No results"}
+            description={tab === "trash" ? undefined : "Write your first article to feature it on the Media Center."}
+            action={tab !== "trash" && !dq ? <Button asChild><Link href="/admin/cms/articles/new"><Plus /> Write article</Link></Button> : undefined}
           />
         }
       />
@@ -253,9 +253,9 @@ export function ArticlesView() {
       <ConfirmDialog
         open={!!confirm}
         onOpenChange={(o) => !o && setConfirm(null)}
-        title={confirm?.action === "delete" ? "Hapus permanen?" : "Pindahkan ke sampah?"}
-        description={confirm?.action === "delete" ? `${confirm.ids.length} artikel akan dihapus permanen beserta terjemahannya. Tidak bisa dibatalkan.` : "Artikel bisa dipulihkan dari tab Sampah."}
-        confirmLabel={confirm?.action === "delete" ? "Hapus permanen" : "Ke sampah"}
+        title={confirm?.action === "delete" ? "Delete permanently?" : "Move to trash?"}
+        description={confirm?.action === "delete" ? `${confirm.ids.length} article(s) and their translations will be deleted permanently. This cannot be undone.` : "Articles can be restored from the Trash tab."}
+        confirmLabel={confirm?.action === "delete" ? "Delete permanently" : "Move to trash"}
         loading={bulk.isPending}
         onConfirm={() => { if (confirm) bulk.mutate({ ids: confirm.ids, action: confirm.action }); }}
       />

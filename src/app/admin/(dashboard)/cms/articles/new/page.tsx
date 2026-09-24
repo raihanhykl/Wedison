@@ -1,6 +1,6 @@
 import { ArticleForm } from "../article-form";
 
-export const metadata = { title: "Tulis Artikel" };
+export const metadata = { title: "Write Article" };
 
 export default function NewArticlePage() {
   return <ArticleForm />;

@@ -2,7 +2,7 @@ export function formatDate(value: string | Date | null | undefined, opts: Intl.D
   if (!value) return "—";
   const d = typeof value === "string" ? new Date(value) : value;
   if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric", ...opts });
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", ...opts });
 }
 
 export function formatDateTime(value: string | Date | null | undefined) {
@@ -12,8 +12,8 @@ export function formatDateTime(value: string | Date | null | undefined) {
 export function timeAgo(value: string | Date) {
   const d = typeof value === "string" ? new Date(value) : value;
   const diff = (Date.now() - d.getTime()) / 1000;
-  const rtf = new Intl.RelativeTimeFormat("id", { numeric: "auto" });
-  if (diff < 60) return "baru saja";
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+  if (diff < 60) return "just now";
   if (diff < 3600) return rtf.format(-Math.floor(diff / 60), "minute");
   if (diff < 86400) return rtf.format(-Math.floor(diff / 3600), "hour");
   if (diff < 86400 * 30) return rtf.format(-Math.floor(diff / 86400), "day");
@@ -26,7 +26,7 @@ export function formatBytes(bytes: number) {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
-/** Nilai untuk <input type="datetime-local"> dari ISO (zona waktu lokal browser). */
+/** Value for <input type="datetime-local"> from ISO (browser local time zone). */
 export function toLocalInput(value: string | null | undefined) {
   if (!value) return "";
   const d = new Date(value);

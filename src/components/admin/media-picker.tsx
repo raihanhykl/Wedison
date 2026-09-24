@@ -25,14 +25,14 @@ export function useUploadMedia(folder = "general") {
       return api<{ items: Media[] }>("/admin/media/upload", { method: "POST", body: form });
     },
     onSuccess: (r) => {
-      toast.success(`${r.items.length} file diunggah`);
+      toast.success(`${r.items.length} file(s) uploaded`);
       qc.invalidateQueries({ queryKey: ["media"] });
     },
     onError: (e) => toast.error(errorMessage(e)),
   });
 }
 
-/** Dialog pilih gambar dari Media Library, dengan unggah cepat. */
+/** Pick an image from the Media Library, with quick upload. */
 export function MediaPickerDialog({ open, onOpenChange, onSelect, folder = "articles" }: { open: boolean; onOpenChange: (o: boolean) => void; onSelect: (m: Media) => void; folder?: string }) {
   const [q, setQ] = useState("");
   const [page, setPage] = useState(1);
@@ -53,17 +53,17 @@ export function MediaPickerDialog({ open, onOpenChange, onSelect, folder = "arti
       <DialogContent className="sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>Media Library</DialogTitle>
-          <DialogDescription>Pilih gambar atau unggah baru. Gambar dikonversi ke WebP otomatis.</DialogDescription>
+          <DialogDescription>Choose an image or upload a new one. Images are converted to WebP automatically.</DialogDescription>
         </DialogHeader>
         <div className="flex gap-2">
-          <Input placeholder="Cari nama file / alt…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} />
+          <Input placeholder="Search file name / alt text…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} />
           <input ref={fileRef} type="file" accept="image/*" multiple hidden onChange={(e) => {
             const files = Array.from(e.target.files ?? []);
             if (files.length) upload.mutate(files, { onSuccess: (r) => setPicked(r.items[0] ?? null) });
             e.target.value = "";
           }} />
           <Button variant="outline" onClick={() => fileRef.current?.click()} disabled={upload.isPending}>
-            {upload.isPending ? <Loader2 className="animate-spin" /> : <Upload />} Unggah
+            {upload.isPending ? <Loader2 className="animate-spin" /> : <Upload />} Upload
           </Button>
         </div>
         <ScrollArea className="h-[52vh] rounded-lg border border-border p-2">
@@ -91,7 +91,7 @@ export function MediaPickerDialog({ open, onOpenChange, onSelect, folder = "arti
             </div>
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-2 py-16 text-sm text-muted-foreground">
-              <ImagePlus className="size-6" /> Belum ada gambar. Unggah untuk memulai.
+              <ImagePlus className="size-6" /> No images yet. Upload to get started.
             </div>
           )}
         </ScrollArea>
@@ -99,15 +99,15 @@ export function MediaPickerDialog({ open, onOpenChange, onSelect, folder = "arti
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             {data?.meta && (
               <>
-                <Button variant="ghost" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Sebelumnya</Button>
+                <Button variant="ghost" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Previous</Button>
                 <span className="font-mono">{data.meta.page}/{data.meta.totalPages}</span>
-                <Button variant="ghost" size="sm" disabled={page >= data.meta.totalPages} onClick={() => setPage((p) => p + 1)}>Berikutnya</Button>
+                <Button variant="ghost" size="sm" disabled={page >= data.meta.totalPages} onClick={() => setPage((p) => p + 1)}>Next</Button>
               </>
             )}
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => onOpenChange(false)}>Batal</Button>
-            <Button disabled={!picked} onClick={() => picked && onSelect(picked)}>Gunakan gambar</Button>
+            <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
+            <Button disabled={!picked} onClick={() => picked && onSelect(picked)}>Use image</Button>
           </div>
         </DialogFooter>
       </DialogContent>

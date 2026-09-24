@@ -9,11 +9,11 @@ const AdminUserContext = createContext<AuthUser | null>(null);
 
 export function useAdminUser() {
   const u = useContext(AdminUserContext);
-  if (!u) throw new Error("useAdminUser harus dipakai di dalam AdminProviders");
+  if (!u) throw new Error("useAdminUser must be used inside AdminProviders");
   return u;
 }
 
-/** Hak akses turunan dari role (mengikuti aturan requireRole di backend). */
+/** Permissions derived from role (mirrors requireRole rules in the backend). */
 export function useCan() {
   const user = useAdminUser();
   const isSuper = user.role === "SUPER_ADMIN";

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="en">
       <body className={`${fontVariables} antialiased bg-background text-foreground`}>
         {children}
         <Toaster position="top-right" richColors closeButton />

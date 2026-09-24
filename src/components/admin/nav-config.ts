@@ -8,46 +8,46 @@ export type NavGroup = { label: string; items: NavItem[] };
 
 export const NAV: NavGroup[] = [
   {
-    label: "Ringkasan",
+    label: "Overview",
     items: [{ title: "Dashboard", href: "/admin", icon: LayoutDashboard }],
   },
   {
     label: "CMS · Media Center",
     items: [
-      { title: "Artikel", href: "/admin/cms/articles", icon: FileText },
-      { title: "Liputan Pers", href: "/admin/cms/press", icon: Newspaper },
-      { title: "Sosial Media", href: "/admin/cms/social", icon: Share2 },
-      { title: "Kategori & Tag", href: "/admin/cms/taxonomy", icon: Tags },
+      { title: "Articles", href: "/admin/cms/articles", icon: FileText },
+      { title: "Press Coverage", href: "/admin/cms/press", icon: Newspaper },
+      { title: "Social Media", href: "/admin/cms/social", icon: Share2 },
+      { title: "Topics & Tags", href: "/admin/cms/topics", icon: Tags },
       { title: "Media Library", href: "/admin/cms/media", icon: Images },
     ],
   },
   {
     label: "SuperCharge",
-    items: [{ title: "Lokasi", href: "/admin/supercharge/stations", icon: MapPin }],
+    items: [{ title: "Stations", href: "/admin/supercharge/stations", icon: MapPin }],
   },
   {
-    label: "Sistem",
+    label: "System",
     items: [
-      { title: "Pengguna", href: "/admin/users", icon: Users, roles: ["SUPER_ADMIN"] },
-      { title: "Log Aktivitas", href: "/admin/activity", icon: ScrollText, roles: ["SUPER_ADMIN", "ADMIN"] },
-      { title: "Akun Saya", href: "/admin/settings", icon: Settings },
+      { title: "Users", href: "/admin/users", icon: Users, roles: ["SUPER_ADMIN"] },
+      { title: "Activity Log", href: "/admin/activity", icon: ScrollText, roles: ["SUPER_ADMIN", "ADMIN"] },
+      { title: "My Account", href: "/admin/settings", icon: Settings },
     ],
   },
 ];
 
-/** Label breadcrumb per segmen path. */
+/** Breadcrumb label per path segment. */
 export const SEGMENT_LABEL: Record<string, string> = {
   admin: "Admin",
   cms: "CMS",
-  articles: "Artikel",
-  new: "Baru",
-  press: "Liputan Pers",
-  social: "Sosial Media",
-  taxonomy: "Kategori & Tag",
+  articles: "Articles",
+  new: "New",
+  press: "Press Coverage",
+  social: "Social Media",
+  topics: "Topics & Tags",
   media: "Media Library",
   supercharge: "SuperCharge",
-  stations: "Lokasi",
-  users: "Pengguna",
-  activity: "Log Aktivitas",
-  settings: "Akun Saya",
+  stations: "Stations",
+  users: "Users",
+  activity: "Activity Log",
+  settings: "My Account",
 };

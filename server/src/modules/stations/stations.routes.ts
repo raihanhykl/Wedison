@@ -15,7 +15,7 @@ const STATUS = z.enum(["OPERATIONAL", "COMING_SOON", "MAINTENANCE", "CLOSED"]);
 const TIER = z.enum(["HUB", "SHOWROOM", "MITRA"]);
 
 const stationSchema = z.object({
-  id: z.string().trim().regex(/^[A-Z0-9-]{3,20}$/, "Format kode: huruf besar/angka, mis. ST0045").optional(),
+  id: z.string().trim().regex(/^[A-Z0-9-]{3,20}$/, "Code format: uppercase letters/digits, e.g. ST0045").optional(),
   slug: z.string().trim().max(160).optional(),
   name: z.string().trim().min(3).max(160),
   status: STATUS.default("COMING_SOON"),
@@ -67,7 +67,7 @@ stationsRouter.get("/", validate(listQuery, "query"), async (req, res, next) => 
 stationsRouter.get("/:id", async (req, res, next) => {
   try {
     const item = await prisma.station.findUnique({ where: { id: req.params.id as string } });
-    if (!item) throw notFound("Lokasi tidak ditemukan");
+    if (!item) throw notFound("Station not found");
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -81,7 +81,7 @@ stationsRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(stationSchema)
     const slug = await uniqueSlug(data.slug || data.name, async (s) => !!(await prisma.station.findUnique({ where: { slug: s } })));
     const item = await prisma.station.create({ data: { ...data, id, slug } });
     invalidate([CacheTags.stations, CacheTags.dashboard]);
-    logActivity(req, { action: "create", entity: "station", entityId: item.id, summary: `Tambah lokasi ${item.id} ${item.name}` });
+    logActivity(req, { action: "create", entity: "station", entityId: item.id, summary: `Added station ${item.id} ${item.name}` });
     res.status(201).json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -94,7 +94,7 @@ stationsRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(stationSch
     const id = req.params.id as string;
     const item = await prisma.station.update({ where: { id }, data });
     invalidate([CacheTags.stations, CacheTags.dashboard]);
-    logActivity(req, { action: "update", entity: "station", entityId: id, summary: `Ubah lokasi ${id}` });
+    logActivity(req, { action: "update", entity: "station", entityId: id, summary: `Updated station ${id}` });
     res.json({ ok: true, data: item });
   } catch (e) {
     next(e);
@@ -106,7 +106,7 @@ stationsRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
     const id = req.params.id as string;
     await prisma.station.delete({ where: { id } });
     invalidate([CacheTags.stations, CacheTags.dashboard]);
-    logActivity(req, { action: "delete", entity: "station", entityId: id, summary: `Hapus lokasi ${id}` });
+    logActivity(req, { action: "delete", entity: "station", entityId: id, summary: `Deleted station ${id}` });
     res.json({ ok: true });
   } catch (e) {
     next(e);
