@@ -58,6 +58,7 @@ import {
   SearchAndReplace,
   SearchAndReplaceButton,
 } from "@/components/tiptap-ui/search-and-replace"
+import { ImageAltMenu } from "@/components/tiptap-ui/image-alt-menu/image-alt-menu"
 
 // --- Icons ---
 import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon"
@@ -339,6 +340,8 @@ export function SimpleEditor({ content, onChange, placeholder, editable = true }
           role="presentation"
           className="simple-editor-content"
         />
+        {/* Alt/title editor for the selected inline image (SEO & accessibility) */}
+        <ImageAltMenu editor={editor} />
       </EditorContext.Provider>
     </div>
   )
