@@ -8,6 +8,10 @@ import Footer from "./components/footer";
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/sonner";
 import { getSEOMetadata } from "./lib/seo1";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/gtm";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,6 +56,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <GoogleTagManagerNoScript />
+
         <LanguageProvider>
           <Navbar />
           <div className="">{children}</div>
@@ -66,6 +72,8 @@ export default function RootLayout({
             },
           }}
         />
+
+        <GoogleTagManager />
       </body>
     </html>
   );
