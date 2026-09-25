@@ -51,11 +51,27 @@ Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `np
 
 Role: `SUPER_ADMIN` (semua + kelola user) · `ADMIN` (semua konten, hapus permanen) · `EDITOR` (tulis/edit, tanpa hapus permanen).
 
-## Deploy VPS (ringkas)
+## Deploy VPS (ssr.wedison.tech)
 
-- Jalankan API dengan PM2 (`server/dist/index.js`, `NODE_ENV=production`, `COOKIE_SECURE=true`), Postgres lokal VPS.
-- nginx: `location /api/ { proxy_pass http://127.0.0.1:4000; }` di depan Next (atau biarkan rewrite Next yang meneruskan). Folder `server/uploads` harus persisten (di luar folder rilis) dan writable.
-- Set `FRONTEND_URL` = origin situs publik agar webhook revalidate sampai.
+Otomatis lewat `.github/workflows/deploy-ssr.yml` saat push ke `ssr-version`:
+
+1. CI build Next standalone (`API_INTERNAL_URL=http://127.0.0.1:4002` wajib saat build karena rewrite dibaca waktu build) → rsync ke VPS.
+2. rsync source `server/` + `ecosystem.config.js` (tanpa `node_modules`, `dist`, `.env`, `uploads`, `.seeded`).
+3. Di VPS: `npm ci` → `npm run build` → `prisma migrate deploy` → seed **sekali** (penanda `server/.seeded`).
+4. `pm2 startOrReload ecosystem.config.js --update-env` (app `wedison-landing` :3002 + `wedison-api` :4002).
+5. Health check API + `POST /api/revalidate/` agar halaman publik langsung memakai data DB.
+
+Kondisi VPS (disiapkan manual, sekali):
+
+| Item | Nilai |
+|---|---|
+| Env backend | `/home/wedison/wedison-landing/server/.env` (chmod 600, tidak pernah di-rsync). `PORT=4002`, `FRONTEND_URL=http://127.0.0.1:3002`, `COOKIE_SECURE=true`. Password di `DATABASE_URL` harus URL-encoded; `JWT_SECRET` ≥ 32 karakter. |
+| Database | PostgreSQL lokal VPS, DB `wedison_admin`, owner `wedison_app` |
+| Upload | `UPLOAD_DIR=/home/wedison/wedison-data/uploads` (di luar folder deploy → aman dari `rsync --delete`) |
+| nginx | `/api/v1/` dan `/api/uploads/` → `127.0.0.1:4002`; sisanya (termasuk `/api/revalidate`) → Next :3002. Lihat `deploy/nginx/ssr.wedison.tech.conf`. |
+| PM2 boot | service `pm2-wedison` (enabled); jalankan `pm2 save` setelah perubahan proses. |
+
+Backup yang disarankan (cron harian): `pg_dump wedison_admin` + folder `wedison-data/uploads`.
 
 ## Roadmap modul
 
