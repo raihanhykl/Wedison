@@ -20,6 +20,22 @@ function detectLocale(req: NextRequest): string {
 
 const ADMIN_COOKIE = process.env.ADMIN_COOKIE_NAME ?? "wd_admin_token";
 
+/**
+ * Redirect ke URL publik. Di belakang nginx, req.nextUrl.host = bind internal
+ * (localhost:3002), sehingga redirect absolut bocor jadi https://localhost:3002/...
+ * Bangun ulang host/proto dari header X-Forwarded-* yang di-set nginx.
+ */
+function redirectPublic(req: NextRequest, url: URL) {
+  const fwdHost = req.headers.get("x-forwarded-host");
+  if (fwdHost) {
+    const [hostname, port] = fwdHost.split(":");
+    url.hostname = hostname;
+    url.port = port ?? ""; // clear port internal (3002), kecuali proxy kirim port eksplisit
+    url.protocol = `${req.headers.get("x-forwarded-proto") ?? "https"}:`;
+  }
+  return NextResponse.redirect(url);
+}
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -32,13 +48,13 @@ export function middleware(req: NextRequest) {
       const url = req.nextUrl.clone();
       url.pathname = "/admin/login/";
       url.searchParams.set("next", pathname);
-      return NextResponse.redirect(url);
+      return redirectPublic(req, url);
     }
     if (isLogin && hasSession) {
       const url = req.nextUrl.clone();
       url.pathname = "/admin/";
       url.search = "";
-      return NextResponse.redirect(url);
+      return redirectPublic(req, url);
     }
     return NextResponse.next();
   }
@@ -68,17 +84,7 @@ export function middleware(req: NextRequest) {
   const locale = detectLocale(req);
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
-  // PENTING (di belakang nginx): req.nextUrl.host = bind internal (localhost:3002),
-  // sehingga redirect absolut bocor jadi https://localhost:3002/en/. Bangun ulang
-  // host/proto dari header X-Forwarded-* yang di-set nginx -> host publik yang benar.
-  const fwdHost = req.headers.get("x-forwarded-host");
-  if (fwdHost) {
-    const [hostname, port] = fwdHost.split(":");
-    url.hostname = hostname;
-    url.port = port ?? ""; // clear port internal (3002), kecuali proxy kirim port eksplisit
-    url.protocol = `${req.headers.get("x-forwarded-proto") ?? "https"}:`;
-  }
-  return NextResponse.redirect(url);
+  return redirectPublic(req, url);
 }
 
 export const config = {
