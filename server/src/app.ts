@@ -12,8 +12,11 @@ import { errorHandler, notFoundHandler } from "./middleware/error-handler.js";
 export function createApp() {
   const app = express();
 
-  // Di VPS berada di belakang nginx -> percaya X-Forwarded-* (IP asli untuk rate limit/log)
-  app.set("trust proxy", 1);
+  // Di VPS request melewati DUA proxy lokal sebelum sampai sini: nginx -> Next (rewrite /api/v1)
+  // -> Express. "loopback" mempercayai semua hop 127.0.0.1 sehingga req.ip = IP klien asli
+  // (bukan 127.0.0.1) untuk rate limit, log, dan hash persetujuan cookie. Dengan angka 1,
+  // hanya satu hop yang dipercaya dan semua pengunjung akan berbagi satu bucket rate limit.
+  app.set("trust proxy", "loopback");
   app.disable("x-powered-by");
 
   app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));

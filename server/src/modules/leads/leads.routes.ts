@@ -24,8 +24,9 @@ const BOOKING_STATUS = z.enum(["NEW", "CONTACTED", "CONFIRMED", "COMPLETED", "CA
 const BOOKING_PURPOSE = z.enum(["TEST_RIDE", "CONSULTATION", "FINANCING", "SERVICE", "OTHER"]);
 const ADMIN_TZ = "Asia/Jakarta";
 
-const clientIp = (req: { ip?: string; headers: Record<string, unknown> }) =>
-  ((req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() || req.ip || null);
+// req.ip sudah IP klien asli berkat `trust proxy: "loopback"` di app.ts (entri X-Forwarded-For
+// paling kiri bisa dipalsukan klien, jadi tidak dibaca langsung).
+const clientIp = (req: { ip?: string }) => req.ip || null;
 
 // ─────────────────────────── Google Calendar sync (fail-soft) ───────────────────────────
 
