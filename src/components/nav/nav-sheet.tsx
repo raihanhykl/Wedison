@@ -128,14 +128,19 @@ export default function NavSheet({
                             </Link>
                           ))}
                         </div>
-                        <Link
-                          href={`${base}${item.compare.href}`}
-                          onClick={onNavigate}
-                          className="mt-3 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary"
-                        >
-                          {item.compare.label}
-                          <ArrowRight className="h-4 w-4" />
-                        </Link>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          {[item.all, item.compare].map((l) => (
+                            <Link
+                              key={l.href}
+                              href={`${base}${l.href}`}
+                              onClick={onNavigate}
+                              className="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary"
+                            >
+                              {l.label}
+                              <ArrowRight className="h-4 w-4" />
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     ) : (
                       <ul className="pb-3">

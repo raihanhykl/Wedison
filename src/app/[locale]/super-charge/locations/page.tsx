@@ -11,7 +11,7 @@ export async function generateMetadata({
   const { locale } = await params;
   return getSEOMetadata({
     locale: locale as "id" | "en",
-    path: "/super-charge/lokasi",
+    path: "/super-charge/locations",
   });
 }
 

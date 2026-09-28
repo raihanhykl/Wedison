@@ -159,7 +159,7 @@ export default function OjolClient() {
       taglineKey: "ojol.models.bees.tagline",
       highlightKey: "ojol.models.bees.highlight",
       image: "/bees/bees-grey.webp",
-      link: "/bees",
+      link: "/products/bees/",
       specs: [
         { labelKey: "ojol.models.spec.range", value: "80 km" },
         { labelKey: "ojol.models.spec.maxSpeed", value: "60 km/h" },
@@ -171,7 +171,7 @@ export default function OjolClient() {
       taglineKey: "ojol.models.victory.tagline",
       highlightKey: "ojol.models.victory.highlight",
       image: "/victory/victory-grey.webp",
-      link: "/victory",
+      link: "/products/victory/",
       specs: [
         { labelKey: "ojol.models.spec.range", value: "120 km*" },
         {
@@ -186,7 +186,7 @@ export default function OjolClient() {
       taglineKey: "ojol.models.athena.tagline",
       highlightKey: "ojol.models.athena.highlight",
       image: "/athena/athena-grey.webp",
-      link: "/athena",
+      link: "/products/athena/",
       specs: [
         { labelKey: "ojol.models.spec.range", value: "120 km*" },
         {
@@ -201,7 +201,7 @@ export default function OjolClient() {
       taglineKey: "ojol.models.edpower.tagline",
       highlightKey: "ojol.models.edpower.highlight",
       image: "/edpower/edpower-black.webp",
-      link: "/edpower",
+      link: "/products/edpower/",
       specs: [
         { labelKey: "ojol.models.spec.range", value: "200 km*" },
         {

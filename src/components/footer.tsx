@@ -33,7 +33,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <Link href={`/${language}/bees/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/products/bees/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Bees
                 </Link>
               </li>
@@ -46,17 +46,17 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <Link href={`/${language}/athena/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/products/athena/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Athena
                 </Link>
               </li>
               <li>
-                <Link href={`/${language}/victory/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/products/victory/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Victory
                 </Link>
               </li>
               <li>
-                <Link href={`/${language}/edpower/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/products/edpower/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   EdPower
                 </Link>
               </li>

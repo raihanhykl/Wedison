@@ -1,7 +1,7 @@
-import type { SiteCollection } from "@/app/[locale]/super-charge/lokasi/types";
+import type { SiteCollection } from "@/app/[locale]/super-charge/locations/types";
 
 /**
- * Data lokasi SuperCharge Wedison (sumber tunggal untuk halaman /super-charge/lokasi).
+ * Data lokasi SuperCharge Wedison (sumber tunggal untuk halaman /super-charge/locations).
  * Bentuk = GeoJSON FeatureCollection (siap dipindah ke DB/admin CRUD; UI selalu fetch bentuk ini).
  * Aturan: charger_available = piles_total * 2 (1 pile = 2 charger). status di-set manual.
  * amenity keys yang dikenal UI: toilet | kafe | musala | parkir | wifi | minimarket.

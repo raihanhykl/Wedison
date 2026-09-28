@@ -18,7 +18,7 @@ export type PageSEO = {
   image?: string;
 };
 
-// Key = path locale-agnostic ("/", "/victory", "/corporate/about", ...).
+// Key = path locale-agnostic ("/", "/products/victory", "/corporate/about", ...).
 export const seoContent: Record<string, PageSEO> = {
   "/": {
     image: "/wedison-sidebyside.png",
@@ -120,7 +120,41 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
-  "/athena": {
+  "/products": {
+    image: "/wedison-sidebyside.png",
+    id: {
+      title: "Produk Motor Listrik Wedison - Bees, Athena, Victory, EdPower",
+      description:
+        "Lihat seluruh jajaran motor listrik Wedison: Bees, Athena, Victory, dan EdPower. Bandingkan kecepatan, jarak tempuh, dan daya motor, lalu pilih yang paling pas untuk kebutuhanmu.",
+      keywords: [
+        "wedison",
+        "produk wedison",
+        "motor listrik",
+        "wedison bees",
+        "wedison athena",
+        "wedison victory",
+        "wedison edpower",
+        "harga motor listrik",
+      ],
+    },
+    en: {
+      title: "Wedison Electric Motorcycles - Bees, Athena, Victory, EdPower",
+      description:
+        "Explore the full Wedison electric motorcycle lineup: Bees, Athena, Victory, and EdPower. Compare top speed, range, and motor power, then pick the one that fits how you ride.",
+      keywords: [
+        "wedison",
+        "wedison products",
+        "electric motorcycle",
+        "wedison bees",
+        "wedison athena",
+        "wedison victory",
+        "wedison edpower",
+        "electric scooter indonesia",
+      ],
+    },
+  },
+
+  "/products/athena": {
     image: "/athena-product-hero.webp",
     id: {
       title: "Athena - Motor Listrik Premium Indonesia",
@@ -153,7 +187,7 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
-  "/bees": {
+  "/products/bees": {
     image: "/bees-product-hero.webp",
     id: {
       title: "Bees - Motor Listrik Compact & Praktis | Wedison",
@@ -186,7 +220,7 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
-  "/victory": {
+  "/products/victory": {
     image: "/victory-product-hero.webp",
     id: {
       title: "Victory - Motor Listrik Urban Modern | Wedison",
@@ -219,7 +253,7 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
-  "/edpower": {
+  "/products/edpower": {
     image: "/edpower-product-hero.webp",
     id: {
       title: "EdPower - Motor Listrik Premium Indonesia | Wedison",
@@ -286,7 +320,7 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
   },
-  "/super-charge/lokasi": {
+  "/super-charge/locations": {
     image: "/super-charge/supercharge-testing.webp",
     id: {
       title:

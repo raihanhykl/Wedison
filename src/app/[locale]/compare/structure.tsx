@@ -155,7 +155,7 @@ export default function CompareStructure({
       </Select>
       {!opts.compact && (
         <Link
-          href={`/${language}/${bike}/`}
+          href={`/${language}/products/${bike}/`}
           className="mt-1.5 text-xs font-medium text-primary hover:underline"
         >
           {t("compare.viewDetails")}

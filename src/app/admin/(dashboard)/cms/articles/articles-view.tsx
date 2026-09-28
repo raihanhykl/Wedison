@@ -149,7 +149,7 @@ export function ArticlesView() {
                     <DropdownMenuItem asChild><Link href={`/admin/cms/articles/${a.id}`}><Pencil /> Edit</Link></DropdownMenuItem>
                     {a.status === "PUBLISHED" && t && (
                       <DropdownMenuItem asChild>
-                        <a href={`/${t.locale}/media-center/artikel/${t.slug}/`} target="_blank" rel="noreferrer"><Eye /> View on site</a>
+                        <a href={`/${t.locale}/media-center/articles/${t.slug}/`} target="_blank" rel="noreferrer"><Eye /> View on site</a>
                       </DropdownMenuItem>
                     )}
                     <DropdownMenuSeparator />

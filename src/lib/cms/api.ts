@@ -5,7 +5,7 @@
  * Semua fungsi "fail-soft": backend mati -> kembalikan data kosong, halaman tetap render.
  */
 import "server-only";
-import type { SiteCollection } from "@/app/[locale]/super-charge/lokasi/types";
+import type { SiteCollection } from "@/app/[locale]/super-charge/locations/types";
 
 const API = process.env.API_INTERNAL_URL ?? "http://127.0.0.1:4000";
 const REVALIDATE = Number(process.env.CMS_REVALIDATE_SECONDS ?? 300);

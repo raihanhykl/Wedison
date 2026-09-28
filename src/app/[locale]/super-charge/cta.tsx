@@ -42,7 +42,7 @@ export default function SuperChargeCta() {
                   size="lg"
                   className="bg-on-forest-accent text-forest-deep hover:bg-white"
                 >
-                  <Link href={`/${language}/super-charge/lokasi/`}>
+                  <Link href={`/${language}/super-charge/locations/`}>
                     <MapPin className="h-5 w-5" />
                     {t("supercharge.finalCta.ctaPrimary")}
                   </Link>
