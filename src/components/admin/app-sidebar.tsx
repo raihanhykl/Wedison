@@ -15,7 +15,11 @@ export function AppSidebar() {
   const pathname = usePathname().replace(/\/+$/, "") || "/";
   const user = useAdminUser();
 
-  const isActive = (href: string) => (href === "/admin" ? pathname === "/admin" : pathname.startsWith(href));
+  // Item aktif = href TERPANJANG yang cocok dengan path, supaya "Overview" (/admin/leads)
+  // tidak ikut menyala saat membuka /admin/leads/bookings.
+  const matches = (href: string) => (href === "/admin" ? pathname === "/admin" : pathname === href || pathname.startsWith(`${href}/`));
+  const activeHref = NAV.flatMap((g) => g.items.map((i) => i.href)).filter(matches).sort((a, b) => b.length - a.length)[0];
+  const isActive = (href: string) => href === activeHref;
 
   return (
     <Sidebar collapsible="icon">

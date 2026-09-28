@@ -10,6 +10,7 @@ import { mediaRouter } from "../modules/media/media.routes.js";
 import { stationsRouter, publicStationsRouter } from "../modules/stations/stations.routes.js";
 import { consentRouter, publicConsentRouter } from "../modules/consent/consent.routes.js";
 import { dashboardRouter } from "../modules/dashboard/dashboard.routes.js";
+import { leadsRouter, publicLeadsRouter } from "../modules/leads/leads.routes.js";
 import { env } from "../config/env.js";
 
 export const api = Router();
@@ -27,7 +28,11 @@ api.use("/admin/press", pressRouter);
 api.use("/admin/social", socialRouter);
 api.use("/admin/media", mediaRouter);
 api.use("/admin/stations", stationsRouter);
+api.use("/admin/leads", leadsRouter); // booking showroom + pesan kontak + statistik
 api.use("/admin/consent", consentRouter);
+
+// ── Publik: form submission (POST, tanpa cache) — didaftarkan SEBELUM publicRouter ──
+api.use("/public/leads", publicLeadsRouter);
 
 // ── Publik (dikonsumsi Next.js SSR/ISR) — cache-able ────────────────
 const publicRouter = Router();

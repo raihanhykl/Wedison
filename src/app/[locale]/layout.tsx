@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/app/lib/language-context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { BookingProvider } from "@/components/booking/booking-provider";
 import { notFound } from "next/navigation";
 import { LOCALES, isLocale } from "@/app/lib/locale";
 import { ConsentModeDefault, GoogleTagManager } from "@/components/gtm";
@@ -44,15 +45,19 @@ export default async function LocaleLayout({
         </noscript>
         {/* locale dari URL = sumber kebenaran bahasa (bukan localStorage lagi) */}
         <LanguageProvider locale={locale} dictionary={dictionary}>
-          <Navbar />
-          <LazyMotionProvider>
-            {/* Target skip-link di navbar. Sengaja <div>, bukan <main>: sebagian
-                halaman sudah punya <main> sendiri dan <main> bersarang itu invalid. */}
-            <div id="konten" tabIndex={-1}>
-              {children}
-            </div>
-          </LazyMotionProvider>
-          <Footer />
+          {/* Satu modal booking (Test Ride / Book a Visit) untuk seluruh situs;
+              tombol di navbar, landing, dan kartu showroom membukanya lewat useBooking(). */}
+          <BookingProvider>
+            <Navbar />
+            <LazyMotionProvider>
+              {/* Target skip-link di navbar. Sengaja <div>, bukan <main>: sebagian
+                  halaman sudah punya <main> sendiri dan <main> bersarang itu invalid. */}
+              <div id="konten" tabIndex={-1}>
+                {children}
+              </div>
+            </LazyMotionProvider>
+            <Footer />
+          </BookingProvider>
           <CookieConsent />
         </LanguageProvider>
         <Toaster

@@ -20,6 +20,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
+import type { ShowroomId } from "@/lib/booking/showrooms";
 
 export default function ShowroomPageStructure() {
   const { t } = useLanguage();
@@ -47,8 +49,16 @@ export default function ShowroomPageStructure() {
   ];
 
   // Active Experience Center locations (showroom + service center per location)
-  const locations = [
+  const locations: {
+    id: ShowroomId;
+    nameKey: string;
+    addressKey: string;
+    mapsUrl: string;
+    lat: number;
+    lng: number;
+  }[] = [
     {
+      id: "jakarta",
       nameKey: "showroom.jakarta.name",
       addressKey: "showroom.jakarta.address",
       mapsUrl:
@@ -57,6 +67,7 @@ export default function ShowroomPageStructure() {
       lng: 106.781,
     },
     {
+      id: "bekasi",
       nameKey: "showroom.bekasi.name",
       addressKey: "showroom.bekasi.address",
       mapsUrl: "https://maps.app.goo.gl/DXB6csamG8R78XoP9",
@@ -64,6 +75,7 @@ export default function ShowroomPageStructure() {
       lng: 107.0199037,
     },
     {
+      id: "bandung",
       nameKey: "showroom.bandung.name",
       addressKey: "showroom.bandung.address",
       mapsUrl: "https://maps.app.goo.gl/T86DfRuAkHFBmhMs8",
@@ -71,6 +83,7 @@ export default function ShowroomPageStructure() {
       lng: 107.514505,
     },
     {
+      id: "bali",
       nameKey: "showroom.bali.name",
       addressKey: "showroom.bali.address",
       mapsUrl: "https://maps.app.goo.gl/og4ovnG2FgCAQAWt8",
@@ -220,12 +233,13 @@ export default function ShowroomPageStructure() {
                     )}
 
                     <div className="flex flex-wrap gap-3 px-5 sm:px-6 pb-5 sm:pb-6 pt-4">
-                      <Link href={"/corporate/contact/#contact"}>
+                      {/* Showroom ikut terisi otomatis; tujuan dipilih sendiri oleh user */}
+                      <BookingTrigger asChild showroom={location.id} source="showroom-card">
                         <Button size="sm" className="group">
                           {t("showroom.bookVisit")}
                           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </Button>
-                      </Link>
+                      </BookingTrigger>
                       <Link
                         href={location.mapsUrl}
                         target="_blank"

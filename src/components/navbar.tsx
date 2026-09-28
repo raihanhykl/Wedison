@@ -20,8 +20,8 @@ import NavSheet from "./nav/nav-sheet";
 import { NavPanelBody } from "./nav/nav-panels";
 import { activeNavKey, buildNav } from "./nav/nav-config";
 import { useNavChrome } from "./nav/use-nav-chrome";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
 
-const CTA_HREF = "/showroom/";
 const OPEN_DELAY = 90; // ms — hover-intent, biar tak "meletup" saat kursor lewat
 const CLOSE_DELAY = 190; // ms — masa tenggang menyeberang ke panel
 
@@ -289,12 +289,14 @@ export default function Navbar() {
             <LanguageSwitch className="hidden sm:flex" />
             <LanguageSwitch size="sm" className="flex sm:hidden" />
 
-            <Link
-              href={`${base}${CTA_HREF}`}
-              className="nav-cta hidden h-10 items-center rounded-md px-5 font-display text-sm font-semibold tracking-[-0.01em] md:inline-flex"
+            {/* CTA utama: buka modal booking dengan tujuan "Test Ride" sudah terisi */}
+            <BookingTrigger
+              purpose="testRide"
+              source="navbar"
+              className="nav-cta hidden h-10 cursor-pointer items-center rounded-md px-5 font-display text-sm font-semibold tracking-[-0.01em] md:inline-flex"
             >
               {t("nav.cta.testRide")}
-            </Link>
+            </BookingTrigger>
 
             <button
               type="button"
@@ -379,7 +381,6 @@ export default function Navbar() {
         current={path}
         activeKey={activeKey}
         ctaLabel={t("nav.cta.testRide")}
-        ctaHref={CTA_HREF}
         onNavigate={() => setSheetOpen(false)}
       />
     </header>

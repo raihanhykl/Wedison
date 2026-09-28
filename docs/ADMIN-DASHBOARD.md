@@ -10,8 +10,8 @@ browser ──/admin/*──▶ Next.js (:3000) ──rewrite /api/*──▶ Ex
                      └──────────── webhook /api/revalidate ◀────┘ (setelah admin ubah data)
 ```
 
-- **Frontend admin**: `src/app/admin/**` (login, dashboard, CMS, SuperCharge, pengguna, log). Komponen: shadcn/ui + TanStack Table/Query + Tiptap (template resmi `simple-editor`).
-- **Backend**: `server/src` — `modules/*` (auth, users, articles, taxonomy, press, social, media, stations, dashboard, activity), `lib/cache.ts` (LRU in-memory bertag), `lib/metadata.ts` (scraper OG), `middleware/auth.ts` (JWT cookie httpOnly, role).
+- **Frontend admin**: `src/app/admin/**` (login, dashboard, CMS, SuperCharge, Leads [booking showroom, pesan kontak, kalender, analytics — lihat docs/BOOKING-FORM.md], pengguna, log). Komponen: shadcn/ui + TanStack Table/Query + Tiptap (template resmi `simple-editor`).
+- **Backend**: `server/src` — `modules/*` (auth, users, articles, taxonomy, press, social, media, stations, dashboard, activity, leads), `lib/cache.ts` (LRU in-memory bertag), `lib/metadata.ts` (scraper OG), `middleware/auth.ts` (JWT cookie httpOnly, role).
 - **Caching 3 lapis**:
   1. Backend: `cached(key, tags, fn)` (LRU, TTL `CACHE_TTL_PUBLIC`) + header `Cache-Control: s-maxage` di `/api/v1/public/*`.
   2. Next.js: `fetch(..., { next: { revalidate, tags } })` di `src/lib/cms/api.ts` (ISR).

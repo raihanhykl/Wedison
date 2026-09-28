@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "./nav-config";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 type Props = {
   open: boolean;
@@ -14,7 +15,6 @@ type Props = {
   current: string;
   activeKey: string | null;
   ctaLabel: string;
-  ctaHref: string;
   onNavigate: () => void;
 };
 
@@ -30,7 +30,6 @@ export default function NavSheet({
   current,
   activeKey,
   ctaLabel,
-  ctaHref,
   onNavigate,
 }: Props) {
   // Selalu ada satu grup terbuka: yang cocok dengan halaman aktif, kalau tidak
@@ -187,14 +186,16 @@ export default function NavSheet({
       </div>
 
       <div className="border-t border-border bg-card px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4">
-        <Link
-          href={`${base}${ctaHref}`}
+        {/* Tutup sheet dulu, lalu modal booking (Test Ride) terbuka di atas halaman */}
+        <BookingTrigger
+          purpose="testRide"
+          source="nav-sheet"
           onClick={onNavigate}
-          className="nav-cta flex h-12 w-full items-center justify-center gap-2 rounded-md font-display text-[15px] font-semibold tracking-[-0.01em]"
+          className="nav-cta flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md font-display text-[15px] font-semibold tracking-[-0.01em]"
         >
           {ctaLabel}
           <ArrowRight className="h-4 w-4" />
-        </Link>
+        </BookingTrigger>
       </div>
     </div>
   );

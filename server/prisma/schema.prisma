@@ -295,3 +295,80 @@ model Setting {
   value     Json
   updatedAt DateTime @updatedAt
 }
+
+// ───────────────────────── Leads: Booking showroom & pesan kontak ─────────────────────────
+
+enum BookingPurpose {
+  TEST_RIDE
+  CONSULTATION
+  FINANCING
+  SERVICE
+  OTHER
+}
+
+enum BookingStatus {
+  NEW        // baru masuk, belum dihubungi
+  CONTACTED  // sudah dihubungi via WA/telepon
+  CONFIRMED  // jadwal dikonfirmasi customer
+  COMPLETED  // kunjungan selesai
+  CANCELLED  // dibatalkan
+  NO_SHOW    // tidak datang
+}
+
+enum CalendarSyncStatus {
+  PENDING
+  SAVED
+  FAILED
+  SKIPPED // Google Calendar belum dikonfigurasi
+}
+
+/// Booking Test Ride / kunjungan showroom dari form di situs publik.
+model Booking {
+  id              String             @id @default(cuid())
+  showroom        String             // jakarta | bekasi | bandung | bali (registry di modul leads)
+  purpose         BookingPurpose
+  name            String
+  phone           String             // dinormalisasi ke 08xxxxxxxxxx
+  email           String?
+  date            String             // YYYY-MM-DD (zona waktu showroom)
+  time            String             // HH:mm (zona waktu showroom)
+  startAt         DateTime           // instan UTC dari date+time+zona showroom (untuk sortir/"mendatang")
+  note            String?
+  source          String?            // navbar | nav-sheet | landing-hero | showroom-card | other
+  locale          Locale?
+  status          BookingStatus      @default(NEW)
+  calendarStatus  CalendarSyncStatus @default(PENDING)
+  calendarEventId String?
+  calendarLink    String?
+  calendarError   String?
+  adminNote       String?
+  ip              String?
+  userAgent       String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index([startAt])
+  @@index([showroom, status])
+  @@index([status, createdAt])
+  @@index([createdAt])
+}
+
+/// Pesan dari form kontak (/[locale]/corporate/contact). Email tetap dikirim via EmailJS.
+model ContactSubmission {
+  id        String    @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  topic     String
+  message   String
+  locale    Locale?
+  isHandled Boolean   @default(false)
+  handledAt DateTime?
+  adminNote String?
+  ip        String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([isHandled, createdAt])
+  @@index([createdAt])
+}

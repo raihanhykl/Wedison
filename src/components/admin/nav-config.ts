@@ -1,5 +1,6 @@
 import {
-  LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings, type LucideIcon,
+  LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings,
+  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, type LucideIcon,
 } from "lucide-react";
 import type { UserRole } from "@/lib/admin/types";
 
@@ -26,6 +27,15 @@ export const NAV: NavGroup[] = [
     items: [{ title: "Stations", href: "/admin/supercharge/stations", icon: MapPin }],
   },
   {
+    label: "Leads",
+    items: [
+      { title: "Overview", href: "/admin/leads", icon: ChartColumnBig },
+      { title: "Bookings", href: "/admin/leads/bookings", icon: CalendarCheck },
+      { title: "Contact Messages", href: "/admin/leads/contacts", icon: MessageSquareText },
+      { title: "Calendar", href: "/admin/leads/calendar", icon: CalendarDays },
+    ],
+  },
+  {
     label: "System",
     items: [
       { title: "Users", href: "/admin/users", icon: Users, roles: ["SUPER_ADMIN"] },
@@ -47,6 +57,10 @@ export const SEGMENT_LABEL: Record<string, string> = {
   media: "Media Library",
   supercharge: "SuperCharge",
   stations: "Stations",
+  leads: "Leads",
+  bookings: "Bookings",
+  contacts: "Contact Messages",
+  calendar: "Calendar",
   users: "Users",
   activity: "Activity Log",
   settings: "My Account",
