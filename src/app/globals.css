@@ -200,25 +200,6 @@
     @apply w-full mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12;
   }
 
-  /* Ather-style hero: full-bleed at top; once past a small scroll threshold it insets to
-     ~container width + rounds, in ONE smooth eased transition (not scroll-linked -> no flicker).
-     `calc` keeps the shrunk width container-aligned and resize-aware for free. */
-  .hero-shrink {
-    padding: 0;
-    transition: padding 650ms cubic-bezier(0.54, 0.46, 0.54, 0.94);
-  }
-  .hero-shrink[data-shrunk="true"] {
-    padding: 0.75rem max(0.875rem, calc((100vw - 1340px) / 2)) 0;
-  }
-  .hero-shrink-inner {
-    overflow: hidden;
-    border-radius: 0;
-    transition: border-radius 650ms cubic-bezier(0.54, 0.46, 0.54, 0.94);
-  }
-  .hero-shrink[data-shrunk="true"] .hero-shrink-inner {
-    border-radius: 1.75rem;
-  }
-
   /* =======================================================================
      NAVBAR — tone system + morphing megamenu   (src/components/nav/*)
      One attribute on <header data-tone> drives EVERY colour inside, so no
