@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/app/lib/language-context";
+import { openCookieSettings } from "@/lib/consent";
 
 export default function Footer() {
   const { t, language } = useLanguage();
@@ -280,26 +281,21 @@ export default function Footer() {
             {/* Designed with sustainability in mind. Powered by renewable energy. */}
             {t("footer.tagline")}
           </p>
-          {/* <div className="flex space-x-6">
-            <a
-              href="#"
+<div className="flex gap-6">
+            <Link
+              href={`/${language}/cookie-policy/`}
               className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
             >
-              Privacy
-            </a>
-            <a
-              href="#"
+              {t("footer.cookiePolicy")}
+            </Link>
+            <button
+              type="button"
+              onClick={openCookieSettings}
               className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
             >
-              Terms
-            </a>
-            <a
-              href="#"
-              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-            >
-              Cookies
-            </a>
-          </div> */}
+              {t("footer.cookieSettings")}
+            </button>
+          </div>
         </div>
       </div>
     </footer>

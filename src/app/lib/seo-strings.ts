@@ -120,6 +120,21 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
+  "/cookie-policy": {
+    id: {
+      title: "Kebijakan Cookie - Wedison",
+      description:
+        "Cookie apa saja yang digunakan wedison.co, untuk apa, berapa lama disimpan, dan cara mengatur atau mencabut persetujuanmu.",
+      keywords: ["wedison", "kebijakan cookie", "privasi", "persetujuan cookie"],
+    },
+    en: {
+      title: "Cookie Policy - Wedison",
+      description:
+        "Which cookies wedison.co uses, why, how long they are kept, and how to manage or withdraw your consent.",
+      keywords: ["wedison", "cookie policy", "privacy", "cookie consent"],
+    },
+  },
+
   "/products": {
     image: "/wedison-sidebyside.png",
     id: {
