@@ -7,7 +7,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  return getSEOMetadata({ locale: locale as "id" | "en", path: "/athena" });
+  return getSEOMetadata({ locale: locale as "id" | "en", path: "/products/athena" });
 }
 export default function Page() {
   return (

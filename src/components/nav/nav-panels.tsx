@@ -62,14 +62,19 @@ export function NavPanelBody({ item, base, current, onNavigate }: PanelProps) {
 
         <div className="flex items-center justify-between gap-6 border-t border-border px-6 py-3.5">
           <p className="text-sm text-muted-foreground">{item.hint}</p>
-          <Link
-            href={`${base}${item.compare.href}`}
-            onClick={onNavigate}
-            className="group inline-flex shrink-0 items-center gap-1.5 font-display text-sm font-semibold text-primary"
-          >
-            {item.compare.label}
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
-          </Link>
+          <div className="flex shrink-0 items-center gap-6">
+            {[item.all, item.compare].map((l) => (
+              <Link
+                key={l.href}
+                href={`${base}${l.href}`}
+                onClick={onNavigate}
+                className="group inline-flex items-center gap-1.5 font-display text-sm font-semibold text-primary"
+              >
+                {l.label}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ function localeUrl(locale: string, path: string): string {
 
 type Args = {
   locale: Locale;
-  /** Path locale-agnostic, mis. "/", "/victory", "/corporate/about". */
+  /** Path locale-agnostic, mis. "/", "/products/victory", "/corporate/about". */
   path: string;
   // Override opsional untuk halaman dinamis (mis. news/[slug]) yang tidak ada di seoContent.
   title?: string;

@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { consentModeDefaultScript } from "@/lib/consent";
 
 /**
  * ID container Google Tag Manager, per environment (nilainya publik, bukan secret).
@@ -28,18 +29,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   );
 }
 
-/** Fallback GTM untuk browser tanpa JavaScript. Letakkan tepat setelah <body>. */
-export function GoogleTagManagerNoScript() {
+/**
+ * Default Google Consent Mode v2 (semua denied, kecuali cookie persetujuan sudah ada).
+ * Script inline biasa -> dieksekusi saat HTML di-parse, PASTI sebelum GTM (afterInteractive).
+ * Letakkan di <body> sebelum <GoogleTagManager />.
+ *
+ * Catatan: fallback <noscript> GTM sengaja tidak dipakai lagi — tanpa JavaScript
+ * pengunjung tidak bisa memberi persetujuan, jadi pelacakan tidak boleh jalan.
+ */
+export function ConsentModeDefault() {
   if (!GTM_ID) return null;
-
   return (
-    <noscript>
-      <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-        height="0"
-        width="0"
-        style={{ display: "none", visibility: "hidden" }}
-      />
-    </noscript>
+    <script
+      id="consent-default"
+      dangerouslySetInnerHTML={{ __html: consentModeDefaultScript() }}
+    />
   );
 }

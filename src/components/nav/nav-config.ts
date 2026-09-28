@@ -2,13 +2,13 @@
 // maupun mobile sheet. Perubahan IA cukup dilakukan di sini.
 //
 // Prinsip pengelompokan:
-//  · Motor       -> apa yang dibeli (4 model + pintu masuk ke halaman bandingkan)
+//  · Produk      -> apa yang dibeli (4 model + pintu ke halaman semua produk & bandingkan)
 //  · SuperCharge -> apa yang membuat motornya masuk akal (jaringan + peta lokasi)
 //  · Layanan     -> apa yang didapat setelah/menjelang beli (showroom, ojol, bantuan)
 //  · Perusahaan  -> siapa di balik semuanya (tentang, media, karier, kontak)
 //
 // Grup "Jelajahi" yang lama dibubarkan karena isinya campur aduk (showroom +
-// berita + FAQ + program sewa). Halaman /compare dan /super-charge/lokasi yang
+// berita + FAQ + program sewa). Halaman /compare dan /super-charge/locations yang
 // sebelumnya tidak pernah muncul di navbar sekarang punya tempat.
 
 export type NavLink = {
@@ -43,6 +43,7 @@ export type NavItem =
       kind: "models";
       models: NavModel[];
       hint: string;
+      all: { href: string; label: string };
       compare: { href: string; label: string };
     })
   | (Base & { kind: "links"; links: NavLink[]; feature: NavFeature });
@@ -55,31 +56,32 @@ export function buildNav(t: Translate): NavItem[] {
       key: "models",
       kind: "models",
       label: t("nav.menu.models"),
-      match: ["/bees/", "/athena/", "/victory/", "/edpower/", "/compare/"],
+      match: ["/products/", "/compare/"],
       hint: t("nav.models.hint"),
+      all: { href: "/products/", label: t("nav.models.all") },
       compare: { href: "/compare/", label: t("nav.models.compare") },
       models: [
         {
           name: "Bees",
-          href: "/bees/",
+          href: "/products/bees/",
           image: "/navbar-product/bees.webp",
           tagline: t("nav.model.bees.tagline"),
         },
         {
           name: "Athena",
-          href: "/athena/",
+          href: "/products/athena/",
           image: "/navbar-product/athena.webp",
           tagline: t("nav.model.athena.tagline"),
         },
         {
           name: "Victory",
-          href: "/victory/",
+          href: "/products/victory/",
           image: "/navbar-product/victory.webp",
           tagline: t("nav.model.victory.tagline"),
         },
         {
           name: "EdPower",
-          href: "/edpower/",
+          href: "/products/edpower/",
           image: "/navbar-product/edpower.webp",
           tagline: t("nav.model.edpower.tagline"),
         },
@@ -97,7 +99,7 @@ export function buildNav(t: Translate): NavItem[] {
           desc: t("nav.superCharge.network.description"),
         },
         {
-          href: "/super-charge/lokasi/",
+          href: "/super-charge/locations/",
           title: t("nav.superCharge.map"),
           desc: t("nav.superCharge.map.description"),
         },

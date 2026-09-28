@@ -21,6 +21,8 @@ const schema = z.object({
   MAX_UPLOAD_MB: z.coerce.number().positive().default(10),
   CACHE_TTL_PUBLIC: z.coerce.number().int().positive().default(300),
   LOG_LEVEL: z.string().default("info"),
+  // Salt hash IP di log persetujuan cookie (opsional; fallback ke JWT_SECRET).
+  CONSENT_IP_SALT: z.string().min(16).optional(),
   SEED_ADMIN_EMAIL: z.string().email().default("admin@wedison.co"),
   SEED_ADMIN_PASSWORD: z.string().min(8).default("Wedison2026!"),
   SEED_ADMIN_NAME: z.string().default("Super Admin"),

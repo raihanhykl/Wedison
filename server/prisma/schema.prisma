@@ -245,6 +245,33 @@ model Station {
   @@index([province, city])
 }
 
+// ───────────────────────── Privasi: Persetujuan Cookie ─────────────────────────
+
+enum ConsentAction {
+  ACCEPT_ALL
+  REJECT_ALL
+  CUSTOM
+}
+
+/// Bukti persetujuan cookie (akuntabilitas UU PDP). Satu baris per keputusan pengunjung.
+/// Tanpa data identitas: consentId = UUID acak dari cookie browser, IP disimpan sebagai hash.
+model ConsentLog {
+  id        String        @id @default(cuid())
+  consentId String // UUID acak di cookie wd_consent (menghubungkan perubahan pilihan pengunjung yang sama)
+  version   Int // versi kebijakan cookie yang disetujui
+  action    ConsentAction
+  analytics Boolean
+  marketing Boolean
+  locale    String?
+  path      String? // halaman tempat keputusan diambil
+  ipHash    String? // sha256(salt + IP), bukan IP mentah
+  userAgent String?
+  createdAt DateTime      @default(now())
+
+  @@index([consentId])
+  @@index([createdAt])
+}
+
 // ───────────────────────── Sistem ─────────────────────────
 
 model ActivityLog {

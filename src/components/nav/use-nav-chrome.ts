@@ -14,7 +14,9 @@ const LIGHT_TOP_ROUTES = [
   "/corporate/about/",
   "/corporate/contact/",
   "/showroom/",
-  "/super-charge/lokasi/",
+  "/super-charge/locations/",
+  "/products/",
+  "/cookie-policy/",
 ];
 
 function routeHasLightTop(pathname: string): boolean {

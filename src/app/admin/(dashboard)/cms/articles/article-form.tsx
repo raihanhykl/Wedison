@@ -175,7 +175,7 @@ export function ArticleForm({ article }: { article?: Article }) {
     onError: (e) => toast.error(errorMessage(e)),
   });
 
-  const publicUrl = article?.status === "PUBLISHED" && tr.id.slug ? `/id/media-center/artikel/${tr.id.slug}/` : null;
+  const publicUrl = article?.status === "PUBLISHED" && tr.id.slug ? `/id/media-center/articles/${tr.id.slug}/` : null;
   const primaryAction = status === "SCHEDULED" && scheduledAt ? "SCHEDULED" : "PUBLISHED";
 
   return (
@@ -219,7 +219,7 @@ export function ArticleForm({ article }: { article?: Article }) {
               const t = tr[locale];
               const snippetTitle = t.seoTitle || t.title || "Article title";
               const snippetDesc = t.seoDescription || t.excerpt || "Meta description preview — fill in the excerpt or SEO description.";
-              const snippetUrl = `${SITE}/${locale}/media-center/artikel/${t.slug || "slug"}/`;
+              const snippetUrl = `${SITE}/${locale}/media-center/articles/${t.slug || "slug"}/`;
               return (
                 <TabsContent key={locale} value={locale} className="mt-4 space-y-4">
                   {locale === "en" && !t.enabled ? (
@@ -238,7 +238,7 @@ export function ArticleForm({ article }: { article?: Article }) {
                           className="h-12 !text-xl font-display font-bold tracking-tight border-transparent bg-transparent px-0 shadow-none focus-visible:ring-0 focus-visible:border-transparent"
                         />
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <span className="font-mono">/{locale}/media-center/artikel/</span>
+                          <span className="font-mono">/{locale}/media-center/articles/</span>
                           <Input
                             value={t.slug}
                             onChange={(e) => update(locale, { slug: slugify(e.target.value), slugTouched: true })}

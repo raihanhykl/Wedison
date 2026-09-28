@@ -32,6 +32,20 @@ const nextConfig: NextConfig = {
   // tidak mengganggu (sumber error "Cannot find module './xxx.js'").
   output: process.env.NODE_ENV === "production" ? "standalone" : undefined,
   trailingSlash: true, // <== ini penting (jaga kontinuitas URL/SEO)
+  // URL lama (slug Indonesia & produk tanpa /products) -> URL baru berbahasa Inggris.
+  // 301 permanen agar link lama, bookmark, dan peringkat SEO ikut pindah.
+  // Versi tanpa locale ikut dicakup; middleware lalu menambahkan /id atau /en.
+  async redirects() {
+    const moves: [string, string][] = [
+      ["/:product(athena|bees|victory|edpower)", "/products/:product/"],
+      ["/super-charge/lokasi", "/super-charge/locations/"],
+      ["/media-center/artikel/:slug", "/media-center/articles/:slug/"],
+    ];
+    return moves.flatMap(([from, to]) => [
+      { source: `/:locale(id|en)${from}`, destination: `/:locale${to}`, permanent: true },
+      { source: from, destination: to, permanent: true },
+    ]);
+  },
   // Backend Express (server/) diakses lewat origin yang sama: /api/* -> API_INTERNAL_URL.
   // Browser tidak perlu CORS/cookie lintas origin; di VPS nginx bisa mengambil alih rule ini.
   // Route handler milik Next (mis. /api/revalidate) tetap menang karena rewrite = afterFiles.

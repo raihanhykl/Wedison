@@ -16,7 +16,7 @@ browser ──/admin/*──▶ Next.js (:3000) ──rewrite /api/*──▶ Ex
   1. Backend: `cached(key, tags, fn)` (LRU, TTL `CACHE_TTL_PUBLIC`) + header `Cache-Control: s-maxage` di `/api/v1/public/*`.
   2. Next.js: `fetch(..., { next: { revalidate, tags } })` di `src/lib/cms/api.ts` (ISR).
   3. On-demand: setiap write admin → `invalidate(tags)` → `POST {FRONTEND_URL}/api/revalidate` → `revalidateTag`.
-- **Halaman publik yang sudah memakai CMS**: `/media-center` (artikel, liputan pers, Instagram), `/media-center/news/[slug]`, `/media-center/artikel/[slug]` (baru), `/super-charge/lokasi`. Semua fail-soft ke data statis lama bila backend kosong/mati.
+- **Halaman publik yang sudah memakai CMS**: `/media-center` (artikel, liputan pers, Instagram), `/media-center/news/[slug]`, `/media-center/articles/[slug]` (baru), `/super-charge/locations`. Semua fail-soft ke data statis lama bila backend kosong/mati.
 
 ## Setup lokal (tanpa Docker)
 

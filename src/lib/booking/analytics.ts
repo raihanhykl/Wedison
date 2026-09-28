@@ -12,16 +12,12 @@ type DataLayerEvent = Record<string, string | number | boolean | undefined> & {
   event: string;
 };
 
-declare global {
-  interface Window {
-    dataLayer?: DataLayerEvent[];
-  }
-}
-
+// Deklarasi global `window.dataLayer` sudah ada di src/lib/consent.ts (Consent Mode).
 export function pushDataLayer(payload: DataLayerEvent) {
   if (typeof window === "undefined") return;
-  window.dataLayer = window.dataLayer ?? [];
-  window.dataLayer.push(payload);
+  const w = window as Window & { dataLayer?: unknown[] };
+  w.dataLayer = w.dataLayer ?? [];
+  w.dataLayer.push(payload);
 }
 
 export function trackBookingOpen(p: {

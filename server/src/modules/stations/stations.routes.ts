@@ -113,7 +113,7 @@ stationsRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
   }
 });
 
-// ─── Publik: GeoJSON FeatureCollection (bentuk yang dikonsumsi halaman /super-charge/lokasi) ───
+// ─── Publik: GeoJSON FeatureCollection (bentuk yang dikonsumsi halaman /super-charge/locations) ───
 export const publicStationsRouter = Router();
 publicStationsRouter.get("/", async (_req, res, next) => {
   try {
