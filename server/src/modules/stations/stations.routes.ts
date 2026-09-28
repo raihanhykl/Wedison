@@ -8,9 +8,9 @@ import { uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
-import { notFound } from "../../lib/errors.js";
+import { notFound, conflict, badRequest } from "../../lib/errors.js";
 
-// Modul SuperCharge — fondasi API (CRUD). UI admin menyusul di iterasi berikutnya.
+// Modul SuperCharge — CRUD + aksi massal untuk halaman admin /admin/supercharge/stations.
 const STATUS = z.enum(["OPERATIONAL", "COMING_SOON", "MAINTENANCE", "CLOSED"]);
 const TIER = z.enum(["HUB", "SHOWROOM", "MITRA"]);
 
@@ -43,7 +43,13 @@ async function nextStationId() {
 export const stationsRouter = Router();
 stationsRouter.use(requireAuth);
 
-const listQuery = paginationQuery.extend({ status: STATUS.optional(), tier: TIER.optional(), province: z.string().optional() });
+const listQuery = paginationQuery.extend({
+  status: STATUS.optional(),
+  tier: TIER.optional(),
+  province: z.string().optional(),
+  active: z.enum(["true", "false"]).optional(),
+});
+const SORTABLE = new Set(["name", "id", "updatedAt", "status", "tier", "city"]);
 
 stationsRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {
   try {
@@ -52,13 +58,70 @@ stationsRouter.get("/", validate(listQuery, "query"), async (req, res, next) => 
       ...(q.status ? { status: q.status } : {}),
       ...(q.tier ? { tier: q.tier } : {}),
       ...(q.province ? { province: q.province } : {}),
-      ...(q.q ? { OR: [{ name: { contains: q.q, mode: "insensitive" } }, { city: { contains: q.q, mode: "insensitive" } }, { id: { contains: q.q.toUpperCase() } }] } : {}),
+      ...(q.active ? { isActive: q.active === "true" } : {}),
+      ...(q.q
+        ? { OR: [{ name: { contains: q.q, mode: "insensitive" } }, { city: { contains: q.q, mode: "insensitive" } }, { address: { contains: q.q, mode: "insensitive" } }, { id: { contains: q.q.toUpperCase() } }] }
+        : {}),
     };
+    const sort = q.sort && SORTABLE.has(q.sort) ? q.sort : "updatedAt";
     const [items, total] = await Promise.all([
-      prisma.station.findMany({ where, orderBy: { [q.sort === "name" ? "name" : "updatedAt"]: q.order }, ...skipTake(q) }),
+      prisma.station.findMany({ where, orderBy: { [sort]: q.order }, ...skipTake(q) }),
       prisma.station.count({ where }),
     ]);
     res.json({ ok: true, ...paginate(items, total, q) });
+  } catch (e) {
+    next(e);
+  }
+});
+
+// Nilai unik untuk filter/datalist di admin (provinsi & kota) + ringkasan jumlah per status.
+stationsRouter.get("/meta", async (_req, res, next) => {
+  try {
+    const [provinces, cities, byStatus, total, inactive] = await Promise.all([
+      prisma.station.findMany({ distinct: ["province"], select: { province: true }, orderBy: { province: "asc" } }),
+      prisma.station.findMany({ distinct: ["city"], select: { city: true, province: true }, orderBy: { city: "asc" } }),
+      prisma.station.groupBy({ by: ["status"], where: { isActive: true }, _count: true }),
+      prisma.station.count(),
+      prisma.station.count({ where: { isActive: false } }),
+    ]);
+    res.json({
+      ok: true,
+      data: {
+        provinces: provinces.map((p) => p.province),
+        cities: cities.map((c) => ({ city: c.city, province: c.province })),
+        byStatus: Object.fromEntries(byStatus.map((s) => [s.status, s._count])),
+        total,
+        inactive,
+      },
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+
+// Aksi massal dari tabel admin: ubah status / aktif-nonaktif / hapus (hapus hanya ADMIN).
+const bulkSchema = z.object({
+  ids: z.array(z.string()).min(1).max(500),
+  action: z.enum(["status", "activate", "deactivate", "delete"]),
+  status: STATUS.optional(),
+});
+
+stationsRouter.post("/bulk", requireRole("ADMIN", "EDITOR"), validate(bulkSchema), async (req, res, next) => {
+  try {
+    const { ids, action, status } = getValidated<typeof bulkSchema>(req);
+    if (action === "delete" && req.user!.role === "EDITOR") throw badRequest("Editors cannot delete stations");
+    if (action === "status" && !status) throw badRequest("status is required for the status action");
+    const where = { id: { in: ids } };
+    let count = 0;
+    switch (action) {
+      case "status": count = (await prisma.station.updateMany({ where, data: { status } })).count; break;
+      case "activate": count = (await prisma.station.updateMany({ where, data: { isActive: true } })).count; break;
+      case "deactivate": count = (await prisma.station.updateMany({ where, data: { isActive: false } })).count; break;
+      case "delete": count = (await prisma.station.deleteMany({ where })).count; break;
+    }
+    invalidate([CacheTags.stations, CacheTags.dashboard]);
+    logActivity(req, { action: action === "delete" ? "delete" : "update", entity: "station", summary: `Bulk ${action}${status ? ` → ${status}` : ""} on ${count} station(s)`, meta: { ids, action, status } });
+    res.json({ ok: true, count });
   } catch (e) {
     next(e);
   }
@@ -78,6 +141,7 @@ stationsRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(stationSchema)
   try {
     const data = getValidated<typeof stationSchema>(req);
     const id = data.id ?? (await nextStationId());
+    if (await prisma.station.findUnique({ where: { id }, select: { id: true } })) throw conflict(`Station code ${id} already exists`);
     const slug = await uniqueSlug(data.slug || data.name, async (s) => !!(await prisma.station.findUnique({ where: { slug: s } })));
     const item = await prisma.station.create({ data: { ...data, id, slug } });
     invalidate([CacheTags.stations, CacheTags.dashboard]);
@@ -92,6 +156,11 @@ stationsRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(stationSch
   try {
     const { id: _id, ...data } = getValidated<typeof stationSchema>(req);
     const id = req.params.id as string;
+    // Slug baru harus unik di luar stasiun ini sendiri; kosong = biarkan slug lama.
+    if (data.slug !== undefined) {
+      if (!data.slug) delete data.slug;
+      else data.slug = await uniqueSlug(data.slug, async (s) => !!(await prisma.station.findFirst({ where: { slug: s, NOT: { id } }, select: { id: true } })));
+    }
     const item = await prisma.station.update({ where: { id }, data });
     invalidate([CacheTags.stations, CacheTags.dashboard]);
     logActivity(req, { action: "update", entity: "station", entityId: id, summary: `Updated station ${id}` });

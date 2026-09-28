@@ -215,6 +215,24 @@ export const STATION_STATUS_LABEL: Record<StationStatus, string> = {
 
 export const STATION_TIER_LABEL: Record<StationTier, string> = { HUB: "Hub", SHOWROOM: "Showroom", MITRA: "Partner" };
 
+/** Kunci fasilitas = kunci kamus publik `supercharge.locator.amenity.<key>` (jangan diubah sembarangan). */
+export const STATION_AMENITIES: { key: string; label: string }[] = [
+  { key: "parkir", label: "Parking" },
+  { key: "toilet", label: "Toilet" },
+  { key: "musala", label: "Prayer room" },
+  { key: "kafe", label: "Café" },
+  { key: "minimarket", label: "Minimarket" },
+  { key: "wifi", label: "Wi-Fi" },
+];
+
+export type StationsMeta = {
+  provinces: string[];
+  cities: { city: string; province: string }[];
+  byStatus: Partial<Record<StationStatus, number>>;
+  total: number;
+  inactive: number;
+};
+
 // ───────────────────────── Leads (booking showroom & pesan kontak) ─────────────────────────
 export type ShowroomId = "jakarta" | "bekasi" | "bandung" | "bali";
 export type BookingPurpose = "TEST_RIDE" | "CONSULTATION" | "FINANCING" | "SERVICE" | "OTHER";
