@@ -43,7 +43,7 @@ export function StationsView() {
 
   return (
     <>
-      <PageHeader title="SuperCharge Stations" description="Station data shown on the /super-charge/lokasi map." />
+      <PageHeader title="SuperCharge Stations" description="Station data shown on the /super-charge/locations map." />
       <Alert>
         <MapPin className="size-4" />
         <AlertTitle>SuperCharge module — phase 1</AlertTitle>

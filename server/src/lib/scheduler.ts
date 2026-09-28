@@ -1,6 +1,7 @@
 import { prisma } from "./prisma.js";
 import { logger } from "./logger.js";
 import { invalidate, CacheTags } from "./cache.js";
+import { purgeOldConsentLogs } from "../modules/consent/consent.routes.js";
 
 /**
  * Promote SCHEDULED content whose publish time has passed to PUBLISHED.
@@ -32,5 +33,17 @@ export function startScheduler(intervalMs = 60_000) {
   void tick();
   const timer = setInterval(tick, intervalMs);
   timer.unref();
-  return () => clearInterval(timer);
+
+  // Retensi log persetujuan cookie: cukup sekali sehari.
+  const purge = () =>
+    purgeOldConsentLogs()
+      .then((n) => n > 0 && logger.info({ deleted: n }, "old consent logs purged"))
+      .catch((err) => logger.warn({ err }, "consent purge failed"));
+  void purge();
+  const purgeTimer = setInterval(purge, 24 * 60 * 60 * 1000);
+  purgeTimer.unref();
+  return () => {
+    clearInterval(timer);
+    clearInterval(purgeTimer);
+  };
 }

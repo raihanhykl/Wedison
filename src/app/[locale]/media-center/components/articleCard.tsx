@@ -10,7 +10,7 @@ export function ArticleCard({ article, locale }: { article: PublicArticle; local
     : "";
   return (
     <Card className="group mx-auto h-full flex flex-col overflow-hidden rounded-xl border border-border bg-card p-0 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-lg">
-      <Link href={`/${locale}/media-center/artikel/${article.slug}/`} className="h-full flex flex-col">
+      <Link href={`/${locale}/media-center/articles/${article.slug}/`} className="h-full flex flex-col">
         <div className="relative w-full overflow-hidden aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9]">
           {article.coverImage ? (
             <Image

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const base = getSEOMetadata({
     locale: loc,
-    path: `/media-center/artikel/${slug}`,
+    path: `/media-center/articles/${slug}`,
     title: a.seoTitle ?? a.title,
     description: a.seoDescription ?? a.excerpt ?? undefined,
     keywords: a.seoKeywords ? a.seoKeywords.split(",").map((k) => k.trim()).filter(Boolean) : undefined,
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   });
 
   const languages: Record<string, string> = {};
-  for (const l of a.availableLocales) languages[l.locale] = `${SITE}/${l.locale}/media-center/artikel/${l.slug}/`;
+  for (const l of a.availableLocales) languages[l.locale] = `${SITE}/${l.locale}/media-center/articles/${l.slug}/`;
   languages["x-default"] = languages.id ?? languages[loc];
 
   const ogTitle = a.ogTitle ?? a.seoTitle ?? a.title;
@@ -72,7 +72,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
     ? new Date(a.publishedAt).toLocaleDateString(loc === "en" ? "en-US" : "id-ID", { year: "numeric", month: "long", day: "numeric" })
     : "";
   const other = a.availableLocales.find((l) => l.locale !== loc);
-  const url = `${SITE}/${loc}/media-center/artikel/${a.slug}/`;
+  const url = `${SITE}/${loc}/media-center/articles/${a.slug}/`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -101,7 +101,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
               <span>{loc === "en" ? "Back to Media Center" : "Kembali ke Media Center"}</span>
             </Link>
             {other && (
-              <Link href={`/${other.locale}/media-center/artikel/${other.slug}/`} className="font-mono text-xs uppercase tracking-wider text-primary hover:underline">
+              <Link href={`/${other.locale}/media-center/articles/${other.slug}/`} className="font-mono text-xs uppercase tracking-wider text-primary hover:underline">
                 {other.locale === "en" ? "Read in English" : "Baca dalam Bahasa Indonesia"}
               </Link>
             )}

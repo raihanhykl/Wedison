@@ -80,7 +80,7 @@ const HERO_SLIDES = [
     id: "charge",
     img: "/new-looks/HERO 3.webp",
     pos: "object-[58%_center]",
-    href: "/super-charge/lokasi/",
+    href: "/super-charge/locations/",
     logo: true,
   },
   {
@@ -400,7 +400,7 @@ export default function Landing() {
           {MODELS.map((m) => (
             <Link
               key={m.id}
-              href={`/${m.id}/`}
+              href={`/products/${m.id}/`}
               className="group relative block aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[16/10]"
             >
               {/* Card image reveals on its own viewport entry (opacity) */}

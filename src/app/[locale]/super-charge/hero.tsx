@@ -50,7 +50,7 @@ export default function SuperChargeHero() {
                 size="lg"
                 className="bg-white text-forest hover:bg-white/90"
               >
-                <Link href={`/${language}/super-charge/lokasi/`}>
+                <Link href={`/${language}/super-charge/locations/`}>
                   <MapPin className="h-5 w-5" />
                   {t("supercharge.hero.ctaPrimary")}
                 </Link>
