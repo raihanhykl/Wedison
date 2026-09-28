@@ -28,6 +28,7 @@ import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 type Lang = "id" | "en";
 
@@ -88,7 +89,9 @@ const HERO_SLIDES = [
     id: "green",
     img: "/new-looks/test image.webp",
     pos: "object-[28%_center]",
-    href: "/corporate/contact/",
+    // CTA "Jadwalkan Test Ride" membuka modal booking (bukan pindah halaman)
+    href: "/showroom/",
+    booking: true,
     logo: false,
   },
 ] as const;
@@ -330,9 +333,15 @@ export default function Landing() {
                           {c[`h_${s.id}_sub`]}
                         </p>
                         <div className="mt-8">
-                          <Link href={s.href}>
-                            <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
-                          </Link>
+                          {"booking" in s && s.booking ? (
+                            <BookingTrigger asChild purpose="testRide" source="landing-hero">
+                              <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
+                            </BookingTrigger>
+                          ) : (
+                            <Link href={s.href}>
+                              <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
+                            </Link>
+                          )}
                         </div>
                       </div>
                       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45">

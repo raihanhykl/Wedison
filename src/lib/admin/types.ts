@@ -170,6 +170,10 @@ export type DashboardStats = {
     media: number;
     stations: number;
     stationsByStatus: Partial<Record<StationStatus, number>>;
+    bookings: number;
+    bookingsNew: number;
+    bookingsUpcoming7d: number;
+    contactsUnhandled: number;
   };
   recentArticles: (Pick<Article, "id" | "status" | "updatedAt" | "publishedAt"> & {
     translations: { locale: Locale; title: string; slug: string }[];
@@ -210,3 +214,109 @@ export const STATION_STATUS_LABEL: Record<StationStatus, string> = {
 };
 
 export const STATION_TIER_LABEL: Record<StationTier, string> = { HUB: "Hub", SHOWROOM: "Showroom", MITRA: "Partner" };
+
+// ───────────────────────── Leads (booking showroom & pesan kontak) ─────────────────────────
+export type ShowroomId = "jakarta" | "bekasi" | "bandung" | "bali";
+export type BookingPurpose = "TEST_RIDE" | "CONSULTATION" | "FINANCING" | "SERVICE" | "OTHER";
+export type BookingStatus = "NEW" | "CONTACTED" | "CONFIRMED" | "COMPLETED" | "CANCELLED" | "NO_SHOW";
+export type CalendarSyncStatus = "PENDING" | "SAVED" | "FAILED" | "SKIPPED";
+
+export type Booking = {
+  id: string;
+  showroom: ShowroomId;
+  purpose: BookingPurpose;
+  name: string;
+  phone: string;
+  email: string | null;
+  date: string; // YYYY-MM-DD (showroom time zone)
+  time: string; // HH:mm
+  startAt: string;
+  note: string | null;
+  source: string | null;
+  locale: Locale | null;
+  status: BookingStatus;
+  calendarStatus: CalendarSyncStatus;
+  calendarEventId: string | null;
+  calendarLink: string | null;
+  calendarError: string | null;
+  adminNote: string | null;
+  ip: string | null;
+  userAgent: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ContactSubmission = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  topic: string;
+  message: string;
+  locale: Locale | null;
+  isHandled: boolean;
+  handledAt: string | null;
+  adminNote: string | null;
+  ip: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type LeadsStats = {
+  range: { from: string; to: string };
+  totals: {
+    bookingsAll: number;
+    bookingsInRange: number;
+    bookingsNew: number;
+    upcoming7d: number;
+    contactsAll: number;
+    contactsInRange: number;
+    contactsUnhandled: number;
+  };
+  byPurpose: Partial<Record<BookingPurpose, number>>;
+  byShowroom: Partial<Record<ShowroomId, number>>;
+  bySource: Record<string, number>;
+  byStatus: Partial<Record<BookingStatus, number>>;
+  byTopic: { topic: string; count: number }[];
+  perDay: { day: string; bookings: number; contacts: number }[];
+  recentBookings: Booking[];
+  upcomingBookings: Booking[];
+  recentContacts: ContactSubmission[];
+  calendarConfigured: boolean;
+  generatedAt: string;
+};
+
+export const SHOWROOM_LABEL: Record<ShowroomId, string> = { jakarta: "Wedison Jakarta", bekasi: "Wedison Bekasi", bandung: "Wedison Bandung", bali: "Wedison Bali" };
+export const SHOWROOM_TZ: Record<ShowroomId, string> = { jakarta: "WIB", bekasi: "WIB", bandung: "WIB", bali: "WITA" };
+export const BOOKING_PURPOSE_LABEL: Record<BookingPurpose, string> = {
+  TEST_RIDE: "Test Ride",
+  CONSULTATION: "Product consultation",
+  FINANCING: "Financing simulation",
+  SERVICE: "Service",
+  OTHER: "Other visit",
+};
+export const BOOKING_STATUS_LABEL: Record<BookingStatus, string> = {
+  NEW: "New",
+  CONTACTED: "Contacted",
+  CONFIRMED: "Confirmed",
+  COMPLETED: "Completed",
+  CANCELLED: "Cancelled",
+  NO_SHOW: "No-show",
+};
+export const CALENDAR_STATUS_LABEL: Record<CalendarSyncStatus, string> = {
+  PENDING: "Pending",
+  SAVED: "In Google Calendar",
+  FAILED: "Sync failed",
+  SKIPPED: "Not synced",
+};
+export const BOOKING_SOURCE_LABEL: Record<string, string> = {
+  navbar: "Navbar button",
+  "nav-sheet": "Mobile menu",
+  "landing-hero": "Landing hero",
+  "showroom-card": "Showroom card",
+  other: "Other",
+  unknown: "Unknown",
+};
+
+/** Nomor WhatsApp internasional dari nomor kanonik 08xx. */
+export const waLink = (phone: string) => `https://wa.me/${phone.replace(/\D/g, "").replace(/^0/, "62")}`;

@@ -24,6 +24,18 @@ const schema = z.object({
   SEED_ADMIN_EMAIL: z.string().email().default("admin@wedison.co"),
   SEED_ADMIN_PASSWORD: z.string().min(8).default("Wedison2026!"),
   SEED_ADMIN_NAME: z.string().default("Super Admin"),
+  // Booking form -> Google Calendar (service account). Semua opsional: tanpa ini booking tetap
+  // tersimpan di DB, hanya tidak disinkronkan ke kalender (calendarStatus = SKIPPED).
+  GOOGLE_SERVICE_ACCOUNT_EMAIL: z.string().optional(),
+  GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: z.string().optional(),
+  GOOGLE_SERVICE_ACCOUNT_JSON_BASE64: z.string().optional(),
+  GOOGLE_CALENDAR_ID: z.string().optional(),
+  GOOGLE_CALENDAR_ID_JAKARTA: z.string().optional(),
+  GOOGLE_CALENDAR_ID_BEKASI: z.string().optional(),
+  GOOGLE_CALENDAR_ID_BANDUNG: z.string().optional(),
+  GOOGLE_CALENDAR_ID_BALI: z.string().optional(),
+  // Verifikasi reCAPTCHA v2 server-side untuk form booking (secret key). Kosong = tidak diverifikasi.
+  RECAPTCHA_SECRET_KEY: z.string().optional(),
 });
 
 const parsed = schema.safeParse(process.env);

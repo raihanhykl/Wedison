@@ -33,6 +33,13 @@ dashboardRouter.get("/stats", async (_req, res, next) => {
           prisma.article.aggregate({ _sum: { viewCount: true }, where: { deletedAt: null } }),
         ]);
       const publishedLast30 = await prisma.article.count({ where: { deletedAt: null, status: "PUBLISHED", publishedAt: { gte: since } } });
+      const now = new Date();
+      const [bookings, bookingsNew, bookingsUpcoming7d, contactsUnhandled] = await Promise.all([
+        prisma.booking.count(),
+        prisma.booking.count({ where: { status: "NEW" } }),
+        prisma.booking.count({ where: { startAt: { gte: now, lt: new Date(now.getTime() + 7 * 86_400_000) }, status: { notIn: ["CANCELLED", "NO_SHOW"] } } }),
+        prisma.contactSubmission.count({ where: { isHandled: false } }),
+      ]);
       return {
         counts: {
           articles,
@@ -44,6 +51,10 @@ dashboardRouter.get("/stats", async (_req, res, next) => {
           media,
           stations,
           stationsByStatus: Object.fromEntries(stationsByStatus.map((s) => [s.status, s._count])),
+          bookings,
+          bookingsNew,
+          bookingsUpcoming7d,
+          contactsUnhandled,
         },
         recentArticles,
         recentActivity,

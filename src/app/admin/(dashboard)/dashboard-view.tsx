@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Eye, FileText, Images, MapPin, Newspaper, Plus, Share2, Zap } from "lucide-react";
+import { ArrowRight, CalendarCheck, Eye, FileText, Images, MapPin, Newspaper, Plus, Share2, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -47,7 +47,7 @@ export function DashboardView() {
     <>
       <PageHeader
         title={`${greet}, ${user.name.split(" ")[0]}`}
-        description="Overview of Media Center content and the SuperCharge network."
+        description="Overview of leads, Media Center content, and the SuperCharge network."
         actions={
           <Button asChild>
             <Link href="/admin/cms/articles/new">
@@ -58,13 +58,14 @@ export function DashboardView() {
       />
 
       {isLoading || !c ? (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+          {Array.from({ length: 5 }).map((_, i) => (
             <Skeleton key={i} className="h-28 rounded-xl" />
           ))}
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+          <StatCard title="Booking requests" value={c.bookings} hint={`${c.bookingsNew} new · ${c.bookingsUpcoming7d} visits next 7d · ${c.contactsUnhandled} unread messages`} icon={CalendarCheck} href="/admin/leads" />
           <StatCard title="Articles" value={c.articles} hint={`${c.articlesByStatus.PUBLISHED ?? 0} published · ${c.articlesByStatus.DRAFT ?? 0} drafts`} icon={FileText} href="/admin/cms/articles" />
           <StatCard title="Press coverage" value={c.press} hint="live on Media Center" icon={Newspaper} href="/admin/cms/press" />
           <StatCard title="Social posts" value={c.social} hint="active" icon={Share2} href="/admin/cms/social" />
