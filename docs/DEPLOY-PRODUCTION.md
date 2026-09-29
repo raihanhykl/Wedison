@@ -1,7 +1,8 @@
 # Deploy & Operasional Produksi (wedison.co di VPS)
 
 Runbook produksi setelah migrasi dari Hostinger shared hosting (SSG) ke VPS (SSR + backend).
-VPS: `76.13.22.124` (IPv6 `2a02:4780:59:d60f::1`), user app `wedison`, butuh root untuk nginx/certbot.
+VPS: `76.13.22.124`, user app `wedison`, butuh root untuk nginx/certbot.
+(VPS punya IPv6 `2a02:4780:59:d60f::1`, tetapi per 2026-09-29 tidak bisa dijangkau dari luar → wedison.co **tanpa AAAA**.)
 
 ## Branch & environment
 
@@ -79,7 +80,7 @@ Permintaan ke tim DNS (zona `wedison.co`, nameserver Hostinger `ns1/ns2.dns-park
 | Record | Nilai lama | Nilai baru |
 |---|---|---|
 | `wedison.co` A | `147.93.80.85` | `76.13.22.124` |
-| `wedison.co` AAAA | `2a02:4780:6:1966:0:2895:3f69:2` | `2a02:4780:59:d60f::1` (atau hapus) |
+| `wedison.co` AAAA | `2a02:4780:6:1966:0:2895:3f69:2` | **hapus** (IPv6 VPS belum bisa diakses dari luar) |
 | `www.wedison.co` CNAME | `wedison.co.` | tetap |
 | MX / TXT / subdomain lain | — | **jangan diubah** |
 
@@ -91,7 +92,7 @@ otomatis, lalu menghapus dirinya. Log: `/var/log/wedison-cert-cutover.log`.
 
 Cek pasca-cutover:
 ```bash
-dig +short A wedison.co @1.1.1.1; dig +short AAAA wedison.co @1.1.1.1
+dig +short A wedison.co @1.1.1.1; dig +short AAAA wedison.co @1.1.1.1   # A = 76.13.22.124, AAAA kosong
 curl -sI https://wedison.co/id/ | head -3         # server: nginx
 sudo certbot certificates --cert-name wedison.co   # setelah cron: authenticator webroot
 ```
@@ -99,8 +100,11 @@ Lalu: submit ulang `https://wedison.co/sitemap.xml` di Google Search Console, pa
 
 ## Setelah stabil (± 2 minggu)
 
-- Pensiunkan hosting Hostinger & subdomain `staging.wedison.co`; hapus secret `HOSTINGER_*` dan
-  branch/workflow `legacy-static` (salinan `/var/www/wedison-legacy` tetap sebagai arsip fallback).
+- **Sebelum** mematikan hosting Hostinger, pindahkan/putuskan subdomain yang masih dilayani di sana
+  (`147.93.80.85`): minimal `promo-awal-tahun.wedison.co` (microsite kampanye, aktif) dan
+  `staging.wedison.co` (situs staging lama). Minta daftar lengkap record zona ke tim DNS.
+- Pensiunkan hosting Hostinger; hapus secret `HOSTINGER_*` dan branch/workflow `legacy-static`
+  (salinan `/var/www/wedison-legacy` tetap sebagai arsip fallback).
 - Naikkan kembali TTL DNS.
 
 ## Operasional

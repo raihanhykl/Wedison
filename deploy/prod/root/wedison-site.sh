@@ -26,6 +26,7 @@ PREV=$(readlink "$LINK" 2>/dev/null || true)
 ln -sfn "$TARGET" "$LINK"
 if nginx -t 2>/dev/null; then
   systemctl reload nginx
+  sleep 2 # reload nginx asinkron: tunggu worker baru mengambil alih
   echo "wedison.co sekarang: $MODE"
 else
   nginx -t || true
