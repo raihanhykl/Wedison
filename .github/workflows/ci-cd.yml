@@ -74,8 +74,9 @@ jobs:
           DEST=${{ env.VPS_USER }}@${{ env.VPS_HOST }}
           REL=${{ env.PROD_ROOT }}/releases/${{ github.sha }}
           ssh $DEST "mkdir -p $REL/web $REL/server"
-          # --link-dest: file yang sama dengan rilis aktif di-hardlink -> cepat & hemat disk
-          rsync -az --delete --link-dest=${{ env.PROD_ROOT }}/current/web/ \
+          # --link-dest + --checksum: file yang isinya sama dengan rilis aktif di-hardlink (mtime
+          # hasil build selalu baru, jadi bandingkan isi) -> hanya file berubah yang dikirim.
+          rsync -az --checksum --delete --link-dest=${{ env.PROD_ROOT }}/current/web/ \
             .next/standalone/ $DEST:$REL/web/
           rsync -az --delete \
             --exclude node_modules --exclude dist --exclude src/generated \
