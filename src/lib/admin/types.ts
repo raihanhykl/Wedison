@@ -1,0 +1,340 @@
+// Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
+// "Topics" in the UI map to the Category model in the database.
+export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR";
+export type ContentStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED" | "ARCHIVED";
+export type Locale = "id" | "en";
+export type SocialPlatform = "INSTAGRAM" | "TIKTOK" | "YOUTUBE" | "X" | "FACEBOOK" | "LINKEDIN";
+export type StationStatus = "OPERATIONAL" | "COMING_SOON" | "MAINTENANCE" | "CLOSED";
+export type StationTier = "HUB" | "SHOWROOM" | "MITRA";
+
+export type AuthUser = { id: string; email: string; name: string; role: UserRole; avatarUrl: string | null };
+
+export type Paginated<T> = {
+  ok: true;
+  items: T[];
+  meta: { page: number; limit: number; total: number; totalPages: number };
+};
+
+export type User = AuthUser & {
+  isActive: boolean;
+  lastLoginAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _count?: { articles: number };
+};
+
+export type Category = {
+  id: string;
+  slug: string;
+  nameId: string;
+  nameEn: string | null;
+  description: string | null;
+  color: string | null;
+  sortOrder: number;
+  _count?: { articles: number };
+};
+
+export type Tag = { id: string; slug: string; name: string; _count?: { articles: number } };
+
+export type Media = {
+  id: string;
+  filename: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+  width: number | null;
+  height: number | null;
+  url: string;
+  alt: string | null;
+  caption: string | null;
+  folder: string;
+  createdAt: string;
+  uploadedBy?: { id: string; name: string } | null;
+};
+
+export type ArticleTranslation = {
+  id?: string;
+  locale: Locale;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: unknown;
+  contentHtml: string;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  seoKeywords: string | null;
+  canonicalUrl: string | null;
+  ogTitle: string | null;
+  ogDescription: string | null;
+  readingTime?: number;
+};
+
+export type Article = {
+  id: string;
+  status: ContentStatus;
+  isFeatured: boolean;
+  publishedAt: string | null;
+  scheduledAt: string | null;
+  viewCount: number;
+  coverImageId: string | null;
+  coverImage: Media | null;
+  ogImageId: string | null;
+  ogImage: Media | null;
+  noIndex: boolean;
+  categoryId: string | null;
+  category: Category | null;
+  author: { id: string; name: string; email: string; avatarUrl: string | null } | null;
+  tags: Tag[];
+  translations: ArticleTranslation[];
+  deletedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Press = {
+  id: string;
+  slug: string;
+  url: string;
+  title: string;
+  excerpt: string | null;
+  description: string | null;
+  imageUrl: string | null;
+  siteName: string | null;
+  author: string | null;
+  publishedAt: string | null;
+  status: ContentStatus;
+  sortOrder: number;
+  fetchedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type SocialPost = {
+  id: string;
+  platform: SocialPlatform;
+  url: string;
+  externalId: string | null;
+  caption: string | null;
+  thumbnailUrl: string | null;
+  isActive: boolean;
+  sortOrder: number;
+  publishedAt: string | null;
+  fetchedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Station = {
+  id: string;
+  slug: string;
+  name: string;
+  status: StationStatus;
+  tier: StationTier;
+  address: string;
+  city: string;
+  province: string;
+  lat: number;
+  lng: number;
+  pilesTotal: number;
+  powerKw: number;
+  hours: string;
+  amenities: string[];
+  photoUrl: string | null;
+  notes: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ActivityLog = {
+  id: string;
+  userId: string | null;
+  user: { id: string; name: string; email: string; avatarUrl: string | null } | null;
+  action: string;
+  entity: string;
+  entityId: string | null;
+  summary: string | null;
+  meta: unknown;
+  ip: string | null;
+  createdAt: string;
+};
+
+export type DashboardStats = {
+  counts: {
+    articles: number;
+    articlesByStatus: Partial<Record<ContentStatus, number>>;
+    publishedLast30Days: number;
+    totalViews: number;
+    press: number;
+    social: number;
+    media: number;
+    stations: number;
+    stationsByStatus: Partial<Record<StationStatus, number>>;
+    bookings: number;
+    bookingsNew: number;
+    bookingsUpcoming7d: number;
+    contactsUnhandled: number;
+  };
+  recentArticles: (Pick<Article, "id" | "status" | "updatedAt" | "publishedAt"> & {
+    translations: { locale: Locale; title: string; slug: string }[];
+    author: { name: string } | null;
+  })[];
+  recentActivity: (ActivityLog & { user: { name: string; avatarUrl: string | null } | null })[];
+  cache: { size: number; tags: string[] };
+  generatedAt: string;
+};
+
+export const STATUS_LABEL: Record<ContentStatus, string> = {
+  DRAFT: "Draft",
+  SCHEDULED: "Scheduled",
+  PUBLISHED: "Published",
+  ARCHIVED: "Archived",
+};
+
+export const ROLE_LABEL: Record<UserRole, string> = {
+  SUPER_ADMIN: "Super Admin",
+  ADMIN: "Admin",
+  EDITOR: "Editor",
+};
+
+export const PLATFORM_LABEL: Record<SocialPlatform, string> = {
+  INSTAGRAM: "Instagram",
+  TIKTOK: "TikTok",
+  YOUTUBE: "YouTube",
+  X: "X (Twitter)",
+  FACEBOOK: "Facebook",
+  LINKEDIN: "LinkedIn",
+};
+
+export const STATION_STATUS_LABEL: Record<StationStatus, string> = {
+  OPERATIONAL: "Operational",
+  COMING_SOON: "Coming soon",
+  MAINTENANCE: "Maintenance",
+  CLOSED: "Closed",
+};
+
+export const STATION_TIER_LABEL: Record<StationTier, string> = { HUB: "Hub", SHOWROOM: "Showroom", MITRA: "Partner" };
+
+/** Kunci fasilitas = kunci kamus publik `supercharge.locator.amenity.<key>` (jangan diubah sembarangan). */
+export const STATION_AMENITIES: { key: string; label: string }[] = [
+  { key: "parkir", label: "Parking" },
+  { key: "toilet", label: "Toilet" },
+  { key: "musala", label: "Prayer room" },
+  { key: "kafe", label: "Café" },
+  { key: "minimarket", label: "Minimarket" },
+  { key: "wifi", label: "Wi-Fi" },
+];
+
+export type StationsMeta = {
+  provinces: string[];
+  cities: { city: string; province: string }[];
+  byStatus: Partial<Record<StationStatus, number>>;
+  total: number;
+  inactive: number;
+};
+
+// ───────────────────────── Leads (booking showroom & pesan kontak) ─────────────────────────
+export type ShowroomId = "jakarta" | "bekasi" | "bandung" | "bali";
+export type BookingPurpose = "TEST_RIDE" | "CONSULTATION" | "FINANCING" | "SERVICE" | "OTHER";
+export type BookingStatus = "NEW" | "CONTACTED" | "CONFIRMED" | "COMPLETED" | "CANCELLED" | "NO_SHOW";
+export type CalendarSyncStatus = "PENDING" | "SAVED" | "FAILED" | "SKIPPED";
+
+export type Booking = {
+  id: string;
+  showroom: ShowroomId;
+  purpose: BookingPurpose;
+  name: string;
+  phone: string;
+  email: string | null;
+  date: string; // YYYY-MM-DD (showroom time zone)
+  time: string; // HH:mm
+  startAt: string;
+  note: string | null;
+  source: string | null;
+  locale: Locale | null;
+  status: BookingStatus;
+  calendarStatus: CalendarSyncStatus;
+  calendarEventId: string | null;
+  calendarLink: string | null;
+  calendarError: string | null;
+  adminNote: string | null;
+  ip: string | null;
+  userAgent: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ContactSubmission = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  topic: string;
+  message: string;
+  locale: Locale | null;
+  isHandled: boolean;
+  handledAt: string | null;
+  adminNote: string | null;
+  ip: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type LeadsStats = {
+  range: { from: string; to: string };
+  totals: {
+    bookingsAll: number;
+    bookingsInRange: number;
+    bookingsNew: number;
+    upcoming7d: number;
+    contactsAll: number;
+    contactsInRange: number;
+    contactsUnhandled: number;
+  };
+  byPurpose: Partial<Record<BookingPurpose, number>>;
+  byShowroom: Partial<Record<ShowroomId, number>>;
+  bySource: Record<string, number>;
+  byStatus: Partial<Record<BookingStatus, number>>;
+  byTopic: { topic: string; count: number }[];
+  perDay: { day: string; bookings: number; contacts: number }[];
+  recentBookings: Booking[];
+  upcomingBookings: Booking[];
+  recentContacts: ContactSubmission[];
+  calendarConfigured: boolean;
+  generatedAt: string;
+};
+
+export const SHOWROOM_LABEL: Record<ShowroomId, string> = { jakarta: "Wedison Jakarta", bekasi: "Wedison Bekasi", bandung: "Wedison Bandung", bali: "Wedison Bali" };
+export const SHOWROOM_TZ: Record<ShowroomId, string> = { jakarta: "WIB", bekasi: "WIB", bandung: "WIB", bali: "WITA" };
+export const BOOKING_PURPOSE_LABEL: Record<BookingPurpose, string> = {
+  TEST_RIDE: "Test Ride",
+  CONSULTATION: "Product consultation",
+  FINANCING: "Financing simulation",
+  SERVICE: "Service",
+  OTHER: "Other visit",
+};
+export const BOOKING_STATUS_LABEL: Record<BookingStatus, string> = {
+  NEW: "New",
+  CONTACTED: "Contacted",
+  CONFIRMED: "Confirmed",
+  COMPLETED: "Completed",
+  CANCELLED: "Cancelled",
+  NO_SHOW: "No-show",
+};
+export const CALENDAR_STATUS_LABEL: Record<CalendarSyncStatus, string> = {
+  PENDING: "Pending",
+  SAVED: "In Google Calendar",
+  FAILED: "Sync failed",
+  SKIPPED: "Not synced",
+};
+export const BOOKING_SOURCE_LABEL: Record<string, string> = {
+  navbar: "Navbar button",
+  "nav-sheet": "Mobile menu",
+  "landing-hero": "Landing hero",
+  "showroom-card": "Showroom card",
+  other: "Other",
+  unknown: "Unknown",
+};
+
+/** Nomor WhatsApp internasional dari nomor kanonik 08xx. */
+export const waLink = (phone: string) => `https://wa.me/${phone.replace(/\D/g, "").replace(/^0/, "62")}`;

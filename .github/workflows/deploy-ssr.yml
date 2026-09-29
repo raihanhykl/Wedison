@@ -1,0 +1,112 @@
+name: Deploy staging -> VPS (ssr.wedison.tech)
+
+# Build standalone di GitHub Actions, lalu rsync artefak ramping ke VPS + pm2 reload.
+# Aman untuk VPS shared (n8n/novo/wedisense): build Next TIDAK jalan di VPS.
+# Backend admin (server/, Express + Prisma) di-rsync sebagai source lalu di-build di VPS
+# (hanya tsc, ringan) karena `sharp` butuh binary Linux dari `npm ci`.
+# server/.env dibuat manual di VPS (tidak pernah di-rsync / di-commit).
+# Branch `staging` = pra-produksi SSR di ssr.wedison.tech (dulu dipicu branch ssr-version).
+# Alur rilis: feature/* -> staging (cek di sini) -> main (produksi wedison.co, ci-cd.yml).
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+  VPS_HOST: "76.13.22.124"
+  VPS_USER: "wedison"
+  DEPLOY_DIR: "/home/wedison/wedison-landing"
+  SITE_URL: "https://ssr.wedison.tech"
+  # Port backend Express di VPS (harus sama dengan PORT di server/.env)
+  API_PORT: "4002"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build (standalone)
+        run: npm run build
+        env:
+          # SITE_URL testing -> canonical/hreflang/sitemap pakai ssr.wedison.tech
+          NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
+          # NEXT_PUBLIC_* di-inline saat build (sama seperti CI lama)
+          NEXT_PUBLIC_EMAIL_CONFIG_serviceId: ${{ secrets.EMAIL_SERVICE_ID }}
+          NEXT_PUBLIC_EMAIL_CONFIG_templateId: ${{ secrets.EMAIL_TEMPLATE_ID }}
+          NEXT_PUBLIC_EMAIL_CONFIG_publicKey: ${{ secrets.EMAIL_PUBLIC_KEY }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+          # ID container GTM testing (publik) — terpisah dari produksi
+          NEXT_PUBLIC_GTM_ID: GTM-MBLHDFJ2
+          # Rewrite /api/* di next.config dibaca saat BUILD -> wajib menunjuk port backend VPS
+          API_INTERNAL_URL: http://127.0.0.1:${{ env.API_PORT }}
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Add VPS to known_hosts
+        run: ssh-keyscan -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Rsync standalone artifact
+        run: |
+          rsync -az --delete \
+            .next/standalone/ \
+            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/.next/standalone/
+
+      - name: Rsync backend source + PM2 ecosystem
+        run: |
+          rsync -az --delete \
+            --exclude node_modules --exclude dist --exclude src/generated \
+            --exclude .env --exclude uploads --exclude .seeded \
+            server/ \
+            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/server/
+          rsync -az ecosystem.config.js \
+            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/ecosystem.config.js
+
+      - name: Build backend + migrate DB (+ seed sekali)
+        run: |
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} bash -se <<'REMOTE'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_DIR }}/server
+          test -f .env || { echo "server/.env belum ada di VPS"; exit 1; }
+          npm ci --no-audit --no-fund
+          npm run build
+          npx prisma migrate deploy
+          # Seed data awal hanya sekali (admin, topics, liputan, IG, 85 lokasi).
+          if [ ! -f .seeded ]; then npm run db:seed && touch .seeded; fi
+          REMOTE
+
+      - name: Reload PM2 (landing + api)
+        run: |
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
+            "cd ${{ env.DEPLOY_DIR }} && pm2 startOrReload ecosystem.config.js --update-env && pm2 save"
+
+      - name: Health check + segarkan cache halaman publik
+        run: |
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} bash -se <<'REMOTE'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_DIR }}
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:${{ env.API_PORT }}/api/health >/dev/null && break; sleep 2; done
+          curl -fsS http://127.0.0.1:${{ env.API_PORT }}/api/health
+          # Halaman di-prerender di CI tanpa API (fallback data statis) -> revalidate sekarang.
+          SECRET=$(grep '^REVALIDATE_SECRET=' server/.env | cut -d= -f2-)
+          for i in $(seq 1 20); do curl -fsS -o /dev/null http://127.0.0.1:3002/id/ && break; sleep 2; done
+          curl -fsS -X POST -H "x-revalidate-secret: $SECRET" http://127.0.0.1:3002/api/revalidate/ || echo "revalidate gagal (tidak fatal)"
+          REMOTE

@@ -1,0 +1,303 @@
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { useLanguage } from "@/app/lib/language-context";
+import { openCookieSettings } from "@/lib/consent";
+
+export default function Footer() {
+  const { t, language } = useLanguage();
+  return (
+    <footer className="text-forest-foreground bg-forest-deep">
+      <div className="container px-4 py-8 mx-auto sm:px-6 lg:px-8 md:py-12">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-7">
+          <div className="col-span-2 mr-6 ">
+            <h3 className="font-display text-lg md:text-xl font-bold mb-3 md:mb-4 text-white">
+              Wedison Motors
+            </h3>
+            <p className="mb-3 text-sm text-forest-muted md:text-base md:mb-4">
+              {/* Pioneering the future of electric mobility with cutting-edge
+              technology and sustainable design. */}
+              {t("footer.description")}
+            </p>
+            <p className="text-sm text-forest-muted md:text-base">
+              {/* © {new Date().getFullYear()} Wedison Motors. All rights reserved. */}
+              {t("footer.copyright")}
+            </p>
+          </div>
+
+          {/* Products */}
+          <div>
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
+              {/* Products */}
+              {t("footer.products")}
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
+            </h4>
+            <ul className="space-y-1.5 md:space-y-2">
+              <li>
+                <Link href={`/${language}/products/bees/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  Bees
+                </Link>
+              </li>
+              {/* <li>
+                <a
+                  href="#"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                >
+                  Mini-Pro
+                </a>
+              </li> */}
+              <li>
+                <Link href={`/${language}/products/athena/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  Athena
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${language}/products/victory/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  Victory
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${language}/products/edpower/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  EdPower
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* experience */}
+          <div>
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
+              {/* Experience */}
+              {t("footer.experience")}
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
+            </h4>
+            <ul className="space-y-1.5 md:space-y-2">
+              <li>
+                <Link href={`/${language}/showroom`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  Showroom
+                </Link>
+              </li>
+              {/* <li>
+                <a
+                  href="#"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                >
+                  Service Locations
+                </a>
+              </li> */}
+              <li>
+                <Link href={`/${language}/super-charge`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  SuperCharge
+                </Link>
+              </li>
+              {/* <li>
+                <a
+                  href="#"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                >
+                  Test Ride
+                </a>
+              </li> */}
+            </ul>
+          </div>
+
+          {/* support */}
+          <div>
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
+              {t("footer.support")}
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
+            </h4>
+            <ul className="space-y-1.5 md:space-y-2">
+              <li>
+                <Link href={`/${language}/faq#user-manual`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  {t("footer.userManual")}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${language}/faq`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  {t("footer.faq")}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* corporate */}
+          <div>
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
+              {/* Corporate */}
+              {t("footer.corporate")}
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
+            </h4>
+            <ul className="space-y-1.5 md:space-y-2">
+              <li>
+                <Link href={`/${language}/corporate/about`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  {/* About Us */}
+                  {t("footer.about")}
+                </Link>
+              </li>
+              {/* <li>
+                <a
+                  href="#"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                >
+                  Careers
+                </a>
+              </li> */}
+              <li>
+                <Link href={`/${language}/corporate/contact`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  {/* Contact Us */}
+                  {t("footer.contact")}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${language}/career`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                  {/* Contact Us */}
+                  {t("footer.career")}
+                </Link>
+              </li>
+              {/* <li>
+                <a
+                  href="#"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                >
+                  Help Center
+                </a>
+              </li> */}
+            </ul>
+          </div>
+
+          {/* meet us */}
+          <div>
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
+              {/* Meet Us */}
+              {t("footer.meetus")}
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
+            </h4>
+            <div className="flex w-full gap-3 mt-2 max-md:justify-between b md:gap-4">
+              {/* <div className="flex items-center justify-between w-full space-x-4"> */}
+              <div className="">
+                <ul className="flex gap-3 space-y-3 md:space-y-4">
+                  <li>
+                    <Link
+                      href="https://www.instagram.com/wedison.id/"
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                    >
+                      <Image
+                        src="/icons/instagram.svg"
+                        alt="Instagram"
+                        width={35}
+                        height={35}
+                      />
+                      {/* wedison.id */}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.tiktok.com/@wedison.id"
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                    >
+                      <Image
+                        src="/icons/tiktok.svg"
+                        alt="Tiktok"
+                        width={35}
+                        height={35}
+                      />
+                      {/* wedison.id */}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.youtube.com/channel/UCePP1fIil61GyQF4XFWGB2g"
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                    >
+                      <Image
+                        src="/icons/youtube.svg"
+                        alt="YouTube"
+                        width={35}
+                        height={35}
+                      />
+                      {/* Motor Listrik Wedison */}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul className="flex gap-3 space-y-3 md:space-y-4">
+                  <li>
+                    <Link
+                      href="https://www.facebook.com/people/wedisonid/61562726390879/"
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                    >
+                      <Image
+                        src="/icons/facebook.svg"
+                        alt="Facebook"
+                        width={35}
+                        height={35}
+                      />
+                      {/* wedisonid */}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://wa.me/6282124657804"
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                    >
+                      <Image
+                        src="/icons/whatsapp.svg"
+                        alt="WhatsApp"
+                        width={35}
+                        height={35}
+                      />
+                      {/* +62 821-2465-7804 */}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="mailto:support@wedison.co"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                    >
+                      <Image
+                        src="/icons/mail.svg"
+                        alt="Email"
+                        width={35}
+                        height={35}
+                      />
+                      {/* support@wedison.co */}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center justify-between pt-6 mt-8 border-t border-white/10 md:mt-12 md:pt-8 md:flex-row">
+          <p className="mb-4 text-xs text-forest-muted md:text-sm md:mb-0">
+            {/* Designed with sustainability in mind. Powered by renewable energy. */}
+            {t("footer.tagline")}
+          </p>
+<div className="flex gap-6">
+            <Link
+              href={`/${language}/cookie-policy/`}
+              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+            >
+              {t("footer.cookiePolicy")}
+            </Link>
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+            >
+              {t("footer.cookieSettings")}
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

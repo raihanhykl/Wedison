@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { carouselData } from "../testing-product/peek";
+import { carouselData } from "../_product/peek";
 import { useLanguage } from "./language-context";
 
 interface overview {
