@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wedison — Arah Hijau Premium (10 Opsi)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Schibsted+Grotesk:wght@400;500;700;900&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --display:"Schibsted Grotesk",system-ui,sans-serif;
+    --text:"Hanken Grotesk",system-ui,sans-serif;
+    --mono:"Martian Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--text);background:#0a0d0b;color:#e8e4d8;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .pagehead{padding:64px 24px 36px;text-align:center;border-bottom:1px solid #1c241f}
+  .pagehead .mark{font-family:var(--display);font-weight:700;letter-spacing:.28em;font-size:13px;color:#9aa79e;text-transform:uppercase}
+  .pagehead h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,5vw,44px);letter-spacing:-.02em;margin:16px 0 10px;color:#f3efe4}
+  .pagehead p{max-width:640px;margin:0 auto;color:#9aa79e;font-size:16px}
+  .note{max-width:780px;margin:24px auto 0;font-size:13.5px;color:#7e8b82;background:#10150f;border:1px solid #1c241f;border-radius:12px;padding:14px 18px;text-align:left}
+  .note b{color:#c9b27a}
+
+  .opt-head{max-width:1120px;margin:0 auto;padding:52px 24px 20px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .opt-head .tag{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:#7e8b82}
+  .opt-head h2{font-family:var(--display);font-weight:700;font-size:clamp(21px,3.2vw,28px);letter-spacing:-.01em;color:#f3efe4}
+  .opt-head .rec{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:#0a0d0b;background:#d9a441;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  .opt-head .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:#9aa79e;border:1px solid #2a342d;padding:3px 9px;border-radius:999px;text-transform:uppercase}
+  .opt-head .desc{flex-basis:100%;color:#9aa79e;font-size:14.5px;max-width:780px;margin-top:2px}
+
+  .stage{margin:0 auto;max-width:1120px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+  .hero{padding:clamp(34px,5vw,60px) clamp(26px,4.5vw,56px)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+  .hero h3{font-family:var(--display);font-weight:700;letter-spacing:-.025em;font-size:clamp(30px,5vw,54px);line-height:1.05;margin:16px 0 14px;text-wrap:balance}
+  .hero p{max-width:46ch;font-size:clamp(14px,1.5vw,17px);opacity:.85}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .btn{font-family:var(--text);font-weight:600;font-size:14.5px;padding:13px 26px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:transparent}
+  .specs{display:flex;gap:clamp(18px,4vw,52px);flex-wrap:wrap;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)}
+  .spec .n{font-family:var(--mono);font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.02em}
+  .spec .l{font-size:12px;letter-spacing:.04em;opacity:.62;margin-top:6px;text-transform:uppercase}
+  .specs.dark{border-top-color:rgba(0,0,0,.12)}
+
+  .swatches{display:flex;flex-wrap:wrap;gap:0}
+  .sw{flex:1 1 120px;min-height:96px;padding:13px 15px;display:flex;flex-direction:column;justify-content:flex-end}
+  .sw .nm{font-family:var(--text);font-weight:600;font-size:12.5px}
+  .sw .hx{font-family:var(--mono);font-size:10.5px;opacity:.9;margin-top:3px}
+  .sw .ok{font-family:var(--mono);font-size:9.5px;opacity:.62}
+
+  .specimen{border-top:1px solid #1c241f;margin-top:76px;padding:60px 0}
+  .specimen .row{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid #161c18;align-items:baseline}
+  .specimen .role{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#7e8b82;text-transform:uppercase}
+  .specimen .role span{display:block;color:#c9b27a;margin-top:6px}
+  .sp-display{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.2vw,48px);letter-spacing:-.025em;color:#f3efe4;line-height:1.05}
+  .sp-text{font-family:var(--text);font-size:17px;color:#cdc8ba;max-width:62ch}
+  .sp-mono{font-family:var(--mono);font-size:17px;color:#d9a441}
+  footer{padding:44px 24px 80px;text-align:center;color:#5f6a62;font-size:13px}
+  @media(max-width:640px){.specimen .row{grid-template-columns:1fr;gap:8px}}
+</style>
+</head>
+<body>
+
+<header class="pagehead">
+  <div class="mark">Wedison · Design Polish</div>
+  <h1>Arah Hijau Premium · 10 Opsi</h1>
+  <p>Hijau tetap dipakai (warna logo), dibawa ke wilayah gelap, serius, premium. Rentang luas: light vs dark, hijau-sebagai-dasar vs hijau-sebagai-aksen, dan variasi metalik berbeda.</p>
+  <div class="note"><b>Cara baca:</b> tiap blok adalah satu “dunia” lengkap pada mini-UI (hero, tombol, angka spek, swatch). Catat kode opsi yang Anda suka, boleh dicampur (misal “hijau F, tapi aksen seperti G”). Warna di layar indikatif, nanti dikalibrasi ulang di app.</div>
+</header>
+
+<main id="grid"></main>
+
+<div class="wrap specimen">
+  <div class="opt-head" style="padding-left:0;padding-right:0;padding-top:0">
+    <span class="tag">TIPOGRAFI</span>
+    <h2>Spesimen Font</h2>
+    <span class="desc">Rekomendasi: <b style="color:#c9b27a">Schibsted Grotesk</b> (display dan body, satu keluarga, premium, tidak ditandai overused). Opsi body hangat: <b style="color:#c9b27a">Hanken Grotesk</b>. Angka spek pakai mono.</span>
+  </div>
+  <div class="row"><div class="role">Display<span>Schibsted Grotesk</span></div><div class="sp-display">Athena · Bees · Victory</div></div>
+  <div class="row"><div class="role">Teks / Body<span>Hanken Grotesk</span></div><div class="sp-text">Wedison membangun motor listrik dan jaringan SuperCharge untuk mobilitas Indonesia yang lebih tenang dan bersih. Keterbacaan tinggi untuk Bahasa Indonesia, aperture terbuka, hangat.</div></div>
+  <div class="row"><div class="role">Data / Angka<span>Martian Mono</span></div><div class="sp-mono">120 km · 105 km/j · 3.5 jam · 4.2 kWh</div></div>
+</div>
+
+<footer>Wedison · moodboard internal · indikatif, bukan final · docs/redesign/palette-preview.html</footer>
+
+<script>
+const SPECS=[["105","km/j","Top speed"],["120","km","Jangkauan"],["3.5","jam","Pengisian"]];
+const P=[
+ {id:"A",name:"Racing + Brass",rec:true,mode:"dark",
+  desc:"British-racing green sangat gelap sebagai brand, aksen emas/brass hangat untuk CTA dan data. Heritage, paling “mahal”, emasnya menyambung cerita filament/Edison.",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #11402e 0%, #0b2c20 45%, #07211800 100%), #08231a",hc:"#f1ede1",kc:"#d9a441",
+  btn:["#d9a441","#1a1205"],ghost:["#3a5347","#f1ede1"],sn:"#d9a441",
+  sw:[["Racing Ink","#08231A","oklch(.26 .05 162)","#e8e4d8"],["Racing Green","#0E3A2A","oklch(.34 .06 162)","#e8e4d8"],["Brass","#D9A441","oklch(.78 .12 82)","#1a1205"],["Bone","#F3EFE4","oklch(.95 .01 90)","#1a1205"],["Sage Grey","#8FA096","oklch(.66 .02 158)","#0a0d0b"]]},
+
+ {id:"B",name:"Emerald Monochrome",badge:"hijau-saja",mode:"dark",
+  desc:"Murni hijau: emerald tua sebagai dasar, emerald lebih matang untuk CTA. Paling setia ke logo dan restraint. Butuh disiplin kontras.",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #0f5a3d 0%, #0c4631 50%, #08311f00 100%), #0a3624",hc:"#eef3ee",kc:"#5fd6a0",
+  btn:["#1f9d68","#04140c"],ghost:["#2f6e51","#eef3ee"],sn:"#7fe3b2",
+  sw:[["Emerald Ink","#072719","oklch(.26 .06 160)","#e8e4d8"],["Deep Emerald","#0C4631","oklch(.39 .09 160)","#e8e4d8"],["Emerald CTA","#1F9D68","oklch(.63 .13 160)","#04140c"],["Bone","#F3EFE4","oklch(.95 .01 90)","#04140c"],["Sage Grey","#88A294","oklch(.66 .03 158)","#04140c"]]},
+
+ {id:"C",name:"Pine Editorial",badge:"muted",mode:"dark",
+  desc:"Hijau pinus teredam, paling tenang dan dewasa. Cocok dipadukan badan terang editorial untuk halaman padat, dengan sentuhan emas tipis.",
+  heroBg:"#21372e",hc:"#eef0ea",kc:"#c9982e",
+  btn:["#c9982e","#231a06"],ghost:["#52685d","#eef0ea"],sn:"#e6c06a",
+  sw:[["Pine","#21372E","oklch(.35 .035 165)","#eef0ea"],["Pine Light","#2F5345","oklch(.45 .045 162)","#eef0ea"],["Gold","#C9982E","oklch(.72 .12 84)","#231a06"],["Paper","#F6F4EC","oklch(.96 .01 95)","#21372e"],["Slate Green","#5B6B62","oklch(.50 .02 162)","#f6f4ec"]]},
+
+ {id:"D",name:"Forest + Cream",badge:"light-led",mode:"light",
+  desc:"Light-led: badan cream/ivory dengan hijau forest sebagai warna brand dan headline. Editorial, kalem, premium organik. Hijau yang dominan tapi di atas terang.",
+  heroBg:"#F4F0E6",hc:"#16241D",kc:"#1B5235",
+  btn:["#143D2B","#F4F0E6"],ghost:["#cdbf9e","#16241D"],sn:"#143D2B",
+  sw:[["Cream","#F4F0E6","oklch(.94 .015 92)","#16241D"],["Forest","#143D2B","oklch(.35 .07 158)","#F4F0E6"],["Forest Light","#1B5235","oklch(.44 .085 158)","#F4F0E6"],["Clay Gold","#B8893B","oklch(.66 .10 78)","#16241D"],["Ink","#16241D","oklch(.24 .03 160)","#F4F0E6"]]},
+
+ {id:"E",name:"Hunter + Copper",mode:"dark",
+  desc:"Hunter green (hijau dalam sedikit lebih dingin) dengan aksen copper/terracotta. Lebih hangat dan earthy dari emas, tetap premium dan sedikit lebih beda.",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #1c4c3d 0%, #143a30 50%, #0c261e00 100%), #0c261e",hc:"#efeae0",kc:"#d98a52",
+  btn:["#C77B45","#1a0f06"],ghost:["#355247","#efeae0"],sn:"#d98a52",
+  sw:[["Hunter Ink","#0C261E","oklch(.26 .04 166)","#efeae0"],["Hunter","#173E32","oklch(.36 .05 166)","#efeae0"],["Copper","#C77B45","oklch(.65 .12 52)","#1a0f06"],["Bone","#EFEAE0","oklch(.94 .01 88)","#1a0f06"],["Sage","#8A998F","oklch(.65 .02 160)","#0a0d0b"]]},
+
+ {id:"F",name:"Bottle + Oxblood",mode:"dark",
+  desc:"Bottle green sangat dalam, CTA off-white kontras tinggi, dengan oxblood/maroon sebagai aksen langka (kicker, garis). Sangat fashion-house, heritage serius.",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #134231 0%, #0c3324 50%, #07251b00 100%), #07251b",hc:"#edeae1",kc:"#c4736f",
+  btn:["#EDEAE1","#12281f"],ghost:["#7E2A2E","#edeae1"],sn:"#edeae1",
+  sw:[["Bottle Ink","#07251B","oklch(.26 .05 162)","#edeae1"],["Bottle","#103A2C","oklch(.35 .06 162)","#edeae1"],["Oxblood","#7E2A2E","oklch(.42 .13 24)","#edeae1"],["Off-white","#EDEAE1","oklch(.93 .01 90)","#12281f"],["Stone","#9A9387","oklch(.65 .02 90)","#0a0d0b"]]},
+
+ {id:"G",name:"Jade on Charcoal",badge:"hijau = aksen",mode:"dark",
+  desc:"Kanvas charcoal hampir-hitam, hijau jade jadi satu-satunya aksen permata yang menyala. Modern, tech-premium. Hijau di sini menonjol seperti batu, bukan wash.",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #1a1d1b 0%, #121413 55%, #0e0f0f00 100%), #0e0f0f",hc:"#f0f2f0",kc:"#2fc79b",
+  btn:["#239B7C","#04140e"],ghost:["#2a2e2c","#f0f2f0"],sn:"#2fc79b",
+  sw:[["Charcoal","#0E0F0F","oklch(.16 .003 160)","#f0f2f0"],["Carbon","#17191A","oklch(.22 .004 200)","#f0f2f0"],["Jade","#239B7C","oklch(.60 .10 165)","#04140e"],["Cold White","#F0F2F0","oklch(.95 .003 160)","#0e0f0f"],["Steel","#8C928E","oklch(.64 .005 170)","#0e0f0f"]]},
+
+ {id:"H",name:"Olive Luxe",badge:"earthy",mode:"dark",
+  desc:"Olive/khaki green yang hangat dan teredam dengan aksen camel. Quiet-luxury, militer-heritage. Hijau paling earthy, paling jauh dari klise EV (tapi juga paling jauh dari hijau logo sekarang).",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #3b4327 0%, #2c3320 50%, #20240f00 100%), #20240f",hc:"#efebde",kc:"#cdb277",
+  btn:["#C7A86B","#20180a"],ghost:["#4a5235","#efebde"],sn:"#cdb277",
+  sw:[["Olive Ink","#20240F","oklch(.26 .04 118)","#efebde"],["Olive","#2C3320","oklch(.33 .04 122)","#efebde"],["Camel","#C7A86B","oklch(.74 .09 85)","#20180a"],["Bone","#EFEBDE","oklch(.94 .01 92)","#20180a"],["Drab","#8F8C72","oklch(.62 .03 110)","#0a0d0b"]]},
+
+ {id:"I",name:"Sage + Ink",badge:"light-led",mode:"light",
+  desc:"Light dan airy: near-white dengan panel sage lembut, teks ink near-black, CTA hijau dalam. Bersih, modern, premium-skincare. Paling ringan dan terbaca untuk halaman padat.",
+  heroBg:"#EDF1EA",hc:"#1A1F1C",kc:"#1E5B40",
+  btn:["#1E5B40","#FAFAF7"],ghost:["#c2cdbf","#1A1F1C"],sn:"#1E5B40",
+  sw:[["Snow","#FAFAF7","oklch(.98 .003 150)","#1A1F1C"],["Sage","#DCE4DA","oklch(.90 .02 156)","#1A1F1C"],["Deep Green","#1E5B40","oklch(.45 .09 158)","#FAFAF7"],["Ink","#1A1F1C","oklch(.23 .01 160)","#FAFAF7"],["Slate Green","#5E6B62","oklch(.52 .02 160)","#FAFAF7"]]},
+
+ {id:"J",name:"Emerald Jewel + Gold",badge:"opulent",mode:"dark",
+  desc:"Emerald permata yang lebih menyala dari B (tetap dalam) dengan emas terang. Jewel-box, opulen. Untuk yang merasa A terlalu kalem/coklat dan B terlalu datar.",
+  heroBg:"radial-gradient(120% 120% at 80% 0%, #0e6b48 0%, #0a4d35 48%, #08130e00 100%), #08130e",hc:"#f2eee3",kc:"#e0b457",
+  btn:["#E0B457","#1c1405"],ghost:["#2c5a45","#f2eee3"],sn:"#e8c46e",
+  sw:[["Emerald Ink","#08130E","oklch(.21 .04 160)","#f2eee3"],["Emerald Jewel","#0B5A3C","oklch(.46 .11 160)","#f2eee3"],["Gold","#E0B457","oklch(.80 .11 90)","#1c1405"],["Warm White","#F2EEE3","oklch(.94 .01 90)","#1c1405"],["Sage","#8FA396","oklch(.66 .02 158)","#08130e"]]},
+];
+
+function specsHTML(sn,light){
+  return `<div class="specs ${light?'dark':''}">`+SPECS.map(s=>
+    `<div class="spec"><div class="n" style="color:${sn}">${s[0]}<span style="font-size:.5em;opacity:.7"> ${s[1]}</span></div><div class="l">${s[2]}</div></div>`
+  ).join("")+`</div>`;
+}
+function swHTML(sw){
+  return `<div class="swatches">`+sw.map(s=>
+    `<div class="sw" style="background:${s[1]};color:${s[3]}"><div class="nm">${s[0]}</div><div class="hx">${s[1]}</div><div class="ok">${s[2]}</div></div>`
+  ).join("")+`</div>`;
+}
+function card(p){
+  const tags=`<span class="tag">OPSI ${p.id}</span><h2>${p.name}</h2>`+
+    (p.rec?`<span class="rec">Rekomendasi</span>`:"")+
+    (p.badge?`<span class="badge">${p.badge}</span>`:"");
+  return `<section class="opt">
+    <div class="opt-head">${tags}<span class="desc">${p.desc}</span></div>
+    <div class="stage">
+      <div class="hero" style="background:${p.heroBg};color:${p.hc}">
+        <div class="kicker" style="color:${p.kc}">Athena · Motor Listrik</div>
+        <h3>Tenaga listrik,<br>dengan sikap yang serius.</h3>
+        <p>Jangkauan harian tanpa kompromi. Diam, bertenaga, dibangun untuk jalanan Indonesia.</p>
+        <div class="cta">
+          <button class="btn" style="background:${p.btn[0]};color:${p.btn[1]}">Jelajahi Athena</button>
+          <button class="btn ghost" style="border-color:${p.ghost[0]};color:${p.ghost[1]}">Lihat Brosur</button>
+        </div>
+        ${specsHTML(p.sn,p.mode==="light")}
+      </div>
+      ${swHTML(p.sw)}
+    </div>
+  </section>`;
+}
+document.getElementById("grid").innerHTML=P.map(card).join("");
+</script>
+
+</body>
+</html>

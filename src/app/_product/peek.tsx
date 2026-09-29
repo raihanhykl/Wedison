@@ -61,7 +61,7 @@ export default function PeekCarousel(data: PeekCarousel) {
 
   return (
     <div className="w-full overflow-hidden">
-      <div className="sm:mx-[72px] xl:mx-[138px] px-4 max-w-[2486px] overflow-visible">
+      <div className="sm:mx-[72px] xl:mx-[138px] px-4 max-w-[1600px] overflow-visible">
         <div
           ref={sliderRef}
           className="keen-slider overflow-visible mb-32 "
@@ -83,27 +83,23 @@ export default function PeekCarousel(data: PeekCarousel) {
                     instanceRef.current?.moveToIdx(index);
                 }}
               >
-                <div className="relative w-full rounded-xl">
+                <div className="relative h-[370px] w-full overflow-hidden rounded-xl sm:h-[404px] xl:h-[580px]">
                   <Image
                     src={isDesktop ? src.image : src.imageMobile || src.image}
                     alt={src.alt}
-                    width={1000}
-                    height={500}
-                    quality={100}
-                    className={cn(
-                      "rounded-xl w-full xl:h-[580px] xl:w-full sm:h-[404px]  h-[370px]   object-cover object-center",
-                      src.className
-                    )}
+                    fill
+                    sizes="(max-width: 640px) 90vw, (max-width: 1280px) 70vw, 1100px"
+                    className={cn("object-cover object-center", src.className)}
                   />
                 </div>
-                <div className="pl-0 mt-6 w-full">
-                  <h3 className=" text-4xl xl:text-5xl font-medium">
+                <div className="mt-6 w-full">
+                  <h3 className="font-display text-3xl font-bold tracking-tight text-foreground xl:text-4xl">
                     {src.title}
                   </h3>
 
-                  <p className=" mt-2 text-xl text-muted-foreground font-normal w-[90%] sm:w-[90%] lg:w-[80%] overflow-visible text-align">
+                  <div className="mt-3 w-[90%] text-lg leading-relaxed text-muted-foreground lg:w-[80%]">
                     {src.desc}
-                  </p>
+                  </div>
                 </div>
               </div>
             ))}

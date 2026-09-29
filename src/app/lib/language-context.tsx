@@ -1,50 +1,50 @@
 "use client";
 
-import { translations } from "./translations";
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 type Language = "en" | "id";
 
 type LanguageContextType = {
   language: Language;
   setLanguage: (language: Language) => void;
+  // Catatan: sebagian nilai terjemahan sebenarnya JSX (ReactNode), tapi tipe
+  // dipertahankan `string` (via cast di t()) agar ~ratusan call site yang
+  // menaruh t() ke field bertipe string tetap kompilasi.
   t: (key: string) => string;
 };
-
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("id");
+export function LanguageProvider({
+  locale,
+  dictionary,
+  children,
+}: {
+  locale: Language;
+  // Kamus locale AKTIF saja (di-inject oleh provider per-locale) -> hanya satu
+  // bahasa yang ikut ke bundle client, bukan keduanya sekaligus.
+  dictionary: Record<string, unknown>;
+  children: ReactNode;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Load language preference from localStorage on initial render
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("language") as Language;
-    if (savedLanguage && (savedLanguage === "en" || savedLanguage === "id")) {
-      setLanguageState(savedLanguage);
-    }
-  }, []);
+  // URL = sumber kebenaran. `language` selalu mengikuti segmen [locale] di URL.
+  const language: Language = locale;
 
-  // Save language preference to localStorage when it changes
+  // Ganti bahasa = navigasi ke URL locale lain (pertahankan sisa path),
+  // plus simpan preferensi di cookie agar middleware mengingatnya.
   const setLanguage = (newLanguage: Language) => {
-    setLanguageState(newLanguage);
-    localStorage.setItem("language", newLanguage);
+    document.cookie = `NEXT_LOCALE=${newLanguage}; path=/; max-age=31536000; samesite=lax`;
+    const rest = pathname.replace(/^\/(id|en)(?=\/|$)/, "");
+    router.push(`/${newLanguage}${rest || "/"}`);
   };
 
-  // Translation function
   const t = (key: string): string => {
-    return (
-      (translations[language] as unknown as Record<string, string>)[key] || key
-    );
-    // return (translations[language] as Record<string, string>)[key] || key;
+    return (dictionary as unknown as Record<string, string>)[key] || key;
   };
 
   return (

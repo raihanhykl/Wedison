@@ -1,0 +1,85 @@
+# Admin Dashboard & Backend (branch `feature/admin-dashboard`)
+
+Panel admin di `/admin` (Next.js, tidak dilokalisasi) + backend **Express 5 + PostgreSQL + Prisma 7** di folder `server/`.
+
+## Arsitektur singkat
+
+```
+browser ──/admin/*──▶ Next.js (:3000) ──rewrite /api/*──▶ Express API (:4000) ──▶ PostgreSQL
+                     │  halaman publik (SSR/ISR, cache bertag)  ▲
+                     └──────────── webhook /api/revalidate ◀────┘ (setelah admin ubah data)
+```
+
+- **Frontend admin**: `src/app/admin/**` (login, dashboard, CMS, SuperCharge, Leads [booking showroom, pesan kontak, kalender, analytics — lihat docs/BOOKING-FORM.md], pengguna, log). Komponen: shadcn/ui + TanStack Table/Query + Tiptap (template resmi `simple-editor`).
+- **Backend**: `server/src` — `modules/*` (auth, users, articles, taxonomy, press, social, media, stations, dashboard, activity, leads), `lib/cache.ts` (LRU in-memory bertag), `lib/metadata.ts` (scraper OG), `middleware/auth.ts` (JWT cookie httpOnly, role).
+- **Caching 3 lapis**:
+  1. Backend: `cached(key, tags, fn)` (LRU, TTL `CACHE_TTL_PUBLIC`) + header `Cache-Control: s-maxage` di `/api/v1/public/*`.
+  2. Next.js: `fetch(..., { next: { revalidate, tags } })` di `src/lib/cms/api.ts` (ISR).
+  3. On-demand: setiap write admin → `invalidate(tags)` → `POST {FRONTEND_URL}/api/revalidate` → `revalidateTag`.
+- **Modul SuperCharge (admin)**: `/admin/supercharge/stations` — tabel + filter (status, tier, provinsi, tampil/tersembunyi, pencarian), tambah/edit lewat sheet (`station-form.tsx`) dengan pemilih koordinat MapLibre (`station-map-picker.tsx`, style peta sama dengan halaman publik), fasilitas (kunci = kamus `supercharge.locator.amenity.*`), foto dari Media Library (folder `stations`), aksi baris & massal (ubah status, tampil/sembunyikan, hapus — hapus hanya ADMIN). Setiap perubahan meng-invalidate cache `stations` sehingga peta publik langsung segar.
+- **Halaman publik yang sudah memakai CMS**: `/media-center` (artikel, liputan pers, Instagram), `/media-center/news/[slug]`, `/media-center/articles/[slug]` (baru), `/super-charge/locations`. Semua fail-soft ke data statis lama bila backend kosong/mati.
+
+## Setup lokal (tanpa Docker)
+
+1. **PostgreSQL 15 lokal** (sudah terpasang di `/Library/PostgreSQL/15`). Buat DB:
+   ```bash
+   /Library/PostgreSQL/15/bin/psql -U postgres -h localhost -c "CREATE DATABASE wedison_admin;"
+   ```
+2. **Env backend**: `cp server/.env.example server/.env`, isi `DATABASE_URL` (password postgres Anda), `JWT_SECRET` (`openssl rand -base64 48`), `REVALIDATE_SECRET`.
+3. **Env frontend**: tambahkan ke `.env.local` (lihat `.env.example` bagian bawah): `API_INTERNAL_URL=http://127.0.0.1:4000`, `REVALIDATE_SECRET=<sama dengan server>`.
+4. **Install & migrasi & seed**:
+   ```bash
+   npm install                 # frontend
+   cd server && npm install    # backend
+   npm run db:setup            # migrate deploy + seed (admin, kategori, 5 liputan, 6 IG, 85 lokasi)
+   ```
+5. **Jalankan** (dua terminal): `npm run dev:api` dan `npm run dev`. Buka http://localhost:3000/admin.
+   - Login awal: `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` dari `server/.env` (default `admin@wedison.co` / `Wedison2026!`). **Ganti setelah login** (Akun Saya).
+
+Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `npm --prefix server run db:studio` (Prisma Studio), `npm run typecheck` (FE + BE).
+
+## Endpoint utama (`/api/v1`)
+
+| Publik (cache) | Admin (cookie JWT) |
+|---|---|
+| `GET /public/articles?locale=&page=&category=&tag=` | `GET/POST /admin/articles`, `PUT/DELETE /admin/articles/:id`, `PATCH /admin/articles/:id/status`, `POST /admin/articles/bulk` |
+| `GET /public/articles/:slug?locale=` | `GET/POST/PATCH/DELETE /admin/topics` (alias `/admin/categories`), `/admin/tags` |
+| `GET /public/press`, `GET /public/press/:slug` | `/admin/press` + `POST /admin/press/fetch-metadata`, `POST /admin/press/:id/refresh`, `POST /admin/press/reorder` |
+| `GET /public/social?platform=` | `/admin/social` + `fetch-metadata`, `:id/refresh`, `reorder` |
+| `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD), `GET /admin/stations/meta` (provinsi/kota/jumlah per status), `POST /admin/stations/bulk` (`status` / `activate` / `deactivate` / `delete`) |
+| `GET /public/categories` | `GET /admin/media`, `POST /admin/media/upload` (multipart `files[]`, `folder`), `PATCH/DELETE /admin/media/:id` |
+| | `/auth/login|logout|me|change-password|profile`, `/admin/users` (SUPER_ADMIN), `/admin/activity`, `/admin/dashboard/stats` |
+
+Role: `SUPER_ADMIN` (semua + kelola user) · `ADMIN` (semua konten, hapus permanen) · `EDITOR` (tulis/edit, tanpa hapus permanen).
+
+## Deploy VPS (ssr.wedison.tech)
+
+Otomatis lewat `.github/workflows/deploy-ssr.yml` saat push ke `ssr-version`:
+
+1. CI build Next standalone (`API_INTERNAL_URL=http://127.0.0.1:4002` wajib saat build karena rewrite dibaca waktu build) → rsync ke VPS.
+2. rsync source `server/` + `ecosystem.config.js` (tanpa `node_modules`, `dist`, `.env`, `uploads`, `.seeded`).
+3. Di VPS: `npm ci` → `npm run build` → `prisma migrate deploy` → seed **sekali** (penanda `server/.seeded`).
+4. `pm2 startOrReload ecosystem.config.js --update-env` (app `wedison-landing` :3002 + `wedison-api` :4002).
+5. Health check API + `POST /api/revalidate/` agar halaman publik langsung memakai data DB.
+
+Kondisi VPS (disiapkan manual, sekali):
+
+| Item | Nilai |
+|---|---|
+| Env backend | `/home/wedison/wedison-landing/server/.env` (chmod 600, tidak pernah di-rsync). `PORT=4002`, `FRONTEND_URL=http://127.0.0.1:3002`, `COOKIE_SECURE=true`. Password di `DATABASE_URL` harus URL-encoded; `JWT_SECRET` ≥ 32 karakter. |
+| Database | PostgreSQL lokal VPS, DB `wedison_admin`, owner `wedison_app` |
+| Upload | `UPLOAD_DIR=/home/wedison/wedison-data/uploads` (di luar folder deploy → aman dari `rsync --delete`) |
+| nginx | `/api/v1/` dan `/api/uploads/` → `127.0.0.1:4002`; sisanya (termasuk `/api/revalidate`) → Next :3002. Lihat `deploy/nginx/ssr.wedison.tech.conf`. |
+| PM2 boot | service `pm2-wedison` (enabled); jalankan `pm2 save` setelah perubahan proses. |
+
+Backup yang disarankan (cron harian): `pg_dump wedison_admin` + folder `wedison-data/uploads`.
+
+## Roadmap modul
+
+- [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.
+- [x] SEO artikel: SEO title/meta description (+ preview snippet Google), keywords, canonical override, OG title/description + gambar share khusus, noindex, hreflang per locale tersedia, JSON-LD NewsArticle.
+- [x] Scheduler: `server/src/lib/scheduler.ts` menayangkan artikel/liputan berstatus SCHEDULED tiap 60 detik (dan saat daftar admin dibuka).
+- [x] UI admin berbahasa Inggris; "Kategori" ditampilkan sebagai **Topics** (model DB tetap `Category`, API tersedia di `/admin/topics` dan `/admin/categories`).
+- [x] Sistem: login/role, pengguna, log aktivitas, akun saya, dashboard statistik.
+- [ ] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta (API CRUD sudah siap; UI baru daftar/pencarian).
+- [ ] Modul berikutnya (menyusul).

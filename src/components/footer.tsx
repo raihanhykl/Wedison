@@ -2,23 +2,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/app/lib/language-context";
+import { openCookieSettings } from "@/lib/consent";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
-    <footer className="text-white bg-gray-900">
+    <footer className="text-forest-foreground bg-forest-deep">
       <div className="container px-4 py-8 mx-auto sm:px-6 lg:px-8 md:py-12">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-7">
           <div className="col-span-2 mr-6 ">
-            <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[var(--primary-light)] to-teal-300 bg-clip-text text-transparent">
+            <h3 className="font-display text-lg md:text-xl font-bold mb-3 md:mb-4 text-white">
               Wedison Motors
             </h3>
-            <p className="mb-3 text-sm text-gray-400 md:text-base md:mb-4">
+            <p className="mb-3 text-sm text-forest-muted md:text-base md:mb-4">
               {/* Pioneering the future of electric mobility with cutting-edge
               technology and sustainable design. */}
               {t("footer.description")}
             </p>
-            <p className="text-sm text-gray-400 md:text-base">
+            <p className="text-sm text-forest-muted md:text-base">
               {/* © {new Date().getFullYear()} Wedison Motors. All rights reserved. */}
               {t("footer.copyright")}
             </p>
@@ -26,91 +27,73 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Products */}
               {t("footer.products")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/bees/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/products/bees/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Bees
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                 >
                   Mini-Pro
                 </a>
               </li> */}
               <li>
-                <a
-                  href="/athena/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/products/athena/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Athena
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/victory/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/products/victory/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Victory
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/edpower/"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/products/edpower/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   EdPower
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* experience */}
           <div>
-            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Experience */}
               {t("footer.experience")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/showroom"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/showroom`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Showroom
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                 >
                   Service Locations
                 </a>
               </li> */}
               <li>
-                <a
-                  href="/super-charge"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/super-charge`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   SuperCharge
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                 >
                   Test Ride
                 </a>
@@ -120,77 +103,62 @@ export default function Footer() {
 
           {/* support */}
           <div>
-            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
               {t("footer.support")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/faq#user-manual"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/faq#user-manual`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {t("footer.userManual")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/faq"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/faq`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {t("footer.faq")}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* corporate */}
           <div>
-            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Corporate */}
               {t("footer.corporate")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <a
-                  href="/corporate/about"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/corporate/about`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {/* About Us */}
                   {t("footer.about")}
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                 >
                   Careers
                 </a>
               </li> */}
               <li>
-                <a
-                  href="/corporate/contact"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/corporate/contact`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {/* Contact Us */}
                   {t("footer.contact")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/career"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-                >
+                <Link href={`/${language}/career`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {/* Contact Us */}
                   {t("footer.career")}
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
                   href="#"
-                  className="text-sm md:text-base text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                 >
                   Help Center
                 </a>
@@ -200,10 +168,10 @@ export default function Footer() {
 
           {/* meet us */}
           <div>
-            <h4 className="relative inline-block mb-3 text-base font-semibold text-white md:text-lg md:mb-4">
+            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
               {/* Meet Us */}
               {t("footer.meetus")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-[var(--primary-light)]"></span>
+              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
             </h4>
             <div className="flex w-full gap-3 mt-2 max-md:justify-between b md:gap-4">
               {/* <div className="flex items-center justify-between w-full space-x-4"> */}
@@ -213,7 +181,7 @@ export default function Footer() {
                     <Link
                       href="https://www.instagram.com/wedison.id/"
                       target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
                       <Image
                         src="/icons/instagram.svg"
@@ -228,7 +196,7 @@ export default function Footer() {
                     <Link
                       href="https://www.tiktok.com/@wedison.id"
                       target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
                       <Image
                         src="/icons/tiktok.svg"
@@ -243,11 +211,11 @@ export default function Footer() {
                     <Link
                       href="https://www.youtube.com/channel/UCePP1fIil61GyQF4XFWGB2g"
                       target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
                       <Image
                         src="/icons/youtube.svg"
-                        alt="Instagram"
+                        alt="YouTube"
                         width={35}
                         height={35}
                       />
@@ -262,7 +230,7 @@ export default function Footer() {
                     <Link
                       href="https://www.facebook.com/people/wedisonid/61562726390879/"
                       target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
                       <Image
                         src="/icons/facebook.svg"
@@ -277,11 +245,11 @@ export default function Footer() {
                     <Link
                       href="https://wa.me/6282124657804"
                       target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
                       <Image
                         src="/icons/whatsapp.svg"
-                        alt="Instagram"
+                        alt="WhatsApp"
                         width={35}
                         height={35}
                       />
@@ -290,12 +258,12 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link
-                      href="mailto: support@wedison.co"
-                      className="text-sm md:text-base flex gap-2 items-center text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+                      href="mailto:support@wedison.co"
+                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
                       <Image
                         src="/icons/mail.svg"
-                        alt="Instagram"
+                        alt="Email"
                         width={35}
                         height={35}
                       />
@@ -308,31 +276,26 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between pt-6 mt-8 border-t border-gray-800 md:mt-12 md:pt-8 md:flex-row">
-          <p className="mb-4 text-xs text-gray-400 md:text-sm md:mb-0">
+        <div className="flex flex-col items-center justify-between pt-6 mt-8 border-t border-white/10 md:mt-12 md:pt-8 md:flex-row">
+          <p className="mb-4 text-xs text-forest-muted md:text-sm md:mb-0">
             {/* Designed with sustainability in mind. Powered by renewable energy. */}
             {t("footer.tagline")}
           </p>
-          {/* <div className="flex space-x-6">
-            <a
-              href="#"
-              className="text-xs md:text-sm text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+<div className="flex gap-6">
+            <Link
+              href={`/${language}/cookie-policy/`}
+              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
             >
-              Privacy
-            </a>
-            <a
-              href="#"
-              className="text-xs md:text-sm text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
+              {t("footer.cookiePolicy")}
+            </Link>
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
             >
-              Terms
-            </a>
-            <a
-              href="#"
-              className="text-xs md:text-sm text-gray-400 hover:text-[var(--primary-light)] transition-colors duration-300"
-            >
-              Cookies
-            </a>
-          </div> */}
+              {t("footer.cookieSettings")}
+            </button>
+          </div>
         </div>
       </div>
     </footer>
