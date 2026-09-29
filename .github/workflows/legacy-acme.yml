@@ -1,0 +1,38 @@
+name: Legacy - upload challenge ACME ke Hostinger
+
+# Menerbitkan sertifikat Let's Encrypt wedison.co di VPS SEBELUM DNS pindah: selama domain masih
+# ke Hostinger, file challenge HTTP-01 harus tersaji dari public_html. Operator menyalin
+# challenge dari VPS (/var/lib/wedison-acme/pending/<token>) ke ops/acme/<token> lalu push;
+# workflow ini meng-upload-nya ke public_html/.well-known/acme-challenge/.
+# Isi challenge bukan rahasia (memang disajikan publik).
+
+on:
+  push:
+    branches: [legacy-static]
+    paths: ["ops/acme/**"]
+
+env:
+  REMOTE_DIR: /domains/wedison.co/public_html/.well-known/acme-challenge
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Upload challenge
+        env:
+          FTP_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
+          FTP_USER: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+        run: |
+          printf 'machine %s login %s password %s\n' "$FTP_HOST" "$FTP_USER" "$FTP_PASS" > ~/.netrc
+          chmod 600 ~/.netrc
+          lftp -e "set ftp:ssl-allow yes; set ssl:verify-certificate no; \
+            mkdir -p -f ${REMOTE_DIR}; \
+            mirror -R --only-newer --exclude-glob .gitkeep ops/acme/ ${REMOTE_DIR}/; \
+            cls -l ${REMOTE_DIR}/; bye" "$FTP_HOST"
+          rm -f ~/.netrc

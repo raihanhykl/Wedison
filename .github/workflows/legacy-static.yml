@@ -1,0 +1,129 @@
+name: Legacy - situs statis lama (Hostinger FTP + salinan fallback di VPS)
+
+# Branch `legacy-static` = kode situs lama (SSG) yang MASIH melayani wedison.co selama menunggu
+# DNS dipindah ke VPS. `main` sekarang milik versi SSR (deploy ke VPS), jadi hotfix situs lama
+# dilakukan di branch ini. Setiap deploy juga menyalin public_html live ke VPS
+# (/var/www/wedison-legacy) sebagai fallback: `sudo wedison-site legacy` di VPS.
+# Commit dengan "[snapshot-only]" di pesan = lewati build/FTP, hanya salin ulang ke VPS.
+
+on:
+  push:
+    branches: [legacy-static]
+    paths-ignore:
+      - "ops/**"
+      - ".github/workflows/legacy-acme.yml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: legacy-static
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: 20
+  BUILD_DIR: out
+  REMOTE_DIR: /domains/wedison.co/public_html
+  WEBSITE_URL: https://wedison.co
+  VPS_HOST: "76.13.22.124"
+  VPS_USER: "wedison"
+  LEGACY_DIR: /var/www/wedison-legacy
+
+jobs:
+  ci:
+    name: Build & Deploy to Hostinger (FTP)
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[snapshot-only]') }}
+
+    env:
+      TAILWIND_DISABLE_OXIDE: "1"
+
+    environment:
+      name: production
+      url: ${{ env.WEBSITE_URL }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Build (Next.js SSG + next-sitemap)
+        run: npm run build
+        env:
+          # NEXT_PUBLIC_* di-inline ke bundle saat build.
+          # ID container GTM produksi (publik, bukan secret).
+          NEXT_PUBLIC_GTM_ID: GTM-TGNBLQ37
+          # Meta (Facebook) Pixel — produksi saja (publik, bukan secret)
+          NEXT_PUBLIC_META_PIXEL_ID: "1869176430902673"
+
+      - name: Copy sitemap/robots to out (post-build)
+        shell: bash
+        run: |
+          mkdir -p "${BUILD_DIR}"
+          shopt -s nullglob || true
+          for f in public/robots.txt public/sitemap*.xml public/*.xml.gz; do
+            if [ -f "$f" ]; then
+              cp -f "$f" "${BUILD_DIR}/"
+            fi
+          done
+
+      - name: FTP Deploy (preserve .htaccess)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          local-dir: ${{ env.BUILD_DIR }}/
+          server-dir: ${{ env.REMOTE_DIR }}/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/.htaccess
+            .htaccess
+
+  snapshot:
+    name: Salin public_html live -> VPS (fallback)
+    runs-on: ubuntu-latest
+    needs: ci
+    if: ${{ always() && needs.ci.result != 'failure' && needs.ci.result != 'cancelled' }}
+    steps:
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Mirror public_html (tanpa subfolder staging)
+        env:
+          FTP_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
+          FTP_USER: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+        run: |
+          printf 'machine %s login %s password %s\n' "$FTP_HOST" "$FTP_USER" "$FTP_PASS" > ~/.netrc
+          chmod 600 ~/.netrc
+          lftp -e "set ftp:ssl-allow yes; set ssl:verify-certificate no; set net:max-retries 3; \
+            cls -la ${REMOTE_DIR}/; \
+            mirror --parallel=6 --exclude-glob staging/ --exclude-glob .well-known/ \
+              --exclude-glob .ftp-deploy-sync-state.json ${REMOTE_DIR}/ site/; bye" "$FTP_HOST"
+          rm -f ~/.netrc
+          test -f site/index.html
+          du -sh site; find site -type f | wc -l
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Rsync ke VPS
+        run: |
+          ssh-keyscan -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts
+          rsync -rltz --delete --chmod=D755,F644 site/ \
+            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.LEGACY_DIR }}/
