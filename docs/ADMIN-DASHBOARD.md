@@ -16,6 +16,7 @@ browser ──/admin/*──▶ Next.js (:3000) ──rewrite /api/*──▶ Ex
   1. Backend: `cached(key, tags, fn)` (LRU, TTL `CACHE_TTL_PUBLIC`) + header `Cache-Control: s-maxage` di `/api/v1/public/*`.
   2. Next.js: `fetch(..., { next: { revalidate, tags } })` di `src/lib/cms/api.ts` (ISR).
   3. On-demand: setiap write admin → `invalidate(tags)` → `POST {FRONTEND_URL}/api/revalidate` → `revalidateTag`.
+- **Modul SuperCharge (admin)**: `/admin/supercharge/stations` — tabel + filter (status, tier, provinsi, tampil/tersembunyi, pencarian), tambah/edit lewat sheet (`station-form.tsx`) dengan pemilih koordinat MapLibre (`station-map-picker.tsx`, style peta sama dengan halaman publik), fasilitas (kunci = kamus `supercharge.locator.amenity.*`), foto dari Media Library (folder `stations`), aksi baris & massal (ubah status, tampil/sembunyikan, hapus — hapus hanya ADMIN). Setiap perubahan meng-invalidate cache `stations` sehingga peta publik langsung segar.
 - **Halaman publik yang sudah memakai CMS**: `/media-center` (artikel, liputan pers, Instagram), `/media-center/news/[slug]`, `/media-center/articles/[slug]` (baru), `/super-charge/locations`. Semua fail-soft ke data statis lama bila backend kosong/mati.
 
 ## Setup lokal (tanpa Docker)
@@ -45,7 +46,7 @@ Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `np
 | `GET /public/articles/:slug?locale=` | `GET/POST/PATCH/DELETE /admin/topics` (alias `/admin/categories`), `/admin/tags` |
 | `GET /public/press`, `GET /public/press/:slug` | `/admin/press` + `POST /admin/press/fetch-metadata`, `POST /admin/press/:id/refresh`, `POST /admin/press/reorder` |
 | `GET /public/social?platform=` | `/admin/social` + `fetch-metadata`, `:id/refresh`, `reorder` |
-| `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD) |
+| `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD), `GET /admin/stations/meta` (provinsi/kota/jumlah per status), `POST /admin/stations/bulk` (`status` / `activate` / `deactivate` / `delete`) |
 | `GET /public/categories` | `GET /admin/media`, `POST /admin/media/upload` (multipart `files[]`, `folder`), `PATCH/DELETE /admin/media/:id` |
 | | `/auth/login|logout|me|change-password|profile`, `/admin/users` (SUPER_ADMIN), `/admin/activity`, `/admin/dashboard/stats` |
 
