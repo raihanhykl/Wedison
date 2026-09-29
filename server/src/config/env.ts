@@ -16,6 +16,10 @@ const schema = z.object({
     .transform((v) => v === "true"),
   FRONTEND_URL: z.string().url().default("http://localhost:3000"),
   REVALIDATE_SECRET: z.string().optional(),
+  // Base URL Next untuk webhook revalidate; boleh beberapa, pisahkan koma (mis. instance
+  // utama + cadangan di prod). Kosong = FRONTEND_URL. Di VPS pakai http://127.0.0.1:<port>
+  // supaya tidak bergantung DNS publik (sebelum cutover, domain prod masih ke hosting lama).
+  REVALIDATE_URL: z.string().optional(),
   UPLOAD_DIR: z.string().default("uploads"),
   UPLOAD_PUBLIC_PATH: z.string().default("/api/uploads"),
   MAX_UPLOAD_MB: z.coerce.number().positive().default(10),

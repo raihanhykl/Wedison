@@ -1,0 +1,30 @@
+name: PR check (build frontend + backend)
+
+# Pastikan PR ke branch yang ter-deploy bisa di-build sebelum di-merge.
+on:
+  pull_request:
+    branches: [main, staging, ssr-version]
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Build frontend (standalone)
+        run: npm ci && npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://wedison.co
+          API_INTERNAL_URL: http://127.0.0.1:4003
+
+      - name: Build backend
+        run: npm --prefix server ci && npm --prefix server run build

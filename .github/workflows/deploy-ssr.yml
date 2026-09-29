@@ -1,17 +1,19 @@
-name: Deploy ssr-version -> VPS (testing)
+name: Deploy staging -> VPS (ssr.wedison.tech)
 
 # Build standalone di GitHub Actions, lalu rsync artefak ramping ke VPS + pm2 reload.
 # Aman untuk VPS shared (n8n/novo/wedisense): build Next TIDAK jalan di VPS.
 # Backend admin (server/, Express + Prisma) di-rsync sebagai source lalu di-build di VPS
 # (hanya tsc, ringan) karena `sharp` butuh binary Linux dari `npm ci`.
 # server/.env dibuat manual di VPS (tidak pernah di-rsync / di-commit).
+# Branch `staging` = pra-produksi SSR di ssr.wedison.tech (dulu dipicu branch ssr-version).
+# Alur rilis: feature/* -> staging (cek di sini) -> main (produksi wedison.co, ci-cd.yml).
 on:
   push:
-    branches: [ssr-version]
+    branches: [staging]
   workflow_dispatch: {}
 
 concurrency:
-  group: deploy-ssr
+  group: deploy-staging
   cancel-in-progress: true
 
 env:
