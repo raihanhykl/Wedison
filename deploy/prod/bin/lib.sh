@@ -5,6 +5,8 @@ ROOT=${WEDISON_PROD_ROOT:-/home/wedison/wedison-prod}
 ECOSYSTEM="$ROOT/ecosystem.prod.config.js"
 WEB_PORT=3003
 WEB_B_PORT=3013
+# = fail_timeout upstream wedison_prod_web di nginx (deploy/nginx/wedison.co.app.conf)
+NGINX_FAIL_TIMEOUT=5
 
 log() { printf '[%s] %s\n' "$(date '+%F %T')" "$*"; }
 die() { log "ERROR: $*"; exit 1; }
@@ -50,6 +52,9 @@ reload_all() {
 
   pm2_reload wedison-prod-web
   wait_http "http://127.0.0.1:$WEB_PORT/id/" || return 1
+  # nginx menandai utama "down" selama fail_timeout sejak gagal konek saat restart; selama
+  # itu hanya cadangan yang dipakai -> jangan restart cadangan sebelum jendela itu lewat.
+  sleep $((NGINX_FAIL_TIMEOUT + 2))
 
   pm2_reload wedison-prod-web-b
   wait_http "http://127.0.0.1:$WEB_B_PORT/id/" || return 1
