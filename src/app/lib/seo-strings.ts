@@ -209,7 +209,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison Athena – Retro Electric Motorcycle, 120 km Range",
       description:
-        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 85 km/h top speed, SuperCharge 10% to 80% in 15 minutes. See full specifications.",
+        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 85 km/h, SuperCharge 10% to 80% in 15 minutes. See full specs.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -244,7 +244,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison Bees – Compact Electric Scooter, 80 km Range",
       description:
-        "Bees, Wedison's compact and agile electric scooter for daily rides: 80 km range, 60 km/h top speed and just 78.5 kg. See the specifications and highlights.",
+        "Bees, Wedison's compact electric scooter for daily rides: 80 km range, 60 km/h top speed and just 78.5 kg. See specs and highlights.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -279,7 +279,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison Victory – Urban Electric Motorcycle, 120 km",
       description:
-        "Victory, Wedison's urban electric motorcycle with style and power: up to 120 km range, 85 km/h, 3 kW motor, 15-minute SuperCharge. See full specifications.",
+        "Victory, Wedison's urban electric motorcycle: up to 120 km range, 85 km/h, 3 kW motor and 15-minute SuperCharge. See full specs.",
       keywords: [
         "wedison",
         "electric motorcycle",
