@@ -1,6 +1,6 @@
 // Kamus terjemahan (ID). Dipisah per-locale supaya HANYA locale aktif
 // yang dibundel ke client (bukan kedua bahasa sekaligus). Dikonsumsi lewat provider per-locale.
-import Link from "next/link";
+import { LocaleLink } from "@/components/locale-link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -599,9 +599,9 @@ export const id = {
     <>
       Isi daya dari 10% ke 80% dalam 15 menit, pas untuk mampir di sela
       aktivitas. Tersedia di seluruh showroom Wedison.{" "}
-      <Link href="/super-charge" className="underline text-primary">
+      <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
-      </Link>
+      </LocaleLink>
     </>
   ),
 
@@ -761,9 +761,9 @@ export const id = {
     <>
       Isi daya dari 10% ke 80% dalam 15 menit, pas untuk berhenti sebentar di
       tengah hari yang padat. Tersedia di semua showroom Wedison.{" "}
-      <Link href="/super-charge" className="underline text-primary">
+      <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
-      </Link>
+      </LocaleLink>
     </>
   ),
 
@@ -883,9 +883,9 @@ export const id = {
     <>
       SuperCharge mengisi baterai Athena dari 10% ke 80% dalam 15 menit, jadi
       kamu tidak perlu menunggu lama sebelum lanjut jalan.{" "}
-      <Link href="/super-charge" className="underline text-primary">
+      <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
-      </Link>
+      </LocaleLink>
     </>
   ),
 
@@ -1248,6 +1248,12 @@ export const id = {
   "faq.category.Servicing": "Layanan: Garansi, Perbaikan, dan Perawatan",
   "faq.category.SmartFeatures": "Fitur Pintar, Bluetooth, Aplikasi",
   "faq.category.Tires": "Ban",
+  "faq.page.kicker": "Pusat Bantuan",
+  "faq.page.title": "Pertanyaan Umum",
+  "faq.page.intro":
+    "Temukan jawaban untuk pertanyaan yang paling sering diajukan seputar motor listrik Wedison: baterai, pengisian daya, performa, keamanan, garansi, dan servis. Belum ketemu jawabannya?",
+  "faq.page.contactLink": "Hubungi tim kami.",
+  "faq.page.tablist": "Kategori pertanyaan",
 
   // Battery Questions
   "faq.Battery.questions.0.question": "Berapa lama garansi baterainya?",

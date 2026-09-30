@@ -65,26 +65,28 @@ export function middleware(req: NextRequest) {
 
   if (hasLocale) {
     const current = pathname.split("/")[1];
-    // Teruskan locale sebagai REQUEST header agar Server Component (khususnya
-    // not-found, yang tak menerima params & ada di luar LanguageProvider) bisa
-    // merender bahasa yang benar per-request (bukan default static).
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("x-locale", current);
-    const res = NextResponse.next({ request: { headers: requestHeaders } });
-    // Refresh cookie agar link tanpa-locale ikut ke locale yang sedang dibuka.
-    res.cookies.set("NEXT_LOCALE", current, {
-      path: "/",
-      maxAge: 31536000,
-      sameSite: "lax",
-    });
+    const res = NextResponse.next();
+    // Ingat locale yang sedang dibuka agar link tanpa-locale ikut ke locale itu.
+    // Cookie hanya ditulis bila nilainya berubah: respons halaman statis (SSG/ISR) tanpa
+    // Set-Cookie tetap bisa di-cache oleh browser/proxy sesuai Cache-Control dari Next.
+    if (req.cookies.get("NEXT_LOCALE")?.value !== current) {
+      res.cookies.set("NEXT_LOCALE", current, {
+        path: "/",
+        maxAge: 31536000,
+        sameSite: "lax",
+      });
+    }
     return res;
   }
 
   // Path tanpa locale -> redirect ke locale hasil deteksi (pertahankan path + query).
+  // Hasilnya bergantung pada cookie + Accept-Language, jadi beri tahu cache lewat Vary.
   const locale = detectLocale(req);
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
-  return redirectPublic(req, url);
+  const res = redirectPublic(req, url);
+  res.headers.set("Vary", "Accept-Language, Cookie");
+  return res;
 }
 
 export const config = {

@@ -10,6 +10,8 @@ import { notFound } from "next/navigation";
 import { LOCALES, isLocale } from "@/app/lib/locale";
 import { ConsentModeDefault, GoogleTagManager } from "@/components/gtm";
 import CookieConsent from "@/components/cookie-consent";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organizationSchema, webSiteSchema } from "@/lib/seo/schema";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -38,6 +40,9 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={`${fontVariables} antialiased`}>
         <ConsentModeDefault />
+        {/* Identitas situs untuk mesin pencari & asisten AI (Organization + WebSite). Schema
+            per-halaman (Product, FAQPage, BreadcrumbList, dst.) ditambahkan di page.tsx masing-masing. */}
+        <JsonLd data={[organizationSchema(locale), webSiteSchema(locale)]} />
         {/* Tanpa JS/observer, konten yang dibungkus <Reveal>/<StaggerItem> harus tetap terlihat
             (motion menulis opacity:0 ke HTML SSR). noscript ini memaksa visible saat scripting mati. */}
         <noscript>
@@ -50,11 +55,11 @@ export default async function LocaleLayout({
           <BookingProvider>
             <Navbar />
             <LazyMotionProvider>
-              {/* Target skip-link di navbar. Sengaja <div>, bukan <main>: sebagian
-                  halaman sudah punya <main> sendiri dan <main> bersarang itu invalid. */}
-              <div id="konten" tabIndex={-1}>
+              {/* Landmark <main> tunggal untuk seluruh halaman publik (target skip-link navbar).
+                  Halaman TIDAK boleh merender <main> sendiri (nested main = HTML invalid). */}
+              <main id="konten" tabIndex={-1}>
                 {children}
-              </div>
+              </main>
             </LazyMotionProvider>
             <Footer />
           </BookingProvider>

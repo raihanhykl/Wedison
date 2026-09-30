@@ -1,18 +1,23 @@
-import React from "react";
 import ProductPageComponent from "@/app/_product/structure";
 import { getSEOMetadata } from "@/app/lib/seo1";
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+import { JsonLd } from "@/components/seo/json-ld";
+import { productPageJsonLd } from "@/lib/seo/product-page";
+import type { Locale } from "@/app/lib/locale";
+
+const ID = "athena" as const;
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return getSEOMetadata({ locale: locale as "id" | "en", path: "/products/athena" });
+  return getSEOMetadata({ locale: locale as Locale, path: `/products/${ID}` });
 }
-export default function Page() {
+
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const loc = (locale === "en" ? "en" : "id") as Locale;
   return (
     <div>
-      <ProductPageComponent motorType="athena" />
+      <JsonLd data={await productPageJsonLd(loc, ID)} />
+      <ProductPageComponent motorType={ID} />
     </div>
   );
 }

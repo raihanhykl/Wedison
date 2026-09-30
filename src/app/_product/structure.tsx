@@ -2,9 +2,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,6 @@ type Props = {
 };
 
 export default function ProductPageComponent({ motorType }: Props) {
-  const [isDesktop, setIsDesktop] = useState<boolean>(true);
   const product = GetProductData(motorType);
   // Seed dengan nilai spesifikasi asli -> SSR/no-JS menampilkan angka benar (bukan 0).
   const [counts, setCounts] = useState<(number | string)[]>(() =>
@@ -29,13 +28,6 @@ export default function ProductPageComponent({ motorType }: Props) {
   );
   const { ref, inView } = useInView({ triggerOnce: true });
   const { t, language } = useLanguage();
-
-  useEffect(() => {
-    const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
-  }, []);
 
   // Client-only: turunkan angka numerik ke 0 (saat section masih di luar viewport) supaya
   // count-up punya titik mulai; SSR tetap membawa nilai asli untuk aksesibilitas/crawler.
@@ -77,16 +69,13 @@ export default function ProductPageComponent({ motorType }: Props) {
     <div>
       {/* ============ HERO ============ */}
       <section className="relative h-[100svh] w-full overflow-hidden">
-        <Image
-          src={
-            isDesktop
-              ? product.hero.imageUrl
-              : product.hero.imageUrlMobile || product.hero.imageUrl
-          }
+        {/* LCP: art direction lewat <picture> (mobile/desktop dipilih browser saat parse HTML,
+            bukan setelah hydration) + fetchpriority=high. */}
+        <ArtDirectedImage
+          desktop={product.hero.imageUrl}
+          mobile={product.hero.imageUrlMobile}
           alt={product.hero.imageAlt}
-          fill
           priority
-          sizes="100vw"
           className={cn("object-cover object-center", product.hero.className)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
@@ -108,12 +97,13 @@ export default function ProductPageComponent({ motorType }: Props) {
                 rel="noopener noreferrer"
               >
                 <Button size="lg" className="gap-2 bg-white text-foreground hover:bg-white/90">
+                  {/* Sumber 64x77 px (bukan persegi) -> jaga rasio agar tidak gepeng */}
                   <Image
                     src="/icons/Tokopedia_Mascot.png"
                     alt=""
-                    width={28}
-                    height={28}
-                    className="h-6 w-6"
+                    width={20}
+                    height={24}
+                    className="h-6 w-auto"
                   />
                   {t("btn.buy.on.tokopedia")}
                 </Button>
@@ -193,11 +183,8 @@ export default function ProductPageComponent({ motorType }: Props) {
 
       {/* ============ PRODUCT OVERVIEW ============ */}
       <FeatureBlock
-        image={
-          isDesktop
-            ? product.productOverview.imageUrl
-            : product.productOverview.imageUrlMobile || product.productOverview.imageUrl
-        }
+        image={product.productOverview.imageUrl}
+        imageMobile={product.productOverview.imageUrlMobile}
         imageClass={product.productOverview.className}
         alt={product.productOverview.imageAlt}
         title={product.productOverview.title}
@@ -212,11 +199,8 @@ export default function ProductPageComponent({ motorType }: Props) {
       {/* ============ SUPERCHARGE OVERVIEW ============ */}
       {product.chargingOverview && (
         <FeatureBlock
-          image={
-            isDesktop
-              ? product.chargingOverview.imageUrl
-              : product.chargingOverview.imageUrlMobile || product.chargingOverview.imageUrl
-          }
+          image={product.chargingOverview.imageUrl}
+          imageMobile={product.chargingOverview.imageUrlMobile}
           imageClass={product.chargingOverview.className}
           alt={product.chargingOverview.imageAlt}
           title={product.chargingOverview.title}
@@ -243,14 +227,78 @@ export default function ProductPageComponent({ motorType }: Props) {
   );
 }
 
+/**
+ * Gambar `fill` dengan art direction: sumber mobile (<640px) dan desktop dipilih browser lewat
+ * <picture>, tanpa state JS. getImageProps memberi srcSet/sizes hasil optimizer Next yang sama
+ * dengan <Image>. Untuk LCP (`priority`) dipasang fetchpriority=high + loading=eager.
+ */
+function ArtDirectedImage({
+  desktop,
+  mobile,
+  alt,
+  className,
+  priority = false,
+  sizes = "100vw",
+}: {
+  desktop: string;
+  mobile?: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+  sizes?: string;
+}) {
+  const common = { alt, fill: true as const, sizes, priority, className };
+  const d = getImageProps({ ...common, src: desktop });
+  const m = mobile && mobile !== desktop ? getImageProps({ ...common, src: mobile }) : null;
+  const MOBILE = "(max-width: 639px)";
+  // getImageProps TIDAK menyetel fetchpriority/loading dan tidak membuat <link rel=preload>
+  // seperti <Image priority>; keduanya dipasang manual. React 19 menghoist <link> ke <head>,
+  // dan atribut `media` membuat browser hanya memuat varian yang sesuai viewport.
+  return (
+    <picture>
+      {priority && m && (
+        <link
+          rel="preload"
+          as="image"
+          href={m.props.src}
+          imageSrcSet={m.props.srcSet}
+          imageSizes={m.props.sizes}
+          media={MOBILE}
+          fetchPriority="high"
+        />
+      )}
+      {priority && (
+        <link
+          rel="preload"
+          as="image"
+          href={d.props.src}
+          imageSrcSet={d.props.srcSet}
+          imageSizes={d.props.sizes}
+          media={m ? "(min-width: 640px)" : undefined}
+          fetchPriority="high"
+        />
+      )}
+      {m && <source media={MOBILE} srcSet={m.props.srcSet} sizes={m.props.sizes} />}
+      <img
+        {...d.props}
+        alt={alt}
+        fetchPriority={priority ? "high" : undefined}
+        loading={priority ? "eager" : "lazy"}
+      />
+    </picture>
+  );
+}
+
 function FeatureBlock({
   image,
+  imageMobile,
   imageClass,
   alt,
   title,
   desc,
 }: {
   image: string;
+  imageMobile?: string;
   imageClass?: string;
   alt: string;
   title: string;
@@ -259,10 +307,10 @@ function FeatureBlock({
   return (
     <section className="main-container py-16 sm:py-24">
       <Reveal className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl sm:aspect-[16/8]" y={0}>
-        <Image
-          src={image}
+        <ArtDirectedImage
+          desktop={image}
+          mobile={imageMobile}
           alt={alt}
-          fill
           sizes="(max-width: 1280px) 100vw, 1200px"
           className={cn("object-cover object-center", imageClass)}
         />

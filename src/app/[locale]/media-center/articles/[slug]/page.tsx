@@ -6,10 +6,10 @@ import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { getSEOMetadata } from "@/app/lib/seo1";
 import { getArticle } from "@/lib/cms/api";
 import { Reveal } from "@/components/motion/reveal";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema, newsArticleSchema } from "@/lib/seo/schema";
+import { SITE_URL as SITE, absUrl as abs } from "@/lib/seo/site";
 import type { Locale } from "@/app/lib/locale";
-
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wedison.co";
-const abs = (u: string) => (u.startsWith("http") ? u : `${SITE}${u}`);
 
 // Artikel dari CMS: render on-demand + cache ISR (tag "articles"), disegarkan lewat webhook admin.
 // SEO per artikel: title/description/keywords, canonical (override dari admin), robots noindex,
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: a.seoDescription ?? a.excerpt ?? undefined,
     keywords: a.seoKeywords ? a.seoKeywords.split(",").map((k) => k.trim()).filter(Boolean) : undefined,
     image: a.ogImage?.url ?? a.coverImage?.url,
+    noIndex: a.noIndex,
   });
 
   const languages: Record<string, string> = {};
@@ -43,7 +44,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       canonical: a.canonicalUrl ?? base.alternates?.canonical,
       languages,
     },
-    robots: a.noIndex ? { index: false, follow: true } : undefined,
     openGraph: {
       ...base.openGraph,
       type: "article",
@@ -74,25 +74,29 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
   const other = a.availableLocales.find((l) => l.locale !== loc);
   const url = `${SITE}/${loc}/media-center/articles/${a.slug}/`;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    headline: a.title,
-    description: a.seoDescription ?? a.excerpt ?? undefined,
-    image: [a.ogImage?.url, a.coverImage?.url].filter(Boolean).map((u) => abs(u!)),
-    datePublished: a.publishedAt ?? undefined,
-    dateModified: a.updatedAt,
-    author: a.author ? { "@type": "Person", name: a.author.name } : { "@type": "Organization", name: "Wedison" },
-    publisher: { "@type": "Organization", name: "Wedison", logo: { "@type": "ImageObject", url: `${SITE}/logo/wedison-logo.png` } },
-    mainEntityOfPage: { "@type": "WebPage", "@id": a.canonicalUrl ?? url },
-    inLanguage: loc === "en" ? "en-US" : "id-ID",
-    keywords: a.seoKeywords ?? undefined,
-    articleSection: a.category?.name,
-  };
+  const jsonLd = [
+    newsArticleSchema({
+      locale: loc,
+      url: a.canonicalUrl ?? url,
+      headline: a.title,
+      description: a.seoDescription ?? a.excerpt ?? undefined,
+      images: [a.ogImage?.url, a.coverImage?.url].filter((u): u is string => Boolean(u)),
+      datePublished: a.publishedAt ?? undefined,
+      dateModified: a.updatedAt,
+      authorName: a.author?.name,
+      section: a.category?.name,
+      keywords: a.seoKeywords ?? undefined,
+    }),
+    breadcrumbSchema(loc, [
+      { name: loc === "en" ? "Home" : "Beranda", path: "/" },
+      { name: "Media Center", path: "/media-center" },
+      { name: a.title, path: `/media-center/articles/${a.slug}` },
+    ]),
+  ];
 
   return (
     <div className="min-h-screen bg-background mt-14">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <article className="max-w-3xl mx-auto">
           <div className="mb-4 flex items-center justify-between gap-4">

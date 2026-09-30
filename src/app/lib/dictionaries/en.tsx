@@ -1,6 +1,6 @@
 // Kamus terjemahan (EN). Dipisah per-locale supaya HANYA locale aktif
 // yang dibundel ke client (bukan kedua bahasa sekaligus). Dikonsumsi lewat provider per-locale.
-import Link from "next/link";
+import { LocaleLink } from "@/components/locale-link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -617,9 +617,9 @@ export const en = {
     <>
       Charge from 10% to 80% in 15 minutes, suited to a brief stop between
       errands. Available at every Wedison showroom.{" "}
-      <Link href="/super-charge" className="underline text-primary">
+      <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
-      </Link>
+      </LocaleLink>
     </>
   ),
 
@@ -783,9 +783,9 @@ export const en = {
     <>
       Go from 10% to 80% in 15 minutes, enough time for a short break on a busy
       day. Available at every Wedison showroom.{" "}
-      <Link href="/super-charge" className="underline text-primary">
+      <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
-      </Link>
+      </LocaleLink>
     </>
   ),
 
@@ -903,9 +903,9 @@ export const en = {
     <>
       SuperCharge takes the battery from 10% to 80% in 15 minutes, so you are
       not standing around waiting to move again.{" "}
-      <Link href="/super-charge" className="underline text-primary">
+      <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
-      </Link>
+      </LocaleLink>
     </>
   ),
 
@@ -1261,6 +1261,12 @@ export const en = {
   "faq.category.Servicing": "Servicing: Warranty, Repair, and Maintenance",
   "faq.category.SmartFeatures": "Smart Features, Bluetooth, App",
   "faq.category.Tires": "Tires",
+  "faq.page.kicker": "Help Center",
+  "faq.page.title": "Frequently Asked Questions",
+  "faq.page.intro":
+    "Find answers to the most common questions about Wedison electric motorcycles: battery, charging, performance, safety, warranty and servicing. Can't find what you need?",
+  "faq.page.contactLink": "Reach out to our team.",
+  "faq.page.tablist": "Question categories",
 
   // Battery Questions
   "faq.Battery.questions.0.question": "How long is the battery warranty?",

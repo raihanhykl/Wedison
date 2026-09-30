@@ -1,6 +1,9 @@
-name: PR check (build frontend + backend)
+name: PR check (build frontend + backend + SEO smoke test)
 
-# Pastikan PR ke branch yang ter-deploy bisa di-build sebelum di-merge.
+# Pastikan PR ke branch yang ter-deploy bisa di-build sebelum di-merge, lalu jalankan
+# pemeriksaan SEO/keamanan (scripts/seo-check.mjs) terhadap server standalone hasil build:
+# metadata di <head>, satu <h1>, header keamanan, link internal tanpa redirect, robots/sitemap,
+# JSON-LD, 404. Gagal = PR diblokir (mencegah regresi temuan audit docs/SEO-AUDIT-2026-09.md).
 on:
   pull_request:
     branches: [main, staging, ssr-version]
@@ -24,6 +27,14 @@ jobs:
         run: npm ci && npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://wedison.co
+          API_INTERNAL_URL: http://127.0.0.1:4003
+
+      - name: SEO & security smoke test (standalone server)
+        run: |
+          (PORT=3999 HOSTNAME=127.0.0.1 node .next/standalone/server.js > /tmp/web.log 2>&1 &)
+          for i in $(seq 1 40); do curl -sf -o /dev/null http://127.0.0.1:3999/id/ && break; sleep 1; done
+          node scripts/seo-check.mjs http://127.0.0.1:3999 || { echo "--- server log ---"; cat /tmp/web.log; exit 1; }
+        env:
           API_INTERNAL_URL: http://127.0.0.1:4003
 
       - name: Build backend

@@ -1,15 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, User, Share2, ArrowLeft, Check } from "lucide-react";
+import { Calendar, User, Share2, ArrowLeft, Check, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { LinkPreview } from "@/app/lib/fetchPreview";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
+import { useLanguage } from "@/app/lib/language-context";
+
+const COPY = {
+  id: {
+    back: "Kembali ke Media Center",
+    by: "Oleh",
+    copied: "Tersalin!",
+    share: "Bagikan",
+    summary: "Ringkasan liputan",
+    readMore: "Baca selengkapnya di",
+    publishedOn: "Diterbitkan pada",
+    publishedBy: "oleh",
+  },
+  en: {
+    back: "Back to Media Center",
+    by: "By",
+    copied: "Copied!",
+    share: "Share",
+    summary: "Coverage summary",
+    readMore: "Read the full story at",
+    publishedOn: "Published on",
+    publishedBy: "by",
+  },
+} as const;
 
 export default function NewsClient({ preview }: { preview: LinkPreview }) {
+  const { language } = useLanguage();
+  const c = COPY[language === "en" ? "en" : "id"];
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
@@ -23,26 +49,29 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
     }
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toLocaleDateString("id-ID", {
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleDateString(language === "en" ? "en-US" : "id-ID", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
   };
+  const published = formatDate(preview.published);
 
   return (
     <div className="min-h-screen bg-background mt-14">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-4xl mx-auto">
+        <article className="max-w-4xl mx-auto">
           {/* Back Button */}
           <Link
-            href={"/media-center"}
-            className="mb-3 hover:mb-[10px]  flex items-center justify-between w-fit gap-1 text-muted-foreground hover:text-foreground hover:border-b-[2px]  border-b-foreground transition-colors"
+            href={`/${language}/media-center/`}
+            className="mb-3 flex w-fit items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            <p> Kembali ke Berita</p>
+            <span>{c.back}</span>
           </Link>
 
           {/* Header */}
@@ -52,16 +81,20 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
             </h1>
 
             <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-6">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                <span>{formatDate(preview.published!)}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                <span>
-                  Oleh {preview.site} - {preview.author}
-                </span>
-              </div>
+              {published && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <time dateTime={preview.published}>{published}</time>
+                </div>
+              )}
+              {(preview.site || preview.author) && (
+                <div className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  <span>
+                    {c.by} {[preview.site, preview.author].filter(Boolean).join(" - ")}
+                  </span>
+                </div>
+              )}
               <Button
                 variant="outline"
                 size="sm"
@@ -71,12 +104,12 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
                 {copied ? (
                   <>
                     <Check className="mr-2 h-4 w-4" />
-                    Tersalin!
+                    {c.copied}
                   </>
                 ) : (
                   <>
                     <Share2 className="mr-2 h-4 w-4" />
-                    Share
+                    {c.share}
                   </>
                 )}
               </Button>
@@ -84,70 +117,60 @@ export default function NewsClient({ preview }: { preview: LinkPreview }) {
           </Reveal>
 
           {/* Image */}
-          <Reveal className="mb-8" y={0}>
-            <Image
-              width={1000}
-              height={800}
-              src={preview.image || "/placeholder.svg"}
-              alt={preview.title}
-              className="w-full h-full object-contain aspect-video shadow-lg rounded-xl bg-muted"
-            />
-          </Reveal>
+          {preview.image && (
+            <Reveal className="mb-8" y={0}>
+              <Image
+                width={1000}
+                height={800}
+                src={preview.image}
+                alt={preview.title}
+                priority
+                sizes="(max-width: 1024px) 100vw, 896px"
+                className="w-full h-full object-contain aspect-video shadow-lg rounded-xl bg-muted"
+              />
+            </Reveal>
+          )}
 
           {/* Article */}
           <Card className="mb-8 p-0 border border-border bg-card shadow-lg">
             <CardContent className="p-6 sm:p-8">
+              <h2 className="mb-4 font-display text-xl font-bold tracking-tight text-foreground">
+                {c.summary}
+              </h2>
               <div className="prose prose-lg max-w-none">
                 <div className="text-foreground leading-relaxed whitespace-pre-line">
                   {preview.headLine}
                 </div>
               </div>
             </CardContent>
-            <CardContent className=" px-6 sm:px-8">
-              <div className="text-foreground  my-8 leading-relaxed font-bold whitespace-pre-line">
-                <Link
+            <CardContent className="px-6 sm:px-8">
+              <p className="my-8 font-bold leading-relaxed text-foreground">
+                <a
                   href={preview.url}
-                  target="_blank" rel="noopener noreferrer"
-                  className="  underline flex items-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-start gap-2 underline underline-offset-4"
                 >
-                  {" "}
-                  Baca selengkapnya di {preview.site} - {preview.title}{" "}
-                  {/* <ArrowRight className=" ml-3 h-5 w-5" /> */}
-                </Link>
-              </div>
+                  <span>
+                    {c.readMore} {preview.site ?? preview.url}
+                    {preview.site ? ` – ${preview.title}` : ""}
+                  </span>
+                  <ExternalLink className="mt-1 h-4 w-4 shrink-0" aria-hidden />
+                </a>
+              </p>
             </CardContent>
           </Card>
 
           {/* Footer */}
-          <div className="border-t border-border pt-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  Diterbitkan pada {formatDate(preview.published!)} oleh{" "}
-                  {/* {news.author} */}
-                  {preview.author}
-                </p>
-              </div>
-              {/* <Button
-                variant="outline"
-                className=" border-black"
-                onClick={handleShare}
-              >
-                {copied ? (
-                  <>
-                    <Check className="mr-2 h-4 w-4" />
-                    URL Tersalin!
-                  </>
-                ) : (
-                  <>
-                    <Share2 className="mr-2 h-4 w-4" />
-                    Bagikan Artikel
-                  </>
-                )}
-              </Button> */}
+          {(published || preview.author) && (
+            <div className="border-t border-border pt-6">
+              <p className="text-sm text-muted-foreground">
+                {published ? `${c.publishedOn} ${published}` : ""}
+                {preview.author ? ` ${c.publishedBy} ${preview.author}` : ""}
+              </p>
             </div>
-          </div>
-        </div>
+          )}
+        </article>
       </div>
     </div>
   );

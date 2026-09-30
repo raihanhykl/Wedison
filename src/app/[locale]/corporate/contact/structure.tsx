@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import Image from "next/image";
 import Contact from "@/components/contact3";
+import { CONTACT } from "@/lib/seo/site";
 
 export default function ContactPage() {
   const { t } = useLanguage();
@@ -17,8 +18,15 @@ export default function ContactPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Contact information
-  const contactInfo = [
+  // Contact information. Telepon & email berupa tautan tel:/mailto: (klik langsung di ponsel,
+  // dan konsisten dengan ContactPoint di JSON-LD Organization).
+  const contactInfo: {
+    icon: React.ReactNode;
+    title: string;
+    content: string;
+    subContent?: string;
+    href?: string;
+  }[] = [
     {
       icon: <MapPin className="h-6 w-6 text-primary" />,
       title: t("contact.headquarters"),
@@ -27,14 +35,16 @@ export default function ContactPage() {
     {
       icon: <Phone className="h-6 w-6 text-primary" />,
       title: t("contact.phone"),
-      content: "(+62) 821-2465-7804",
+      content: CONTACT.phoneDisplay,
       subContent: t("contact.phoneHours"),
+      href: `tel:${CONTACT.phoneE164}`,
     },
     {
       icon: <Mail className="h-6 w-6 text-primary" />,
       title: t("contact.emailLabel"),
-      content: "support@wedison.co",
+      content: CONTACT.email,
       subContent: t("contact.emailResponse"),
+      href: `mailto:${CONTACT.email}`,
     },
     {
       icon: <Clock className="h-6 w-6 text-primary" />,
@@ -65,7 +75,8 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-background">
+    // Bukan <main>: landmark <main> tunggal disediakan layout locale (#konten).
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="pt-16 2xl:pt-24 bg-gradient-to-b from-muted to-background">
         <div className="main-container py-0 2xl:py-20">
@@ -106,7 +117,16 @@ export default function ContactPage() {
                       <h3 className="font-display text-lg font-semibold tracking-tight text-foreground mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground">{item.content}</p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          className="text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+                        >
+                          {item.content}
+                        </a>
+                      ) : (
+                        <p className="text-muted-foreground">{item.content}</p>
+                      )}
                       {item.subContent && (
                         <p className="text-muted-foreground text-sm mt-1">
                           {item.subContent}
@@ -240,6 +260,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
