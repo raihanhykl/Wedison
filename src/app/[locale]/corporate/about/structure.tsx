@@ -18,7 +18,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function AboutPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Scroll to top on page load
   useEffect(() => {
@@ -26,7 +26,8 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background">
+    // Bukan <main>: landmark <main> tunggal disediakan layout locale (#konten).
+    <div className="min-h-screen bg-background">
       {/* Hero Section with Image */}
       <section className="pt-0 2xl:pt-24 bg-gradient-to-b from-muted to-background">
         <div className="main-container py-16 md:py-20 lg:py-16">
@@ -233,15 +234,18 @@ export default function AboutPage() {
             <p className="text-muted-foreground mb-8 text-base md:text-lg">
               {t("about.joinUsDescription")}
             </p>
-            <Link href={"/corporate/contact/#contact"}>
-              <Button className="bg-primary hover:bg-primary-hover text-primary-foreground group transition-all duration-300 hover:-translate-y-1 px-6 py-3 text-base">
+            <Button
+              asChild
+              className="bg-primary hover:bg-primary-hover text-primary-foreground group transition-all duration-300 hover:-translate-y-1 px-6 py-3 text-base"
+            >
+              <Link href={`/${language}/corporate/contact/#contact`}>
                 {t("about.contactUs")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </Reveal>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

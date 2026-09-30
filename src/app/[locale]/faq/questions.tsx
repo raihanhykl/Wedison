@@ -1,5 +1,17 @@
 import { useLanguage } from "@/app/lib/language-context";
 
+/** Urutan kategori FAQ = urutan tab & urutan FAQPage JSON-LD (page.tsx). */
+export const FAQ_CATEGORIES = [
+  "Battery",
+  "Charging",
+  "Performance",
+  "Safety",
+  "Servicing",
+  "SmartFeatures",
+  "Tires",
+] as const;
+export type FaqCategory = (typeof FAQ_CATEGORIES)[number];
+
 export default function GetQuestions() {
   const { t } = useLanguage();
   const questions = {

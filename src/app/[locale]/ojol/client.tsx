@@ -14,6 +14,7 @@ import React from "react";
 import { useLanguage } from "@/app/lib/language-context";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { LocaleLink } from "@/components/locale-link";
 import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
@@ -669,7 +670,7 @@ export default function OjolClient() {
               </p>
 
               {/* CTA Button */}
-              <Link href="/super-charge">
+              <LocaleLink href="/super-charge">
                 <Button
                   className="group relative px-8 py-6 text-lg font-semibold rounded-xl
                     bg-primary hover:bg-primary-hover text-primary-foreground
@@ -694,7 +695,7 @@ export default function OjolClient() {
                     </svg>
                   </span>
                 </Button>
-              </Link>
+              </LocaleLink>
             </Reveal>
           </div>
         </div>
@@ -766,7 +767,7 @@ export default function OjolClient() {
                   </div>
 
                   {/* CTA Button */}
-                  <Link href={model.link}>
+                  <LocaleLink href={model.link}>
                     <Button
                       variant="outline"
                       className="w-full group/btn border-border hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
@@ -788,7 +789,7 @@ export default function OjolClient() {
                         </svg>
                       </span>
                     </Button>
-                  </Link>
+                  </LocaleLink>
                 </div>
               </StaggerItem>
             ))}

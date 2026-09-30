@@ -1,7 +1,11 @@
 // Sumber tunggal copy SEO per-halaman per-locale (id + en).
 // Dipisah dari komponen agar bisa diimpor Server Component (generateMetadata)
-// dan app/sitemap.ts. JANGAN ambil string SEO dari translations.tsx — file itu
-// berisi JSX (next/link, AlertDialog) dan client-only; di sini harus string murni.
+// dan app/sitemap.ts. JANGAN ambil string SEO dari kamus (dictionaries/*.tsx) —
+// file itu berisi JSX (next/link, AlertDialog) dan client-only; di sini harus string murni.
+//
+// Aturan panjang (audit SEO 2026-09): title <= 60 karakter, description 120–155 karakter,
+// klaim angka (jarak, kecepatan, waktu charging) HARUS sama dengan kamus spesifikasi.
+// Gambar OG: 1200x630 di /public/og (dibuat dari aset resmi; lihat docs/SEO-AUDIT-2026-09.md).
 
 export type Locale = "id" | "en";
 
@@ -16,16 +20,21 @@ export type PageSEO = {
   en: LocaleSEO;
   /** Path gambar OG relatif terhadap origin (di-prefix SITE di seo1.ts). */
   image?: string;
+  /** Prioritas & frekuensi untuk sitemap.xml */
+  priority?: number;
+  changeFrequency?: "daily" | "weekly" | "monthly" | "yearly";
 };
 
 // Key = path locale-agnostic ("/", "/products/victory", "/corporate/about", ...).
 export const seoContent: Record<string, PageSEO> = {
   "/": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/default.jpg",
+    priority: 1,
+    changeFrequency: "weekly",
     id: {
-      title: "Wedison - Motor Listrik & SuperCharge Terdepan di Indonesia",
+      title: "Wedison – Motor Listrik & SuperCharge Indonesia",
       description:
-        "Wedison adalah produsen motor listrik terbaik di Indonesia dengan teknologi SuperCharge. Temukan produk motor listrik premium, stasiun pengisian cepat, dan solusi kendaraan listrik masa depan.",
+        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun. Jadwalkan test ride di showroom.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -39,9 +48,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Wedison - Indonesia's Leading Electric Motorcycle & SuperCharge",
+      title: "Wedison – Electric Motorcycles & SuperCharge Indonesia",
       description:
-        "Wedison is Indonesia's premier electric motorcycle manufacturer, powered by SuperCharge technology. Discover premium electric motorbikes, fast-charging stations, and the future of electric mobility.",
+        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 10% to 80% in 15 minutes, 3-year battery warranty. Book a test ride.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -56,11 +65,13 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/corporate/about": {
-    image: "/about-us.webp",
+    image: "/og/about.jpg",
+    priority: 0.5,
+    changeFrequency: "monthly",
     id: {
-      title: "Tentang Wedison - Produsen Motor Listrik Indonesia",
+      title: "Tentang Wedison – Produsen Motor Listrik Indonesia",
       description:
-        "Wedison adalah produsen motor listrik terkemuka di Indonesia yang berkomitmen menghadirkan solusi kendaraan listrik ramah lingkungan. Ketahui visi, misi, dan sejarah perusahaan kami.",
+        "Kenali Wedison, produsen motor listrik Indonesia dengan jaringan SuperCharge: visi, misi, nilai perusahaan, dan komitmen pada mobilitas bersih.",
       keywords: [
         "wedison",
         "tentang wedison",
@@ -73,9 +84,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "About Wedison - Indonesian Electric Motorcycle Manufacturer",
+      title: "About Wedison – Electric Motorcycle Maker, Indonesia",
       description:
-        "Wedison is a leading electric motorcycle manufacturer in Indonesia committed to eco-friendly electric mobility solutions. Learn about our vision, mission, and company history.",
+        "Get to know Wedison, the Indonesian electric motorcycle maker behind the SuperCharge network: our vision, mission, values and commitment to clean mobility.",
       keywords: [
         "wedison",
         "about wedison",
@@ -90,11 +101,13 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/corporate/contact": {
-    image: "/contact-us.webp",
+    image: "/og/default.jpg",
+    priority: 0.5,
+    changeFrequency: "monthly",
     id: {
-      title: "Kontak Wedison - Hubungi Kami",
+      title: "Hubungi Wedison – Kontak, Showroom & Layanan",
       description:
-        "Hubungi Wedison untuk informasi produk, layanan purna jual, kerjasama bisnis, atau pertanyaan seputar motor listrik dan SuperCharge. Tim kami siap membantu Anda.",
+        "Hubungi tim Wedison via WhatsApp, email, atau formulir kontak untuk info produk, layanan purna jual, dan kerja sama bisnis. Kantor pusat: Jakarta Selatan.",
       keywords: [
         "wedison",
         "kontak wedison",
@@ -106,9 +119,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Contact Wedison - Get in Touch",
+      title: "Contact Wedison – Sales, Support & Partnerships",
       description:
-        "Contact Wedison for product information, after-sales service, business partnerships, or any questions about electric motorcycles and SuperCharge. Our team is ready to help you.",
+        "Reach the Wedison team via WhatsApp, email or the contact form for product info, after-sales service and partnerships. Head office in South Jakarta.",
       keywords: [
         "wedison",
         "contact wedison",
@@ -121,26 +134,31 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/cookie-policy": {
+    image: "/og/default.jpg",
+    priority: 0.2,
+    changeFrequency: "yearly",
     id: {
-      title: "Kebijakan Cookie - Wedison",
+      title: "Kebijakan Cookie Wedison – Privasi & Persetujuan",
       description:
-        "Cookie apa saja yang digunakan wedison.co, untuk apa, berapa lama disimpan, dan cara mengatur atau mencabut persetujuanmu.",
+        "Cookie apa saja yang dipakai wedison.co, tujuannya, masa simpannya, dan cara mengatur atau mencabut persetujuan cookie analitik dan marketing kapan saja.",
       keywords: ["wedison", "kebijakan cookie", "privasi", "persetujuan cookie"],
     },
     en: {
-      title: "Cookie Policy - Wedison",
+      title: "Wedison Cookie Policy – Privacy & Consent",
       description:
-        "Which cookies wedison.co uses, why, how long they are kept, and how to manage or withdraw your consent.",
+        "Which cookies wedison.co uses, why we use them, how long they are kept, and how to manage or withdraw your analytics and marketing consent at any time.",
       keywords: ["wedison", "cookie policy", "privacy", "cookie consent"],
     },
   },
 
   "/products": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/default.jpg",
+    priority: 0.9,
+    changeFrequency: "monthly",
     id: {
-      title: "Produk Motor Listrik Wedison - Bees, Athena, Victory, EdPower",
+      title: "Motor Listrik Wedison – Bees, Athena, Victory, EdPower",
       description:
-        "Lihat seluruh jajaran motor listrik Wedison: Bees, Athena, Victory, dan EdPower. Bandingkan kecepatan, jarak tempuh, dan daya motor, lalu pilih yang paling pas untuk kebutuhanmu.",
+        "Jajaran motor listrik Wedison: Bees, Athena, Victory, dan EdPower. Bandingkan kecepatan, jarak tempuh, dan daya motor, lalu pilih yang paling pas untukmu.",
       keywords: [
         "wedison",
         "produk wedison",
@@ -153,9 +171,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Wedison Electric Motorcycles - Bees, Athena, Victory, EdPower",
+      title: "Wedison Electric Motorcycles – Bees, Athena & More",
       description:
-        "Explore the full Wedison electric motorcycle lineup: Bees, Athena, Victory, and EdPower. Compare top speed, range, and motor power, then pick the one that fits how you ride.",
+        "The Wedison lineup: Bees, Athena, Victory and EdPower electric motorcycles. Compare top speed, range and motor power, then pick the model that fits you.",
       keywords: [
         "wedison",
         "wedison products",
@@ -170,143 +188,153 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/products/athena": {
-    image: "/athena-product-hero.webp",
+    image: "/og/athena.jpg",
+    priority: 0.9,
+    changeFrequency: "monthly",
     id: {
-      title: "Athena - Motor Listrik Premium Indonesia",
+      title: "Wedison Athena – Motor Listrik Retro, 120 km, SuperCharge",
       description:
-        "Athena adalah motor listrik premium dari Wedison, dengan teknologi SuperCharge, baterai tahan lama, dan desain modern. Lihat fitur, spesifikasi, dan keunggulannya di sini.",
+        "Athena, motor listrik retro premium Wedison: jarak tempuh hingga 120 km, 85 km/jam, SuperCharge 10% ke 80% dalam 15 menit. Lihat spesifikasi lengkapnya.",
       keywords: [
         "wedison",
         "motor listrik",
         "athena",
+        "wedison athena",
+        "motor listrik retro",
         "kendaraan listrik",
-        "EV",
         "supercharge",
-        "motor listrik terbaik",
         "electric motorcycle",
       ],
     },
     en: {
-      title: "Athena - Premium Electric Motorcycle Indonesia",
+      title: "Wedison Athena – Retro Electric Motorcycle, 120 km Range",
       description:
-        "Athena is Wedison's premium electric motorcycle featuring SuperCharge technology, a long-lasting battery, and a modern design. Explore its features, specifications, and highlights here.",
+        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 85 km/h top speed, SuperCharge 10% to 80% in 15 minutes. See full specifications.",
       keywords: [
         "wedison",
         "electric motorcycle",
         "athena",
+        "wedison athena",
+        "retro electric motorcycle",
         "electric vehicle",
-        "EV",
         "supercharge",
-        "best electric motorcycle",
       ],
     },
   },
 
   "/products/bees": {
-    image: "/bees-product-hero.webp",
+    image: "/og/bees.jpg",
+    priority: 0.9,
+    changeFrequency: "monthly",
     id: {
-      title: "Bees - Motor Listrik Compact & Praktis | Wedison",
+      title: "Wedison Bees – Motor Listrik Ringkas, 80 km, 60 km/jam",
       description:
-        "Bees adalah motor listrik compact dari Wedison, cocok untuk kebutuhan harian, desain praktis dan mudah digunakan. Lihat keunggulan dan spesifikasi lengkapnya di sini.",
+        "Bees, motor listrik ringkas dan lincah dari Wedison untuk harian: jarak tempuh 80 km, kecepatan 60 km/jam, bobot 78,5 kg. Lihat spesifikasi lengkapnya.",
       keywords: [
         "wedison",
         "motor listrik",
         "bees",
+        "wedison bees",
         "motor listrik compact",
         "kendaraan listrik",
-        "EV",
-        "motor listrik praktis",
+        "motor listrik harian",
         "electric motorcycle",
       ],
     },
     en: {
-      title: "Bees - Compact & Practical Electric Motorcycle | Wedison",
+      title: "Wedison Bees – Compact Electric Scooter, 80 km Range",
       description:
-        "Bees is Wedison's compact electric motorcycle, perfect for daily use with a practical, easy-to-ride design. See its highlights and full specifications here.",
+        "Bees, Wedison's compact and agile electric scooter for daily rides: 80 km range, 60 km/h top speed and just 78.5 kg. See the specifications and highlights.",
       keywords: [
         "wedison",
         "electric motorcycle",
         "bees",
+        "wedison bees",
         "compact electric motorcycle",
         "electric vehicle",
-        "EV",
-        "practical electric motorcycle",
+        "electric scooter",
       ],
     },
   },
 
   "/products/victory": {
-    image: "/victory-product-hero.webp",
+    image: "/og/victory.jpg",
+    priority: 0.9,
+    changeFrequency: "monthly",
     id: {
-      title: "Victory - Motor Listrik Urban Modern | Wedison",
+      title: "Wedison Victory – Motor Listrik Urban, 120 km, 85 km/jam",
       description:
-        "Victory adalah motor listrik urban dari Wedison, didesain untuk mobilitas kota yang efisien, ramah lingkungan, dan hemat energi. Temukan spesifikasi, fitur, dan keunggulannya di sini.",
+        "Victory, motor listrik urban Wedison dengan gaya dan tenaga: jarak hingga 120 km, 85 km/jam, motor 3 kW, SuperCharge 15 menit. Lihat spesifikasinya.",
       keywords: [
         "wedison",
         "motor listrik",
         "victory",
+        "wedison victory",
         "motor listrik urban",
         "kendaraan listrik",
-        "EV",
-        "motor listrik hemat energi",
+        "supercharge",
         "electric motorcycle",
       ],
     },
     en: {
-      title: "Victory - Modern Urban Electric Motorcycle | Wedison",
+      title: "Wedison Victory – Urban Electric Motorcycle, 120 km",
       description:
-        "Victory is Wedison's urban electric motorcycle, designed for efficient, eco-friendly, and energy-saving city mobility. Discover its specifications, features, and highlights here.",
+        "Victory, Wedison's urban electric motorcycle with style and power: up to 120 km range, 85 km/h, 3 kW motor, 15-minute SuperCharge. See full specifications.",
       keywords: [
         "wedison",
         "electric motorcycle",
         "victory",
+        "wedison victory",
         "urban electric motorcycle",
         "electric vehicle",
-        "EV",
-        "energy-saving electric motorcycle",
+        "supercharge",
       ],
     },
   },
 
   "/products/edpower": {
-    image: "/edpower-product-hero.webp",
+    image: "/og/edpower.jpg",
+    priority: 0.9,
+    changeFrequency: "monthly",
     id: {
-      title: "EdPower - Motor Listrik Premium Indonesia | Wedison",
+      title: "Wedison EdPower – Motor Listrik Jarak Jauh, 200 km",
       description:
-        "EdPower adalah motor listrik premium dari Wedison, dengan teknologi SuperCharge, baterai tahan lama, dan desain modern. Lihat fitur, spesifikasi, dan keunggulannya di sini.",
+        "EdPower, motor listrik Wedison untuk jarak jauh dan armada: jarak hingga 200 km, 90 km/jam, baterai 5 kWh, SuperCharge 15 menit. Lihat spesifikasinya.",
       keywords: [
         "wedison",
         "motor listrik",
         "edpower",
-        "kendaraan listrik",
-        "EV",
+        "wedison edpower",
+        "motor listrik jarak jauh",
+        "motor listrik armada",
         "supercharge",
-        "motor listrik premium",
         "electric motorcycle",
       ],
     },
     en: {
-      title: "EdPower - Premium Electric Motorcycle Indonesia | Wedison",
+      title: "Wedison EdPower – Long-Range Electric Motorcycle, 200 km",
       description:
-        "EdPower is Wedison's premium electric motorcycle featuring SuperCharge technology, a long-lasting battery, and a modern design. Explore its features, specifications, and highlights here.",
+        "EdPower, Wedison's rugged long-range electric motorcycle for fleets and touring: up to 200 km range, 90 km/h, 5 kWh battery, 15-minute SuperCharge.",
       keywords: [
         "wedison",
         "electric motorcycle",
         "edpower",
-        "electric vehicle",
-        "EV",
+        "wedison edpower",
+        "long range electric motorcycle",
+        "fleet electric motorcycle",
         "supercharge",
-        "premium electric motorcycle",
       ],
     },
   },
 
   "/super-charge": {
-    image: "/super-charge/supercharge-testing.webp",
+    image: "/og/supercharge.jpg",
+    priority: 0.8,
+    changeFrequency: "monthly",
     id: {
-      title: "SuperCharge - Stasiun Pengisian Cepat Motor Listrik | Wedison",
+      title: "SuperCharge Wedison – Isi Daya Motor Listrik 15 Menit",
       description:
-        "SuperCharge adalah teknologi stasiun pengisian super cepat dari Wedison, solusi terbaik untuk mengisi daya motor listrik dalam waktu singkat. Lihat lokasi dan keunggulan SuperCharge di sini.",
+        "SuperCharge, jaringan pengisian cepat Wedison: baterai 10% ke 80% dalam 15 menit, mulai dari aplikasi, tersebar di banyak kota. Pelajari cara kerjanya.",
       keywords: [
         "wedison",
         "supercharge",
@@ -319,10 +347,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title:
-        "SuperCharge - Fast Charging Stations for Electric Motorcycles | Wedison",
+      title: "Wedison SuperCharge – 15-Minute Fast Charging Network",
       description:
-        "SuperCharge is the Wedison fast-charging network for electric motorcycles, bringing a battery from 10% to 80% in 15 minutes. View the locations and how it works.",
+        "SuperCharge, Wedison's fast-charging network: 10% to 80% in 15 minutes, started from the app, available across Indonesian cities. See how it works.",
       keywords: [
         "wedison",
         "supercharge",
@@ -335,13 +362,15 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
   },
+
   "/super-charge/locations": {
-    image: "/super-charge/supercharge-testing.webp",
+    image: "/og/supercharge.jpg",
+    priority: 0.8,
+    changeFrequency: "weekly",
     id: {
-      title:
-        "Lokasi SuperCharge - Peta Stasiun Pengisian Motor Listrik | Wedison",
+      title: "Lokasi SuperCharge Wedison – Peta Stasiun Pengisian",
       description:
-        "Cari stasiun SuperCharge Wedison terdekat lewat peta interaktif. Lihat jumlah charger, jam operasional, dan fasilitas di tiap titik pengisian motor listrik.",
+        "Cari stasiun SuperCharge Wedison terdekat di peta interaktif: jumlah charger, daya, jam operasional, dan fasilitas di tiap titik pengisian motor listrik.",
       keywords: [
         "wedison",
         "supercharge",
@@ -353,9 +382,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "SuperCharge Locations - Charging Station Map | Wedison",
+      title: "Wedison SuperCharge Locations – Charging Station Map",
       description:
-        "Locate your nearest Wedison SuperCharge station on an interactive map. Review the number of chargers, opening hours, and amenities at every charging point.",
+        "Find the nearest Wedison SuperCharge station on the interactive map: number of chargers, power, opening hours and amenities at every charging point.",
       keywords: [
         "wedison",
         "supercharge",
@@ -369,11 +398,13 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/compare": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/default.jpg",
+    priority: 0.7,
+    changeFrequency: "monthly",
     id: {
-      title: "Bandingkan Motor Listrik Wedison - Spesifikasi Lengkap",
+      title: "Bandingkan Motor Listrik Wedison – Spesifikasi Lengkap",
       description:
-        "Bandingkan spesifikasi lengkap motor listrik Wedison (Bees, Athena, Victory, EdPower) berdampingan: performa, baterai, jarak tempuh, dimensi, dan pengereman. Temukan yang paling pas untukmu.",
+        "Bandingkan Bees, Athena, Victory, dan EdPower berdampingan: performa, baterai, jarak tempuh, dimensi, dan pengereman. Temukan yang paling pas untukmu.",
       keywords: [
         "bandingkan motor listrik",
         "spesifikasi wedison",
@@ -385,9 +416,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Compare Wedison Electric Motorcycles - Full Specs",
+      title: "Compare Wedison Electric Motorcycles – Full Specs",
       description:
-        "Compare full specifications of Wedison electric motorcycles (Bees, Athena, Victory, EdPower) side by side: performance, battery, range, dimensions, and brakes. Find the one that fits you.",
+        "Compare Bees, Athena, Victory and EdPower side by side: performance, battery, range, dimensions and brakes. Find the electric motorcycle that fits you.",
       keywords: [
         "compare electric motorcycle",
         "wedison specs",
@@ -401,43 +432,46 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/showroom": {
-    image: "/Showroom-Receptionist.webp",
+    image: "/og/showroom.jpg",
+    priority: 0.8,
+    changeFrequency: "monthly",
     id: {
-      title: "Showroom Wedison - Lihat & Test Motor Listrik Terbaru",
+      title: "Showroom Wedison – Test Ride Motor Listrik & Servis",
       description:
-        "Kunjungi showroom Wedison untuk melihat dan mencoba motor listrik terbaru serta teknologi SuperCharge. Dapatkan informasi lokasi, jam buka, dan fasilitas lengkap di sini.",
+        "Kunjungi showroom Wedison di Jakarta, Bekasi, Bandung, dan Bali: test ride motor listrik, konsultasi, pembiayaan, dan servis resmi. Booking kunjungan.",
       keywords: [
         "wedison",
         "showroom motor listrik",
         "test ride motor listrik",
-        "motor listrik terbaru",
-        "kendaraan listrik",
-        "supercharge",
-        "EV",
+        "showroom wedison jakarta",
+        "showroom wedison bandung",
+        "showroom wedison bali",
+        "service center motor listrik",
       ],
     },
     en: {
-      title: "Wedison Showroom - See & Test the Latest Electric Motorcycles",
+      title: "Wedison Showrooms – Test Rides & Official Service",
       description:
-        "Visit a Wedison showroom to see and test-ride the latest electric motorcycles and SuperCharge technology. Find location details, opening hours, and facilities here.",
+        "Visit Wedison showrooms in Jakarta, Bekasi, Bandung and Bali: electric motorcycle test rides, consultation, financing and official service. Book a visit.",
       keywords: [
         "wedison",
         "electric motorcycle showroom",
         "test ride electric motorcycle",
-        "latest electric motorcycle",
-        "electric vehicle",
-        "supercharge",
-        "EV",
+        "wedison showroom jakarta",
+        "wedison showroom bali",
+        "electric motorcycle service center",
       ],
     },
   },
 
   "/faq": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/default.jpg",
+    priority: 0.6,
+    changeFrequency: "monthly",
     id: {
-      title: "FAQ - Pertanyaan Umum Motor Listrik | Wedison",
+      title: "FAQ Motor Listrik Wedison – Baterai, Charging, Garansi",
       description:
-        "Temukan jawaban dari pertanyaan umum seputar motor listrik Wedison. Mulai dari cara pengisian daya, perawatan, garansi, hingga informasi pembelian.",
+        "Jawaban pertanyaan umum seputar motor listrik Wedison: baterai dan garansi, cara isi daya, performa, keamanan, servis, fitur pintar, dan ban.",
       keywords: [
         "wedison",
         "faq motor listrik",
@@ -449,9 +483,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "FAQ - Common Electric Motorcycle Questions | Wedison",
+      title: "Wedison FAQ – Battery, Charging, Warranty & Service",
       description:
-        "Answers to common questions about Wedison electric motorcycles, covering charging, maintenance, warranty, and purchasing.",
+        "Answers to common questions about Wedison electric motorcycles: battery and warranty, charging, performance, safety, servicing, smart features and tyres.",
       keywords: [
         "wedison",
         "electric motorcycle faq",
@@ -465,11 +499,13 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/career": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/career.jpg",
+    priority: 0.4,
+    changeFrequency: "weekly",
     id: {
-      title: "Karier - Bergabung dengan Wedison | Lowongan Kerja",
+      title: "Karier di Wedison – Lowongan Kerja Motor Listrik",
       description:
-        "Temukan lowongan kerja terbaru di Wedison. Bergabunglah dengan tim yang membangun masa depan kendaraan listrik di Indonesia.",
+        "Lowongan kerja terbaru di Wedison. Bergabung dengan tim yang membangun motor listrik dan jaringan pengisian cepat SuperCharge untuk jalanan Indonesia.",
       keywords: [
         "wedison",
         "karier",
@@ -480,9 +516,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Careers - Join Wedison | Job Openings",
+      title: "Careers at Wedison – Electric Mobility Jobs",
       description:
-        "Explore the latest job openings at Wedison. Join the team building the future of electric mobility in Indonesia.",
+        "The latest job openings at Wedison. Join the team building electric motorcycles and the SuperCharge fast-charging network for Indonesian roads.",
       keywords: [
         "wedison",
         "careers",
@@ -495,11 +531,13 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/ojol": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/ojol.jpg",
+    priority: 0.7,
+    changeFrequency: "monthly",
     id: {
-      title: "Sewa Motor Listrik untuk Ojol | Wedison",
+      title: "Wedison Ojol – Sewa Motor Listrik Driver Ojek Online",
       description:
-        "Sewa motor listrik Wedison untuk driver ojek online. Biaya operasional lebih ringan, tanpa antre BBM, dan didukung jaringan SuperCharge.",
+        "Program sewa motor listrik Wedison untuk driver ojol: sewa harian atau sewa milik mulai Rp50.000 per hari, tanpa antre BBM, didukung jaringan SuperCharge.",
       keywords: [
         "wedison",
         "sewa motor listrik",
@@ -510,9 +548,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Electric Motorcycle Rental for Ride-Hailing | Wedison",
+      title: "Wedison Ojol – Electric Motorcycle Rental for Drivers",
       description:
-        "Wedison electric motorcycle rental for ride-hailing drivers. Lower running costs, no fuel queues, and support from the SuperCharge network.",
+        "Wedison electric motorcycle rental for ride-hailing drivers: daily rental or rent-to-own from Rp50,000 per day, no fuel queues, backed by SuperCharge.",
       keywords: [
         "wedison",
         "electric motorcycle rental",
@@ -525,11 +563,13 @@ export const seoContent: Record<string, PageSEO> = {
   },
 
   "/media-center": {
-    image: "/wedison-sidebyside.png",
+    image: "/og/media-center.jpg",
+    priority: 0.6,
+    changeFrequency: "daily",
     id: {
-      title: "Media Center - Berita & Update Wedison",
+      title: "Media Center Wedison – Berita, Artikel & Liputan",
       description:
-        "Ikuti berita terbaru, siaran pers, dan liputan media tentang Wedison. Dapatkan update seputar inovasi, produk baru, serta aktivitas perusahaan.",
+        "Berita terbaru, artikel, siaran pers, dan liputan media tentang Wedison: peluncuran produk, teknologi SuperCharge, dan kegiatan perusahaan.",
       keywords: [
         "wedison",
         "media center",
@@ -541,9 +581,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Media Center - Wedison News & Updates",
+      title: "Wedison Media Center – News, Articles & Press",
       description:
-        "Follow the latest news, press releases, and media coverage about Wedison. Get updates on innovations, new products, and company activities.",
+        "The latest news, articles, press releases and media coverage about Wedison: product launches, SuperCharge technology and company activities.",
       keywords: [
         "wedison",
         "media center",

@@ -46,6 +46,10 @@ jobs:
         env:
           # SITE_URL testing -> canonical/hreflang/sitemap pakai ssr.wedison.tech
           NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
+          # Staging TIDAK boleh diindeks (meta robots noindex + X-Robots-Tag + robots.txt Disallow)
+          # agar tidak bersaing dengan wedison.co. Otomatis noindex bila SITE_URL bukan wedison.co;
+          # ditulis eksplisit di sini supaya jelas dan tidak bergantung pada nama domain.
+          NEXT_PUBLIC_ROBOTS_NOINDEX: "true"
           # NEXT_PUBLIC_* di-inline saat build (sama seperti CI lama)
           NEXT_PUBLIC_EMAIL_CONFIG_serviceId: ${{ secrets.EMAIL_SERVICE_ID }}
           NEXT_PUBLIC_EMAIL_CONFIG_templateId: ${{ secrets.EMAIL_TEMPLATE_ID }}

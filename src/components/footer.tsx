@@ -73,7 +73,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <Link href={`/${language}/showroom`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/showroom/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   Showroom
                 </Link>
               </li>
@@ -86,7 +86,7 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <Link href={`/${language}/super-charge`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/super-charge/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   SuperCharge
                 </Link>
               </li>
@@ -109,12 +109,12 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <Link href={`/${language}/faq#user-manual`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/faq/#user-manual`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {t("footer.userManual")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${language}/faq`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/faq/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {t("footer.faq")}
                 </Link>
               </li>
@@ -130,7 +130,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-1.5 md:space-y-2">
               <li>
-                <Link href={`/${language}/corporate/about`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/corporate/about/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {/* About Us */}
                   {t("footer.about")}
                 </Link>
@@ -144,13 +144,13 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <Link href={`/${language}/corporate/contact`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/corporate/contact/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {/* Contact Us */}
                   {t("footer.contact")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${language}/career`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
+                <Link href={`/${language}/career/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   {/* Contact Us */}
                   {t("footer.career")}
                 </Link>

@@ -1,32 +1,25 @@
-import React from "react";
-// import { generateSeoMetadata } from "../../lib/seo";
 import ContactPage from "./structure";
 import { getSEOMetadata } from "@/app/lib/seo1";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/seo/schema";
+import type { Locale } from "@/app/lib/locale";
 
-// const { metadata, jsonLd } = generateSeoMetadata({
-//   title: "Contact Us - Wedison",
-//   description:
-//     "Get in touch with Wedison for inquiries, support, or feedback. We're here to help you with all your electric motorcycle needs.",
-//   path: "/corporate/contact",
-//   image: "/contact-us.webp",
-//   type: "website",
-//   jsonLdType: "organization",
-// });
-
-// export { metadata };
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return getSEOMetadata({ locale: locale as "id" | "en", path: "/corporate/contact" });
+  return getSEOMetadata({ locale: locale as Locale, path: "/corporate/contact" });
 }
 
-export default function Page() {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const loc = (locale === "en" ? "en" : "id") as Locale;
   return (
     <>
-      {/* Main content of the showroom page */}
+      <JsonLd
+        data={breadcrumbSchema(loc, [
+          { name: loc === "en" ? "Home" : "Beranda", path: "/" },
+          { name: loc === "en" ? "Contact" : "Kontak", path: "/corporate/contact" },
+        ])}
+      />
       <ContactPage />
     </>
   );

@@ -49,14 +49,14 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import { useLanguage } from "@/app/lib/language-context";
 
 export function NewsCard({ data }: { data: LinkPreview }) {
+  const { language } = useLanguage();
   return (
     <Card className="group mx-auto h-full flex flex-col overflow-hidden rounded-xl border border-border bg-card p-0 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-lg">
       <Link
-        // href={data.url}
-        href={"/media-center/news/" + data.slug}
-        rel="noreferrer"
+        href={`/${language}/media-center/news/${data.slug}/`}
         className="h-full flex flex-col"
       >
         {/* Bungkus gambar dgn aspect ratio tetap */}
