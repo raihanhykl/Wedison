@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { getSEOMetadata } from "@/app/lib/seo1";
@@ -66,7 +66,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
   const { locale, slug } = await params;
   const loc = (locale === "en" ? "en" : "id") as Locale;
   const a = await getArticle(loc, slug);
-  if (!a) notFound();
+  if (!a) {
+    // Slug artikel berbeda per bahasa. Tombol ID|EN di navbar (atau link lama) bisa membawa
+    // slug locale lain ke sini, mis. /en/.../judul-bahasa-indonesia/. Daripada 404, arahkan
+    // ke terjemahannya (permanen) atau, bila belum ada terjemahan, ke versi aslinya (sementara).
+    const otherLoc: Locale = loc === "en" ? "id" : "en";
+    const source = await getArticle(otherLoc, slug);
+    if (source) {
+      const translation = source.availableLocales.find((l) => l.locale === loc);
+      if (translation) permanentRedirect(`/${loc}/media-center/articles/${translation.slug}/`);
+      redirect(`/${otherLoc}/media-center/articles/${source.slug}/`);
+    }
+    notFound();
+  }
 
   const date = a.publishedAt
     ? new Date(a.publishedAt).toLocaleDateString(loc === "en" ? "en-US" : "id-ID", { year: "numeric", month: "long", day: "numeric" })
