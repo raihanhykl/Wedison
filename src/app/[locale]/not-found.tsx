@@ -19,9 +19,9 @@ const COPY = {
   },
   id: {
     title: "Halaman Tidak Ditemukan",
-    description: "Halaman yang kamu cari tidak ketemu.",
+    description: "Halaman yang Anda cari tidak dapat ditemukan.",
     suggestion:
-      "Mungkin halamannya sudah dipindah atau dihapus, atau ada salah ketik di alamatnya.",
+      "Halaman ini mungkin telah dipindahkan atau dihapus, atau alamat yang dimasukkan kurang tepat.",
     homeButton: "Kembali ke Beranda",
     exploreButton: "Jelajahi Model Kami",
   },

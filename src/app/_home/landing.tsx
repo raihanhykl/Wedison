@@ -117,9 +117,9 @@ const COPY: Record<Lang, Record<string, string>> = {
   id: {
     // ── Hero: 3 babak brand (kicker / judul / sub / CTA / running text) ──
     h_lineup_kicker: "Motor Listrik Wedison",
-    h_lineup_title: "Motor listrik untuk cara kamu bergerak.",
+    h_lineup_title: "Motor listrik untuk cara Anda bergerak.",
     h_lineup_sub:
-      "Dari harian di kota sampai kebutuhan armada, ada satu yang paling pas buat kamu.",
+      "Dari perjalanan harian di kota hingga kebutuhan armada, ada satu model yang paling sesuai untuk Anda.",
     h_lineup_cta: "Jelajahi Model",
     h_lineup_mq: "Athena|Bees|Victory|EdPower",
 
@@ -127,37 +127,37 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_charge_title: "Isi daya cepat di jaringan",
     h_charge_titleFull: "Isi daya cepat di jaringan SuperCharge",
     h_charge_sub:
-      "Cari stasiun terdekat lewat peta, mulai pengisian dari aplikasi, lalu lanjut jalan.",
+      "Temukan stasiun terdekat di peta, mulai pengisian dari aplikasi, lalu lanjutkan perjalanan.",
     h_charge_cta: "Temukan Lokasi",
-    h_charge_mq: "Cari stasiun di peta|Mulai dari aplikasi|Paket isi daya",
+    h_charge_mq: "Temukan stasiun di peta|Mulai dari aplikasi|Paket isi daya",
 
     h_green_kicker: "Nol Emisi",
     h_green_title: "Senyap di jalan. Bersih untuk kota.",
     h_green_sub:
-      "Tanpa bensin, tanpa asap, dan perawatannya sedikit. Perjalanan harian jadi terasa lebih tenang.",
+      "Tanpa bensin, tanpa asap, dan perawatan yang minimal. Perjalanan harian terasa lebih tenang.",
     h_green_cta: "Jadwalkan Test Ride",
     h_green_mq: "Nol emisi|Tanpa bensin|Perawatan minimal",
 
     familyLabel: "Jajaran Model",
     familyTitle: "Empat motor, satu standar.",
     familySub:
-      "Beda karakter, beda kebutuhan, tapi semuanya dirakit dengan patokan yang sama.",
+      "Karakter dan kebutuhan boleh berbeda, namun semuanya dirakit dengan standar yang sama.",
     learn: "Jelajahi",
     Commute: "Harian",
     Style: "Gaya",
     Performance: "Performa",
     Fleet: "Armada",
     superLabel: "Jaringan SuperCharge",
-    superTitle: "Isi daya cepat, di kota tempat kamu berkendara.",
+    superTitle: "Isi daya cepat, di kota tempat Anda berkendara.",
     superCta: "Lihat SuperCharge",
     advLabel: "Keunggulan Wedison",
-    advTitle: "Enak dipakai harian, tenang dimiliki jangka panjang.",
+    advTitle: "Nyaman dipakai harian, tenang dimiliki jangka panjang.",
     adv_charge_t: "Jaringan SuperCharge",
     adv_charge_d: "Isi daya 15 menit di titik yang terus bertambah.",
     adv_battery_t: "Garansi Baterai",
     adv_battery_d: "Baterai bergaransi 3 tahun, motornya 2 tahun.",
     adv_cost_t: "Biaya Harian Lebih Ringan",
-    adv_cost_d: "Tanpa bensin, servisnya sedikit, ongkosnya jauh menurun.",
+    adv_cost_d: "Tanpa bensin dan minim servis, biaya harian turun jauh.",
     adv_service_t: "Servis & Showroom",
     adv_service_d: "Bengkel resmi dan showroom yang terus bertambah.",
     exLabel: "Lanjut Jelajahi",
@@ -165,16 +165,16 @@ const COPY: Record<Lang, Record<string, string>> = {
     ex_media_t: "Berita Wedison",
     ex_media_d: "Cerita, peluncuran, dan liputan terbaru.",
     ex_compare_t: "Bandingkan Model",
-    ex_compare_d: "Temukan motor yang paling cocok buat kamu.",
-    ex_showroom_t: "Cari Showroom",
+    ex_compare_d: "Temukan motor yang paling sesuai untuk Anda.",
+    ex_showroom_t: "Temukan Showroom",
     ex_showroom_d: "Alamat, kontak, dan jam operasional.",
     ex_charge_t: "SuperCharge",
     ex_charge_d: "Pelajari cara kerja pengisian Wedison.",
     chatBadge: "Asisten AI • Dion",
-    chatTitle: "Ada yang mau ditanyakan? Ngobrol dengan Dion.",
+    chatTitle: "Ada yang ingin ditanyakan? Berbincang dengan Dion.",
     chatSub:
-      "Soal spesifikasi, harga, atau jadwal test ride, Dion siap menjawab kapan saja. Kalau perlu, kamu bisa langsung terhubung ke tim kami.",
-    chatCta: "Mulai Ngobrol",
+      "Seputar spesifikasi, harga, atau jadwal test ride, Dion siap menjawab kapan saja. Bila diperlukan, Anda bisa langsung terhubung dengan tim kami.",
+    chatCta: "Mulai Percakapan",
   },
   en: {
     // ── Hero: 3 brand beats (kicker / title / sub / CTA / running text) ──

@@ -1,5 +1,5 @@
 import {
-  LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings,
+  LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings, Gauge,
   ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, type LucideIcon,
 } from "lucide-react";
 import type { UserRole } from "@/lib/admin/types";
@@ -20,6 +20,7 @@ export const NAV: NavGroup[] = [
       { title: "Social Media", href: "/admin/cms/social", icon: Share2 },
       { title: "Topics & Tags", href: "/admin/cms/topics", icon: Tags },
       { title: "Media Library", href: "/admin/cms/media", icon: Images },
+      { title: "SEO & AI Readiness", href: "/admin/seo", icon: Gauge },
     ],
   },
   {
@@ -55,6 +56,7 @@ export const SEGMENT_LABEL: Record<string, string> = {
   social: "Social Media",
   topics: "Topics & Tags",
   media: "Media Library",
+  seo: "SEO & AI Readiness",
   supercharge: "SuperCharge",
   stations: "Stations",
   leads: "Leads",

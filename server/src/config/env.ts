@@ -15,6 +15,10 @@ const schema = z.object({
     .default("false")
     .transform((v) => v === "true"),
   FRONTEND_URL: z.string().url().default("http://localhost:3000"),
+  // Audit situs (admin > SEO): URL yang di-crawl (default FRONTEND_URL) + origin publik untuk
+  // mengenali link internal di artikel (default https://wedison.co).
+  SITE_AUDIT_URL: z.string().url().optional(),
+  SITE_AUDIT_PUBLIC_ORIGIN: z.string().url().default("https://wedison.co"),
   REVALIDATE_SECRET: z.string().optional(),
   // Base URL Next untuk webhook revalidate; boleh beberapa, pisahkan koma (mis. instance
   // utama + cadangan di prod). Kosong = FRONTEND_URL. Di VPS pakai http://127.0.0.1:<port>

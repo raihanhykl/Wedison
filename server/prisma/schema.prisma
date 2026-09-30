@@ -124,6 +124,8 @@ model ArticleTranslation {
   ogTitle        String?
   ogDescription  String?
   readingTime    Int      @default(1) // menit
+  /// Hasil analisis SEO/AEO/GEO terakhir (lib/content-score.ts), dihitung saat simpan
+  contentScore   Json?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 

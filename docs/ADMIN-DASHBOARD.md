@@ -74,6 +74,37 @@ Kondisi VPS (disiapkan manual, sekali):
 
 Backup yang disarankan (cron harian): `pg_dump wedison_admin` + folder `wedison-data/uploads`.
 
+## Indikator SEO · AEO · GEO (early detection)
+
+Dua level, satu skala (0–100; ≥80 baik, 55–79 perlu perbaikan, <55 buruk). Setiap cek membawa
+catatan singkat *apa yang harus diperbaiki* untuk editor, bukan untuk engineer.
+
+**Artikel** — `server/src/lib/content-score.ts` (pure function).
+- Dihitung live di editor (`POST /admin/seo/analyze`, debounce 0,9 s) dan disimpan saat simpan
+  (`ArticleTranslation.contentScore`, migrasi `article_content_score`). Daftar artikel menampilkan pil S/A/G.
+- SEO: panjang title/meta description, focus keyword (judul, paragraf awal, subjudul, slug, densitas),
+  cover + alt, alt gambar inline, struktur H2/H3 (tanpa H1 di isi, urutan level), panjang artikel,
+  link internal, panjang paragraf, topik, tag, gambar share, canonical, noindex.
+- AEO: jawaban langsung di paragraf pembuka, subjudul berbentuk pertanyaan, blok FAQ (otomatis jadi
+  `FAQPage` JSON-LD di halaman publik — `src/lib/seo/article-faq.ts`), list/tabel, panjang kalimat,
+  excerpt, ringkasan/kesimpulan, definisi istilah, langkah bernomor untuk artikel cara.
+- GEO: sumber eksternal yang dikutip, angka/statistik, kutipan beratribusi, penulis, penyebutan
+  entitas Wedison di awal, kedalaman, bahasa bukti ("menurut data …"), gambar orisinal, kesegaran,
+  keywords, structured data.
+- `POST /admin/seo/rescore` menghitung ulang semua artikel (jalankan setelah aturan skor berubah).
+
+**Website** — `server/src/lib/site-audit.ts`, halaman admin **SEO & AI Readiness** (`/admin/seo`).
+- `POST /admin/seo/site/run` meng-crawl semua URL di `sitemap.xml` (dipetakan ke `SITE_AUDIT_URL`,
+  default `FRONTEND_URL`; di VPS `http://127.0.0.1:3002`) + `robots.txt`, `llms.txt`, manifest.
+  Hasil disimpan di tabel `Setting` (`site_audit`) dan ditampilkan di dashboard.
+- SEO situs: status 200, metadata di `<head>`, panjang title/description, canonical, hreflang, satu H1,
+  H2, alt gambar, og:image, link internal tanpa redirect, landmark `<main>`, robots, sitemap.
+- AEO situs: `FAQPage` schema, subjudul bertanya, `BreadcrumbList`, description layak jawaban,
+  `llms.txt`, rata-rata skor AEO artikel.
+- GEO situs: `Organization`/`WebSite`, `Product`, `LocalBusiness`, crawler AI diizinkan di robots.txt,
+  `llms.txt`, jumlah & kesegaran artikel, rata-rata skor GEO artikel, penulis, JSON-LD valid.
+- Jalankan audit setelah setiap rilis; temuan halaman statis diperbaiki tim dev, temuan artikel di editor.
+
 ## Roadmap modul
 
 - [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.

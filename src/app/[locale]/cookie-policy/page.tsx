@@ -21,7 +21,7 @@ const CONTENT = {
     title: "Kebijakan Cookie",
     updated: "Terakhir diperbarui: 28 September 2026",
     intro:
-      "Cookie adalah file kecil yang disimpan browser saat kamu mengunjungi wedison.co. Halaman ini menjelaskan cookie apa saja yang kami pakai, untuk apa, dan bagaimana kamu mengaturnya. Cookie analitik dan marketing hanya aktif setelah kamu memberi izin.",
+      "Cookie adalah file kecil yang disimpan browser saat Anda mengunjungi wedison.co. Halaman ini menjelaskan cookie apa saja yang kami gunakan, untuk apa, dan bagaimana Anda dapat mengaturnya. Cookie analitik dan marketing hanya aktif setelah kamu memberi izin.",
     cols: ["Nama", "Penyedia", "Tujuan", "Masa berlaku"],
     sections: [
       {
@@ -29,7 +29,7 @@ const CONTENT = {
         title: "Wajib",
         desc: "Diperlukan agar situs berfungsi. Selalu aktif dan tidak dipakai untuk melacakmu.",
         rows: [
-          { name: "wd_consent", provider: "Wedison", purpose: "Menyimpan pilihan persetujuan cookie kamu.", duration: "6 bulan" },
+          { name: "wd_consent", provider: "Wedison", purpose: "Menyimpan pilihan persetujuan cookie Anda.", duration: "6 bulan" },
           { name: "NEXT_LOCALE", provider: "Wedison", purpose: "Mengingat pilihan bahasa (Indonesia/Inggris).", duration: "1 tahun" },
         ],
       },
@@ -53,7 +53,7 @@ const CONTENT = {
     ] as Section[],
     manageTitle: "Mengatur pilihanmu",
     manage:
-      "Kamu bisa mengubah atau mencabut persetujuan kapan saja lewat tombol di bawah atau link \"Pengaturan Cookie\" di footer. Saat izin dicabut, kami berhenti memuat tag terkait dan menghapus cookie-nya dari domain kami. Kamu juga bisa menghapus cookie lewat pengaturan browser.",
+      "Anda dapat mengubah atau mencabut persetujuan kapan saja melalui tombol di bawah ini atau tautan \"Pengaturan Cookie\" di footer. Saat izin dicabut, kami berhenti memuat tag terkait dan menghapus cookie-nya dari domain kami. Kamu juga bisa menghapus cookie lewat pengaturan browser.",
     manageCta: "Buka pengaturan cookie",
     recordTitle: "Catatan persetujuan",
     record:
