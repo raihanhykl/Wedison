@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,11 @@ import { useLanguage } from "@/app/lib/language-context";
  *    baru, terbaca crawler, dapat fokus keyboard gratis.
  *  · Bahasa aktif kelihatan langsung. Toggle lama hanya menampilkan bahasa tujuan,
  *    jadi orang harus menebak sedang berada di bahasa apa.
+ *
+ * Halaman dengan slug berbeda per bahasa (artikel CMS) mendeklarasikan URL terjemahan lewat
+ * <link rel="alternate" hreflang> di <head>. Setelah mount, tautan memakai URL itu agar
+ * tidak mendarat di slug yang salah. Tanpa JS, halaman artikel sendiri me-redirect slug
+ * locale lain ke terjemahannya (lihat media-center/articles/[slug]/page.tsx).
  */
 export default function LanguageSwitch({
   size = "md",
@@ -26,6 +32,39 @@ export default function LanguageSwitch({
   const pathname = usePathname();
   const rest = pathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
   const activeIndex = LOCALES.indexOf(language as Locale);
+
+  const [alternates, setAlternates] = useState<Partial<Record<Locale, string>>>({});
+  useEffect(() => {
+    // Untuk browser, metadata halaman dinamis di-stream Next ke <body> dan bisa tiba setelah
+    // efek ini jalan -> cari di seluruh dokumen dan amati perubahan DOM sebentar.
+    const read = () => {
+      const found: Partial<Record<Locale, string>> = {};
+      for (const locale of LOCALES) {
+        const el = document.querySelector<HTMLLinkElement>(
+          `link[rel="alternate"][hreflang="${locale}"]`,
+        );
+        if (!el?.href) continue;
+        try {
+          const u = new URL(el.href);
+          found[locale] = `${u.pathname}${u.search}`;
+        } catch {
+          /* abaikan href tidak valid */
+        }
+      }
+      setAlternates(found);
+      return Object.keys(found).length > 0;
+    };
+    if (read()) return;
+    const observer = new MutationObserver(() => {
+      if (read()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    const stop = window.setTimeout(() => observer.disconnect(), 5000);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(stop);
+    };
+  }, [pathname]);
 
   const remember = (locale: Locale) => {
     document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; samesite=lax`;
@@ -48,10 +87,11 @@ export default function LanguageSwitch({
       />
       {LOCALES.map((locale) => {
         const active = locale === language;
+        const href = alternates[locale] ?? `/${locale}${rest}`;
         return (
           <Link
             key={locale}
-            href={`/${locale}${rest}`}
+            href={href}
             hrefLang={locale}
             aria-current={active ? "true" : undefined}
             onClick={() => remember(locale)}

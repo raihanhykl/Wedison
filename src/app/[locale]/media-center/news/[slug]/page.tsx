@@ -39,7 +39,15 @@ function snippetTitle(preview: LinkPreview): string {
 }
 
 function snippetDescription(preview: LinkPreview): string | undefined {
-  const d = (preview.description || preview.headLine || "").toString().trim();
+  // headLine dari data statis lama bisa berupa JSX -> hanya pakai bila string.
+  const headLine = typeof preview.headLine === "string" ? preview.headLine.trim() : "";
+  const desc = preview.description?.trim() ?? "";
+  // Deskripsi dari situs sumber kadang terlalu pendek (<70 karakter) -> pakai teks yang lebih
+  // informatif, atau lengkapi dengan konteks liputan.
+  let d = desc.length >= 70 ? desc : headLine.length > desc.length ? headLine : desc;
+  if (d && d.length < 70) {
+    d = `${d.replace(/[.\s]+$/, "")}. Liputan ${preview.site ?? "media"} tentang motor listrik Wedison.`;
+  }
   if (!d) return undefined;
   return d.length > 155 ? `${d.slice(0, 152).trimEnd()}…` : d;
 }
