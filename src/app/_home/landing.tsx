@@ -6,13 +6,10 @@ import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 import {
   ArrowRight,
-  GitCompareArrows,
   Zap,
-  MapPin,
   BatteryCharging,
   Wallet,
   Headphones,
-  Newspaper,
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,7 +21,6 @@ import {
 } from "@/components/ui/carousel";
 import { Marquee } from "@/components/ui/marquee";
 import { Reveal } from "@/components/motion/reveal";
-import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
@@ -115,13 +111,6 @@ const ADVANTAGE = [
     Icon: Headphones,
     key: "service",
   },
-];
-
-const EXPLORE = [
-  { Icon: Newspaper, key: "media", href: "/media-center/" },
-  { Icon: GitCompareArrows, key: "compare", href: "/compare/" },
-  { Icon: MapPin, key: "showroom", href: "/showroom/" },
-  { Icon: Zap, key: "charge", href: "/super-charge/" },
 ];
 
 const COPY: Record<Lang, Record<string, string>> = {
@@ -257,6 +246,9 @@ const COPY: Record<Lang, Record<string, string>> = {
 export default function Landing() {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
+  // Semua link internal WAJIB berprefix locale + trailing slash: tanpa itu tiap klik/crawl
+  // lewat dua redirect (307 locale dari middleware + 308 trailing slash).
+  const href = (path: string) => (path.startsWith("/") ? `/${language}${path}` : path);
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [selected, setSelected] = React.useState(0);
@@ -283,6 +275,8 @@ export default function Landing() {
             <CarouselContent className="ml-0">
               {HERO_SLIDES.map((s, i) => {
                 const ph = c[`h_${s.id}_mq`].split("|");
+                // Satu <h1> per halaman (slide pertama); slide lain = <h2> dengan gaya sama.
+                const Heading = i === 0 ? "h1" : "h2";
                 return (
                   <CarouselItem key={s.id} className="pl-0">
                     <div className="relative h-[100svh] w-full overflow-hidden">
@@ -304,7 +298,7 @@ export default function Landing() {
                         </p>
                         {s.logo ? (
                           // Sebutan SuperCharge dibawakan oleh wordmark-nya sendiri, bukan teks.
-                          <h1 className="mt-4 flex flex-col items-center">
+                          <Heading className="mt-4 flex flex-col items-center">
                             <span className="sr-only">
                               {c.h_charge_titleFull}
                             </span>
@@ -323,11 +317,11 @@ export default function Landing() {
                               priority={i === 0}
                               className="mt-4 h-auto w-[min(84vw,340px)] sm:mt-5 sm:w-[500px] lg:w-[640px]"
                             />
-                          </h1>
+                          </Heading>
                         ) : (
-                          <h1 className="mt-4 max-w-[18ch] text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                          <Heading className="mt-4 max-w-[18ch] text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
                             {c[`h_${s.id}_title`]}
-                          </h1>
+                          </Heading>
                         )}
                         <p className="mt-5 max-w-[46ch] text-base text-white/85 sm:text-lg">
                           {c[`h_${s.id}_sub`]}
@@ -338,9 +332,9 @@ export default function Landing() {
                               <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
                             </BookingTrigger>
                           ) : (
-                            <Link href={s.href}>
-                              <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
-                            </Link>
+                            <Button asChild size="lg">
+                              <Link href={href(s.href)}>{c[`h_${s.id}_cta`]}</Link>
+                            </Button>
                           )}
                         </div>
                       </div>
@@ -409,7 +403,7 @@ export default function Landing() {
           {MODELS.map((m) => (
             <Link
               key={m.id}
-              href={`/products/${m.id}/`}
+              href={href(`/products/${m.id}/`)}
               className="group relative block aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[16/10]"
             >
               {/* Card image reveals on its own viewport entry (opacity) */}
@@ -471,14 +465,13 @@ export default function Landing() {
                   {t("supercharge.landing.description")}
                 </p>
                 <div className="mt-8">
-                  <Link href="/super-charge/">
-                    <Button
-                      size="lg"
-                      className="bg-forest-foreground text-forest hover:bg-white"
-                    >
-                      {c.superCta}
-                    </Button>
-                  </Link>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-forest-foreground text-forest hover:bg-white"
+                  >
+                    <Link href={href("/super-charge/")}>{c.superCta}</Link>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -534,42 +527,6 @@ export default function Landing() {
           </div>
         </div>
       </section>
-
-      {/* ============ KEEP EXPLORING (icon cards) ============ */}
-      {/* <section className="main-container py-16 sm:py-24">
-        <Reveal className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            {c.exLabel}
-          </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            {c.exTitle}
-          </h2>
-        </Reveal>
-        <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {EXPLORE.map(({ Icon, key, href }) => (
-            <StaggerItem key={key} className="h-full">
-              <Link
-                href={href}
-                className="group flex h-full flex-col rounded-xl border border-border bg-card p-6 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-lg"
-              >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-primary">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="mt-5 text-lg font-bold tracking-tight text-foreground">
-                  {c[`ex_${key}_t`]}
-                </h3>
-                <p className="mt-1.5 flex-1 text-sm text-muted-foreground">
-                  {c[`ex_${key}_d`]}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                  {c.learn}
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </span>
-              </Link>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </section> */}
 
       {/* ============ TALK TO DION (chat CTA) — section terakhir ============ */}
       <section className="relative w-full overflow-hidden">

@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
-import type { ShowroomId } from "@/lib/booking/showrooms";
+import { SHOWROOM_LOCATIONS } from "@/lib/seo/showrooms";
 
 export default function ShowroomPageStructure() {
   const { t } = useLanguage();
@@ -48,49 +48,17 @@ export default function ShowroomPageStructure() {
     // },
   ];
 
-  // Active Experience Center locations (showroom + service center per location)
-  const locations: {
-    id: ShowroomId;
-    nameKey: string;
-    addressKey: string;
-    mapsUrl: string;
-    lat: number;
-    lng: number;
-  }[] = [
-    {
-      id: "jakarta",
-      nameKey: "showroom.jakarta.name",
-      addressKey: "showroom.jakarta.address",
-      mapsUrl:
-        "https://www.google.com/maps/place/Wedison+Showroom/@-6.248464,106.7806209,19z/data=!4m10!1m2!2m1!1swedison+showroom!3m6!1s0x2e69f10019a26049:0xa59abd5e111a8a10!8m2!3d-6.248447!4d106.7810459!15sChB3ZWRpc29uIHNob3dyb29tWhIiEHdlZGlzb24gc2hvd3Jvb22SARplbGVjdHJpY19tb3RvcmN5Y2xlX2RlYWxlcqoBOBABMh4QASIa377C9bwSIpBp7hHS_qeMc_QbuBNmgIsWHu0yFBACIhB3ZWRpc29uIHNob3dyb29t4AEA!16s%2Fg%2F11x1nqm1sg!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDQyMi4wIKXMDSoASAFQAw%3D%3D",
-      lat: -6.2484,
-      lng: 106.781,
-    },
-    {
-      id: "bekasi",
-      nameKey: "showroom.bekasi.name",
-      addressKey: "showroom.bekasi.address",
-      mapsUrl: "https://maps.app.goo.gl/DXB6csamG8R78XoP9",
-      lat: -6.2597989,
-      lng: 107.0199037,
-    },
-    {
-      id: "bandung",
-      nameKey: "showroom.bandung.name",
-      addressKey: "showroom.bandung.address",
-      mapsUrl: "https://maps.app.goo.gl/T86DfRuAkHFBmhMs8",
-      lat: -6.86542,
-      lng: 107.514505,
-    },
-    {
-      id: "bali",
-      nameKey: "showroom.bali.name",
-      addressKey: "showroom.bali.address",
-      mapsUrl: "https://maps.app.goo.gl/og4ovnG2FgCAQAWt8",
-      lat: -8.6359263,
-      lng: 115.2213254,
-    },
-  ];
+  // Active Experience Center locations (showroom + service center per location).
+  // Koordinat & tautan peta dari satu sumber (src/lib/seo/showrooms.ts) yang juga
+  // dipakai JSON-LD MotorcycleDealer di page.tsx — supaya data peta dan schema selalu sama.
+  const locations = SHOWROOM_LOCATIONS.map((s) => ({
+    id: s.id,
+    nameKey: `showroom.${s.id}.name`,
+    addressKey: `showroom.${s.id}.address`,
+    mapsUrl: s.mapsUrl,
+    lat: s.geo.latitude,
+    lng: s.geo.longitude,
+  }));
 
   const activeLocation = locations[activeIndex];
 
@@ -119,7 +87,8 @@ export default function ShowroomPageStructure() {
   ];
 
   return (
-    <main className="min-h-[70%] bg-background">
+    // Bukan <main>: landmark <main> tunggal disediakan layout locale (#konten).
+    <div className="min-h-[70%] bg-background">
       {/* Hero Section with Carousel */}
       <section className="mt-20 md:mt-30">
         <div className="main-container">
@@ -309,6 +278,6 @@ export default function ShowroomPageStructure() {
           </Stagger>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

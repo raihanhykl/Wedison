@@ -37,6 +37,44 @@ Alur rilis: `feature/*` → PR ke `staging` (cek di ssr.wedison.tech) → PR `st
 nginx mode `app` juga menyajikan file lama yang tidak ada di app (PDF, file verifikasi Google,
 chunk `_next` lama) dari `/var/www/wedison-legacy` bila app membalas 404.
 
+## SEO, indeksasi, dan header keamanan (audit 2026-09)
+
+Ringkasan temuan & perbaikan: `docs/SEO-AUDIT-2026-09.md`. Yang perlu diketahui saat operasional:
+
+- **Indeksasi per environment** ditentukan saat build oleh `NEXT_PUBLIC_SITE_URL` (+ override
+  `NEXT_PUBLIC_ROBOTS_NOINDEX`): hanya `https://wedison.co` yang indexable. Staging
+  (`ssr.wedison.tech`) otomatis mengirim `<meta name="robots" content="noindex, nofollow">`,
+  header `X-Robots-Tag`, dan `robots.txt` `Disallow: /`. Jangan pernah mem-build produksi dengan
+  `NEXT_PUBLIC_ROBOTS_NOINDEX=true`.
+- **Audit crawl staging sementara** (Screaming Frog versi gratis tidak bisa mengabaikan
+  robots/nofollow): GitHub → Actions → "Deploy staging -> VPS" → **Run workflow** → branch
+  `staging`, `robots_mode = audit`. Hasilnya: `robots.txt` hanya mengizinkan
+  "Screaming Frog SEO Spider" (crawler lain tetap `Disallow: /`), tanpa noindex/nofollow.
+  **Tutup kembali** dengan Run workflow `robots_mode = noindex`; deploy staging berikutnya
+  (push/merge) juga otomatis menutupnya. Cek: `curl -s https://ssr.wedison.tech/robots.txt`.
+- **Header keamanan** (CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy)
+  dikirim oleh aplikasi Next untuk semua respons (`next.config.ts` → `headers()`); Express memakai
+  helmet. nginx hanya menambahkan **HSTS** lewat snippet bersama yang harus dipasang sekali (root):
+  ```bash
+  sudo install -m 644 deploy/nginx/snippets/wedison-security-headers.conf /etc/nginx/snippets/
+  sudo cp deploy/nginx/wedison.co.app.conf /etc/nginx/sites-available/wedison.co.app
+  sudo cp deploy/nginx/ssr.wedison.tech.conf /etc/nginx/sites-available/ssr.wedison.tech  # sesuaikan blok certbot
+  sudo nginx -t && sudo systemctl reload nginx
+  ```
+  Snippet di-`include` di level server **dan** di `location /_next/static/` (add_header di
+  location membatalkan pewarisan header level server — penyebab HSTS hilang di aset statis).
+- **Menambah tag pihak ketiga di GTM** (mis. TikTok Pixel): tambahkan origin-nya ke CSP di
+  `next.config.ts` (`script-src`/`connect-src`/`img-src`), build, lalu cek console browser di
+  staging. Origin yang tidak ada di daftar akan diblokir browser tanpa error di GTM.
+- **Pemeriksaan otomatis**: `npm run seo:check -- http://127.0.0.1:3003` (atau
+  `https://ssr.wedison.tech --expect-noindex`) memeriksa metadata di `<head>`, satu `<h1>`,
+  header keamanan, link internal tanpa redirect, robots/sitemap/llms.txt, JSON-LD, dan 404.
+  Skrip yang sama berjalan di `pr-check.yml` untuk setiap PR.
+- Setelah cutover: submit `https://wedison.co/sitemap.xml` di Search Console, uji
+  `https://wedison.co/id/products/athena/` dengan **URL Inspection → View crawled page** (title,
+  canonical, hreflang harus di `<head>`), dan uji Rich Results (Product, FAQ, Breadcrumb,
+  Organization, LocalBusiness).
+
 ## Deploy
 
 Merge ke `main` → Actions build → rsync ke `releases/<sha>` → `bin/deploy-release.sh`:

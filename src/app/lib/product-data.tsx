@@ -314,7 +314,7 @@ export default function GetProductData(bikeType: string) {
       },
       {
         image: `/${bikeType}/${bikeType}-product-card2.webp`,
-        alt: "Edmax Hero",
+        alt: t(`${bikeType}.productPage.productHighlight2.imageAlt`),
         imageMobile: `/${bikeType}/${bikeType}-product-card2-mobile.webp`,
 
         className: "object-100%_0% object-cover w-full ",
@@ -333,7 +333,7 @@ export default function GetProductData(bikeType: string) {
         ? [
             {
               image: `/${bikeType}/${bikeType}-product-card4.webp`,
-              alt: "Edmax Hero",
+              alt: t(`${bikeType}.productPage.productHighlight4.imageAlt`),
               imageMobile: `/${bikeType}/${bikeType}-product-card4-mobile.webp`,
 
               className: "object-100%_0% object-cover w-full ",

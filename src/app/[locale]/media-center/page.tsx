@@ -5,6 +5,8 @@ import MediaCenterClient from "./mediaCenterClient";
 import { PRESS_URLS } from "@public/data/press-urls";
 import { INSTAGRAM_POSTS, fetchAllInstagramPosts, type InstagramPostData } from "./components/fetchInstagram";
 import { getArticles, getPress, getSocialPosts } from "@/lib/cms/api";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/seo/schema";
 import type { Locale } from "@/app/lib/locale";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -49,5 +51,15 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     instagramPosts = await fetchAllInstagramPosts(INSTAGRAM_POSTS);
   }
 
-  return <MediaCenterClient previews={previews} instagramPosts={instagramPosts} articles={articles.items} locale={loc} />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema(loc, [
+          { name: loc === "en" ? "Home" : "Beranda", path: "/" },
+          { name: "Media Center", path: "/media-center" },
+        ])}
+      />
+      <MediaCenterClient previews={previews} instagramPosts={instagramPosts} articles={articles.items} locale={loc} />
+    </>
+  );
 }

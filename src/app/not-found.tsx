@@ -1,98 +1,44 @@
 import "./globals.css";
 import Link from "next/link";
-import { headers } from "next/headers";
-import { Button } from "@/components/ui/button";
-import { Home, ArrowLeft, Search } from "lucide-react";
+import { fontVariables } from "@/app/fonts";
 
-// Satu-satunya halaman 404 untuk seluruh app.
-// CATATAN PENTING: di Next.js App Router, `not-found.tsx` di dalam segmen dinamis
-// ([locale]) TIDAK terdaftar sebagai boundary yang andal — yang selalu dipakai
-// untuk SEMUA 404 (URL tak-cocok maupun notFound()) adalah ROOT not-found ini.
-// Karena root layout = passthrough (tanpa <html>/<body>), halaman ini menyediakan
-// dokumennya sendiri + import globals.css.
+// 404 ROOT: dipakai untuk URL yang tidak cocok rute mana pun (di-prerender sebagai
+// _not-found.html -> cepat, tanpa JS, dwibahasa). Untuk notFound() saat navigasi klien di dalam
+// /[locale] dipakai src/app/[locale]/not-found.tsx (dengan navbar/footer & bahasa yang benar).
 //
-// Locale dibaca dari request header `x-locale` yang di-set middleware. Ini server
-// component async (pakai headers()) -> dirender per-request dengan bahasa yang
-// benar (tanpa flash / hydration mismatch, dan benar untuk crawler).
-const translations = {
-  en: {
-    title: "Page Not Found",
-    description: "The page you requested could not be found.",
-    suggestion:
-      "It may have been moved or removed, or the address may contain an error.",
-    homeButton: "Back to Home",
-    exploreButton: "Explore Our Models",
-  },
-  id: {
-    title: "Halaman Tidak Ditemukan",
-    description: "Halaman yang kamu cari tidak ketemu.",
-    suggestion:
-      "Mungkin halamannya sudah dipindah atau dihapus, atau ada salah ketik di alamatnya.",
-    homeButton: "Kembali ke Beranda",
-    exploreButton: "Jelajahi Model Kami",
-  },
-};
-
-export default async function NotFound() {
-  const h = await headers();
-  const locale = h.get("x-locale") === "en" ? "en" : "id";
-  const text = translations[locale];
-
+// PENTING: komponen ini ikut dirender saat prerender SEMUA halaman (sebagai boundary
+// not-found root). Ia harus STATIS — jangan panggil headers()/cookies() di sini: itu membuat
+// seluruh situs jatuh ke rendering dinamis per-request (metadata ter-stream ke <body>,
+// TTFB lambat). Lihat docs/SEO-AUDIT-2026-09.md.
+export default function NotFound() {
   return (
-    <html lang={locale}>
-      <body className="antialiased">
-        <main className="min-h-screen bg-white flex flex-col">
-          <div className="flex-grow flex items-center justify-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
-              <div className="max-w-3xl mx-auto">
-                <div className="text-center">
-                  {/* 404 Number */}
-                  <div className="relative mb-6">
-                    <div className="text-9xl md:text-[12rem] font-bold text-primary opacity-20">
-                      404
-                    </div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-                        {text.title}
-                      </h1>
-                    </div>
-                  </div>
-
-                  {/* Illustration */}
-                  <div className="mb-8 flex justify-center">
-                    <div className="relative w-64 h-64 md:w-80 md:h-80">
-                      <div className="absolute inset-0 bg-[var(--secondary)] rounded-full opacity-20 animate-pulse"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Search className="h-24 w-24 text-primary opacity-50" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-xl text-gray-700 mb-3">
-                    {text.description}
-                  </p>
-                  <p className="text-gray-600 mb-8">{text.suggestion}</p>
-
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link href={`/${locale}/`}>
-                      <Button className="bg-primary hover:bg-[var(--primary-dark)] text-white group transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto">
-                        <Home className="mr-2 h-5 w-5" />
-                        {text.homeButton}
-                      </Button>
-                    </Link>
-                    <Link href={`/${locale}/`}>
-                      <Button
-                        variant="outline"
-                        className="border-primary text-primary hover:bg-[var(--secondary-light)] transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto"
-                      >
-                        <ArrowLeft className="mr-2 h-5 w-5" />
-                        {text.exploreButton}
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <html lang="id">
+      <body className={`${fontVariables} antialiased bg-background text-foreground`}>
+        <main className="flex min-h-screen flex-col items-center justify-center px-6 py-16 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">404</p>
+          <h1 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            Halaman Tidak Ditemukan
+          </h1>
+          <p className="mt-4 max-w-md text-muted-foreground">
+            Mungkin halamannya sudah dipindah atau dihapus, atau ada salah ketik di alamatnya.
+          </p>
+          <p className="mt-1 max-w-md text-sm text-muted-foreground" lang="en">
+            The page you requested could not be found.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/id/"
+              className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-6 font-display text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+            >
+              Kembali ke Beranda
+            </Link>
+            <Link
+              href="/en/"
+              hrefLang="en"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-border px-6 font-display text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              Go to English site
+            </Link>
           </div>
         </main>
       </body>
