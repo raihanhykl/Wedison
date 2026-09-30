@@ -32,6 +32,13 @@ export const NOINDEX =
   process.env.NEXT_PUBLIC_ROBOTS_NOINDEX === "true" ||
   (process.env.NEXT_PUBLIC_ROBOTS_NOINDEX !== "false" && !IS_PRODUCTION_SITE);
 
+/**
+ * Mode audit staging (sementara): bila diisi (mis. "Screaming Frog SEO Spider"), robots.txt
+ * hanya mengizinkan user-agent ini; semua crawler lain (Googlebot, Bing, AI) tetap Disallow: /.
+ * Dipakai bersama NEXT_PUBLIC_ROBOTS_NOINDEX=false lewat workflow_dispatch deploy-ssr.yml.
+ */
+export const ROBOTS_ALLOW_ONLY = (process.env.NEXT_PUBLIC_ROBOTS_ALLOW_ONLY ?? "").trim();
+
 /** Absolutkan path relatif ke origin situs. URL absolut diteruskan apa adanya. */
 export function absUrl(path: string): string {
   if (/^https?:\/\//i.test(path)) return path;

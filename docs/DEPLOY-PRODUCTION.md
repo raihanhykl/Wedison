@@ -46,6 +46,12 @@ Ringkasan temuan & perbaikan: `docs/SEO-AUDIT-2026-09.md`. Yang perlu diketahui 
   (`ssr.wedison.tech`) otomatis mengirim `<meta name="robots" content="noindex, nofollow">`,
   header `X-Robots-Tag`, dan `robots.txt` `Disallow: /`. Jangan pernah mem-build produksi dengan
   `NEXT_PUBLIC_ROBOTS_NOINDEX=true`.
+- **Audit crawl staging sementara** (Screaming Frog versi gratis tidak bisa mengabaikan
+  robots/nofollow): GitHub → Actions → "Deploy staging -> VPS" → **Run workflow** → branch
+  `staging`, `robots_mode = audit`. Hasilnya: `robots.txt` hanya mengizinkan
+  "Screaming Frog SEO Spider" (crawler lain tetap `Disallow: /`), tanpa noindex/nofollow.
+  **Tutup kembali** dengan Run workflow `robots_mode = noindex`; deploy staging berikutnya
+  (push/merge) juga otomatis menutupnya. Cek: `curl -s https://ssr.wedison.tech/robots.txt`.
 - **Header keamanan** (CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy)
   dikirim oleh aplikasi Next untuk semua respons (`next.config.ts` → `headers()`); Express memakai
   helmet. nginx hanya menambahkan **HSTS** lewat snippet bersama yang harus dipasang sekali (root):
