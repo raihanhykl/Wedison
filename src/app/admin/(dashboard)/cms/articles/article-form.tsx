@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ArrowLeft, Check, ChevronsUpDown, ImagePlus, Loader2, Save, Search, Send, X } from "lucide-react";
+import { ArrowLeft, Check, ChevronsUpDown, Gauge, ImagePlus, Loader2, Save, Search, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,10 +22,13 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Skeleton } from "@/components/ui/skeleton";
 import { StatusBadge } from "@/components/admin/status-badge";
 import { MediaPickerDialog } from "@/components/admin/media-picker";
+import { PillarTabs, ScoreRing } from "@/components/admin/content-health";
+import { useAdminUser } from "@/components/admin/providers";
+import { useDebounce } from "@/hooks/use-debounce";
 import { api, errorMessage } from "@/lib/admin/api";
 import { slugify, toLocalInput } from "@/lib/admin/format";
 import { cn } from "@/lib/utils";
-import { STATUS_LABEL, type Article, type Category, type ContentStatus, type Locale, type Media, type Tag } from "@/lib/admin/types";
+import { STATUS_LABEL, type Article, type Category, type ContentScore, type ContentStatus, type Locale, type Media, type Tag } from "@/lib/admin/types";
 import type { SimpleEditorChange } from "@/components/tiptap-templates/simple/simple-editor";
 
 // The Tiptap editor is heavy and browser-only -> dynamic import without SSR.
@@ -96,6 +99,43 @@ export function ArticleForm({ article }: { article?: Article }) {
   const [dirty, setDirty] = useState(false);
 
   const { data: topics } = useQuery({ queryKey: ["topics"], queryFn: () => api<{ items: Category[] }>("/admin/topics").then((r) => r.items) });
+  const me = useAdminUser();
+
+  // Live SEO/AEO/GEO analysis of the active locale draft (debounced; same engine as on save).
+  const draft = tr[activeLocale];
+  const analyzeInput = useMemo(
+    () => ({
+      locale: activeLocale,
+      title: draft.title,
+      slug: draft.slug,
+      excerpt: draft.excerpt,
+      contentHtml: draft.contentHtml,
+      seoTitle: draft.seoTitle,
+      seoDescription: draft.seoDescription,
+      seoKeywords: draft.seoKeywords,
+      canonicalUrl: draft.canonicalUrl,
+      ogTitle: draft.ogTitle,
+      ogDescription: draft.ogDescription,
+      coverImage: cover ? { url: cover.url, alt: cover.alt } : null,
+      ogImage: ogImage ? { url: ogImage.url, alt: ogImage.alt } : null,
+      categoryName: categoryId === "none" ? null : (topics?.find((c) => c.id === categoryId)?.nameId ?? null),
+      tags: tags.map((t) => t.name),
+      authorName: article?.author?.name ?? me.name,
+      publishedAt: article?.publishedAt ?? null,
+      updatedAt: article?.updatedAt ?? null,
+      noIndex,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeLocale, draft.title, draft.slug, draft.excerpt, draft.contentHtml, draft.seoTitle, draft.seoDescription, draft.seoKeywords, draft.canonicalUrl, draft.ogTitle, draft.ogDescription, cover, ogImage, categoryId, topics, tags, noIndex],
+  );
+  const debouncedInput = useDebounce(analyzeInput, 900);
+  const health = useQuery({
+    queryKey: ["article-health", debouncedInput],
+    queryFn: () => api<{ data: ContentScore }>("/admin/seo/analyze", { method: "POST", body: debouncedInput }).then((r) => r.data),
+    enabled: draft.enabled && (debouncedInput.title.length > 0 || debouncedInput.contentHtml.length > 0),
+    placeholderData: (prev) => prev,
+    staleTime: 60_000,
+  });
 
   // Warn before leaving with unsaved changes
   useEffect(() => {
@@ -320,6 +360,33 @@ export function ArticleForm({ article }: { article?: Article }) {
 
         {/* ── Side panel ──────────────────────────────────────── */}
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-base"><Gauge className="size-4" /> Content health <span className="ml-auto font-mono text-xs font-normal uppercase text-muted-foreground">{activeLocale}</span></CardTitle>
+              <CardDescription>Early detection for SEO, AEO and GEO. Fix the notes before publishing.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {health.data ? (
+                <>
+                  <div className="mb-3 grid grid-cols-3">
+                    <ScoreRing score={health.data.seo.score} label="SEO" size={64} />
+                    <ScoreRing score={health.data.aeo.score} label="AEO" size={64} />
+                    <ScoreRing score={health.data.geo.score} label="GEO" size={64} />
+                  </div>
+                  <p className="mb-3 text-center font-mono text-[11px] text-muted-foreground">
+                    {health.data.stats.words} words · {health.data.stats.headings.h2} H2 · {health.data.stats.images} images · {health.data.stats.externalDomains} sources
+                    {health.isFetching && " · updating…"}
+                  </p>
+                  <PillarTabs pillars={{ seo: health.data.seo, aeo: health.data.aeo, geo: health.data.geo }} compact />
+                </>
+              ) : health.isLoading ? (
+                <Skeleton className="h-40" />
+              ) : (
+                <p className="text-sm text-muted-foreground">Start writing to see the SEO, AEO and GEO checks.</p>
+              )}
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader className="pb-3"><CardTitle className="text-base">Publishing</CardTitle></CardHeader>
             <CardContent className="space-y-4">

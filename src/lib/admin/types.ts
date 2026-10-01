@@ -67,6 +67,52 @@ export type ArticleTranslation = {
   ogTitle: string | null;
   ogDescription: string | null;
   readingTime?: number;
+  contentScore?: ContentScore | null;
+};
+
+// ─── Content health (SEO / AEO / GEO) — mirrors server/src/lib/content-score.ts ───
+export type Pillar = "seo" | "aeo" | "geo";
+export type CheckStatus = "pass" | "warn" | "fail" | "info";
+export type HealthCheck = { id: string; pillar: Pillar; label: string; status: CheckStatus; weight: number; note?: string; value?: string; pages?: string[] };
+export type PillarScore = { score: number; grade: "good" | "fair" | "poor"; passed: number; total: number; checks: HealthCheck[] };
+export type ContentScore = {
+  version: 1;
+  analyzedAt: string;
+  overall: number;
+  seo: PillarScore;
+  aeo: PillarScore;
+  geo: PillarScore;
+  stats: {
+    words: number; sentences: number; paragraphs: number;
+    headings: { h1: number; h2: number; h3: number; h4: number };
+    questionHeadings: number; images: number; imagesMissingAlt: number; internalLinks: number; externalLinks: number;
+    externalDomains: number; lists: number; tables: number; blockquotes: number; numericFacts: number; readingMinutes: number;
+  };
+  faq: { question: string; answer: string }[];
+};
+
+export type SitePage = {
+  path: string; status: number; title: string; titleLength: number; description: string; descriptionLength: number; canonical: string;
+  hreflang: number; robots: string; h1: number; h2: number; questionHeadings: number; jsonLdTypes: string[]; images: number;
+  imagesMissingAlt: number; ogImage: string; words: number; hasMain: boolean; internalLinkIssues: number; metadataInHead: boolean; issues: string[];
+};
+export type SiteAudit = {
+  version: 1; ranAt: string; durationMs: number; baseUrl: string; publicOrigin: string; pagesCrawled: number; overall: number;
+  seo: PillarScore; aeo: PillarScore; geo: PillarScore; pages?: SitePage[];
+  files: { robots: boolean; sitemap: boolean; llms: boolean; manifest: boolean; robotsAllowsAi: boolean; sitemapUrls: number };
+};
+export type SeoOverview = {
+  site: SiteAudit | null;
+  articles: { published: number; publishedLast90d: number; withAuthor: number; avgSeo: number | null; avgAeo: number | null; avgGeo: number | null };
+  attention: { id: string; status: ContentStatus; title: string; seo: number; aeo: number; geo: number; overall: number; updatedAt: string }[];
+  running: boolean;
+};
+
+export const PILLAR_LABEL: Record<Pillar, string> = { seo: "SEO", aeo: "AEO", geo: "GEO" };
+export const PILLAR_DESCRIPTION: Record<Pillar, string> = {
+  seo: "Search Engine Optimization — how well Google can find, understand and rank the page.",
+  aeo: "Answer Engine Optimization — whether the content can be lifted as a direct answer (featured snippets, voice, AI overviews).",
+  geo: "Generative Engine Optimization — how likely ChatGPT, Gemini, Perplexity and similar cite this content.",
 };
 
 export type Article = {

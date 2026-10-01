@@ -7,7 +7,8 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 import { getArticle } from "@/lib/cms/api";
 import { Reveal } from "@/components/motion/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbSchema, newsArticleSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, faqSchema, newsArticleSchema } from "@/lib/seo/schema";
+import { extractArticleFaq } from "@/lib/seo/article-faq";
 import { SITE_URL as SITE, absUrl as abs } from "@/lib/seo/site";
 import type { Locale } from "@/app/lib/locale";
 
@@ -105,6 +106,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
       { name: a.title, path: `/media-center/articles/${a.slug}` },
     ]),
   ];
+  // AEO: blok tanya-jawab di dalam artikel (heading berbentuk pertanyaan + jawabannya)
+  // otomatis jadi FAQPage schema. Minimal 2 pasang agar tidak menandai heading tunggal.
+  const faq = extractArticleFaq(a.contentHtml ?? "");
+  if (faq.length >= 2) jsonLd.push(faqSchema(faq));
 
   return (
     <div className="min-h-screen bg-background mt-14">

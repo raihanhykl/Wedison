@@ -13,7 +13,8 @@ import { initials } from "@/components/admin/nav-user";
 import { useAdminUser } from "@/components/admin/providers";
 import { api } from "@/lib/admin/api";
 import { timeAgo } from "@/lib/admin/format";
-import type { DashboardStats } from "@/lib/admin/types";
+import type { DashboardStats, SeoOverview } from "@/lib/admin/types";
+import { ScoreRing } from "@/components/admin/content-health";
 
 function StatCard({ title, value, hint, icon: Icon, href }: { title: string; value: number | string; hint?: string; icon: React.ElementType; href: string }) {
   return (
@@ -39,6 +40,7 @@ export function DashboardView() {
     queryFn: () => api<{ data: DashboardStats }>("/admin/dashboard/stats").then((r) => r.data),
     refetchInterval: 60_000,
   });
+  const seo = useQuery({ queryKey: ["seo-overview"], queryFn: () => api<{ data: SeoOverview }>("/admin/seo/overview").then((r) => r.data), staleTime: 60_000 });
   const c = data?.counts;
   const hour = new Date().getHours();
   const greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
@@ -139,6 +141,32 @@ export function DashboardView() {
                 ))
               ) : (
                 <p className="text-sm text-muted-foreground">No activity yet.</p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle className="font-display text-lg">SEO · AEO · GEO</CardTitle>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/admin/seo">Details <ArrowRight /></Link>
+              </Button>
+            </CardHeader>
+            <CardContent>
+              {seo.data?.site ? (
+                <>
+                  <div className="grid grid-cols-3">
+                    <ScoreRing score={seo.data.site.seo.score} label="SEO" size={60} />
+                    <ScoreRing score={seo.data.site.aeo.score} label="AEO" size={60} />
+                    <ScoreRing score={seo.data.site.geo.score} label="GEO" size={60} />
+                  </div>
+                  <p className="mt-2 text-center text-xs text-muted-foreground">Website · audited {timeAgo(seo.data.site.ranAt)}{seo.data.articles.avgSeo !== null && ` · articles avg S${seo.data.articles.avgSeo} A${seo.data.articles.avgAeo} G${seo.data.articles.avgGeo}`}</p>
+                </>
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  No site audit yet.{" "}
+                  <Link href="/admin/seo" className="text-primary underline underline-offset-4">Run the first audit</Link>.
+                </p>
               )}
             </CardContent>
           </Card>
