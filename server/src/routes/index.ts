@@ -10,6 +10,7 @@ import { mediaRouter } from "../modules/media/media.routes.js";
 import { stationsRouter, publicStationsRouter } from "../modules/stations/stations.routes.js";
 import { consentRouter, publicConsentRouter } from "../modules/consent/consent.routes.js";
 import { dashboardRouter } from "../modules/dashboard/dashboard.routes.js";
+import { seoRouter } from "../modules/seo/seo.routes.js";
 import { leadsRouter, publicLeadsRouter } from "../modules/leads/leads.routes.js";
 import { env } from "../config/env.js";
 
@@ -20,6 +21,7 @@ api.use("/auth", authRouter);
 api.use("/admin/users", usersRouter);
 api.use("/admin/activity", activityRouter);
 api.use("/admin/dashboard", dashboardRouter);
+api.use("/admin/seo", seoRouter); // audit situs + analisis draf artikel (SEO/AEO/GEO)
 api.use("/admin/topics", categoriesRouter); // "Topics" in the UI (DB model: Category)
 api.use("/admin/categories", categoriesRouter);
 api.use("/admin/tags", tagsRouter);

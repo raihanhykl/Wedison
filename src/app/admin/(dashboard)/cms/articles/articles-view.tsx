@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/admin/page-header";
 import { DataTable } from "@/components/admin/data-table";
 import { StatusBadge } from "@/components/admin/status-badge";
+import { HealthPills } from "@/components/admin/content-health";
 import { EmptyState } from "@/components/admin/empty-state";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { useCan } from "@/components/admin/providers";
@@ -121,6 +122,13 @@ export function ArticlesView() {
       },
       { id: "category", header: "Topic", size: 130, cell: ({ row }) => <span className="text-sm">{row.original.category?.nameId ?? <span className="text-muted-foreground">—</span>}</span> },
       { id: "status", header: "Status", size: 110, cell: ({ row }) => <StatusBadge status={row.original.status} /> },
+      {
+        id: "health", header: "Health", size: 150,
+        cell: ({ row }) => {
+          const t = row.original.translations.find((x) => x.locale === "id") ?? row.original.translations[0];
+          return <HealthPills score={t?.contentScore ?? null} />;
+        },
+      },
       { id: "author", header: "Author", size: 140, cell: ({ row }) => <span className="text-sm">{row.original.author?.name ?? "—"}</span> },
       { id: "views", header: "Reads", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount}</span> },
       {

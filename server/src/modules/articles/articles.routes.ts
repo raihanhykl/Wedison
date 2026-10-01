@@ -11,6 +11,7 @@ import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
 import { sanitizeArticleHtml, stripHtml, readingTimeMinutes } from "../../lib/sanitize.js";
 import { notFound, badRequest } from "../../lib/errors.js";
 import { promoteScheduled } from "../../lib/scheduler.js";
+import { rescoreArticle } from "../../lib/content-score-db.js";
 
 const STATUS = z.enum(["DRAFT", "SCHEDULED", "PUBLISHED", "ARCHIVED"]);
 const LOCALE = z.enum(["id", "en"]);
@@ -159,9 +160,11 @@ articlesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(articleSchema)
       },
       include: adminInclude,
     });
+    await rescoreArticle(item.id);
+    const withScore = await prisma.article.findUniqueOrThrow({ where: { id: item.id }, include: adminInclude });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
     logActivity(req, { action: "create", entity: "article", entityId: item.id, summary: `Created article "${translations[0].title}"` });
-    res.status(201).json({ ok: true, data: item });
+    res.status(201).json({ ok: true, data: withScore });
   } catch (e) {
     next(e);
   }
@@ -201,9 +204,11 @@ articlesRouter.put("/:id", requireRole("ADMIN", "EDITOR"), validate(articleSchem
         include: adminInclude,
       });
     });
+    await rescoreArticle(item.id);
+    const withScore = await prisma.article.findUniqueOrThrow({ where: { id: item.id }, include: adminInclude });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
     logActivity(req, { action: "update", entity: "article", entityId: id, summary: `Updated article "${translations[0].title}"` });
-    res.json({ ok: true, data: item });
+    res.json({ ok: true, data: withScore });
   } catch (e) {
     next(e);
   }
