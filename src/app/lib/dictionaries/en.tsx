@@ -303,6 +303,11 @@ export const en = {
   "footer.about": "About Us",
   "footer.meetus": "Meet Us",
   "footer.career": "Career",
+  "footer.werigo": "Electric motorcycle rental in Bali",
+  "footer.werigoBridge":
+    "Visiting Bali? Rent a Wedison electric motorcycle through Werigo, delivered right to your stay.",
+  "footer.werigoCta": "Visit Werigo",
+  "footer.opensNewTab": "(opens in a new tab)",
 
   // Showroom Page
   "showroom.title": "Visit Our",

@@ -25,6 +25,7 @@ import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
+import { whatsappUrl } from "@/lib/seo/site";
 
 type Lang = "id" | "en";
 
@@ -556,11 +557,11 @@ export default function Landing() {
               {c.chatSub}
             </p>
             <Link
-              href={`https://wa.me/6282124657804?text=${encodeURIComponent(
+              href={whatsappUrl(
                 language === "id"
                   ? "Halo Dion, saya ingin tahu lebih lanjut tentang motor listrik Wedison."
                   : "Hi Dion, I'd like to know more about Wedison electric motorcycles.",
-              )}`}
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="group mt-7 inline-flex items-center gap-2 rounded-full bg-on-forest-accent px-7 py-3.5 text-base font-semibold text-forest-deep shadow-lg transition-transform duration-200 hover:-translate-y-0.5"

@@ -12,6 +12,7 @@ import {
   SITE_NAME,
   SITE_URL,
   SOCIAL_PROFILES,
+  WERIGO_URL,
   absUrl,
   localeUrl,
 } from "./site";
@@ -40,6 +41,16 @@ export function organizationSchema(locale: Locale): JsonLdObject {
     address: { "@type": "PostalAddress", ...HQ_ADDRESS },
     areaServed: { "@type": "Country", name: "Indonesia" },
     sameAs: [...SOCIAL_PROFILES],
+    // Werigo ditautkan di footer setiap halaman -> klaim ini terlihat di konten.
+    subOrganization: {
+      "@type": "Organization",
+      name: "Werigo",
+      url: WERIGO_URL,
+      description:
+        locale === "en"
+          ? "Wedison's electric motorcycle rental service in Bali."
+          : "Layanan sewa motor listrik Wedison di Bali.",
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",

@@ -23,7 +23,7 @@ import { useNavChrome } from "./nav/use-nav-chrome";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 const OPEN_DELAY = 90; // ms — hover-intent, biar tak "meletup" saat kursor lewat
-const CLOSE_DELAY = 190; // ms — masa tenggang menyeberang ke panel
+const CLOSE_DELAY = 300; // ms — toleransi bila kursor sedikit kelewat keluar dari header
 
 export default function Navbar() {
   const { t, language } = useLanguage();
@@ -185,6 +185,17 @@ export default function Navbar() {
       data-surface={solid ? "solid" : "clear"}
       data-condensed={condensed}
       data-hidden={hidden && !openKey && !sheetOpen}
+      // Bar + megamenu = SATU zona hover (panel adalah turunan <header>). Panel baru menutup
+      // saat kursor benar-benar keluar dari keduanya, jadi menyeberang pelan dari menu ke
+      // panel (melewati padding bar / celah pt-2) tidak lagi menutupnya.
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse" && openKey) clearTimer();
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "mouse") return;
+        setHoverKey(null);
+        if (openKey) closePanel();
+      }}
     >
       <a
         href="#konten"
@@ -235,10 +246,10 @@ export default function Navbar() {
           <nav
             aria-label={t("nav.primary")}
             className="hidden justify-center lg:flex"
+            // Hanya chip penanda yang ikut kursor; buka/tutup panel diatur di <header>.
             onPointerLeave={(event) => {
               if (event.pointerType !== "mouse") return;
               setHoverKey(null);
-              closePanel();
             }}
           >
             <div ref={navRef} className="relative flex items-center">
@@ -334,11 +345,6 @@ export default function Navbar() {
           style={{ pointerEvents: openKey ? "auto" : "none" }}
           onPointerEnter={() => {
             if (openKey) clearTimer();
-          }}
-          onPointerLeave={(event) => {
-            if (event.pointerType !== "mouse") return;
-            setHoverKey(null);
-            closePanel();
           }}
         >
           <div
