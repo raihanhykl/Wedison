@@ -39,8 +39,12 @@ export const en = {
 
   // buttons
   "btn.learn.more": "Learn More",
-  "btn.buy.on.tokopedia": "Buy on Tokopedia",
   "btn.see.brochure": "See Brochure",
+  "btn.testRide.product": "Take It for a Test Ride",
+  "btn.testRide.short": "Book a Test Ride",
+  "btn.findShowroom": "Find a Showroom",
+  "product.brochure.title": "{model} Brochure",
+  "product.brochure.desc": "Full specs and key features in one PDF, handy to save or share.",
   "btn.order.now": "Order Now",
 
   // user manual

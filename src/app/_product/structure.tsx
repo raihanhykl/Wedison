@@ -2,10 +2,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Image, { getImageProps } from "next/image";
-import Link from "next/link";
+import { getImageProps } from "next/image";
 import React, { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, FileText, MapPin } from "lucide-react";
 import PeekCarousel from "./peek";
 import { cn } from "@/lib/utils";
 import GetProductData from "../lib/product-data";
@@ -15,6 +14,8 @@ import UserManualSection from "@/components/user-manual-section";
 import { useInView } from "react-intersection-observer";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
+import { LocaleLink } from "@/components/locale-link";
 
 type Props = {
   motorType: string;
@@ -33,7 +34,9 @@ export default function ProductPageComponent({ motorType }: Props) {
   // count-up punya titik mulai; SSR tetap membawa nilai asli untuk aksesibilitas/crawler.
   useEffect(() => {
     if (!product) return;
-    setCounts(product.techSpec.map((s) => (typeof s.title === "number" ? 0 : s.title)));
+    setCounts(
+      product.techSpec.map((s) => (typeof s.title === "number" ? 0 : s.title)),
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [motorType]);
 
@@ -63,7 +66,8 @@ export default function ProductPageComponent({ motorType }: Props) {
 
   if (!product) return null;
 
-  const kicker = language === "id" ? "Motor Listrik Wedison" : "Wedison Electric";
+  const kicker =
+    language === "id" ? "Motor Listrik Wedison" : "Wedison Electric";
 
   return (
     <div>
@@ -91,35 +95,25 @@ export default function ProductPageComponent({ motorType }: Props) {
               {product.hero.desc}
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-              <Link
-                href="https://www.tokopedia.com/wedison-store"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" className="gap-2 bg-white text-foreground hover:bg-white/90">
-                  {/* Sumber 64x77 px (bukan persegi) -> jaga rasio agar tidak gepeng */}
-                  <Image
-                    src="/icons/Tokopedia_Mascot.png"
-                    alt=""
-                    width={20}
-                    height={24}
-                    className="h-6 w-auto"
-                  />
-                  {t("btn.buy.on.tokopedia")}
-                </Button>
-              </Link>
-              <Link
-                href={`/brochure/brochure-${motorType}.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              {/* CTA utama: buka modal booking dengan tujuan "Test Ride" sudah terisi */}
+              <BookingTrigger asChild purpose="testRide" source="product-hero">
                 <Button
                   size="lg"
-                  className="border border-white/40 bg-white/10 text-white hover:bg-white/20"
+                  className="bg-white text-foreground hover:bg-white/90"
                 >
-                  {t("btn.see.brochure")}
+                  {t("btn.testRide.product")}
                 </Button>
-              </Link>
+              </BookingTrigger>
+              <Button
+                asChild
+                size="lg"
+                className="border border-white/40 bg-white/10 text-white hover:bg-white/20"
+              >
+                <LocaleLink href="/showroom">
+                  {/* <MapPin className="h-4 w-4" /> */}
+                  {t("btn.findShowroom")}
+                </LocaleLink>
+              </Button>
             </div>
           </div>
         </div>
@@ -133,23 +127,17 @@ export default function ProductPageComponent({ motorType }: Props) {
             {product.hero.title}
           </span>
           <div className="flex items-center gap-2">
-            <Link
-              href={`/brochure/brochure-${motorType}.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:block"
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
+              className="hidden sm:inline-flex"
             >
-              <Button variant="ghost" size="sm">
-                {t("btn.see.brochure")}
-              </Button>
-            </Link>
-            <Link
-              href="https://www.tokopedia.com/wedison-store"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button size="sm">{t("btn.buy.on.tokopedia")}</Button>
-            </Link>
+              <LocaleLink href="/showroom">{t("btn.findShowroom")}</LocaleLink>
+            </Button>
+            <BookingTrigger asChild purpose="testRide" source="product-subnav">
+              <Button size="sm">{t("btn.testRide.short")}</Button>
+            </BookingTrigger>
           </div>
         </div>
       </div>
@@ -175,7 +163,9 @@ export default function ProductPageComponent({ motorType }: Props) {
                   </span>
                 )}
               </div>
-              <div className="mt-3 text-base font-medium text-muted-foreground">{s.desc}</div>
+              <div className="mt-3 text-base font-medium text-muted-foreground">
+                {s.desc}
+              </div>
             </StaggerItem>
           ))}
         </Stagger>
@@ -193,7 +183,11 @@ export default function ProductPageComponent({ motorType }: Props) {
 
       {/* ============ PRODUCT HIGHLIGHT ============ */}
       <div className="py-8 sm:py-12">
-        <PeekCarousel data={product.productHighlight} for={motorType} perView={1.35} />
+        <PeekCarousel
+          data={product.productHighlight}
+          for={motorType}
+          perView={1.35}
+        />
       </div>
 
       {/* ============ SUPERCHARGE OVERVIEW ============ */}
@@ -211,12 +205,19 @@ export default function ProductPageComponent({ motorType }: Props) {
       {/* ============ SUPERCHARGE HIGHLIGHT ============ */}
       {product.chargingHighlight && (
         <div className="py-8 sm:py-12">
-          <PeekCarousel data={product.chargingHighlight} for="supercharge" perView={1.35} />
+          <PeekCarousel
+            data={product.chargingHighlight}
+            for="supercharge"
+            perView={1.35}
+          />
         </div>
       )}
 
       {/* ============ COMPARISON ============ */}
       <CompareStructure embedded initialColumns={[motorType]} />
+
+      {/* ============ BROSUR (sekunder, sengaja kalem) ============ */}
+      <BrochureStrip motorType={motorType} />
 
       {/* ============ USER MANUAL ============ */}
       <UserManualSection
@@ -249,7 +250,10 @@ function ArtDirectedImage({
 }) {
   const common = { alt, fill: true as const, sizes, priority, className };
   const d = getImageProps({ ...common, src: desktop });
-  const m = mobile && mobile !== desktop ? getImageProps({ ...common, src: mobile }) : null;
+  const m =
+    mobile && mobile !== desktop
+      ? getImageProps({ ...common, src: mobile })
+      : null;
   const MOBILE = "(max-width: 639px)";
   // getImageProps TIDAK menyetel fetchpriority/loading dan tidak membuat <link rel=preload>
   // seperti <Image priority>; keduanya dipasang manual. React 19 menghoist <link> ke <head>,
@@ -278,7 +282,9 @@ function ArtDirectedImage({
           fetchPriority="high"
         />
       )}
-      {m && <source media={MOBILE} srcSet={m.props.srcSet} sizes={m.props.sizes} />}
+      {m && (
+        <source media={MOBILE} srcSet={m.props.srcSet} sizes={m.props.sizes} />
+      )}
       <img
         {...d.props}
         alt={alt}
@@ -306,7 +312,10 @@ function FeatureBlock({
 }) {
   return (
     <section className="main-container py-16 sm:py-24">
-      <Reveal className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl sm:aspect-[16/8]" y={0}>
+      <Reveal
+        className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl sm:aspect-[16/8]"
+        y={0}
+      >
         <ArtDirectedImage
           desktop={image}
           mobile={imageMobile}
@@ -319,7 +328,63 @@ function FeatureBlock({
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
           {title}
         </h2>
-        <div className="mt-4 text-lg leading-relaxed text-muted-foreground">{desc}</div>
+        <div className="mt-4 text-lg leading-relaxed text-muted-foreground">
+          {desc}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+/**
+ * Brosur PDF per model. Sengaja dibuat sebagai strip tipis (bukan section penuh) supaya tidak
+ * bersaing dengan konten utama; letaknya di dekat Buku Panduan karena sama-sama dokumen.
+ */
+const MODEL_NAME: Record<string, string> = {
+  bees: "Bees",
+  athena: "Athena",
+  victory: "Victory",
+  edpower: "EdPower",
+};
+
+function BrochureStrip({ motorType }: { motorType: string }) {
+  const { t } = useLanguage();
+  // hero.title ditulis kapital (BEES) untuk display; kalimat butuh nama model biasa.
+  const model = `Wedison ${MODEL_NAME[motorType] ?? motorType}`;
+  return (
+    <section className="main-container py-6 sm:py-8">
+      <Reveal
+        className="flex flex-col gap-4 rounded-xl border border-border bg-muted/40 p-5 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+        y={16}
+      >
+        <div className="flex items-start gap-3">
+          <FileText
+            className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
+            aria-hidden
+          />
+          <div>
+            <h2 className="text-base font-semibold tracking-tight text-foreground">
+              {t("product.brochure.title").replace("{model}", model)}
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t("product.brochure.desc")}
+            </p>
+          </div>
+        </div>
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="self-start sm:self-auto"
+        >
+          <a
+            href={`/brochure/brochure-${motorType}.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("btn.see.brochure")}
+          </a>
+        </Button>
       </Reveal>
     </section>
   );

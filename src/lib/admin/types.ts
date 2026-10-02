@@ -378,6 +378,8 @@ export const BOOKING_SOURCE_LABEL: Record<string, string> = {
   "nav-sheet": "Mobile menu",
   "landing-hero": "Landing hero",
   "showroom-card": "Showroom card",
+  "product-hero": "Product page hero",
+  "product-subnav": "Product page sticky bar",
   other: "Other",
   unknown: "Unknown",
 };

@@ -148,16 +148,21 @@ const COPY: Record<Lang, Record<string, string>> = {
     Performance: "Performa",
     Fleet: "Armada",
     superLabel: "Jaringan SuperCharge",
-    superTitle: "Stasiun pengisian cepat, tersebar di kota tempat Anda berkendara.",
+    superTitle:
+      "Stasiun pengisian cepat, tersebar di kota tempat Anda berkendara.",
     superCta: "Lihat SuperCharge",
     advLabel: "Keunggulan Wedison",
-    advTitle: "Nyaman untuk perjalanan harian. Tenang untuk tahun-tahun ke depan.",
+    advTitle:
+      "Nyaman untuk perjalanan harian. Tenang untuk tahun-tahun ke depan.",
     adv_charge_t: "Jaringan SuperCharge",
-    adv_charge_d: "Dari 10% ke 80% dalam 15 menit, di jaringan yang terus bertambah.",
+    adv_charge_d:
+      "Dari 10% ke 80% dalam 15 menit, di jaringan yang terus bertambah.",
     adv_battery_t: "Garansi Baterai",
-    adv_battery_d: "Garansi 3 tahun untuk baterai dan 2 tahun untuk unit motor.",
+    adv_battery_d:
+      "Garansi 3 tahun untuk baterai dan 2 tahun untuk unit motor.",
     adv_cost_t: "Biaya Harian Lebih Ringan",
-    adv_cost_d: "Tanpa bensin dan dengan perawatan minimal, pengeluaran harian jauh lebih ringan.",
+    adv_cost_d:
+      "Tanpa bensin dan dengan perawatan minimal, pengeluaran harian jauh lebih ringan.",
     adv_service_t: "Servis & Showroom",
     adv_service_d: "Jaringan showroom dan bengkel resmi yang terus berkembang.",
     exLabel: "Lanjut Jelajahi",
@@ -248,7 +253,8 @@ export default function Landing() {
   const c = COPY[(language as Lang) ?? "id"];
   // Semua link internal WAJIB berprefix locale + trailing slash: tanpa itu tiap klik/crawl
   // lewat dua redirect (307 locale dari middleware + 308 trailing slash).
-  const href = (path: string) => (path.startsWith("/") ? `/${language}${path}` : path);
+  const href = (path: string) =>
+    path.startsWith("/") ? `/${language}${path}` : path;
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [selected, setSelected] = React.useState(0);
@@ -328,12 +334,18 @@ export default function Landing() {
                         </p>
                         <div className="mt-8">
                           {"booking" in s && s.booking ? (
-                            <BookingTrigger asChild purpose="testRide" source="landing-hero">
+                            <BookingTrigger
+                              asChild
+                              purpose="testRide"
+                              source="landing-hero"
+                            >
                               <Button size="lg">{c[`h_${s.id}_cta`]}</Button>
                             </BookingTrigger>
                           ) : (
                             <Button asChild size="lg">
-                              <Link href={href(s.href)}>{c[`h_${s.id}_cta`]}</Link>
+                              <Link href={href(s.href)}>
+                                {c[`h_${s.id}_cta`]}
+                              </Link>
                             </Button>
                           )}
                         </div>
@@ -448,12 +460,12 @@ export default function Landing() {
               alt="SuperCharge"
               fill
               sizes="(max-width: 1280px) 100vw, 1280px"
-              className="object-cover object-[40%_100%]"
+              className="object-cover object-[20%_100%] "
             />
             {/* Brand tint + right-side darkening so the text stays legible (subject is on the left) */}
             {/* <div className="absolute inset-0 bg-forest/45" /> */}
             {/* <div className="absolute inset-0 bg-gradient-to-l from-forest via-forest/70 to-transparent" /> */}
-            <div className="relative flex h-full min-h-[460px] items-center justify-end px-6 py-16 sm:min-h-[540px] sm:px-14 sm:py-24">
+            <div className="relative flex h-full min-h-[460px] items-center justify-end px-6 py-16 sm:min-h-[540px] sm:px-14 sm:py-24 bg-black/60 md:bg-black/0">
               <div className="max-w-lg">
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-on-forest-accent">
                   {c.superLabel}

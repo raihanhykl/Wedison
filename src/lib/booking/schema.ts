@@ -22,6 +22,8 @@ export const BOOKING_SOURCES = [
   "nav-sheet",
   "landing-hero",
   "showroom-card",
+  "product-hero",
+  "product-subnav",
   "other",
 ] as const;
 export type BookingSource = (typeof BOOKING_SOURCES)[number];

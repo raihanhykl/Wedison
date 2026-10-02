@@ -39,8 +39,13 @@ export const id = {
 
   // buttons
   "btn.learn.more": "Pelajari Lebih Lanjut",
-  "btn.buy.on.tokopedia": "Beli di Tokopedia",
   "btn.see.brochure": "Lihat Brosur",
+  "btn.testRide.product": "Jadwalkan Test Ride",
+  "btn.testRide.short": "Jadwalkan Test Ride",
+  "btn.findShowroom": "Cari Showroom Terdekat",
+  "product.brochure.title": "Brosur {model}",
+  "product.brochure.desc":
+    "Spesifikasi lengkap dan fitur unggulan dalam satu PDF, praktis untuk disimpan atau dibagikan.",
   "btn.order.now": "Pesan Sekarang",
 
   // user manual
@@ -144,7 +149,8 @@ export const id = {
   "career.section.description":
     "Temukan peran yang paling sesuai dengan keahlian dan minat Anda.",
   "career.card.viewDetails": "Lihat Detail",
-  "career.card.previewText": "Klik untuk melihat detail posisi dan kualifikasinya",
+  "career.card.previewText":
+    "Klik untuk melihat detail posisi dan kualifikasinya",
   "career.detail.jobOverview": "Job Overview",
   "career.detail.keyResponsibilities": "Key Responsibilities",
   "career.detail.qualifications": "Qualifications & Requirements",
@@ -269,7 +275,8 @@ export const id = {
   "footer.cookiePolicy": "Kebijakan Cookie",
   "footer.cookieSettings": "Pengaturan Cookie",
   "consent.title": "Situs ini menggunakan cookie",
-  "consent.body": "Cookie yang wajib memastikan situs berjalan dengan baik. Dengan izin Anda, kami juga menggunakan cookie analitik untuk memahami cara situs digunakan, dan cookie pemasaran untuk mengukur efektivitas iklan. Pilihan ini bisa Anda ubah kapan saja.",
+  "consent.body":
+    "Cookie yang wajib memastikan situs berjalan dengan baik. Dengan izin Anda, kami juga menggunakan cookie analitik untuk memahami cara situs digunakan, dan cookie pemasaran untuk mengukur efektivitas iklan. Pilihan ini bisa Anda ubah kapan saja.",
   "consent.policyLink": "Kebijakan Cookie",
   "consent.acceptAll": "Terima Semua",
   "consent.rejectAll": "Tolak Semua",
@@ -277,13 +284,17 @@ export const id = {
   "consent.save": "Simpan Pilihan",
   "consent.alwaysOn": "Selalu aktif",
   "consent.prefs.title": "Preferensi Cookie",
-  "consent.prefs.description": "Pilih kategori cookie yang Anda izinkan. Pilihan ini tersimpan di browser Anda selama 6 bulan.",
+  "consent.prefs.description":
+    "Pilih kategori cookie yang Anda izinkan. Pilihan ini tersimpan di browser Anda selama 6 bulan.",
   "consent.cat.necessary.title": "Wajib",
-  "consent.cat.necessary.desc": "Dibutuhkan agar situs berfungsi, misalnya untuk mengingat pilihan bahasa dan preferensi cookie ini. Tidak dapat dinonaktifkan.",
+  "consent.cat.necessary.desc":
+    "Dibutuhkan agar situs berfungsi, misalnya untuk mengingat pilihan bahasa dan preferensi cookie ini. Tidak dapat dinonaktifkan.",
   "consent.cat.analytics.title": "Analitik",
-  "consent.cat.analytics.desc": "Membantu kami memahami halaman mana yang paling sering dikunjungi dan bagaimana situs digunakan, dalam bentuk statistik anonim (Google Analytics melalui Google Tag Manager).",
+  "consent.cat.analytics.desc":
+    "Membantu kami memahami halaman mana yang paling sering dikunjungi dan bagaimana situs digunakan, dalam bentuk statistik anonim (Google Analytics melalui Google Tag Manager).",
   "consent.cat.marketing.title": "Pemasaran",
-  "consent.cat.marketing.desc": "Digunakan untuk mengukur efektivitas iklan dan menampilkan iklan yang relevan di platform lain (Meta Pixel, Google Ads).",
+  "consent.cat.marketing.desc":
+    "Digunakan untuk mengukur efektivitas iklan dan menampilkan iklan yang relevan di platform lain (Meta Pixel, Google Ads).",
   "footer.meetus": "Kunjungi Kami",
   "footer.career": "Karier",
 
@@ -338,7 +349,8 @@ export const id = {
   "about.tag": "Tentang Kami",
   "about.title": "Mengenal",
   "about.titleHighlight": "Wedison Group",
-  "about.overview.title": "Motor Listrik dan Jaringan Pengisiannya, dalam Satu Ekosistem",
+  "about.overview.title":
+    "Motor Listrik dan Jaringan Pengisiannya, dalam Satu Ekosistem",
   "about.overview.p1":
     "Wedison adalah perusahaan motor listrik pertama di Indonesia dengan teknologi pengisian cepat. Bagi kami, menjual motor saja tidak cukup. Kami juga membangun jaringan pengisian daya yang membuat motor listrik benar-benar praktis untuk dipakai setiap hari.",
   "about.overview.p2":
@@ -519,7 +531,8 @@ export const id = {
     "Pilih warna EdPower favorit Anda dan lihat tampilannya.",
 
   "edmax.specs.title": "Spesifikasi",
-  "edmax.specs.description": "Spesifikasi teknis lengkap motor listrik EdPower.",
+  "edmax.specs.description":
+    "Spesifikasi teknis lengkap motor listrik EdPower.",
   "edmax.specs.engine": "Mesin",
   "edmax.specs.battery": "Baterai",
   "edmax.specs.brake": "Rem",
@@ -570,13 +583,15 @@ export const id = {
 
   "edpower.productPage.productHighlight3.imageAlt":
     "Tampilan belakang tiga perempat menonjolkan postur EdPower yang lebar dan jok ekstra luas",
-  "edpower.productPage.productHighlight3.title": "Jok Lebar, Posisi Duduk Rileks",
+  "edpower.productPage.productHighlight3.title":
+    "Jok Lebar, Posisi Duduk Rileks",
   "edpower.productPage.productHighlight3.description":
     "Jok lebar yang empuk dan posisi duduk yang santai membuat perjalanan panjang tidak cepat melelahkan, bagi pengendara maupun penumpang.",
 
   "edpower.productPage.productHighlight4.imageAlt":
     "Tampilan depan menampilkan lampu LED canggih dan bodi modern",
-  "edpower.productPage.productHighlight4.title": "Desain yang Langsung Dikenali",
+  "edpower.productPage.productHighlight4.title":
+    "Desain yang Langsung Dikenali",
   "edpower.productPage.productHighlight4.description":
     "Wajah depan yang tegas, lampu LED menyeluruh, dan lekuk bodi belakang yang rapi. EdPower tampil beda, bahkan saat terparkir.",
 
@@ -664,7 +679,8 @@ export const id = {
 
   "dash.color.title": "Tentukan",
   "dash.color.titleHighlight": "Warna Anda",
-  "dash.color.description": "Pilih warna Dash favorit Anda dan lihat tampilannya.",
+  "dash.color.description":
+    "Pilih warna Dash favorit Anda dan lihat tampilannya.",
 
   "dash.specs.title": "Spesifikasi",
   "dash.specs.description": "Spesifikasi teknis lengkap motor listrik Dash.",
@@ -727,7 +743,8 @@ export const id = {
   "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
   "victory.productPage.productOverview.imageAlt": "Victory Abu-Abu",
-  "victory.productPage.productOverview.title": "Sporty di Tampilan, Lincah di Jalanan",
+  "victory.productPage.productOverview.title":
+    "Sporty di Tampilan, Lincah di Jalanan",
   "victory.productPage.productOverview.description":
     "Victory dibuat untuk jalanan kota. Wheelbase yang panjang membuatnya stabil, rem cakram CBS di kedua roda membuat pengereman lebih terkendali, dan jarak tempuhnya mencapai 120 km dalam sekali pengisian. Saat baterai menipis, SuperCharge mengisinya kembali dalam 15 menit.",
 
@@ -738,7 +755,8 @@ export const id = {
 
   "victory.productPage.productHighlight2.imageAlt":
     "Tampilan tiga perempat depan menunjukkan ban lebar dan suspensi",
-  "victory.productPage.productHighlight2.title": "Stabil di Berbagai Kondisi Jalan",
+  "victory.productPage.productHighlight2.title":
+    "Stabil di Berbagai Kondisi Jalan",
   "victory.productPage.productHighlight2.description":
     "Ban lebar dengan cengkeraman kuat dan suspensi hidrolik menjaga Victory tetap mantap, di aspal mulus maupun jalan berlubang.",
 
@@ -759,8 +777,8 @@ export const id = {
   "victory.productPage.chargingHighlight1.title": "SuperCharge, Secepat Itu",
   "victory.productPage.chargingHighlight1.description": (
     <>
-      Dari 10% ke 80% dalam 15 menit, pas untuk jeda singkat di tengah hari
-      yang padat. Tersedia di seluruh showroom Wedison.{" "}
+      Dari 10% ke 80% dalam 15 menit, pas untuk jeda singkat di tengah hari yang
+      padat. Tersedia di seluruh showroom Wedison.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
       </LocaleLink>
@@ -851,7 +869,8 @@ export const id = {
   "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
   "athena.productPage.productOverview.imageAlt": "Athena Hijau",
-  "athena.productPage.productOverview.title": "Bentuk Klasik, Bertenaga Listrik",
+  "athena.productPage.productOverview.title":
+    "Bentuk Klasik, Bertenaga Listrik",
   "athena.productPage.productOverview.description":
     "Athena mengambil siluet skuter Eropa klasik dan menggantikan mesinnya dengan penggerak listrik. Hasilnya, motor yang menarik perhatian tanpa suara bising. Jarak tempuhnya hingga 120 km dalam sekali pengisian, dengan rem cakram CBS di kedua roda dan suspensi hidrolik. Isi daya cepat di showroom Wedison, atau perlahan di rumah.",
 
@@ -945,7 +964,8 @@ export const id = {
   "bees.feature2.description":
     "Bees termasuk dalam program subsidi motor listrik pemerintah. Biaya hariannya ringan, dan cukup diisi dari stopkontak rumah.",
 
-  "bees.color.description": "Pilih warna Bees favorit Anda dan lihat tampilannya.",
+  "bees.color.description":
+    "Pilih warna Bees favorit Anda dan lihat tampilannya.",
 
   // ===
 
@@ -1096,7 +1116,8 @@ export const id = {
 
   "supercharge.feature1.tag": "Cepat dan Andal",
   "supercharge.feature1.title": "Lima Belas Menit, Bukan Lima Jam",
-  "supercharge.feature1.subtitle": "Lebih singkat, tanpa mengorbankan umur baterai",
+  "supercharge.feature1.subtitle":
+    "Lebih singkat, tanpa mengorbankan umur baterai",
   "supercharge.feature1.description":
     "SuperCharge mengisi baterai dari 10% ke 80% dalam 15 menit. Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
 
@@ -1129,7 +1150,8 @@ export const id = {
 
   "supercharge.app.feature1.icon": "MapPin",
   "supercharge.app.feature1.title": "Temukan Stasiun Terdekat",
-  "supercharge.app.feature1.subtitle": "Titik pengisian di sekitar Anda, dalam satu peta",
+  "supercharge.app.feature1.subtitle":
+    "Titik pengisian di sekitar Anda, dalam satu peta",
   "supercharge.app.feature1.description":
     "Semua stasiun SuperCharge tampil di peta, lengkap dengan alamat, jam operasional, dan jumlah charger yang tersedia.",
   "supercharge.app.feature1.bullet1": "Peta interaktif dengan navigasi GPS",
@@ -1207,8 +1229,8 @@ export const id = {
   "form.agreePrivacy.description": (
     <>
       Saya mengizinkan PT Wedison menggunakan data di atas dan menghubungi saya
-      melalui email, telepon, atau sarana komunikasi lain untuk keperluan layanan
-      pelanggan, sesuai dengan{" "}
+      melalui email, telepon, atau sarana komunikasi lain untuk keperluan
+      layanan pelanggan, sesuai dengan{" "}
       {/* <Link href="/" className="underline text-blue-400">
           persetujuan privasi.
         </Link> */}
@@ -1257,16 +1279,17 @@ export const id = {
 
   // Battery Questions
   "faq.Battery.questions.0.question": "Berapa lama garansi baterainya?",
-  "faq.Battery.questions.0.answer": "Baterai Wedison dilindungi garansi selama 3 tahun.",
+  "faq.Battery.questions.0.answer":
+    "Baterai Wedison dilindungi garansi selama 3 tahun.",
   "faq.Battery.questions.1.question":
     "Berapa lama waktu mengisi baterai hingga penuh?",
   "faq.Battery.questions.1.answer":
     "Wedison SuperCharge: 10% ke 80% dalam 15 menit, atau 10% ke 95% dalam 20 menit.\nWedison Regular Charge: bervariasi tergantung adaptor dan kapasitas baterai, antara 2 hingga 10 jam.",
-  "faq.Battery.questions.2.question": "Baterai jenis apa yang digunakan Wedison?",
+  "faq.Battery.questions.2.question":
+    "Baterai jenis apa yang digunakan Wedison?",
   "faq.Battery.questions.2.answer":
     "Wedison menggunakan baterai Lithium-ion (LFP), teknologi yang sama dengan yang dipakai smartphone, laptop, dan mobil listrik.\n\nKeunggulannya:\nA. Padat energi: menyimpan daya besar dalam ukuran yang ringkas dan ringan.\nB. Tahan panas: tetap bekerja optimal hingga suhu 45 derajat Celsius.\nC. Minim kebocoran daya: daya tetap tersimpan meski motor tidak dipakai berhari-hari.\nD. Awet: mampu lebih dari 5.000 siklus pengisian dengan kapasitas yang tetap terjaga.\nE. Cepat diisi: di stasiun SuperCharge, baterai terisi dari 10% ke 80% dalam 15 menit.",
-  "faq.Battery.questions.3.question":
-    "Ada berapa pilihan baterai?",
+  "faq.Battery.questions.3.question": "Ada berapa pilihan baterai?",
   "faq.Battery.questions.3.answer":
     "Untuk model tertentu tersedia dua pilihan: Regular dan Extended.\nJarak tempuhnya berbeda-beda tergantung model, mulai dari 80 km hingga 200 km dalam sekali pengisian.",
   "faq.Battery.questions.4.question": "Siapa yang mengembangkan baterainya?",
@@ -1377,7 +1400,8 @@ export const id = {
   "faq.Safety.questions.1.question": "Sistem rem apa yang digunakan?",
   "faq.Safety.questions.1.answer":
     "CBS (Combined Braking System), yang membagi daya pengereman ke roda depan dan belakang secara otomatis saat tuas rem ditarik:\nAthena, Victory, dan EdPower\n\nRem cakram di roda depan dan belakang:\nBees",
-  "faq.Safety.questions.2.question": "Motor penggerak jenis apa yang digunakan?",
+  "faq.Safety.questions.2.question":
+    "Motor penggerak jenis apa yang digunakan?",
   "faq.Safety.questions.2.answer":
     "Semua model Wedison menggunakan motor DC brushless (BLDC), yang dikenal efisien, bertorsi besar, dan berumur panjang.\n\nTipenya satu:\nDC Brushless Rear Hub Motor, dengan kecepatan hingga 90 km/jam (Bees, Athena, Victory, EdPower).",
 
@@ -1395,9 +1419,11 @@ export const id = {
   "faq.Servicing.questions.3.answer":
     "Tersedia. Wedison menyediakan suku cadang asli untuk seluruh modelnya.",
   "faq.Servicing.questions.4.question": "Apakah baterai bergaransi?",
-  "faq.Servicing.questions.4.answer": "Ya. Baterai dilindungi garansi selama 3 tahun.",
+  "faq.Servicing.questions.4.answer":
+    "Ya. Baterai dilindungi garansi selama 3 tahun.",
   "faq.Servicing.questions.5.question": "Apakah motor bergaransi?",
-  "faq.Servicing.questions.5.answer": "Ya. Unit motor dilindungi garansi selama 2 tahun.",
+  "faq.Servicing.questions.5.answer":
+    "Ya. Unit motor dilindungi garansi selama 2 tahun.",
   "faq.Servicing.questions.6.question":
     "Berapa biaya perbaikan motor, dinamo, dan komponen lainnya?",
   "faq.Servicing.questions.6.answer":
@@ -1416,7 +1442,8 @@ export const id = {
     "Tidak ada komponen yang bergaransi seumur hidup.\nSuku cadang yang diganti selama masa garansi hanya ditanggung hingga sisa periode garansi awal.\nUntuk suku cadang yang dibeli atau diganti di luar garansi, masa garansinya dihitung sejak tanggal pembelian atau penggantian.",
 
   // Smart Features Questions
-  "faq.SmartFeatures.questions.0.question": "Fitur pintar apa saja yang tersedia?",
+  "faq.SmartFeatures.questions.0.question":
+    "Fitur pintar apa saja yang tersedia?",
   "faq.SmartFeatures.questions.0.answer":
     "Melalui aplikasi Wedison, model tertentu bisa dinyalakan dan dimatikan dari ponsel lewat koneksi Bluetooth.\nFitur lainnya akan hadir pada pembaruan aplikasi berikutnya.",
 
@@ -1590,7 +1617,8 @@ export const id = {
   "booking.placeholder.time": "Pilih waktu",
   "booking.time.pickDateFirst": "Pilih showroom dan tanggal terlebih dahulu",
   "booking.time.none": "Tidak ada slot yang tersisa",
-  "booking.hoursHint": "Jam operasional: Senin–Jumat 10.00–19.00, Sabtu–Minggu 10.00–17.00.",
+  "booking.hoursHint":
+    "Jam operasional: Senin–Jumat 10.00–19.00, Sabtu–Minggu 10.00–17.00.",
   "booking.field.note": "Catatan",
   "booking.placeholder.note": "Contoh: ingin mencoba Athena, datang berdua",
   "booking.submit": "Kirim dan Lanjutkan ke WhatsApp",
@@ -1606,11 +1634,13 @@ export const id = {
   "booking.error.date": "Pilih tanggal kunjungan",
   "booking.error.time": "Pilih waktu kunjungan",
   "booking.error.note": "Catatan terlalu panjang (maks. 500 karakter)",
-  "booking.error.recaptcha": "Centang verifikasi \"Saya bukan robot\" terlebih dahulu.",
+  "booking.error.recaptcha":
+    'Centang verifikasi "Saya bukan robot" terlebih dahulu.',
   "booking.error.submit.title": "Permintaan belum terkirim",
   "booking.error.submit.desc":
     "Silakan coba beberapa saat lagi, atau hubungi kami langsung melalui WhatsApp.",
-  "booking.error.rateLimited": "Terlalu banyak percobaan. Silakan coba lagi dalam beberapa menit.",
+  "booking.error.rateLimited":
+    "Terlalu banyak percobaan. Silakan coba lagi dalam beberapa menit.",
   "booking.error.slot": "Slot tersebut sudah terisi. Silakan pilih waktu lain.",
   "booking.success.title": "Terima kasih, {name}!",
   "booking.success.desc":
