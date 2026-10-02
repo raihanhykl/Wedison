@@ -309,13 +309,7 @@ export const en = {
   "footer.career": "Career",
 
   // Showroom Page
-  "showroom.title": "Visit Our",
-  "showroom.titleHighlight": "Showroom",
-  "showroom.description":
-    "See the range in person and ride one yourself before making a decision.",
   "showroom.tag": "Experience Center",
-  "showroom.location": "Our Locations",
-  "showroom.findUs": "Find Us",
   "showroom.address":
     "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
   "showroom.jakarta.name": "Wedison Jakarta",
@@ -328,20 +322,13 @@ export const en = {
   "showroom.bekasi.name": "Wedison Bekasi",
   "showroom.bekasi.address":
     "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, East Bekasi, Bekasi City, West Java 17113",
-  "showroom.locationDescription":
-    "Choose a showroom to see its location on the map. Every location includes a showroom and an official service center.",
   "showroom.bali.address":
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
-  "showroom.facility.showroom": "Showroom",
-  "showroom.facility.service": "Service Center",
-  "showroom.viewOnMaps": "View on Maps",
-  "showroom.hours": "Opening Hours",
   "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
   "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
-  "showroom.whatYouCanDo": "What You Can Do at the Showroom",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
-    "Ride in our test area and assess the acceleration and comfort for yourself before buying.",
+    "Ride around the showroom area with our team beside you. It's free, and you don't need to bring an ID or licence.",
   "showroom.consultation.title": "Product Consultation",
   "showroom.consultation.description":
     "Unsure which model suits you? Describe how you ride and our team will narrow down the options.",
@@ -352,7 +339,72 @@ export const en = {
   "showroom.service.description":
     "Official servicing and genuine parts, carried out by technicians trained on Wedison motorcycles.",
   "showroom.bookVisit": "Book a Visit",
-  "showroom.viewModels": "Go to Showroom",
+
+  // showroom page (redesign 2026-10)
+  "showroomPage.hero.imageAlt":
+    "Visitors looking at the Wedison electric motorcycle lineup with the showroom team",
+  "showroomPage.hero.title": "Meet Wedison up close.",
+  "showroomPage.hero.desc":
+    "See every model in person, take one out on the road with our team, and sort out advice, financing and servicing in a single visit.",
+  "showroomPage.hero.ctaPrimary": "Book a Test Ride",
+  "showroomPage.hero.ctaSecondary": "See Locations",
+  "showroomPage.hero.fact1": "Free test rides",
+  "showroomPage.hero.fact2": "No ID or licence needed",
+  "showroomPage.hero.fact3": "Walk-ins welcome",
+  "showroomPage.locations.title": "Find a showroom near you",
+  "showroomPage.locations.desc":
+    "Every location is a showroom and an official service centre, with SuperCharge on site. Pick a card to see it on the map.",
+  "showroomPage.locations.countOpen": "{n} open",
+  "showroomPage.locations.countUpcoming": "{n} coming soon",
+  "showroomPage.locations.prev": "Previous showroom",
+  "showroomPage.locations.next": "Next showroom",
+  "showroomPage.locations.showAll": "Show all",
+  "showroomPage.locations.listLabel": "Showrooms in {country}",
+  "showroomPage.card.showOnMap": "Show {name} on the map",
+  "showroomPage.card.facilities": "Showroom · Service · SuperCharge",
+  "showroomPage.card.openUntil": "Open · closes {time}",
+  "showroomPage.card.closedUntil": "Closed · opens {time}",
+  "showroomPage.card.weekdays": "Mon–Fri",
+  "showroomPage.card.weekend": "Sat–Sun",
+  "showroomPage.card.directions": "Directions",
+  "showroomPage.upcoming.label": "Coming soon",
+  "showroomPage.upcoming.desc": "Our next Experience Center is on its way. Stay tuned.",
+  "showroomPage.activities.title": "One visit covers it all.",
+  "showroomPage.activities.desc":
+    "From trying a motorcycle to planning its servicing, our team is ready to help at every location.",
+  "showroomPage.steps.title": "How your visit works",
+  "showroomPage.steps.1.title": "Pick a time",
+  "showroomPage.steps.1.desc":
+    "Booking on this site takes about a minute. Walk-ins are welcome too, but booking means you won't wait for your turn.",
+  "showroomPage.steps.2.title": "Come to the showroom",
+  "showroomPage.steps.2.desc":
+    "Our team helps you choose the model that fits your daily routine. No ID or licence needed.",
+  "showroomPage.steps.3.title": "Take it for a ride",
+  "showroomPage.steps.3.desc":
+    "Ride around the area with a Wedison team member, then head back to talk it through. It's all free.",
+  "showroomPage.faq.title": "Before you visit",
+  "showroomPage.faq.desc": "Still have a question? Our team is happy to help on WhatsApp.",
+  "showroomPage.faq.whatsapp": "Ask on WhatsApp",
+  "showroomPage.faq.q1": "Is there a charge for a test ride?",
+  "showroomPage.faq.a1": "No. Test rides are free at every Wedison showroom.",
+  "showroomPage.faq.q2": "Do I need to bring an ID or a driving licence?",
+  "showroomPage.faq.a2":
+    "No. Test rides take place around the showroom and are always accompanied by the Wedison team.",
+  "showroomPage.faq.q3": "How long does a test ride take?",
+  "showroomPage.faq.a3":
+    "Not long. You ride around the showroom area with our team, then come back to talk it over or try another model.",
+  "showroomPage.faq.q4": "Do I need to book in advance?",
+  "showroomPage.faq.a4":
+    "You're welcome to walk in. We do recommend booking first so your visit doesn't overlap with other customers.",
+  "showroomPage.faq.q5": "Can I get my motorcycle serviced and charged at the showroom?",
+  "showroomPage.faq.a5":
+    "Yes. Every Wedison showroom is also an official service centre and has a SuperCharge station.",
+  "showroomPage.faq.q6": "When are the showrooms open?",
+  "showroomPage.faq.a6":
+    "Monday to Friday 10:00–19:00, Saturday and Sunday 10:00–17:00, local time.",
+  "showroomPage.cta.title": "We look forward to seeing you.",
+  "showroomPage.cta.desc":
+    "Choose the showroom and time that suit you. We'll confirm it on WhatsApp.",
 
   // About Us
   "about.tag": "Our Story",

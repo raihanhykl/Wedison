@@ -380,6 +380,9 @@ export const BOOKING_SOURCE_LABEL: Record<string, string> = {
   "showroom-card": "Showroom card",
   "product-hero": "Product page hero",
   "product-subnav": "Product page sticky bar",
+  "showroom-hero": "Showroom page hero",
+  "showroom-steps": "Showroom page visit steps",
+  "showroom-cta": "Showroom page closing CTA",
   other: "Other",
   unknown: "Unknown",
 };

@@ -300,13 +300,7 @@ export const id = {
 
   //showroom
 
-  "showroom.title": "Kunjungi",
-  "showroom.titleHighlight": "Showroom Kami",
-  "showroom.description":
-    "Lihat langsung, duduki, dan rasakan sendiri motor listrik Wedison sebelum menentukan pilihan.",
   "showroom.tag": "Experience Center",
-  "showroom.location": "Lokasi Showroom",
-  "showroom.findUs": "Temukan Kami",
   "showroom.address":
     "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
   "showroom.jakarta.name": "Wedison Jakarta",
@@ -319,20 +313,13 @@ export const id = {
   "showroom.bekasi.name": "Wedison Bekasi",
   "showroom.bekasi.address":
     "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, Kec. Bekasi Timur, Kota Bekasi, Jawa Barat 17113",
-  "showroom.locationDescription":
-    "Pilih showroom untuk melihat lokasinya di peta. Setiap lokasi dilengkapi showroom sekaligus pusat servis resmi.",
   "showroom.bali.address":
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
-  "showroom.facility.showroom": "Showroom",
-  "showroom.facility.service": "Pusat Servis",
-  "showroom.viewOnMaps": "Lihat di Maps",
-  "showroom.hours": "Jam Buka",
   "showroom.weekdays": "Senin - Jumat: 10.00 - 19.00",
   "showroom.weekend": "Sabtu - Minggu: 10.00 - 17.00",
-  "showroom.whatYouCanDo": "Apa yang Bisa Anda Lakukan di Showroom",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
-    "Coba langsung di area uji kami. Rasakan tarikan dan kenyamanannya sebelum Anda memutuskan.",
+    "Coba langsung di sekitar showroom, didampingi tim kami. Gratis, dan Anda tidak perlu membawa KTP atau SIM.",
   "showroom.consultation.title": "Konsultasi Produk",
   "showroom.consultation.description":
     "Belum yakin model mana yang tepat? Ceritakan rutinitas harian Anda, dan tim kami akan membantu memilihkan yang paling sesuai.",
@@ -343,7 +330,74 @@ export const id = {
   "showroom.service.description":
     "Servis resmi dengan suku cadang asli, ditangani teknisi yang memahami setiap detail motor listrik Wedison.",
   "showroom.bookVisit": "Jadwalkan Kunjungan",
-  "showroom.viewModels": "Kunjungi Showroom",
+
+  // showroom page (redesign 2026-10)
+  "showroomPage.hero.imageAlt":
+    "Pengunjung melihat jajaran motor listrik Wedison bersama tim showroom",
+  "showroomPage.hero.title": "Kenali Wedison dari dekat.",
+  "showroomPage.hero.desc":
+    "Lihat setiap model secara langsung, coba di jalan bersama tim kami, lalu urus konsultasi, pembiayaan, hingga servis dalam satu kunjungan.",
+  "showroomPage.hero.ctaPrimary": "Jadwalkan Test Ride",
+  "showroomPage.hero.ctaSecondary": "Lihat Lokasi",
+  "showroomPage.hero.fact1": "Test ride gratis",
+  "showroomPage.hero.fact2": "Tanpa perlu KTP atau SIM",
+  "showroomPage.hero.fact3": "Boleh langsung datang",
+  "showroomPage.locations.title": "Pilih showroom terdekat",
+  "showroomPage.locations.desc":
+    "Setiap lokasi adalah showroom sekaligus pusat servis resmi, lengkap dengan SuperCharge. Pilih kartu untuk melihat lokasinya di peta.",
+  "showroomPage.locations.countOpen": "{n} lokasi buka",
+  "showroomPage.locations.countUpcoming": "{n} segera hadir",
+  "showroomPage.locations.prev": "Showroom sebelumnya",
+  "showroomPage.locations.next": "Showroom berikutnya",
+  "showroomPage.locations.showAll": "Lihat semua",
+  "showroomPage.locations.listLabel": "Daftar showroom di {country}",
+  "showroomPage.card.showOnMap": "Tampilkan {name} di peta",
+  "showroomPage.card.facilities": "Showroom · Servis · SuperCharge",
+  "showroomPage.card.openUntil": "Buka · tutup {time}",
+  "showroomPage.card.closedUntil": "Tutup · buka {time}",
+  "showroomPage.card.weekdays": "Sen–Jum",
+  "showroomPage.card.weekend": "Sab–Min",
+  "showroomPage.card.directions": "Rute",
+  "showroomPage.upcoming.label": "Segera hadir",
+  "showroomPage.upcoming.desc":
+    "Experience Center berikutnya sedang kami siapkan. Nantikan kabarnya.",
+  "showroomPage.activities.title": "Satu kunjungan, semua beres.",
+  "showroomPage.activities.desc":
+    "Dari mencoba motor sampai merencanakan servis berkala, tim kami siap membantu di setiap lokasi.",
+  "showroomPage.steps.title": "Begini alur kunjungan Anda",
+  "showroomPage.steps.1.title": "Pilih jadwal",
+  "showroomPage.steps.1.desc":
+    "Booking lewat situs ini hanya butuh satu menit. Datang langsung juga boleh, tetapi dengan booking Anda tidak perlu menunggu giliran.",
+  "showroomPage.steps.2.title": "Datang ke showroom",
+  "showroomPage.steps.2.desc":
+    "Tim kami membantu memilih model yang paling cocok untuk kebutuhan harian Anda. Tidak perlu membawa KTP atau SIM.",
+  "showroomPage.steps.3.title": "Coba di jalan",
+  "showroomPage.steps.3.desc":
+    "Berkendara di sekitar showroom bersama tim Wedison, lalu kembali untuk berdiskusi lebih lanjut. Semuanya gratis.",
+  "showroomPage.faq.title": "Sebelum Anda datang",
+  "showroomPage.faq.desc":
+    "Masih ada yang ingin ditanyakan? Tim kami siap membantu lewat WhatsApp.",
+  "showroomPage.faq.whatsapp": "Tanya lewat WhatsApp",
+  "showroomPage.faq.q1": "Apakah test ride dikenakan biaya?",
+  "showroomPage.faq.a1": "Tidak. Test ride di semua showroom Wedison gratis.",
+  "showroomPage.faq.q2": "Apakah saya perlu membawa KTP atau SIM?",
+  "showroomPage.faq.a2":
+    "Tidak perlu. Test ride dilakukan di sekitar showroom dan selalu didampingi tim Wedison.",
+  "showroomPage.faq.q3": "Berapa lama test ride berlangsung?",
+  "showroomPage.faq.a3":
+    "Cukup singkat. Anda berkendara di sekitar showroom bersama tim kami, lalu kembali ke showroom untuk berdiskusi atau mencoba model lain.",
+  "showroomPage.faq.q4": "Apakah harus booking terlebih dahulu?",
+  "showroomPage.faq.a4":
+    "Anda boleh datang langsung. Namun kami sarankan booking terlebih dahulu agar jadwal Anda tidak bersamaan dengan pengunjung lain.",
+  "showroomPage.faq.q5": "Apakah saya bisa servis dan mengisi daya di showroom?",
+  "showroomPage.faq.a5":
+    "Bisa. Setiap showroom Wedison juga merupakan pusat servis resmi dan dilengkapi stasiun SuperCharge.",
+  "showroomPage.faq.q6": "Kapan showroom buka?",
+  "showroomPage.faq.a6":
+    "Senin sampai Jumat pukul 10.00–19.00, Sabtu dan Minggu pukul 10.00–17.00, mengikuti waktu setempat.",
+  "showroomPage.cta.title": "Kami tunggu kedatangan Anda.",
+  "showroomPage.cta.desc":
+    "Pilih showroom dan jadwal yang paling pas. Konfirmasinya kami kirim lewat WhatsApp.",
 
   // About Us Page
   "about.tag": "Tentang Kami",

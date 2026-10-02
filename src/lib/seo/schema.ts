@@ -15,7 +15,11 @@ import {
   absUrl,
   localeUrl,
 } from "./site";
-import { SHOWROOM_LOCATIONS, SHOWROOM_OPENING_HOURS, type ShowroomLocation } from "./showrooms";
+import {
+  PUBLISHED_SHOWROOM_LOCATIONS,
+  SHOWROOM_OPENING_HOURS,
+  type ShowroomLocation,
+} from "./showrooms";
 
 export type JsonLdObject = Record<string, unknown>;
 
@@ -156,7 +160,7 @@ function dealerSchema(locale: Locale, s: ShowroomLocation): JsonLdObject {
     url: localeUrl(locale, "/showroom"),
     image: absUrl("/og/showroom.jpg"),
     telephone: `+${s.whatsapp}`,
-    address: { "@type": "PostalAddress", ...s.address, addressCountry: "ID" },
+    address: { "@type": "PostalAddress", ...s.address, addressCountry: s.country },
     geo: { "@type": "GeoCoordinates", latitude: s.geo.latitude, longitude: s.geo.longitude },
     hasMap: s.mapsUrl,
     parentOrganization: { "@id": ORG_ID },
@@ -175,7 +179,7 @@ function dealerSchema(locale: Locale, s: ShowroomLocation): JsonLdObject {
 export function showroomsSchema(locale: Locale): JsonLdObject {
   return {
     "@context": "https://schema.org",
-    "@graph": SHOWROOM_LOCATIONS.map((s) => dealerSchema(locale, s)),
+    "@graph": PUBLISHED_SHOWROOM_LOCATIONS.map((s) => dealerSchema(locale, s)),
   };
 }
 

@@ -13,7 +13,6 @@ import { stripLocale } from "@/app/lib/locale";
 const LIGHT_TOP_ROUTES = [
   "/corporate/about/",
   "/corporate/contact/",
-  "/showroom/",
   "/super-charge/locations/",
   "/products/",
   "/cookie-policy/",
