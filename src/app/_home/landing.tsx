@@ -25,6 +25,7 @@ import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
+import { ArtDirectedImage } from "@/components/art-directed-image";
 
 type Lang = "id" | "en";
 
@@ -35,26 +36,40 @@ const NAMES: Record<string, string> = {
   edpower: "EdPower",
 };
 
+// Kartu model: 16:10 di >=640px, 4:5 di mobile -> dua aset terpisah (ArtDirectedImage).
+// SEMENTARA versi mobile = desktop; ganti dengan aset ASET-H2a–d versi 4:5 dari tim GD.
 const MODELS = [
   {
     id: "athena",
     line: "Style",
-    productImage: "/new-looks/01-HERO CARD-LP.webp",
+    productImage: {
+      desktop: "/new-looks/01-HERO CARD-LP.webp",
+      mobile: "/new-looks/01-HERO CARD-LP.webp",
+    },
   },
   {
     id: "bees",
     line: "Commute",
-    productImage: "/new-looks/02-HERO CARD-LP.webp",
+    productImage: {
+      desktop: "/new-looks/02-HERO CARD-LP.webp",
+      mobile: "/new-looks/02-HERO CARD-LP.webp",
+    },
   },
   {
     id: "victory",
     line: "Fleet",
-    productImage: "/new-looks/04-HERO CARD-LP.webp",
+    productImage: {
+      desktop: "/new-looks/04-HERO CARD-LP.webp",
+      mobile: "/new-looks/04-HERO CARD-LP.webp",
+    },
   },
   {
     id: "edpower",
     line: "Performance",
-    productImage: "/new-looks/03-HERO CARD-LP.webp",
+    productImage: {
+      desktop: "/new-looks/03-HERO CARD-LP.webp",
+      mobile: "/new-looks/03-HERO CARD-LP.webp",
+    },
   },
 ] as const;
 
@@ -420,10 +435,10 @@ export default function Landing() {
             >
               {/* Card image reveals on its own viewport entry (opacity) */}
               <Reveal className="absolute inset-0" y={0}>
-                <Image
-                  src={m.productImage}
+                <ArtDirectedImage
+                  desktop={m.productImage.desktop}
+                  mobile={m.productImage.mobile}
                   alt={NAMES[m.id]}
-                  fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
                 />
