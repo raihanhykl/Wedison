@@ -20,8 +20,6 @@ export type ShowroomMapProps = {
   pins: ShowroomPin[];
   selectedId: string | null;
   onSelect: (id: string) => void;
-  /** Ruang bawah (px) yang tertutup deretan kartu — pin dijaga tetap di atasnya. */
-  bottomInset: number;
 };
 
 /**
@@ -30,7 +28,7 @@ export type ShowroomMapProps = {
  * nama hanya muncul untuk pin aktif/hover supaya cabang yang berdekatan (Jakarta–Bekasi)
  * tidak saling tumpuk di zoom negara.
  */
-export default function ShowroomMap({ pins, selectedId, onSelect, bottomInset }: ShowroomMapProps) {
+export default function ShowroomMap({ pins, selectedId, onSelect }: ShowroomMapProps) {
   const mapRef = useRef<MapRef>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -52,8 +50,8 @@ export default function ShowroomMap({ pins, selectedId, onSelect, bottomInset }:
   }, []);
 
   const padding = useCallback(
-    (base: number) => ({ top: base, left: base, right: base, bottom: bottomInset + base }),
-    [bottomInset],
+    (base: number) => ({ top: base, left: base, right: base, bottom: base }),
+    [],
   );
 
   const bounds = useCallback((): LngLatBoundsLike => {
@@ -102,8 +100,8 @@ export default function ShowroomMap({ pins, selectedId, onSelect, bottomInset }:
           ?.classList.remove("maplibregl-compact-show");
       }}
     >
-      {/* Atribusi OSM wajib terlihat: dinaikkan tepat di atas deretan kartu yang menumpang. */}
-      <AttributionControl position="bottom-right" compact style={{ marginBottom: bottomInset + 8 }} />
+      {/* Atribusi OSM wajib terlihat. */}
+      <AttributionControl position="bottom-right" compact />
       <NavigationControl position="top-right" showCompass={false} />
       {pins.map((p) => {
         const active = p.id === selectedId;
