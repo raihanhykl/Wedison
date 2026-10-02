@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/app/lib/language-context";
 import { openCookieSettings } from "@/lib/consent";
+import { ArrowUpRight } from "lucide-react";
+import { WERIGO_URL } from "@/lib/seo/site";
+import { whatsappUrl } from "@/lib/seo/site";
 
 export default function Footer() {
   const { t, language } = useLanguage();
@@ -18,6 +21,17 @@ export default function Footer() {
               {/* Pioneering the future of electric mobility with cutting-edge
               technology and sustainable design. */}
               {t("footer.description")}
+            </p>
+            <p className="mb-3 text-sm text-forest-muted md:mb-4">
+              {t("footer.werigoBridge")}{" "}
+              <a
+                href={WERIGO_URL}
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-on-forest-accent underline-offset-4 hover:underline"
+              >
+                {t("footer.werigoCta")}
+              </a>
             </p>
             <p className="text-sm text-forest-muted md:text-base">
               {/* © {new Date().getFullYear()} Wedison Motors. All rights reserved. */}
@@ -89,6 +103,24 @@ export default function Footer() {
                 <Link href={`/${language}/super-charge/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
                   SuperCharge
                 </Link>
+              </li>
+              {/* Werigo = layanan sewa motor listrik Wedison di Bali (situs terpisah). */}
+              <li>
+                <a
+                  href={WERIGO_URL}
+                  target="_blank"
+                  rel="noopener"
+                  className="group block text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+                >
+                  <span className="inline-flex items-center gap-1">
+                    Werigo
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </span>
+                  <span className="block text-xs text-forest-muted/80 group-hover:text-on-forest-accent/80">
+                    {t("footer.werigo")}
+                  </span>
+                  <span className="sr-only">{t("footer.opensNewTab")}</span>
+                </a>
               </li>
               {/* <li>
                 <a
@@ -243,7 +275,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link
-                      href="https://wa.me/6282124657804"
+                      href={whatsappUrl()}
                       target="_blank" rel="noopener noreferrer"
                       className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
                     >
@@ -253,7 +285,7 @@ export default function Footer() {
                         width={35}
                         height={35}
                       />
-                      {/* +62 821-2465-7804 */}
+                      {/* +62 852-8612-6550 */}
                     </Link>
                   </li>
                   <li>

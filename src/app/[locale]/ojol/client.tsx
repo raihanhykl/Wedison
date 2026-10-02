@@ -18,6 +18,7 @@ import { LocaleLink } from "@/components/locale-link";
 import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { whatsappUrl } from "@/lib/seo/site";
 
 // Campaign meta (translatable strings live in language-context.tsx)
 const campaignMeta = [
@@ -25,7 +26,7 @@ const campaignMeta = [
     id: "milik",
     image: "/ojol/sewa-milik-banner.webp",
     waLink:
-      "https://wa.me/6282124657804?text=Halo%20Wedison,%20saya%20tertarik%20dengan%20program%20Sewa%20Milik",
+      whatsappUrl("Halo Wedison, saya tertarik dengan program Sewa Milik"),
     benefitsCount: 6,
     termsCount: 7,
     schemeCount: 4,
@@ -34,7 +35,7 @@ const campaignMeta = [
     id: "harian",
     image: "/ojol/sewa-harian-banner.webp",
     waLink:
-      "https://wa.me/6282124657804?text=Halo%20Wedison,%20saya%20tertarik%20dengan%20program%20Sewa%20Harian",
+      whatsappUrl("Halo Wedison, saya tertarik dengan program Sewa Harian"),
     benefitsCount: 7,
     termsCount: 8,
     schemeCount: 4,
@@ -857,7 +858,7 @@ export default function OjolClient() {
 
             {/* CTA Button */}
             <Link
-              href="https://wa.me/6282124657804?text=Halo%20Wedison,%20saya%20tertarik%20dengan%20program%20untuk%20driver%20ojol"
+              href={whatsappUrl("Halo Wedison, saya tertarik dengan program untuk driver ojol")}
               target="_blank" rel="noopener noreferrer"
             >
               <Button

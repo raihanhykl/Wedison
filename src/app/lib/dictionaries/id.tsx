@@ -291,6 +291,11 @@ export const id = {
     "Digunakan untuk mengukur efektivitas iklan dan menampilkan iklan yang relevan di platform lain (Meta Pixel, Google Ads).",
   "footer.meetus": "Kunjungi Kami",
   "footer.career": "Karier",
+  "footer.werigo": "Sewa motor listrik di Bali",
+  "footer.werigoBridge":
+    "Berlibur ke Bali? Sewa motor listrik Wedison lewat Werigo, diantar langsung ke tempat Anda menginap.",
+  "footer.werigoCta": "Kunjungi Werigo",
+  "footer.opensNewTab": "(membuka tab baru)",
 
   //showroom
 
