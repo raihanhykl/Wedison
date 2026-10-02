@@ -12,10 +12,15 @@ import {
   SITE_NAME,
   SITE_URL,
   SOCIAL_PROFILES,
+  WERIGO_URL,
   absUrl,
   localeUrl,
 } from "./site";
-import { SHOWROOM_LOCATIONS, SHOWROOM_OPENING_HOURS, type ShowroomLocation } from "./showrooms";
+import {
+  PUBLISHED_SHOWROOM_LOCATIONS,
+  SHOWROOM_OPENING_HOURS,
+  type ShowroomLocation,
+} from "./showrooms";
 
 export type JsonLdObject = Record<string, unknown>;
 
@@ -40,6 +45,16 @@ export function organizationSchema(locale: Locale): JsonLdObject {
     address: { "@type": "PostalAddress", ...HQ_ADDRESS },
     areaServed: { "@type": "Country", name: "Indonesia" },
     sameAs: [...SOCIAL_PROFILES],
+    // Werigo ditautkan di footer setiap halaman -> klaim ini terlihat di konten.
+    subOrganization: {
+      "@type": "Organization",
+      name: "Werigo",
+      url: WERIGO_URL,
+      description:
+        locale === "en"
+          ? "Wedison's electric motorcycle rental service in Bali."
+          : "Layanan sewa motor listrik Wedison di Bali.",
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -156,7 +171,7 @@ function dealerSchema(locale: Locale, s: ShowroomLocation): JsonLdObject {
     url: localeUrl(locale, "/showroom"),
     image: absUrl("/og/showroom.jpg"),
     telephone: `+${s.whatsapp}`,
-    address: { "@type": "PostalAddress", ...s.address, addressCountry: "ID" },
+    address: { "@type": "PostalAddress", ...s.address, addressCountry: s.country },
     geo: { "@type": "GeoCoordinates", latitude: s.geo.latitude, longitude: s.geo.longitude },
     hasMap: s.mapsUrl,
     parentOrganization: { "@id": ORG_ID },
@@ -175,7 +190,7 @@ function dealerSchema(locale: Locale, s: ShowroomLocation): JsonLdObject {
 export function showroomsSchema(locale: Locale): JsonLdObject {
   return {
     "@context": "https://schema.org",
-    "@graph": SHOWROOM_LOCATIONS.map((s) => dealerSchema(locale, s)),
+    "@graph": PUBLISHED_SHOWROOM_LOCATIONS.map((s) => dealerSchema(locale, s)),
   };
 }
 

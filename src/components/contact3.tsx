@@ -1,6 +1,5 @@
 "use client";
 
-import { useInView } from "react-intersection-observer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -32,6 +31,7 @@ import {
   ContactFormData,
   contactFormSchema,
   FORM_TOPICS,
+  type FormTopic,
 } from "@/lib/contact-schema";
 import { EmailService } from "@/service/email-service";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -44,7 +44,12 @@ import {
 // Aktif hanya bila site key di-set (env). Tanpa key, form jalan seperti biasa.
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-export default function Contact() {
+type Props = {
+  /** Topik yang dipilih dari luar (mis. baris "Kemitraan" di halaman Kontak). */
+  topic?: FormTopic | null;
+};
+
+export default function Contact({ topic = null }: Props) {
   const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
@@ -70,10 +75,6 @@ export default function Contact() {
     []
   );
 
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
 
   // Initialize react-hook-form with Zod validation
   const form = useForm<ContactFormData>({
@@ -90,6 +91,11 @@ export default function Contact() {
     mode: "onChange", // Validate on change for better UX
     shouldUnregister: false,
   });
+
+  useEffect(() => {
+    if (topic) form.setValue("title", t(`form.title.${topic}.value`), { shouldValidate: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topic]);
 
   const selectedTitle = form.watch("title");
   const isOtherSelected = selectedTitle === t("form.title.other.value");
@@ -184,21 +190,10 @@ export default function Contact() {
   };
 
   return (
-    <section ref={ref} className="bg-gray-50" id="contact">
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div
-          className={cn(
-            "bg-white rounded-xl shadow-soft p-5 md:p-8 transition-all duration-700 transform",
-            inView ? "opacity-100 animate-slide-in-left" : "opacity-0"
-          )}
-          style={{ animationFillMode: "both" }}
-        >
-          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">
-            <span className="text-foreground">
-              {t("contact.sendMessage")}
-            </span>
-          </h3>
-
+    // Pembungkus netral: judul & latar diatur halaman pemakainya.
+    <div>
+      <div>
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-sm)] md:p-8">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleFormSubmit)}
@@ -414,6 +409,6 @@ export default function Contact() {
           </Form>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

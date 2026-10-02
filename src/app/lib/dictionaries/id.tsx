@@ -39,8 +39,13 @@ export const id = {
 
   // buttons
   "btn.learn.more": "Pelajari Lebih Lanjut",
-  "btn.buy.on.tokopedia": "Beli di Tokopedia",
   "btn.see.brochure": "Lihat Brosur",
+  "btn.testRide.product": "Jadwalkan Test Ride",
+  "btn.testRide.short": "Jadwalkan Test Ride",
+  "btn.findShowroom": "Cari Showroom Terdekat",
+  "product.brochure.title": "Brosur {model}",
+  "product.brochure.desc":
+    "Spesifikasi lengkap dan fitur unggulan dalam satu PDF, praktis untuk disimpan atau dibagikan.",
   "btn.order.now": "Pesan Sekarang",
 
   // user manual
@@ -144,7 +149,8 @@ export const id = {
   "career.section.description":
     "Temukan peran yang paling sesuai dengan keahlian dan minat Anda.",
   "career.card.viewDetails": "Lihat Detail",
-  "career.card.previewText": "Klik untuk melihat detail posisi dan kualifikasinya",
+  "career.card.previewText":
+    "Klik untuk melihat detail posisi dan kualifikasinya",
   "career.detail.jobOverview": "Job Overview",
   "career.detail.keyResponsibilities": "Key Responsibilities",
   "career.detail.qualifications": "Qualifications & Requirements",
@@ -226,10 +232,6 @@ export const id = {
 
   // Contact
   "contact.tag": "Hubungi Kami",
-  "contact.title": "Mari",
-  "contact.titleHighlight": "Terhubung",
-  "contact.description":
-    "Ada pertanyaan seputar motor listrik Wedison? Tim kami siap membantu.",
   "contact.sendMessage": "Kirim Pesan",
   "contact.name": "Nama",
   "contact.email": "Email",
@@ -245,10 +247,8 @@ export const id = {
   "contact.message": "Pesan",
   "contact.messagePlaceholder": "Pesan Anda",
   "contact.send": "Kirim Pesan",
-  "contact.contactInfo": "Informasi Kontak",
   "contact.headquarters": "Kantor Pusat",
   "contact.phone": "Telepon",
-  "contact.phoneHours": "Senin sampai Jumat, pukul 09.00 hingga 18.00 WIB",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "Kami balas secepatnya",
   "contact.followUs": "Ikuti Kami",
@@ -269,7 +269,8 @@ export const id = {
   "footer.cookiePolicy": "Kebijakan Cookie",
   "footer.cookieSettings": "Pengaturan Cookie",
   "consent.title": "Situs ini menggunakan cookie",
-  "consent.body": "Cookie yang wajib memastikan situs berjalan dengan baik. Dengan izin Anda, kami juga menggunakan cookie analitik untuk memahami cara situs digunakan, dan cookie pemasaran untuk mengukur efektivitas iklan. Pilihan ini bisa Anda ubah kapan saja.",
+  "consent.body":
+    "Cookie yang wajib memastikan situs berjalan dengan baik. Dengan izin Anda, kami juga menggunakan cookie analitik untuk memahami cara situs digunakan, dan cookie pemasaran untuk mengukur efektivitas iklan. Pilihan ini bisa Anda ubah kapan saja.",
   "consent.policyLink": "Kebijakan Cookie",
   "consent.acceptAll": "Terima Semua",
   "consent.rejectAll": "Tolak Semua",
@@ -277,25 +278,28 @@ export const id = {
   "consent.save": "Simpan Pilihan",
   "consent.alwaysOn": "Selalu aktif",
   "consent.prefs.title": "Preferensi Cookie",
-  "consent.prefs.description": "Pilih kategori cookie yang Anda izinkan. Pilihan ini tersimpan di browser Anda selama 6 bulan.",
+  "consent.prefs.description":
+    "Pilih kategori cookie yang Anda izinkan. Pilihan ini tersimpan di browser Anda selama 6 bulan.",
   "consent.cat.necessary.title": "Wajib",
-  "consent.cat.necessary.desc": "Dibutuhkan agar situs berfungsi, misalnya untuk mengingat pilihan bahasa dan preferensi cookie ini. Tidak dapat dinonaktifkan.",
+  "consent.cat.necessary.desc":
+    "Dibutuhkan agar situs berfungsi, misalnya untuk mengingat pilihan bahasa dan preferensi cookie ini. Tidak dapat dinonaktifkan.",
   "consent.cat.analytics.title": "Analitik",
-  "consent.cat.analytics.desc": "Membantu kami memahami halaman mana yang paling sering dikunjungi dan bagaimana situs digunakan, dalam bentuk statistik anonim (Google Analytics melalui Google Tag Manager).",
+  "consent.cat.analytics.desc":
+    "Membantu kami memahami halaman mana yang paling sering dikunjungi dan bagaimana situs digunakan, dalam bentuk statistik anonim (Google Analytics melalui Google Tag Manager).",
   "consent.cat.marketing.title": "Pemasaran",
-  "consent.cat.marketing.desc": "Digunakan untuk mengukur efektivitas iklan dan menampilkan iklan yang relevan di platform lain (Meta Pixel, Google Ads).",
+  "consent.cat.marketing.desc":
+    "Digunakan untuk mengukur efektivitas iklan dan menampilkan iklan yang relevan di platform lain (Meta Pixel, Google Ads).",
   "footer.meetus": "Kunjungi Kami",
   "footer.career": "Karier",
+  "footer.werigo": "Sewa motor listrik di Bali",
+  "footer.werigoBridge":
+    "Berlibur ke Bali? Sewa motor listrik Wedison lewat Werigo, diantar langsung ke tempat Anda menginap.",
+  "footer.werigoCta": "Kunjungi Werigo",
+  "footer.opensNewTab": "(membuka tab baru)",
 
   //showroom
 
-  "showroom.title": "Kunjungi",
-  "showroom.titleHighlight": "Showroom Kami",
-  "showroom.description":
-    "Lihat langsung, duduki, dan rasakan sendiri motor listrik Wedison sebelum menentukan pilihan.",
   "showroom.tag": "Experience Center",
-  "showroom.location": "Lokasi Showroom",
-  "showroom.findUs": "Temukan Kami",
   "showroom.address":
     "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
   "showroom.jakarta.name": "Wedison Jakarta",
@@ -308,20 +312,13 @@ export const id = {
   "showroom.bekasi.name": "Wedison Bekasi",
   "showroom.bekasi.address":
     "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, Kec. Bekasi Timur, Kota Bekasi, Jawa Barat 17113",
-  "showroom.locationDescription":
-    "Pilih showroom untuk melihat lokasinya di peta. Setiap lokasi dilengkapi showroom sekaligus pusat servis resmi.",
   "showroom.bali.address":
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
-  "showroom.facility.showroom": "Showroom",
-  "showroom.facility.service": "Pusat Servis",
-  "showroom.viewOnMaps": "Lihat di Maps",
-  "showroom.hours": "Jam Buka",
   "showroom.weekdays": "Senin - Jumat: 10.00 - 19.00",
   "showroom.weekend": "Sabtu - Minggu: 10.00 - 17.00",
-  "showroom.whatYouCanDo": "Apa yang Bisa Anda Lakukan di Showroom",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
-    "Coba langsung di area uji kami. Rasakan tarikan dan kenyamanannya sebelum Anda memutuskan.",
+    "Coba langsung di sekitar showroom, didampingi tim kami. Gratis, dan Anda tidak perlu membawa KTP atau SIM.",
   "showroom.consultation.title": "Konsultasi Produk",
   "showroom.consultation.description":
     "Belum yakin model mana yang tepat? Ceritakan rutinitas harian Anda, dan tim kami akan membantu memilihkan yang paling sesuai.",
@@ -332,13 +329,77 @@ export const id = {
   "showroom.service.description":
     "Servis resmi dengan suku cadang asli, ditangani teknisi yang memahami setiap detail motor listrik Wedison.",
   "showroom.bookVisit": "Jadwalkan Kunjungan",
-  "showroom.viewModels": "Kunjungi Showroom",
+
+  // showroom page (redesign 2026-10)
+  "showroomPage.hero.imageAlt":
+    "Pengunjung melihat jajaran motor listrik Wedison bersama tim showroom",
+  "showroomPage.hero.title": "Kenali Wedison dari dekat.",
+  "showroomPage.hero.desc":
+    "Lihat setiap model secara langsung, coba di jalan bersama tim kami, lalu urus konsultasi, pembiayaan, hingga servis dalam satu kunjungan.",
+  "showroomPage.hero.ctaPrimary": "Jadwalkan Test Ride",
+  "showroomPage.hero.ctaSecondary": "Lihat Lokasi",
+  "showroomPage.hero.fact1": "Test ride gratis",
+  "showroomPage.hero.fact2": "Tanpa perlu KTP atau SIM",
+  "showroomPage.hero.fact3": "Boleh langsung datang",
+  "showroomPage.locations.title": "Pilih showroom terdekat",
+  "showroomPage.locations.desc":
+    "Setiap lokasi adalah showroom sekaligus pusat servis resmi, lengkap dengan SuperCharge. Pilih kartu untuk melihat lokasinya di peta.",
+  "showroomPage.locations.countOpen": "{n} lokasi buka",
+  "showroomPage.locations.countUpcoming": "{n} segera hadir",
+  "showroomPage.locations.prev": "Showroom sebelumnya",
+  "showroomPage.locations.next": "Showroom berikutnya",
+  "showroomPage.locations.showAll": "Lihat semua",
+  "showroomPage.locations.listLabel": "Daftar showroom di {country}",
+  "showroomPage.card.showOnMap": "Tampilkan {name} di peta",
+  "showroomPage.card.facilities": "Showroom · Servis · SuperCharge",
+  "showroomPage.card.openUntil": "Buka · tutup {time}",
+  "showroomPage.card.closedUntil": "Tutup · buka {time}",
+  "showroomPage.card.weekdays": "Sen–Jum",
+  "showroomPage.card.weekend": "Sab–Min",
+  "showroomPage.card.directions": "Rute",
+  "showroomPage.upcoming.label": "Segera hadir",
+  "showroomPage.upcoming.desc":
+    "Experience Center berikutnya sedang kami siapkan. Nantikan kabarnya.",
+  "showroomPage.activities.title": "Satu kunjungan, semua beres.",
+  "showroomPage.activities.desc":
+    "Dari mencoba motor sampai merencanakan servis berkala, tim kami siap membantu di setiap lokasi.",
+  "showroomPage.steps.title": "Begini alur kunjungan Anda",
+  "showroomPage.steps.1.title": "Pilih jadwal",
+  "showroomPage.steps.1.desc":
+    "Booking lewat situs ini hanya butuh satu menit. Datang langsung juga boleh, tetapi dengan booking Anda tidak perlu menunggu giliran.",
+  "showroomPage.steps.2.title": "Datang ke showroom",
+  "showroomPage.steps.2.desc":
+    "Tim kami membantu memilih model yang paling cocok untuk kebutuhan harian Anda. Tidak perlu membawa KTP atau SIM.",
+  "showroomPage.steps.3.title": "Coba di jalan",
+  "showroomPage.steps.3.desc":
+    "Berkendara di sekitar showroom bersama tim Wedison, lalu kembali untuk berdiskusi lebih lanjut. Semuanya gratis.",
+  "showroomPage.faq.title": "Sebelum Anda datang",
+  "showroomPage.faq.desc":
+    "Masih ada yang ingin ditanyakan? Tim kami siap membantu lewat WhatsApp.",
+  "showroomPage.faq.whatsapp": "Tanya lewat WhatsApp",
+  "showroomPage.faq.q1": "Apakah test ride dikenakan biaya?",
+  "showroomPage.faq.a1": "Tidak. Test ride di semua showroom Wedison gratis.",
+  "showroomPage.faq.q2": "Apakah saya perlu membawa KTP atau SIM?",
+  "showroomPage.faq.a2":
+    "Tidak perlu. Test ride dilakukan di sekitar showroom dan selalu didampingi tim Wedison.",
+  "showroomPage.faq.q3": "Berapa lama test ride berlangsung?",
+  "showroomPage.faq.a3":
+    "Cukup singkat. Anda berkendara di sekitar showroom bersama tim kami, lalu kembali ke showroom untuk berdiskusi atau mencoba model lain.",
+  "showroomPage.faq.q4": "Apakah harus booking terlebih dahulu?",
+  "showroomPage.faq.a4":
+    "Anda boleh datang langsung. Namun kami sarankan booking terlebih dahulu agar jadwal Anda tidak bersamaan dengan pengunjung lain.",
+  "showroomPage.faq.q5": "Apakah saya bisa servis dan mengisi daya di showroom?",
+  "showroomPage.faq.a5":
+    "Bisa. Setiap showroom Wedison juga merupakan pusat servis resmi dan dilengkapi stasiun SuperCharge.",
+  "showroomPage.faq.q6": "Kapan showroom buka?",
+  "showroomPage.faq.a6":
+    "Senin sampai Jumat pukul 10.00–19.00, Sabtu dan Minggu pukul 10.00–17.00, mengikuti waktu setempat.",
+  "showroomPage.cta.title": "Kami tunggu kedatangan Anda.",
+  "showroomPage.cta.desc":
+    "Pilih showroom dan jadwal yang paling pas. Konfirmasinya kami kirim lewat WhatsApp.",
 
   // About Us Page
   "about.tag": "Tentang Kami",
-  "about.title": "Mengenal",
-  "about.titleHighlight": "Wedison Group",
-  "about.overview.title": "Motor Listrik dan Jaringan Pengisiannya, dalam Satu Ekosistem",
   "about.overview.p1":
     "Wedison adalah perusahaan motor listrik pertama di Indonesia dengan teknologi pengisian cepat. Bagi kami, menjual motor saja tidak cukup. Kami juga membangun jaringan pengisian daya yang membuat motor listrik benar-benar praktis untuk dipakai setiap hari.",
   "about.overview.p2":
@@ -358,14 +419,8 @@ export const id = {
   "about.values.experience.title": "Pengalaman Pemilik yang Utuh",
   "about.values.experience.description":
     "Menghadirkan motor yang mudah dikendarai siapa saja, dengan fitur yang benar-benar berguna dalam keseharian.",
-  "about.projects.title": "Yang Sedang Kami Kerjakan",
-  "about.projects.future.title": "Menekan Emisi Transportasi Perkotaan",
   "about.projects.future.description":
     "Memanfaatkan energi terbarukan untuk menurunkan emisi karbon, sekaligus memperluas akses kendaraan listrik agar transportasi bersih semakin terjangkau.",
-  "about.projects.charging.title": "Jaringan SuperCharge",
-  "about.projects.charging.description":
-    "Membangun jaringan pengisian yang andal, sehingga pemilik motor listrik tidak perlu lagi mengkhawatirkan sisa daya setiap hari.",
-  "about.offers.title": "Yang Kami Tawarkan",
   "about.offers.motorcycles.title": "Jajaran Motor Listrik",
   "about.offers.motorcycles.description":
     "Beberapa model dengan karakter berbeda, dari komuter ringkas hingga maxi-scooter untuk perjalanan jauh.",
@@ -377,12 +432,64 @@ export const id = {
     "Kami sedang membangun transportasi listrik yang bisa diandalkan Indonesia untuk jangka panjang. Mari mewujudkannya bersama.",
   "about.contactUs": "Hubungi Kami",
 
+  // about & contact page (redesign 2026-10)
+  "aboutPage.hero.title": "Kami membuat motornya, sekaligus jaringan pengisiannya.",
+  "aboutPage.hero.imageAlt": "Gedung kantor Wedison",
+  "aboutPage.intro.imageAlt": "Tim Wedison di kantor",
+  "aboutPage.values.imageAlt": "Pengendara bersama motor listrik Wedison",
+  "aboutPage.eco.title": "Satu ekosistem, dari motor sampai stasiunnya",
+  "aboutPage.eco.desc":
+    "Setiap bagian kami rancang untuk saling melengkapi, supaya memiliki motor listrik terasa mudah setiap hari.",
+  "aboutPage.eco.motorcycles.cta": "Lihat jajaran model",
+  "aboutPage.eco.charging.cta": "Kenali SuperCharge",
+  "aboutPage.eco.app.title": "Aplikasi Wedison",
+  "aboutPage.eco.app.cta": "Tentang aplikasi",
+  "aboutPage.eco.werigo.desc":
+    "Layanan sewa motor listrik Wedison di Bali, diantar langsung ke tempat Anda menginap.",
+  "aboutPage.eco.werigo.cta": "Kunjungi Werigo",
+  "aboutPage.place.title": "Tempat kami bekerja",
+  "aboutPage.place.desc":
+    "Kantor pusat Wedison berada di Pondok Indah, Jakarta Selatan, satu gedung dengan showroom dan pusat servis kami. Silakan mampir.",
+  "aboutPage.place.cta": "Lihat semua showroom",
+  "aboutPage.place.imageMain": "Kantor pusat Wedison di Pondok Indah",
+  "aboutPage.place.imageA": "Ruang kerja tim Wedison",
+  "aboutPage.place.imageB": "Area tamu di kantor Wedison",
+  "aboutPage.join.career": "Lihat Lowongan",
+  "contactPage.hero.title": "Apa yang bisa kami bantu?",
+  "contactPage.hero.desc":
+    "Pilih kebutuhan Anda di bawah ini, supaya pertanyaan Anda langsung sampai ke tim yang tepat.",
+  "contactPage.hero.imageAlt": "Meja layanan pelanggan di showroom Wedison",
+  "contactPage.routes.label": "Pilih kebutuhan Anda",
+  "contactPage.routes.testRide.title": "Test ride atau kunjungan showroom",
+  "contactPage.routes.testRide.desc":
+    "Jadwalkan kunjungan di showroom terdekat. Gratis, dan tidak perlu membawa KTP atau SIM.",
+  "contactPage.routes.testRide.action": "Jadwalkan",
+  "contactPage.routes.product.title": "Pertanyaan produk dan pembelian",
+  "contactPage.routes.product.desc":
+    "Tanyakan model, harga, atau pilihan pembiayaan langsung ke tim kami lewat WhatsApp.",
+  "contactPage.routes.product.action": "Chat WhatsApp",
+  "contactPage.routes.service.title": "Servis dan garansi",
+  "contactPage.routes.service.desc":
+    "Hubungi showroom terdekat. Setiap lokasi juga merupakan pusat servis resmi.",
+  "contactPage.routes.service.action": "Pilih showroom",
+  "contactPage.routes.partnership.title": "Kemitraan, korporat, dan media",
+  "contactPage.routes.partnership.desc":
+    "Ceritakan rencana kerja sama atau kebutuhan liputan Anda melalui formulir di bawah.",
+  "contactPage.routes.partnership.action": "Isi formulir",
+  "contactPage.routes.career.title": "Karier",
+  "contactPage.routes.career.desc":
+    "Lihat posisi yang sedang dibuka, atau kirim CV Anda ke {email}.",
+  "contactPage.routes.career.action": "Lihat lowongan",
+  "contactPage.direct.title": "Kontak langsung",
+  "contactPage.direct.phone": "Telepon",
+  "contactPage.direct.hours": "Jam layanan",
+  "contactPage.branches.title": "Kontak per cabang",
+  "contactPage.branches.desc":
+    "Untuk servis, test ride, atau pertanyaan seputar cabang tertentu, hubungi cabangnya langsung.",
+  "contactPage.branches.all": "Lihat halaman showroom",
+  "contactPage.faq.all": "Lihat semua FAQ",
+
   // Contact Page
-  "contact.page.description":
-    "Ada pertanyaan atau butuh bantuan? Hubungi kami melalui salah satu cara di bawah ini.",
-  "contact.page.findUs": "Temukan Kami",
-  "contact.page.openInMaps": "Buka di Google Maps",
-  "contact.page.hours": "Jam Operasional",
   "contact.page.business.hours": "Senin - Jumat: 09.00 - 18.00 WIB",
   "contact.page.faqTitle": "Pertanyaan yang Sering Diajukan",
   "contact.page.thankYou": "Terima Kasih",
@@ -519,7 +626,8 @@ export const id = {
     "Pilih warna EdPower favorit Anda dan lihat tampilannya.",
 
   "edmax.specs.title": "Spesifikasi",
-  "edmax.specs.description": "Spesifikasi teknis lengkap motor listrik EdPower.",
+  "edmax.specs.description":
+    "Spesifikasi teknis lengkap motor listrik EdPower.",
   "edmax.specs.engine": "Mesin",
   "edmax.specs.battery": "Baterai",
   "edmax.specs.brake": "Rem",
@@ -570,13 +678,15 @@ export const id = {
 
   "edpower.productPage.productHighlight3.imageAlt":
     "Tampilan belakang tiga perempat menonjolkan postur EdPower yang lebar dan jok ekstra luas",
-  "edpower.productPage.productHighlight3.title": "Jok Lebar, Posisi Duduk Rileks",
+  "edpower.productPage.productHighlight3.title":
+    "Jok Lebar, Posisi Duduk Rileks",
   "edpower.productPage.productHighlight3.description":
     "Jok lebar yang empuk dan posisi duduk yang santai membuat perjalanan panjang tidak cepat melelahkan, bagi pengendara maupun penumpang.",
 
   "edpower.productPage.productHighlight4.imageAlt":
     "Tampilan depan menampilkan lampu LED canggih dan bodi modern",
-  "edpower.productPage.productHighlight4.title": "Desain yang Langsung Dikenali",
+  "edpower.productPage.productHighlight4.title":
+    "Desain yang Langsung Dikenali",
   "edpower.productPage.productHighlight4.description":
     "Wajah depan yang tegas, lampu LED menyeluruh, dan lekuk bodi belakang yang rapi. EdPower tampil beda, bahkan saat terparkir.",
 
@@ -664,7 +774,8 @@ export const id = {
 
   "dash.color.title": "Tentukan",
   "dash.color.titleHighlight": "Warna Anda",
-  "dash.color.description": "Pilih warna Dash favorit Anda dan lihat tampilannya.",
+  "dash.color.description":
+    "Pilih warna Dash favorit Anda dan lihat tampilannya.",
 
   "dash.specs.title": "Spesifikasi",
   "dash.specs.description": "Spesifikasi teknis lengkap motor listrik Dash.",
@@ -727,7 +838,8 @@ export const id = {
   "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
   "victory.productPage.productOverview.imageAlt": "Victory Abu-Abu",
-  "victory.productPage.productOverview.title": "Sporty di Tampilan, Lincah di Jalanan",
+  "victory.productPage.productOverview.title":
+    "Sporty di Tampilan, Lincah di Jalanan",
   "victory.productPage.productOverview.description":
     "Victory dibuat untuk jalanan kota. Wheelbase yang panjang membuatnya stabil, rem cakram CBS di kedua roda membuat pengereman lebih terkendali, dan jarak tempuhnya mencapai 120 km dalam sekali pengisian. Saat baterai menipis, SuperCharge mengisinya kembali dalam 15 menit.",
 
@@ -738,7 +850,8 @@ export const id = {
 
   "victory.productPage.productHighlight2.imageAlt":
     "Tampilan tiga perempat depan menunjukkan ban lebar dan suspensi",
-  "victory.productPage.productHighlight2.title": "Stabil di Berbagai Kondisi Jalan",
+  "victory.productPage.productHighlight2.title":
+    "Stabil di Berbagai Kondisi Jalan",
   "victory.productPage.productHighlight2.description":
     "Ban lebar dengan cengkeraman kuat dan suspensi hidrolik menjaga Victory tetap mantap, di aspal mulus maupun jalan berlubang.",
 
@@ -759,8 +872,8 @@ export const id = {
   "victory.productPage.chargingHighlight1.title": "SuperCharge, Secepat Itu",
   "victory.productPage.chargingHighlight1.description": (
     <>
-      Dari 10% ke 80% dalam 15 menit, pas untuk jeda singkat di tengah hari
-      yang padat. Tersedia di seluruh showroom Wedison.{" "}
+      Dari 10% ke 80% dalam 15 menit, pas untuk jeda singkat di tengah hari yang
+      padat. Tersedia di seluruh showroom Wedison.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
       </LocaleLink>
@@ -851,7 +964,8 @@ export const id = {
   "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
   "athena.productPage.productOverview.imageAlt": "Athena Hijau",
-  "athena.productPage.productOverview.title": "Bentuk Klasik, Bertenaga Listrik",
+  "athena.productPage.productOverview.title":
+    "Bentuk Klasik, Bertenaga Listrik",
   "athena.productPage.productOverview.description":
     "Athena mengambil siluet skuter Eropa klasik dan menggantikan mesinnya dengan penggerak listrik. Hasilnya, motor yang menarik perhatian tanpa suara bising. Jarak tempuhnya hingga 120 km dalam sekali pengisian, dengan rem cakram CBS di kedua roda dan suspensi hidrolik. Isi daya cepat di showroom Wedison, atau perlahan di rumah.",
 
@@ -945,7 +1059,8 @@ export const id = {
   "bees.feature2.description":
     "Bees termasuk dalam program subsidi motor listrik pemerintah. Biaya hariannya ringan, dan cukup diisi dari stopkontak rumah.",
 
-  "bees.color.description": "Pilih warna Bees favorit Anda dan lihat tampilannya.",
+  "bees.color.description":
+    "Pilih warna Bees favorit Anda dan lihat tampilannya.",
 
   // ===
 
@@ -1031,18 +1146,41 @@ export const id = {
   "supercharge.hero.description":
     "SuperCharge adalah jaringan pengisian cepat yang dibangun Wedison sendiri, kompatibel dengan Athena, Victory, dan EdPower.",
   "supercharge.hero.ctaPrimary": "Temukan Lokasi",
-  "supercharge.hero.ctaSecondary": "Pelajari Teknologinya",
+  "supercharge.hero.ctaSecondary": "Lihat Cara Kerjanya",
+  "supercharge.hero.imageAlt":
+    "Motor listrik Wedison sedang mengisi daya di stasiun SuperCharge",
+  "supercharge.how.compare.super": "SuperCharge",
+  "supercharge.how.compare.superValue": "15 menit",
+  "supercharge.how.compare.home": "Isi daya di rumah",
+  "supercharge.how.compare.homeValue": "±5 jam",
+  "supercharge.how.compare.note":
+    "Isi daya di rumah: Athena dan Victory dengan baterai Regular. SuperCharge kompatibel dengan Athena, Victory, dan EdPower.",
+  "supercharge.how.step1.title": "Colokkan konektor",
+  "supercharge.how.step1.desc":
+    "Parkir di stasiun SuperCharge, lalu sambungkan konektor ke motor Anda.",
+  "supercharge.how.step2.title": "Mulai dari aplikasi",
+  "supercharge.how.step2.desc":
+    "Ketuk mulai di aplikasi Wedison. Pengisian memakai paket isi daya Anda.",
+  "supercharge.how.step3.title": "Siap melaju lagi",
+  "supercharge.how.step3.desc":
+    "Sekitar 15 menit kemudian baterai sudah di 80%. Aplikasi memberi tahu saat pengisian selesai.",
+  "supercharge.network.upcomingLabel": "Segera hadir",
+  "supercharge.safety.imageAlt": "Modul pengisian daya di dalam stasiun Wedison SuperCharge",
+  "supercharge.safety.fact1.title": "Tersertifikasi IEC",
+  "supercharge.safety.fact1.desc":
+    "Stasiun DC kami memenuhi standar keselamatan internasional IEC.",
+  "supercharge.safety.fact2.title": "Mengikuti Direktif Uni Eropa",
+  "supercharge.safety.fact2.desc":
+    "Dirancang sesuai ketentuan keselamatan perangkat listrik Uni Eropa.",
+  "supercharge.safety.fact3.title": "Khusus motor Wedison",
+  "supercharge.safety.fact3.desc": "Dibuat untuk sistem baterai Athena, Victory, dan EdPower.",
+  "supercharge.safety.fact4.title": "Menjaga umur baterai",
+  "supercharge.safety.fact4.desc":
+    "Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
+  "supercharge.app.screenAlt": "Tampilan fitur {feature} di aplikasi Wedison",
 
-  "supercharge.speed.kicker": "Kecepatan",
-  "supercharge.speed.lead": "Dari 10% ke 80% hanya butuh",
-  "supercharge.speed.unit": "menit",
-  "supercharge.speed.caption":
-    "Kira-kira selama Anda menunggu secangkir kopi. Setelah itu, siap melaju lagi.",
 
-  "supercharge.network.kicker": "Jaringan SuperCharge",
   "supercharge.network.title": "Semakin dekat dengan Anda",
-  "supercharge.network.description":
-    "Titik SuperCharge terus bertambah, dari Jakarta hingga kota-kota lain di Indonesia.",
   "supercharge.network.stationsLabel": "Titik pengisian",
   "supercharge.network.citiesLabel": "Kota, dan terus bertambah",
 
@@ -1094,23 +1232,16 @@ export const id = {
   "supercharge.video.description":
     "Dari menyambungkan konektor hingga melaju kembali, lihat seperti apa proses pengisian di stasiun SuperCharge.",
 
-  "supercharge.feature1.tag": "Cepat dan Andal",
   "supercharge.feature1.title": "Lima Belas Menit, Bukan Lima Jam",
-  "supercharge.feature1.subtitle": "Lebih singkat, tanpa mengorbankan umur baterai",
   "supercharge.feature1.description":
     "SuperCharge mengisi baterai dari 10% ke 80% dalam 15 menit. Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
 
-  "supercharge.feature2.tag": "Hadir di Banyak Kota",
-  "supercharge.feature2.title": "Jaringan yang Terus Bertambah",
   "supercharge.feature2.subtitle": "Cek titik terdekat sebelum berangkat",
   "supercharge.feature2.description":
     "Stasiun SuperCharge tersedia di showroom Wedison dan lokasi mitra, dan jumlahnya terus bertambah. Semuanya bisa Anda temukan di peta.",
 
-  "supercharge.feature3.tag": "Aman dan Tersertifikasi",
   "supercharge.feature3.title": "Dibangun untuk Dipakai Bertahun-tahun",
   "supercharge.feature3.subtitle": "Keselamatan lebih dulu, baru kecepatan",
-  "supercharge.feature3.description":
-    "Stasiun DC kami dirancang khusus untuk motor listrik Wedison, tersertifikasi standar keselamatan IEC, dan mengikuti Direktif Uni Eropa.",
 
   // SuperCharge App Section
   "supercharge.app.tag": "Aplikasi Wedison",
@@ -1127,16 +1258,15 @@ export const id = {
   "supercharge.app.hero.description":
     "Temukan stasiun, mulai pengisian, pantau prosesnya, dan kelola paket isi daya Anda. Semuanya dari satu aplikasi.",
 
-  "supercharge.app.feature1.icon": "MapPin",
   "supercharge.app.feature1.title": "Temukan Stasiun Terdekat",
-  "supercharge.app.feature1.subtitle": "Titik pengisian di sekitar Anda, dalam satu peta",
+  "supercharge.app.feature1.subtitle":
+    "Titik pengisian di sekitar Anda, dalam satu peta",
   "supercharge.app.feature1.description":
     "Semua stasiun SuperCharge tampil di peta, lengkap dengan alamat, jam operasional, dan jumlah charger yang tersedia.",
   "supercharge.app.feature1.bullet1": "Peta interaktif dengan navigasi GPS",
   "supercharge.app.feature1.bullet2": "Diurutkan dari yang terdekat",
   "supercharge.app.feature1.bullet3": "Simpan stasiun favorit Anda",
 
-  "supercharge.app.feature2.icon": "Activity",
   "supercharge.app.feature2.title": "Pantau Pengisian dari Ponsel",
   "supercharge.app.feature2.subtitle": "Tidak perlu menunggu di samping motor",
   "supercharge.app.feature2.description":
@@ -1145,7 +1275,6 @@ export const id = {
   "supercharge.app.feature2.bullet2": "Perkiraan sisa waktu pengisian",
   "supercharge.app.feature2.bullet3": "Notifikasi saat pengisian selesai",
 
-  "supercharge.app.feature3.icon": "Zap",
   "supercharge.app.feature3.title": "Mulai dengan Satu Ketukan",
   "supercharge.app.feature3.subtitle": "Colokkan, ketuk, dan tinggalkan",
   "supercharge.app.feature3.description":
@@ -1159,8 +1288,6 @@ export const id = {
   "supercharge.app.stats.rating": "Rating",
   "supercharge.app.stats.chargeTime": "Menit Isi Daya",
 
-  "supercharge.app.cta.title": "Siap SuperCharge",
-  "supercharge.app.cta.titleHighlight": "Perjalanan Anda?",
   "supercharge.app.cta.description":
     "Unduh aplikasinya, lalu temukan stasiun terdekat sebelum berangkat.",
 
@@ -1207,8 +1334,8 @@ export const id = {
   "form.agreePrivacy.description": (
     <>
       Saya mengizinkan PT Wedison menggunakan data di atas dan menghubungi saya
-      melalui email, telepon, atau sarana komunikasi lain untuk keperluan layanan
-      pelanggan, sesuai dengan{" "}
+      melalui email, telepon, atau sarana komunikasi lain untuk keperluan
+      layanan pelanggan, sesuai dengan{" "}
       {/* <Link href="/" className="underline text-blue-400">
           persetujuan privasi.
         </Link> */}
@@ -1257,16 +1384,17 @@ export const id = {
 
   // Battery Questions
   "faq.Battery.questions.0.question": "Berapa lama garansi baterainya?",
-  "faq.Battery.questions.0.answer": "Baterai Wedison dilindungi garansi selama 3 tahun.",
+  "faq.Battery.questions.0.answer":
+    "Baterai Wedison dilindungi garansi selama 3 tahun.",
   "faq.Battery.questions.1.question":
     "Berapa lama waktu mengisi baterai hingga penuh?",
   "faq.Battery.questions.1.answer":
     "Wedison SuperCharge: 10% ke 80% dalam 15 menit, atau 10% ke 95% dalam 20 menit.\nWedison Regular Charge: bervariasi tergantung adaptor dan kapasitas baterai, antara 2 hingga 10 jam.",
-  "faq.Battery.questions.2.question": "Baterai jenis apa yang digunakan Wedison?",
+  "faq.Battery.questions.2.question":
+    "Baterai jenis apa yang digunakan Wedison?",
   "faq.Battery.questions.2.answer":
     "Wedison menggunakan baterai Lithium-ion (LFP), teknologi yang sama dengan yang dipakai smartphone, laptop, dan mobil listrik.\n\nKeunggulannya:\nA. Padat energi: menyimpan daya besar dalam ukuran yang ringkas dan ringan.\nB. Tahan panas: tetap bekerja optimal hingga suhu 45 derajat Celsius.\nC. Minim kebocoran daya: daya tetap tersimpan meski motor tidak dipakai berhari-hari.\nD. Awet: mampu lebih dari 5.000 siklus pengisian dengan kapasitas yang tetap terjaga.\nE. Cepat diisi: di stasiun SuperCharge, baterai terisi dari 10% ke 80% dalam 15 menit.",
-  "faq.Battery.questions.3.question":
-    "Ada berapa pilihan baterai?",
+  "faq.Battery.questions.3.question": "Ada berapa pilihan baterai?",
   "faq.Battery.questions.3.answer":
     "Untuk model tertentu tersedia dua pilihan: Regular dan Extended.\nJarak tempuhnya berbeda-beda tergantung model, mulai dari 80 km hingga 200 km dalam sekali pengisian.",
   "faq.Battery.questions.4.question": "Siapa yang mengembangkan baterainya?",
@@ -1377,7 +1505,8 @@ export const id = {
   "faq.Safety.questions.1.question": "Sistem rem apa yang digunakan?",
   "faq.Safety.questions.1.answer":
     "CBS (Combined Braking System), yang membagi daya pengereman ke roda depan dan belakang secara otomatis saat tuas rem ditarik:\nAthena, Victory, dan EdPower\n\nRem cakram di roda depan dan belakang:\nBees",
-  "faq.Safety.questions.2.question": "Motor penggerak jenis apa yang digunakan?",
+  "faq.Safety.questions.2.question":
+    "Motor penggerak jenis apa yang digunakan?",
   "faq.Safety.questions.2.answer":
     "Semua model Wedison menggunakan motor DC brushless (BLDC), yang dikenal efisien, bertorsi besar, dan berumur panjang.\n\nTipenya satu:\nDC Brushless Rear Hub Motor, dengan kecepatan hingga 90 km/jam (Bees, Athena, Victory, EdPower).",
 
@@ -1395,9 +1524,11 @@ export const id = {
   "faq.Servicing.questions.3.answer":
     "Tersedia. Wedison menyediakan suku cadang asli untuk seluruh modelnya.",
   "faq.Servicing.questions.4.question": "Apakah baterai bergaransi?",
-  "faq.Servicing.questions.4.answer": "Ya. Baterai dilindungi garansi selama 3 tahun.",
+  "faq.Servicing.questions.4.answer":
+    "Ya. Baterai dilindungi garansi selama 3 tahun.",
   "faq.Servicing.questions.5.question": "Apakah motor bergaransi?",
-  "faq.Servicing.questions.5.answer": "Ya. Unit motor dilindungi garansi selama 2 tahun.",
+  "faq.Servicing.questions.5.answer":
+    "Ya. Unit motor dilindungi garansi selama 2 tahun.",
   "faq.Servicing.questions.6.question":
     "Berapa biaya perbaikan motor, dinamo, dan komponen lainnya?",
   "faq.Servicing.questions.6.answer":
@@ -1416,7 +1547,8 @@ export const id = {
     "Tidak ada komponen yang bergaransi seumur hidup.\nSuku cadang yang diganti selama masa garansi hanya ditanggung hingga sisa periode garansi awal.\nUntuk suku cadang yang dibeli atau diganti di luar garansi, masa garansinya dihitung sejak tanggal pembelian atau penggantian.",
 
   // Smart Features Questions
-  "faq.SmartFeatures.questions.0.question": "Fitur pintar apa saja yang tersedia?",
+  "faq.SmartFeatures.questions.0.question":
+    "Fitur pintar apa saja yang tersedia?",
   "faq.SmartFeatures.questions.0.answer":
     "Melalui aplikasi Wedison, model tertentu bisa dinyalakan dan dimatikan dari ponsel lewat koneksi Bluetooth.\nFitur lainnya akan hadir pada pembaruan aplikasi berikutnya.",
 
@@ -1590,7 +1722,8 @@ export const id = {
   "booking.placeholder.time": "Pilih waktu",
   "booking.time.pickDateFirst": "Pilih showroom dan tanggal terlebih dahulu",
   "booking.time.none": "Tidak ada slot yang tersisa",
-  "booking.hoursHint": "Jam operasional: Senin–Jumat 10.00–19.00, Sabtu–Minggu 10.00–17.00.",
+  "booking.hoursHint":
+    "Jam operasional: Senin–Jumat 10.00–19.00, Sabtu–Minggu 10.00–17.00.",
   "booking.field.note": "Catatan",
   "booking.placeholder.note": "Contoh: ingin mencoba Athena, datang berdua",
   "booking.submit": "Kirim dan Lanjutkan ke WhatsApp",
@@ -1606,11 +1739,13 @@ export const id = {
   "booking.error.date": "Pilih tanggal kunjungan",
   "booking.error.time": "Pilih waktu kunjungan",
   "booking.error.note": "Catatan terlalu panjang (maks. 500 karakter)",
-  "booking.error.recaptcha": "Centang verifikasi \"Saya bukan robot\" terlebih dahulu.",
+  "booking.error.recaptcha":
+    'Centang verifikasi "Saya bukan robot" terlebih dahulu.',
   "booking.error.submit.title": "Permintaan belum terkirim",
   "booking.error.submit.desc":
     "Silakan coba beberapa saat lagi, atau hubungi kami langsung melalui WhatsApp.",
-  "booking.error.rateLimited": "Terlalu banyak percobaan. Silakan coba lagi dalam beberapa menit.",
+  "booking.error.rateLimited":
+    "Terlalu banyak percobaan. Silakan coba lagi dalam beberapa menit.",
   "booking.error.slot": "Slot tersebut sudah terisi. Silakan pilih waktu lain.",
   "booking.success.title": "Terima kasih, {name}!",
   "booking.success.desc":
