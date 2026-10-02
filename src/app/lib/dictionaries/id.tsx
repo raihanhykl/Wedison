@@ -232,10 +232,6 @@ export const id = {
 
   // Contact
   "contact.tag": "Hubungi Kami",
-  "contact.title": "Mari",
-  "contact.titleHighlight": "Terhubung",
-  "contact.description":
-    "Ada pertanyaan seputar motor listrik Wedison? Tim kami siap membantu.",
   "contact.sendMessage": "Kirim Pesan",
   "contact.name": "Nama",
   "contact.email": "Email",
@@ -251,10 +247,8 @@ export const id = {
   "contact.message": "Pesan",
   "contact.messagePlaceholder": "Pesan Anda",
   "contact.send": "Kirim Pesan",
-  "contact.contactInfo": "Informasi Kontak",
   "contact.headquarters": "Kantor Pusat",
   "contact.phone": "Telepon",
-  "contact.phoneHours": "Senin sampai Jumat, pukul 09.00 hingga 18.00 WIB",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "Kami balas secepatnya",
   "contact.followUs": "Ikuti Kami",
@@ -401,10 +395,6 @@ export const id = {
 
   // About Us Page
   "about.tag": "Tentang Kami",
-  "about.title": "Mengenal",
-  "about.titleHighlight": "Wedison Group",
-  "about.overview.title":
-    "Motor Listrik dan Jaringan Pengisiannya, dalam Satu Ekosistem",
   "about.overview.p1":
     "Wedison adalah perusahaan motor listrik pertama di Indonesia dengan teknologi pengisian cepat. Bagi kami, menjual motor saja tidak cukup. Kami juga membangun jaringan pengisian daya yang membuat motor listrik benar-benar praktis untuk dipakai setiap hari.",
   "about.overview.p2":
@@ -424,14 +414,8 @@ export const id = {
   "about.values.experience.title": "Pengalaman Pemilik yang Utuh",
   "about.values.experience.description":
     "Menghadirkan motor yang mudah dikendarai siapa saja, dengan fitur yang benar-benar berguna dalam keseharian.",
-  "about.projects.title": "Yang Sedang Kami Kerjakan",
-  "about.projects.future.title": "Menekan Emisi Transportasi Perkotaan",
   "about.projects.future.description":
     "Memanfaatkan energi terbarukan untuk menurunkan emisi karbon, sekaligus memperluas akses kendaraan listrik agar transportasi bersih semakin terjangkau.",
-  "about.projects.charging.title": "Jaringan SuperCharge",
-  "about.projects.charging.description":
-    "Membangun jaringan pengisian yang andal, sehingga pemilik motor listrik tidak perlu lagi mengkhawatirkan sisa daya setiap hari.",
-  "about.offers.title": "Yang Kami Tawarkan",
   "about.offers.motorcycles.title": "Jajaran Motor Listrik",
   "about.offers.motorcycles.description":
     "Beberapa model dengan karakter berbeda, dari komuter ringkas hingga maxi-scooter untuk perjalanan jauh.",
@@ -443,12 +427,64 @@ export const id = {
     "Kami sedang membangun transportasi listrik yang bisa diandalkan Indonesia untuk jangka panjang. Mari mewujudkannya bersama.",
   "about.contactUs": "Hubungi Kami",
 
+  // about & contact page (redesign 2026-10)
+  "aboutPage.hero.title": "Kami membuat motornya, sekaligus jaringan pengisiannya.",
+  "aboutPage.hero.imageAlt": "Gedung kantor Wedison",
+  "aboutPage.intro.imageAlt": "Tim Wedison di kantor",
+  "aboutPage.values.imageAlt": "Pengendara bersama motor listrik Wedison",
+  "aboutPage.eco.title": "Satu ekosistem, dari motor sampai stasiunnya",
+  "aboutPage.eco.desc":
+    "Setiap bagian kami rancang untuk saling melengkapi, supaya memiliki motor listrik terasa mudah setiap hari.",
+  "aboutPage.eco.motorcycles.cta": "Lihat jajaran model",
+  "aboutPage.eco.charging.cta": "Kenali SuperCharge",
+  "aboutPage.eco.app.title": "Aplikasi Wedison",
+  "aboutPage.eco.app.cta": "Tentang aplikasi",
+  "aboutPage.eco.werigo.desc":
+    "Layanan sewa motor listrik Wedison di Bali, diantar langsung ke tempat Anda menginap.",
+  "aboutPage.eco.werigo.cta": "Kunjungi Werigo",
+  "aboutPage.place.title": "Tempat kami bekerja",
+  "aboutPage.place.desc":
+    "Kantor pusat Wedison berada di Pondok Indah, Jakarta Selatan, satu gedung dengan showroom dan pusat servis kami. Silakan mampir.",
+  "aboutPage.place.cta": "Lihat semua showroom",
+  "aboutPage.place.imageMain": "Kantor pusat Wedison di Pondok Indah",
+  "aboutPage.place.imageA": "Ruang kerja tim Wedison",
+  "aboutPage.place.imageB": "Area tamu di kantor Wedison",
+  "aboutPage.join.career": "Lihat Lowongan",
+  "contactPage.hero.title": "Apa yang bisa kami bantu?",
+  "contactPage.hero.desc":
+    "Pilih kebutuhan Anda di bawah ini, supaya pertanyaan Anda langsung sampai ke tim yang tepat.",
+  "contactPage.hero.imageAlt": "Meja layanan pelanggan di showroom Wedison",
+  "contactPage.routes.label": "Pilih kebutuhan Anda",
+  "contactPage.routes.testRide.title": "Test ride atau kunjungan showroom",
+  "contactPage.routes.testRide.desc":
+    "Jadwalkan kunjungan di showroom terdekat. Gratis, dan tidak perlu membawa KTP atau SIM.",
+  "contactPage.routes.testRide.action": "Jadwalkan",
+  "contactPage.routes.product.title": "Pertanyaan produk dan pembelian",
+  "contactPage.routes.product.desc":
+    "Tanyakan model, harga, atau pilihan pembiayaan langsung ke tim kami lewat WhatsApp.",
+  "contactPage.routes.product.action": "Chat WhatsApp",
+  "contactPage.routes.service.title": "Servis dan garansi",
+  "contactPage.routes.service.desc":
+    "Hubungi showroom terdekat. Setiap lokasi juga merupakan pusat servis resmi.",
+  "contactPage.routes.service.action": "Pilih showroom",
+  "contactPage.routes.partnership.title": "Kemitraan, korporat, dan media",
+  "contactPage.routes.partnership.desc":
+    "Ceritakan rencana kerja sama atau kebutuhan liputan Anda melalui formulir di bawah.",
+  "contactPage.routes.partnership.action": "Isi formulir",
+  "contactPage.routes.career.title": "Karier",
+  "contactPage.routes.career.desc":
+    "Lihat posisi yang sedang dibuka, atau kirim CV Anda ke {email}.",
+  "contactPage.routes.career.action": "Lihat lowongan",
+  "contactPage.direct.title": "Kontak langsung",
+  "contactPage.direct.phone": "Telepon",
+  "contactPage.direct.hours": "Jam layanan",
+  "contactPage.branches.title": "Kontak per cabang",
+  "contactPage.branches.desc":
+    "Untuk servis, test ride, atau pertanyaan seputar cabang tertentu, hubungi cabangnya langsung.",
+  "contactPage.branches.all": "Lihat halaman showroom",
+  "contactPage.faq.all": "Lihat semua FAQ",
+
   // Contact Page
-  "contact.page.description":
-    "Ada pertanyaan atau butuh bantuan? Hubungi kami melalui salah satu cara di bawah ini.",
-  "contact.page.findUs": "Temukan Kami",
-  "contact.page.openInMaps": "Buka di Google Maps",
-  "contact.page.hours": "Jam Operasional",
   "contact.page.business.hours": "Senin - Jumat: 09.00 - 18.00 WIB",
   "contact.page.faqTitle": "Pertanyaan yang Sering Diajukan",
   "contact.page.thankYou": "Terima Kasih",

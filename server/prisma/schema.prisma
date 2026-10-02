@@ -336,7 +336,7 @@ model Booking {
   time            String             // HH:mm (zona waktu showroom)
   startAt         DateTime           // instan UTC dari date+time+zona showroom (untuk sortir/"mendatang")
   note            String?
-  source          String?            // navbar | nav-sheet | landing-hero | showroom-card | product-hero | product-subnav | showroom-hero | showroom-steps | showroom-cta | other
+  source          String?            // navbar | nav-sheet | landing-hero | showroom-card | product-hero | product-subnav | showroom-hero | showroom-steps | showroom-cta | contact-page | other
   locale          Locale?
   status          BookingStatus      @default(NEW)
   calendarStatus  CalendarSyncStatus @default(PENDING)

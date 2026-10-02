@@ -383,6 +383,7 @@ export const BOOKING_SOURCE_LABEL: Record<string, string> = {
   "showroom-hero": "Showroom page hero",
   "showroom-steps": "Showroom page visit steps",
   "showroom-cta": "Showroom page closing CTA",
+  "contact-page": "Contact page",
   other: "Other",
   unknown: "Unknown",
 };

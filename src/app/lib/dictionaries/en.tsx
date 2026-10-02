@@ -247,10 +247,6 @@ export const en = {
 
   // Contact
   "contact.tag": "Contact Us",
-  "contact.title": "Get in",
-  "contact.titleHighlight": "Touch",
-  "contact.description":
-    "Questions about Wedison electric motorcycles? Our team is here to help.",
   "contact.sendMessage": "Send Us a Message",
   "contact.name": "Name",
   "contact.email": "Email",
@@ -266,10 +262,8 @@ export const en = {
   "contact.message": "Message",
   "contact.messagePlaceholder": "Your message",
   "contact.send": "Send Message",
-  "contact.contactInfo": "Contact Information",
   "contact.headquarters": "Headquarters",
   "contact.phone": "Phone",
-  "contact.phoneHours": "Monday to Friday, 9am to 6pm",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "We respond as soon as possible",
   "contact.followUs": "Follow Us",
@@ -408,10 +402,6 @@ export const en = {
 
   // About Us
   "about.tag": "Our Story",
-  "about.title": "About",
-  "about.titleHighlight": "Wedison Group",
-  "about.overview.title":
-    "Wedison: The Motorcycles and the Network Behind Them",
   "about.overview.p1":
     "Wedison is Indonesia's first fast-charging electric motorcycle company. Our work does not end at selling motorcycles. We also build the charging network that makes owning one practical day to day.",
   "about.overview.p2":
@@ -431,14 +421,8 @@ export const en = {
   "about.values.experience.title": "Ownership That Holds Together",
   "about.values.experience.description":
     "Motorcycles that are straightforward to ride, equipped with features owners use every day.",
-  "about.projects.title": "Our Projects",
-  "about.projects.future.title": "Reducing Emissions From Urban Transport",
   "about.projects.future.description":
     "Drawing on renewable energy to lower carbon emissions, and broadening the electric vehicle market so clean transport becomes more affordable.",
-  "about.projects.charging.title": "SuperCharge",
-  "about.projects.charging.description":
-    "Building a charging network dependable enough that owners no longer need to monitor their remaining range daily.",
-  "about.offers.title": "What We Offer",
   "about.offers.motorcycles.title": "Electric Motorcycle Models",
   "about.offers.motorcycles.description":
     "Several models with distinct characters, from a compact commuter to a long-range maxi-scooter.",
@@ -450,12 +434,63 @@ export const en = {
     "We are building electric transport in Indonesia designed for the long term. We would welcome your part in it.",
   "about.contactUs": "Contact Us",
 
+  // about & contact page (redesign 2026-10)
+  "aboutPage.hero.title": "We build the motorcycle, and the network that charges it.",
+  "aboutPage.hero.imageAlt": "The Wedison office building",
+  "aboutPage.intro.imageAlt": "The Wedison team at the office",
+  "aboutPage.values.imageAlt": "A rider with a Wedison electric motorcycle",
+  "aboutPage.eco.title": "One ecosystem, from the motorcycle to the charger",
+  "aboutPage.eco.desc":
+    "Every part is designed to work with the others, so owning an electric motorcycle feels easy every day.",
+  "aboutPage.eco.motorcycles.cta": "See the lineup",
+  "aboutPage.eco.charging.cta": "Discover SuperCharge",
+  "aboutPage.eco.app.title": "The Wedison App",
+  "aboutPage.eco.app.cta": "About the app",
+  "aboutPage.eco.werigo.desc":
+    "Wedison's electric motorcycle rental in Bali, delivered right to where you're staying.",
+  "aboutPage.eco.werigo.cta": "Visit Werigo",
+  "aboutPage.place.title": "Where we work",
+  "aboutPage.place.desc":
+    "Wedison's head office is in Pondok Indah, South Jakarta, in the same building as our showroom and service centre. Feel free to drop by.",
+  "aboutPage.place.cta": "See all showrooms",
+  "aboutPage.place.imageMain": "Wedison head office in Pondok Indah",
+  "aboutPage.place.imageA": "The Wedison team workspace",
+  "aboutPage.place.imageB": "The guest area at the Wedison office",
+  "aboutPage.join.career": "See Open Roles",
+  "contactPage.hero.title": "How can we help?",
+  "contactPage.hero.desc":
+    "Choose what you need below so your question reaches the right team straight away.",
+  "contactPage.hero.imageAlt": "The customer service desk at a Wedison showroom",
+  "contactPage.routes.label": "Choose what you need",
+  "contactPage.routes.testRide.title": "Test ride or showroom visit",
+  "contactPage.routes.testRide.desc":
+    "Book a visit at your nearest showroom. It's free, and you don't need an ID or licence.",
+  "contactPage.routes.testRide.action": "Book",
+  "contactPage.routes.product.title": "Product and purchase questions",
+  "contactPage.routes.product.desc":
+    "Ask about models, prices or financing options with our team on WhatsApp.",
+  "contactPage.routes.product.action": "Chat on WhatsApp",
+  "contactPage.routes.service.title": "Service and warranty",
+  "contactPage.routes.service.desc":
+    "Contact your nearest showroom. Every location is also an official service centre.",
+  "contactPage.routes.service.action": "Choose a showroom",
+  "contactPage.routes.partnership.title": "Partnerships, corporate and media",
+  "contactPage.routes.partnership.desc":
+    "Tell us about your partnership idea or press request using the form below.",
+  "contactPage.routes.partnership.action": "Fill in the form",
+  "contactPage.routes.career.title": "Careers",
+  "contactPage.routes.career.desc": "See our open roles, or send your CV to {email}.",
+  "contactPage.routes.career.action": "See open roles",
+  "contactPage.direct.title": "Direct contact",
+  "contactPage.direct.phone": "Phone",
+  "contactPage.direct.hours": "Service hours",
+  "contactPage.branches.title": "Branch contacts",
+  "contactPage.branches.desc":
+    "For servicing, test rides or questions about a specific branch, contact that branch directly.",
+  "contactPage.branches.all": "Go to the showroom page",
+  "contactPage.faq.all": "See all FAQs",
+
   // Contact Page
-  "contact.page.description":
-    "Have a question or need assistance? Reach us through any of the channels below.",
-  "contact.page.findUs": "Find Us",
-  "contact.page.openInMaps": "Open in Google Maps",
-  "contact.page.hours": "Business Hours",
   "contact.page.business.hours": "Monday - Friday: 09.00 AM - 06.00 PM",
   "contact.page.faqTitle": "Frequently Asked Questions",
   "contact.page.thankYou": "Thank You!",
