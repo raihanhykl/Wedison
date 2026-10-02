@@ -27,7 +27,7 @@ export default function ShowroomActivities() {
 
   return (
     <section className="bg-background py-16 sm:py-24">
-      <div className="main-container grid items-center gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-16">
+      <div className="main-container grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-16">
         <div>
           <Reveal>
             <h2 className="max-w-[16ch] text-balance font-display text-3xl font-bold tracking-tight text-foreground sm:text-5xl">

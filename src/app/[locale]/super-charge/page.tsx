@@ -1,13 +1,14 @@
 import SuperChargeHero from "./hero";
-import SuperChargeSpeed from "./speed";
-import SuperChargeNetwork from "./network";
-import SuperChargeFeature from "./features";
+import HowItWorks from "./how-it-works";
+import SuperChargeNetwork, { type NetworkStats } from "./network";
+import SuperChargeSafety from "./safety";
 import SuperChargeCta from "./cta";
-import VideoSection from "./videoSection";
 import AppSection from "./app-section";
 import { getSEOMetadata } from "@/app/lib/seo1";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
+import { SITES } from "@/data/supercharge-sites";
+import { getStations } from "@/lib/cms/api";
 import type { Locale } from "@/app/lib/locale";
 
 export async function generateMetadata({
@@ -19,6 +20,26 @@ export async function generateMetadata({
   return getSEOMetadata({ locale: locale as Locale, path: "/super-charge" });
 }
 
+/** Statistik jaringan dari data stasiun yang sama dengan halaman Lokasi (fallback statis). */
+async function networkStats(): Promise<NetworkStats> {
+  const remote = await getStations();
+  const sites = remote?.features.length ? remote.features : SITES.features;
+  const live = sites.filter((s) => s.properties.status === "operational");
+  return {
+    stations: live.length,
+    cities: new Set(live.map((s) => s.properties.city.trim().toLowerCase())).size,
+    upcoming: sites.filter((s) => s.properties.status === "coming_soon").length,
+    // Semua titik yang tidak tutup tampil di peta; yang beroperasi ditandai `live`.
+    points: sites
+      .filter((s) => s.properties.status === "operational" || s.properties.status === "coming_soon")
+      .map((s) => [
+        s.geometry.coordinates[1],
+        s.geometry.coordinates[0],
+        s.properties.status === "operational",
+      ]),
+  };
+}
+
 export default async function SuperChargePage({
   params,
 }: {
@@ -26,9 +47,12 @@ export default async function SuperChargePage({
 }) {
   const { locale } = await params;
   const loc = (locale === "en" ? "en" : "id") as Locale;
+  const stats = await networkStats();
 
   return (
     // Bukan <main>: landmark <main> tunggal disediakan layout locale (#konten).
+    // Alur: janji (hero) -> bukti 15 menit (cara kerja) -> di mana (jaringan) -> bisa dipercaya
+    // (keamanan) -> cara memakainya (aplikasi) -> satu ajakan penutup.
     <div className="bg-background">
       <JsonLd
         data={breadcrumbSchema(loc, [
@@ -36,51 +60,11 @@ export default async function SuperChargePage({
           { name: "SuperCharge", path: "/super-charge" },
         ])}
       />
-      {/* 1 — Hero (gelap) */}
       <SuperChargeHero />
-
-      {/* 2 — Kecepatan: angka bahasa-manusia (terang) */}
-      <SuperChargeSpeed />
-
-      {/* 3 — Video overview (terang) */}
-      <VideoSection />
-
-      {/* 4 — Living Network: peta + counter (forest, signature #1) */}
-      <SuperChargeNetwork />
-
-      {/* 5 — Teknologi charging */}
-      <div id="teknologi" className="scroll-mt-16">
-        <SuperChargeFeature
-          feature={1}
-          icon="Zap"
-          image="/super-charge/supercharge-chip-1.webp"
-          alt="Modul pengisian cepat Wedison SuperCharge"
-          bg="bg-muted"
-          reverse
-        />
-        <SuperChargeFeature
-          feature={2}
-          icon="MapPin"
-          image="/super-charge/supercharge-location-1.webp"
-          alt="Motor listrik Wedison di stasiun SuperCharge"
-          bg="bg-background"
-          imagePosition="object-[70%_25%]"
-        />
-        <SuperChargeFeature
-          feature={3}
-          icon="ShieldCheck"
-          image="/super-charge/supercharge-charging.webp"
-          alt="Proses pengisian daya di stasiun Wedison SuperCharge"
-          bg="bg-muted"
-          reverse
-          imagePosition="object-[30%_75%]"
-        />
-      </div>
-
-      {/* 6 — App: scrollytelling (signature #2) */}
+      <HowItWorks />
+      <SuperChargeNetwork stats={stats} />
+      <SuperChargeSafety />
       <AppSection />
-
-      {/* 7 — CTA penutup (forest-deep) */}
       <SuperChargeCta />
     </div>
   );

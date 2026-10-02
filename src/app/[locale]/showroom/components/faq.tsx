@@ -19,7 +19,7 @@ export default function ShowroomFaq() {
 
   return (
     <section className="bg-background py-16 sm:py-24">
-      <div className="main-container grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
+      <div className="main-container grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <h2 className="max-w-[14ch] text-balance font-display text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
             {t("showroomPage.faq.title")}

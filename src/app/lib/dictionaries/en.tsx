@@ -1105,18 +1105,42 @@ export const en = {
   "supercharge.hero.description":
     "SuperCharge is the fast-charging network Wedison builds and operates itself, compatible with Athena, Victory, and EdPower.",
   "supercharge.hero.ctaPrimary": "Find a Station",
-  "supercharge.hero.ctaSecondary": "Learn the Tech",
+  "supercharge.hero.ctaSecondary": "See How It Works",
+  "supercharge.hero.imageAlt":
+    "A Wedison electric motorcycle charging at a SuperCharge station",
+  "supercharge.how.compare.super": "SuperCharge",
+  "supercharge.how.compare.superValue": "15 min",
+  "supercharge.how.compare.home": "Charging at home",
+  "supercharge.how.compare.homeValue": "~5 hrs",
+  "supercharge.how.compare.note":
+    "Home charging: Athena and Victory with the Regular battery. SuperCharge works with Athena, Victory and EdPower.",
+  "supercharge.how.step1.title": "Plug in",
+  "supercharge.how.step1.desc":
+    "Park at a SuperCharge station and connect the charger to your motorcycle.",
+  "supercharge.how.step2.title": "Start in the app",
+  "supercharge.how.step2.desc":
+    "Tap start in the Wedison app. The session uses your charging package.",
+  "supercharge.how.step3.title": "Ride on",
+  "supercharge.how.step3.desc":
+    "About 15 minutes later the battery is at 80%. The app lets you know when it's done.",
+  "supercharge.network.upcomingLabel": "Coming soon",
+  "supercharge.safety.imageAlt": "The charging module inside a Wedison SuperCharge station",
+  "supercharge.safety.fact1.title": "IEC certified",
+  "supercharge.safety.fact1.desc":
+    "Our DC stations meet the international IEC safety standards.",
+  "supercharge.safety.fact2.title": "Follows EU directives",
+  "supercharge.safety.fact2.desc":
+    "Designed in line with European Union safety rules for electrical equipment.",
+  "supercharge.safety.fact3.title": "Built for Wedison",
+  "supercharge.safety.fact3.desc":
+    "Made for the battery systems in Athena, Victory and EdPower.",
+  "supercharge.safety.fact4.title": "Protects battery life",
+  "supercharge.safety.fact4.desc":
+    "Charging current is managed automatically, so speed doesn't cost battery life.",
+  "supercharge.app.screenAlt": "The {feature} screen in the Wedison app",
 
-  "supercharge.speed.kicker": "Speed",
-  "supercharge.speed.lead": "Charging from 10% to 80% takes just",
-  "supercharge.speed.unit": "minutes",
-  "supercharge.speed.caption":
-    "Approximately the length of a coffee break, after which you are back on the road.",
 
-  "supercharge.network.kicker": "SuperCharge Network",
   "supercharge.network.title": "Growing across your cities",
-  "supercharge.network.description":
-    "SuperCharge points continue to expand, from Jakarta to cities across Indonesia.",
   "supercharge.network.stationsLabel": "Charging points",
   "supercharge.network.citiesLabel": "Cities & counting",
 
@@ -1168,24 +1192,16 @@ export const en = {
   "supercharge.video.description":
     "From connecting the charger to riding away, this is what charging at a SuperCharge station involves.",
 
-  "supercharge.feature1.tag": "Fast & Reliable",
   "supercharge.feature1.title": "Fifteen Minutes, Not Five Hours",
-  "supercharge.feature1.subtitle":
-    "Less waiting, without compromising battery health",
   "supercharge.feature1.description":
     "SuperCharge brings a battery from 10% to 80% in 15 minutes. The current is regulated automatically, so the speed comes at no cost to battery life.",
 
-  "supercharge.feature2.tag": "In More Cities Every Month",
-  "supercharge.feature2.title": "A Network That Keeps Growing",
   "supercharge.feature2.subtitle": "Check the nearest point before setting off",
   "supercharge.feature2.description":
     "SuperCharge points are located in Wedison showrooms and partner sites, with new locations opening regularly. All of them are listed on the map.",
 
-  "supercharge.feature3.tag": "Safe and Certified",
   "supercharge.feature3.title": "Built to Last for Years",
   "supercharge.feature3.subtitle": "Safety first, speed second",
-  "supercharge.feature3.description":
-    "Our DC stations are designed specifically for Wedison motorcycles, certified to IEC safety standards, and compliant with EU Directives.",
 
   // SuperCharge App Section
   "supercharge.app.tag": "Mobile App",
@@ -1202,7 +1218,6 @@ export const en = {
   "supercharge.app.hero.description":
     "Locate a station, begin charging, follow the progress, and manage your charging package, all in one place.",
 
-  "supercharge.app.feature1.icon": "MapPin",
   "supercharge.app.feature1.title": "Find Nearby Stations",
   "supercharge.app.feature1.subtitle": "Locate charging points around you",
   "supercharge.app.feature1.description":
@@ -1211,7 +1226,6 @@ export const en = {
   "supercharge.app.feature1.bullet2": "Sorted by proximity",
   "supercharge.app.feature1.bullet3": "Save favorite stations",
 
-  "supercharge.app.feature2.icon": "Activity",
   "supercharge.app.feature2.title": "Monitor Charging From Your Phone",
   "supercharge.app.feature2.subtitle": "No need to wait beside the motorcycle",
   "supercharge.app.feature2.description":
@@ -1220,7 +1234,6 @@ export const en = {
   "supercharge.app.feature2.bullet2": "Estimated time remaining",
   "supercharge.app.feature2.bullet3": "Notification when charging is complete",
 
-  "supercharge.app.feature3.icon": "Zap",
   "supercharge.app.feature3.title": "Start With a Single Tap",
   "supercharge.app.feature3.subtitle": "Connect, confirm, and carry on",
   "supercharge.app.feature3.description":
@@ -1234,8 +1247,6 @@ export const en = {
   "supercharge.app.stats.rating": "Rating",
   "supercharge.app.stats.chargeTime": "Min Charge",
 
-  "supercharge.app.cta.title": "Ready to SuperCharge",
-  "supercharge.app.cta.titleHighlight": "Your Ride?",
   "supercharge.app.cta.description":
     "Download the app and check the nearest station before setting off.",
 

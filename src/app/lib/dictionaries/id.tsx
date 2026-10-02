@@ -1105,18 +1105,41 @@ export const id = {
   "supercharge.hero.description":
     "SuperCharge adalah jaringan pengisian cepat yang dibangun Wedison sendiri, kompatibel dengan Athena, Victory, dan EdPower.",
   "supercharge.hero.ctaPrimary": "Temukan Lokasi",
-  "supercharge.hero.ctaSecondary": "Pelajari Teknologinya",
+  "supercharge.hero.ctaSecondary": "Lihat Cara Kerjanya",
+  "supercharge.hero.imageAlt":
+    "Motor listrik Wedison sedang mengisi daya di stasiun SuperCharge",
+  "supercharge.how.compare.super": "SuperCharge",
+  "supercharge.how.compare.superValue": "15 menit",
+  "supercharge.how.compare.home": "Isi daya di rumah",
+  "supercharge.how.compare.homeValue": "±5 jam",
+  "supercharge.how.compare.note":
+    "Isi daya di rumah: Athena dan Victory dengan baterai Regular. SuperCharge kompatibel dengan Athena, Victory, dan EdPower.",
+  "supercharge.how.step1.title": "Colokkan konektor",
+  "supercharge.how.step1.desc":
+    "Parkir di stasiun SuperCharge, lalu sambungkan konektor ke motor Anda.",
+  "supercharge.how.step2.title": "Mulai dari aplikasi",
+  "supercharge.how.step2.desc":
+    "Ketuk mulai di aplikasi Wedison. Pengisian memakai paket isi daya Anda.",
+  "supercharge.how.step3.title": "Siap melaju lagi",
+  "supercharge.how.step3.desc":
+    "Sekitar 15 menit kemudian baterai sudah di 80%. Aplikasi memberi tahu saat pengisian selesai.",
+  "supercharge.network.upcomingLabel": "Segera hadir",
+  "supercharge.safety.imageAlt": "Modul pengisian daya di dalam stasiun Wedison SuperCharge",
+  "supercharge.safety.fact1.title": "Tersertifikasi IEC",
+  "supercharge.safety.fact1.desc":
+    "Stasiun DC kami memenuhi standar keselamatan internasional IEC.",
+  "supercharge.safety.fact2.title": "Mengikuti Direktif Uni Eropa",
+  "supercharge.safety.fact2.desc":
+    "Dirancang sesuai ketentuan keselamatan perangkat listrik Uni Eropa.",
+  "supercharge.safety.fact3.title": "Khusus motor Wedison",
+  "supercharge.safety.fact3.desc": "Dibuat untuk sistem baterai Athena, Victory, dan EdPower.",
+  "supercharge.safety.fact4.title": "Menjaga umur baterai",
+  "supercharge.safety.fact4.desc":
+    "Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
+  "supercharge.app.screenAlt": "Tampilan fitur {feature} di aplikasi Wedison",
 
-  "supercharge.speed.kicker": "Kecepatan",
-  "supercharge.speed.lead": "Dari 10% ke 80% hanya butuh",
-  "supercharge.speed.unit": "menit",
-  "supercharge.speed.caption":
-    "Kira-kira selama Anda menunggu secangkir kopi. Setelah itu, siap melaju lagi.",
 
-  "supercharge.network.kicker": "Jaringan SuperCharge",
   "supercharge.network.title": "Semakin dekat dengan Anda",
-  "supercharge.network.description":
-    "Titik SuperCharge terus bertambah, dari Jakarta hingga kota-kota lain di Indonesia.",
   "supercharge.network.stationsLabel": "Titik pengisian",
   "supercharge.network.citiesLabel": "Kota, dan terus bertambah",
 
@@ -1168,24 +1191,16 @@ export const id = {
   "supercharge.video.description":
     "Dari menyambungkan konektor hingga melaju kembali, lihat seperti apa proses pengisian di stasiun SuperCharge.",
 
-  "supercharge.feature1.tag": "Cepat dan Andal",
   "supercharge.feature1.title": "Lima Belas Menit, Bukan Lima Jam",
-  "supercharge.feature1.subtitle":
-    "Lebih singkat, tanpa mengorbankan umur baterai",
   "supercharge.feature1.description":
     "SuperCharge mengisi baterai dari 10% ke 80% dalam 15 menit. Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
 
-  "supercharge.feature2.tag": "Hadir di Banyak Kota",
-  "supercharge.feature2.title": "Jaringan yang Terus Bertambah",
   "supercharge.feature2.subtitle": "Cek titik terdekat sebelum berangkat",
   "supercharge.feature2.description":
     "Stasiun SuperCharge tersedia di showroom Wedison dan lokasi mitra, dan jumlahnya terus bertambah. Semuanya bisa Anda temukan di peta.",
 
-  "supercharge.feature3.tag": "Aman dan Tersertifikasi",
   "supercharge.feature3.title": "Dibangun untuk Dipakai Bertahun-tahun",
   "supercharge.feature3.subtitle": "Keselamatan lebih dulu, baru kecepatan",
-  "supercharge.feature3.description":
-    "Stasiun DC kami dirancang khusus untuk motor listrik Wedison, tersertifikasi standar keselamatan IEC, dan mengikuti Direktif Uni Eropa.",
 
   // SuperCharge App Section
   "supercharge.app.tag": "Aplikasi Wedison",
@@ -1202,7 +1217,6 @@ export const id = {
   "supercharge.app.hero.description":
     "Temukan stasiun, mulai pengisian, pantau prosesnya, dan kelola paket isi daya Anda. Semuanya dari satu aplikasi.",
 
-  "supercharge.app.feature1.icon": "MapPin",
   "supercharge.app.feature1.title": "Temukan Stasiun Terdekat",
   "supercharge.app.feature1.subtitle":
     "Titik pengisian di sekitar Anda, dalam satu peta",
@@ -1212,7 +1226,6 @@ export const id = {
   "supercharge.app.feature1.bullet2": "Diurutkan dari yang terdekat",
   "supercharge.app.feature1.bullet3": "Simpan stasiun favorit Anda",
 
-  "supercharge.app.feature2.icon": "Activity",
   "supercharge.app.feature2.title": "Pantau Pengisian dari Ponsel",
   "supercharge.app.feature2.subtitle": "Tidak perlu menunggu di samping motor",
   "supercharge.app.feature2.description":
@@ -1221,7 +1234,6 @@ export const id = {
   "supercharge.app.feature2.bullet2": "Perkiraan sisa waktu pengisian",
   "supercharge.app.feature2.bullet3": "Notifikasi saat pengisian selesai",
 
-  "supercharge.app.feature3.icon": "Zap",
   "supercharge.app.feature3.title": "Mulai dengan Satu Ketukan",
   "supercharge.app.feature3.subtitle": "Colokkan, ketuk, dan tinggalkan",
   "supercharge.app.feature3.description":
@@ -1235,8 +1247,6 @@ export const id = {
   "supercharge.app.stats.rating": "Rating",
   "supercharge.app.stats.chargeTime": "Menit Isi Daya",
 
-  "supercharge.app.cta.title": "Siap SuperCharge",
-  "supercharge.app.cta.titleHighlight": "Perjalanan Anda?",
   "supercharge.app.cta.description":
     "Unduh aplikasinya, lalu temukan stasiun terdekat sebelum berangkat.",
 
