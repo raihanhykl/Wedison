@@ -20,8 +20,6 @@ function MapPlaceholder() {
   return <div className="h-full w-full animate-pulse bg-secondary/60" aria-hidden />;
 }
 
-/** Tinggi bagian kartu yang menumpang di atas peta (px) — harus cocok dgn -mt-* di bawah. */
-const OVERLAP = { mobile: 64, desktop: 120 };
 
 /**
  * Section lokasi: satu blok per negara (hanya negara `published`). Tiap blok = peta + deretan
@@ -61,15 +59,6 @@ function CountryBlock({ network }: { network: CountryNetwork }) {
   const mapBoxRef = useRef<HTMLDivElement>(null);
   const mapReady = useIdleVisible(mapBoxRef);
   const [edges, setEdges] = useState({ start: true, end: false });
-  const [inset, setInset] = useState(OVERLAP.desktop);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 640px)");
-    const sync = () => setInset(mq.matches ? OVERLAP.desktop : OVERLAP.mobile);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
 
   const updateEdges = useCallback(() => {
     const el = scrollerRef.current;
@@ -165,14 +154,13 @@ function CountryBlock({ network }: { network: CountryNetwork }) {
       <div className="main-container mt-6">
         <div
           ref={mapBoxRef}
-          className="relative h-[360px] overflow-hidden rounded-2xl border border-border bg-secondary/50 sm:h-[480px]"
+          className="relative h-[300px] overflow-hidden rounded-2xl border border-border bg-secondary/50 sm:h-[400px]"
         >
           {mapReady ? (
             <ShowroomMap
               pins={pins}
               selectedId={selectedId}
               onSelect={selectFromMap}
-              bottomInset={inset}
             />
           ) : (
             <MapPlaceholder />
@@ -180,7 +168,7 @@ function CountryBlock({ network }: { network: CountryNetwork }) {
         </div>
       </div>
 
-      {/* Deretan kartu: menumpang di tepi bawah peta, bisa digeser, menjorok sampai tepi layar */}
+      {/* Deretan kartu di bawah peta (tidak menumpang), bisa digeser, menjorok sampai tepi layar */}
       <div
         ref={scrollerRef}
         onScroll={updateEdges}
@@ -191,9 +179,9 @@ function CountryBlock({ network }: { network: CountryNetwork }) {
         )}
         tabIndex={0}
         className={cn(
-          "relative z-10 -mt-16 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 pt-1 outline-none sm:-mt-[120px] sm:gap-5",
-          // Rata kiri dengan .main-container (max 1280px, padding 5/8/12) tapi boleh menjorok ke kanan.
-          "scroll-px-9 px-9 sm:scroll-px-16 sm:px-16 lg:scroll-px-[max(6rem,calc((100vw-1280px)/2+6rem))] lg:px-[max(6rem,calc((100vw-1280px)/2+6rem))]",
+          "mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 pt-1 outline-none sm:mt-6 sm:gap-5",
+          // Rata kiri dengan tepi peta/.main-container (max 1280px, padding 5/8/12), menjorok ke kanan.
+          "scroll-px-5 px-5 sm:scroll-px-8 sm:px-8 lg:scroll-px-[max(3rem,calc((100vw-1280px)/2+3rem))] lg:px-[max(3rem,calc((100vw-1280px)/2+3rem))]",
           "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
           "focus-visible:ring-2 focus-visible:ring-ring/50",
         )}
