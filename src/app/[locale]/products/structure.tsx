@@ -7,6 +7,7 @@ import { useLanguage } from "@/app/lib/language-context";
 import { getSpecificationValue } from "@/service/specifications";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { whatsappUrl } from "@/lib/seo/site";
 
 // Urutan sama dengan navbar (nav-config.ts) agar konsisten di seluruh situs.
 const PRODUCTS = [
@@ -16,7 +17,7 @@ const PRODUCTS = [
   { id: "edpower", name: "EdPower" },
 ] as const;
 
-const WHATSAPP = "https://wa.me/6282124657804";
+const WHATSAPP = whatsappUrl();
 
 /**
  * Nilai jarak tempuh di dictionary bisa berupa "110 km (Baterai Regular) / 120 km

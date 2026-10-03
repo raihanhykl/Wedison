@@ -1,265 +1,292 @@
 "use client";
 
-import { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, type ReactNode } from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
 import MapComponent from "@/app/[locale]/showroom/components/map-component";
-import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { Stagger, StaggerItem } from "@/components/motion/stagger";
-import Image from "next/image";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import Contact from "@/components/contact3";
-import { CONTACT } from "@/lib/seo/site";
+import { CONTACT, SOCIAL_PROFILES } from "@/lib/seo/site";
+import { PUBLISHED_SHOWROOM_LOCATIONS } from "@/lib/seo/showrooms";
+import { SHOWROOMS } from "@/lib/booking/showrooms";
+import type { FormTopic } from "@/lib/contact-schema";
+
+/** SEMENTARA: foto area resepsionis. Ganti dengan ASET-K01 (meja layanan/CS, 4:5). */
+const HERO_IMAGE = "/ShowRoom-Receptionist.webp";
+
+const SOCIAL_LABEL: Record<string, string> = {
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  youtube: "YouTube",
+  facebook: "Facebook",
+};
 
 export default function ContactPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [topic, setTopic] = useState<FormTopic | null>(null);
+  const href = (path: string) => `/${language}${path}`;
+  const wa = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(
+    language === "id"
+      ? "Halo Wedison, saya ingin bertanya tentang motor listrik Wedison."
+      : "Hi Wedison, I have a question about Wedison electric motorcycles.",
+  )}`;
 
-  // Scroll to top on page load
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const goToForm = (next: FormTopic) => {
+    setTopic(next);
+    document.getElementById("contact")?.scrollIntoView({ block: "start" });
+  };
 
-  // Contact information. Telepon & email berupa tautan tel:/mailto: (klik langsung di ponsel,
-  // dan konsisten dengan ContactPoint di JSON-LD Organization).
-  const contactInfo: {
-    icon: React.ReactNode;
-    title: string;
-    content: string;
-    subContent?: string;
-    href?: string;
-  }[] = [
+  const rowClass =
+    "group grid w-full cursor-pointer grid-cols-[1fr_auto] items-center gap-6 border-b border-border py-6 text-left transition-colors sm:py-7";
+
+  const routes: { key: string; node: (children: ReactNode) => ReactNode }[] = [
     {
-      icon: <MapPin className="h-6 w-6 text-primary" />,
-      title: t("contact.headquarters"),
-      content: t("showroom.address"),
+      key: "testRide",
+      node: (c) => (
+        <BookingTrigger purpose="testRide" source="contact-page" className={rowClass}>
+          {c}
+        </BookingTrigger>
+      ),
     },
     {
-      icon: <Phone className="h-6 w-6 text-primary" />,
-      title: t("contact.phone"),
-      content: CONTACT.phoneDisplay,
-      subContent: t("contact.phoneHours"),
-      href: `tel:${CONTACT.phoneE164}`,
+      key: "product",
+      node: (c) => (
+        <a href={wa} target="_blank" rel="noopener noreferrer" className={rowClass}>
+          {c}
+        </a>
+      ),
     },
     {
-      icon: <Mail className="h-6 w-6 text-primary" />,
-      title: t("contact.emailLabel"),
-      content: CONTACT.email,
-      subContent: t("contact.emailResponse"),
-      href: `mailto:${CONTACT.email}`,
+      key: "service",
+      node: (c) => (
+        <Link href={href("/showroom/#lokasi")} className={rowClass}>
+          {c}
+        </Link>
+      ),
     },
     {
-      icon: <Clock className="h-6 w-6 text-primary" />,
-      title: t("contact.page.hours"),
-      content: t("contact.page.business.hours"),
-      //   subContent: t("showroom.weekend"),
+      key: "partnership",
+      node: (c) => (
+        <button type="button" onClick={() => goToForm("partnership")} className={rowClass}>
+          {c}
+        </button>
+      ),
+    },
+    {
+      key: "career",
+      node: (c) => (
+        <Link href={href("/career/")} className={rowClass}>
+          {c}
+        </Link>
+      ),
     },
   ];
 
-  // FAQ items
-  const faqItems = [
-    {
-      question: t("contact.page.faq.q1"),
-      answer: t("contact.page.faq.a1"),
-    },
-    {
-      question: t("contact.page.faq.q2"),
-      answer: t("contact.page.faq.a2"),
-    },
-    {
-      question: t("contact.page.faq.q3"),
-      answer: t("contact.page.faq.a3"),
-    },
-    {
-      question: t("contact.page.faq.q4"),
-      answer: t("contact.page.faq.a4"),
-    },
-  ];
+  const faq = [1, 2, 3, 4];
 
   return (
     // Bukan <main>: landmark <main> tunggal disediakan layout locale (#konten).
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="pt-16 2xl:pt-24 bg-gradient-to-b from-muted to-background">
-        <div className="main-container py-0 2xl:py-20">
-          <Reveal className="text-center max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-1 mb-4 border border-border rounded-full bg-secondary text-primary">
-              <span className="text-sm font-medium">{t("contact.tag")}</span>
-            </div>
+    <div className="bg-background">
+      {/* ============ HERO + ARAHKAN SESUAI KEBUTUHAN ============ */}
+      <section className="pb-16 pt-28 sm:pb-24 sm:pt-36">
+        <div className="main-container grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
+          <div>
+            <Reveal>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-primary">
+                {t("contact.tag")}
+              </p>
+              <h1 className="mt-4 max-w-[16ch] text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl">
+                {t("contactPage.hero.title")}
+              </h1>
+              <p className="mt-5 max-w-[52ch] text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {t("contactPage.hero.desc")}
+              </p>
+            </Reveal>
 
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground text-balance mb-4">
-              {t("contact.title")}{" "}
-              <span className="text-primary relative">
-                {t("contact.titleHighlight")}
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/40"></span>
-              </span>
-            </h1>
+            <nav aria-label={t("contactPage.routes.label")} className="mt-10 border-t border-border">
+              {routes.map((r) => (
+                <div key={r.key}>
+                  {r.node(
+                    <>
+                      <span>
+                        <span className="block font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-2xl">
+                          {t(`contactPage.routes.${r.key}.title`)}
+                        </span>
+                        <span className="mt-1.5 block max-w-[56ch] text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+                          {t(`contactPage.routes.${r.key}.desc`).replace("{email}", CONTACT.hrEmail)}
+                        </span>
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-primary">
+                        <span className="hidden sm:inline">{t(`contactPage.routes.${r.key}.action`)}</span>
+                        {r.key === "product" ? (
+                          <ArrowUpRight className="h-5 w-5" aria-hidden />
+                        ) : (
+                          <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden />
+                        )}
+                      </span>
+                    </>,
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>
 
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
-              {t("contact.page.description")}
-            </p>
+          <Reveal y={0} className="relative hidden aspect-[4/5] overflow-hidden rounded-2xl bg-muted lg:block lg:sticky lg:top-28 lg:self-start">
+            <Image
+              src={HERO_IMAGE}
+              alt={t("contactPage.hero.imageAlt")}
+              fill
+              priority
+              sizes="35vw"
+              className="object-cover"
+            />
           </Reveal>
         </div>
       </section>
 
-      {/* Contact Information Section */}
-      <section className="py-12 md:py-16 bg-background">
-        <div className="main-container">
-          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {contactInfo.map((item, index) => (
-              <StaggerItem key={index}>
-                <div className="h-full bg-card border border-border rounded-xl p-6 shadow-sm transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:shadow-lg hover:-translate-y-1">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
-                        {item.icon}
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="font-display text-lg font-semibold tracking-tight text-foreground mb-1">
-                        {item.title}
-                      </h3>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
-                        >
-                          {item.content}
-                        </a>
-                      ) : (
-                        <p className="text-muted-foreground">{item.content}</p>
-                      )}
-                      {item.subContent && (
-                        <p className="text-muted-foreground text-sm mt-1">
-                          {item.subContent}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-
-          {/* Social Media Links */}
-          <Reveal delay={0.1} className="mt-10 text-center">
-            <h3 className="font-display text-xl font-semibold tracking-tight text-foreground mb-4">
-              {t("contact.followUs")}
-            </h3>
-            <div className="flex justify-center space-x-4">
-              <a
-                href="https://www.facebook.com/profile.php?id=61562726390879"
-                target="_blank" rel="noopener noreferrer"
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-muted hover:bg-secondary text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <span className="sr-only">Facebook</span>
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-              {/* Instagram */}
-              <a
-                href="https://www.instagram.com/wedison.id/"
-                target="_blank" rel="noopener noreferrer"
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-muted hover:bg-secondary text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <span className="sr-only">Instagram</span>
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm4.25-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-              <a href="https://www.tiktok.com/@wedison.id" target="_blank" rel="noopener noreferrer">
-                <Image
-                  src="/logo-tiktok-svgrepo-com.svg"
-                  alt="tiktok"
-                  width={80}
-                  height={80}
-                  className="h-10 w-10 p-2.5 flex items-center justify-center rounded-full bg-muted hover:bg-secondary text-muted-foreground hover:text-primary transition-colors duration-300"
-                />
-              </a>
+      {/* ============ FORM + KONTAK LANGSUNG ============ */}
+      <section id="contact" className="scroll-mt-24 bg-muted py-16 sm:py-24">
+        <div className="main-container grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+          <div>
+            <Reveal>
+              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {t("contact.sendMessage")}
+              </h2>
+              <p className="mt-3 text-muted-foreground">{t("contact.emailResponse")}.</p>
+            </Reveal>
+            <div className="mt-8">
+              <Contact topic={topic} />
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </div>
 
-      {/* Form and Map Section */}
-      <section id="contact" className="py-12 md:py-16 bg-muted">
-        <div className="main-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            {/* Contact Form */}
-            <Contact />
-
-            {/* Map */}
-            <Reveal delay={0.1}>
-              <div className="bg-card border border-border rounded-xl shadow-sm p-6 md:p-8">
-                <h2 className="font-display text-2xl font-bold tracking-tight text-foreground mb-6">
-                  {t("contact.page.findUs")}
-                </h2>
-                <div className="h-[400px] md:h-[450px]">
-                  <MapComponent
-                    latitude={-6.2484}
-                    longitude={106.781}
-                    zoom={15}
-                  />
-                </div>
-                <div className="mt-4 flex items-center text-muted-foreground">
-                  <ExternalLink className="h-5 w-5 text-primary mr-2" />
-                  <a
-                    href="https://www.google.com/maps/place/Wedison+Showroom/@-6.248464,106.7806209,19z/data=!4m10!1m2!2m1!1swedison+showroom!3m6!1s0x2e69f10019a26049:0xa59abd5e111a8a10!8m2!3d-6.248447!4d106.7810459!15sChB3ZWRpc29uIHNob3dyb29tWhIiEHdlZGlzb24gc2hvd3Jvb22SARplbGVjdHJpY19tb3RvcmN5Y2xlX2RlYWxlcqoBOBABMh4QASIa377C9bwSIpBp7hHS_qeMc_QbuBNmgIsWHu0yFBACIhB3ZWRpc29uIHNob3dyb29t4AEA!16s%2Fg%2F11x1nqm1sg!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDQyMi4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    {t("contact.page.openInMaps")}
-                  </a>
-                </div>
+          <div>
+            <Reveal>
+              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {t("contactPage.direct.title")}
+              </h2>
+            </Reveal>
+            <dl className="mt-8 border-t border-border">
+              <ContactRow label={t("contactPage.direct.phone")}>
+                <a href={`tel:${CONTACT.phoneE164}`} className="hover:text-primary hover:underline underline-offset-4">
+                  {CONTACT.phoneDisplay}
+                </a>
+                <span className="text-muted-foreground"> · </span>
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline underline-offset-4">
+                  WhatsApp
+                </a>
+              </ContactRow>
+              <ContactRow label={t("contact.emailLabel")}>
+                <a href={`mailto:${CONTACT.email}`} className="hover:text-primary hover:underline underline-offset-4">
+                  {CONTACT.email}
+                </a>
+              </ContactRow>
+              <ContactRow label={t("contactPage.direct.hours")}>
+                {t("contact.page.business.hours")}
+              </ContactRow>
+              <ContactRow label={t("contact.headquarters")}>{t("showroom.address")}</ContactRow>
+              <ContactRow label={t("contact.followUs")}>
+                <span className="flex flex-wrap gap-x-4 gap-y-1">
+                  {SOCIAL_PROFILES.map((url) => {
+                    const key = Object.keys(SOCIAL_LABEL).find((k) => url.includes(k));
+                    return (
+                      <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline underline-offset-4">
+                        {key ? SOCIAL_LABEL[key] : url}
+                      </a>
+                    );
+                  })}
+                </span>
+              </ContactRow>
+            </dl>
+            <Reveal y={0} className="mt-8 overflow-hidden rounded-2xl border border-border">
+              <div className="h-[260px]">
+                <MapComponent latitude={-6.2484} longitude={106.781} zoom={15} />
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-12 md:py-16 bg-background">
+      {/* ============ KONTAK PER CABANG ============ */}
+      <section className="py-16 sm:py-24">
         <div className="main-container">
-          <div className="max-w-3xl mx-auto">
-            <Reveal>
-              <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-center mb-8 text-foreground">
-                {t("contact.page.faqTitle")}
+          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {t("contactPage.branches.title")}
               </h2>
-            </Reveal>
-
-            <Stagger className="space-y-6">
-              {faqItems.map((item, index) => (
-                <StaggerItem key={index}>
-                  <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
-                    <h3 className="font-display text-lg font-semibold tracking-tight text-foreground mb-2">
-                      {item.question}
-                    </h3>
-                    <p className="text-muted-foreground">{item.answer}</p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
+              <p className="mt-3 max-w-[52ch] text-muted-foreground">{t("contactPage.branches.desc")}</p>
+            </div>
+            <Link href={href("/showroom/")} className="inline-flex items-center gap-1.5 font-semibold text-primary underline-offset-4 hover:underline">
+              {t("contactPage.branches.all")}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </Reveal>
+          <ul className="mt-10 grid grid-cols-1 border-t border-border sm:grid-cols-2">
+            {PUBLISHED_SHOWROOM_LOCATIONS.map((s) => {
+              const b = SHOWROOMS[s.id];
+              return (
+                <li key={s.id} className="border-b border-border py-6 sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
+                  <p className="font-display text-xl font-bold tracking-tight text-foreground">{t(b.nameKey)}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t(b.addressKey)}</p>
+                  <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-primary">
+                    <a href={`https://wa.me/${b.whatsapp}`} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+                      WhatsApp
+                    </a>
+                    <a href={s.mapsUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+                      {t("showroomPage.card.directions")}
+                    </a>
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
+
+      {/* ============ FAQ ============ */}
+      <section className="bg-muted py-16 sm:py-24">
+        <div className="main-container grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
+          <Reveal>
+            <h2 className="max-w-[14ch] text-balance font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {t("contact.page.faqTitle")}
+            </h2>
+            <Link href={href("/faq/")} className="mt-5 inline-flex items-center gap-1.5 font-semibold text-primary underline-offset-4 hover:underline">
+              {t("contactPage.faq.all")}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </Reveal>
+          <Accordion type="single" collapsible className="border-t border-border">
+            {faq.map((n) => (
+              <AccordionItem key={n} value={`q${n}`} className="border-border">
+                <AccordionTrigger className="cursor-pointer py-6 font-display text-lg font-semibold tracking-tight text-foreground hover:no-underline sm:text-xl [&>svg]:size-5">
+                  {t(`contact.page.faq.q${n}`)}
+                </AccordionTrigger>
+                <AccordionContent className="max-w-[62ch] pb-6 text-base leading-relaxed text-muted-foreground">
+                  {t(`contact.page.faq.a${n}`)}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ContactRow({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-1 gap-1 border-b border-border py-4 sm:grid-cols-[9rem_1fr] sm:gap-4">
+      <dt className="text-sm text-muted-foreground">{label}</dt>
+      <dd className="text-foreground">{children}</dd>
     </div>
   );
 }

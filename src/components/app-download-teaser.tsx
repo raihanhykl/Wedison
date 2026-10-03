@@ -115,7 +115,7 @@ export default function AppDownloadTeaser() {
                 delay={0.1}
                 className="mt-9 flex flex-col items-center gap-5 lg:items-start"
               >
-                <StoreBadges size="md" />
+                <StoreBadges size="sm" />
                 <Link
                   href={`/${language}/super-charge/`}
                   className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary"

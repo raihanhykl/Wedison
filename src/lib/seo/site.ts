@@ -64,13 +64,20 @@ export const SOCIAL_PROFILES = [
 
 export const CONTACT = {
   /** format tampilan */
-  phoneDisplay: "(+62) 821-2465-7804",
+  phoneDisplay: "(+62) 852-8612-6550",
   /** format E.164 untuk tel: dan schema */
-  phoneE164: "+6282124657804",
-  whatsapp: "6282124657804",
+  phoneE164: "+6285286126550",
+  whatsapp: "6285286126550",
   email: "support@wedison.co",
   hrEmail: "hr@wedison.co",
 } as const;
+
+/** Werigo: layanan sewa motor listrik Wedison di Bali (situs & brand terpisah). */
+export const WERIGO_URL = "https://werigo.co";
+
+/** Tautan WhatsApp kontak utama (opsional dengan pesan pembuka). Satu sumber untuk semua CTA WA umum. */
+export const whatsappUrl = (text?: string) =>
+  `https://wa.me/${CONTACT.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
 /** Kantor pusat = showroom Jakarta (Pondok Indah). */
 export const HQ_ADDRESS = {

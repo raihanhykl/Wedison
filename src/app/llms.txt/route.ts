@@ -1,5 +1,5 @@
 import { CONTACT, SITE_URL } from "@/lib/seo/site";
-import { SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/showrooms";
+import { PUBLISHED_SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/showrooms";
 
 // /llms.txt — ringkasan situs untuk asisten AI / mesin jawaban (GEO/AEO, spesifikasi
 // llmstxt.org). Fakta di sini harus sama dengan kamus spesifikasi & halaman terkait.
@@ -35,7 +35,7 @@ const MODELS = [
 
 function build(): string {
   const u = (p: string, locale = "id") => `${SITE_URL}/${locale}${p}`;
-  const showrooms = SHOWROOM_LOCATIONS.map(
+  const showrooms = PUBLISHED_SHOWROOM_LOCATIONS.map(
     (s) => `- ${s.name}: ${showroomFullAddress(s)} — WhatsApp +${s.whatsapp}`,
   ).join("\n");
 

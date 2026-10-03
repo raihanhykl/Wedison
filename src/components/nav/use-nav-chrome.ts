@@ -11,9 +11,7 @@ import { stripLocale } from "@/app/lib/locale";
  * berbeda isinya. Sekarang satu tempat saja.
  */
 const LIGHT_TOP_ROUTES = [
-  "/corporate/about/",
   "/corporate/contact/",
-  "/showroom/",
   "/super-charge/locations/",
   "/products/",
   "/cookie-policy/",
