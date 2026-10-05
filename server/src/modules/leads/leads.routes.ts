@@ -4,7 +4,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireDelete } from "../../middleware/auth.js";
 import { logActivity } from "../../lib/activity.js";
 import { logger } from "../../lib/logger.js";
 import { env } from "../../config/env.js";
@@ -179,7 +179,7 @@ publicLeadsRouter.post("/contacts", publicLimiter(5), validate(contactBody), asy
 // ─────────────────────────── Admin ───────────────────────────
 
 export const leadsRouter = Router();
-leadsRouter.use(requireAuth);
+leadsRouter.use(requireAuth, requireModule("leads"));
 
 const ymdOpt = z.string().regex(DATE_RE).optional();
 
@@ -377,7 +377,7 @@ leadsRouter.post("/bookings/:id/calendar-sync", async (req, res, next) => {
   }
 });
 
-leadsRouter.delete("/bookings/:id", requireRole("ADMIN"), async (req, res, next) => {
+leadsRouter.delete("/bookings/:id", requireDelete("leads"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const before = await prisma.booking.findUnique({ where: { id } });
@@ -433,7 +433,7 @@ leadsRouter.patch("/contacts/:id", validate(contactPatch), async (req, res, next
   }
 });
 
-leadsRouter.delete("/contacts/:id", requireRole("ADMIN"), async (req, res, next) => {
+leadsRouter.delete("/contacts/:id", requireDelete("leads"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     await prisma.contactSubmission.delete({ where: { id } });

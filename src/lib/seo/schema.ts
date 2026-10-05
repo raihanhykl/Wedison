@@ -224,3 +224,79 @@ export function newsArticleSchema(a: ArticleSchemaInput): JsonLdObject {
     articleSection: a.section,
   };
 }
+
+// ─── JobPosting (Google for Jobs) ────────────────────────────────────────────
+export type JobPostingInput = {
+  locale: Locale;
+  url: string;
+  id: string;
+  title: string;
+  descriptionHtml: string;
+  datePosted?: string | null;
+  validThrough?: string | null;
+  employmentType: "FULL_TIME" | "PART_TIME" | "CONTRACT" | "INTERNSHIP" | "FREELANCE";
+  workplaceType: "ONSITE" | "HYBRID" | "REMOTE";
+  department?: string | null;
+  openings?: number;
+  locations: { city: string; province: string | null; countryCode: string }[];
+  salary?: { min: number | null; max: number | null; currency: string } | null;
+};
+
+const EMPLOYMENT_SCHEMA: Record<JobPostingInput["employmentType"], string> = {
+  FULL_TIME: "FULL_TIME",
+  PART_TIME: "PART_TIME",
+  CONTRACT: "CONTRACTOR",
+  INTERNSHIP: "INTERN",
+  FREELANCE: "CONTRACTOR",
+};
+
+/** Hanya untuk lowongan yang masih dibuka (lowongan tertutup tidak boleh membawa JobPosting). */
+export function jobPostingSchema(j: JobPostingInput): JsonLdObject {
+  const remote = j.workplaceType === "REMOTE";
+  const countries = [...new Set(j.locations.map((l) => l.countryCode))];
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: j.title,
+    description: j.descriptionHtml,
+    identifier: { "@type": "PropertyValue", name: SITE_NAME, value: j.id },
+    url: j.url,
+    datePosted: j.datePosted ?? undefined,
+    validThrough: j.validThrough ?? undefined,
+    employmentType: EMPLOYMENT_SCHEMA[j.employmentType],
+    occupationalCategory: j.department ?? undefined,
+    totalJobOpenings: j.openings && j.openings > 1 ? j.openings : undefined,
+    inLanguage: langTag(j.locale),
+    directApply: false,
+    hiringOrganization: { "@type": "Organization", "@id": ORG_ID, name: SITE_NAME, sameAs: SITE_URL, logo: LOGO_URL },
+    ...(remote
+      ? {
+          jobLocationType: "TELECOMMUTE",
+          applicantLocationRequirements: countries.map((c) => ({ "@type": "Country", name: c })),
+        }
+      : {}),
+    jobLocation: j.locations.map((l) => ({
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: l.city,
+        ...(l.province ? { addressRegion: l.province } : {}),
+        addressCountry: l.countryCode,
+      },
+    })),
+    ...(j.salary && (j.salary.min || j.salary.max)
+      ? {
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: j.salary.currency,
+            value: {
+              "@type": "QuantitativeValue",
+              ...(j.salary.min ? { minValue: j.salary.min } : {}),
+              ...(j.salary.max ? { maxValue: j.salary.max } : {}),
+              unitText: "MONTH",
+            },
+          },
+        }
+      : {}),
+  };
+}

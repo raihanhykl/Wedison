@@ -40,7 +40,7 @@ export const en = {
   // buttons
   "btn.learn.more": "Learn More",
   "btn.see.brochure": "See Brochure",
-  "btn.testRide.product": "Take It for a Test Ride",
+  "btn.testRide.product": "Test Ride Now",
   "btn.testRide.short": "Book a Test Ride",
   "btn.findShowroom": "Find a Showroom",
   "product.brochure.title": "{model} Brochure",

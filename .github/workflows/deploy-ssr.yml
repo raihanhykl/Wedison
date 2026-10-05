@@ -106,6 +106,8 @@ jobs:
           npx prisma migrate deploy
           # Seed data awal hanya sekali (admin, topics, liputan, IG, 85 lokasi).
           if [ ! -f .seeded ]; then npm run db:seed && touch .seeded; fi
+          # Seed modul HR: idempoten (penanda di DB), aman di setiap deploy.
+          npm run db:seed:hr
           REMOTE
 
       - name: Reload PM2 (landing + api)

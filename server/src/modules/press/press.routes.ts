@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
 import { uniqueSlug, slugify } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -28,7 +28,7 @@ const pressSchema = z.object({
 });
 
 export const pressRouter = Router();
-pressRouter.use(requireAuth);
+pressRouter.use(requireAuth, requireModule("cms"));
 
 const listQuery = paginationQuery.extend({ status: STATUS.optional() });
 
@@ -71,7 +71,7 @@ pressRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-pressRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(pressSchema), async (req, res, next) => {
+pressRouter.post("/", requireWrite("cms"), validate(pressSchema), async (req, res, next) => {
   try {
     const data = getValidated<typeof pressSchema>(req);
     const slug = await uniqueSlug(data.slug || data.title, async (s) => !!(await prisma.pressCoverage.findUnique({ where: { slug: s } })));
@@ -84,7 +84,7 @@ pressRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(pressSchema), asy
   }
 });
 
-pressRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(pressSchema.partial()), async (req, res, next) => {
+pressRouter.patch("/:id", requireWrite("cms"), validate(pressSchema.partial()), async (req, res, next) => {
   try {
     const data = getValidated<typeof pressSchema>(req);
     const id = req.params.id as string;
@@ -98,7 +98,7 @@ pressRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(pressSchema.p
 });
 
 // Refresh metadata dari sumber untuk item yang sudah ada
-pressRouter.post("/:id/refresh", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+pressRouter.post("/:id/refresh", requireWrite("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const existing = await prisma.pressCoverage.findUnique({ where: { id } });
@@ -124,7 +124,7 @@ pressRouter.post("/:id/refresh", requireRole("ADMIN", "EDITOR"), async (req, res
 });
 
 const reorderSchema = z.object({ ids: z.array(z.string()).min(1) });
-pressRouter.post("/reorder", requireRole("ADMIN", "EDITOR"), validate(reorderSchema), async (req, res, next) => {
+pressRouter.post("/reorder", requireWrite("cms"), validate(reorderSchema), async (req, res, next) => {
   try {
     const { ids } = getValidated<typeof reorderSchema>(req);
     await prisma.$transaction(ids.map((id, i) => prisma.pressCoverage.update({ where: { id }, data: { sortOrder: i } })));
@@ -135,7 +135,7 @@ pressRouter.post("/reorder", requireRole("ADMIN", "EDITOR"), validate(reorderSch
   }
 });
 
-pressRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
+pressRouter.delete("/:id", requireDelete("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const item = await prisma.pressCoverage.delete({ where: { id } });

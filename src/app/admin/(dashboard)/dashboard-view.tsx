@@ -15,6 +15,7 @@ import { api } from "@/lib/admin/api";
 import { timeAgo } from "@/lib/admin/format";
 import type { DashboardStats, SeoOverview } from "@/lib/admin/types";
 import { ScoreRing } from "@/components/admin/content-health";
+import { canAccess } from "@/lib/admin/permissions";
 
 function StatCard({ title, value, hint, icon: Icon, href }: { title: string; value: number | string; hint?: string; icon: React.ElementType; href: string }) {
   return (
@@ -71,7 +72,7 @@ export function DashboardView() {
           <StatCard title="Articles" value={c.articles} hint={`${c.articlesByStatus.PUBLISHED ?? 0} published · ${c.articlesByStatus.DRAFT ?? 0} drafts`} icon={FileText} href="/admin/cms/articles" />
           <StatCard title="Press coverage" value={c.press} hint="live on Media Center" icon={Newspaper} href="/admin/cms/press" />
           <StatCard title="Social posts" value={c.social} hint="active" icon={Share2} href="/admin/cms/social" />
-          <StatCard title="SuperCharge stations" value={c.stations} hint={`${c.stationsByStatus.OPERATIONAL ?? 0} operational · ${c.stationsByStatus.COMING_SOON ?? 0} coming soon`} icon={MapPin} href="/admin/supercharge/stations" />
+{canAccess(user.role, "supercharge") && <StatCard title="SuperCharge stations" value={c.stations} hint={`${c.stationsByStatus.OPERATIONAL ?? 0} operational · ${c.stationsByStatus.COMING_SOON ?? 0} coming soon`} icon={MapPin} href="/admin/supercharge/stations" />}
         </div>
       )}
 

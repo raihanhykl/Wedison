@@ -46,7 +46,7 @@ const empty: Values = { url: "", title: "", slug: "", excerpt: "", description: 
 
 export function PressView() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("cms");
   const [tab, setTab] = useState<"all" | ContentStatus>("all");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);

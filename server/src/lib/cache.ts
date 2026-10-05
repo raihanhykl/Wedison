@@ -28,6 +28,7 @@ export const CacheTags = {
   media: "media",
   stations: "stations",
   dashboard: "dashboard",
+  jobs: "jobs",
 } as const;
 export type CacheTag = (typeof CacheTags)[keyof typeof CacheTags];
 

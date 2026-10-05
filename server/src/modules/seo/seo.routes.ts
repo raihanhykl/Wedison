@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../../lib/prisma.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite } from "../../middleware/auth.js";
 import { env } from "../../config/env.js";
 import { runSiteAudit, type SiteAudit, type SiteAuditContext } from "../../lib/site-audit.js";
 import { analyzeContent, type ContentScore } from "../../lib/content-score.js";
@@ -12,7 +12,7 @@ import { rescoreArticle } from "../../lib/content-score-db.js";
 const SETTING_KEY = "site_audit";
 
 export const seoRouter = Router();
-seoRouter.use(requireAuth);
+seoRouter.use(requireAuth, requireModule("cms"));
 
 /** Aggregate article scores from stored contentScore (published + indexable). */
 async function articleContext(): Promise<SiteAuditContext["articles"]> {
@@ -81,7 +81,7 @@ seoRouter.get("/site", async (_req, res, next) => {
 });
 
 // Run a fresh crawl (takes ~10–40 s). Concurrent requests share the same run.
-seoRouter.post("/site/run", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+seoRouter.post("/site/run", requireWrite("cms"), async (req, res, next) => {
   try {
     const base = (req.body?.baseUrl as string | undefined) ?? env.SITE_AUDIT_URL ?? env.FRONTEND_URL;
     if (!/^https?:\/\//.test(base)) throw badRequest("Invalid base URL");
@@ -138,7 +138,7 @@ seoRouter.post("/analyze", async (req, res, next) => {
 });
 
 // Recompute stored scores for all articles (after deploying new scoring rules).
-seoRouter.post("/rescore", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+seoRouter.post("/rescore", requireWrite("cms"), async (req, res, next) => {
   try {
     const ids = await prisma.article.findMany({ where: { deletedAt: null }, select: { id: true } });
     let translations = 0;

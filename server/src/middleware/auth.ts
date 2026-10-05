@@ -4,6 +4,7 @@ import { env } from "../config/env.js";
 import { prisma } from "../lib/prisma.js";
 import { unauthorized, forbidden } from "../lib/errors.js";
 import type { UserRole } from "../generated/prisma/enums.js";
+import { canAccess, canDelete, canHr, canWrite, type HrAction, type Module } from "../lib/permissions.js";
 
 export type AuthUser = {
   id: string;
@@ -79,4 +80,40 @@ export function setAuthCookie(res: Response, token: string) {
 
 export function clearAuthCookie(res: Response) {
   res.clearCookie(env.COOKIE_NAME, { path: "/" });
+}
+
+/** Router-level guard: the user's role must have access to the module (see lib/permissions.ts). */
+export function requireModule(module: Module) {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    if (!req.user) return next(unauthorized());
+    if (canAccess(req.user.role, module)) return next();
+    next(forbidden("Your role does not have access to this module"));
+  };
+}
+
+/** Fine-grained HR permission (approval workflow). */
+export function requireHr(action: HrAction) {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    if (!req.user) return next(unauthorized());
+    if (canHr(req.user.role, action)) return next();
+    next(forbidden("Your HR role does not allow this action"));
+  };
+}
+
+/** Create / edit inside a module (see lib/permissions.ts). */
+export function requireWrite(module: Module) {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    if (!req.user) return next(unauthorized());
+    if (canWrite(req.user.role, module)) return next();
+    next(forbidden("Your role cannot make changes in this module"));
+  };
+}
+
+/** Permanent delete inside a module. */
+export function requireDelete(module: Module) {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    if (!req.user) return next(unauthorized());
+    if (canDelete(req.user.role, module)) return next();
+    next(forbidden("Your role cannot delete items in this module"));
+  };
 }

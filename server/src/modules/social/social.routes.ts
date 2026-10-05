@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
@@ -23,7 +23,7 @@ const socialSchema = z.object({
 });
 
 export const socialRouter = Router();
-socialRouter.use(requireAuth);
+socialRouter.use(requireAuth, requireModule("cms"));
 
 const listQuery = paginationQuery.extend({ platform: PLATFORM.optional(), active: z.coerce.boolean().optional() });
 
@@ -56,7 +56,7 @@ socialRouter.post("/fetch-metadata", validate(fetchSchema), async (req, res, nex
   }
 });
 
-socialRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(socialSchema), async (req, res, next) => {
+socialRouter.post("/", requireWrite("cms"), validate(socialSchema), async (req, res, next) => {
   try {
     const data = getValidated<typeof socialSchema>(req);
     const url = data.platform === "INSTAGRAM" ? normalizeInstagramUrl(data.url) : data.url;
@@ -71,7 +71,7 @@ socialRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(socialSchema), a
   }
 });
 
-socialRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(socialSchema.partial()), async (req, res, next) => {
+socialRouter.patch("/:id", requireWrite("cms"), validate(socialSchema.partial()), async (req, res, next) => {
   try {
     const data = getValidated<typeof socialSchema>(req);
     const id = req.params.id as string;
@@ -84,7 +84,7 @@ socialRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(socialSchema
   }
 });
 
-socialRouter.post("/:id/refresh", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+socialRouter.post("/:id/refresh", requireWrite("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const existing = await prisma.socialPost.findUnique({ where: { id } });
@@ -108,7 +108,7 @@ socialRouter.post("/:id/refresh", requireRole("ADMIN", "EDITOR"), async (req, re
 });
 
 const reorderSchema = z.object({ ids: z.array(z.string()).min(1) });
-socialRouter.post("/reorder", requireRole("ADMIN", "EDITOR"), validate(reorderSchema), async (req, res, next) => {
+socialRouter.post("/reorder", requireWrite("cms"), validate(reorderSchema), async (req, res, next) => {
   try {
     const { ids } = getValidated<typeof reorderSchema>(req);
     await prisma.$transaction(ids.map((id, i) => prisma.socialPost.update({ where: { id }, data: { sortOrder: i } })));
@@ -119,7 +119,7 @@ socialRouter.post("/reorder", requireRole("ADMIN", "EDITOR"), validate(reorderSc
   }
 });
 
-socialRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
+socialRouter.delete("/:id", requireDelete("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     await prisma.socialPost.delete({ where: { id } });

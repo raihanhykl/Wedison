@@ -3,6 +3,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/admin/app-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { AdminProviders } from "@/components/admin/providers";
+import { ModuleGuard } from "@/components/admin/module-guard";
 import { getSessionUser } from "@/lib/admin/server";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +20,7 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
         <SidebarInset className="min-w-0">
           <AdminHeader />
           <div className="flex-1 p-4 md:p-6 lg:p-8">
-            <div className="mx-auto w-full max-w-7xl space-y-6">{children}</div>
+            <div className="mx-auto w-full max-w-7xl space-y-6"><ModuleGuard>{children}</ModuleGuard></div>
           </div>
         </SidebarInset>
       </SidebarProvider>
