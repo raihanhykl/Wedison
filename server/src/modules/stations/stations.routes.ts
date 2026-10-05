@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
 import { uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -41,7 +41,7 @@ async function nextStationId() {
 }
 
 export const stationsRouter = Router();
-stationsRouter.use(requireAuth);
+stationsRouter.use(requireAuth, requireModule("supercharge"));
 
 const listQuery = paginationQuery.extend({
   status: STATUS.optional(),

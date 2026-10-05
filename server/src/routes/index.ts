@@ -11,6 +11,7 @@ import { stationsRouter, publicStationsRouter } from "../modules/stations/statio
 import { consentRouter, publicConsentRouter } from "../modules/consent/consent.routes.js";
 import { dashboardRouter } from "../modules/dashboard/dashboard.routes.js";
 import { seoRouter } from "../modules/seo/seo.routes.js";
+import { hrRouter, publicCareersRouter } from "../modules/hr/hr.routes.js";
 import { leadsRouter, publicLeadsRouter } from "../modules/leads/leads.routes.js";
 import { env } from "../config/env.js";
 
@@ -21,6 +22,7 @@ api.use("/auth", authRouter);
 api.use("/admin/users", usersRouter);
 api.use("/admin/activity", activityRouter);
 api.use("/admin/dashboard", dashboardRouter);
+api.use("/admin/hr", hrRouter); // lowongan, divisi, lokasi, kontak HR (role HR_MANAGER/HR_STAFF)
 api.use("/admin/seo", seoRouter); // audit situs + analisis draf artikel (SEO/AEO/GEO)
 api.use("/admin/topics", categoriesRouter); // "Topics" in the UI (DB model: Category)
 api.use("/admin/categories", categoriesRouter);
@@ -43,6 +45,7 @@ publicRouter.use((_req, res, next) => {
   next();
 });
 publicRouter.use("/articles", publicArticlesRouter);
+publicRouter.use("/careers", publicCareersRouter);
 publicRouter.use("/press", publicPressRouter);
 publicRouter.use("/social", publicSocialRouter);
 publicRouter.use("/stations", publicStationsRouter);

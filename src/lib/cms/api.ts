@@ -115,3 +115,66 @@ export async function getStations(): Promise<SiteCollection | null> {
   const res = await get<SiteCollection | null>(`/api/v1/public/stations`, ["stations"], null);
   return res && res.type === "FeatureCollection" ? res : null;
 }
+
+// ─── Careers (modul HR) ─────────────────────────────────────────────────────
+export type PublicJob = {
+  id: string;
+  slug: string;
+  status: "PUBLISHED" | "CLOSED";
+  locale: Locale;
+  title: string;
+  summary: string;
+  responsibilities: string[];
+  qualifications: string[];
+  niceToHave: string[];
+  benefits: string[];
+  department: { slug: string; name: string } | null;
+  locations: { slug: string; city: string; province: string | null; country: string; countryCode: string }[];
+  employmentType: "FULL_TIME" | "PART_TIME" | "CONTRACT" | "INTERNSHIP" | "FREELANCE";
+  workplaceType: "ONSITE" | "HYBRID" | "REMOTE";
+  experienceLevel: "ENTRY" | "JUNIOR" | "MID" | "SENIOR" | "LEAD" | "MANAGER" | null;
+  openings: number;
+  salary: { min: number | null; max: number | null; currency: string } | null;
+  isUrgent: boolean;
+  applyEmail: string | null;
+  portals: { name: string; url: string }[];
+  publishedAt: string | null;
+  closesAt: string | null;
+  updatedAt: string;
+};
+
+export type CareerSettings = {
+  contactName: string;
+  contactEmail: string;
+  ccEmail: string | null;
+  phone: string | null;
+  whatsapp: string | null;
+  emailSubject: string;
+  applicationNote: string | null;
+  openApplicationEnabled: boolean;
+  companyPortals: { name: string; url: string }[];
+};
+
+export type CareersResponse = {
+  items: PublicJob[];
+  filters: {
+    departments: { slug: string; name: string }[];
+    locations: { slug: string; city: string; country: string; countryCode: string }[];
+  };
+  settings: CareerSettings;
+};
+
+/** null = backend unreachable (the page then falls back to the legacy static list). */
+export async function getCareers(locale: Locale): Promise<CareersResponse | null> {
+  const res = await get<(CareersResponse & { ok: boolean }) | null>(`/api/v1/public/careers?locale=${locale}`, ["jobs"], null);
+  return res?.ok ? { items: res.items, filters: res.filters, settings: res.settings } : null;
+}
+
+export async function getCareer(locale: Locale, slug: string) {
+  const res = await get<{ ok: boolean; data: { job: PublicJob; settings: CareerSettings } } | null>(
+    `/api/v1/public/careers/${encodeURIComponent(slug)}?locale=${locale}`,
+    ["jobs"],
+    null,
+  );
+  return res?.ok ? res.data : null;
+}

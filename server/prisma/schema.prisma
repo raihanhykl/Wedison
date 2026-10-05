@@ -20,6 +20,8 @@ enum UserRole {
   SUPER_ADMIN // kelola user + semua modul
   ADMIN       // semua modul konten, tanpa kelola user
   EDITOR      // tulis/edit konten, tidak bisa hapus permanen
+  HR_MANAGER  // modul HR penuh: publikasi, hapus, kontak & pengaturan rekrutmen
+  HR_STAFF    // modul HR: tulis/edit lowongan, ajukan review (tanpa publikasi/hapus)
 }
 
 model User {
@@ -373,4 +375,134 @@ model ContactSubmission {
 
   @@index([isHandled, createdAt])
   @@index([createdAt])
+}
+
+
+// ───────────────────────── HR: Lowongan kerja ─────────────────────────
+
+enum JobStatus {
+  DRAFT
+  PENDING_REVIEW // diajukan HR_STAFF, menunggu HR_MANAGER
+  PUBLISHED
+  CLOSED         // ditutup manual atau otomatis saat closesAt lewat
+  ARCHIVED
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  FREELANCE
+}
+
+enum WorkplaceType {
+  ONSITE
+  HYBRID
+  REMOTE
+}
+
+enum ExperienceLevel {
+  ENTRY
+  JUNIOR
+  MID
+  SENIOR
+  LEAD
+  MANAGER
+}
+
+model JobDepartment {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  nameId    String
+  nameEn    String?
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  jobs Job[]
+}
+
+model JobLocation {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  city        String
+  province    String?
+  country     String   @default("Indonesia")
+  countryCode String   @default("ID") // ISO 3166-1 alpha-2, untuk JSON-LD JobPosting
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  jobs Job[]
+}
+
+model Job {
+  id              String           @id @default(cuid())
+  slug            String           @unique
+  status          JobStatus        @default(DRAFT)
+  departmentId    String?
+  department      JobDepartment?   @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  locations       JobLocation[]
+  employmentType  EmploymentType   @default(FULL_TIME)
+  workplaceType   WorkplaceType    @default(ONSITE)
+  experienceLevel ExperienceLevel?
+  openings        Int              @default(1)
+  salaryMin       Int?
+  salaryMax       Int?
+  salaryCurrency  String           @default("IDR")
+  showSalary      Boolean          @default(false)
+  isUrgent        Boolean          @default(false)
+  /// Override email lamaran per lowongan (kosong = email HR di pengaturan)
+  applyEmail      String?
+  /// Tautan portal lowongan untuk lowongan ini: [{ name, url }]
+  portals         Json             @default("[]")
+  sortOrder       Int              @default(0)
+  publishedAt     DateTime?
+  closesAt        DateTime?
+  closedAt        DateTime?
+  viewCount       Int              @default(0)
+  /// Catatan HR_MANAGER saat mengembalikan pengajuan review
+  reviewNote      String?
+  createdById     String?
+  updatedById     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  translations JobTranslation[]
+  applyClicks  JobApplyClick[]
+
+  @@index([status, publishedAt])
+  @@index([departmentId])
+  @@index([closesAt])
+}
+
+model JobTranslation {
+  id               String   @id @default(cuid())
+  jobId            String
+  job              Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  locale           Locale
+  title            String
+  summary          String
+  responsibilities String[] @default([])
+  qualifications   String[] @default([])
+  niceToHave       String[] @default([])
+  benefits         String[] @default([])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([jobId, locale])
+}
+
+/// Klik tombol lamar dari halaman publik (email / nama portal). Untuk metrik minat per lowongan.
+model JobApplyClick {
+  id        String   @id @default(cuid())
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  channel   String   // "email" | nama portal (JobStreet, LinkedIn, ...)
+  createdAt DateTime @default(now())
+
+  @@index([jobId, createdAt])
 }

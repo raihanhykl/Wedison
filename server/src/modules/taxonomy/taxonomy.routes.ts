@@ -2,14 +2,14 @@ import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
 import { slugify, uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 
 // ─── Kategori ───────────────────────────────────────────────────────────────
 export const categoriesRouter = Router();
-categoriesRouter.use(requireAuth);
+categoriesRouter.use(requireAuth, requireModule("cms"));
 
 const categorySchema = z.object({
   nameId: z.string().trim().min(2).max(80),
@@ -75,7 +75,7 @@ categoriesRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => 
 
 // ─── Tag ────────────────────────────────────────────────────────────────────
 export const tagsRouter = Router();
-tagsRouter.use(requireAuth);
+tagsRouter.use(requireAuth, requireModule("cms"));
 
 const tagSchema = z.object({ name: z.string().trim().min(1).max(50) });
 

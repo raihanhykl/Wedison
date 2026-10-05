@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
@@ -23,7 +23,7 @@ const socialSchema = z.object({
 });
 
 export const socialRouter = Router();
-socialRouter.use(requireAuth);
+socialRouter.use(requireAuth, requireModule("cms"));
 
 const listQuery = paginationQuery.extend({ platform: PLATFORM.optional(), active: z.coerce.boolean().optional() });
 

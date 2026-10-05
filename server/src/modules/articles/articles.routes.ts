@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
 import { slugify, uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -95,7 +95,7 @@ function resolvePublishedAt(data: { status: string; publishedAt?: Date | null; s
 
 // ─── Admin ──────────────────────────────────────────────────────────────────
 export const articlesRouter = Router();
-articlesRouter.use(requireAuth);
+articlesRouter.use(requireAuth, requireModule("cms"));
 
 const listQuery = paginationQuery.extend({
   status: STATUS.optional(),

@@ -105,6 +105,37 @@ catatan singkat *apa yang harus diperbaiki* untuk editor, bukan untuk engineer.
   `llms.txt`, jumlah & kesegaran artikel, rata-rata skor GEO artikel, penulis, JSON-LD valid.
 - Jalankan audit setelah setiap rilis; temuan halaman statis diperbaiki tim dev, temuan artikel di editor.
 
+## Modul HR · Karier
+
+Lowongan kerja di halaman `/career` kini dikelola tim HR dari admin (`/admin/hr`), menggantikan
+data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fallback bila API mati).
+
+**Hak akses (otorisasi)** — satu sumber: `server/src/lib/permissions.ts` (cermin di `src/lib/admin/permissions.ts`).
+
+| Role | Modul yang bisa dibuka | Di modul HR |
+|---|---|---|
+| SUPER_ADMIN | semua | semua aksi |
+| ADMIN / EDITOR | dashboard, CMS, SuperCharge, leads | tidak ada akses |
+| HR_MANAGER | HR saja | tulis, publikasi/tutup/buka ulang/arsip, setujui atau kembalikan review, hapus, divisi & lokasi, kontak HR |
+| HR_STAFF | HR saja | tulis & edit draf, ajukan review; lowongan yang sudah tayang hanya bisa dilihat |
+
+- Backend: `requireModule("cms" | "hr" | …)` di setiap router admin (sebelumnya cukup login), `requireHr(action)` untuk aksi HR.
+- Frontend: menu sidebar difilter per modul, halaman yang tidak boleh dibuka menampilkan "No access", akun HR diarahkan ke `/admin/hr` setelah login.
+- Akun HR dibuat Super Admin di **Users** (role HR Manager / HR Staff).
+
+**Fitur**
+- Lowongan: judul & isi dwibahasa (minimal satu bahasa; bahasa lain memakai fallback), ringkasan, tanggung jawab, kualifikasi, nilai tambah, benefit (satu poin per baris).
+- Klasifikasi: divisi, beberapa lokasi (kota/provinsi/negara), tipe kerja (penuh waktu, kontrak, magang, …), on-site/hybrid/remote, level, jumlah posisi, rentang gaji (tampil opsional), label "Dibutuhkan segera".
+- Alur status: Draft → Pending review → Published → Closed → Archived. Tanggal tutup otomatis menutup lowongan (scheduler tiap menit).
+- Melamar: email (per lowongan atau default HR, subjek otomatis dengan `{title}`/`{department}`, CC opsional) dan tautan portal (JobStreet, LinkedIn, Glints, Kalibrr, …).
+- Duplikat lowongan, metrik views & klik "lamar" per kanal (30 hari) di HR Overview, daftar "perlu perhatian" (menunggu review, tutup ≤ 7 hari).
+- Pengaturan HR: nama & email kontak, CC, telepon/WhatsApp, template subjek email ID/EN, catatan untuk pelamar, lamaran umum (talent pool), profil perusahaan di portal lowongan.
+- Publik: `/[locale]/career` (filter divisi, negara, lokasi, tipe; pencarian), `/[locale]/career/[slug]` dengan JSON-LD `JobPosting` (Google for Jobs) untuk lowongan yang dibuka; lowongan tertutup tetap bisa dibuka (noindex, tanpa JobPosting). Lowongan masuk sitemap.
+
+**Data & deploy** — migrasi `hr_jobs` (enum role HR_MANAGER/HR_STAFF, tabel Job/JobTranslation/JobDepartment/JobLocation/JobApplyClick).
+Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR default) hanya berjalan sekali per database
+(penanda Setting `hr_seeded`) dan otomatis dijalankan di deploy staging & produksi.
+
 ## Roadmap modul
 
 - [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../../lib/prisma.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
 import { env } from "../../config/env.js";
 import { runSiteAudit, type SiteAudit, type SiteAuditContext } from "../../lib/site-audit.js";
 import { analyzeContent, type ContentScore } from "../../lib/content-score.js";
@@ -12,7 +12,7 @@ import { rescoreArticle } from "../../lib/content-score-db.js";
 const SETTING_KEY = "site_audit";
 
 export const seoRouter = Router();
-seoRouter.use(requireAuth);
+seoRouter.use(requireAuth, requireModule("cms"));
 
 /** Aggregate article scores from stored contentScore (published + indexable). */
 async function articleContext(): Promise<SiteAuditContext["articles"]> {

@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   } catch {
     /* body kosong = revalidate semua tag konten */
   }
-  const tags = body.tags?.length ? body.tags : ["articles", "press", "social", "stations", "categories"];
+  const tags = body.tags?.length ? body.tags : ["articles", "press", "social", "stations", "categories", "jobs"];
   for (const t of tags) revalidateTag(t);
   for (const p of body.paths ?? []) revalidatePath(p);
   return NextResponse.json({ ok: true, tags, paths: body.paths ?? [], at: Date.now() });

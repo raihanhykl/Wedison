@@ -26,12 +26,12 @@ import { useAdminUser } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
 import { formatDateTime } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
-import { ROLE_LABEL, type Paginated, type User, type UserRole } from "@/lib/admin/types";
+import { ROLE_DESCRIPTION, ROLE_LABEL, type Paginated, type User, type UserRole } from "@/lib/admin/types";
 
 const schema = z.object({
   name: z.string().trim().min(2, "At least 2 characters").max(80),
   email: z.string().email("Invalid email address"),
-  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR"]),
+  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "HR_MANAGER", "HR_STAFF"]),
   password: z.string().max(128).optional(),
   isActive: z.boolean(),
 });
@@ -104,7 +104,7 @@ export function UsersView() {
     <>
       <PageHeader
         title="Users"
-        description="Super Admin: manage users and every module. Admin: all content. Editor: write/edit, no permanent deletes."
+        description="Super Admin: everything. Admin/Editor: CMS, SuperCharge and leads. HR Manager/HR Staff: the HR module only."
         actions={<Button onClick={() => setEditing("new")}><Plus /> Add user</Button>}
       />
       <Input placeholder="Search name / email…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />
@@ -150,6 +150,7 @@ function UserForm({ user, isSelf, onDone }: { user: User | null; isSelf: boolean
                 <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
                 <SelectContent>{(Object.keys(ROLE_LABEL) as UserRole[]).map((r) => <SelectItem key={r} value={r}>{ROLE_LABEL[r]}</SelectItem>)}</SelectContent>
               </Select>
+              <FormDescription>{ROLE_DESCRIPTION[field.value]}</FormDescription>
               <FormMessage />
             </FormItem>
           )} />

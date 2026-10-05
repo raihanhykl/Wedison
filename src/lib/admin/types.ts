@@ -1,6 +1,6 @@
 // Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
 // "Topics" in the UI map to the Category model in the database.
-export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR";
+export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR" | "HR_MANAGER" | "HR_STAFF";
 export type ContentStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED" | "ARCHIVED";
 export type Locale = "id" | "en";
 export type SocialPlatform = "INSTAGRAM" | "TIKTOK" | "YOUTUBE" | "X" | "FACEBOOK" | "LINKEDIN";
@@ -241,7 +241,50 @@ export const ROLE_LABEL: Record<UserRole, string> = {
   SUPER_ADMIN: "Super Admin",
   ADMIN: "Admin",
   EDITOR: "Editor",
+  HR_MANAGER: "HR Manager",
+  HR_STAFF: "HR Staff",
 };
+
+export const ROLE_DESCRIPTION: Record<UserRole, string> = {
+  SUPER_ADMIN: "Everything, including users.",
+  ADMIN: "CMS, SuperCharge and leads; permanent deletes.",
+  EDITOR: "Write and edit content; no permanent deletes.",
+  HR_MANAGER: "HR module only: publish and close jobs, delete, HR contact settings, divisions and locations.",
+  HR_STAFF: "HR module only: write and edit draft jobs, submit them for review.",
+};
+
+// ─── HR ───
+export type JobStatus = "DRAFT" | "PENDING_REVIEW" | "PUBLISHED" | "CLOSED" | "ARCHIVED";
+export type EmploymentType = "FULL_TIME" | "PART_TIME" | "CONTRACT" | "INTERNSHIP" | "FREELANCE";
+export type WorkplaceType = "ONSITE" | "HYBRID" | "REMOTE";
+export type ExperienceLevel = "ENTRY" | "JUNIOR" | "MID" | "SENIOR" | "LEAD" | "MANAGER";
+export type JobDepartment = { id: string; slug: string; nameId: string; nameEn: string | null; sortOrder: number; isActive: boolean; _count?: { jobs: number } };
+export type JobLocation = { id: string; slug: string; city: string; province: string | null; country: string; countryCode: string; sortOrder: number; isActive: boolean; _count?: { jobs: number } };
+export type JobTranslation = { id?: string; locale: Locale; title: string; summary: string; responsibilities: string[]; qualifications: string[]; niceToHave: string[]; benefits: string[] };
+export type Job = {
+  id: string; slug: string; status: JobStatus; departmentId: string | null; department: JobDepartment | null; locations: JobLocation[];
+  employmentType: EmploymentType; workplaceType: WorkplaceType; experienceLevel: ExperienceLevel | null; openings: number;
+  salaryMin: number | null; salaryMax: number | null; salaryCurrency: string; showSalary: boolean; isUrgent: boolean;
+  applyEmail: string | null; portals: { name: string; url: string }[]; sortOrder: number;
+  publishedAt: string | null; closesAt: string | null; closedAt: string | null; viewCount: number; reviewNote: string | null;
+  translations: JobTranslation[]; createdAt: string; updatedAt: string; _count?: { applyClicks: number };
+};
+export type HrPermissions = { role: UserRole; write: boolean; publish: boolean; delete: boolean; settings: boolean; taxonomy: boolean };
+export type HrSettings = {
+  contactName: string; contactEmail: string; ccEmail?: string | null; phone?: string | null; whatsapp?: string | null;
+  emailSubjectId: string; emailSubjectEn: string; applicationNoteId?: string | null; applicationNoteEn?: string | null;
+  openApplicationEnabled: boolean; companyPortals: { name: string; url: string; enabled: boolean }[];
+};
+export type HrOverview = {
+  counts: Partial<Record<JobStatus, number>>; openPositions: number; totalViews: number; applyClicks30d: number;
+  clicksByChannel30d: { channel: string; count: number }[]; byDepartment: { name: string; count: number }[];
+  closingSoon: { id: string; title: string; closesAt: string }[]; pendingReview: { id: string; title: string; updatedAt: string }[];
+  topJobs: { id: string; title: string; views: number; applyClicks: number }[];
+};
+export const JOB_STATUS_LABEL: Record<JobStatus, string> = { DRAFT: "Draft", PENDING_REVIEW: "Pending review", PUBLISHED: "Published", CLOSED: "Closed", ARCHIVED: "Archived" };
+export const EMPLOYMENT_LABEL: Record<EmploymentType, string> = { FULL_TIME: "Full-time", PART_TIME: "Part-time", CONTRACT: "Contract", INTERNSHIP: "Internship", FREELANCE: "Freelance" };
+export const WORKPLACE_LABEL: Record<WorkplaceType, string> = { ONSITE: "On-site", HYBRID: "Hybrid", REMOTE: "Remote" };
+export const LEVEL_LABEL: Record<ExperienceLevel, string> = { ENTRY: "Entry level", JUNIOR: "Junior", MID: "Mid level", SENIOR: "Senior", LEAD: "Lead", MANAGER: "Manager" };
 
 export const PLATFORM_LABEL: Record<SocialPlatform, string> = {
   INSTAGRAM: "Instagram",

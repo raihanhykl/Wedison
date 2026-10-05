@@ -1,46 +1,56 @@
 import {
   LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings, Gauge,
-  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, type LucideIcon,
+  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, Briefcase, Building2, Contact, LayoutGrid, type LucideIcon,
 } from "lucide-react";
-import type { UserRole } from "@/lib/admin/types";
+import type { Module } from "@/lib/admin/permissions";
 
-export type NavItem = { title: string; href: string; icon: LucideIcon; roles?: UserRole[]; badge?: string };
+/** `module`: the item is shown only to roles with access to it (see lib/admin/permissions.ts). */
+export type NavItem = { title: string; href: string; icon: LucideIcon; module?: Module; badge?: string };
 export type NavGroup = { label: string; items: NavItem[] };
 
 export const NAV: NavGroup[] = [
   {
     label: "Overview",
-    items: [{ title: "Dashboard", href: "/admin", icon: LayoutDashboard }],
+    items: [{ title: "Dashboard", href: "/admin", icon: LayoutDashboard, module: "dashboard" }],
   },
   {
     label: "CMS · Media Center",
     items: [
-      { title: "Articles", href: "/admin/cms/articles", icon: FileText },
-      { title: "Press Coverage", href: "/admin/cms/press", icon: Newspaper },
-      { title: "Social Media", href: "/admin/cms/social", icon: Share2 },
-      { title: "Topics & Tags", href: "/admin/cms/topics", icon: Tags },
-      { title: "Media Library", href: "/admin/cms/media", icon: Images },
-      { title: "SEO & AI Readiness", href: "/admin/seo", icon: Gauge },
+      { title: "Articles", href: "/admin/cms/articles", icon: FileText, module: "cms" },
+      { title: "Press Coverage", href: "/admin/cms/press", icon: Newspaper, module: "cms" },
+      { title: "Social Media", href: "/admin/cms/social", icon: Share2, module: "cms" },
+      { title: "Topics & Tags", href: "/admin/cms/topics", icon: Tags, module: "cms" },
+      { title: "Media Library", href: "/admin/cms/media", icon: Images, module: "cms" },
+      { title: "SEO & AI Readiness", href: "/admin/seo", icon: Gauge, module: "cms" },
     ],
   },
   {
     label: "SuperCharge",
-    items: [{ title: "Stations", href: "/admin/supercharge/stations", icon: MapPin }],
+    items: [{ title: "Stations", href: "/admin/supercharge/stations", icon: MapPin, module: "supercharge" }],
   },
   {
     label: "Leads",
     items: [
-      { title: "Overview", href: "/admin/leads", icon: ChartColumnBig },
-      { title: "Bookings", href: "/admin/leads/bookings", icon: CalendarCheck },
-      { title: "Contact Messages", href: "/admin/leads/contacts", icon: MessageSquareText },
-      { title: "Calendar", href: "/admin/leads/calendar", icon: CalendarDays },
+      { title: "Overview", href: "/admin/leads", icon: ChartColumnBig, module: "leads" },
+      { title: "Bookings", href: "/admin/leads/bookings", icon: CalendarCheck, module: "leads" },
+      { title: "Contact Messages", href: "/admin/leads/contacts", icon: MessageSquareText, module: "leads" },
+      { title: "Calendar", href: "/admin/leads/calendar", icon: CalendarDays, module: "leads" },
+    ],
+  },
+  {
+    label: "HR · Careers",
+    items: [
+      { title: "Overview", href: "/admin/hr", icon: LayoutGrid, module: "hr" },
+      { title: "Job Openings", href: "/admin/hr/jobs", icon: Briefcase, module: "hr" },
+      { title: "Divisions & Locations", href: "/admin/hr/structure", icon: Building2, module: "hr" },
+      { title: "HR Contact & Settings", href: "/admin/hr/settings", icon: Contact, module: "hr" },
     ],
   },
   {
     label: "System",
     items: [
-      { title: "Users", href: "/admin/users", icon: Users, roles: ["SUPER_ADMIN"] },
-      { title: "Activity Log", href: "/admin/activity", icon: ScrollText, roles: ["SUPER_ADMIN", "ADMIN"] },
+      { title: "Users", href: "/admin/users", icon: Users, module: "users" },
+      { title: "Activity Log", href: "/admin/activity", icon: ScrollText, module: "activity" },
       { title: "My Account", href: "/admin/settings", icon: Settings },
     ],
   },
@@ -66,4 +76,7 @@ export const SEGMENT_LABEL: Record<string, string> = {
   users: "Users",
   activity: "Activity Log",
   settings: "My Account",
+  hr: "HR",
+  jobs: "Job Openings",
+  structure: "Divisions & Locations",
 };
