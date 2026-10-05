@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
 import { Button } from "@/components/ui/button";
 import { ShrinkHero } from "@/components/motion/shrink-hero";
 import { Reveal } from "@/components/motion/reveal";
+import { ArtDirectedImage } from "@/components/art-directed-image";
 
 /**
  * Hero SuperCharge — page-local (menggantikan HeroSection generik lama).
@@ -19,12 +19,12 @@ export default function SuperChargeHero() {
   return (
     <ShrinkHero>
       <section className="relative flex min-h-[90svh] w-full items-end overflow-hidden md:min-h-screen">
-        <Image
-          src="/super-charge/supercharge-hero-1.webp"
-          alt="Stasiun pengisian daya Wedison SuperCharge"
-          fill
+        {/* SEMENTARA: foto lama. Ganti dengan ASET-C01 (desktop 16:9 + mobile 9:16). */}
+        <ArtDirectedImage
+          desktop="/super-charge/supercharge-hero-1.webp"
+          mobile="/super-charge/supercharge-hero-1.webp"
+          alt={t("supercharge.hero.imageAlt")}
           priority
-          sizes="100vw"
           className="object-cover object-[center_40%]"
         />
         {/* Scrim: gelap di bawah untuk keterbacaan teks, subjek tetap tampak di atas */}
@@ -61,7 +61,7 @@ export default function SuperChargeHero() {
                 variant="outline"
                 className="border-white/40 bg-white/5 text-white hover:bg-white/15 hover:text-white"
               >
-                <Link href="#teknologi">
+                <Link href="#cara-kerja">
                   {t("supercharge.hero.ctaSecondary")}
                   <ArrowRight className="h-5 w-5" />
                 </Link>

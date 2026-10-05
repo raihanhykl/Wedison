@@ -4,8 +4,46 @@
 
 import { SHOWROOMS, type ShowroomId } from "@/lib/booking/showrooms";
 
+/**
+ * Negara jaringan showroom. Negara dengan `published: false` TIDAK tampil di mana pun
+ * (halaman /showroom, JSON-LD, llms.txt) — dipakai untuk menyiapkan ekspansi yang belum
+ * diumumkan. Cara menambah negara baru:
+ *   1. Tambah kode di CountryCode + entri di COUNTRIES (published: false dulu).
+ *   2. Cabang yang sudah buka: daftarkan di src/lib/booking/showrooms.ts (WA, zona waktu,
+ *      jam; juga registry server/src/modules/leads) lalu di SHOWROOM_LOCATIONS dengan
+ *      `country` yang sesuai. Cabang yang belum buka: cukup di UPCOMING_SHOWROOMS.
+ *   3. Saat siap diumumkan, ubah `published` negara itu jadi true.
+ */
+export type CountryCode = "ID";
+
+export type Country = {
+  code: CountryCode;
+  name: { id: string; en: string };
+  published: boolean;
+};
+
+export const COUNTRIES: Country[] = [
+  { code: "ID", name: { id: "Indonesia", en: "Indonesia" }, published: true },
+];
+
+/**
+ * Cabang yang segera buka: sengaja HANYA kota (teaser) — tanpa alamat, kontak, koordinat,
+ * atau tautan booking sampai cabang resmi dibuka.
+ */
+export type UpcomingShowroom = {
+  id: string;
+  city: string;
+  country: CountryCode;
+};
+
+export const UPCOMING_SHOWROOMS: UpcomingShowroom[] = [
+  { id: "medan", city: "Medan", country: "ID" },
+  { id: "surabaya", city: "Surabaya", country: "ID" },
+];
+
 export type ShowroomLocation = {
   id: ShowroomId;
+  country: CountryCode;
   /** Nama tampil (tidak dilokalisasi; kunci kamus tetap dipakai UI) */
   name: string;
   address: {
@@ -22,6 +60,7 @@ export type ShowroomLocation = {
 export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
   {
     id: "jakarta",
+    country: "ID",
     name: "Wedison Jakarta",
     address: {
       streetAddress: "Jl. Arteri Pondok Indah No. 30 A-C, Kebayoran Lama Selatan",
@@ -36,6 +75,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
   },
   {
     id: "bekasi",
+    country: "ID",
     name: "Wedison Bekasi",
     address: {
       streetAddress: "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, Bekasi Timur",
@@ -49,6 +89,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
   },
   {
     id: "bandung",
+    country: "ID",
     name: "Wedison Bandung",
     address: {
       streetAddress: "Jl. Raya Gadobangkong No. 154, Gadobangkong, Ngamprah",
@@ -62,6 +103,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
   },
   {
     id: "bali",
+    country: "ID",
     name: "Wedison Bali",
     address: {
       streetAddress: "Jl. Gatot Subroto Tengah No. 93, Dangin Puri Kaja, Denpasar Utara",
@@ -74,6 +116,28 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
     whatsapp: SHOWROOMS.bali.whatsapp,
   },
 ];
+
+const PUBLISHED_COUNTRIES = new Set(COUNTRIES.filter((c) => c.published).map((c) => c.code));
+
+/** Cabang buka di negara yang sudah dipublikasikan — dipakai halaman, JSON-LD, dan llms.txt. */
+export const PUBLISHED_SHOWROOM_LOCATIONS = SHOWROOM_LOCATIONS.filter((s) =>
+  PUBLISHED_COUNTRIES.has(s.country),
+);
+
+export type CountryNetwork = {
+  country: Country;
+  open: ShowroomLocation[];
+  upcoming: UpcomingShowroom[];
+};
+
+/** Jaringan per negara (hanya negara published), urut sesuai COUNTRIES. */
+export function showroomNetwork(): CountryNetwork[] {
+  return COUNTRIES.filter((c) => c.published).map((country) => ({
+    country,
+    open: SHOWROOM_LOCATIONS.filter((s) => s.country === country.code),
+    upcoming: UPCOMING_SHOWROOMS.filter((u) => u.country === country.code),
+  }));
+}
 
 /** Jam buka (sama semua cabang): Sen–Jum 10:00–19:00, Sab–Min 10:00–17:00 (waktu setempat). */
 export const SHOWROOM_OPENING_HOURS = [

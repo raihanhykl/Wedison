@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { whatsappUrl } from "@/lib/seo/site";
 
 const ALL_BIKES = ["bees", "athena", "victory", "edpower"] as const;
 type Bike = (typeof ALL_BIKES)[number];
@@ -29,7 +30,7 @@ const BIKE_NAME: Record<Bike, string> = {
 };
 const MIN_COLS = 2;
 const MAX_COLS = 4;
-const WHATSAPP = "https://wa.me/6282124657804";
+const WHATSAPP = whatsappUrl();
 
 export default function CompareStructure({
   initialColumns,

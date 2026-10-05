@@ -39,8 +39,12 @@ export const en = {
 
   // buttons
   "btn.learn.more": "Learn More",
-  "btn.buy.on.tokopedia": "Buy on Tokopedia",
   "btn.see.brochure": "See Brochure",
+  "btn.testRide.product": "Take It for a Test Ride",
+  "btn.testRide.short": "Book a Test Ride",
+  "btn.findShowroom": "Find a Showroom",
+  "product.brochure.title": "{model} Brochure",
+  "product.brochure.desc": "Full specs and key features in one PDF, handy to save or share.",
   "btn.order.now": "Order Now",
 
   // user manual
@@ -243,10 +247,6 @@ export const en = {
 
   // Contact
   "contact.tag": "Contact Us",
-  "contact.title": "Get in",
-  "contact.titleHighlight": "Touch",
-  "contact.description":
-    "Questions about Wedison electric motorcycles? Our team is here to help.",
   "contact.sendMessage": "Send Us a Message",
   "contact.name": "Name",
   "contact.email": "Email",
@@ -262,10 +262,8 @@ export const en = {
   "contact.message": "Message",
   "contact.messagePlaceholder": "Your message",
   "contact.send": "Send Message",
-  "contact.contactInfo": "Contact Information",
   "contact.headquarters": "Headquarters",
   "contact.phone": "Phone",
-  "contact.phoneHours": "Monday to Friday, 9am to 6pm",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "We respond as soon as possible",
   "contact.followUs": "Follow Us",
@@ -303,15 +301,14 @@ export const en = {
   "footer.about": "About Us",
   "footer.meetus": "Meet Us",
   "footer.career": "Career",
+  "footer.werigo": "Electric motorcycle rental in Bali",
+  "footer.werigoBridge":
+    "Visiting Bali? Rent a Wedison electric motorcycle through Werigo, delivered right to your stay.",
+  "footer.werigoCta": "Visit Werigo",
+  "footer.opensNewTab": "(opens in a new tab)",
 
   // Showroom Page
-  "showroom.title": "Visit Our",
-  "showroom.titleHighlight": "Showroom",
-  "showroom.description":
-    "See the range in person and ride one yourself before making a decision.",
   "showroom.tag": "Experience Center",
-  "showroom.location": "Our Locations",
-  "showroom.findUs": "Find Us",
   "showroom.address":
     "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
   "showroom.jakarta.name": "Wedison Jakarta",
@@ -324,20 +321,13 @@ export const en = {
   "showroom.bekasi.name": "Wedison Bekasi",
   "showroom.bekasi.address":
     "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, East Bekasi, Bekasi City, West Java 17113",
-  "showroom.locationDescription":
-    "Choose a showroom to see its location on the map. Every location includes a showroom and an official service center.",
   "showroom.bali.address":
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
-  "showroom.facility.showroom": "Showroom",
-  "showroom.facility.service": "Service Center",
-  "showroom.viewOnMaps": "View on Maps",
-  "showroom.hours": "Opening Hours",
   "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
   "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
-  "showroom.whatYouCanDo": "What You Can Do at the Showroom",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
-    "Ride in our test area and assess the acceleration and comfort for yourself before buying.",
+    "Ride around the showroom area with our team beside you. It's free, and you don't need to bring an ID or licence.",
   "showroom.consultation.title": "Product Consultation",
   "showroom.consultation.description":
     "Unsure which model suits you? Describe how you ride and our team will narrow down the options.",
@@ -348,14 +338,75 @@ export const en = {
   "showroom.service.description":
     "Official servicing and genuine parts, carried out by technicians trained on Wedison motorcycles.",
   "showroom.bookVisit": "Book a Visit",
-  "showroom.viewModels": "Go to Showroom",
+
+  // showroom page (redesign 2026-10)
+  "showroomPage.hero.imageAlt":
+    "Visitors looking at the Wedison electric motorcycle lineup with the showroom team",
+  "showroomPage.hero.title": "Meet Wedison up close.",
+  "showroomPage.hero.desc":
+    "See every model in person, take one out on the road with our team, and sort out advice, financing and servicing in a single visit.",
+  "showroomPage.hero.ctaPrimary": "Book a Test Ride",
+  "showroomPage.hero.ctaSecondary": "See Locations",
+  "showroomPage.hero.fact1": "Free test rides",
+  "showroomPage.hero.fact2": "No ID or licence needed",
+  "showroomPage.hero.fact3": "Walk-ins welcome",
+  "showroomPage.locations.title": "Find a showroom near you",
+  "showroomPage.locations.desc":
+    "Every location is a showroom and an official service centre, with SuperCharge on site. Pick a card to see it on the map.",
+  "showroomPage.locations.countOpen": "{n} open",
+  "showroomPage.locations.countUpcoming": "{n} coming soon",
+  "showroomPage.locations.prev": "Previous showroom",
+  "showroomPage.locations.next": "Next showroom",
+  "showroomPage.locations.showAll": "Show all",
+  "showroomPage.locations.listLabel": "Showrooms in {country}",
+  "showroomPage.card.showOnMap": "Show {name} on the map",
+  "showroomPage.card.facilities": "Showroom · Service · SuperCharge",
+  "showroomPage.card.openUntil": "Open · closes {time}",
+  "showroomPage.card.closedUntil": "Closed · opens {time}",
+  "showroomPage.card.weekdays": "Mon–Fri",
+  "showroomPage.card.weekend": "Sat–Sun",
+  "showroomPage.card.directions": "Directions",
+  "showroomPage.upcoming.label": "Coming soon",
+  "showroomPage.upcoming.desc": "Our next Experience Center is on its way. Stay tuned.",
+  "showroomPage.activities.title": "One visit covers it all.",
+  "showroomPage.activities.desc":
+    "From trying a motorcycle to planning its servicing, our team is ready to help at every location.",
+  "showroomPage.steps.title": "How your visit works",
+  "showroomPage.steps.1.title": "Pick a time",
+  "showroomPage.steps.1.desc":
+    "Booking on this site takes about a minute. Walk-ins are welcome too, but booking means you won't wait for your turn.",
+  "showroomPage.steps.2.title": "Come to the showroom",
+  "showroomPage.steps.2.desc":
+    "Our team helps you choose the model that fits your daily routine. No ID or licence needed.",
+  "showroomPage.steps.3.title": "Take it for a ride",
+  "showroomPage.steps.3.desc":
+    "Ride around the area with a Wedison team member, then head back to talk it through. It's all free.",
+  "showroomPage.faq.title": "Before you visit",
+  "showroomPage.faq.desc": "Still have a question? Our team is happy to help on WhatsApp.",
+  "showroomPage.faq.whatsapp": "Ask on WhatsApp",
+  "showroomPage.faq.q1": "Is there a charge for a test ride?",
+  "showroomPage.faq.a1": "No. Test rides are free at every Wedison showroom.",
+  "showroomPage.faq.q2": "Do I need to bring an ID or a driving licence?",
+  "showroomPage.faq.a2":
+    "No. Test rides take place around the showroom and are always accompanied by the Wedison team.",
+  "showroomPage.faq.q3": "How long does a test ride take?",
+  "showroomPage.faq.a3":
+    "Not long. You ride around the showroom area with our team, then come back to talk it over or try another model.",
+  "showroomPage.faq.q4": "Do I need to book in advance?",
+  "showroomPage.faq.a4":
+    "You're welcome to walk in. We do recommend booking first so your visit doesn't overlap with other customers.",
+  "showroomPage.faq.q5": "Can I get my motorcycle serviced and charged at the showroom?",
+  "showroomPage.faq.a5":
+    "Yes. Every Wedison showroom is also an official service centre and has a SuperCharge station.",
+  "showroomPage.faq.q6": "When are the showrooms open?",
+  "showroomPage.faq.a6":
+    "Monday to Friday 10:00–19:00, Saturday and Sunday 10:00–17:00, local time.",
+  "showroomPage.cta.title": "We look forward to seeing you.",
+  "showroomPage.cta.desc":
+    "Choose the showroom and time that suit you. We'll confirm it on WhatsApp.",
 
   // About Us
   "about.tag": "Our Story",
-  "about.title": "About",
-  "about.titleHighlight": "Wedison Group",
-  "about.overview.title":
-    "Wedison: The Motorcycles and the Network Behind Them",
   "about.overview.p1":
     "Wedison is Indonesia's first fast-charging electric motorcycle company. Our work does not end at selling motorcycles. We also build the charging network that makes owning one practical day to day.",
   "about.overview.p2":
@@ -375,14 +426,8 @@ export const en = {
   "about.values.experience.title": "Ownership That Holds Together",
   "about.values.experience.description":
     "Motorcycles that are straightforward to ride, equipped with features owners use every day.",
-  "about.projects.title": "Our Projects",
-  "about.projects.future.title": "Reducing Emissions From Urban Transport",
   "about.projects.future.description":
     "Drawing on renewable energy to lower carbon emissions, and broadening the electric vehicle market so clean transport becomes more affordable.",
-  "about.projects.charging.title": "SuperCharge",
-  "about.projects.charging.description":
-    "Building a charging network dependable enough that owners no longer need to monitor their remaining range daily.",
-  "about.offers.title": "What We Offer",
   "about.offers.motorcycles.title": "Electric Motorcycle Models",
   "about.offers.motorcycles.description":
     "Several models with distinct characters, from a compact commuter to a long-range maxi-scooter.",
@@ -394,12 +439,63 @@ export const en = {
     "We are building electric transport in Indonesia designed for the long term. We would welcome your part in it.",
   "about.contactUs": "Contact Us",
 
+  // about & contact page (redesign 2026-10)
+  "aboutPage.hero.title": "We build the motorcycle, and the network that charges it.",
+  "aboutPage.hero.imageAlt": "The Wedison office building",
+  "aboutPage.intro.imageAlt": "The Wedison team at the office",
+  "aboutPage.values.imageAlt": "A rider with a Wedison electric motorcycle",
+  "aboutPage.eco.title": "One ecosystem, from the motorcycle to the charger",
+  "aboutPage.eco.desc":
+    "Every part is designed to work with the others, so owning an electric motorcycle feels easy every day.",
+  "aboutPage.eco.motorcycles.cta": "See the lineup",
+  "aboutPage.eco.charging.cta": "Discover SuperCharge",
+  "aboutPage.eco.app.title": "The Wedison App",
+  "aboutPage.eco.app.cta": "About the app",
+  "aboutPage.eco.werigo.desc":
+    "Wedison's electric motorcycle rental in Bali, delivered right to where you're staying.",
+  "aboutPage.eco.werigo.cta": "Visit Werigo",
+  "aboutPage.place.title": "Where we work",
+  "aboutPage.place.desc":
+    "Wedison's head office is in Pondok Indah, South Jakarta, in the same building as our showroom and service centre. Feel free to drop by.",
+  "aboutPage.place.cta": "See all showrooms",
+  "aboutPage.place.imageMain": "Wedison head office in Pondok Indah",
+  "aboutPage.place.imageA": "The Wedison team workspace",
+  "aboutPage.place.imageB": "The guest area at the Wedison office",
+  "aboutPage.join.career": "See Open Roles",
+  "contactPage.hero.title": "How can we help?",
+  "contactPage.hero.desc":
+    "Choose what you need below so your question reaches the right team straight away.",
+  "contactPage.hero.imageAlt": "The customer service desk at a Wedison showroom",
+  "contactPage.routes.label": "Choose what you need",
+  "contactPage.routes.testRide.title": "Test ride or showroom visit",
+  "contactPage.routes.testRide.desc":
+    "Book a visit at your nearest showroom. It's free, and you don't need an ID or licence.",
+  "contactPage.routes.testRide.action": "Book",
+  "contactPage.routes.product.title": "Product and purchase questions",
+  "contactPage.routes.product.desc":
+    "Ask about models, prices or financing options with our team on WhatsApp.",
+  "contactPage.routes.product.action": "Chat on WhatsApp",
+  "contactPage.routes.service.title": "Service and warranty",
+  "contactPage.routes.service.desc":
+    "Contact your nearest showroom. Every location is also an official service centre.",
+  "contactPage.routes.service.action": "Choose a showroom",
+  "contactPage.routes.partnership.title": "Partnerships, corporate and media",
+  "contactPage.routes.partnership.desc":
+    "Tell us about your partnership idea or press request using the form below.",
+  "contactPage.routes.partnership.action": "Fill in the form",
+  "contactPage.routes.career.title": "Careers",
+  "contactPage.routes.career.desc": "See our open roles, or send your CV to {email}.",
+  "contactPage.routes.career.action": "See open roles",
+  "contactPage.direct.title": "Direct contact",
+  "contactPage.direct.phone": "Phone",
+  "contactPage.direct.hours": "Service hours",
+  "contactPage.branches.title": "Branch contacts",
+  "contactPage.branches.desc":
+    "For servicing, test rides or questions about a specific branch, contact that branch directly.",
+  "contactPage.branches.all": "Go to the showroom page",
+  "contactPage.faq.all": "See all FAQs",
+
   // Contact Page
-  "contact.page.description":
-    "Have a question or need assistance? Reach us through any of the channels below.",
-  "contact.page.findUs": "Find Us",
-  "contact.page.openInMaps": "Open in Google Maps",
-  "contact.page.hours": "Business Hours",
   "contact.page.business.hours": "Monday - Friday: 09.00 AM - 06.00 PM",
   "contact.page.faqTitle": "Frequently Asked Questions",
   "contact.page.thankYou": "Thank You!",
@@ -1049,18 +1145,42 @@ export const en = {
   "supercharge.hero.description":
     "SuperCharge is the fast-charging network Wedison builds and operates itself, compatible with Athena, Victory, and EdPower.",
   "supercharge.hero.ctaPrimary": "Find a Station",
-  "supercharge.hero.ctaSecondary": "Learn the Tech",
+  "supercharge.hero.ctaSecondary": "See How It Works",
+  "supercharge.hero.imageAlt":
+    "A Wedison electric motorcycle charging at a SuperCharge station",
+  "supercharge.how.compare.super": "SuperCharge",
+  "supercharge.how.compare.superValue": "15 min",
+  "supercharge.how.compare.home": "Charging at home",
+  "supercharge.how.compare.homeValue": "~5 hrs",
+  "supercharge.how.compare.note":
+    "Home charging: Athena and Victory with the Regular battery. SuperCharge works with Athena, Victory and EdPower.",
+  "supercharge.how.step1.title": "Plug in",
+  "supercharge.how.step1.desc":
+    "Park at a SuperCharge station and connect the charger to your motorcycle.",
+  "supercharge.how.step2.title": "Start in the app",
+  "supercharge.how.step2.desc":
+    "Tap start in the Wedison app. The session uses your charging package.",
+  "supercharge.how.step3.title": "Ride on",
+  "supercharge.how.step3.desc":
+    "About 15 minutes later the battery is at 80%. The app lets you know when it's done.",
+  "supercharge.network.upcomingLabel": "Coming soon",
+  "supercharge.safety.imageAlt": "The charging module inside a Wedison SuperCharge station",
+  "supercharge.safety.fact1.title": "IEC certified",
+  "supercharge.safety.fact1.desc":
+    "Our DC stations meet the international IEC safety standards.",
+  "supercharge.safety.fact2.title": "Follows EU directives",
+  "supercharge.safety.fact2.desc":
+    "Designed in line with European Union safety rules for electrical equipment.",
+  "supercharge.safety.fact3.title": "Built for Wedison",
+  "supercharge.safety.fact3.desc":
+    "Made for the battery systems in Athena, Victory and EdPower.",
+  "supercharge.safety.fact4.title": "Protects battery life",
+  "supercharge.safety.fact4.desc":
+    "Charging current is managed automatically, so speed doesn't cost battery life.",
+  "supercharge.app.screenAlt": "The {feature} screen in the Wedison app",
 
-  "supercharge.speed.kicker": "Speed",
-  "supercharge.speed.lead": "Charging from 10% to 80% takes just",
-  "supercharge.speed.unit": "minutes",
-  "supercharge.speed.caption":
-    "Approximately the length of a coffee break, after which you are back on the road.",
 
-  "supercharge.network.kicker": "SuperCharge Network",
   "supercharge.network.title": "Growing across your cities",
-  "supercharge.network.description":
-    "SuperCharge points continue to expand, from Jakarta to cities across Indonesia.",
   "supercharge.network.stationsLabel": "Charging points",
   "supercharge.network.citiesLabel": "Cities & counting",
 
@@ -1112,24 +1232,16 @@ export const en = {
   "supercharge.video.description":
     "From connecting the charger to riding away, this is what charging at a SuperCharge station involves.",
 
-  "supercharge.feature1.tag": "Fast & Reliable",
   "supercharge.feature1.title": "Fifteen Minutes, Not Five Hours",
-  "supercharge.feature1.subtitle":
-    "Less waiting, without compromising battery health",
   "supercharge.feature1.description":
     "SuperCharge brings a battery from 10% to 80% in 15 minutes. The current is regulated automatically, so the speed comes at no cost to battery life.",
 
-  "supercharge.feature2.tag": "In More Cities Every Month",
-  "supercharge.feature2.title": "A Network That Keeps Growing",
   "supercharge.feature2.subtitle": "Check the nearest point before setting off",
   "supercharge.feature2.description":
     "SuperCharge points are located in Wedison showrooms and partner sites, with new locations opening regularly. All of them are listed on the map.",
 
-  "supercharge.feature3.tag": "Safe and Certified",
   "supercharge.feature3.title": "Built to Last for Years",
   "supercharge.feature3.subtitle": "Safety first, speed second",
-  "supercharge.feature3.description":
-    "Our DC stations are designed specifically for Wedison motorcycles, certified to IEC safety standards, and compliant with EU Directives.",
 
   // SuperCharge App Section
   "supercharge.app.tag": "Mobile App",
@@ -1146,7 +1258,6 @@ export const en = {
   "supercharge.app.hero.description":
     "Locate a station, begin charging, follow the progress, and manage your charging package, all in one place.",
 
-  "supercharge.app.feature1.icon": "MapPin",
   "supercharge.app.feature1.title": "Find Nearby Stations",
   "supercharge.app.feature1.subtitle": "Locate charging points around you",
   "supercharge.app.feature1.description":
@@ -1155,7 +1266,6 @@ export const en = {
   "supercharge.app.feature1.bullet2": "Sorted by proximity",
   "supercharge.app.feature1.bullet3": "Save favorite stations",
 
-  "supercharge.app.feature2.icon": "Activity",
   "supercharge.app.feature2.title": "Monitor Charging From Your Phone",
   "supercharge.app.feature2.subtitle": "No need to wait beside the motorcycle",
   "supercharge.app.feature2.description":
@@ -1164,7 +1274,6 @@ export const en = {
   "supercharge.app.feature2.bullet2": "Estimated time remaining",
   "supercharge.app.feature2.bullet3": "Notification when charging is complete",
 
-  "supercharge.app.feature3.icon": "Zap",
   "supercharge.app.feature3.title": "Start With a Single Tap",
   "supercharge.app.feature3.subtitle": "Connect, confirm, and carry on",
   "supercharge.app.feature3.description":
@@ -1178,8 +1287,6 @@ export const en = {
   "supercharge.app.stats.rating": "Rating",
   "supercharge.app.stats.chargeTime": "Min Charge",
 
-  "supercharge.app.cta.title": "Ready to SuperCharge",
-  "supercharge.app.cta.titleHighlight": "Your Ride?",
   "supercharge.app.cta.description":
     "Download the app and check the nearest station before setting off.",
 
