@@ -3,7 +3,8 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite } from "../../middleware/auth.js";
+import { canDelete } from "../../lib/permissions.js";
 import { slugify, uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -140,7 +141,7 @@ articlesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-articlesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(articleSchema), async (req, res, next) => {
+articlesRouter.post("/", requireWrite("cms"), validate(articleSchema), async (req, res, next) => {
   try {
     const data = getValidated<typeof articleSchema>(req);
     const translations = await buildTranslations(null, data.translations);
@@ -170,7 +171,7 @@ articlesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(articleSchema)
   }
 });
 
-articlesRouter.put("/:id", requireRole("ADMIN", "EDITOR"), validate(articleSchema), async (req, res, next) => {
+articlesRouter.put("/:id", requireWrite("cms"), validate(articleSchema), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const data = getValidated<typeof articleSchema>(req);
@@ -216,7 +217,7 @@ articlesRouter.put("/:id", requireRole("ADMIN", "EDITOR"), validate(articleSchem
 
 const statusSchema = z.object({ status: STATUS, scheduledAt: z.coerce.date().nullable().optional() });
 
-articlesRouter.patch("/:id/status", requireRole("ADMIN", "EDITOR"), validate(statusSchema), async (req, res, next) => {
+articlesRouter.patch("/:id/status", requireWrite("cms"), validate(statusSchema), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const { status, scheduledAt } = getValidated<typeof statusSchema>(req);
@@ -240,10 +241,10 @@ const bulkSchema = z.object({
   action: z.enum(["publish", "draft", "archive", "trash", "restore", "delete"]),
 });
 
-articlesRouter.post("/bulk", requireRole("ADMIN", "EDITOR"), validate(bulkSchema), async (req, res, next) => {
+articlesRouter.post("/bulk", requireWrite("cms"), validate(bulkSchema), async (req, res, next) => {
   try {
     const { ids, action } = getValidated<typeof bulkSchema>(req);
-    if (action === "delete" && req.user!.role === "EDITOR") throw badRequest("Editors cannot delete permanently");
+    if (action === "delete" && !canDelete(req.user!.role, "cms")) throw badRequest("Your role cannot delete items permanently");
     const where = { id: { in: ids } };
     let count = 0;
     switch (action) {
@@ -263,11 +264,11 @@ articlesRouter.post("/bulk", requireRole("ADMIN", "EDITOR"), validate(bulkSchema
 });
 
 // soft delete -> tempat sampah; ?force=true hapus permanen (ADMIN)
-articlesRouter.delete("/:id", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+articlesRouter.delete("/:id", requireWrite("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const force = req.query.force === "true";
-    if (force && req.user!.role === "EDITOR") throw badRequest("Editors cannot delete permanently");
+    if (force && !canDelete(req.user!.role, "cms")) throw badRequest("Your role cannot delete items permanently");
     if (force) await prisma.article.delete({ where: { id } });
     else await prisma.article.update({ where: { id }, data: { deletedAt: new Date() } });
     invalidate([CacheTags.articles, CacheTags.dashboard]);
@@ -278,7 +279,7 @@ articlesRouter.delete("/:id", requireRole("ADMIN", "EDITOR"), async (req, res, n
   }
 });
 
-articlesRouter.post("/:id/restore", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+articlesRouter.post("/:id/restore", requireWrite("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     await prisma.article.update({ where: { id }, data: { deletedAt: null } });

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
 import { slugify, uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -32,7 +32,7 @@ categoriesRouter.get("/", async (_req, res, next) => {
   }
 });
 
-categoriesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(categorySchema), async (req, res, next) => {
+categoriesRouter.post("/", requireWrite("cms"), validate(categorySchema), async (req, res, next) => {
   try {
     const data = getValidated<typeof categorySchema>(req);
     const slug = await uniqueSlug(data.slug || data.nameId, async (s) => !!(await prisma.category.findUnique({ where: { slug: s } })));
@@ -45,7 +45,7 @@ categoriesRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(categorySche
   }
 });
 
-categoriesRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(categorySchema.partial()), async (req, res, next) => {
+categoriesRouter.patch("/:id", requireWrite("cms"), validate(categorySchema.partial()), async (req, res, next) => {
   try {
     const data = getValidated<typeof categorySchema>(req);
     const id = req.params.id as string;
@@ -61,7 +61,7 @@ categoriesRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(category
   }
 });
 
-categoriesRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
+categoriesRouter.delete("/:id", requireDelete("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const item = await prisma.category.delete({ where: { id } });
@@ -94,7 +94,7 @@ tagsRouter.get("/", async (req, res, next) => {
   }
 });
 
-tagsRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(tagSchema), async (req, res, next) => {
+tagsRouter.post("/", requireWrite("cms"), validate(tagSchema), async (req, res, next) => {
   try {
     const { name } = getValidated<typeof tagSchema>(req);
     const slug = slugify(name);
@@ -107,7 +107,7 @@ tagsRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(tagSchema), async 
   }
 });
 
-tagsRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(tagSchema), async (req, res, next) => {
+tagsRouter.patch("/:id", requireWrite("cms"), validate(tagSchema), async (req, res, next) => {
   try {
     const { name } = getValidated<typeof tagSchema>(req);
     const item = await prisma.tag.update({ where: { id: req.params.id as string }, data: { name, slug: slugify(name) } });
@@ -118,7 +118,7 @@ tagsRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(tagSchema), as
   }
 });
 
-tagsRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
+tagsRouter.delete("/:id", requireDelete("cms"), async (req, res, next) => {
   try {
     await prisma.tag.delete({ where: { id: req.params.id as string } });
     invalidate([CacheTags.tags, CacheTags.articles]);

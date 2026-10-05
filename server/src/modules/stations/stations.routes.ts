@@ -3,7 +3,8 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
+import { canDelete } from "../../lib/permissions.js";
 import { uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -106,10 +107,10 @@ const bulkSchema = z.object({
   status: STATUS.optional(),
 });
 
-stationsRouter.post("/bulk", requireRole("ADMIN", "EDITOR"), validate(bulkSchema), async (req, res, next) => {
+stationsRouter.post("/bulk", requireWrite("supercharge"), validate(bulkSchema), async (req, res, next) => {
   try {
     const { ids, action, status } = getValidated<typeof bulkSchema>(req);
-    if (action === "delete" && req.user!.role === "EDITOR") throw badRequest("Editors cannot delete stations");
+    if (action === "delete" && !canDelete(req.user!.role, "supercharge")) throw badRequest("Your role cannot delete stations");
     if (action === "status" && !status) throw badRequest("status is required for the status action");
     const where = { id: { in: ids } };
     let count = 0;
@@ -137,7 +138,7 @@ stationsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-stationsRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(stationSchema), async (req, res, next) => {
+stationsRouter.post("/", requireWrite("supercharge"), validate(stationSchema), async (req, res, next) => {
   try {
     const data = getValidated<typeof stationSchema>(req);
     const id = data.id ?? (await nextStationId());
@@ -152,7 +153,7 @@ stationsRouter.post("/", requireRole("ADMIN", "EDITOR"), validate(stationSchema)
   }
 });
 
-stationsRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(stationSchema.partial()), async (req, res, next) => {
+stationsRouter.patch("/:id", requireWrite("supercharge"), validate(stationSchema.partial()), async (req, res, next) => {
   try {
     const { id: _id, ...data } = getValidated<typeof stationSchema>(req);
     const id = req.params.id as string;
@@ -170,7 +171,7 @@ stationsRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(stationSch
   }
 });
 
-stationsRouter.delete("/:id", requireRole("ADMIN"), async (req, res, next) => {
+stationsRouter.delete("/:id", requireDelete("supercharge"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     await prisma.station.delete({ where: { id } });

@@ -50,7 +50,7 @@ export function TopicsView() {
 
 function TopicsPanel() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("cms");
   const [editing, setEditing] = useState<Category | null | "new">(null);
   const [toDelete, setToDelete] = useState<Category | null>(null);
   const { data, isLoading } = useQuery({ queryKey: ["topics"], queryFn: () => api<{ items: Category[] }>("/admin/topics").then((r) => r.items) });
@@ -149,7 +149,7 @@ function TopicsPanel() {
 
 function TagsPanel() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("cms");
   const [name, setName] = useState("");
   const [editing, setEditing] = useState<Tag | null>(null);
   const [editName, setEditName] = useState("");

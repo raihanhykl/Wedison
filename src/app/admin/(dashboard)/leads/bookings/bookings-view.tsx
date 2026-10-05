@@ -51,7 +51,7 @@ type Filters = {
 export function BookingsView() {
   const params = useSearchParams();
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("leads");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [f, setF] = useState<Filters>(() => ({

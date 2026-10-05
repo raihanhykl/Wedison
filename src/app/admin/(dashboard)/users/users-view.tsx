@@ -31,7 +31,7 @@ import { ROLE_DESCRIPTION, ROLE_LABEL, type Paginated, type User, type UserRole 
 const schema = z.object({
   name: z.string().trim().min(2, "At least 2 characters").max(80),
   email: z.string().email("Invalid email address"),
-  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "HR_MANAGER", "HR_STAFF"]),
+  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "MARKETING", "SUPERCHARGE", "HR_MANAGER", "HR_STAFF"]),
   password: z.string().max(128).optional(),
   isActive: z.boolean(),
 });
@@ -104,7 +104,7 @@ export function UsersView() {
     <>
       <PageHeader
         title="Users"
-        description="Super Admin: everything. Admin/Editor: CMS, SuperCharge and leads. HR Manager/HR Staff: the HR module only."
+        description="Super Admin: everything. Admin/Editor: CMS, SuperCharge and leads. Marketing Team: CMS and leads. SuperCharge Team: stations. HR Manager/HR Staff: the HR module only."
         actions={<Button onClick={() => setEditing("new")}><Plus /> Add user</Button>}
       />
       <Input placeholder="Search name / email…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-xs" />

@@ -22,6 +22,8 @@ enum UserRole {
   EDITOR      // tulis/edit konten, tidak bisa hapus permanen
   HR_MANAGER  // modul HR penuh: publikasi, hapus, kontak & pengaturan rekrutmen
   HR_STAFF    // modul HR: tulis/edit lowongan, ajukan review (tanpa publikasi/hapus)
+  MARKETING   // tim marketing: dashboard, CMS, dan leads (kendali penuh, termasuk hapus)
+  SUPERCHARGE // tim SuperCharge: modul lokasi stasiun saja (kendali penuh, termasuk hapus)
 }
 
 model User {

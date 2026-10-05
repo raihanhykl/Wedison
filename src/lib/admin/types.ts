@@ -1,6 +1,6 @@
 // Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
 // "Topics" in the UI map to the Category model in the database.
-export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR" | "HR_MANAGER" | "HR_STAFF";
+export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR" | "MARKETING" | "SUPERCHARGE" | "HR_MANAGER" | "HR_STAFF";
 export type ContentStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED" | "ARCHIVED";
 export type Locale = "id" | "en";
 export type SocialPlatform = "INSTAGRAM" | "TIKTOK" | "YOUTUBE" | "X" | "FACEBOOK" | "LINKEDIN";
@@ -241,6 +241,8 @@ export const ROLE_LABEL: Record<UserRole, string> = {
   SUPER_ADMIN: "Super Admin",
   ADMIN: "Admin",
   EDITOR: "Editor",
+  MARKETING: "Marketing Team",
+  SUPERCHARGE: "SuperCharge Team",
   HR_MANAGER: "HR Manager",
   HR_STAFF: "HR Staff",
 };
@@ -249,6 +251,8 @@ export const ROLE_DESCRIPTION: Record<UserRole, string> = {
   SUPER_ADMIN: "Everything, including users.",
   ADMIN: "CMS, SuperCharge and leads; permanent deletes.",
   EDITOR: "Write and edit content; no permanent deletes.",
+  MARKETING: "Dashboard, CMS (articles, press, social, media, SEO) and Leads, including deletes.",
+  SUPERCHARGE: "SuperCharge stations only: add, edit, bulk update and delete stations.",
   HR_MANAGER: "HR module only: publish and close jobs, delete, HR contact settings, divisions and locations.",
   HR_STAFF: "HR module only: write and edit draft jobs, submit them for review.",
 };

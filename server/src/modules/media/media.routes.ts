@@ -9,7 +9,7 @@ import { env } from "../../config/env.js";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole, requireModule } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite } from "../../middleware/auth.js";
 import { invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
@@ -103,7 +103,7 @@ mediaRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {
 });
 
 // multipart: field "files" (bisa banyak), opsional "folder", "alt"
-mediaRouter.post("/upload", requireRole("ADMIN", "EDITOR"), upload.array("files", 10), async (req, res, next) => {
+mediaRouter.post("/upload", requireWrite("cms"), upload.array("files", 10), async (req, res, next) => {
   try {
     const files = (req.files as Express.Multer.File[] | undefined) ?? [];
     if (!files.length) throw badRequest("No files were uploaded");
@@ -143,7 +143,7 @@ const patchSchema = z.object({
   folder: z.string().trim().max(60).optional(),
 });
 
-mediaRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(patchSchema), async (req, res, next) => {
+mediaRouter.patch("/:id", requireWrite("cms"), validate(patchSchema), async (req, res, next) => {
   try {
     const data = getValidated<typeof patchSchema>(req);
     const item = await prisma.media.update({
@@ -157,7 +157,7 @@ mediaRouter.patch("/:id", requireRole("ADMIN", "EDITOR"), validate(patchSchema),
   }
 });
 
-mediaRouter.delete("/:id", requireRole("ADMIN", "EDITOR"), async (req, res, next) => {
+mediaRouter.delete("/:id", requireWrite("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const item = await prisma.media.findUnique({ where: { id }, include: { _count: { select: { articlesAsCover: true } } } });

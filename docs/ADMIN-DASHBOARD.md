@@ -112,16 +112,19 @@ data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fall
 
 **Hak akses (otorisasi)** — satu sumber: `server/src/lib/permissions.ts` (cermin di `src/lib/admin/permissions.ts`).
 
-| Role | Modul yang bisa dibuka | Di modul HR |
-|---|---|---|
-| SUPER_ADMIN | semua | semua aksi |
-| ADMIN / EDITOR | dashboard, CMS, SuperCharge, leads | tidak ada akses |
-| HR_MANAGER | HR saja | tulis, publikasi/tutup/buka ulang/arsip, setujui atau kembalikan review, hapus, divisi & lokasi, kontak HR |
-| HR_STAFF | HR saja | tulis & edit draf, ajukan review; lowongan yang sudah tayang hanya bisa dilihat |
+| Role | Modul yang bisa dibuka | Hapus permanen | Di modul HR |
+|---|---|---|---|
+| SUPER_ADMIN | semua | ya | semua aksi |
+| ADMIN | dashboard, CMS, SuperCharge, leads, log aktivitas, consent | ya | tidak ada akses |
+| EDITOR | dashboard, CMS, SuperCharge, leads | tidak | tidak ada akses |
+| MARKETING (Marketing Team) | dashboard, CMS (termasuk SEO & AI Readiness), leads | ya, di CMS & leads | tidak ada akses |
+| SUPERCHARGE (SuperCharge Team) | SuperCharge (lokasi stasiun) | ya, stasiun | tidak ada akses |
+| HR_MANAGER | HR saja | – | tulis, publikasi/tutup/buka ulang/arsip, setujui atau kembalikan review, hapus, divisi & lokasi, kontak HR |
+| HR_STAFF | HR saja | – | tulis & edit draf, ajukan review; lowongan yang sudah tayang hanya bisa dilihat |
 
-- Backend: `requireModule("cms" | "hr" | …)` di setiap router admin (sebelumnya cukup login), `requireHr(action)` untuk aksi HR.
+- Backend: `requireModule(modul)` di setiap router admin (sebelumnya cukup login), `requireWrite(modul)` / `requireDelete(modul)` untuk ubah & hapus permanen (menggantikan daftar role hardcode), `requireHr(action)` untuk aksi HR. Role baru cukup didaftarkan di `permissions.ts` (dan cerminnya di frontend).
 - Frontend: menu sidebar difilter per modul, halaman yang tidak boleh dibuka menampilkan "No access", akun HR diarahkan ke `/admin/hr` setelah login.
-- Akun HR dibuat Super Admin di **Users** (role HR Manager / HR Staff).
+- Akun dibuat Super Admin di **Users**; setiap role punya deskripsi singkat di form. Setelah login, role tanpa dashboard diarahkan ke modulnya (HR → `/admin/hr`, SuperCharge Team → `/admin/supercharge/stations`).
 
 **Fitur**
 - Lowongan: judul & isi dwibahasa (minimal satu bahasa; bahasa lain memakai fallback), ringkasan, tanggung jawab, kualifikasi, nilai tambah, benefit (satu poin per baris).

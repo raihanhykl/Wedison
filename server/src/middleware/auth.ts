@@ -4,7 +4,7 @@ import { env } from "../config/env.js";
 import { prisma } from "../lib/prisma.js";
 import { unauthorized, forbidden } from "../lib/errors.js";
 import type { UserRole } from "../generated/prisma/enums.js";
-import { canAccess, canHr, type HrAction, type Module } from "../lib/permissions.js";
+import { canAccess, canDelete, canHr, canWrite, type HrAction, type Module } from "../lib/permissions.js";
 
 export type AuthUser = {
   id: string;
@@ -97,5 +97,23 @@ export function requireHr(action: HrAction) {
     if (!req.user) return next(unauthorized());
     if (canHr(req.user.role, action)) return next();
     next(forbidden("Your HR role does not allow this action"));
+  };
+}
+
+/** Create / edit inside a module (see lib/permissions.ts). */
+export function requireWrite(module: Module) {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    if (!req.user) return next(unauthorized());
+    if (canWrite(req.user.role, module)) return next();
+    next(forbidden("Your role cannot make changes in this module"));
+  };
+}
+
+/** Permanent delete inside a module. */
+export function requireDelete(module: Module) {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    if (!req.user) return next(unauthorized());
+    if (canDelete(req.user.role, module)) return next();
+    next(forbidden("Your role cannot delete items in this module"));
   };
 }
