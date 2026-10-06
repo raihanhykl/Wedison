@@ -530,6 +530,39 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
+  "/baas": {
+    image: "/og/baas.jpg",
+    priority: 0.8,
+    changeFrequency: "monthly",
+    id: {
+      title: "BaaS Wedison – Beli Motor, Langganan Baterai",
+      description:
+        "Battery as a Service Wedison: beli motornya, langganan baterainya mulai Rp390.000/bulan. Garansi baterai seumur hidup untuk Victory, Athena, dan EdPower.",
+      keywords: [
+        "wedison",
+        "baas",
+        "battery as a service",
+        "langganan baterai",
+        "sewa baterai motor listrik",
+        "garansi baterai seumur hidup",
+        "motor listrik murah",
+      ],
+    },
+    en: {
+      title: "Wedison BaaS – Buy the Bike, Subscribe to the Battery",
+      description:
+        "Wedison Battery as a Service: buy the bike, subscribe to the battery from Rp390,000/month. Lifetime battery warranty on Victory, Athena and EdPower.",
+      keywords: [
+        "wedison",
+        "baas",
+        "battery as a service",
+        "battery subscription",
+        "electric motorcycle battery rental",
+        "lifetime battery warranty",
+      ],
+    },
+  },
+
   "/ojol": {
     image: "/og/ojol.jpg",
     priority: 0.7,

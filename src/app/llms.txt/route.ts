@@ -47,6 +47,7 @@ Key notes:
 - [Electric Motorcycles](${en("/products/")}): Official Wedison motorcycle lineup.
 - [Compare Models](${en("/compare/")}): Compare specifications across Wedison motorcycles.
 - [SuperCharge](${en("/super-charge/")}): Official Wedison fast-charging network.
+- [Battery as a Service](${en("/baas/")}): Buy the bike, subscribe to the battery, lifetime battery warranty.
 - [Showrooms](${en("/showroom/")}): Official showrooms, service centers, and test ride booking.
 - [FAQ](${en("/faq/")}): Battery, charging, warranty, servicing, safety, and ownership information.
 - [About Wedison](${en("/corporate/about/")}): Company and brand information.
@@ -58,6 +59,7 @@ Key notes:
 - [Motor Listrik](${id("/products/")}): Jajaran motor listrik Wedison.
 - [Bandingkan Model](${id("/compare/")}): Perbandingan spesifikasi motor listrik Wedison.
 - [SuperCharge](${id("/super-charge/")}): Jaringan pengisian cepat Wedison.
+- [Battery as a Service](${id("/baas/")}): Beli motornya, langganan baterainya, garansi baterai seumur hidup.
 - [Showroom](${id("/showroom/")}): Showroom resmi, service center, dan booking test ride.
 - [FAQ](${id("/faq/")}): Informasi baterai, pengisian daya, garansi, servis, keselamatan, dan kepemilikan.
 - [Tentang Wedison](${id("/corporate/about/")}): Informasi perusahaan dan brand.
@@ -121,6 +123,8 @@ ${showrooms}
 
 ## BaaS
 
+- [Battery as a Service (English)](${en("/baas/")}): Buy the bike, subscribe to the battery. Prices, plans, inclusions and FAQ.
+- [Battery as a Service (Bahasa Indonesia)](${id("/baas/")}): Beli motornya, langganan baterainya. Harga, paket, yang termasuk, dan tanya jawab.
 - Battery as a Service (BaaS) separates the battery from the motorcycle purchase to reduce the upfront ownership cost.
 - Core BaaS proposition: the battery is no longer the rider's problem.
 - Lifetime battery warranty is the primary BaaS benefit. It applies only to BaaS; regular purchases carry the standard 3-year battery warranty.

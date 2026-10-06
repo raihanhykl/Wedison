@@ -32,6 +32,7 @@ const PAGES = [
   "/id/corporate/contact/",
   "/id/media-center/",
   "/id/ojol/",
+  "/id/baas/",
   "/en/career/",
 ];
 

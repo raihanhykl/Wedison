@@ -274,7 +274,7 @@ export const en = {
   "footer.products": "Products",
   "footer.experience": "Experience",
   "footer.corporate": "Corporate",
-  "footer.copyright": "© 2025 Wedison. All rights reserved.",
+  "footer.copyright": "© 2026 Wedison. All rights reserved.",
   "footer.tagline": "Built to last, and built to run on electricity.",
   "footer.privacy": "Privacy",
   "footer.terms": "Terms",
@@ -1740,6 +1740,162 @@ export const en = {
   "booking.success.schedule": "Schedule",
   "booking.success.whatsapp": "Open WhatsApp",
   "booking.success.close": "Done",
+
+  // ===== BaaS (Battery as a Service) — /baas =====
+  "nav.baas.description":
+    "Buy the bike, subscribe to the battery. Lifetime battery warranty.",
+  "baas.hero.tag": "Battery as a Service",
+  "baas.hero.title": "The battery is no longer",
+  "baas.hero.titleHighlight": "your problem.",
+  "baas.hero.description":
+    "Buy the bike, subscribe to the battery. Lifetime battery warranty, a lower entry price, and a cost you can count per day.",
+  "baas.hero.ctaPrimary": "Calculate Your Cost",
+  "baas.hero.ctaSecondary": "Chat on WhatsApp",
+  "baas.hero.imageAlt":
+    "Wedison Victory, one of the models in the Battery as a Service programme",
+  "baas.hero.stat.warranty": "Battery warranty",
+  "baas.hero.stat.warrantyValue": "Lifetime",
+  "baas.hero.stat.daily": "Battery subscription from",
+  "baas.hero.stat.dailySuffix": "/day",
+  "baas.hero.stat.vehicle": "Vehicle warranty",
+  "baas.hero.stat.vehicleValue": "3 yrs / 100,000 km",
+  "baas.hero.scroll": "Scroll",
+
+  "baas.why.kicker": "Why BaaS",
+  "baas.why.title":
+    "Two reasons people put off going electric. BaaS answers both.",
+  "baas.why.1.label": "Reason one",
+  "baas.why.1.title": "The sticker price",
+  "baas.why.1.desc":
+    "An EV costs more than the petrol bike it replaces. BaaS separates the battery, the single most expensive component, from the purchase. You pay for the bike and subscribe to the battery.",
+  "baas.why.2.label": "Reason two",
+  "baas.why.2.title": "The question nobody asks out loud",
+  "baas.why.2.desc":
+    "What happens in three years when the battery degrades, and what will it cost? With BaaS the battery carries a lifetime warranty. The answer is simple: it is no longer your problem.",
+
+  "baas.calc.kicker": "Do the maths",
+  "baas.calc.title": "Pick your bike, see the cost.",
+  "baas.calc.subtitle":
+    "We always show the bike price and the battery subscription together, so nothing surprises you at the showroom.",
+  "baas.calc.model": "Choose a model",
+  "baas.calc.plan": "Battery plan",
+  "baas.calc.plan.standard": "Standard",
+  "baas.calc.plan.extended": "Extended",
+  "baas.calc.plan.extended.hint": "Longer range",
+  "baas.calc.plan.onlyStandard": "Standard plan available",
+  "baas.calc.unitPrice": "Bike price",
+  "baas.calc.unitPrice.note": "Paid once, battery not included",
+  "baas.calc.monthly": "Battery subscription",
+  "baas.calc.perMonth": "/month",
+  "baas.calc.perDay": "/day",
+  "baas.calc.perDay.note": "Roughly",
+  "baas.calc.included": "Included with every unit",
+  "baas.calc.cta": "Request a Quote",
+  "baas.calc.ctaSecondary": "Explore the bike",
+  "baas.calc.disclaimer":
+    "Prices may vary by region and are subject to change without notice. The programme applies to cash, credit and financing purchases for a limited time and limited quantity. Written quotations are confirmed at official Wedison showrooms.",
+  "baas.calc.waMessage":
+    "Hello Wedison, I am interested in the BaaS programme for the {model} with the {plan} plan. Please send me a quotation.",
+
+  "baas.included.kicker": "What you get",
+  "baas.included.title": "Every BaaS unit comes with this.",
+  "baas.included.1.title": "Lifetime battery warranty",
+  "baas.included.1.desc":
+    "For as long as you subscribe, battery performance is our responsibility. Degraded? Replaced.",
+  "baas.included.2.title": "Rp 2,000,000 charging incentive",
+  "baas.included.2.desc": "Charging credit to get your journey started.",
+  "baas.included.3.title": "Complimentary charging adapter",
+  "baas.included.3.desc": "Worth Rp 1,700,000, for everyday charging at home.",
+  "baas.included.4.title": "3-year / 100,000 km vehicle warranty",
+  "baas.included.4.desc": "Whichever comes first.",
+  "baas.included.5.title": "2 mechanical keys",
+  "baas.included.5.desc": "One for you, one spare.",
+
+  "baas.how.kicker": "How it works",
+  "baas.how.title": "Three steps. Nothing hidden.",
+  "baas.how.1.title": "Choose a bike and a battery plan",
+  "baas.how.1.desc":
+    "Victory, Athena or EdPower. Standard plan for all, Extended for Victory.",
+  "baas.how.2.title": "Pay for the bike",
+  "baas.how.2.desc":
+    "Cash, credit or financing through our partners: Kredivo and WOM Finance for individuals, Mandiri for business.",
+  "baas.how.3.title": "Subscribe to the battery",
+  "baas.how.3.desc":
+    "One fixed monthly fee. The battery is covered for life for as long as you subscribe.",
+  "baas.how.partners": "Financing partners",
+  "baas.how.partners.b2c": "Individuals",
+  "baas.how.partners.b2b": "Business",
+
+  "baas.compare.kicker": "BaaS vs regular purchase",
+  "baas.compare.title": "What changes when the battery is subscribed.",
+  "baas.compare.col.regular": "Regular purchase",
+  "baas.compare.col.baas": "With BaaS",
+  "baas.compare.1.label": "Paid up front",
+  "baas.compare.1.regular": "Bike and battery",
+  "baas.compare.1.baas": "Bike only",
+  "baas.compare.2.label": "Battery warranty",
+  "baas.compare.2.regular": "3 years",
+  "baas.compare.2.baas": "Lifetime",
+  "baas.compare.3.label": "If the battery degrades",
+  "baas.compare.3.regular": "Replacement cost is yours",
+  "baas.compare.3.baas": "Replaced by Wedison",
+  "baas.compare.4.label": "Monthly fee",
+  "baas.compare.4.regular": "None",
+  "baas.compare.4.baas": "From Rp 390,000",
+  "baas.compare.5.label": "Charging incentive and adapter",
+  "baas.compare.5.regular": "Per current promotions",
+  "baas.compare.5.baas": "Included",
+  "baas.compare.note":
+    "Battery warranty on regular purchases follows Wedison's standard warranty terms.",
+
+  "baas.audience.kicker": "Who it is for",
+  "baas.audience.title": "Built for everyday riders, not just fleets.",
+  "baas.audience.1.title": "Urban commuter",
+  "baas.audience.1.desc":
+    "Rides to work every day and wants a lower cost than petrol, with no fuel queues.",
+  "baas.audience.2.title": "First-time EV buyer",
+  "baas.audience.2.desc":
+    "Curious, but nervous about the battery. A lifetime warranty removes that doubt.",
+  "baas.audience.3.title": "Small business",
+  "baas.audience.3.desc":
+    "Couriers, rentals, shops. A predictable monthly cost with no battery replacement risk.",
+
+  "baas.charging.kicker": "Charging",
+  "baas.charging.title": "At home every day. SuperCharge when you travel.",
+  "baas.charging.desc":
+    "A home charging adapter is included. For longer trips, SuperCharge stations take the battery from 10% to 80% in 15 minutes in the cities our network already covers.",
+  "baas.charging.cta": "See SuperCharge locations",
+  "baas.charging.imageAlt": "A Wedison motorcycle charging at a SuperCharge station",
+
+  "baas.faq.kicker": "Questions",
+  "baas.faq.title": "Before choosing BaaS",
+  "baas.faq.1.q": "Does the monthly fee include the bike instalment?",
+  "baas.faq.1.a":
+    "No. The monthly fee is the battery subscription. The bike is paid for separately, by cash, credit or financing.",
+  "baas.faq.2.q": "Which models are in the BaaS programme?",
+  "baas.faq.2.a":
+    "Victory (Standard and Extended plans), Athena (Standard) and EdPower (Standard). Bees is not part of this programme.",
+  "baas.faq.3.q": "What happens if the battery degrades?",
+  "baas.faq.3.a":
+    "For as long as you subscribe, the battery carries a lifetime warranty. If performance drops below standard, it is replaced at no extra cost.",
+  "baas.faq.4.q": "Where do I charge?",
+  "baas.faq.4.a":
+    "Day to day at home with the included adapter. When travelling, use SuperCharge stations in the cities our network already covers.",
+  "baas.faq.5.q": "How do I pay?",
+  "baas.faq.5.a":
+    "The bike can be paid for in cash, on credit, or through financing with Kredivo and WOM Finance (individuals) and Mandiri (business). The battery subscription is billed monthly.",
+  "baas.faq.6.q": "How long does the programme run?",
+  "baas.faq.6.a":
+    "The programme runs for a limited time and a limited number of units. The showroom team confirms availability when you request a quotation.",
+  "baas.faq.more": "More questions?",
+  "baas.faq.moreCta": "See the full FAQ",
+
+  "baas.cta.title": "Start with the bike. Leave the battery to us.",
+  "baas.cta.description":
+    "Request a written quotation or book a test ride at your nearest showroom.",
+  "baas.cta.primary": "Request a Quote on WhatsApp",
+  "baas.cta.secondary": "Book a Test Ride",
+  "baas.cta.limited": "Limited time, limited quantity.",
 
   // Language
   language: "English",
