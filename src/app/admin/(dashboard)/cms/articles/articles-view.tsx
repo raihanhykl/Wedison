@@ -32,7 +32,7 @@ type Tab = "all" | ContentStatus | "trash";
 
 export function ArticlesView() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("cms");
   const [tab, setTab] = useState<Tab>("all");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);

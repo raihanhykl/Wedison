@@ -4,6 +4,7 @@ import { createContext, useContext, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import type { AuthUser } from "@/lib/admin/types";
+import { canAccess, canDelete, type Module } from "@/lib/admin/permissions";
 
 const AdminUserContext = createContext<AuthUser | null>(null);
 
@@ -13,14 +14,17 @@ export function useAdminUser() {
   return u;
 }
 
-/** Permissions derived from role (mirrors requireRole rules in the backend). */
-export function useCan() {
+/**
+ * Permissions of the current user, optionally inside a module (mirrors the backend's
+ * requireWrite / requireDelete in server/src/lib/permissions.ts).
+ */
+export function useCan(module?: Module) {
   const user = useAdminUser();
   const isSuper = user.role === "SUPER_ADMIN";
   const isAdmin = isSuper || user.role === "ADMIN";
   return {
-    write: true, // EDITOR ke atas
-    deleteHard: isAdmin,
+    write: module ? canAccess(user.role, module) : true,
+    deleteHard: module ? canDelete(user.role, module) : isAdmin,
     manageUsers: isSuper,
     viewActivity: isAdmin,
     isSuper,

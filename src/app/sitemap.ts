@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { seoContent } from "@/app/lib/seo-strings";
 import { LOCALES, type Locale } from "@/app/lib/locale";
 import { PRESS_URLS } from "@public/data/press-urls";
-import { getArticles, getPress } from "@/lib/cms/api";
+import { getArticles, getCareers, getPress } from "@/lib/cms/api";
 import { localeUrl } from "@/lib/seo/site";
 
 // Sitemap multi-locale. Halaman statis dari seoContent (id + en dengan hreflang), liputan pers
@@ -67,6 +67,21 @@ async function pressEntries(): Promise<MetadataRoute.Sitemap> {
   });
 }
 
+// Lowongan kerja yang sedang dibuka (modul HR), kedua locale (slug sama di id & en).
+async function jobEntries(): Promise<MetadataRoute.Sitemap> {
+  const data = await getCareers("id");
+  if (!data) return [];
+  return data.items.flatMap((j) =>
+    LOCALES.map((locale) => ({
+      url: localeUrl(locale, `/career/${j.slug}`),
+      lastModified: new Date(j.updatedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
+      alternates: alternates(`/career/${j.slug}`),
+    })),
+  );
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = Object.entries(seoContent).flatMap(([path, seo]) =>
     LOCALES.map((locale) => ({
@@ -78,6 +93,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  const [press, articles] = await Promise.all([pressEntries(), articleEntries()]);
-  return [...staticEntries, ...press, ...articles];
+  const [press, articles, jobs] = await Promise.all([pressEntries(), articleEntries(), jobEntries()]);
+  return [...staticEntries, ...press, ...articles, ...jobs];
 }

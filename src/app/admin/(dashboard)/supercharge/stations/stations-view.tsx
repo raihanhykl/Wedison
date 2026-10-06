@@ -34,7 +34,7 @@ const mapsUrl = (s: Station) => `https://www.google.com/maps?q=${s.lat},${s.lng}
 
 export function StationsView() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("supercharge");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [q, setQ] = useState("");

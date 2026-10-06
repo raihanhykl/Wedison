@@ -24,6 +24,8 @@ npm run build
 # 2) Backup DB sebelum migrasi (restore manual bila migrasi perlu dibatalkan).
 "$ROOT/bin/backup-db.sh" "pre-${SHA:0:7}"
 npx prisma migrate deploy
+# Seed modul HR: idempoten (penanda Setting "hr_seeded"), aman di setiap rilis.
+npm run db:seed:hr
 
 # 3) Switch + reload bergantian. Gagal -> rollback otomatis.
 activate "$SHA"

@@ -34,7 +34,7 @@ function HandledBadge({ c }: { c: ContactSubmission }) {
 
 export function ContactsView() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("leads");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [q, setQ] = useState("");

@@ -2,6 +2,7 @@ import { prisma } from "./prisma.js";
 import { logger } from "./logger.js";
 import { invalidate, CacheTags } from "./cache.js";
 import { purgeOldConsentLogs } from "../modules/consent/consent.routes.js";
+import { autoCloseJobs } from "../modules/hr/hr.routes.js";
 
 /**
  * Promote SCHEDULED content whose publish time has passed to PUBLISHED.
@@ -29,7 +30,13 @@ export async function promoteScheduled(): Promise<number> {
 }
 
 export function startScheduler(intervalMs = 60_000) {
-  const tick = () => promoteScheduled().catch((err) => logger.warn({ err }, "scheduler tick failed"));
+  const tick = () => {
+    promoteScheduled().catch((err) => logger.warn({ err }, "scheduler tick failed"));
+    // Lowongan yang melewati tanggal tutup otomatis jadi CLOSED.
+    autoCloseJobs()
+      .then((n) => n > 0 && logger.info({ closed: n }, "expired jobs closed"))
+      .catch((err) => logger.warn({ err }, "auto-close jobs failed"));
+  };
   void tick();
   const timer = setInterval(tick, intervalMs);
   timer.unref();

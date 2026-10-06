@@ -10,6 +10,7 @@ import {
 import { NAV } from "./nav-config";
 import { NavUser } from "./nav-user";
 import { useAdminUser } from "./providers";
+import { canAccess, homeFor } from "@/lib/admin/permissions";
 
 export function AppSidebar() {
   const pathname = usePathname().replace(/\/+$/, "") || "/";
@@ -27,7 +28,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip="Wedison Admin">
-              <Link href="/admin">
+              <Link href={homeFor(user.role)}>
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
                   <Image src="/logo/wedison-logogram.svg" alt="" width={18} height={18} className="size-4 brightness-0 invert" />
                 </span>
@@ -43,7 +44,7 @@ export function AppSidebar() {
 
       <SidebarContent>
         {NAV.map((group) => {
-          const items = group.items.filter((i) => !i.roles || i.roles.includes(user.role));
+          const items = group.items.filter((i) => !i.module || canAccess(user.role, i.module));
           if (!items.length) return null;
           return (
             <SidebarGroup key={group.label}>

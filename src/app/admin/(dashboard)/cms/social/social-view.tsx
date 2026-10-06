@@ -36,7 +36,7 @@ type Values = z.infer<typeof schema>;
 
 export function SocialView() {
   const qc = useQueryClient();
-  const can = useCan();
+  const can = useCan("cms");
   const [platform, setPlatform] = useState<"all" | SocialPlatform>("all");
   const [editing, setEditing] = useState<SocialPost | "new" | null>(null);
   const [toDelete, setToDelete] = useState<SocialPost | null>(null);

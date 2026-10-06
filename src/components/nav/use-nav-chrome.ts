@@ -22,6 +22,8 @@ function routeHasLightTop(pathname: string): boolean {
   if (LIGHT_TOP_ROUTES.includes(path)) return true;
   // Halaman detail berita: banner terang, indeksnya tidak.
   if (path.startsWith("/media-center/") && path !== "/media-center/") return true;
+  // Detail lowongan (/career/<slug>/) berlatar terang; halaman /career/ sendiri punya hero gelap.
+  if (path.startsWith("/career/") && path !== "/career/") return true;
   return false;
 }
 
