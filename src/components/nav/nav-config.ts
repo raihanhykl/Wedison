@@ -4,7 +4,7 @@
 // Prinsip pengelompokan:
 //  · Produk      -> apa yang dibeli (4 model + pintu ke halaman semua produk & bandingkan)
 //  · SuperCharge -> apa yang membuat motornya masuk akal (jaringan + peta lokasi)
-//  · Layanan     -> apa yang didapat setelah/menjelang beli (showroom, ojol, bantuan)
+//  · Layanan     -> apa yang didapat setelah/menjelang beli (BaaS, showroom, ojol, bantuan)
 //  · Perusahaan  -> siapa di balik semuanya (tentang, media, karier, kontak)
 //
 // Grup "Jelajahi" yang lama dibubarkan karena isinya campur aduk (showroom +
@@ -115,8 +115,13 @@ export function buildNav(t: Translate): NavItem[] {
       key: "services",
       kind: "links",
       label: t("nav.menu.services"),
-      match: ["/showroom/", "/ojol/", "/faq/"],
+      match: ["/baas/", "/showroom/", "/ojol/", "/faq/"],
       links: [
+        {
+          href: "/baas/",
+          title: "Battery as a Service",
+          desc: t("nav.baas.description"),
+        },
         {
           href: "/showroom/",
           title: "Experience Center",
