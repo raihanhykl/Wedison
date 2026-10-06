@@ -28,6 +28,7 @@ export const BOOKING_SOURCES = [
   "showroom-steps",
   "showroom-cta",
   "contact-page",
+  "baas-cta",
   "other",
 ] as const;
 export type BookingSource = (typeof BOOKING_SOURCES)[number];

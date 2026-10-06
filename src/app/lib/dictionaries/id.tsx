@@ -1758,6 +1758,162 @@ export const id = {
   "booking.success.whatsapp": "Buka WhatsApp",
   "booking.success.close": "Selesai",
 
+  // ===== BaaS (Battery as a Service) — /baas =====
+  "nav.baas.description":
+    "Beli motornya, langganan baterainya. Garansi baterai seumur hidup.",
+  "baas.hero.tag": "Battery as a Service",
+  "baas.hero.title": "Baterai bukan lagi",
+  "baas.hero.titleHighlight": "urusan Anda.",
+  "baas.hero.description":
+    "Beli motornya, langganan baterainya. Garansi baterai seumur hidup, harga masuk lebih ringan, dan biaya yang bisa Anda hitung per hari.",
+  "baas.hero.ctaPrimary": "Hitung Biaya Anda",
+  "baas.hero.ctaSecondary": "Konsultasi via WhatsApp",
+  "baas.hero.imageAlt":
+    "Wedison Victory, salah satu model dalam program Battery as a Service",
+  "baas.hero.stat.warranty": "Garansi baterai",
+  "baas.hero.stat.warrantyValue": "Seumur hidup",
+  "baas.hero.stat.daily": "Langganan baterai mulai",
+  "baas.hero.stat.dailySuffix": "/hari",
+  "baas.hero.stat.vehicle": "Garansi kendaraan",
+  "baas.hero.stat.vehicleValue": "3 th / 100.000 km",
+  "baas.hero.scroll": "Gulir",
+
+  "baas.why.kicker": "Mengapa BaaS",
+  "baas.why.title":
+    "Dua alasan orang menunda motor listrik. BaaS menjawab keduanya.",
+  "baas.why.1.label": "Alasan pertama",
+  "baas.why.1.title": "Harga di awal",
+  "baas.why.1.desc":
+    "Motor listrik terasa lebih mahal dari motor bensin yang digantikannya. BaaS memisahkan baterai, komponen termahal, dari harga beli. Anda membayar motornya, baterainya dilanggankan.",
+  "baas.why.2.label": "Alasan kedua",
+  "baas.why.2.title": "Pertanyaan yang jarang diucapkan",
+  "baas.why.2.desc":
+    "Bagaimana tiga tahun lagi saat baterai menurun, dan berapa biayanya? Dengan BaaS, baterai bergaransi seumur hidup. Jawabannya sederhana: itu bukan lagi urusan Anda.",
+
+  "baas.calc.kicker": "Hitung sendiri",
+  "baas.calc.title": "Pilih motor Anda, lihat biayanya.",
+  "baas.calc.subtitle":
+    "Harga motor dan langganan baterai selalu kami tampilkan bersama, supaya tidak ada yang mengejutkan saat Anda tiba di showroom.",
+  "baas.calc.model": "Pilih model",
+  "baas.calc.plan": "Paket baterai",
+  "baas.calc.plan.standard": "Standard",
+  "baas.calc.plan.extended": "Extended",
+  "baas.calc.plan.extended.hint": "Jarak tempuh lebih jauh",
+  "baas.calc.plan.onlyStandard": "Tersedia paket Standard",
+  "baas.calc.unitPrice": "Harga motor",
+  "baas.calc.unitPrice.note": "Dibayar sekali, tanpa baterai",
+  "baas.calc.monthly": "Langganan baterai",
+  "baas.calc.perMonth": "/bulan",
+  "baas.calc.perDay": "/hari",
+  "baas.calc.perDay.note": "Setara dengan",
+  "baas.calc.included": "Sudah termasuk di setiap unit",
+  "baas.calc.cta": "Minta Penawaran",
+  "baas.calc.ctaSecondary": "Lihat motornya",
+  "baas.calc.disclaimer":
+    "Harga dapat berbeda per wilayah dan dapat berubah tanpa pemberitahuan. Program berlaku untuk pembelian tunai, kredit, dan pembiayaan, selama periode dan kuota terbatas. Penawaran tertulis dikonfirmasi di showroom resmi Wedison.",
+  "baas.calc.waMessage":
+    "Halo Wedison, saya tertarik dengan program BaaS untuk {model} paket {plan}. Mohon info penawarannya.",
+
+  "baas.included.kicker": "Yang Anda dapatkan",
+  "baas.included.title": "Setiap unit BaaS sudah membawa ini.",
+  "baas.included.1.title": "Garansi baterai seumur hidup",
+  "baas.included.1.desc":
+    "Selama Anda berlangganan, performa baterai menjadi tanggung jawab kami. Menurun? Diganti.",
+  "baas.included.2.title": "Insentif pengisian Rp 2.000.000",
+  "baas.included.2.desc": "Kredit pengisian daya untuk memulai perjalanan Anda.",
+  "baas.included.3.title": "Adapter pengisian gratis",
+  "baas.included.3.desc": "Senilai Rp 1.700.000, untuk mengisi daya di rumah setiap hari.",
+  "baas.included.4.title": "Garansi kendaraan 3 tahun / 100.000 km",
+  "baas.included.4.desc": "Mana yang tercapai lebih dulu.",
+  "baas.included.5.title": "2 kunci mekanik",
+  "baas.included.5.desc": "Satu untuk Anda, satu cadangan.",
+
+  "baas.how.kicker": "Cara kerjanya",
+  "baas.how.title": "Tiga langkah. Tidak ada yang tersembunyi.",
+  "baas.how.1.title": "Pilih motor dan paket baterai",
+  "baas.how.1.desc":
+    "Victory, Athena, atau EdPower. Paket Standard untuk semua, Extended untuk Victory.",
+  "baas.how.2.title": "Bayar motornya",
+  "baas.how.2.desc":
+    "Tunai, kredit, atau pembiayaan lewat mitra kami: Kredivo dan WOM Finance untuk perorangan, Mandiri untuk bisnis.",
+  "baas.how.3.title": "Berlangganan baterainya",
+  "baas.how.3.desc":
+    "Satu biaya tetap per bulan. Baterai bergaransi seumur hidup selama Anda berlangganan.",
+  "baas.how.partners": "Mitra pembiayaan",
+  "baas.how.partners.b2c": "Perorangan",
+  "baas.how.partners.b2b": "Bisnis",
+
+  "baas.compare.kicker": "BaaS vs beli biasa",
+  "baas.compare.title": "Apa yang berubah saat baterai dilanggankan.",
+  "baas.compare.col.regular": "Beli biasa",
+  "baas.compare.col.baas": "Dengan BaaS",
+  "baas.compare.1.label": "Yang dibayar di awal",
+  "baas.compare.1.regular": "Motor dan baterai",
+  "baas.compare.1.baas": "Motor saja",
+  "baas.compare.2.label": "Garansi baterai",
+  "baas.compare.2.regular": "3 tahun",
+  "baas.compare.2.baas": "Seumur hidup",
+  "baas.compare.3.label": "Jika baterai menurun",
+  "baas.compare.3.regular": "Biaya ganti ditanggung Anda",
+  "baas.compare.3.baas": "Diganti oleh Wedison",
+  "baas.compare.4.label": "Biaya bulanan",
+  "baas.compare.4.regular": "Tidak ada",
+  "baas.compare.4.baas": "Mulai Rp 390.000",
+  "baas.compare.5.label": "Insentif pengisian dan adapter",
+  "baas.compare.5.regular": "Mengikuti promo berjalan",
+  "baas.compare.5.baas": "Termasuk",
+  "baas.compare.note":
+    "Garansi baterai pembelian reguler mengikuti ketentuan garansi standar Wedison.",
+
+  "baas.audience.kicker": "Untuk siapa",
+  "baas.audience.title": "Dirancang untuk pengendara harian, bukan hanya armada.",
+  "baas.audience.1.title": "Komuter kota",
+  "baas.audience.1.desc":
+    "Berangkat kerja setiap hari dan ingin biaya lebih rendah dari bensin, tanpa antre di SPBU.",
+  "baas.audience.2.title": "Pembeli motor listrik pertama",
+  "baas.audience.2.desc":
+    "Penasaran, tapi ragu soal baterai. Garansi seumur hidup menghapus keraguan itu.",
+  "baas.audience.3.title": "Usaha kecil",
+  "baas.audience.3.desc":
+    "Kurir, rental, toko. Biaya bulanan yang bisa diprediksi, tanpa risiko ganti baterai.",
+
+  "baas.charging.kicker": "Pengisian daya",
+  "baas.charging.title": "Di rumah setiap hari. SuperCharge saat bepergian.",
+  "baas.charging.desc":
+    "Adapter pengisian rumah sudah termasuk dalam paket. Untuk perjalanan jauh, stasiun SuperCharge mengisi 10% ke 80% dalam 15 menit di kota-kota yang sudah terjangkau jaringan.",
+  "baas.charging.cta": "Lihat lokasi SuperCharge",
+  "baas.charging.imageAlt": "Motor Wedison mengisi daya di stasiun SuperCharge",
+
+  "baas.faq.kicker": "Tanya jawab",
+  "baas.faq.title": "Sebelum memilih BaaS",
+  "baas.faq.1.q": "Apakah biaya bulanan sudah termasuk cicilan motor?",
+  "baas.faq.1.a":
+    "Tidak. Biaya bulanan adalah langganan baterai. Motor dibayar terpisah, secara tunai, kredit, atau pembiayaan.",
+  "baas.faq.2.q": "Model apa saja yang bisa ikut program BaaS?",
+  "baas.faq.2.a":
+    "Victory (paket Standard dan Extended), Athena (Standard), dan EdPower (Standard). Bees tidak termasuk dalam program ini.",
+  "baas.faq.3.q": "Apa yang terjadi jika baterai menurun?",
+  "baas.faq.3.a":
+    "Selama Anda berlangganan, baterai bergaransi seumur hidup. Jika performanya turun di bawah standar, baterai diganti tanpa biaya tambahan.",
+  "baas.faq.4.q": "Di mana saya mengisi daya?",
+  "baas.faq.4.a":
+    "Sehari-hari di rumah dengan adapter yang sudah termasuk. Saat bepergian, gunakan stasiun SuperCharge di kota yang sudah terjangkau jaringan kami.",
+  "baas.faq.5.q": "Bagaimana cara pembayarannya?",
+  "baas.faq.5.a":
+    "Motor dapat dibayar tunai, kredit, atau pembiayaan melalui Kredivo dan WOM Finance (perorangan) serta Mandiri (bisnis). Langganan baterai dibayar bulanan.",
+  "baas.faq.6.q": "Sampai kapan program ini berlaku?",
+  "baas.faq.6.a":
+    "Program berlaku untuk periode dan kuota unit terbatas. Tim showroom akan mengonfirmasi ketersediaan saat Anda meminta penawaran.",
+  "baas.faq.more": "Pertanyaan lain?",
+  "baas.faq.moreCta": "Lihat FAQ lengkap",
+
+  "baas.cta.title": "Mulai dari motornya. Baterainya biar kami yang pikirkan.",
+  "baas.cta.description":
+    "Minta penawaran tertulis atau jadwalkan test ride di showroom terdekat.",
+  "baas.cta.primary": "Minta Penawaran via WhatsApp",
+  "baas.cta.secondary": "Jadwalkan Test Ride",
+  "baas.cta.limited": "Program terbatas waktu dan kuota.",
+
   // Language
   language: "Bahasa Indonesia",
   switchLanguage: "English",

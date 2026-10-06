@@ -1,28 +1,82 @@
 "use client";
-import Image from "next/image";
+
 import Link from "next/link";
+import { useMemo, type CSSProperties } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
 import { openCookieSettings } from "@/lib/consent";
-import { ArrowUpRight } from "lucide-react";
-import { WERIGO_URL } from "@/lib/seo/site";
-import { whatsappUrl } from "@/lib/seo/site";
+import { WERIGO_URL, whatsappUrl } from "@/lib/seo/site";
+import { buildNav } from "@/components/nav/nav-config";
 
+type FooterLink = {
+  href: string;
+  label: string;
+  /** Tautan eksternal (buka tab baru) + keterangan kecil di bawahnya. */
+  external?: boolean;
+  hint?: string;
+};
+
+type FooterColumn = { key: string; title: string; links: FooterLink[] };
+
+const SOCIALS = [
+  { label: "Instagram", icon: "/icons/instagram.svg", href: "https://www.instagram.com/wedison.id/" },
+  { label: "TikTok", icon: "/icons/tiktok.svg", href: "https://www.tiktok.com/@wedison.id" },
+  {
+    label: "YouTube",
+    icon: "/icons/youtube.svg",
+    href: "https://www.youtube.com/channel/UCePP1fIil61GyQF4XFWGB2g",
+  },
+  {
+    label: "Facebook",
+    icon: "/icons/facebook.svg",
+    href: "https://www.facebook.com/people/wedisonid/61562726390879/",
+  },
+  { label: "WhatsApp", icon: "/icons/whatsapp.svg", href: whatsappUrl() },
+  { label: "Email", icon: "/icons/mail.svg", href: "mailto:support@wedison.co" },
+] as const;
+
+/**
+ * Footer — kolom tautan diturunkan dari struktur navbar (nav-config.ts) supaya keduanya
+ * tidak pernah berbeda. Tambahan di luar navbar hanya Werigo (situs sewa terpisah).
+ */
 export default function Footer() {
   const { t, language } = useLanguage();
+  const base = `/${language}`;
+
+  const columns = useMemo<FooterColumn[]>(() => {
+    const items = buildNav(t);
+    return items.map((item) => {
+      if (item.kind === "models") {
+        return {
+          key: item.key,
+          title: item.label,
+          links: [
+            ...item.models.map((m) => ({ href: m.href, label: m.name })),
+            { href: item.all.href, label: item.all.label },
+            { href: item.compare.href, label: item.compare.label },
+          ],
+        };
+      }
+      const links: FooterLink[] = item.links.map((l) => ({ href: l.href, label: l.title }));
+      if (item.key === "services") {
+        // Werigo = layanan sewa motor listrik Wedison di Bali (situs terpisah).
+        links.push({ href: WERIGO_URL, label: "Werigo", external: true, hint: t("footer.werigo") });
+      }
+      return { key: item.key, title: item.label, links };
+    });
+  }, [t]);
+
   return (
-    <footer className="text-forest-foreground bg-forest-deep">
-      <div className="container px-4 py-8 mx-auto sm:px-6 lg:px-8 md:py-12">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-7">
-          <div className="col-span-2 mr-6 ">
-            <h3 className="font-display text-lg md:text-xl font-bold mb-3 md:mb-4 text-white">
-              Wedison Motors
-            </h3>
-            <p className="mb-3 text-sm text-forest-muted md:text-base md:mb-4">
-              {/* Pioneering the future of electric mobility with cutting-edge
-              technology and sustainable design. */}
+    <footer className="bg-forest-deep text-forest-foreground">
+      <div className="main-container py-12 md:py-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Brand */}
+          <div className="lg:col-span-4">
+            <h3 className="font-display text-xl font-bold tracking-tight text-white md:text-2xl">Wedison</h3>
+            <p className="mt-3 max-w-[44ch] text-sm leading-relaxed text-forest-muted md:text-base">
               {t("footer.description")}
             </p>
-            <p className="mb-3 text-sm text-forest-muted md:mb-4">
+            <p className="mt-3 max-w-[44ch] text-sm leading-relaxed text-forest-muted">
               {t("footer.werigoBridge")}{" "}
               <a
                 href={WERIGO_URL}
@@ -33,297 +87,110 @@ export default function Footer() {
                 {t("footer.werigoCta")}
               </a>
             </p>
-            <p className="text-sm text-forest-muted md:text-base">
-              {/* © {new Date().getFullYear()} Wedison Motors. All rights reserved. */}
-              {t("footer.copyright")}
-            </p>
-          </div>
 
-          {/* Products */}
-          <div>
-            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
-              {/* Products */}
-              {t("footer.products")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              <li>
-                <Link href={`/${language}/products/bees/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  Bees
-                </Link>
-              </li>
-              {/* <li>
-                <a
-                  href="#"
-                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                >
-                  Mini-Pro
-                </a>
-              </li> */}
-              <li>
-                <Link href={`/${language}/products/athena/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  Athena
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${language}/products/victory/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  Victory
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${language}/products/edpower/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  EdPower
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* experience */}
-          <div>
-            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
-              {/* Experience */}
-              {t("footer.experience")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              <li>
-                <Link href={`/${language}/showroom/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  Showroom
-                </Link>
-              </li>
-              {/* <li>
-                <a
-                  href="#"
-                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                >
-                  Service Locations
-                </a>
-              </li> */}
-              <li>
-                <Link href={`/${language}/super-charge/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  SuperCharge
-                </Link>
-              </li>
-              {/* Werigo = layanan sewa motor listrik Wedison di Bali (situs terpisah). */}
-              <li>
-                <a
-                  href={WERIGO_URL}
-                  target="_blank"
-                  rel="noopener"
-                  className="group block text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                >
-                  <span className="inline-flex items-center gap-1">
-                    Werigo
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                  </span>
-                  <span className="block text-xs text-forest-muted/80 group-hover:text-on-forest-accent/80">
-                    {t("footer.werigo")}
-                  </span>
-                  <span className="sr-only">{t("footer.opensNewTab")}</span>
-                </a>
-              </li>
-              {/* <li>
-                <a
-                  href="#"
-                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                >
-                  Test Ride
-                </a>
-              </li> */}
-            </ul>
-          </div>
-
-          {/* support */}
-          <div>
-            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
-              {t("footer.support")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              <li>
-                <Link href={`/${language}/faq/#user-manual`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  {t("footer.userManual")}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${language}/faq/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  {t("footer.faq")}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* corporate */}
-          <div>
-            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
-              {/* Corporate */}
-              {t("footer.corporate")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              <li>
-                <Link href={`/${language}/corporate/about/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  {/* About Us */}
-                  {t("footer.about")}
-                </Link>
-              </li>
-              {/* <li>
-                <a
-                  href="#"
-                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                >
-                  Careers
-                </a>
-              </li> */}
-              <li>
-                <Link href={`/${language}/corporate/contact/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  {/* Contact Us */}
-                  {t("footer.contact")}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${language}/career/`} className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300">
-                  {/* Contact Us */}
-                  {t("footer.career")}
-                </Link>
-              </li>
-              {/* <li>
-                <a
-                  href="#"
-                  className="text-sm md:text-base text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                >
-                  Help Center
-                </a>
-              </li> */}
-            </ul>
-          </div>
-
-          {/* meet us */}
-          <div>
-            <h4 className="relative inline-block mb-3 font-display text-base font-semibold text-white md:text-lg md:mb-4">
-              {/* Meet Us */}
+            <h4 className="relative mt-8 inline-block font-display text-base font-semibold text-white">
               {t("footer.meetus")}
-              <span className="absolute -bottom-1 left-0 w-10 h-0.5 bg-on-forest-accent"></span>
+              <span className="absolute -bottom-1 left-0 h-0.5 w-10 bg-on-forest-accent" />
             </h4>
-            <div className="flex w-full gap-3 mt-2 max-md:justify-between b md:gap-4">
-              {/* <div className="flex items-center justify-between w-full space-x-4"> */}
-              <div className="">
-                <ul className="flex gap-3 space-y-3 md:space-y-4">
-                  <li>
-                    <Link
-                      href="https://www.instagram.com/wedison.id/"
-                      target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                    >
-                      <Image
-                        src="/icons/instagram.svg"
-                        alt="Instagram"
-                        width={35}
-                        height={35}
-                      />
-                      {/* wedison.id */}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://www.tiktok.com/@wedison.id"
-                      target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                    >
-                      <Image
-                        src="/icons/tiktok.svg"
-                        alt="Tiktok"
-                        width={35}
-                        height={35}
-                      />
-                      {/* wedison.id */}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://www.youtube.com/channel/UCePP1fIil61GyQF4XFWGB2g"
-                      target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                    >
-                      <Image
-                        src="/icons/youtube.svg"
-                        alt="YouTube"
-                        width={35}
-                        height={35}
-                      />
-                      {/* Motor Listrik Wedison */}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ul className="flex gap-3 space-y-3 md:space-y-4">
-                  <li>
-                    <Link
-                      href="https://www.facebook.com/people/wedisonid/61562726390879/"
-                      target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                    >
-                      <Image
-                        src="/icons/facebook.svg"
-                        alt="Facebook"
-                        width={35}
-                        height={35}
-                      />
-                      {/* wedisonid */}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={whatsappUrl()}
-                      target="_blank" rel="noopener noreferrer"
-                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                    >
-                      <Image
-                        src="/icons/whatsapp.svg"
-                        alt="WhatsApp"
-                        width={35}
-                        height={35}
-                      />
-                      {/* +62 852-8612-6550 */}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="mailto:support@wedison.co"
-                      className="text-sm md:text-base flex gap-2 items-center text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
-                    >
-                      <Image
-                        src="/icons/mail.svg"
-                        alt="Email"
-                        width={35}
-                        height={35}
-                      />
-                      {/* support@wedison.co */}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <ul className="mt-5 flex flex-wrap gap-2.5">
+              {SOCIALS.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target={s.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                    aria-label={s.label}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-forest-muted transition-[color,border-color,background-color,transform] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-0.5 hover:border-on-forest-accent/60 hover:bg-white/5 hover:text-on-forest-accent"
+                  >
+                    {/* Ikon dipakai sebagai mask: warna ikut currentColor, ukuran ikut kontainer. */}
+                    <span
+                      aria-hidden
+                      className="block h-[22px] w-[22px] bg-current"
+                      style={
+                        {
+                          maskImage: `url(${s.icon})`,
+                          WebkitMaskImage: `url(${s.icon})`,
+                          maskSize: "contain",
+                          WebkitMaskSize: "contain",
+                          maskRepeat: "no-repeat",
+                          WebkitMaskRepeat: "no-repeat",
+                          maskPosition: "center",
+                          WebkitMaskPosition: "center",
+                        } as CSSProperties
+                      }
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Kolom tautan = grup navbar */}
+          <nav
+            aria-label="Footer"
+            className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8"
+          >
+            {columns.map((col) => (
+              <div key={col.key}>
+                <h4 className="relative inline-block font-display text-base font-semibold text-white">
+                  {col.title}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-10 bg-on-forest-accent" />
+                </h4>
+                <ul className="mt-5 space-y-2.5">
+                  {col.links.map((l) =>
+                    l.external ? (
+                      <li key={l.href}>
+                        <a
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener"
+                          className="group block text-sm text-forest-muted transition-colors duration-300 hover:text-on-forest-accent md:text-[15px]"
+                        >
+                          <span className="inline-flex items-center gap-1">
+                            {l.label}
+                            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                          </span>
+                          {l.hint ? (
+                            <span className="block text-xs text-forest-muted/80 group-hover:text-on-forest-accent/80">
+                              {l.hint}
+                            </span>
+                          ) : null}
+                          <span className="sr-only">{t("footer.opensNewTab")}</span>
+                        </a>
+                      </li>
+                    ) : (
+                      <li key={l.href}>
+                        <Link
+                          href={`${base}${l.href}`}
+                          className="text-sm text-forest-muted transition-colors duration-300 hover:text-on-forest-accent md:text-[15px]"
+                        >
+                          {l.label}
+                        </Link>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
 
-        <div className="flex flex-col items-center justify-between pt-6 mt-8 border-t border-white/10 md:mt-12 md:pt-8 md:flex-row">
-          <p className="mb-4 text-xs text-forest-muted md:text-sm md:mb-0">
-            {/* Designed with sustainability in mind. Powered by renewable energy. */}
-            {t("footer.tagline")}
-          </p>
-<div className="flex gap-6">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 md:mt-16 md:flex-row md:items-center md:justify-between md:pt-8">
+          <div className="flex flex-col gap-1 text-xs text-forest-muted md:text-sm">
+            <p>{t("footer.copyright")}</p>
+            <p>{t("footer.tagline")}</p>
+          </div>
+          <div className="flex gap-6">
             <Link
-              href={`/${language}/cookie-policy/`}
-              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+              href={`${base}/cookie-policy/`}
+              className="text-xs text-forest-muted transition-colors duration-300 hover:text-on-forest-accent md:text-sm"
             >
               {t("footer.cookiePolicy")}
             </Link>
             <button
               type="button"
               onClick={openCookieSettings}
-              className="text-xs md:text-sm text-forest-muted hover:text-on-forest-accent transition-colors duration-300"
+              className="text-xs text-forest-muted transition-colors duration-300 hover:text-on-forest-accent md:text-sm"
             >
               {t("footer.cookieSettings")}
             </button>
