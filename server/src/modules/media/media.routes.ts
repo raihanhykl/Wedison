@@ -81,6 +81,31 @@ async function persist(file: Express.Multer.File) {
   return { filename, mime, size: buffer.length, width, height, url: `${env.UPLOAD_PUBLIC_PATH}/${filename}` };
 }
 
+/**
+ * Store an image that did not arrive via multipart (e.g. extracted from an imported
+ * document) and create its Media record. Returns the public URL.
+ */
+export async function storeImageBuffer(input: { buffer: Buffer; mime: string; name: string; folder: string; alt?: string | null; userId: string }) {
+  if (!ALLOWED.has(input.mime)) throw badRequest(`Image type ${input.mime} is not supported`);
+  const ext = { "image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp", "image/gif": ".gif", "image/avif": ".avif", "image/svg+xml": ".svg" }[input.mime] ?? ".bin";
+  const saved = await persist({ buffer: input.buffer, mimetype: input.mime, originalname: `${input.name}${ext}` } as Express.Multer.File);
+  const media = await prisma.media.create({
+    data: {
+      filename: saved.filename,
+      originalName: `${input.name}${ext}`,
+      mimeType: saved.mime,
+      size: saved.size,
+      width: saved.width,
+      height: saved.height,
+      url: saved.url,
+      alt: input.alt ?? null,
+      folder: safeBase(input.folder),
+      uploadedById: input.userId,
+    },
+  });
+  return media;
+}
+
 const listQuery = paginationQuery.extend({ folder: z.string().optional(), mime: z.string().optional() });
 
 mediaRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {

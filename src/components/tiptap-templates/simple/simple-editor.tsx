@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { EditorContent, EditorContext, useEditor, type JSONContent } from "@tiptap/react"
+import { EditorContent, EditorContext, useEditor, type Editor, type JSONContent } from "@tiptap/react"
 
 // --- Tiptap Core Extensions ---
 import { StarterKit } from "@tiptap/starter-kit"
@@ -14,6 +14,7 @@ import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
 import { FindAndReplace } from "@tiptap/extension-find-and-replace"
 import { Selection } from "@tiptap/extensions"
+import { TableKit } from "@tiptap/extension-table"
 
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button"
@@ -34,6 +35,7 @@ import "@/components/tiptap-node/list-node/list-node.scss"
 import "@/components/tiptap-node/image-node/image-node.scss"
 import "@/components/tiptap-node/heading-node/heading-node.scss"
 import "@/components/tiptap-node/paragraph-node/paragraph-node.scss"
+import "@/components/tiptap-node/table-node/table-node.scss"
 
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from "@/components/tiptap-ui/heading-dropdown-menu"
@@ -59,6 +61,8 @@ import {
   SearchAndReplaceButton,
 } from "@/components/tiptap-ui/search-and-replace"
 import { ImageAltMenu } from "@/components/tiptap-ui/image-alt-menu/image-alt-menu"
+import { TableDropdownMenu } from "@/components/tiptap-ui/table-dropdown-menu/table-dropdown-menu"
+import { SelectionBubbleMenu } from "@/components/tiptap-ui/selection-bubble-menu/selection-bubble-menu"
 
 // --- Icons ---
 import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon"
@@ -84,6 +88,8 @@ export type SimpleEditorProps = {
   onChange?: (change: SimpleEditorChange) => void
   placeholder?: string
   editable?: boolean
+  /** Gives the parent the live editor instance (e.g. to replace/append imported content). */
+  onReady?: (editor: Editor) => void
 }
 
 const SEARCH_AND_REPLACE_SCROLL_OPTIONS: ScrollIntoViewOptions = {
@@ -162,6 +168,7 @@ const MainToolbarContent = ({
 
       <ToolbarGroup>
         <ImageUploadButton text="Add" />
+        <TableDropdownMenu modal={false} />
       </ToolbarGroup>
 
       <Spacer />
@@ -209,7 +216,7 @@ const MobileToolbarContent = ({
   </>
 )
 
-export function SimpleEditor({ content, onChange, placeholder, editable = true }: SimpleEditorProps) {
+export function SimpleEditor({ content, onChange, placeholder, editable = true, onReady }: SimpleEditorProps) {
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -222,6 +229,9 @@ export function SimpleEditor({ content, onChange, placeholder, editable = true }
   const editor = useEditor({
     immediatelyRender: false,
     editable,
+    onCreate: ({ editor }) => {
+      onReady?.(editor)
+    },
     onUpdate: ({ editor }) => {
       onChange?.({ json: editor.getJSON(), html: editor.getHTML(), text: editor.getText() })
     },
@@ -252,6 +262,7 @@ export function SimpleEditor({ content, onChange, placeholder, editable = true }
       Superscript,
       Subscript,
       Selection,
+      TableKit.configure({ table: { resizable: true } }),
       FindAndReplace.configure({
         searchDebounceMs: 500,
         injectCSS: false,
@@ -340,6 +351,8 @@ export function SimpleEditor({ content, onChange, placeholder, editable = true }
           role="presentation"
           className="simple-editor-content"
         />
+        {/* Floating formatting bar above the current text selection */}
+        <SelectionBubbleMenu editor={editor} />
         {/* Alt/title editor for the selected inline image (SEO & accessibility) */}
         <ImageAltMenu editor={editor} />
       </EditorContext.Provider>

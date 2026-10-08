@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ArrowLeft, Check, ChevronsUpDown, Gauge, ImagePlus, Loader2, Save, Search, Send, X } from "lucide-react";
+import { ArrowLeft, Check, ChevronsUpDown, FileUp, Gauge, ImagePlus, Loader2, Save, Search, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +22,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Skeleton } from "@/components/ui/skeleton";
 import { StatusBadge } from "@/components/admin/status-badge";
 import { MediaPickerDialog } from "@/components/admin/media-picker";
+import { ImportDocumentDialog } from "@/components/admin/import-document-dialog";
 import { PillarTabs, ScoreRing } from "@/components/admin/content-health";
 import { useAdminUser } from "@/components/admin/providers";
 import { useDebounce } from "@/hooks/use-debounce";
@@ -30,6 +31,7 @@ import { slugify, toLocalInput } from "@/lib/admin/format";
 import { cn } from "@/lib/utils";
 import { STATUS_LABEL, type Article, type Category, type ContentScore, type ContentStatus, type Locale, type Media, type Tag } from "@/lib/admin/types";
 import type { SimpleEditorChange } from "@/components/tiptap-templates/simple/simple-editor";
+import type { Editor } from "@tiptap/react";
 
 // The Tiptap editor is heavy and browser-only -> dynamic import without SSR.
 const SimpleEditor = dynamic(() => import("@/components/tiptap-templates/simple/simple-editor").then((m) => m.SimpleEditor), {
@@ -95,6 +97,10 @@ export function ArticleForm({ article }: { article?: Article }) {
     en: article ? fromArticle(article, "en") : emptyTranslation(false),
   });
   const [activeLocale, setActiveLocale] = useState<Locale>("id");
+  // Live editor instances per locale (set via onReady) so "Import document" can replace/append
+  // the body in place without remounting the editor.
+  const editorsRef = useRef<Partial<Record<Locale, Editor>>>({});
+  const [importOpen, setImportOpen] = useState(false);
   const [picker, setPicker] = useState<"cover" | "og" | null>(null);
   const [dirty, setDirty] = useState(false);
 
@@ -247,13 +253,38 @@ export function ArticleForm({ article }: { article?: Article }) {
                 <TabsTrigger value="id">🇮🇩 Indonesian</TabsTrigger>
                 <TabsTrigger value="en">🇬🇧 English {!tr.en.enabled && <span className="ml-1 text-muted-foreground">(empty)</span>}</TabsTrigger>
               </TabsList>
-              {activeLocale === "en" && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Switch id="en-enabled" checked={tr.en.enabled} onCheckedChange={(v) => update("en", { enabled: v })} />
-                  <Label htmlFor="en-enabled">Provide an English version</Label>
-                </div>
-              )}
+              <div className="flex items-center gap-3">
+                {activeLocale === "en" && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Switch id="en-enabled" checked={tr.en.enabled} onCheckedChange={(v) => update("en", { enabled: v })} />
+                    <Label htmlFor="en-enabled">Provide an English version</Label>
+                  </div>
+                )}
+                {(activeLocale === "id" || tr.en.enabled) && (
+                  <Button type="button" variant="outline" size="sm" onClick={() => setImportOpen(true)}>
+                    <FileUp className="size-4" /> Import document
+                  </Button>
+                )}
+              </div>
             </div>
+            <ImportDocumentDialog
+              open={importOpen}
+              onOpenChange={setImportOpen}
+              localeLabel={activeLocale === "id" ? "Indonesian" : "English"}
+              hasContent={Boolean(draft.contentHtml && draft.contentHtml.replace(/<[^>]+>/g, "").trim())}
+              onApply={(html, mode, r) => {
+                const ed = editorsRef.current[activeLocale];
+                if (!ed) {
+                  // Editor not mounted yet (should not happen): fall back to the draft state.
+                  update(activeLocale, { content: null, contentHtml: mode === "append" ? `${draft.contentHtml}${html}` : html });
+                  return;
+                }
+                if (mode === "append") ed.chain().focus("end").insertContent(html).run();
+                else ed.chain().setContent(html).focus("start").run();
+                // setContent/insertContent emit onUpdate, which syncs draft.content/contentHtml.
+                toast.success(`Imported ${r.stats.words} words${r.stats.images ? ` and ${r.stats.images} image${r.stats.images > 1 ? "s" : ""}` : ""} from ${r.fileName}`);
+              }}
+            />
 
             {(["id", "en"] as Locale[]).map((locale) => {
               const t = tr[locale];
@@ -293,6 +324,9 @@ export function ArticleForm({ article }: { article?: Article }) {
                         key={`${article?.id ?? "new"}-${locale}`}
                         content={(t.content as never) ?? t.contentHtml}
                         onChange={(c: SimpleEditorChange) => update(locale, { content: c.json, contentHtml: c.html })}
+                        onReady={(ed) => {
+                          editorsRef.current[locale] = ed;
+                        }}
                       />
 
                       <Card>

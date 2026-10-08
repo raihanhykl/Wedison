@@ -13,6 +13,11 @@ import { sanitizeArticleHtml, stripHtml, readingTimeMinutes } from "../../lib/sa
 import { notFound, badRequest } from "../../lib/errors.js";
 import { promoteScheduled } from "../../lib/scheduler.js";
 import { rescoreArticle } from "../../lib/content-score-db.js";
+import multer from "multer";
+import rateLimit from "express-rate-limit";
+import { env } from "../../config/env.js";
+import { storeImageBuffer } from "../media/media.routes.js";
+import { detectKind, importDocument } from "../../lib/doc-import/index.js";
 
 const STATUS = z.enum(["DRAFT", "SCHEDULED", "PUBLISHED", "ARCHIVED"]);
 const LOCALE = z.enum(["id", "en"]);
@@ -286,6 +291,33 @@ articlesRouter.post("/:id/restore", requireWrite("cms"), async (req, res, next) 
     invalidate([CacheTags.articles, CacheTags.dashboard]);
     logActivity(req, { action: "restore", entity: "article", entityId: id, summary: "Restored article from trash" });
     res.json({ ok: true });
+  } catch (e) {
+    next(e);
+  }
+});
+
+// ─── Import dokumen (.docx / .pdf) -> HTML untuk body artikel ──────────────────
+const importUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: Math.max(20, env.MAX_UPLOAD_MB) * 1024 * 1024, files: 1 },
+});
+const importLimiter = rateLimit({ windowMs: 10 * 60_000, limit: 30, standardHeaders: "draft-8", legacyHeaders: false });
+
+// multipart: field "file". Response: { html, warnings[], stats }. Title/slug are left to the author.
+articlesRouter.post("/import", requireWrite("cms"), importLimiter, importUpload.single("file"), async (req, res, next) => {
+  try {
+    const file = req.file;
+    if (!file) throw badRequest("No file was uploaded");
+    const kind = detectKind(file.mimetype, file.originalname);
+    if (kind === "doc") throw badRequest("Legacy .doc files are not supported. Open the file in Word and save it as .docx first.");
+    if (!kind) throw badRequest("Upload a Word (.docx) or PDF (.pdf) file");
+    const userId = req.user!.id;
+    const result = await importDocument(kind, file.buffer, async (img) => {
+      const media = await storeImageBuffer({ buffer: img.buffer, mime: img.mime, name: img.name, folder: "articles/import", alt: img.alt ?? null, userId });
+      return media.url;
+    });
+    logActivity(req, { action: "import", entity: "article", summary: `Imported ${kind.toUpperCase()} "${file.originalname}" (${result.stats.words} words, ${result.stats.images} images)` });
+    res.json({ ok: true, data: { ...result, kind, fileName: file.originalname } });
   } catch (e) {
     next(e);
   }
