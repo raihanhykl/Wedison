@@ -55,19 +55,32 @@ body,
 }
 
 .simple-editor-wrapper {
-  /* CMS Wedison: editor mengisi kartu form (bukan viewport penuh) */
+  /* CMS Wedison: editor mengisi kartu form (bukan viewport penuh). Tidak boleh overflow:auto,
+     supaya toolbar bisa sticky terhadap scroll halaman (di bawah header admin 3.5rem). */
+  --tt-admin-header-height: 3.5rem;
   width: 100%;
   min-height: 520px;
-  overflow: auto;
   position: relative;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
+
+  > .tiptap-toolbar[data-variant="fixed"] {
+    top: var(--tt-admin-header-height);
+    /* di bawah dialog/popover (z-50) tapi di atas konten */
+    z-index: 30;
+    border-radius: var(--radius) var(--radius) 0 0;
+
+    @media (max-width: 480px) {
+      top: auto;
+      border-radius: 0;
+    }
+  }
 }
 
 .simple-editor-search-and-replace {
   position: fixed;
-  top: calc(var(--tt-toolbar-height) + 0.5rem);
+  top: calc(var(--tt-admin-header-height, 3.5rem) + var(--tt-toolbar-height) + 0.5rem);
   right: 0.5rem;
   z-index: 51;
   max-height: calc(100dvh - var(--tt-toolbar-height) - 1rem);

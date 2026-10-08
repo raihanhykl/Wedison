@@ -43,7 +43,8 @@ Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `np
 | Publik (cache) | Admin (cookie JWT) |
 |---|---|
 | `GET /public/articles?locale=&page=&category=&tag=` | `GET/POST /admin/articles`, `PUT/DELETE /admin/articles/:id`, `PATCH /admin/articles/:id/status`, `POST /admin/articles/bulk` |
-| `GET /public/articles/:slug?locale=` | `GET/POST/PATCH/DELETE /admin/topics` (alias `/admin/categories`), `/admin/tags` |
+| `GET /public/articles/:slug?locale=` | `POST /admin/articles/import` (multipart `file` .docx/.pdf, maks 20 MB, rate limit 30/10 mnt) → `{ html, warnings, stats }` |
+| | `GET/POST/PATCH/DELETE /admin/topics` (alias `/admin/categories`), `/admin/tags` |
 | `GET /public/press`, `GET /public/press/:slug` | `/admin/press` + `POST /admin/press/fetch-metadata`, `POST /admin/press/:id/refresh`, `POST /admin/press/reorder` |
 | `GET /public/social?platform=` | `/admin/social` + `fetch-metadata`, `:id/refresh`, `reorder` |
 | `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD), `GET /admin/stations/meta` (provinsi/kota/jumlah per status), `POST /admin/stations/bulk` (`status` / `activate` / `deactivate` / `delete`) |
@@ -139,6 +140,20 @@ data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fall
 Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR default) hanya berjalan sekali per database
 (penanda Setting `hr_seeded`) dan otomatis dijalankan di deploy staging & produksi.
 
+## Editor artikel: impor dokumen & toolbar melayang
+
+**Impor dokumen (Word/PDF)** — tombol **Import document** di sebelah tab bahasa pada form artikel (`src/components/admin/import-document-dialog.tsx`). Mengisi *body* locale yang aktif saja; judul, slug, dan SEO tetap manual.
+
+- Backend: `server/src/lib/doc-import/` — `docx.ts` (mammoth: heading Word 1–6 → h1–h6, list, tabel, bold/italic/underline, link, gambar inline), `pdf.ts` (pdfjs-dist, *best-effort*: paragraf dari jarak baris, heading dari ukuran font relatif, bold/italic dari nama font, bullet/nomor → list, gambar raster via operator list, header/footer & nomor halaman dibuang, maks 60 halaman). `.doc` lama ditolak (minta simpan ulang sebagai .docx). PDF hasil scan tanpa teks → peringatan, tanpa OCR.
+- Gambar diekstrak lalu disimpan ke Media Library (`storeImageBuffer()` di `media.routes.ts`, folder `articles/import`, otomatis WebP) sehingga HTML hanya berisi URL, bukan base64.
+- Output selalu lewat `sanitizeArticleHtml` (whitelist sama dengan editor). Response memuat `warnings` (mis. heading hasil tebakan) dan `stats` (kata, paragraf, heading, list, tabel, gambar, halaman).
+- Dialog: drag-and-drop/browse → **Convert** (progress upload + konversi) → ringkasan + peringatan → **Replace body** / **Append to body** (replace minta konfirmasi bila body sudah berisi; semua bisa di-Undo). Konten dimasukkan ke editor via `onReady(editor)` tanpa remount.
+- Setelah impor, penulis tetap memeriksa level heading (H1 di body → H2), alt text gambar, dan link.
+
+**Toolbar melayang** — toolbar utama Tiptap kini benar-benar *sticky* tepat di bawah header admin (`.simple-editor-wrapper` tidak lagi `overflow:auto`; `top: 3.5rem`). Saat teks diseleksi muncul *bubble menu* ringkas (`src/components/tiptap-ui/selection-bubble-menu/`): heading, list, bold/italic/underline/strike/code, highlight, link; disembunyikan di layar ≤480px (toolbar mobile sudah menempel di keyboard), pada gambar dan code block.
+
+**Tabel** — `@tiptap/extension-table` (TableKit, kolom bisa di-resize) + dropdown **Table** di toolbar (`src/components/tiptap-ui/table-dropdown-menu/`): sisip 3×3, tambah/hapus baris & kolom, header row, merge/split, hapus tabel. Dibutuhkan agar tabel dari Word tidak hilang saat diimpor.
+
 ## Roadmap modul
 
 - [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.
@@ -146,5 +161,6 @@ Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR defau
 - [x] Scheduler: `server/src/lib/scheduler.ts` menayangkan artikel/liputan berstatus SCHEDULED tiap 60 detik (dan saat daftar admin dibuka).
 - [x] UI admin berbahasa Inggris; "Kategori" ditampilkan sebagai **Topics** (model DB tetap `Category`, API tersedia di `/admin/topics` dan `/admin/categories`).
 - [x] Sistem: login/role, pengguna, log aktivitas, akun saya, dashboard statistik.
+- [x] Editor artikel: impor Word/PDF ke body, toolbar sticky + bubble menu seleksi, tabel.
 - [ ] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta (API CRUD sudah siap; UI baru daftar/pencarian).
 - [ ] Modul berikutnya (menyusul).
