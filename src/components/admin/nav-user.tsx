@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import { api } from "@/lib/admin/api";
-import { ROLE_LABEL } from "@/lib/admin/types";
 import { useAdminUser } from "./providers";
 
 export function initials(name: string) {
@@ -43,7 +42,7 @@ export function NavUser() {
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs text-muted-foreground">{ROLE_LABEL[user.role]}</span>
+                <span className="truncate text-xs text-muted-foreground">{user.role.name}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>

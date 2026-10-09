@@ -4,7 +4,7 @@ import { z } from "zod";
 import rateLimit from "express-rate-limit";
 import { prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, signToken, setAuthCookie, clearAuthCookie } from "../../middleware/auth.js";
+import { requireAuth, signToken, setAuthCookie, clearAuthCookie, authUserSelect, toAuthUser } from "../../middleware/auth.js";
 import { unauthorized, badRequest } from "../../lib/errors.js";
 import { logActivity } from "../../lib/activity.js";
 
@@ -26,7 +26,7 @@ const loginSchema = z.object({
 authRouter.post("/login", loginLimiter, validate(loginSchema), async (req, res, next) => {
   try {
     const { email, password } = getValidated<typeof loginSchema>(req);
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { email }, select: { ...authUserSelect, passwordHash: true } });
     if (!user || !user.isActive) throw unauthorized("Incorrect email or password");
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) throw unauthorized("Incorrect email or password");
@@ -34,11 +34,11 @@ authRouter.post("/login", loginLimiter, validate(loginSchema), async (req, res, 
     await prisma.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } });
     const token = signToken(user);
     setAuthCookie(res, token);
-    req.user = { id: user.id, email: user.email, name: user.name, role: user.role, avatarUrl: user.avatarUrl };
+    req.user = toAuthUser(user);
     logActivity(req, { action: "login", entity: "auth", entityId: user.id, summary: "Signed in" });
     res.json({
       ok: true,
-      data: { id: user.id, email: user.email, name: user.name, role: user.role, avatarUrl: user.avatarUrl },
+      data: req.user,
       token, // untuk klien non-browser (mobile/CLI); browser pakai cookie httpOnly
     });
   } catch (e) {
@@ -88,9 +88,9 @@ authRouter.patch("/profile", requireAuth, validate(profileSchema), async (req, r
     const user = await prisma.user.update({
       where: { id: req.user!.id },
       data,
-      select: { id: true, email: true, name: true, role: true, avatarUrl: true },
+      select: authUserSelect,
     });
-    res.json({ ok: true, data: user });
+    res.json({ ok: true, data: toAuthUser(user) });
   } catch (e) {
     next(e);
   }

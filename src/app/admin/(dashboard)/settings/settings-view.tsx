@@ -13,7 +13,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { PageHeader } from "@/components/admin/page-header";
 import { useAdminUser } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
-import { ROLE_LABEL } from "@/lib/admin/types";
 
 const profileSchema = z.object({ name: z.string().trim().min(2, "At least 2 characters").max(80) });
 const passwordSchema = z
@@ -35,7 +34,7 @@ export function SettingsView() {
 
   return (
     <>
-      <PageHeader title="My Account" description={`${user.email} · ${ROLE_LABEL[user.role]}`} />
+      <PageHeader title="My Account" description={`${user.email} · ${user.role.name}`} />
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
