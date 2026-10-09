@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authRouter } from "../modules/auth/auth.routes.js";
 import { usersRouter } from "../modules/users/users.routes.js";
+import { rolesRouter } from "../modules/roles/roles.routes.js";
 import { activityRouter } from "../modules/activity/activity.routes.js";
 import { categoriesRouter, tagsRouter, publicTaxonomyRouter } from "../modules/taxonomy/taxonomy.routes.js";
 import { articlesRouter, publicArticlesRouter } from "../modules/articles/articles.routes.js";
@@ -20,6 +21,7 @@ export const api = Router();
 // ── Admin (butuh login) ─────────────────────────────────────────────
 api.use("/auth", authRouter);
 api.use("/admin/users", usersRouter);
+api.use("/admin/roles", rolesRouter); // role kustom (izin per modul), butuh users.manage
 api.use("/admin/activity", activityRouter);
 api.use("/admin/dashboard", dashboardRouter);
 api.use("/admin/hr", hrRouter); // lowongan, divisi, lokasi, kontak HR (role HR_MANAGER/HR_STAFF)

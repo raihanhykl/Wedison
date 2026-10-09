@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import type { AuthUser } from "@/lib/admin/types";
-import { canAccess, canDelete, type Module } from "@/lib/admin/permissions";
+import { canDelete, canWrite, hasPermission, type Module } from "@/lib/admin/permissions";
 
 const AdminUserContext = createContext<AuthUser | null>(null);
 
@@ -20,15 +20,14 @@ export function useAdminUser() {
  */
 export function useCan(module?: Module) {
   const user = useAdminUser();
-  const isSuper = user.role === "SUPER_ADMIN";
-  const isAdmin = isSuper || user.role === "ADMIN";
+  const isSuper = user.permissions.includes("*");
   return {
-    write: module ? canAccess(user.role, module) : true,
-    deleteHard: module ? canDelete(user.role, module) : isAdmin,
-    manageUsers: isSuper,
-    viewActivity: isAdmin,
+    write: module ? canWrite(user, module) : true,
+    deleteHard: module ? canDelete(user, module) : isSuper,
+    manageUsers: hasPermission(user, "users.manage"),
+    viewActivity: hasPermission(user, "activity.view"),
+    has: (permission: string) => hasPermission(user, permission),
     isSuper,
-    isAdmin,
   };
 }
 

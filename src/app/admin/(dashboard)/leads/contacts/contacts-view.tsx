@@ -22,6 +22,7 @@ import { api, errorMessage } from "@/lib/admin/api";
 import { formatDateTime, timeAgo } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { waLink, type ContactSubmission, type Paginated } from "@/lib/admin/types";
+import { contactReplyMailto } from "@/lib/admin/contact-reply";
 import { cn } from "@/lib/utils";
 
 function HandledBadge({ c }: { c: ContactSubmission }) {
@@ -85,7 +86,7 @@ export function ContactsView() {
             <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="size-8" aria-label="Actions"><MoreHorizontal /></Button></DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem onClick={() => setSelected(c)}><Eye /> View message</DropdownMenuItem>
-              <DropdownMenuItem asChild><a href={`mailto:${c.email}?subject=${encodeURIComponent(`Re: ${c.topic}`)}`}><Mail /> Reply by email</a></DropdownMenuItem>
+              <DropdownMenuItem asChild><a href={contactReplyMailto(c)}><Mail /> Reply by email</a></DropdownMenuItem>
               <DropdownMenuItem asChild><a href={waLink(c.phone)} target="_blank" rel="noreferrer"><MessageCircle /> WhatsApp</a></DropdownMenuItem>
               <DropdownMenuSeparator />
               {c.isHandled
@@ -144,7 +145,7 @@ function ContactDetail({ c, saving, onHandled, onNote }: { c: ContactSubmission;
       </SheetHeader>
       <div className="space-y-5 px-4 pb-6">
         <div className="flex flex-wrap items-center gap-2">
-          <Button size="sm" asChild><a href={`mailto:${c.email}?subject=${encodeURIComponent(`Re: ${c.topic}`)}`}><Mail /> Reply by email</a></Button>
+          <Button size="sm" asChild><a href={contactReplyMailto(c)}><Mail /> Reply by email</a></Button>
           <Button size="sm" variant="outline" asChild><a href={waLink(c.phone)} target="_blank" rel="noreferrer"><MessageCircle /> WhatsApp</a></Button>
           <div className="ml-auto"><HandledBadge c={c} /></div>
         </div>

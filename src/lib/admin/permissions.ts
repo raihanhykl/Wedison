@@ -1,44 +1,47 @@
-// Mirror of server/src/lib/permissions.ts (keep in sync). The backend is the real
-// enforcement; this only hides navigation and pages a role cannot use.
-import type { UserRole } from "./types";
+// Mirror of server/src/lib/permissions.ts (module -> view permission). The backend is the real
+// enforcement; this only hides navigation and pages the user's role cannot use.
+import type { AuthUser } from "./types";
 
 export type Module = "dashboard" | "cms" | "supercharge" | "leads" | "hr" | "users" | "activity" | "consent";
 
-export const ROLE_MODULES: Record<UserRole, Module[]> = {
-  SUPER_ADMIN: ["dashboard", "cms", "supercharge", "leads", "hr", "users", "activity", "consent"],
-  ADMIN: ["dashboard", "cms", "supercharge", "leads", "activity", "consent"],
-  EDITOR: ["dashboard", "cms", "supercharge", "leads"],
-  MARKETING: ["dashboard", "cms", "leads"],
-  SUPERCHARGE: ["supercharge"],
-  HR_MANAGER: ["hr"],
-  HR_STAFF: ["hr"],
-};
+type Holder = Pick<AuthUser, "permissions">;
 
-const DELETE_MODULES: Record<UserRole, Module[]> = {
-  SUPER_ADMIN: ["cms", "supercharge", "leads"],
-  ADMIN: ["cms", "supercharge", "leads"],
-  EDITOR: [],
-  MARKETING: ["cms", "leads"],
-  SUPERCHARGE: ["supercharge"],
-  HR_MANAGER: [],
-  HR_STAFF: [],
-};
-
-export function canAccess(role: UserRole, module: Module) {
-  return ROLE_MODULES[role]?.includes(module) ?? false;
+export function hasPermission(user: Holder, permission: string) {
+  return user.permissions.includes("*") || user.permissions.includes(permission);
 }
 
-/** Permanent deletes inside a module (Editor: none; team roles: their own modules). */
-export function canDelete(role: UserRole, module: Module) {
-  return DELETE_MODULES[role]?.includes(module) ?? false;
+const MODULE_VIEW_PERMISSION: Record<Module, string> = {
+  dashboard: "dashboard.view",
+  cms: "cms.view",
+  supercharge: "supercharge.view",
+  leads: "leads.view",
+  hr: "hr.view",
+  users: "users.manage",
+  activity: "activity.view",
+  consent: "consent.view",
+};
+
+export function canAccess(user: Holder, module: Module) {
+  return hasPermission(user, MODULE_VIEW_PERMISSION[module]);
+}
+
+export function canWrite(user: Holder, module: Module) {
+  return hasPermission(user, `${module}.write`);
+}
+
+/** Permanent deletes inside a module. */
+export function canDelete(user: Holder, module: Module) {
+  return hasPermission(user, `${module}.delete`);
 }
 
 /** Landing page after login / when opening a page the role cannot use. */
-export function homeFor(role: UserRole) {
-  if (canAccess(role, "dashboard")) return "/admin";
-  if (canAccess(role, "hr")) return "/admin/hr";
-  if (canAccess(role, "supercharge")) return "/admin/supercharge/stations";
-  if (canAccess(role, "cms")) return "/admin/cms/articles";
+export function homeFor(user: Holder) {
+  if (canAccess(user, "dashboard")) return "/admin";
+  if (canAccess(user, "hr")) return "/admin/hr";
+  if (canAccess(user, "supercharge")) return "/admin/supercharge/stations";
+  if (canAccess(user, "cms")) return "/admin/cms/articles";
+  if (canAccess(user, "leads")) return "/admin/leads";
+  if (canAccess(user, "users")) return "/admin/users";
   return "/admin/settings";
 }
 

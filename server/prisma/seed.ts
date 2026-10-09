@@ -27,10 +27,16 @@ async function main() {
   // 1) Super admin
   const email = (process.env.SEED_ADMIN_EMAIL ?? "admin@wedison.co").toLowerCase();
   const password = process.env.SEED_ADMIN_PASSWORD ?? "Wedison2026!";
+  // Role bawaan dibuat oleh migrasi `custom_roles`; pastikan super_admin ada (DB baru).
+  const superRole = await prisma.role.upsert({
+    where: { key: "super_admin" },
+    update: { permissions: ["*"], isSystem: true },
+    create: { id: "role_super_admin", key: "super_admin", name: "Super Admin", description: "Full access to every module, including users and roles.", color: "emerald", permissions: ["*"], isSystem: true },
+  });
   const admin = await prisma.user.upsert({
     where: { email },
     update: {},
-    create: { email, name: process.env.SEED_ADMIN_NAME ?? "Super Admin", role: "SUPER_ADMIN", passwordHash: await bcrypt.hash(password, 12) },
+    create: { email, name: process.env.SEED_ADMIN_NAME ?? "Super Admin", roleId: superRole.id, passwordHash: await bcrypt.hash(password, 12) },
   });
   console.log(`✔ admin: ${admin.email}`);
 

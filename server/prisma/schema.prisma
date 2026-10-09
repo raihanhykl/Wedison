@@ -16,14 +16,23 @@ datasource db {
 
 // ───────────────────────── Auth & Users ─────────────────────────
 
-enum UserRole {
-  SUPER_ADMIN // kelola user + semua modul
-  ADMIN       // semua modul konten, tanpa kelola user
-  EDITOR      // tulis/edit konten, tidak bisa hapus permanen
-  HR_MANAGER  // modul HR penuh: publikasi, hapus, kontak & pengaturan rekrutmen
-  HR_STAFF    // modul HR: tulis/edit lowongan, ajukan review (tanpa publikasi/hapus)
-  MARKETING   // tim marketing: dashboard, CMS, dan leads (kendali penuh, termasuk hapus)
-  SUPERCHARGE // tim SuperCharge: modul lokasi stasiun saja (kendali penuh, termasuk hapus)
+// Role kustom: kumpulan izin (permission key) yang bisa dibuat/diubah dari admin.
+// Katalog izin ada di server/src/lib/permissions.ts. Role `super_admin` (isSystem) selalu
+// punya izin "*" dan tidak bisa diubah/dihapus.
+model Role {
+  id          String   @id @default(cuid())
+  key         String   @unique // slug tetap (tidak bisa diubah setelah dibuat)
+  name        String   @unique
+  description String?
+  color       String? // token warna badge (mis. "emerald")
+  permissions String[] @default([])
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users User[]
+
+  @@index([isSystem])
 }
 
 model User {
@@ -31,7 +40,8 @@ model User {
   email        String    @unique
   name         String
   passwordHash String
-  role         UserRole  @default(EDITOR)
+  roleId       String
+  role         Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
   isActive     Boolean   @default(true)
   avatarUrl    String?
   lastLoginAt  DateTime?
@@ -42,7 +52,7 @@ model User {
   media        Media[]
   activityLogs ActivityLog[]
 
-  @@index([role])
+  @@index([roleId])
 }
 
 // ───────────────────────── CMS: Artikel ─────────────────────────

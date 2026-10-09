@@ -72,11 +72,11 @@ export function DashboardView() {
           <StatCard title="Articles" value={c.articles} hint={`${c.articlesByStatus.PUBLISHED ?? 0} published · ${c.articlesByStatus.DRAFT ?? 0} drafts`} icon={FileText} href="/admin/cms/articles" />
           <StatCard title="Press coverage" value={c.press} hint="live on Media Center" icon={Newspaper} href="/admin/cms/press" />
           <StatCard title="Social posts" value={c.social} hint="active" icon={Share2} href="/admin/cms/social" />
-{canAccess(user.role, "supercharge") && <StatCard title="SuperCharge stations" value={c.stations} hint={`${c.stationsByStatus.OPERATIONAL ?? 0} operational · ${c.stationsByStatus.COMING_SOON ?? 0} coming soon`} icon={MapPin} href="/admin/supercharge/stations" />}
+{canAccess(user, "supercharge") && <StatCard title="SuperCharge stations" value={c.stations} hint={`${c.stationsByStatus.OPERATIONAL ?? 0} operational · ${c.stationsByStatus.COMING_SOON ?? 0} coming soon`} icon={MapPin} href="/admin/supercharge/stations" />}
         </div>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="font-display text-lg">Recent articles</CardTitle>
@@ -116,8 +116,8 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <div className="space-y-6">
-          <Card>
+        <div className="min-w-0 space-y-6">
+          <Card className="overflow-hidden">
             <CardHeader>
               <CardTitle className="font-display text-lg">Recent activity</CardTitle>
             </CardHeader>
@@ -132,7 +132,7 @@ export function DashboardView() {
                       <AvatarFallback className="text-[10px]">{initials(log.user?.name ?? "?")}</AvatarFallback>
                     </Avatar>
                     <div className="min-w-0 flex-1 text-sm">
-                      <p className="truncate">
+                      <p className="line-clamp-2 break-words" title={log.summary ?? undefined}>
                         <span className="font-medium">{log.user?.name ?? "System"}</span>{" "}
                         <span className="text-muted-foreground">{log.summary ?? `${log.action} ${log.entity}`}</span>
                       </p>

@@ -1,13 +1,26 @@
 // Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
 // "Topics" in the UI map to the Category model in the database.
-export type UserRole = "SUPER_ADMIN" | "ADMIN" | "EDITOR" | "MARKETING" | "SUPERCHARGE" | "HR_MANAGER" | "HR_STAFF";
+/** Badge colors a role may use (mirrors server/src/lib/roles.ts). */
+export type RoleColor = "emerald" | "blue" | "violet" | "pink" | "amber" | "teal" | "cyan" | "rose" | "orange" | "indigo" | "lime" | "slate";
+export type RoleRef = { id: string; key: string; name: string; color: RoleColor | null; isSystem: boolean };
+export type Role = RoleRef & {
+  description: string | null;
+  permissions: string[];
+  createdAt: string;
+  updatedAt: string;
+  _count: { users: number };
+};
+export type PermissionDef = { key: string; label: string; description: string; implies?: string[] };
+export type PermissionModule = { key: string; label: string; description: string; permissions: PermissionDef[] };
+export type PermissionCatalog = { modules: PermissionModule[]; colors: RoleColor[] };
 export type ContentStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED" | "ARCHIVED";
 export type Locale = "id" | "en";
 export type SocialPlatform = "INSTAGRAM" | "TIKTOK" | "YOUTUBE" | "X" | "FACEBOOK" | "LINKEDIN";
 export type StationStatus = "OPERATIONAL" | "COMING_SOON" | "MAINTENANCE" | "CLOSED";
 export type StationTier = "HUB" | "SHOWROOM" | "MITRA";
 
-export type AuthUser = { id: string; email: string; name: string; role: UserRole; avatarUrl: string | null };
+/** Signed-in user: role reference + effective permission keys ("*" = everything). */
+export type AuthUser = { id: string; email: string; name: string; avatarUrl: string | null; role: RoleRef; permissions: string[] };
 
 export type Paginated<T> = {
   ok: true;
@@ -15,7 +28,7 @@ export type Paginated<T> = {
   meta: { page: number; limit: number; total: number; totalPages: number };
 };
 
-export type User = AuthUser & {
+export type User = Omit<AuthUser, "permissions"> & {
   isActive: boolean;
   lastLoginAt: string | null;
   createdAt: string;
@@ -237,24 +250,20 @@ export const STATUS_LABEL: Record<ContentStatus, string> = {
   ARCHIVED: "Archived",
 };
 
-export const ROLE_LABEL: Record<UserRole, string> = {
-  SUPER_ADMIN: "Super Admin",
-  ADMIN: "Admin",
-  EDITOR: "Editor",
-  MARKETING: "Marketing Team",
-  SUPERCHARGE: "SuperCharge Team",
-  HR_MANAGER: "HR Manager",
-  HR_STAFF: "HR Staff",
-};
-
-export const ROLE_DESCRIPTION: Record<UserRole, string> = {
-  SUPER_ADMIN: "Everything, including users.",
-  ADMIN: "CMS, SuperCharge and leads; permanent deletes.",
-  EDITOR: "Write and edit content; no permanent deletes.",
-  MARKETING: "Dashboard, CMS (articles, press, social, media, SEO) and Leads, including deletes.",
-  SUPERCHARGE: "SuperCharge stations only: add, edit, bulk update and delete stations.",
-  HR_MANAGER: "HR module only: publish and close jobs, delete, HR contact settings, divisions and locations.",
-  HR_STAFF: "HR module only: write and edit draft jobs, submit them for review.",
+/** Tailwind classes per role color (badge + swatch). Keys mirror RoleColor. */
+export const ROLE_COLOR_CLASS: Record<RoleColor, { badge: string; dot: string }> = {
+  emerald: { badge: "bg-emerald-500/12 text-emerald-700 border-emerald-500/30 dark:text-emerald-300", dot: "bg-emerald-500" },
+  blue: { badge: "bg-blue-500/12 text-blue-700 border-blue-500/30 dark:text-blue-300", dot: "bg-blue-500" },
+  violet: { badge: "bg-violet-500/12 text-violet-700 border-violet-500/30 dark:text-violet-300", dot: "bg-violet-500" },
+  pink: { badge: "bg-pink-500/12 text-pink-700 border-pink-500/30 dark:text-pink-300", dot: "bg-pink-500" },
+  amber: { badge: "bg-amber-500/15 text-amber-800 border-amber-500/30 dark:text-amber-300", dot: "bg-amber-500" },
+  teal: { badge: "bg-teal-500/12 text-teal-700 border-teal-500/30 dark:text-teal-300", dot: "bg-teal-500" },
+  cyan: { badge: "bg-cyan-500/12 text-cyan-700 border-cyan-500/30 dark:text-cyan-300", dot: "bg-cyan-500" },
+  rose: { badge: "bg-rose-500/12 text-rose-700 border-rose-500/30 dark:text-rose-300", dot: "bg-rose-500" },
+  orange: { badge: "bg-orange-500/12 text-orange-700 border-orange-500/30 dark:text-orange-300", dot: "bg-orange-500" },
+  indigo: { badge: "bg-indigo-500/12 text-indigo-700 border-indigo-500/30 dark:text-indigo-300", dot: "bg-indigo-500" },
+  lime: { badge: "bg-lime-500/15 text-lime-800 border-lime-500/30 dark:text-lime-300", dot: "bg-lime-500" },
+  slate: { badge: "bg-slate-500/12 text-slate-700 border-slate-500/30 dark:text-slate-300", dot: "bg-slate-500" },
 };
 
 // ─── HR ───
@@ -273,7 +282,7 @@ export type Job = {
   publishedAt: string | null; closesAt: string | null; closedAt: string | null; viewCount: number; reviewNote: string | null;
   translations: JobTranslation[]; createdAt: string; updatedAt: string; _count?: { applyClicks: number };
 };
-export type HrPermissions = { role: UserRole; write: boolean; publish: boolean; delete: boolean; settings: boolean; taxonomy: boolean };
+export type HrPermissions = { role: string; write: boolean; publish: boolean; delete: boolean; settings: boolean; taxonomy: boolean };
 export type HrSettings = {
   contactName: string; contactEmail: string; ccEmail?: string | null; phone?: string | null; whatsapp?: string | null;
   emailSubjectId: string; emailSubjectEn: string; applicationNoteId?: string | null; applicationNoteEn?: string | null;

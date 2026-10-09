@@ -49,7 +49,7 @@ export const NAV: NavGroup[] = [
   {
     label: "System",
     items: [
-      { title: "Users", href: "/admin/users", icon: Users, module: "users" },
+      { title: "Users & Roles", href: "/admin/users", icon: Users, module: "users" },
       { title: "Activity Log", href: "/admin/activity", icon: ScrollText, module: "activity" },
       { title: "My Account", href: "/admin/settings", icon: Settings },
     ],
@@ -73,7 +73,8 @@ export const SEGMENT_LABEL: Record<string, string> = {
   bookings: "Bookings",
   contacts: "Contact Messages",
   calendar: "Calendar",
-  users: "Users",
+  users: "Users & Roles",
+  roles: "Roles",
   activity: "Activity Log",
   settings: "My Account",
   hr: "HR",
