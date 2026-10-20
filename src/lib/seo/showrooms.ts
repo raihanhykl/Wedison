@@ -36,10 +36,8 @@ export type UpcomingShowroom = {
   country: CountryCode;
 };
 
-export const UPCOMING_SHOWROOMS: UpcomingShowroom[] = [
-  { id: "medan", city: "Medan", country: "ID" },
-  { id: "surabaya", city: "Surabaya", country: "ID" },
-];
+// Kosong per keputusan 2026-10-20: rencana cabang baru tidak diumumkan di situs.
+export const UPCOMING_SHOWROOMS: UpcomingShowroom[] = [];
 
 export type ShowroomLocation = {
   id: ShowroomId;
@@ -55,6 +53,8 @@ export type ShowroomLocation = {
   geo: { latitude: number; longitude: number };
   mapsUrl: string;
   whatsapp: string;
+  /** Punya stasiun SuperCharge di lokasi (Bali belum). */
+  supercharge: boolean;
 };
 
 export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
@@ -63,7 +63,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
     country: "ID",
     name: "Wedison Jakarta",
     address: {
-      streetAddress: "Jl. Arteri Pondok Indah No. 30 A-C, Kebayoran Lama Selatan",
+      streetAddress: "Jl. Sultan Iskandar Muda No. 30 A-C, Kebayoran Lama",
       addressLocality: "Jakarta Selatan",
       addressRegion: "DKI Jakarta",
       postalCode: "12240",
@@ -72,6 +72,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
     mapsUrl:
       "https://www.google.com/maps/place/Wedison+Showroom/@-6.248464,106.7806209,19z/data=!4m10!1m2!2m1!1swedison+showroom!3m6!1s0x2e69f10019a26049:0xa59abd5e111a8a10!8m2!3d-6.248447!4d106.7810459!15sChB3ZWRpc29uIHNob3dyb29tWhIiEHdlZGlzb24gc2hvd3Jvb22SARplbGVjdHJpY19tb3RvcmN5Y2xlX2RlYWxlcqoBOBABMh4QASIa377C9bwSIpBp7hHS_qeMc_QbuBNmgIsWHu0yFBACIhB3ZWRpc29uIHNob3dyb29t4AEA!16s%2Fg%2F11x1nqm1sg!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDQyMi4wIKXMDSoASAFQAw%3D%3D",
     whatsapp: SHOWROOMS.jakarta.whatsapp,
+    supercharge: true,
   },
   {
     id: "bekasi",
@@ -86,6 +87,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
     geo: { latitude: -6.2597989, longitude: 107.0199037 },
     mapsUrl: "https://maps.app.goo.gl/DXB6csamG8R78XoP9",
     whatsapp: SHOWROOMS.bekasi.whatsapp,
+    supercharge: true,
   },
   {
     id: "bandung",
@@ -100,6 +102,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
     geo: { latitude: -6.86542, longitude: 107.514505 },
     mapsUrl: "https://maps.app.goo.gl/T86DfRuAkHFBmhMs8",
     whatsapp: SHOWROOMS.bandung.whatsapp,
+    supercharge: true,
   },
   {
     id: "bali",
@@ -114,6 +117,7 @@ export const SHOWROOM_LOCATIONS: ShowroomLocation[] = [
     geo: { latitude: -8.6359263, longitude: 115.2213254 },
     mapsUrl: "https://maps.app.goo.gl/og4ovnG2FgCAQAWt8",
     whatsapp: SHOWROOMS.bali.whatsapp,
+    supercharge: false,
   },
 ];
 
@@ -139,7 +143,7 @@ export function showroomNetwork(): CountryNetwork[] {
   }));
 }
 
-/** Jam buka (sama semua cabang): Sen–Jum 10:00–19:00, Sab–Min 10:00–17:00 (waktu setempat). */
+/** Jam buka (sama semua cabang): Sen–Jum 10:00–19:00, Sab–Min 10:00–17:00, libur nasional 10:00–16:00 (waktu setempat). */
 export const SHOWROOM_OPENING_HOURS = [
   { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "19:00" },
   { days: ["Saturday", "Sunday"], opens: "10:00", closes: "17:00" },
