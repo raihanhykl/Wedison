@@ -27,6 +27,8 @@ import AppDownloadTeaser from "@/components/app-download-teaser";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
 import { ArtDirectedImage } from "@/components/art-directed-image";
 import { whatsappUrl } from "@/lib/seo/site";
+import SuperChargeMapSection from "./supercharge-map-section";
+import type { Site } from "@/app/[locale]/super-charge/locations/types";
 
 type Lang = "id" | "en";
 
@@ -264,7 +266,7 @@ const COPY: Record<Lang, Record<string, string>> = {
   },
 };
 
-export default function Landing() {
+export default function Landing({ sites }: { sites: Site[] }) {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
   // Semua link internal WAJIB berprefix locale + trailing slash: tanpa itu tiap klik/crawl
@@ -506,6 +508,9 @@ export default function Landing() {
           </div>
         </Reveal>
       </section>
+
+      {/* ============ SUPERCHARGE MAP (peta ringkas stasiun) ============ */}
+      <SuperChargeMapSection sites={sites} />
 
       {/* ============ APP DOWNLOAD ============ */}
       <AppDownloadTeaser />

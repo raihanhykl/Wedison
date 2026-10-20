@@ -1229,6 +1229,30 @@ export const id = {
   "supercharge.locator.empty.desc":
     "Coba kata kunci lain, atau longgarkan filternya.",
 
+  // Beranda: peta ringkas stasiun SuperCharge (section di bawah Spotlight)
+  "home.map.title": "Stasiun SuperCharge di dekat Anda",
+  "home.map.desc":
+    "Pilih area untuk melihat stasiun yang sudah beroperasi dan yang segera hadir. Detail jam operasional, fasilitas, dan navigasi ada di halaman lokasi.",
+  "home.map.stats": "{n} beroperasi · {m} segera hadir",
+  "home.map.areaLabel": "Pilih area",
+  "home.map.all": "Semua",
+  "home.map.listLabel": "Daftar stasiun SuperCharge",
+  "home.map.mapLabel": "Peta stasiun SuperCharge",
+  "home.map.chargers": "{n} nozzle",
+  "home.map.comingSoon": "Segera hadir",
+  "home.map.more": "+{n} lokasi lainnya",
+  "home.map.empty": "Belum ada stasiun di area ini.",
+  "home.map.viewAll": "Lihat semua lokasi",
+  "home.map.nearMe": "Di sekitar saya",
+  "home.map.nearMeActive": "Urut jarak: aktif",
+  "home.map.locating": "Mencari lokasi Anda…",
+  "home.map.nearMeDone": "Diurutkan dari yang terdekat dengan Anda.",
+  "home.map.geoDenied":
+    "Akses lokasi ditolak. Anda tetap bisa memilih area di atas.",
+  "home.map.geoError":
+    "Lokasi Anda belum terdeteksi. Coba lagi, atau pilih area di atas.",
+  "home.map.distance": "{km} km",
+
   "supercharge.video.title": "Begini Cara Kerja SuperCharge",
   "supercharge.video.description":
     "Dari menyambungkan konektor hingga melaju kembali, lihat seperti apa proses pengisian di stasiun SuperCharge.",
