@@ -183,7 +183,7 @@ export const en = {
   "features.titleHighlight": "Wedison",
   "features.description":
     "Four models, one charging network, and running costs substantially lower than petrol.",
-  "features.longRangeBattery": "Up to 160 km of Range",
+  "features.longRangeBattery": "Up to 200 km of Range",
   "features.longRangeBatteryDesc":
     "A single charge covers several days of city riding, depending on the model and battery selected.",
   "features.rapidCharging": "SuperCharge in 15 Minutes",
@@ -310,10 +310,10 @@ export const en = {
   // Showroom Page
   "showroom.tag": "Experience Center",
   "showroom.address":
-    "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
+    "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, South Jakarta, DKI Jakarta 12240",
   "showroom.jakarta.name": "Wedison Jakarta",
   "showroom.jakarta.address":
-    "Arteri Pondok Indah Street No 30 A-C, South Kebayoran Lama, South Jakarta, DKI Jakarta. 12240",
+    "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, South Jakarta, DKI Jakarta 12240",
   "showroom.bandung.name": "Wedison Bandung",
   "showroom.bandung.address":
     "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
@@ -325,6 +325,7 @@ export const en = {
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
   "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
   "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
+  "showroom.holiday": "Public holidays: 10:00 AM - 4:00 PM",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
     "Ride around the showroom area with our team beside you. It's free, and you don't need to bring an ID or licence.",
@@ -352,7 +353,7 @@ export const en = {
   "showroomPage.hero.fact3": "Walk-ins welcome",
   "showroomPage.locations.title": "Find a showroom near you",
   "showroomPage.locations.desc":
-    "Every location is a showroom and an official service centre, with SuperCharge on site. Pick a card to see it on the map.",
+    "Every location is a showroom and an official service centre. SuperCharge stations are available in Jakarta, Bandung Barat, and Bekasi. Pick a card to see it on the map.",
   "showroomPage.locations.countOpen": "{n} open",
   "showroomPage.locations.countUpcoming": "{n} coming soon",
   "showroomPage.locations.prev": "Previous showroom",
@@ -361,10 +362,12 @@ export const en = {
   "showroomPage.locations.listLabel": "Showrooms in {country}",
   "showroomPage.card.showOnMap": "Show {name} on the map",
   "showroomPage.card.facilities": "Showroom · Service · SuperCharge",
+  "showroomPage.card.facilitiesNoCharge": "Showroom · Service",
   "showroomPage.card.openUntil": "Open · closes {time}",
   "showroomPage.card.closedUntil": "Closed · opens {time}",
   "showroomPage.card.weekdays": "Mon–Fri",
   "showroomPage.card.weekend": "Sat–Sun",
+  "showroomPage.card.holiday": "Public holidays",
   "showroomPage.card.directions": "Directions",
   "showroomPage.upcoming.label": "Coming soon",
   "showroomPage.upcoming.desc": "Our next Experience Center is on its way. Stay tuned.",
@@ -397,10 +400,10 @@ export const en = {
     "You're welcome to walk in. We do recommend booking first so your visit doesn't overlap with other customers.",
   "showroomPage.faq.q5": "Can I get my motorcycle serviced and charged at the showroom?",
   "showroomPage.faq.a5":
-    "Yes. Every Wedison showroom is also an official service centre and has a SuperCharge station.",
+    "Servicing, yes: all four showrooms are official Wedison service centres. SuperCharge stations are available at the Jakarta, Bandung Barat, and Bekasi showrooms. The Bali showroom does not have a SuperCharge station yet.",
   "showroomPage.faq.q6": "When are the showrooms open?",
   "showroomPage.faq.a6":
-    "Monday to Friday 10:00–19:00, Saturday and Sunday 10:00–17:00, local time.",
+    "Monday to Friday 10:00–19:00, Saturday and Sunday 10:00–17:00, and public holidays 10:00–16:00, local time.",
   "showroomPage.cta.title": "We look forward to seeing you.",
   "showroomPage.cta.desc":
     "Choose the showroom and time that suit you. We'll confirm it on WhatsApp.",
@@ -496,7 +499,7 @@ export const en = {
   "contactPage.faq.all": "See all FAQs",
 
   // Contact Page
-  "contact.page.business.hours": "Monday - Friday: 09.00 AM - 06.00 PM",
+  "contact.page.business.hours": "Monday - Friday: 10:00 AM - 7:00 PM, Saturday - Sunday: 10:00 AM - 5:00 PM (local time)",
   "contact.page.faqTitle": "Frequently Asked Questions",
   "contact.page.thankYou": "Thank You!",
   "contact.page.messageReceived":
@@ -508,10 +511,10 @@ export const en = {
     "Visit any of our showrooms directly, or reserve a slot in advance through this site. Our team will accompany you throughout the ride.",
   "contact.page.faq.q2": "What warranty comes with a Wedison motorcycle?",
   "contact.page.faq.a2":
-    "Every Wedison motorcycle carries a 2-year warranty, and the battery carries a 3-year warranty. Both cover manufacturing defects.",
+    "The battery, motor, and frame are covered for 3 years or 100,000 km, whichever comes first. Other components carry a 1 to 2 year warranty per the official list. The warranty covers manufacturing defects.",
   "contact.page.faq.q3": "How long does charging take?",
   "contact.page.faq.a3":
-    "At a SuperCharge station, most models charge from 10% to 80% in 15 minutes. On a household outlet, a full charge takes approximately 4 to 10 hours, depending on the model and battery capacity.",
+    "At a SuperCharge station, Athena, Victory, and EdPower charge from 10% to 80% in about 15 minutes. On a household outlet, a full charge takes 4 to 6 hours for Bees, Athena, and Victory, and 8 to 10 hours for EdPower.",
   "contact.page.faq.q4": "Are financing options available?",
   "contact.page.faq.a4":
     "Yes. We offer several installment plans, and our team can help you select the one best suited to your budget.",
@@ -657,7 +660,7 @@ export const en = {
   "edpower.productPage.techSpecs2.desc":
     "Charge from 10% to 80% with SuperCharge",
 
-  "edpower.productPage.techSpecs3.title": 90,
+  "edpower.productPage.techSpecs3.title": 85,
   "edpower.productPage.techSpecs3.unit": "km/h",
   "edpower.productPage.techSpecs3.desc": "Top Speed",
 
@@ -712,7 +715,7 @@ export const en = {
   "edpower.productPage.chargingHighlight1.description": (
     <>
       Charge from 10% to 80% in 15 minutes, suited to a brief stop between
-      errands. Available at every Wedison showroom.{" "}
+      errands. Available at the Jakarta, Bandung Barat, and Bekasi showrooms.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
       </LocaleLink>
@@ -727,13 +730,13 @@ export const en = {
 
   "edpower.specs.engine.motorType": "Brushless DC Motor",
   "edpower.specs.engine.motorPower": "3 kW",
-  "edpower.specs.engine.topSpeed": "90 km/h",
+  "edpower.specs.engine.topSpeed": "85 km/h",
   "edpower.specs.engine.acceleration": "7.9 seconds",
   "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
   "edpower.specs.battery.batteryCapacity": "5 kWh",
   "edpower.specs.battery.voltage": "76.8 Volt",
   "edpower.specs.battery.chargingTimeSuperCharge": "15 minutes",
-  "edpower.specs.battery.chargingTimeHome": "10.2 hours",
+  "edpower.specs.battery.chargingTimeHome": "8 - 10 hours",
   "edpower.specs.battery.range": "200 km",
   "edpower.specs.brake.frontBrake": "Disc Brake",
   "edpower.specs.brake.rearBrake": "Disc Brake",
@@ -840,7 +843,7 @@ export const en = {
   "victory.productPage.techSpecs2.desc":
     "Charge from 10% to 80% with SuperCharge",
 
-  "victory.productPage.techSpecs3.title": 85,
+  "victory.productPage.techSpecs3.title": 80,
   "victory.productPage.techSpecs3.unit": "km/h",
   "victory.productPage.techSpecs3.desc": "Top Speed",
 
@@ -878,7 +881,7 @@ export const en = {
   "victory.productPage.chargingHighlight1.description": (
     <>
       Go from 10% to 80% in 15 minutes, enough time for a short break on a busy
-      day. Available at every Wedison showroom.{" "}
+      day. Available at the Jakarta, Bandung Barat, and Bekasi showrooms.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
       </LocaleLink>
@@ -893,15 +896,14 @@ export const en = {
 
   "victory.specs.engine.motorType": "Brushless DC Motor",
   "victory.specs.engine.motorPower": "3 kW",
-  "victory.specs.engine.topSpeed": "85 km/h",
+  "victory.specs.engine.topSpeed": "80 km/h",
   "victory.specs.engine.acceleration": "6.5 seconds",
   "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
   "victory.specs.battery.batteryCapacity":
     "2.5 kWh (Regular Battery) / 3.4 kWh (Extended Battery)",
   "victory.specs.battery.voltage": "76.8 Volt",
   "victory.specs.battery.chargingTimeSuperCharge": "15 minutes",
-  "victory.specs.battery.chargingTimeHome":
-    "5 hours (Regular Battery) / 7 hours (Extended Battery)",
+  "victory.specs.battery.chargingTimeHome": "4 - 6 hours",
   "victory.specs.battery.range":
     "110 km (Regular Battery) / 120 km (Extended Battery)",
   "victory.specs.brake.frontBrake": "Disc Brake",
@@ -963,7 +965,7 @@ export const en = {
   "athena.productPage.techSpecs2.desc":
     "Charge from 10% to 80% with SuperCharge",
 
-  "athena.productPage.techSpecs3.title": 85,
+  "athena.productPage.techSpecs3.title": 75,
   "athena.productPage.techSpecs3.unit": "km/h",
   "athena.productPage.techSpecs3.desc": "Top Speed",
 
@@ -980,7 +982,7 @@ export const en = {
   "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
   "athena.productPage.productHighlight2.title": "SuperCharge",
   "athena.productPage.productHighlight2.description":
-    "At a SuperCharge station, Athena charges from 10% to 80% in 15 minutes. At home, a full charge takes approximately 5 hours with the Regular battery and 7 hours with the Extended.",
+    "At a SuperCharge station, Athena charges from 10% to 80% in 15 minutes. At home, a full charge from 0% takes about 4 to 6 hours.",
 
   "athena.productPage.productHighlight3.imageAlt": "CBS Breaking System Athena",
   "athena.productPage.productHighlight3.title": "Designed for the City",
@@ -1012,15 +1014,14 @@ export const en = {
 
   "athena.specs.engine.motorType": "Brushless DC Motor",
   "athena.specs.engine.motorPower": "2.5 kW",
-  "athena.specs.engine.topSpeed": "85 km/h",
+  "athena.specs.engine.topSpeed": "75 km/h",
   "athena.specs.engine.acceleration": "6.5 seconds",
   "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
   "athena.specs.battery.batteryCapacity":
     "2.5 kWh (Regular Battery) / 3.4 kWh (Extended Battery)",
   "athena.specs.battery.voltage": "76.8 Volt",
   "athena.specs.battery.chargingTimeSuperCharge": "15 minutes",
-  "athena.specs.battery.chargingTimeHome":
-    "5 hours (Regular Battery) / 7 hours (Extended Battery)",
+  "athena.specs.battery.chargingTimeHome": "4 - 6 hours",
   "athena.specs.battery.range":
     "110 km (Regular Battery) / 120 km (Extended Battery)",
   "athena.specs.brake.frontBrake": "Disc Brake",
@@ -1070,14 +1071,14 @@ export const en = {
   "bees.productPage.hero.ctaPrimary": "Order Now",
   "bees.productPage.hero.ctaSecondary": "Download Brochure",
 
-  "bees.productPage.techSpecs1.title": 80,
+  "bees.productPage.techSpecs1.title": 90,
   "bees.productPage.techSpecs1.unit": "km",
   "bees.productPage.techSpecs1.desc": "Cruising Range",
 
   "bees.productPage.techSpecs2.title": "LED",
   "bees.productPage.techSpecs2.desc": "Head unit Display",
 
-  "bees.productPage.techSpecs3.title": 60,
+  "bees.productPage.techSpecs3.title": 55,
   "bees.productPage.techSpecs3.unit": "km/h",
   "bees.productPage.techSpecs3.desc": "Top Speed",
 
@@ -1105,20 +1106,20 @@ export const en = {
     "Red Bees charging at a home outlet",
   "bees.productPage.chargingOverview.title": "A Household Socket Is Enough",
   "bees.productPage.chargingOverview.description":
-    "Bees charges from a standard outlet and reaches full capacity in approximately 4 hours. The charger is included, with nothing further to purchase.",
+    "Bees charges from a standard outlet and reaches full capacity in 4 to 6 hours. The charger is included, with nothing further to purchase.",
 
   // ===
 
   "bees.specs.engine.motorType": "Brushless DC Motor",
   "bees.specs.engine.motorPower": "1.2 kW",
-  "bees.specs.engine.topSpeed": "60 km/h",
+  "bees.specs.engine.topSpeed": "55 km/h",
   "bees.specs.engine.acceleration": "19.3 seconds",
   "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
   "bees.specs.battery.batteryCapacity": "1.6 kWh",
   "bees.specs.battery.voltage": "64 Volt",
   "bees.specs.battery.chargingTimeSuperCharge": "-",
-  "bees.specs.battery.chargingTimeHome": "4.1 hours",
-  "bees.specs.battery.range": "80 km",
+  "bees.specs.battery.chargingTimeHome": "4 - 6 hours",
+  "bees.specs.battery.range": "90 km",
   "bees.specs.brake.frontBrake": "Disc Brake",
   "bees.specs.brake.rearBrake": "Disc Brake",
   "bees.specs.brake.cbsSupport": "No",
@@ -1153,7 +1154,7 @@ export const en = {
   "supercharge.how.compare.home": "Charging at home",
   "supercharge.how.compare.homeValue": "~5 hrs",
   "supercharge.how.compare.note":
-    "Home charging: Athena and Victory with the Regular battery. SuperCharge works with Athena, Victory and EdPower.",
+    "Home charging 0% to 100%: Bees, Athena, and Victory 4 - 6 hours, EdPower 8 - 10 hours. SuperCharge works with Athena, Victory and EdPower.",
   "supercharge.how.step1.title": "Plug in",
   "supercharge.how.step1.desc":
     "Park at a SuperCharge station and connect the charger to your motorcycle.",
@@ -1238,7 +1239,7 @@ export const en = {
 
   "supercharge.feature2.subtitle": "Check the nearest point before setting off",
   "supercharge.feature2.description":
-    "SuperCharge points are located in Wedison showrooms and partner sites, with new locations opening regularly. All of them are listed on the map.",
+    "SuperCharge points are located at the Jakarta, Bandung Barat, and Bekasi showrooms and at partner sites, with new locations opening regularly. All of them are listed on the map.",
 
   "supercharge.feature3.title": "Built to Last for Years",
   "supercharge.feature3.subtitle": "Safety first, speed second",
@@ -1378,7 +1379,7 @@ export const en = {
   // Battery Questions
   "faq.Battery.questions.0.question": "How long is the battery warranty?",
   "faq.Battery.questions.0.answer":
-    "Wedison batteries carry a 3-year warranty.",
+    "Wedison batteries carry a 3-year or 100,000 km warranty, whichever comes first, counted from the handover date.",
   "faq.Battery.questions.1.question": "How long does a full charge take?",
   "faq.Battery.questions.1.answer":
     "SuperCharge: 10% to 80% in 15 minutes, or 10% to 95% in 20 minutes.\nHome charging: roughly 2 to 10 hours, depending on the adapter and battery size.",
@@ -1388,7 +1389,7 @@ export const en = {
   "faq.Battery.questions.3.question":
     "How many battery options does Wedison sell?",
   "faq.Battery.questions.3.answer":
-    "Selected models come with 2 battery options, Regular and Extended.\nRange differs by model, from 80 km up to 200 km on a single charge.",
+    "Selected models come with 2 battery options, Regular and Extended.\nRange differs by model, from 90 km up to 200 km on a single charge.",
   "faq.Battery.questions.4.question": "Who makes the battery?",
   "faq.Battery.questions.4.answer": "Wedison develops its batteries in-house.",
   "faq.Battery.questions.5.question": "How long will the battery last?",
@@ -1466,13 +1467,13 @@ export const en = {
   "faq.Performance.questions.0.question":
     "What is the speed of the motorcycle?",
   "faq.Performance.questions.0.answer":
-    "Depending on the model, top speed ranges from 55 km/h to 90 km/h.",
+    "Depending on the model, top speed ranges from 55 km/h to 85 km/h.",
   "faq.Performance.questions.1.question": "What is the motor power?",
   "faq.Performance.questions.1.answer":
     "Motor power varies by model, from 1.2 kW up to 6 kW.",
   "faq.Performance.questions.2.question": "What is the range?",
   "faq.Performance.questions.2.answer":
-    "Depending on the model and battery selected, range extends from 80 km to 200 km.",
+    "Depending on the model and battery selected, range extends from 90 km to 200 km.",
   "faq.Performance.questions.3.question":
     "Is it safe to ride in rain or through standing water?",
   "faq.Performance.questions.3.answer":
@@ -1482,7 +1483,7 @@ export const en = {
     "Climbing ability varies by model:\nBees and EdPower: up to 12%\nAthena and Victory: up to 15%",
   "faq.Performance.questions.5.question": "Does the battery degrade over time?",
   "faq.Performance.questions.5.answer":
-    "Yes, as with any lithium-ion device. Capacity declines slightly with each charge and discharge cycle.\nThe rate depends on cycle count, battery age, and operating temperature.\n\nFor that reason, every Wedison battery carries a 3-year warranty.",
+    "Yes, as with any lithium-ion device. Capacity declines slightly with each charge and discharge cycle.\nThe rate depends on cycle count, battery age, and operating temperature.\n\nFor that reason, every Wedison battery carries a 3-year or 100,000 km warranty.",
 
   // Safety Questions
   "faq.Safety.questions.0.question": "Is the battery safe?",
@@ -1493,15 +1494,16 @@ export const en = {
     "CBS (Combined Braking System), which distributes braking force between the front and rear wheels automatically when the brake lever is applied:\nAthena, Victory, and EdPower\n\nFront and rear disc brakes:\nBees",
   "faq.Safety.questions.2.question": "What type of motor is used?",
   "faq.Safety.questions.2.answer":
-    "Every Wedison model uses a brushless DC motor (BLDC), recognized for its efficiency, torque, and long service life.\n\nOne type is fitted:\nDC Brushless Rear Hub Motor, with speeds up to 90 km/h (Bees, Athena, Victory, EdPower).",
+    "Every Wedison model uses a brushless DC motor (BLDC), recognized for its efficiency, torque, and long service life.\n\nOne type is fitted:\nDC Brushless Rear Hub Motor, with speeds up to 85 km/h (Bees, Athena, Victory, EdPower).",
 
   // Servicing Questions
   "faq.Servicing.questions.0.question": "Is complimentary servicing included?",
   "faq.Servicing.questions.0.answer":
-    "Yes. Every Wedison motorcycle includes 3 complimentary service visits at a Wedison workshop or an authorized partner workshop.\nThese are scheduled by distance: 1,000 km, 5,000 km, and 10,000 km.",
+    "Yes. Every unit purchased includes 1 complimentary regular service at an official Wedison workshop. The schedule is confirmed by the showroom team at handover.",
   "faq.Servicing.questions.1.question":
-    "At what mileage are the complimentary services scheduled?",
-  "faq.Servicing.questions.1.answer": "At 1,000 km, 5,000 km, and 10,000 km.",
+    "When is the complimentary service scheduled?",
+  "faq.Servicing.questions.1.answer":
+    "The regular service schedule is confirmed by the showroom team at handover. Contact your nearest showroom to confirm.",
   "faq.Servicing.questions.2.question": "Where can the motorcycle be serviced?",
   "faq.Servicing.questions.2.answer":
     "At a Wedison workshop or the nearest authorized Wedison partner workshop.",
@@ -1510,10 +1512,10 @@ export const en = {
     "Yes. Wedison stocks genuine parts for all of its models.",
   "faq.Servicing.questions.4.question": "Is the battery under warranty?",
   "faq.Servicing.questions.4.answer":
-    "Yes, the battery carries a 3-year warranty.",
+    "Yes, the battery carries a 3-year or 100,000 km warranty, whichever comes first.",
   "faq.Servicing.questions.5.question": "Is the motorcycle under warranty?",
   "faq.Servicing.questions.5.answer":
-    "Yes, the motorcycle carries a 2-year warranty.",
+    "Yes. The motor and frame are covered for 3 years or 100,000 km. The handlebar, side stand, and centre stand are covered for 2 years or 20,000 km. Electrical components such as the controller, ECU, lights, speedometer, and main cable are covered for 1 year or 10,000 km. Each ends at whichever limit is reached first.",
   "faq.Servicing.questions.6.question":
     "What does it cost to repair the motor, dynamo, or other components?",
   "faq.Servicing.questions.6.answer":
@@ -1563,76 +1565,85 @@ export const en = {
   "ojol.btn.detail": "See Details",
 
   "ojol.campaign.milik.title": "Rent-to-Own",
-  "ojol.campaign.milik.tagline": "Ride While You Pay, Then Own It",
+  "ojol.campaign.milik.tagline": "Pay Daily While You Ride, Then Own It",
   "ojol.campaign.milik.description":
-    "A 3.5-year (42-month) rental with an ownership option. Once the contract concludes, the motorcycle becomes yours.",
+    "Rent To Own for ride-hailing (ojol) drivers only. A 42-month contract (40 months for Bees), and once it concludes the motorcycle becomes yours. BPKB processing is covered by Wedison.",
   "ojol.campaign.milik.benefit.0":
     "1x Free regular charging adapter (worth Rp 1,000,000)",
   "ojol.campaign.milik.benefit.1":
     "1x Free front and rear tire replacement (worth Rp 385,000)",
   "ojol.campaign.milik.benefit.2":
     "1x Free brake pad replacement (1 set front and rear)",
-  "ojol.campaign.milik.benefit.3": "2x Mechanical lock",
-  "ojol.campaign.milik.benefit.4": "3-year battery warranty",
-  "ojol.campaign.milik.benefit.5": "2-year motorcycle warranty",
+  "ojol.campaign.milik.benefit.3": "Free routine servicing",
+  "ojol.campaign.milik.benefit.4": "1x Mechanical key",
+  "ojol.campaign.milik.benefit.5": "3-year or 100,000 km battery warranty",
+  "ojol.campaign.milik.benefit.6":
+    "3-year or 100,000 km motor and frame warranty",
   "ojol.campaign.milik.term.0":
-    "The rent-to-own scheme runs for 3 years 6 months (42 months)",
-  "ojol.campaign.milik.term.1":
-    "Riders are entitled to 1 day off per week (maximum 48 days per year)",
+    "Contract term of 42 months for Athena, Victory, and EdPower. 40 months for Bees",
+  "ojol.campaign.milik.term.1": "For ride-hailing (ojol) drivers only",
   "ojol.campaign.milik.term.2":
-    "After the 42-month contract ends, ownership of the motorcycle is transferred to the rider",
-  "ojol.campaign.milik.term.3":
-    "Savings are applied to insurance, servicing, spare parts, and BPKB (vehicle ownership document) costs. Any remaining balance is transferred to the rider at the end of the contract",
-  "ojol.campaign.milik.term.4":
-    "The down payment is non-refundable once the rider is declared eligible",
+    "After the contract ends, ownership of the motorcycle is transferred to the rider",
+  "ojol.campaign.milik.term.3": "BPKB processing is covered by Wedison",
+  "ojol.campaign.milik.term.4": "The down payment is non-refundable",
   "ojol.campaign.milik.term.5":
     "Traffic fines and violations are the rider's responsibility",
   "ojol.campaign.milik.term.6":
-    "Riders must complete the screening process from Wedison",
-  "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
-  "ojol.campaign.milik.scheme.0.value": "Rp 55,000/day",
-  "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
-  "ojol.campaign.milik.scheme.1.value": "Rp 60,000/day",
-  "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
-  "ojol.campaign.milik.scheme.2.value": "Rp 80,000/day",
-  "ojol.campaign.milik.scheme.3.label": "Deposit",
-  "ojol.campaign.milik.scheme.3.value": "Rp 600,000 - Rp 800,000",
+    "Damage caused by negligence or misuse is the rider's responsibility",
+  "ojol.campaign.milik.term.7":
+    "Riders must pass Wedison's screening process",
+  "ojol.campaign.milik.term.8":
+    "Motorcycle color is assigned at random based on stock availability",
+  "ojol.campaign.milik.scheme.0.label": "Bees",
+  "ojol.campaign.milik.scheme.0.value": "Rp 35,000/day",
+  "ojol.campaign.milik.scheme.1.label": "Athena/Victory Regular",
+  "ojol.campaign.milik.scheme.1.value": "Rp 58,000/day",
+  "ojol.campaign.milik.scheme.2.label": "Athena/Victory Extended",
+  "ojol.campaign.milik.scheme.2.value": "Rp 63,000/day",
+  "ojol.campaign.milik.scheme.3.label": "EdPower",
+  "ojol.campaign.milik.scheme.3.value": "Rp 83,000/day",
+  "ojol.campaign.milik.scheme.4.label": "Down Payment",
+  "ojol.campaign.milik.scheme.4.value": "Rp 100,000 - Rp 800,000",
 
   "ojol.campaign.harian.title": "Daily Rental",
   "ojol.campaign.harian.tagline": "Pay Daily, Without Installments",
   "ojol.campaign.harian.description":
-    "Daily rental on a 3-year contract. Suited to riders who want to begin earning without committing to installments.",
-  "ojol.campaign.harian.benefit.0": "1x Free regular charging adapter",
+    "Rental on a 36-month contract. The motorcycle is returned to Wedison at the end of the contract. Suited to riders who want to begin earning without thinking about ownership.",
+  "ojol.campaign.harian.benefit.0":
+    "1x Free regular charging adapter (worth Rp 1,000,000)",
   "ojol.campaign.harian.benefit.1":
     "1x Free front and rear tire replacement (worth Rp 385,000)",
   "ojol.campaign.harian.benefit.2":
     "1x Free brake pad replacement (1 set front and rear)",
-  "ojol.campaign.harian.benefit.3": "1x Free routine service",
-  "ojol.campaign.harian.benefit.4": "2x Mechanical lock",
-  "ojol.campaign.harian.benefit.5": "3-year battery warranty",
-  "ojol.campaign.harian.benefit.6": "2-year motorcycle warranty",
-  "ojol.campaign.harian.term.0":
-    "The daily rental scheme runs for 3 years (36 months)",
+  "ojol.campaign.harian.benefit.3": "Free routine servicing",
+  "ojol.campaign.harian.benefit.4": "1x Mechanical key",
+  "ojol.campaign.harian.benefit.5": "3-year or 100,000 km battery warranty",
+  "ojol.campaign.harian.benefit.6":
+    "3-year or 100,000 km motor and frame warranty",
+  "ojol.campaign.harian.term.0": "Contract term of 36 months (3 years)",
   "ojol.campaign.harian.term.1":
-    "Riders are entitled to 1 day off per week (maximum 48 days per year)",
+    "The unit remains the property of PT Wedison Nusantara Energi. The STNK is registered to PT Wedison Nusantara Energi",
   "ojol.campaign.harian.term.2":
-    "The down payment is non-refundable once the rider is declared eligible",
+    "The motorcycle is returned to Wedison at the end of the contract",
   "ojol.campaign.harian.term.3":
-    "The motorcycle remains fully owned by PT. Wedison Nusantara Energi",
-  "ojol.campaign.harian.term.4":
-    "Traffic fines and violations are the rider's responsibility",
+    "Riders get 2 payment-free days per month, up to 24 days per year",
+  "ojol.campaign.harian.term.4": "The down payment is non-refundable",
   "ojol.campaign.harian.term.5":
-    "Damage caused by negligence or accidents is the rider's responsibility",
+    "Traffic fines and violations are the rider's responsibility",
   "ojol.campaign.harian.term.6":
-    "Riders must complete the screening process from Wedison",
-  "ojol.campaign.harian.term.7": "Motorcycle color is assigned at random",
+    "Damage caused by negligence or misuse is the rider's responsibility",
+  "ojol.campaign.harian.term.7":
+    "Riders must pass Wedison's screening process",
+  "ojol.campaign.harian.term.8":
+    "Motorcycle color is assigned at random based on stock availability",
+  "ojol.campaign.harian.term.9": "Bees is not available for the Rental scheme",
   "ojol.campaign.harian.scheme.0.label": "Athena/Victory Regular",
   "ojol.campaign.harian.scheme.0.value": "Rp 50,000/day",
   "ojol.campaign.harian.scheme.1.label": "Athena/Victory Extended",
   "ojol.campaign.harian.scheme.1.value": "Rp 55,000/day",
-  "ojol.campaign.harian.scheme.2.label": "EdPower Extended",
+  "ojol.campaign.harian.scheme.2.label": "EdPower",
   "ojol.campaign.harian.scheme.2.value": "Rp 75,000/day",
-  "ojol.campaign.harian.scheme.3.label": "Deposit",
+  "ojol.campaign.harian.scheme.3.label": "Down Payment",
   "ojol.campaign.harian.scheme.3.value": "Rp 500,000 - Rp 750,000",
 
   "ojol.dialog.programBadge": "PROGRAM",
@@ -1675,11 +1686,11 @@ export const en = {
   "ojol.cta.headline.1": "Ready to Earn More",
   "ojol.cta.headline.2": "with Wedison?",
   "ojol.cta.description":
-    "Daily rental from 50K, complimentary SuperCharge, and manageable installment options. Register now and our team will guide you through the process.",
+    "Daily rental from 50K, Rent To Own from 35K per day, and a free charging adapter. Register now and our team will guide you through the process.",
   "ojol.cta.benefit.1": "Daily Rental from 50K",
-  "ojol.cta.benefit.2": "Free SuperCharge",
-  "ojol.cta.benefit.3": "Easy Installments",
-  "ojol.cta.benefit.4": "Priority Service",
+  "ojol.cta.benefit.2": "Rent To Own from 35K/Day",
+  "ojol.cta.benefit.3": "Free Charging Adapter",
+  "ojol.cta.benefit.4": "Free Routine Servicing",
   "ojol.cta.button": "Contact Wedison Sales",
   "ojol.cta.trust": "Prompt response, no consultation fee",
 
@@ -1708,7 +1719,7 @@ export const en = {
   "booking.placeholder.time": "Pick a time",
   "booking.time.pickDateFirst": "Choose a showroom & date first",
   "booking.time.none": "No slots left",
-  "booking.hoursHint": "Opening hours: Mon–Fri 10:00–19:00, Sat–Sun 10:00–17:00.",
+  "booking.hoursHint": "Opening hours: Mon–Fri 10:00–19:00, Sat–Sun 10:00–17:00, public holidays 10:00–16:00.",
   "booking.field.note": "Note",
   "booking.placeholder.note": "e.g. I'd like to try the Athena, coming with a friend",
   "booking.submit": "Submit & Continue to WhatsApp",

@@ -27,9 +27,9 @@ const campaignMeta = [
     image: "/ojol/sewa-milik-banner.webp",
     waLink:
       whatsappUrl("Halo Wedison, saya tertarik dengan program Sewa Milik"),
-    benefitsCount: 6,
-    termsCount: 7,
-    schemeCount: 4,
+    benefitsCount: 7,
+    termsCount: 9,
+    schemeCount: 5,
   },
   {
     id: "harian",
@@ -37,7 +37,7 @@ const campaignMeta = [
     waLink:
       whatsappUrl("Halo Wedison, saya tertarik dengan program Sewa Harian"),
     benefitsCount: 7,
-    termsCount: 8,
+    termsCount: 10,
     schemeCount: 4,
   },
 ];
@@ -163,8 +163,8 @@ export default function OjolClient() {
       image: "/bees/bees-grey.webp",
       link: "/products/bees/",
       specs: [
-        { labelKey: "ojol.models.spec.range", value: "80 km" },
-        { labelKey: "ojol.models.spec.maxSpeed", value: "60 km/h" },
+        { labelKey: "ojol.models.spec.range", value: "90 km" },
+        { labelKey: "ojol.models.spec.maxSpeed", value: "55 km/h" },
         { labelKey: "ojol.models.spec.battery", value: "1600Wh" },
       ],
     },

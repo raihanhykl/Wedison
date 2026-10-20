@@ -75,7 +75,11 @@ export function ShowroomCard({ location, selected, onSelect }: Props) {
             {name}
           </h4>
           <p className="mt-1 text-sm text-muted-foreground">
-            {t("showroomPage.card.facilities")}
+            {t(
+              location.supercharge
+                ? "showroomPage.card.facilities"
+                : "showroomPage.card.facilitiesNoCharge",
+            )}
           </p>
         </div>
       </button>
@@ -87,6 +91,8 @@ export function ShowroomCard({ location, selected, onSelect }: Props) {
           <dd className="tabular-nums">{range(branch.hours.weekday)} {branch.tzLabel}</dd>
           <dt>{t("showroomPage.card.weekend")}</dt>
           <dd className="tabular-nums">{range(branch.hours.weekend)} {branch.tzLabel}</dd>
+          <dt>{t("showroomPage.card.holiday")}</dt>
+          <dd className="tabular-nums">{range(branch.hours.holiday)} {branch.tzLabel}</dd>
         </dl>
 
         <div className="mt-auto grid grid-cols-2 gap-2 pt-5">
