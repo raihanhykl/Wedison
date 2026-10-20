@@ -81,7 +81,7 @@ export const whatsappUrl = (text?: string) =>
 
 /** Kantor pusat = showroom Jakarta (Pondok Indah). */
 export const HQ_ADDRESS = {
-  streetAddress: "Jl. Arteri Pondok Indah No. 30 A-C, Kebayoran Lama Selatan",
+  streetAddress: "Jl. Sultan Iskandar Muda No. 30 A-C, Kebayoran Lama",
   addressLocality: "Jakarta Selatan",
   addressRegion: "DKI Jakarta",
   postalCode: "12240",

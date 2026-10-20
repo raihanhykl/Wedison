@@ -8,6 +8,8 @@ import { getSpecificationValue } from "@/service/specifications";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { whatsappUrl } from "@/lib/seo/site";
+import { pick, rupiahShort, type StartingPrice } from "@/lib/pricing/select";
+import type { ProductId } from "@/lib/pricing/types";
 
 // Urutan sama dengan navbar (nav-config.ts) agar konsisten di seluruh situs.
 const PRODUCTS = [
@@ -30,8 +32,9 @@ function compactRange(value: string): string {
   return `${nums[0]}–${nums[nums.length - 1]} km`;
 }
 
-export default function ProductsStructure() {
+export default function ProductsStructure({ prices }: { prices?: Record<ProductId, StartingPrice | null> }) {
   const { t, language } = useLanguage();
+  const lang = language === "en" ? "en" : "id";
 
   return (
     <div>
@@ -104,6 +107,17 @@ export default function ProductsStructure() {
                     <p className="mt-1 text-muted-foreground">
                       {t(`nav.model.${p.id}.tagline`)}
                     </p>
+                    {prices?.[p.id] && (
+                      <p className="mt-3 text-sm text-muted-foreground">
+                        {t("products.from")}{" "}
+                        <span className="font-mono text-lg font-semibold tabular-nums text-foreground">
+                          {rupiahShort(prices[p.id]!.net, lang)}
+                        </span>{" "}
+                        <span className="text-xs">
+                          {`OTR ${pick(prices[p.id]!.region.name, lang)}`}
+                        </span>
+                      </p>
+                    )}
 
                     <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-5">
                       {specs.map((s) => (

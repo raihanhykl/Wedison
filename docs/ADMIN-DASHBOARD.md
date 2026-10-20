@@ -48,6 +48,7 @@ Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `np
 | `GET /public/press`, `GET /public/press/:slug` | `/admin/press` + `POST /admin/press/fetch-metadata`, `POST /admin/press/:id/refresh`, `POST /admin/press/reorder` |
 | `GET /public/social?platform=` | `/admin/social` + `fetch-metadata`, `:id/refresh`, `reorder` |
 | `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD), `GET /admin/stations/meta` (provinsi/kota/jumlah per status), `POST /admin/stations/bulk` (`status` / `activate` / `deactivate` / `delete`) |
+| `GET /public/pricing` (snapshot harga: wilayah, skema publik, baris harga, S&K, tarif SuperCharge, referral) | `GET /admin/pricing` (semua), `POST/PATCH/DELETE /admin/pricing/regions[/:id]`, `.../schemes[/:id]`, `PUT /admin/pricing/entries` (upsert massal per wilayah × skema), `DELETE /admin/pricing/entries/:id`, `PUT /admin/pricing/terms`, `GET/PUT /admin/pricing/settings` |
 | `GET /public/categories` | `GET /admin/media`, `POST /admin/media/upload` (multipart `files[]`, `folder`), `PATCH/DELETE /admin/media/:id` |
 | | `/auth/login|logout|me|change-password|profile`, `/admin/users` + `/admin/roles` (izin `users.manage`), `/admin/activity`, `/admin/dashboard/stats` |
 
@@ -176,6 +177,26 @@ Sejak migrasi `custom_roles` (2026-10-09) kolom enum `User.role` diganti relasi 
 
 **Tabel** — `@tiptap/extension-table` (TableKit, kolom bisa di-resize) + dropdown **Table** di toolbar (`src/components/tiptap-ui/table-dropdown-menu/`): sisip 3×3, tambah/hapus baris & kolom, header row, merge/split, hapus tabel. Dibutuhkan agar tabel dari Word tidak hilang saat diimpor.
 
+## Modul Pricing (Prices & Schemes)
+
+Satu sumber kebenaran harga publik, dikelola di **/admin/pricing** (izin `pricing.view|write|delete`; role `admin` dapat semuanya, `editor`/`marketing` view+write). Tidak ada angka harga yang hardcode di frontend.
+
+**Model data** (`server/prisma/schema.prisma`):
+- `PriceRegion` — wilayah (Jabodetabek, Bali, Bandung Raya, …): nama ID/EN, label harga ("Harga OTR Jabodetabek"), cakupan kota, WA sales, `isDefault` (dipakai untuk "mulai dari" di landing), `isActive`, urutan. Wilayah **tanpa baris harga** tampil sebagai panel "Hubungi Sales {wilayah}".
+- `PricingScheme` — skema dengan `kind`: `PURCHASE` (OTR, diskon, net), `RENT_TO_OWN` / `RENTAL` (biaya harian, DP, masa kontrak), `B2B_CREDIT` (angsuran 24/36 bln), `BAAS` (harga unit + langganan baterai). `audience` (ALL/OJOL/B2B) jadi label kecil; `isPublic=false` = tersimpan tapi tidak tampil (default untuk B2B Bali).
+- `PriceEntry` — baris harga unik per wilayah × skema × model (`BEES|ATHENA|VICTORY|EDPOWER`) × varian (`SINGLE|REGULAR|EXTENDED`). Beli putus divalidasi `net = OTR − diskon`.
+- `PricingTerms` — per wilayah × skema: "Setiap unit termasuk", S&K, mitra pembiayaan, masa berlaku, catatan (ID/EN).
+- `Setting` key `pricing_settings` — disclaimer, tarif SuperCharge per model + satuan + catatan, program referral (nominal, wilayah, deskripsi).
+
+**Konsumen di situs** (semua lewat `getPricing()` di `src/lib/cms/api.ts`, ISR 300 dtk + tag `pricing`, fallback `src/data/pricing-fallback.ts`):
+- Halaman produk: section **Harga & Skema** (`src/app/_product/pricing-section.tsx`) + JSON-LD `AggregateOffer` (`src/lib/seo/product-page.ts`).
+- Landing dan `/products`: harga "Mulai Rp … (OTR wilayah default)".
+- `/baas`: model & paket dari skema `baas` (`baasModelsFrom()` di `src/app/[locale]/baas/data.ts`).
+- `/ojol`: isi dialog Sewa Milik/Sewa Harian dari skema `rent-to-own`/`rental` (`src/app/[locale]/ojol/programs.ts`).
+- `/super-charge`: baris tarif SuperCharge. `llms.txt`: bagian "Pricing" lengkap untuk AI crawler.
+
+Setiap simpan di admin mem-bust cache API (tag `pricing`) dan memanggil webhook `/api/revalidate` Next, jadi perubahan tampil dalam hitungan detik. Seed awal: `server/prisma/seed-data/pricing.json` (sumber: knowledge source Dion v4, 25 Sep 2026; BaaS dari kampanye Sep 2026), dijalankan `npm run db:seed` (idempoten, tidak menimpa perubahan admin). Jika snapshot statis perlu diperbarui, salin respons `GET /public/pricing` ke `src/data/pricing-fallback.ts`. Tes: `server/test/pricing.api.test.ts`.
+
 ## Roadmap modul
 
 - [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.
@@ -184,5 +205,6 @@ Sejak migrasi `custom_roles` (2026-10-09) kolom enum `User.role` diganti relasi 
 - [x] UI admin berbahasa Inggris; "Kategori" ditampilkan sebagai **Topics** (model DB tetap `Category`, API tersedia di `/admin/topics` dan `/admin/categories`).
 - [x] Sistem: login, pengguna + **role kustom berbasis izin** (anti-lockout, tes vitest/supertest), log aktivitas, akun saya, dashboard statistik.
 - [x] Editor artikel: impor Word/PDF ke body, toolbar sticky + bubble menu seleksi, tabel.
-- [ ] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta (API CRUD sudah siap; UI baru daftar/pencarian).
+- [x] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta + aksi massal.
+- [x] Pricing: wilayah × skema × model × varian, S&K, tarif SuperCharge, referral; section harga di produk, landing, BaaS, ojol; JSON-LD Offer; llms.txt.
 - [ ] Modul berikutnya (menyusul).

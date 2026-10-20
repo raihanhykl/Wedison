@@ -26,6 +26,8 @@ import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
 import { ArtDirectedImage } from "@/components/art-directed-image";
+import { pick, rupiahShort, type StartingPrice } from "@/lib/pricing/select";
+import type { ProductId } from "@/lib/pricing/types";
 import { whatsappUrl } from "@/lib/seo/site";
 
 type Lang = "id" | "en";
@@ -155,6 +157,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_mq: "Nol emisi|Tanpa bensin|Perawatan minimal",
 
     familyLabel: "Jajaran Model",
+    from: "Mulai",
     familyTitle: "Empat model. Satu standar kualitas.",
     familySub:
       "Karakter dan peruntukannya berbeda, tetapi semuanya dirancang dan dirakit dengan standar yang sama.",
@@ -223,6 +226,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_mq: "Zero emission|No petrol|Minimal maintenance",
 
     familyLabel: "The Lineup",
+    from: "From",
     familyTitle: "Four motorcycles, one standard.",
     familySub:
       "Distinct characters for different needs, all built to the same standard.",
@@ -264,9 +268,10 @@ const COPY: Record<Lang, Record<string, string>> = {
   },
 };
 
-export default function Landing() {
+export default function Landing({ prices }: { prices?: Record<ProductId, StartingPrice | null> }) {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
+  const lang = language === "en" ? "en" : "id";
   // Semua link internal WAJIB berprefix locale + trailing slash: tanpa itu tiap klik/crawl
   // lewat dua redirect (307 locale dari middleware + 308 trailing slash).
   const href = (path: string) =>
@@ -457,6 +462,17 @@ export default function Landing() {
                 <h3 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   {NAMES[m.id]}
                 </h3>
+                {prices?.[m.id] && (
+                  <p className="mt-1.5 text-sm text-white/90">
+                    {c.from}{" "}
+                    <span className="font-mono text-base font-semibold tabular-nums text-white">
+                      {rupiahShort(prices[m.id]!.net, lang)}
+                    </span>{" "}
+                    <span className="text-xs text-white/70">
+                      {`OTR ${pick(prices[m.id]!.region.name, lang)}`}
+                    </span>
+                  </p>
+                )}
                 <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
                   {c.learn}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

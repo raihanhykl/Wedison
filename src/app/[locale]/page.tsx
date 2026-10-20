@@ -1,6 +1,8 @@
 import React from "react";
 import Landing from "@/app/_home/landing";
 import { getSEOMetadata } from "@/app/lib/seo1";
+import { getPricing } from "@/lib/cms/api";
+import { startingPrices } from "@/lib/pricing/select";
 
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Wedison – Ride The Future With Wedison",
@@ -22,7 +24,9 @@ export async function generateMetadata({
   return getSEOMetadata({ locale: locale as "id" | "en", path: "/" });
 }
 
-export default function Page() {
+export default async function Page() {
+  // Harga "mulai dari" per model dari modul Pricing (ISR, fallback snapshot statis).
+  const prices = startingPrices(await getPricing());
   return (
     <>
       <div className="">
@@ -41,7 +45,7 @@ export default function Page() {
         <div id="contact">
           <ContactForm />
         </div> */}
-        <Landing />
+        <Landing prices={prices} />
       </div>
     </>
   );

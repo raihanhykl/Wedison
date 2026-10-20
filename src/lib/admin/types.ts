@@ -327,6 +327,52 @@ export const STATION_AMENITIES: { key: string; label: string }[] = [
   { key: "wifi", label: "Wi-Fi" },
 ];
 
+// ─── Pricing ───────────────────────────────────────────────────────────────
+export type PricingModel = "BEES" | "ATHENA" | "VICTORY" | "EDPOWER";
+export type PricingVariant = "SINGLE" | "REGULAR" | "EXTENDED";
+export type PricingKind = "PURCHASE" | "RENT_TO_OWN" | "RENTAL" | "B2B_CREDIT" | "BAAS";
+export type PricingAudience = "ALL" | "OJOL" | "B2B";
+
+export type PriceRegion = {
+  id: string; slug: string; nameId: string; nameEn: string; priceLabelId: string; priceLabelEn: string;
+  coverageId: string | null; coverageEn: string | null; salesWhatsapp: string | null;
+  isDefault: boolean; isActive: boolean; sortOrder: number; createdAt: string; updatedAt: string;
+};
+export type PricingScheme = {
+  id: string; slug: string; kind: PricingKind; nameId: string; nameEn: string;
+  taglineId: string | null; taglineEn: string | null; descriptionId: string | null; descriptionEn: string | null;
+  audience: PricingAudience; isPublic: boolean; isActive: boolean; sortOrder: number; createdAt: string; updatedAt: string;
+};
+export type PriceEntry = {
+  id: string; regionId: string; schemeId: string; model: PricingModel; variant: PricingVariant;
+  otrPrice: number | null; discount: number | null; netPrice: number | null; dailyFee: number | null; downPayment: number | null;
+  termMonths: number | null; installment24: number | null; installment36: number | null; unitPrice: number | null; monthlyFee: number | null;
+  noteId: string | null; noteEn: string | null; isActive: boolean; updatedAt: string;
+};
+export type PricingTerms = {
+  id: string; regionId: string; schemeId: string; includedId: string[]; includedEn: string[]; termsId: string[]; termsEn: string[];
+  partners: string[]; validFrom: string | null; validUntil: string | null; noteId: string | null; noteEn: string | null; updatedAt: string;
+};
+export type PricingSettings = {
+  disclaimerId: string; disclaimerEn: string;
+  supercharge: { enabled: boolean; unitId: string; unitEn: string; tariff: Record<"bees" | "athena" | "victory" | "edpower", number | null>; noteId: string | null; noteEn: string | null };
+  referral: { enabled: boolean; amount: number; regionSlugs: string[]; titleId: string; titleEn: string; descriptionId: string; descriptionEn: string };
+};
+export type PricingData = { regions: PriceRegion[]; schemes: PricingScheme[]; entries: PriceEntry[]; terms: PricingTerms[]; settings: PricingSettings };
+
+export const PRICING_MODEL_LABEL: Record<PricingModel, string> = { BEES: "Bees", ATHENA: "Athena", VICTORY: "Victory", EDPOWER: "EdPower" };
+export const PRICING_VARIANT_LABEL: Record<PricingVariant, string> = { SINGLE: "Single variant", REGULAR: "Regular battery", EXTENDED: "Extended battery" };
+export const PRICING_KIND_LABEL: Record<PricingKind, string> = { PURCHASE: "Outright purchase", RENT_TO_OWN: "Rent To Own", RENTAL: "Rental", B2B_CREDIT: "B2B credit (installments)", BAAS: "Battery as a Service" };
+export const PRICING_AUDIENCE_LABEL: Record<PricingAudience, string> = { ALL: "Everyone", OJOL: "Ojol drivers", B2B: "Business (B2B)" };
+/** Kolom angka yang relevan per jenis skema (urutan = urutan kolom di tabel admin). */
+export const PRICING_KIND_FIELDS: Record<PricingKind, { key: keyof PriceEntry; label: string; hint?: string }[]> = {
+  PURCHASE: [{ key: "otrPrice", label: "OTR price" }, { key: "discount", label: "Discount" }, { key: "netPrice", label: "Net price", hint: "= OTR − discount" }],
+  RENT_TO_OWN: [{ key: "dailyFee", label: "Daily fee" }, { key: "downPayment", label: "Down payment" }, { key: "termMonths", label: "Term (months)" }],
+  RENTAL: [{ key: "dailyFee", label: "Daily fee" }, { key: "downPayment", label: "Down payment" }, { key: "termMonths", label: "Term (months)" }],
+  B2B_CREDIT: [{ key: "otrPrice", label: "OTR price" }, { key: "installment24", label: "Installment / month (24)" }, { key: "installment36", label: "Installment / month (36)" }],
+  BAAS: [{ key: "unitPrice", label: "Unit price (no battery)" }, { key: "monthlyFee", label: "Battery subscription / month" }],
+};
+
 export type StationsMeta = {
   provinces: string[];
   cities: { city: string; province: string }[];

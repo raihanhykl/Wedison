@@ -1,7 +1,7 @@
 // Builder JSON-LD (schema.org) untuk SEO/AEO/GEO. Semua fungsi murni (tanpa React) agar
 // bisa dipakai di Server Component (page.tsx / layout.tsx) lewat <JsonLd data={...} />.
 // Prinsip: hanya klaim yang tampil di halaman (Google: structured data harus mewakili
-// konten yang terlihat), tanpa harga (harga tidak ditampilkan di situs -> tanpa Offer).
+// konten yang terlihat). Harga (Offer) hanya bila data modul Pricing tersedia dan tampil di halaman.
 
 import type { Locale } from "@/app/lib/locale";
 import {
@@ -105,6 +105,8 @@ export type ProductSchemaInput = {
   /** Nilai spesifikasi apa adanya dari kamus (mis. "120 km") */
   specs: { label: string; value: string }[];
   topSpeedKmh?: number;
+  /** Rentang harga net OTR (Rp) dari modul Pricing; tampil di section harga halaman produk. */
+  offers?: { low: number; high: number; count: number; validUntil?: string | null; areas: string[] };
 };
 
 export function productSchema(p: ProductSchemaInput): JsonLdObject {
@@ -125,6 +127,23 @@ export function productSchema(p: ProductSchemaInput): JsonLdObject {
     fuelType: "Electric",
     vehicleEngine: { "@type": "EngineSpecification", engineType: "Brushless DC electric motor" },
     ...speed,
+    ...(p.offers
+      ? {
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "IDR",
+            lowPrice: p.offers.low,
+            highPrice: p.offers.high,
+            offerCount: p.offers.count,
+            availability: "https://schema.org/InStock",
+            itemCondition: "https://schema.org/NewCondition",
+            url: `${localeUrl(p.locale, p.path)}#harga`,
+            ...(p.offers.validUntil ? { priceValidUntil: p.offers.validUntil.slice(0, 10) } : {}),
+            areaServed: p.offers.areas.map((name) => ({ "@type": "AdministrativeArea", name })),
+            seller: { "@id": ORG_ID },
+          },
+        }
+      : {}),
     additionalProperty: p.specs
       .filter((s) => s.value && s.value !== "-")
       .map((s) => ({ "@type": "PropertyValue", name: s.label, value: s.value })),

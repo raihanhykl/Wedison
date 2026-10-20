@@ -237,6 +237,7 @@ export const en = {
   "products.power": "Motor Power",
   "products.miles": "Kilometers",
   "products.mph": "km/h",
+  "products.from": "From",
 
   // Testimonials
   "testimonials.tag": "Testimonials",
@@ -1155,6 +1156,7 @@ export const en = {
   "supercharge.how.compare.homeValue": "~5 hrs",
   "supercharge.how.compare.note":
     "Home charging 0% to 100%: Bees, Athena, and Victory 4 - 6 hours, EdPower 8 - 10 hours. SuperCharge works with Athena, Victory and EdPower.",
+  "supercharge.how.tariff": "SuperCharge tariff: Athena and Victory {av}, EdPower {ed} {unit}.",
   "supercharge.how.step1.title": "Plug in",
   "supercharge.how.step1.desc":
     "Park at a SuperCharge station and connect the charger to your motorcycle.",
@@ -1695,6 +1697,54 @@ export const en = {
   "ojol.cta.trust": "Prompt response, no consultation fee",
 
   // Booking (Test Ride / Book a Visit modal)
+  // Pricing (price section on product pages; numbers from the admin Pricing module)
+  "pricing.kicker": "Prices & Schemes",
+  "pricing.title": "{model} Pricing",
+  "pricing.subtitle": "Choose your region and scheme. All prices are on-the-road, including STNK, BPKB, and number plate.",
+  "pricing.startingFrom": "From",
+  "pricing.region": "Region",
+  "pricing.scheme": "Scheme",
+  "pricing.otr": "OTR price",
+  "pricing.net": "Price after discount",
+  "pricing.save": "Save {amount}",
+  "pricing.perDay": "/day",
+  "pricing.perMonth": "/month",
+  "pricing.dailyFee": "Daily fee",
+  "pricing.downPayment": "Down payment",
+  "pricing.term": "Contract term",
+  "pricing.months": "{n} months",
+  "pricing.ownership.rent_to_own": "The motorcycle becomes yours once the contract ends.",
+  "pricing.ownership.rental": "The motorcycle is returned to Wedison at the end of the contract.",
+  "pricing.installment24": "24-month installment",
+  "pricing.installment36": "36-month installment",
+  "pricing.unitPrice": "Unit price, without battery",
+  "pricing.monthlyFee": "Battery subscription",
+  "pricing.included": "Every unit includes",
+  "pricing.partners": "Financing partners",
+  "pricing.terms": "Terms and conditions",
+  "pricing.validFrom": "Valid from {date}",
+  "pricing.validUntil": "until {date}",
+  "pricing.audience.ojol": "Ojol drivers only",
+  "pricing.audience.b2b": "For business (B2B)",
+  "pricing.contactSales.title": "{region} pricing is coming soon",
+  "pricing.contactSales.desc":
+    "The {region} sales team can help you with the latest offer and a test ride schedule on WhatsApp.",
+  "pricing.contactSales.cta": "Contact {region} Sales",
+  "pricing.notOffered": "{model} is not available under this scheme in {region} yet.",
+  "pricing.cta.testRide": "Book a Test Ride",
+  "pricing.cta.whatsapp": "Ask Sales on WhatsApp",
+  "pricing.whatsappMessage":
+    "Hello Wedison, I would like to ask about the {model} price ({scheme}) for {region}.",
+  "pricing.supercharge.label": "SuperCharge tariff",
+  "pricing.supercharge.notSupported": "Not SuperCharge compatible",
+  "pricing.summary.title": "{model} price summary across regions and schemes",
+  "pricing.summary.region": "Region",
+  "pricing.summary.scheme": "Scheme",
+  "pricing.summary.variant": "Variant",
+  "pricing.summary.price": "Price",
+  "pricing.summary.note": "Net on-the-road price after discount, or the daily fee for rental schemes.",
+  "pricing.otrRegion": "OTR {region}",
+
   "booking.title": "Book a Showroom Visit",
   "booking.title.testRide": "Book a Test Ride",
   "booking.subtitle":
