@@ -16,12 +16,17 @@ import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
 import { LocaleLink } from "@/components/locale-link";
 import { ArtDirectedImage } from "@/components/art-directed-image";
+import { PricingSection } from "./pricing-section";
+import type { PublicPricing } from "@/lib/pricing/types";
+import { isProductId } from "@/lib/pricing/select";
 
 type Props = {
   motorType: string;
+  /** Snapshot modul Pricing (server). Tanpa ini section harga tidak dirender. */
+  pricing?: PublicPricing;
 };
 
-export default function ProductPageComponent({ motorType }: Props) {
+export default function ProductPageComponent({ motorType, pricing }: Props) {
   const product = GetProductData(motorType);
   // Seed dengan nilai spesifikasi asli -> SSR/no-JS menampilkan angka benar (bukan 0).
   const [counts, setCounts] = useState<(number | string)[]>(() =>
@@ -170,6 +175,9 @@ export default function ProductPageComponent({ motorType }: Props) {
           ))}
         </Stagger>
       </section>
+
+      {/* ============ HARGA & SKEMA (modul Pricing) ============ */}
+      {pricing && isProductId(motorType) && <PricingSection model={motorType} pricing={pricing} />}
 
       {/* ============ PRODUCT OVERVIEW ============ */}
       <FeatureBlock

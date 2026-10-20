@@ -4,6 +4,9 @@ import * as m from "motion/react-m";
 import { useLanguage } from "@/app/lib/language-context";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { rupiah } from "@/lib/pricing/select";
+
+export type SuperChargeTariff = { athena: number | null; victory: number | null; edpower: number | null; unit: string } | null;
 
 // Angka perbandingan dari spesifikasi produk (kamus *.specs.battery.chargingTime*):
 // SuperCharge 10–80% = 15 menit; isi di rumah 0–100% Athena/Victory baterai Regular = 5 jam.
@@ -15,8 +18,15 @@ const HOME_MIN = 5 * 60;
  * Jam" yang dulu mengulang pesan yang sama tiga kali. Satu klaim (15 menit), dibuktikan
  * dengan perbandingan waktu + video + tiga langkah.
  */
-export default function HowItWorks() {
-  const { t } = useLanguage();
+export default function HowItWorks({ tariff = null }: { tariff?: SuperChargeTariff }) {
+  const { t, language } = useLanguage();
+  const lang = language === "en" ? "en" : "id";
+  const tariffLine = tariff && (tariff.athena != null || tariff.edpower != null)
+    ? t("supercharge.how.tariff")
+        .replace("{av}", tariff.athena != null ? rupiah(tariff.athena, lang) : "-")
+        .replace("{ed}", tariff.edpower != null ? rupiah(tariff.edpower, lang) : "-")
+        .replace("{unit}", tariff.unit)
+    : null;
 
   return (
     <section id="cara-kerja" className="scroll-mt-16 bg-background py-16 sm:py-24">
@@ -48,6 +58,11 @@ export default function HowItWorks() {
             <p className="mt-5 max-w-[52ch] text-xs leading-relaxed text-muted-foreground">
               {t("supercharge.how.compare.note")}
             </p>
+            {tariffLine && (
+              <p className="mt-3 max-w-[52ch] text-sm font-medium text-foreground">
+                {tariffLine}
+              </p>
+            )}
           </Reveal>
 
           <Reveal y={24} amount={0.3}>

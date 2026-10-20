@@ -6,6 +6,8 @@
  */
 import "server-only";
 import type { SiteCollection } from "@/app/[locale]/super-charge/locations/types";
+import type { PublicPricing } from "@/lib/pricing/types";
+import { PRICING_FALLBACK } from "@/data/pricing-fallback";
 
 const API = process.env.API_INTERNAL_URL ?? "http://127.0.0.1:4000";
 const REVALIDATE = Number(process.env.CMS_REVALIDATE_SECONDS ?? 300);
@@ -114,6 +116,16 @@ export async function getSocialPosts(limit = 12) {
 export async function getStations(): Promise<SiteCollection | null> {
   const res = await get<SiteCollection | null>(`/api/v1/public/stations`, ["stations"], null);
   return res && res.type === "FeatureCollection" ? res : null;
+}
+
+// ─── Harga & skema (modul Pricing) ──────────────────────────────────────────
+/**
+ * Snapshot harga publik. Backend mati / kosong -> snapshot statis (seed v4), sehingga halaman
+ * produk tetap menampilkan harga (bukan kosong). Tag "pricing" di-revalidate saat admin menyimpan.
+ */
+export async function getPricing(): Promise<PublicPricing> {
+  const res = await get<PublicPricing | null>(`/api/v1/public/pricing`, ["pricing"], null);
+  return res && Array.isArray(res.regions) && Array.isArray(res.entries) && res.entries.length > 0 ? res : PRICING_FALLBACK;
 }
 
 // ─── Careers (modul HR) ─────────────────────────────────────────────────────

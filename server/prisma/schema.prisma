@@ -1,6 +1,6 @@
 // Wedison Admin — skema database (PostgreSQL, Prisma 7).
 // Modul: Auth/Users, CMS (Article, Category, Tag, PressCoverage, SocialPost, Media),
-// SuperCharge (Station), ActivityLog, Setting.
+// SuperCharge (Station), Pricing (PriceRegion, PricingScheme, PriceEntry, PricingTerms), ActivityLog, Setting.
 // Konvensi: id = cuid, soft delete via deletedAt hanya di Article (konten editorial).
 
 generator client {
@@ -259,6 +259,135 @@ model Station {
 
   @@index([status, tier])
   @@index([province, city])
+}
+
+// ───────────────────────── Harga & Skema (Pricing) ─────────────────────────
+// Satu sumber kebenaran harga publik: wilayah × skema × model × varian. Dikelola dari
+// /admin/pricing, dikonsumsi halaman produk, landing, BaaS, ojol, dan JSON-LD Offer.
+
+enum ProductModel {
+  BEES
+  ATHENA
+  VICTORY
+  EDPOWER
+}
+
+enum BatteryVariant {
+  SINGLE // model satu varian (Bees, EdPower)
+  REGULAR
+  EXTENDED
+}
+
+enum PricingSchemeKind {
+  PURCHASE // beli putus: otrPrice, discount, netPrice
+  RENT_TO_OWN // dailyFee, downPayment, termMonths; motor jadi milik
+  RENTAL // dailyFee, downPayment, termMonths; motor dikembalikan
+  B2B_CREDIT // installment24, installment36
+  BAAS // unitPrice, monthlyFee
+}
+
+enum PricingAudience {
+  ALL
+  OJOL
+  B2B
+}
+
+/// Wilayah harga (Jabodetabek, Bali, ...). Wilayah tanpa baris harga tampil sebagai "hubungi sales".
+model PriceRegion {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+  nameId        String
+  nameEn        String
+  priceLabelId  String  @default("") // mis. "Harga OTR Jabodetabek"
+  priceLabelEn  String  @default("")
+  coverageId    String? // kota yang tercakup
+  coverageEn    String?
+  salesWhatsapp String? // nomor WA sales wilayah (tanpa +)
+  isDefault     Boolean @default(false)
+  isActive      Boolean @default(true)
+  sortOrder     Int     @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  prices PriceEntry[]
+  terms  PricingTerms[]
+
+  @@index([isActive, sortOrder])
+}
+
+/// Skema pembelian/sewa. `isPublic` = tampil di situs (B2B Bali default tidak).
+model PricingScheme {
+  id            String            @id @default(cuid())
+  slug          String            @unique
+  kind          PricingSchemeKind
+  nameId        String
+  nameEn        String
+  taglineId     String?
+  taglineEn     String?
+  descriptionId String?
+  descriptionEn String?
+  audience      PricingAudience   @default(ALL)
+  isPublic      Boolean           @default(true)
+  isActive      Boolean           @default(true)
+  sortOrder     Int               @default(0)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  prices PriceEntry[]
+  terms  PricingTerms[]
+
+  @@index([isActive, isPublic, sortOrder])
+}
+
+/// Satu baris harga. Kolom yang terisi mengikuti `scheme.kind` (sisanya null).
+model PriceEntry {
+  id       String         @id @default(cuid())
+  regionId String
+  region   PriceRegion    @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  schemeId String
+  scheme   PricingScheme  @relation(fields: [schemeId], references: [id], onDelete: Cascade)
+  model    ProductModel
+  variant  BatteryVariant @default(SINGLE)
+
+  otrPrice      Int? // PURCHASE / B2B_CREDIT (harga OTR sebelum diskon)
+  discount      Int? // PURCHASE
+  netPrice      Int? // PURCHASE (harga setelah diskon)
+  dailyFee      Int? // RENT_TO_OWN / RENTAL
+  downPayment   Int? // RENT_TO_OWN / RENTAL
+  termMonths    Int? // RENT_TO_OWN / RENTAL
+  installment24 Int? // B2B_CREDIT per bulan
+  installment36 Int? // B2B_CREDIT per bulan
+  unitPrice     Int? // BAAS harga unit tanpa baterai
+  monthlyFee    Int? // BAAS langganan baterai per bulan
+
+  noteId    String?
+  noteEn    String?
+  isActive  Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+
+  @@unique([regionId, schemeId, model, variant])
+  @@index([schemeId, model])
+}
+
+/// Bonus per unit, S&K, mitra pembiayaan, dan masa berlaku per wilayah × skema.
+model PricingTerms {
+  id         String        @id @default(cuid())
+  regionId   String
+  region     PriceRegion   @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  schemeId   String
+  scheme     PricingScheme @relation(fields: [schemeId], references: [id], onDelete: Cascade)
+  includedId String[]      @default([]) // "Setiap unit termasuk"
+  includedEn String[]      @default([])
+  termsId    String[]      @default([]) // Syarat & ketentuan
+  termsEn    String[]      @default([])
+  partners   String[]      @default([]) // mitra pembiayaan, mis. "Kredivo (personal)"
+  validFrom  DateTime?
+  validUntil DateTime?
+  noteId     String?
+  noteEn     String?
+  updatedAt  DateTime      @updatedAt
+
+  @@unique([regionId, schemeId])
 }
 
 // ───────────────────────── Privasi: Persetujuan Cookie ─────────────────────────

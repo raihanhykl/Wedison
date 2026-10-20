@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings, Gauge,
-  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, Briefcase, Building2, Contact, LayoutGrid, type LucideIcon,
+  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, Briefcase, Building2, Contact, LayoutGrid, BadgeDollarSign, type LucideIcon,
 } from "lucide-react";
 import type { Module } from "@/lib/admin/permissions";
 
@@ -27,6 +27,10 @@ export const NAV: NavGroup[] = [
   {
     label: "SuperCharge",
     items: [{ title: "Stations", href: "/admin/supercharge/stations", icon: MapPin, module: "supercharge" }],
+  },
+  {
+    label: "Pricing",
+    items: [{ title: "Prices & Schemes", href: "/admin/pricing", icon: BadgeDollarSign, module: "pricing" }],
   },
   {
     label: "Leads",
@@ -69,6 +73,7 @@ export const SEGMENT_LABEL: Record<string, string> = {
   seo: "SEO & AI Readiness",
   supercharge: "SuperCharge",
   stations: "Stations",
+  pricing: "Prices & Schemes",
   leads: "Leads",
   bookings: "Bookings",
   contacts: "Contact Messages",

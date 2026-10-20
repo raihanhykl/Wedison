@@ -27,6 +27,7 @@ export const CacheTags = {
   social: "social",
   media: "media",
   stations: "stations",
+  pricing: "pricing",
   dashboard: "dashboard",
   jobs: "jobs",
 } as const;

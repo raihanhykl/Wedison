@@ -9,7 +9,7 @@
  * `canDelete`, `canHr`), implemented on top of `has()`.
  */
 
-export type Module = "dashboard" | "cms" | "supercharge" | "leads" | "hr" | "users" | "activity" | "consent";
+export type Module = "dashboard" | "cms" | "supercharge" | "pricing" | "leads" | "hr" | "users" | "activity" | "consent";
 
 export type PermissionDef = {
   key: string;
@@ -45,6 +45,16 @@ export const PERMISSION_CATALOG: ModuleDef[] = [
       { key: "supercharge.view", label: "View", description: "Open the station list and map." },
       { key: "supercharge.write", label: "Create & edit", description: "Add, edit and bulk-update stations.", implies: ["supercharge.view"] },
       { key: "supercharge.delete", label: "Delete", description: "Delete stations.", implies: ["supercharge.write"] },
+    ],
+  },
+  {
+    key: "pricing",
+    label: "Pricing",
+    description: "Public prices, schemes (purchase, Rent To Own, rental, B2B credit, BaaS), terms & SuperCharge tariff.",
+    permissions: [
+      { key: "pricing.view", label: "View", description: "Open the pricing module and read prices." },
+      { key: "pricing.write", label: "Edit prices & schemes", description: "Edit prices, terms, regions, schemes and the SuperCharge tariff.", implies: ["pricing.view"] },
+      { key: "pricing.delete", label: "Delete", description: "Delete regions, schemes and price rows.", implies: ["pricing.write"] },
     ],
   },
   {
@@ -131,6 +141,7 @@ export const MODULE_VIEW_PERMISSION: Record<Module, string> = {
   dashboard: "dashboard.view",
   cms: "cms.view",
   supercharge: "supercharge.view",
+  pricing: "pricing.view",
   leads: "leads.view",
   hr: "hr.view",
   users: "users.manage",

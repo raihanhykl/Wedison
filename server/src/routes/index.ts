@@ -9,6 +9,7 @@ import { pressRouter, publicPressRouter } from "../modules/press/press.routes.js
 import { socialRouter, publicSocialRouter } from "../modules/social/social.routes.js";
 import { mediaRouter } from "../modules/media/media.routes.js";
 import { stationsRouter, publicStationsRouter } from "../modules/stations/stations.routes.js";
+import { pricingRouter, publicPricingRouter } from "../modules/pricing/pricing.routes.js";
 import { consentRouter, publicConsentRouter } from "../modules/consent/consent.routes.js";
 import { dashboardRouter } from "../modules/dashboard/dashboard.routes.js";
 import { seoRouter } from "../modules/seo/seo.routes.js";
@@ -34,6 +35,7 @@ api.use("/admin/press", pressRouter);
 api.use("/admin/social", socialRouter);
 api.use("/admin/media", mediaRouter);
 api.use("/admin/stations", stationsRouter);
+api.use("/admin/pricing", pricingRouter); // harga, skema, wilayah, S&K, tarif SuperCharge
 api.use("/admin/leads", leadsRouter); // booking showroom + pesan kontak + statistik
 api.use("/admin/consent", consentRouter);
 
@@ -51,6 +53,7 @@ publicRouter.use("/careers", publicCareersRouter);
 publicRouter.use("/press", publicPressRouter);
 publicRouter.use("/social", publicSocialRouter);
 publicRouter.use("/stations", publicStationsRouter);
+publicRouter.use("/pricing", publicPricingRouter);
 publicRouter.use("/", publicTaxonomyRouter);
 api.use("/public", publicRouter);
 

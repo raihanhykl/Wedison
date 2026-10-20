@@ -7,6 +7,8 @@
 //  · Program terbatas waktu & kuota -> selalu ada satu baris keterangan.
 // Pure data — aman diimpor dari Server Component (metadata/JSON-LD) maupun client.
 
+import type { PublicPricing } from "@/lib/pricing/types";
+
 export type PlanId = "standard" | "extended";
 export type ModelId = "victory" | "athena" | "edpower";
 
@@ -28,6 +30,7 @@ export type BaasModel = {
   href: string;
 };
 
+/** Fallback statis (kampanye Sep 2026). Sumber aktif: modul Pricing, lihat baasModelsFrom(). */
 export const BAAS_MODELS: BaasModel[] = [
   {
     id: "victory",
@@ -60,6 +63,32 @@ export const BAAS_MODELS: BaasModel[] = [
     href: "/products/edpower/",
   },
 ];
+
+const BAAS_ORDER: ModelId[] = ["victory", "athena", "edpower"];
+
+/**
+ * Bangun daftar model BaaS dari snapshot modul Pricing (skema kind "baas"). Varian regular ->
+ * paket "standard", extended -> "extended". Model tanpa baris harga di-skip; kalau snapshot tidak
+ * punya skema BaaS sama sekali, pakai BAAS_MODELS statis.
+ */
+export function baasModelsFrom(pricing: PublicPricing): BaasModel[] {
+  const schemes = pricing.schemes.filter((s) => s.kind === "baas").map((s) => s.slug);
+  if (schemes.length === 0) return BAAS_MODELS;
+  const rows = pricing.entries.filter((e) => schemes.includes(e.scheme) && e.unitPrice != null && e.monthlyFee != null);
+  const models = BAAS_ORDER.flatMap((id) => {
+    const mine = rows.filter((e) => e.model === id);
+    if (mine.length === 0) return [];
+    const base = BAAS_MODELS.find((m) => m.id === id)!;
+    const plans: BaasPlan[] = [];
+    const std = mine.find((e) => e.variant === "regular" || e.variant === "single");
+    const ext = mine.find((e) => e.variant === "extended");
+    if (std) plans.push({ id: "standard", monthly: std.monthlyFee! });
+    if (ext) plans.push({ id: "extended", monthly: ext.monthlyFee! });
+    if (plans.length === 0) return [];
+    return [{ ...base, unitPrice: (std ?? ext)!.unitPrice!, plans }];
+  });
+  return models.length > 0 ? models : BAAS_MODELS;
+}
 
 export const DEFAULT_MODEL: ModelId = "victory";
 export const DEFAULT_PLAN: PlanId = "standard";

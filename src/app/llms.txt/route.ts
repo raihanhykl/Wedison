@@ -1,5 +1,8 @@
 import { CONTACT, SITE_URL } from "@/lib/seo/site";
 import { PUBLISHED_SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/showrooms";
+import { getPricing } from "@/lib/cms/api";
+import type { PublicPricing } from "@/lib/pricing/types";
+import { PRODUCT_IDS, PRODUCT_NAMES, entriesFor, pick, schemesFor, sortedRegions, superchargeTariff, variantLabel } from "@/lib/pricing/select";
 
 // /llms.txt — ringkasan situs untuk asisten AI / mesin jawaban (GEO/AEO, spesifikasi
 // llmstxt.org). Disajikan di root seperti robots.txt & sitemap.xml. Next tidak punya konvensi
@@ -10,7 +13,35 @@ import { PUBLISHED_SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/sho
 export const dynamic = "force-static";
 export const revalidate = 86400;
 
-function build(): string {
+/** Baris harga resmi per wilayah × skema × model untuk AI crawler (angka dari modul Pricing). */
+function pricingSummary(p: PublicPricing): string {
+  const idr = (n: number) => `Rp ${new Intl.NumberFormat("en-US").format(n)}`;
+  const lines: string[] = [];
+  for (const region of sortedRegions(p)) {
+    const label = pick(region.priceLabel, "en") || `${pick(region.name, "en")} pricing`;
+    for (const model of PRODUCT_IDS) {
+      for (const scheme of schemesFor(p, region.slug, model)) {
+        for (const e of entriesFor(p, region.slug, scheme.slug, model)) {
+          const v = e.variant === "single" ? "" : ` (${variantLabel(e.variant, "en")})`;
+          let price = "";
+          if (scheme.kind === "purchase" && e.netPrice != null) price = `${idr(e.netPrice)} net on-the-road${e.otrPrice != null && e.otrPrice !== e.netPrice ? ` (list ${idr(e.otrPrice)})` : ""}`;
+          else if ((scheme.kind === "rent_to_own" || scheme.kind === "rental") && e.dailyFee != null) price = `${idr(e.dailyFee)} per day${e.downPayment != null ? `, down payment ${idr(e.downPayment)}` : ""}${e.termMonths != null ? `, ${e.termMonths}-month contract` : ""}`;
+          else if (scheme.kind === "b2b_credit" && e.installment36 != null) price = `${e.installment24 != null ? `${idr(e.installment24)}/month over 24 months, ` : ""}${idr(e.installment36)}/month over 36 months`;
+          else if (scheme.kind === "baas" && e.unitPrice != null) price = `unit ${idr(e.unitPrice)} without battery + battery subscription ${e.monthlyFee != null ? idr(e.monthlyFee) : "-"}/month`;
+          const where = scheme.kind === "purchase" ? label : pick(region.name, "en");
+          if (price) lines.push(`- ${PRODUCT_NAMES[model]}${v}, ${pick(scheme.name, "en")}, ${where}: ${price}.`);
+        }
+      }
+    }
+  }
+  const tariff = PRODUCT_IDS.map((m) => [m, superchargeTariff(p, m)] as const).filter(([, t]) => t != null);
+  if (tariff.length) lines.push(`- SuperCharge tariff ${p.settings.supercharge.unitEn}: ${tariff.map(([m, t]) => `${PRODUCT_NAMES[m]} ${idr(t!)}`).join(", ")}. Bees does not support SuperCharge.`);
+  if (p.settings.referral.enabled) lines.push(`- Referral programme: ${idr(p.settings.referral.amount)} per qualified referral (${p.settings.referral.regionSlugs.join(", ")} only).`);
+  lines.push(`- ${p.settings.disclaimerEn} Full details per region and scheme are shown on each product page (section "Harga").`);
+  return lines.join("\n");
+}
+
+function build(pricingLines: string): string {
   const u = (locale: "id" | "en", p = "/") => `${SITE_URL}/${locale}${p}`;
   const en = (p?: string) => u("en", p);
   const id = (p?: string) => u("id", p);
@@ -121,6 +152,10 @@ ${showrooms}
 - User manuals (PDF) for each model are available on the [FAQ page](${en("/faq/")}#user-manual).
 - Current battery and warranty terms should always be confirmed from the latest official Wedison information.
 
+## Pricing (official, from the Wedison pricing module)
+
+${pricingLines}
+
 ## BaaS
 
 - [Battery as a Service (English)](${en("/baas/")}): Buy the bike, subscribe to the battery. Prices, plans, inclusions and FAQ.
@@ -163,8 +198,9 @@ ${showrooms}
 `;
 }
 
-export function GET() {
-  return new Response(build(), {
+export async function GET() {
+  const pricing = await getPricing();
+  return new Response(build(pricingSummary(pricing)), {
     headers: {
       "content-type": "text/plain; charset=utf-8",
       "cache-control": "public, max-age=3600, s-maxage=86400",

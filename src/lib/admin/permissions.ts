@@ -2,7 +2,7 @@
 // enforcement; this only hides navigation and pages the user's role cannot use.
 import type { AuthUser } from "./types";
 
-export type Module = "dashboard" | "cms" | "supercharge" | "leads" | "hr" | "users" | "activity" | "consent";
+export type Module = "dashboard" | "cms" | "supercharge" | "pricing" | "leads" | "hr" | "users" | "activity" | "consent";
 
 type Holder = Pick<AuthUser, "permissions">;
 
@@ -14,6 +14,7 @@ const MODULE_VIEW_PERMISSION: Record<Module, string> = {
   dashboard: "dashboard.view",
   cms: "cms.view",
   supercharge: "supercharge.view",
+  pricing: "pricing.view",
   leads: "leads.view",
   hr: "hr.view",
   users: "users.manage",
@@ -40,6 +41,7 @@ export function homeFor(user: Holder) {
   if (canAccess(user, "hr")) return "/admin/hr";
   if (canAccess(user, "supercharge")) return "/admin/supercharge/stations";
   if (canAccess(user, "cms")) return "/admin/cms/articles";
+  if (canAccess(user, "pricing")) return "/admin/pricing";
   if (canAccess(user, "leads")) return "/admin/leads";
   if (canAccess(user, "users")) return "/admin/users";
   return "/admin/settings";
@@ -50,6 +52,7 @@ const PREFIXES: [string, Module][] = [
   ["/admin/cms", "cms"],
   ["/admin/seo", "cms"],
   ["/admin/supercharge", "supercharge"],
+  ["/admin/pricing", "pricing"],
   ["/admin/leads", "leads"],
   ["/admin/hr", "hr"],
   ["/admin/users", "users"],
