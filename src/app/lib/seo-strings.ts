@@ -34,7 +34,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Wedison – Motor Listrik & SuperCharge Indonesia",
       description:
-        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun. Jadwalkan test ride di showroom.",
+        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun/100.000 km. Jadwalkan test ride.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -50,7 +50,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison – Electric Motorcycles & SuperCharge Indonesia",
       description:
-        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 10% to 80% in 15 minutes, 3-year battery warranty. Book a test ride.",
+        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 10% to 80% in 15 minutes, 3-year/100,000 km battery warranty. Book a test ride.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -194,7 +194,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Wedison Athena – Motor Listrik Retro, 120 km, SuperCharge",
       description:
-        "Athena, motor listrik retro premium Wedison: jarak tempuh hingga 120 km, 85 km/jam, SuperCharge 10% ke 80% dalam 15 menit. Lihat spesifikasi lengkapnya.",
+        "Athena, motor listrik retro premium Wedison: jarak tempuh hingga 120 km, 75 km/jam, SuperCharge 10% ke 80% dalam 15 menit. Lihat spesifikasi lengkapnya.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -209,7 +209,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison Athena – Retro Electric Motorcycle, 120 km Range",
       description:
-        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 85 km/h, SuperCharge 10% to 80% in 15 minutes. See full specs.",
+        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 75 km/h, SuperCharge 10% to 80% in 15 minutes. See full specs.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -227,9 +227,9 @@ export const seoContent: Record<string, PageSEO> = {
     priority: 0.9,
     changeFrequency: "monthly",
     id: {
-      title: "Wedison Bees – Motor Listrik Ringkas, 80 km, 60 km/jam",
+      title: "Wedison Bees – Motor Listrik Ringkas, 90 km, 55 km/jam",
       description:
-        "Bees, motor listrik ringkas dan lincah dari Wedison untuk harian: jarak tempuh 80 km, kecepatan 60 km/jam, bobot 78,5 kg. Lihat spesifikasi lengkapnya.",
+        "Bees, motor listrik ringkas dan lincah dari Wedison untuk harian: jarak tempuh 90 km, kecepatan 55 km/jam, bobot 78,5 kg. Lihat spesifikasi lengkapnya.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -242,9 +242,9 @@ export const seoContent: Record<string, PageSEO> = {
       ],
     },
     en: {
-      title: "Wedison Bees – Compact Electric Scooter, 80 km Range",
+      title: "Wedison Bees – Compact Electric Scooter, 90 km Range",
       description:
-        "Bees, Wedison's compact electric scooter for daily rides: 80 km range, 60 km/h top speed and just 78.5 kg. See specs and highlights.",
+        "Bees, Wedison's compact electric scooter for daily rides: 90 km range, 55 km/h top speed and just 78.5 kg. See specs and highlights.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -262,9 +262,9 @@ export const seoContent: Record<string, PageSEO> = {
     priority: 0.9,
     changeFrequency: "monthly",
     id: {
-      title: "Wedison Victory – Motor Listrik Urban, 120 km, 85 km/jam",
+      title: "Wedison Victory – Motor Listrik Urban, 120 km, 80 km/jam",
       description:
-        "Victory, motor listrik urban Wedison dengan gaya dan tenaga: jarak hingga 120 km, 85 km/jam, motor 3 kW, SuperCharge 15 menit. Lihat spesifikasinya.",
+        "Victory, motor listrik urban Wedison dengan gaya dan tenaga: jarak hingga 120 km, 80 km/jam, motor 3 kW, SuperCharge 15 menit. Lihat spesifikasinya.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -279,7 +279,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison Victory – Urban Electric Motorcycle, 120 km",
       description:
-        "Victory, Wedison's urban electric motorcycle: up to 120 km range, 85 km/h, 3 kW motor and 15-minute SuperCharge. See full specs.",
+        "Victory, Wedison's urban electric motorcycle: up to 120 km range, 80 km/h, 3 kW motor and 15-minute SuperCharge. See full specs.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -299,7 +299,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Wedison EdPower – Motor Listrik Jarak Jauh, 200 km",
       description:
-        "EdPower, motor listrik Wedison untuk jarak jauh dan armada: jarak hingga 200 km, 90 km/jam, baterai 5 kWh, SuperCharge 15 menit. Lihat spesifikasinya.",
+        "EdPower, motor listrik Wedison untuk jarak jauh dan armada: jarak hingga 200 km, 85 km/jam, baterai 5 kWh, SuperCharge 15 menit. Lihat spesifikasinya.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -314,7 +314,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison EdPower – Long-Range Electric Motorcycle, 200 km",
       description:
-        "EdPower, Wedison's rugged long-range electric motorcycle for fleets and touring: up to 200 km range, 90 km/h, 5 kWh battery, 15-minute SuperCharge.",
+        "EdPower, Wedison's rugged long-range electric motorcycle for fleets and touring: up to 200 km range, 85 km/h, 5 kWh battery, 15-minute SuperCharge.",
       keywords: [
         "wedison",
         "electric motorcycle",

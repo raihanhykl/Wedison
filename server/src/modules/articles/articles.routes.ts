@@ -249,7 +249,7 @@ const bulkSchema = z.object({
 articlesRouter.post("/bulk", requireWrite("cms"), validate(bulkSchema), async (req, res, next) => {
   try {
     const { ids, action } = getValidated<typeof bulkSchema>(req);
-    if (action === "delete" && !canDelete(req.user!.role, "cms")) throw badRequest("Your role cannot delete items permanently");
+    if (action === "delete" && !canDelete(req.user!, "cms")) throw badRequest("Your role cannot delete items permanently");
     const where = { id: { in: ids } };
     let count = 0;
     switch (action) {
@@ -273,7 +273,7 @@ articlesRouter.delete("/:id", requireWrite("cms"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const force = req.query.force === "true";
-    if (force && !canDelete(req.user!.role, "cms")) throw badRequest("Your role cannot delete items permanently");
+    if (force && !canDelete(req.user!, "cms")) throw badRequest("Your role cannot delete items permanently");
     if (force) await prisma.article.delete({ where: { id } });
     else await prisma.article.update({ where: { id }, data: { deletedAt: new Date() } });
     invalidate([CacheTags.articles, CacheTags.dashboard]);

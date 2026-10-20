@@ -11,7 +11,7 @@ browser ──/admin/*──▶ Next.js (:3000) ──rewrite /api/*──▶ Ex
 ```
 
 - **Frontend admin**: `src/app/admin/**` (login, dashboard, CMS, SuperCharge, Leads [booking showroom, pesan kontak, kalender, analytics — lihat docs/BOOKING-FORM.md], pengguna, log). Komponen: shadcn/ui + TanStack Table/Query + Tiptap (template resmi `simple-editor`).
-- **Backend**: `server/src` — `modules/*` (auth, users, articles, taxonomy, press, social, media, stations, dashboard, activity, leads), `lib/cache.ts` (LRU in-memory bertag), `lib/metadata.ts` (scraper OG), `middleware/auth.ts` (JWT cookie httpOnly, role).
+- **Backend**: `server/src` — `modules/*` (auth, users, articles, taxonomy, press, social, media, stations, dashboard, activity, leads), `lib/cache.ts` (LRU in-memory bertag), `lib/metadata.ts` (scraper OG), `middleware/auth.ts` (JWT cookie httpOnly, izin per role).
 - **Caching 3 lapis**:
   1. Backend: `cached(key, tags, fn)` (LRU, TTL `CACHE_TTL_PUBLIC`) + header `Cache-Control: s-maxage` di `/api/v1/public/*`.
   2. Next.js: `fetch(..., { next: { revalidate, tags } })` di `src/lib/cms/api.ts` (ISR).
@@ -48,10 +48,11 @@ Perintah lain: `npm run db:migrate` (buat migrasi baru saat schema berubah), `np
 | `GET /public/press`, `GET /public/press/:slug` | `/admin/press` + `POST /admin/press/fetch-metadata`, `POST /admin/press/:id/refresh`, `POST /admin/press/reorder` |
 | `GET /public/social?platform=` | `/admin/social` + `fetch-metadata`, `:id/refresh`, `reorder` |
 | `GET /public/stations` (GeoJSON) | `/admin/stations` (CRUD), `GET /admin/stations/meta` (provinsi/kota/jumlah per status), `POST /admin/stations/bulk` (`status` / `activate` / `deactivate` / `delete`) |
+| `GET /public/pricing` (snapshot harga: wilayah, skema publik, baris harga, S&K, tarif SuperCharge, referral) | `GET /admin/pricing` (semua), `POST/PATCH/DELETE /admin/pricing/regions[/:id]`, `.../schemes[/:id]`, `PUT /admin/pricing/entries` (upsert massal per wilayah × skema), `DELETE /admin/pricing/entries/:id`, `PUT /admin/pricing/terms`, `GET/PUT /admin/pricing/settings` |
 | `GET /public/categories` | `GET /admin/media`, `POST /admin/media/upload` (multipart `files[]`, `folder`), `PATCH/DELETE /admin/media/:id` |
-| | `/auth/login|logout|me|change-password|profile`, `/admin/users` (SUPER_ADMIN), `/admin/activity`, `/admin/dashboard/stats` |
+| | `/auth/login|logout|me|change-password|profile`, `/admin/users` + `/admin/roles` (izin `users.manage`), `/admin/activity`, `/admin/dashboard/stats` |
 
-Role: `SUPER_ADMIN` (semua + kelola user) · `ADMIN` (semua konten, hapus permanen) · `EDITOR` (tulis/edit, tanpa hapus permanen).
+Hak akses: role kustom berbasis izin (lihat bagian **Role kustom**). `GET/POST/PATCH/DELETE /admin/roles`, `GET /admin/roles/catalog`, `POST /admin/roles/:id/duplicate` (semua butuh izin `users.manage`).
 
 ## Deploy VPS (ssr.wedison.tech)
 
@@ -111,21 +112,10 @@ catatan singkat *apa yang harus diperbaiki* untuk editor, bukan untuk engineer.
 Lowongan kerja di halaman `/career` kini dikelola tim HR dari admin (`/admin/hr`), menggantikan
 data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fallback bila API mati).
 
-**Hak akses (otorisasi)** — satu sumber: `server/src/lib/permissions.ts` (cermin di `src/lib/admin/permissions.ts`).
+**Hak akses (otorisasi)** — berbasis izin (permission) per role, lihat bagian "Role kustom" di bawah. Role bawaan HR: **HR Manager** (semua aksi HR) dan **HR Staff** (tulis & edit draf, ajukan review).
 
-| Role | Modul yang bisa dibuka | Hapus permanen | Di modul HR |
-|---|---|---|---|
-| SUPER_ADMIN | semua | ya | semua aksi |
-| ADMIN | dashboard, CMS, SuperCharge, leads, log aktivitas, consent | ya | tidak ada akses |
-| EDITOR | dashboard, CMS, SuperCharge, leads | tidak | tidak ada akses |
-| MARKETING (Marketing Team) | dashboard, CMS (termasuk SEO & AI Readiness), leads | ya, di CMS & leads | tidak ada akses |
-| SUPERCHARGE (SuperCharge Team) | SuperCharge (lokasi stasiun) | ya, stasiun | tidak ada akses |
-| HR_MANAGER | HR saja | – | tulis, publikasi/tutup/buka ulang/arsip, setujui atau kembalikan review, hapus, divisi & lokasi, kontak HR |
-| HR_STAFF | HR saja | – | tulis & edit draf, ajukan review; lowongan yang sudah tayang hanya bisa dilihat |
-
-- Backend: `requireModule(modul)` di setiap router admin (sebelumnya cukup login), `requireWrite(modul)` / `requireDelete(modul)` untuk ubah & hapus permanen (menggantikan daftar role hardcode), `requireHr(action)` untuk aksi HR. Role baru cukup didaftarkan di `permissions.ts` (dan cerminnya di frontend).
-- Frontend: menu sidebar difilter per modul, halaman yang tidak boleh dibuka menampilkan "No access", akun HR diarahkan ke `/admin/hr` setelah login.
-- Akun dibuat Super Admin di **Users**; setiap role punya deskripsi singkat di form. Setelah login, role tanpa dashboard diarahkan ke modulnya (HR → `/admin/hr`, SuperCharge Team → `/admin/supercharge/stations`).
+- Backend: `requireModule(modul)` di setiap router admin, `requireWrite(modul)` / `requireDelete(modul)` untuk ubah & hapus permanen, `requireHr(action)` untuk aksi HR, `requirePermission(key)` untuk izin tunggal. Semuanya membaca `req.user.permissions`.
+- Frontend: menu sidebar difilter per modul, halaman yang tidak boleh dibuka menampilkan "No access", akun tanpa dashboard diarahkan ke modul pertamanya setelah login (HR → `/admin/hr`, SuperCharge → `/admin/supercharge/stations`).
 
 **Fitur**
 - Lowongan: judul & isi dwibahasa (minimal satu bahasa; bahasa lain memakai fallback), ringkasan, tanggung jawab, kualifikasi, nilai tambah, benefit (satu poin per baris).
@@ -139,6 +129,39 @@ data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fall
 **Data & deploy** — migrasi `hr_jobs` (enum role HR_MANAGER/HR_STAFF, tabel Job/JobTranslation/JobDepartment/JobLocation/JobApplyClick).
 Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR default) hanya berjalan sekali per database
 (penanda Setting `hr_seeded`) dan otomatis dijalankan di deploy staging & produksi.
+
+## Role kustom (System › Users & Roles)
+
+Sejak migrasi `custom_roles` (2026-10-09) kolom enum `User.role` diganti relasi `User.roleId → Role`. Role = nama, key (slug tetap), deskripsi, warna badge, dan daftar **permission key**. Role dibuat/diubah dari tab **Roles** di `/admin/users` (kartu per role + editor matriks izin di panel samping). Role bawaan hasil migrasi: `super_admin` (sistem, izin `*`, tidak bisa diubah/dihapus), `admin`, `editor`, `marketing`, `supercharge`, `hr_manager`, `hr_staff` (semua bisa diedit/dihapus).
+
+**Katalog izin** (`server/src/lib/permissions.ts`, dikirim ke UI lewat `GET /admin/roles/catalog`):
+
+| Modul | Izin | Catatan |
+|---|---|---|
+| Dashboard | `dashboard.view` | |
+| CMS | `cms.view`, `cms.write`, `cms.delete` | write ⇒ view, delete ⇒ write |
+| SuperCharge | `supercharge.view/write/delete` | idem |
+| Leads | `leads.view`, `leads.write` (ubah status/catatan/handled/sinkron kalender), `leads.delete` | idem; `leads.write` baru — sebelumnya semua yang bisa buka Leads boleh mengubah |
+| HR | `hr.view`, `hr.jobs.write`, `hr.jobs.publish`, `hr.jobs.delete`, `hr.taxonomy.write`, `hr.settings.write` | publish/delete ⇒ jobs.write ⇒ view |
+| Users & Roles | `users.manage` | kelola user dan role |
+| Activity Log | `activity.view` | |
+| Cookie Consent | `consent.view` | |
+
+**Aturan yang dijaga server** (`server/src/lib/roles.ts`, diuji di `server/test/roles.api.test.ts`):
+- izin diverifikasi terhadap katalog, izin turunan (`implies`) ditambahkan otomatis saat simpan; `*` hanya untuk role sistem;
+- `key` tidak bisa diubah setelah dibuat, unik tanpa memandang huruf besar/kecil; nama juga unik tanpa memandang huruf;
+- role sistem tidak bisa diubah/dihapus; role yang masih punya anggota tidak bisa dihapus (409);
+- user tidak bisa mengubah role sendiri, menonaktifkan, atau menghapus akunnya sendiri;
+- **anti-lockout**: setiap perubahan (izin role, ganti role user, nonaktif, hapus) berjalan dalam transaksi dan dibatalkan bila tidak tersisa satu pun user aktif ber-izin `users.manage`/`*`;
+- izin dibaca ulang dari DB di setiap request (`requireAuth`), jadi perubahan langsung berlaku tanpa login ulang; JWT hanya memuat `sub`.
+
+**Tes**: `cd server && npm test` (vitest). `test/permissions.unit.test.ts` (katalog, normalisasi, helper) dan `test/roles.api.test.ts` (supertest ke app Express nyata dengan DB lokal dari `server/.env`; membuat data berawalan id run lalu menghapusnya). Butuh user seed super admin.
+
+**Frontend**: `AuthUser` = `{ role: { id, key, name, color, isSystem }, permissions: string[] }`; helper di `src/lib/admin/permissions.ts` (`hasPermission`, `canAccess`, `canWrite`, `canDelete`, `homeFor`) dan hook `useCan(modul)` (`write`, `deleteHard`, `manageUsers`, `viewActivity`, `has(key)`).
+
+## Form kontak (Leads › Contact Messages)
+
+`POST /public/leads/contacts` adalah sumber kebenaran: form `/corporate/contact` menunggu respons ini sebelum menampilkan "terkirim"; notifikasi email via EmailJS dikirim setelahnya secara best-effort (gagal hanya dicatat di console). Server memverifikasi reCAPTCHA (bila `RECAPTCHA_SECRET_KEY` diset) dan **idempoten**: email + isi pesan yang sama dalam 15 menit mengembalikan id yang sama (`duplicate: true`) sehingga klik ganda/kirim ulang tidak menggandakan pesan di admin. Tombol **Reply by email** membuka mailto berisi sapaan, topik, slot balasan, dan kutipan pesan asli (bahasa mengikuti locale form) — `src/lib/admin/contact-reply.ts`.
 
 ## Editor artikel: impor dokumen & toolbar melayang
 
@@ -154,13 +177,34 @@ Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR defau
 
 **Tabel** — `@tiptap/extension-table` (TableKit, kolom bisa di-resize) + dropdown **Table** di toolbar (`src/components/tiptap-ui/table-dropdown-menu/`): sisip 3×3, tambah/hapus baris & kolom, header row, merge/split, hapus tabel. Dibutuhkan agar tabel dari Word tidak hilang saat diimpor.
 
+## Modul Pricing (Prices & Schemes)
+
+Satu sumber kebenaran harga publik, dikelola di **/admin/pricing** (izin `pricing.view|write|delete`; role `admin` dapat semuanya, `editor`/`marketing` view+write). Tidak ada angka harga yang hardcode di frontend.
+
+**Model data** (`server/prisma/schema.prisma`):
+- `PriceRegion` — wilayah (Jabodetabek, Bali, Bandung Raya, …): nama ID/EN, label harga ("Harga OTR Jabodetabek"), cakupan kota, WA sales, `isDefault` (dipakai untuk "mulai dari" di landing), `isActive`, urutan. Wilayah **tanpa baris harga** tampil sebagai panel "Hubungi Sales {wilayah}".
+- `PricingScheme` — skema dengan `kind`: `PURCHASE` (OTR, diskon, net), `RENT_TO_OWN` / `RENTAL` (biaya harian, DP, masa kontrak), `B2B_CREDIT` (angsuran 24/36 bln), `BAAS` (harga unit + langganan baterai). `audience` (ALL/OJOL/B2B) jadi label kecil; `isPublic=false` = tersimpan tapi tidak tampil (default untuk B2B Bali).
+- `PriceEntry` — baris harga unik per wilayah × skema × model (`BEES|ATHENA|VICTORY|EDPOWER`) × varian (`SINGLE|REGULAR|EXTENDED`). Beli putus divalidasi `net = OTR − diskon`.
+- `PricingTerms` — per wilayah × skema: "Setiap unit termasuk", S&K, mitra pembiayaan, masa berlaku, catatan (ID/EN).
+- `Setting` key `pricing_settings` — disclaimer, tarif SuperCharge per model + satuan + catatan, program referral (nominal, wilayah, deskripsi).
+
+**Konsumen di situs** (semua lewat `getPricing()` di `src/lib/cms/api.ts`, ISR 300 dtk + tag `pricing`, fallback `src/data/pricing-fallback.ts`):
+- Halaman produk: section **Harga & Skema** (`src/app/_product/pricing-section.tsx`) + JSON-LD `AggregateOffer` (`src/lib/seo/product-page.ts`).
+- Landing dan `/products`: harga "Mulai Rp … (OTR wilayah default)".
+- `/baas`: model & paket dari skema `baas` (`baasModelsFrom()` di `src/app/[locale]/baas/data.ts`).
+- `/ojol`: isi dialog Sewa Milik/Sewa Harian dari skema `rent-to-own`/`rental` (`src/app/[locale]/ojol/programs.ts`).
+- `/super-charge`: baris tarif SuperCharge. `llms.txt`: bagian "Pricing" lengkap untuk AI crawler.
+
+Setiap simpan di admin mem-bust cache API (tag `pricing`) dan memanggil webhook `/api/revalidate` Next, jadi perubahan tampil dalam hitungan detik. Seed awal: `server/prisma/seed-data/pricing.json` (sumber: knowledge source Dion v4, 25 Sep 2026; BaaS dari kampanye Sep 2026), dijalankan `npm run db:seed` (idempoten, tidak menimpa perubahan admin). Jika snapshot statis perlu diperbarui, salin respons `GET /public/pricing` ke `src/data/pricing-fallback.ts`. Tes: `server/test/pricing.api.test.ts`.
+
 ## Roadmap modul
 
 - [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.
 - [x] SEO artikel: SEO title/meta description (+ preview snippet Google), keywords, canonical override, OG title/description + gambar share khusus, noindex, hreflang per locale tersedia, JSON-LD NewsArticle.
 - [x] Scheduler: `server/src/lib/scheduler.ts` menayangkan artikel/liputan berstatus SCHEDULED tiap 60 detik (dan saat daftar admin dibuka).
 - [x] UI admin berbahasa Inggris; "Kategori" ditampilkan sebagai **Topics** (model DB tetap `Category`, API tersedia di `/admin/topics` dan `/admin/categories`).
-- [x] Sistem: login/role, pengguna, log aktivitas, akun saya, dashboard statistik.
+- [x] Sistem: login, pengguna + **role kustom berbasis izin** (anti-lockout, tes vitest/supertest), log aktivitas, akun saya, dashboard statistik.
 - [x] Editor artikel: impor Word/PDF ke body, toolbar sticky + bubble menu seleksi, tabel.
-- [ ] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta (API CRUD sudah siap; UI baru daftar/pencarian).
+- [x] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta + aksi massal.
+- [x] Pricing: wilayah × skema × model × varian, S&K, tarif SuperCharge, referral; section harga di produk, landing, BaaS, ojol; JSON-LD Offer; llms.txt.
 - [ ] Modul berikutnya (menyusul).

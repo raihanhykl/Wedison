@@ -222,6 +222,7 @@ export const id = {
   "products.power": "Daya Motor",
   "products.miles": "km",
   "products.mph": "km/jam",
+  "products.from": "Mulai",
 
   // Testimonials
   "testimonials.tag": "Testimoni",
@@ -301,10 +302,10 @@ export const id = {
 
   "showroom.tag": "Experience Center",
   "showroom.address":
-    "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
+    "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, Jakarta Selatan, DKI Jakarta 12240",
   "showroom.jakarta.name": "Wedison Jakarta",
   "showroom.jakarta.address":
-    "Jl. Arteri Pondok Indah No 30 A-C, Kelurahan Kebayoran Lama Selatan, Kecamatan Kebayoran Lama, Jakarta Selatan, DKI Jakarta. 12240",
+    "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, Jakarta Selatan, DKI Jakarta 12240",
   "showroom.bandung.name": "Wedison Bandung",
   "showroom.bandung.address":
     "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
@@ -316,6 +317,7 @@ export const id = {
     "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
   "showroom.weekdays": "Senin - Jumat: 10.00 - 19.00",
   "showroom.weekend": "Sabtu - Minggu: 10.00 - 17.00",
+  "showroom.holiday": "Hari libur nasional: 10.00 - 16.00",
   "showroom.testRide.title": "Test Ride",
   "showroom.testRide.description":
     "Coba langsung di sekitar showroom, didampingi tim kami. Gratis, dan Anda tidak perlu membawa KTP atau SIM.",
@@ -343,7 +345,7 @@ export const id = {
   "showroomPage.hero.fact3": "Boleh langsung datang",
   "showroomPage.locations.title": "Pilih showroom terdekat",
   "showroomPage.locations.desc":
-    "Setiap lokasi adalah showroom sekaligus pusat servis resmi, lengkap dengan SuperCharge. Pilih kartu untuk melihat lokasinya di peta.",
+    "Setiap lokasi adalah showroom sekaligus bengkel resmi. Stasiun SuperCharge tersedia di Jakarta, Bandung Barat, dan Bekasi. Pilih kartu untuk melihat lokasinya di peta.",
   "showroomPage.locations.countOpen": "{n} lokasi buka",
   "showroomPage.locations.countUpcoming": "{n} segera hadir",
   "showroomPage.locations.prev": "Showroom sebelumnya",
@@ -352,10 +354,12 @@ export const id = {
   "showroomPage.locations.listLabel": "Daftar showroom di {country}",
   "showroomPage.card.showOnMap": "Tampilkan {name} di peta",
   "showroomPage.card.facilities": "Showroom · Servis · SuperCharge",
+  "showroomPage.card.facilitiesNoCharge": "Showroom · Servis",
   "showroomPage.card.openUntil": "Buka · tutup {time}",
   "showroomPage.card.closedUntil": "Tutup · buka {time}",
   "showroomPage.card.weekdays": "Sen–Jum",
   "showroomPage.card.weekend": "Sab–Min",
+  "showroomPage.card.holiday": "Libur nasional",
   "showroomPage.card.directions": "Rute",
   "showroomPage.upcoming.label": "Segera hadir",
   "showroomPage.upcoming.desc":
@@ -390,10 +394,10 @@ export const id = {
     "Anda boleh datang langsung. Namun kami sarankan booking terlebih dahulu agar jadwal Anda tidak bersamaan dengan pengunjung lain.",
   "showroomPage.faq.q5": "Apakah saya bisa servis dan mengisi daya di showroom?",
   "showroomPage.faq.a5":
-    "Bisa. Setiap showroom Wedison juga merupakan pusat servis resmi dan dilengkapi stasiun SuperCharge.",
+    "Bisa untuk servis: keempat showroom adalah bengkel resmi Wedison. Stasiun SuperCharge tersedia di showroom Jakarta, Bandung Barat, dan Bekasi. Showroom Bali belum memiliki stasiun SuperCharge.",
   "showroomPage.faq.q6": "Kapan showroom buka?",
   "showroomPage.faq.a6":
-    "Senin sampai Jumat pukul 10.00–19.00, Sabtu dan Minggu pukul 10.00–17.00, mengikuti waktu setempat.",
+    "Senin sampai Jumat pukul 10.00–19.00, Sabtu dan Minggu pukul 10.00–17.00, dan hari libur nasional pukul 10.00–16.00, mengikuti waktu setempat.",
   "showroomPage.cta.title": "Kami tunggu kedatangan Anda.",
   "showroomPage.cta.desc":
     "Pilih showroom dan jadwal yang paling pas. Konfirmasinya kami kirim lewat WhatsApp.",
@@ -490,7 +494,7 @@ export const id = {
   "contactPage.faq.all": "Lihat semua FAQ",
 
   // Contact Page
-  "contact.page.business.hours": "Senin - Jumat: 09.00 - 18.00 WIB",
+  "contact.page.business.hours": "Senin - Jumat: 10.00 - 19.00, Sabtu - Minggu: 10.00 - 17.00 (waktu setempat)",
   "contact.page.faqTitle": "Pertanyaan yang Sering Diajukan",
   "contact.page.thankYou": "Terima Kasih",
   "contact.page.messageReceived":
@@ -502,10 +506,10 @@ export const id = {
     "Datang langsung ke showroom kami, atau buat janji lebih dulu melalui situs ini. Tim kami akan mendampingi Anda selama sesi test ride.",
   "contact.page.faq.q2": "Garansi apa yang saya dapatkan?",
   "contact.page.faq.a2":
-    "Setiap motor Wedison dilindungi garansi 2 tahun untuk unit motor dan 3 tahun untuk baterai. Garansi ini mencakup cacat produksi.",
+    "Baterai, motor, dan rangka dilindungi garansi 3 tahun atau 100.000 km, mana yang tercapai lebih dulu. Komponen lain bergaransi 1 sampai 2 tahun sesuai daftar resmi. Garansi mencakup kerusakan akibat cacat pabrik.",
   "contact.page.faq.q3": "Berapa lama waktu pengisian dayanya?",
   "contact.page.faq.a3":
-    "Di stasiun SuperCharge, sebagian besar model terisi dari 10% ke 80% dalam 15 menit. Dengan charger rumah, pengisian penuh membutuhkan sekitar 4 sampai 10 jam, tergantung model dan kapasitas baterainya.",
+    "Di stasiun SuperCharge, Athena, Victory, dan EdPower terisi dari 10% ke 80% dalam sekitar 15 menit. Dengan charger rumah, pengisian penuh membutuhkan 4 sampai 6 jam untuk Bees, Athena, dan Victory, serta 8 sampai 10 jam untuk EdPower.",
   "contact.page.faq.q4": "Apakah tersedia skema cicilan?",
   "contact.page.faq.a4":
     "Tersedia. Kami bekerja sama dengan beberapa mitra pembiayaan, dan tim kami akan membantu Anda memilih skema yang paling sesuai dengan anggaran.",
@@ -652,7 +656,7 @@ export const id = {
   "edpower.productPage.techSpecs2.desc":
     "Isi daya 10% ke 80% dengan SuperCharge",
 
-  "edpower.productPage.techSpecs3.title": 90,
+  "edpower.productPage.techSpecs3.title": 85,
   "edpower.productPage.techSpecs3.unit": "km/jam",
   "edpower.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -708,7 +712,7 @@ export const id = {
   "edpower.productPage.chargingHighlight1.description": (
     <>
       Dari 10% ke 80% dalam 15 menit, cukup untuk singgah sejenak di sela
-      aktivitas. Tersedia di seluruh showroom Wedison.{" "}
+      aktivitas. Tersedia di showroom Jakarta, Bandung Barat, dan Bekasi.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
       </LocaleLink>
@@ -723,13 +727,13 @@ export const id = {
 
   "edpower.specs.engine.motorType": "Brushless DC Motor",
   "edpower.specs.engine.motorPower": "3 kW",
-  "edpower.specs.engine.topSpeed": "90 km/jam",
+  "edpower.specs.engine.topSpeed": "85 km/jam",
   "edpower.specs.engine.acceleration": "7.9 detik",
   "edpower.specs.battery.batteryType": "Lithium-ion (LFP)",
   "edpower.specs.battery.batteryCapacity": "5 kWh",
   "edpower.specs.battery.voltage": "76.8 Volt",
   "edpower.specs.battery.chargingTimeSuperCharge": "15 menit",
-  "edpower.specs.battery.chargingTimeHome": "10.2 jam",
+  "edpower.specs.battery.chargingTimeHome": "8 - 10 jam",
   "edpower.specs.battery.range": "200 km",
   "edpower.specs.brake.frontBrake": "Rem Cakram",
   "edpower.specs.brake.rearBrake": "Rem Cakram",
@@ -833,7 +837,7 @@ export const id = {
   "victory.productPage.techSpecs2.desc":
     "Isi daya 10% ke 80% dengan SuperCharge",
 
-  "victory.productPage.techSpecs3.title": 85,
+  "victory.productPage.techSpecs3.title": 80,
   "victory.productPage.techSpecs3.unit": "km/jam",
   "victory.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -873,7 +877,7 @@ export const id = {
   "victory.productPage.chargingHighlight1.description": (
     <>
       Dari 10% ke 80% dalam 15 menit, pas untuk jeda singkat di tengah hari yang
-      padat. Tersedia di seluruh showroom Wedison.{" "}
+      padat. Tersedia di showroom Jakarta, Bandung Barat, dan Bekasi.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
       </LocaleLink>
@@ -888,15 +892,14 @@ export const id = {
 
   "victory.specs.engine.motorType": "Brushless DC Motor",
   "victory.specs.engine.motorPower": "3 kW",
-  "victory.specs.engine.topSpeed": "85 km/jam",
+  "victory.specs.engine.topSpeed": "80 km/jam",
   "victory.specs.engine.acceleration": "6.5 detik",
   "victory.specs.battery.batteryType": "Lithium-ion (LFP)",
   "victory.specs.battery.batteryCapacity":
     "2.5 kWh (Baterai Regular) / 3.4 kWh (Baterai Extended)",
   "victory.specs.battery.voltage": "76.8 Volt",
   "victory.specs.battery.chargingTimeSuperCharge": "15 menit",
-  "victory.specs.battery.chargingTimeHome":
-    "5 jam (Baterai Regular) / 7 jam (Baterai Extended)",
+  "victory.specs.battery.chargingTimeHome": "4 - 6 jam",
   "victory.specs.battery.range":
     "110 km (Baterai Regular) / 120 km (Baterai Extended)",
   "victory.specs.brake.frontBrake": "Rem Cakram",
@@ -959,7 +962,7 @@ export const id = {
   "athena.productPage.techSpecs2.desc":
     "Isi daya 10% ke 80% dengan SuperCharge",
 
-  "athena.productPage.techSpecs3.title": 85,
+  "athena.productPage.techSpecs3.title": 75,
   "athena.productPage.techSpecs3.unit": "km/jam",
   "athena.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -977,7 +980,7 @@ export const id = {
   "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
   "athena.productPage.productHighlight2.title": "SuperCharge",
   "athena.productPage.productHighlight2.description":
-    "Di stasiun SuperCharge, Athena terisi dari 10% ke 80% dalam 15 menit. Di rumah, pengisian penuh membutuhkan sekitar 5 jam untuk baterai Regular dan 7 jam untuk Extended.",
+    "Di stasiun SuperCharge, Athena terisi dari 10% ke 80% dalam 15 menit. Di rumah, pengisian penuh dari 0% membutuhkan sekitar 4 sampai 6 jam.",
 
   "athena.productPage.productHighlight3.imageAlt":
     "Sistem Pengereman CBS Athena",
@@ -1011,15 +1014,14 @@ export const id = {
 
   "athena.specs.engine.motorType": "Brushless DC Motor",
   "athena.specs.engine.motorPower": "2.5 kW",
-  "athena.specs.engine.topSpeed": "85 km/jam",
+  "athena.specs.engine.topSpeed": "75 km/jam",
   "athena.specs.engine.acceleration": "6.5 detik",
   "athena.specs.battery.batteryType": "Lithium-ion (LFP)",
   "athena.specs.battery.batteryCapacity":
     "2.5 kWh (Baterai Regular) / 3.4 kWh (Baterai Extended)",
   "athena.specs.battery.voltage": "76.8 Volt",
   "athena.specs.battery.chargingTimeSuperCharge": "15 menit",
-  "athena.specs.battery.chargingTimeHome":
-    "5 jam (Baterai Regular) / 7 jam (Baterai Extended)",
+  "athena.specs.battery.chargingTimeHome": "4 - 6 jam",
   "athena.specs.battery.range":
     "110 km (Baterai Regular) / 120 km (Baterai Extended)",
   "athena.specs.brake.frontBrake": "Rem Cakram",
@@ -1071,14 +1073,14 @@ export const id = {
   "bees.productPage.hero.ctaPrimary": "Pesan Sekarang",
   "bees.productPage.hero.ctaSecondary": "Unduh Brosur",
 
-  "bees.productPage.techSpecs1.title": 80,
+  "bees.productPage.techSpecs1.title": 90,
   "bees.productPage.techSpecs1.unit": "km",
   "bees.productPage.techSpecs1.desc": "Jarak Tempuh",
 
   "bees.productPage.techSpecs2.title": "LED",
   "bees.productPage.techSpecs2.desc": "Tampilan Head Unit",
 
-  "bees.productPage.techSpecs3.title": 60,
+  "bees.productPage.techSpecs3.title": 55,
   "bees.productPage.techSpecs3.unit": "km/jam",
   "bees.productPage.techSpecs3.desc": "Kecepatan Maksimum",
 
@@ -1106,20 +1108,20 @@ export const id = {
     "Bees Merah sedang diisi daya di colokan rumah",
   "bees.productPage.chargingOverview.title": "Cukup dari Stopkontak Rumah",
   "bees.productPage.chargingOverview.description":
-    "Bees diisi dari stopkontak biasa dan penuh dalam sekitar 4 jam. Charger sudah termasuk, tanpa perlu perangkat tambahan.",
+    "Bees diisi dari stopkontak biasa dan penuh dalam 4 sampai 6 jam. Charger sudah termasuk, tanpa perlu perangkat tambahan.",
 
   // ===
 
   "bees.specs.engine.motorType": "Brushless DC Motor",
   "bees.specs.engine.motorPower": "1.2 kW",
-  "bees.specs.engine.topSpeed": "60 km/jam",
+  "bees.specs.engine.topSpeed": "55 km/jam",
   "bees.specs.engine.acceleration": "19.3 detik",
   "bees.specs.battery.batteryType": "Lithium-ion (LFP)",
   "bees.specs.battery.batteryCapacity": "1.6 kWh",
   "bees.specs.battery.voltage": "64 Volt",
   "bees.specs.battery.chargingTimeSuperCharge": "-",
-  "bees.specs.battery.chargingTimeHome": "4.1 jam",
-  "bees.specs.battery.range": "80 km",
+  "bees.specs.battery.chargingTimeHome": "4 - 6 jam",
+  "bees.specs.battery.range": "90 km",
   "bees.specs.brake.frontBrake": "Rem Cakram",
   "bees.specs.brake.rearBrake": "Rem Cakram",
   "bees.specs.brake.cbsSupport": "Tidak",
@@ -1152,9 +1154,10 @@ export const id = {
   "supercharge.how.compare.super": "SuperCharge",
   "supercharge.how.compare.superValue": "15 menit",
   "supercharge.how.compare.home": "Isi daya di rumah",
-  "supercharge.how.compare.homeValue": "±5 jam",
+  "supercharge.how.compare.homeValue": "4 - 6 jam",
   "supercharge.how.compare.note":
-    "Isi daya di rumah: Athena dan Victory dengan baterai Regular. SuperCharge kompatibel dengan Athena, Victory, dan EdPower.",
+    "Isi daya di rumah 0% ke 100%: Bees, Athena, dan Victory 4 - 6 jam, EdPower 8 - 10 jam. SuperCharge kompatibel dengan Athena, Victory, dan EdPower.",
+  "supercharge.how.tariff": "Tarif SuperCharge: Athena dan Victory {av}, EdPower {ed} {unit}.",
   "supercharge.how.step1.title": "Colokkan konektor",
   "supercharge.how.step1.desc":
     "Parkir di stasiun SuperCharge, lalu sambungkan konektor ke motor Anda.",
@@ -1228,6 +1231,30 @@ export const id = {
   "supercharge.locator.empty.desc":
     "Coba kata kunci lain, atau longgarkan filternya.",
 
+  // Beranda: peta ringkas stasiun SuperCharge (section di bawah Spotlight)
+  "home.map.title": "Stasiun SuperCharge di dekat Anda",
+  "home.map.desc":
+    "Pilih area untuk melihat stasiun yang sudah beroperasi dan yang segera hadir. Detail jam operasional, fasilitas, dan navigasi ada di halaman lokasi.",
+  "home.map.stats": "{n} beroperasi · {m} segera hadir",
+  "home.map.areaLabel": "Pilih area",
+  "home.map.all": "Semua",
+  "home.map.listLabel": "Daftar stasiun SuperCharge",
+  "home.map.mapLabel": "Peta stasiun SuperCharge",
+  "home.map.chargers": "{n} nozzle",
+  "home.map.comingSoon": "Segera hadir",
+  "home.map.more": "+{n} lokasi lainnya",
+  "home.map.empty": "Belum ada stasiun di area ini.",
+  "home.map.viewAll": "Lihat semua lokasi",
+  "home.map.nearMe": "Di sekitar saya",
+  "home.map.nearMeActive": "Urut jarak: aktif",
+  "home.map.locating": "Mencari lokasi Anda…",
+  "home.map.nearMeDone": "Diurutkan dari yang terdekat dengan Anda.",
+  "home.map.geoDenied":
+    "Akses lokasi ditolak. Anda tetap bisa memilih area di atas.",
+  "home.map.geoError":
+    "Lokasi Anda belum terdeteksi. Coba lagi, atau pilih area di atas.",
+  "home.map.distance": "{km} km",
+
   "supercharge.video.title": "Begini Cara Kerja SuperCharge",
   "supercharge.video.description":
     "Dari menyambungkan konektor hingga melaju kembali, lihat seperti apa proses pengisian di stasiun SuperCharge.",
@@ -1238,7 +1265,7 @@ export const id = {
 
   "supercharge.feature2.subtitle": "Cek titik terdekat sebelum berangkat",
   "supercharge.feature2.description":
-    "Stasiun SuperCharge tersedia di showroom Wedison dan lokasi mitra, dan jumlahnya terus bertambah. Semuanya bisa Anda temukan di peta.",
+    "Stasiun SuperCharge tersedia di showroom Jakarta, Bandung Barat, dan Bekasi serta lokasi mitra, dan jumlahnya terus bertambah. Semuanya bisa Anda temukan di peta.",
 
   "supercharge.feature3.title": "Dibangun untuk Dipakai Bertahun-tahun",
   "supercharge.feature3.subtitle": "Keselamatan lebih dulu, baru kecepatan",
@@ -1385,7 +1412,7 @@ export const id = {
   // Battery Questions
   "faq.Battery.questions.0.question": "Berapa lama garansi baterainya?",
   "faq.Battery.questions.0.answer":
-    "Baterai Wedison dilindungi garansi selama 3 tahun.",
+    "Baterai Wedison dilindungi garansi selama 3 tahun atau 100.000 km, mana yang tercapai lebih dulu, dihitung sejak tanggal serah terima unit.",
   "faq.Battery.questions.1.question":
     "Berapa lama waktu mengisi baterai hingga penuh?",
   "faq.Battery.questions.1.answer":
@@ -1396,7 +1423,7 @@ export const id = {
     "Wedison menggunakan baterai Lithium-ion (LFP), teknologi yang sama dengan yang dipakai smartphone, laptop, dan mobil listrik.\n\nKeunggulannya:\nA. Padat energi: menyimpan daya besar dalam ukuran yang ringkas dan ringan.\nB. Tahan panas: tetap bekerja optimal hingga suhu 45 derajat Celsius.\nC. Minim kebocoran daya: daya tetap tersimpan meski motor tidak dipakai berhari-hari.\nD. Awet: mampu lebih dari 5.000 siklus pengisian dengan kapasitas yang tetap terjaga.\nE. Cepat diisi: di stasiun SuperCharge, baterai terisi dari 10% ke 80% dalam 15 menit.",
   "faq.Battery.questions.3.question": "Ada berapa pilihan baterai?",
   "faq.Battery.questions.3.answer":
-    "Untuk model tertentu tersedia dua pilihan: Regular dan Extended.\nJarak tempuhnya berbeda-beda tergantung model, mulai dari 80 km hingga 200 km dalam sekali pengisian.",
+    "Untuk model tertentu tersedia dua pilihan: Regular dan Extended.\nJarak tempuhnya berbeda-beda tergantung model, mulai dari 90 km hingga 200 km dalam sekali pengisian.",
   "faq.Battery.questions.4.question": "Siapa yang mengembangkan baterainya?",
   "faq.Battery.questions.4.answer":
     "Baterai Wedison dikembangkan sendiri oleh tim internal kami.",
@@ -1479,13 +1506,13 @@ export const id = {
   // Performance Questions
   "faq.Performance.questions.0.question": "Berapa kecepatan maksimalnya?",
   "faq.Performance.questions.0.answer":
-    "Tergantung modelnya, kecepatan maksimal berkisar antara 60 km/jam hingga 90 km/jam.",
+    "Tergantung modelnya, kecepatan maksimal berkisar antara 55 km/jam hingga 85 km/jam.",
   "faq.Performance.questions.1.question": "Berapa besar daya motornya?",
   "faq.Performance.questions.1.answer":
     "Daya motor berbeda di setiap model, mulai dari 1,2 kW hingga 6 kW.",
   "faq.Performance.questions.2.question": "Berapa jarak tempuhnya?",
   "faq.Performance.questions.2.answer":
-    "Tergantung model dan pilihan baterainya, jarak tempuh berkisar antara 80 km hingga 200 km dalam sekali pengisian.",
+    "Tergantung model dan pilihan baterainya, jarak tempuh berkisar antara 90 km hingga 200 km dalam sekali pengisian.",
   "faq.Performance.questions.3.question":
     "Apakah aman dipakai saat hujan atau melewati genangan?",
   "faq.Performance.questions.3.answer":
@@ -1496,7 +1523,7 @@ export const id = {
   "faq.Performance.questions.5.question":
     "Apakah kapasitas baterai menurun seiring waktu?",
   "faq.Performance.questions.5.answer":
-    "Ya, seperti semua perangkat dengan baterai lithium-ion. Kapasitasnya berkurang sedikit demi sedikit di setiap siklus pengisian.\nLaju penurunannya dipengaruhi jumlah siklus, usia baterai, dan suhu pemakaian.\n\nKarena itulah setiap baterai Wedison dilindungi garansi 3 tahun.",
+    "Ya, seperti semua perangkat dengan baterai lithium-ion. Kapasitasnya berkurang sedikit demi sedikit di setiap siklus pengisian.\nLaju penurunannya dipengaruhi jumlah siklus, usia baterai, dan suhu pemakaian.\n\nKarena itulah setiap baterai Wedison dilindungi garansi 3 tahun atau 100.000 km.",
 
   // Safety Questions
   "faq.Safety.questions.0.question": "Apakah baterainya aman?",
@@ -1508,15 +1535,16 @@ export const id = {
   "faq.Safety.questions.2.question":
     "Motor penggerak jenis apa yang digunakan?",
   "faq.Safety.questions.2.answer":
-    "Semua model Wedison menggunakan motor DC brushless (BLDC), yang dikenal efisien, bertorsi besar, dan berumur panjang.\n\nTipenya satu:\nDC Brushless Rear Hub Motor, dengan kecepatan hingga 90 km/jam (Bees, Athena, Victory, EdPower).",
+    "Semua model Wedison menggunakan motor DC brushless (BLDC), yang dikenal efisien, bertorsi besar, dan berumur panjang.\n\nTipenya satu:\nDC Brushless Rear Hub Motor, dengan kecepatan hingga 85 km/jam (Bees, Athena, Victory, EdPower).",
 
   // Servicing Questions
   "faq.Servicing.questions.0.question": "Apakah ada servis gratis?",
   "faq.Servicing.questions.0.answer":
-    "Ada. Setiap motor Wedison mendapat 3 kali servis gratis di bengkel Wedison atau bengkel resmi rekanan kami.\nJadwalnya mengikuti jarak tempuh: 1.000 km, 5.000 km, dan 10.000 km.",
+    "Ada. Setiap pembelian unit mendapat 1 kali servis reguler gratis di bengkel resmi Wedison. Jadwalnya akan diinformasikan tim showroom saat serah terima.",
   "faq.Servicing.questions.1.question":
-    "Pada jarak tempuh berapa saja servis gratisnya?",
-  "faq.Servicing.questions.1.answer": "Pada 1.000 km, 5.000 km, dan 10.000 km.",
+    "Kapan jadwal servis gratisnya?",
+  "faq.Servicing.questions.1.answer":
+    "Jadwal servis reguler diinformasikan tim showroom saat serah terima unit. Hubungi showroom terdekat untuk memastikannya.",
   "faq.Servicing.questions.2.question": "Di mana motor saya bisa diservis?",
   "faq.Servicing.questions.2.answer":
     "Di bengkel resmi Wedison atau bengkel rekanan resmi Wedison terdekat.",
@@ -1525,10 +1553,10 @@ export const id = {
     "Tersedia. Wedison menyediakan suku cadang asli untuk seluruh modelnya.",
   "faq.Servicing.questions.4.question": "Apakah baterai bergaransi?",
   "faq.Servicing.questions.4.answer":
-    "Ya. Baterai dilindungi garansi selama 3 tahun.",
+    "Ya. Baterai dilindungi garansi selama 3 tahun atau 100.000 km, mana yang tercapai lebih dulu.",
   "faq.Servicing.questions.5.question": "Apakah motor bergaransi?",
   "faq.Servicing.questions.5.answer":
-    "Ya. Unit motor dilindungi garansi selama 2 tahun.",
+    "Ya. Motor (dinamo) dan rangka bergaransi 3 tahun atau 100.000 km. Stang serta standar samping dan tengah bergaransi 2 tahun atau 20.000 km. Komponen elektrikal seperti controller, ECU, lampu, speedometer, dan kabel utama bergaransi 1 tahun atau 10.000 km. Semuanya berakhir pada batas yang tercapai lebih dulu.",
   "faq.Servicing.questions.6.question":
     "Berapa biaya perbaikan motor, dinamo, dan komponen lainnya?",
   "faq.Servicing.questions.6.answer":
@@ -1577,76 +1605,88 @@ export const id = {
   "ojol.btn.detail": "Lihat Detail",
 
   "ojol.campaign.milik.title": "Sewa Milik",
-  "ojol.campaign.milik.tagline": "Cicil Sambil Bekerja, Motor Jadi Milik Anda",
+  "ojol.campaign.milik.tagline": "Bayar Harian Sambil Bekerja, Motor Jadi Milik Anda",
   "ojol.campaign.milik.description":
-    "Sewa selama 3,5 tahun (42 bulan) dengan opsi kepemilikan. Begitu kontrak selesai, motor resmi menjadi milik Anda.",
+    "Rent To Own khusus mitra pengemudi ojol. Kontrak 42 bulan (Bees 40 bulan), dan begitu kontrak selesai motor resmi menjadi milik Anda. Pengurusan BPKB ditanggung Wedison.",
   "ojol.campaign.milik.benefit.0":
     "1x Gratis adaptor charging regular (senilai Rp1.000.000)",
   "ojol.campaign.milik.benefit.1":
     "1x Gratis ganti ban depan dan belakang (senilai Rp385.000)",
   "ojol.campaign.milik.benefit.2":
     "1x Gratis ganti kampas rem (1 set depan dan belakang)",
-  "ojol.campaign.milik.benefit.3": "2x Kunci mekanik",
-  "ojol.campaign.milik.benefit.4": "Garansi baterai 3 tahun",
-  "ojol.campaign.milik.benefit.5": "Garansi motor 2 tahun",
+  "ojol.campaign.milik.benefit.3": "Gratis servis rutin",
+  "ojol.campaign.milik.benefit.4": "1x Kunci mekanik",
+  "ojol.campaign.milik.benefit.5": "Garansi baterai 3 tahun atau 100.000 km",
+  "ojol.campaign.milik.benefit.6":
+    "Garansi motor dan rangka 3 tahun atau 100.000 km",
   "ojol.campaign.milik.term.0":
-    "Skema sewa milik berlaku selama 3 tahun 6 bulan (42 bulan)",
-  "ojol.campaign.milik.term.1":
-    "Mitra berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
+    "Masa kontrak 42 bulan untuk Athena, Victory, dan EdPower. 40 bulan untuk Bees",
+  "ojol.campaign.milik.term.1": "Khusus mitra pengemudi ojol",
   "ojol.campaign.milik.term.2":
-    "Setelah kontrak 42 bulan selesai, kepemilikan motor dialihkan kepada mitra",
-  "ojol.campaign.milik.term.3":
-    "Tabungan digunakan untuk biaya asuransi, servis, suku cadang, dan BPKB. Sisanya ditransfer kepada mitra di akhir kontrak",
+    "Setelah kontrak selesai, kepemilikan motor dialihkan kepada mitra",
+  "ojol.campaign.milik.term.3": "Pengurusan BPKB ditanggung oleh Wedison",
   "ojol.campaign.milik.term.4":
-    "Uang muka tidak dapat dikembalikan setelah mitra dinyatakan memenuhi syarat",
+    "Uang muka tidak dapat dikembalikan",
   "ojol.campaign.milik.term.5":
     "Denda tilang dan pelanggaran lalu lintas menjadi tanggung jawab mitra",
   "ojol.campaign.milik.term.6":
-    "Mitra wajib mengikuti proses seleksi dari Wedison",
-  "ojol.campaign.milik.scheme.0.label": "Athena/Victory Regular",
-  "ojol.campaign.milik.scheme.0.value": "Rp 55.000/hari",
-  "ojol.campaign.milik.scheme.1.label": "Athena/Victory Extended",
-  "ojol.campaign.milik.scheme.1.value": "Rp 60.000/hari",
-  "ojol.campaign.milik.scheme.2.label": "EdPower Extended",
-  "ojol.campaign.milik.scheme.2.value": "Rp 80.000/hari",
-  "ojol.campaign.milik.scheme.3.label": "Deposit",
-  "ojol.campaign.milik.scheme.3.value": "Rp 600.000 - Rp 800.000",
+    "Kerusakan akibat kelalaian atau penyalahgunaan menjadi tanggung jawab mitra",
+  "ojol.campaign.milik.term.7":
+    "Mitra wajib lolos proses skrining dari Wedison",
+  "ojol.campaign.milik.term.8":
+    "Warna motor ditentukan secara acak sesuai ketersediaan stok",
+  "ojol.campaign.milik.scheme.0.label": "Bees",
+  "ojol.campaign.milik.scheme.0.value": "Rp 35.000/hari",
+  "ojol.campaign.milik.scheme.1.label": "Athena/Victory Regular",
+  "ojol.campaign.milik.scheme.1.value": "Rp 58.000/hari",
+  "ojol.campaign.milik.scheme.2.label": "Athena/Victory Extended",
+  "ojol.campaign.milik.scheme.2.value": "Rp 63.000/hari",
+  "ojol.campaign.milik.scheme.3.label": "EdPower",
+  "ojol.campaign.milik.scheme.3.value": "Rp 83.000/hari",
+  "ojol.campaign.milik.scheme.4.label": "Uang Muka",
+  "ojol.campaign.milik.scheme.4.value": "Rp 100.000 - Rp 800.000",
 
   "ojol.campaign.harian.title": "Sewa Harian",
   "ojol.campaign.harian.tagline": "Bayar Harian, Tanpa Beban Cicilan",
   "ojol.campaign.harian.description":
-    "Sewa harian dengan kontrak 3 tahun. Tepat untuk Anda yang ingin langsung bekerja tanpa memikirkan cicilan.",
-  "ojol.campaign.harian.benefit.0": "1x Gratis adaptor charging regular",
+    "Rental dengan kontrak 36 bulan. Motor dikembalikan ke Wedison di akhir kontrak. Tepat untuk Anda yang ingin langsung bekerja tanpa memikirkan kepemilikan.",
+  "ojol.campaign.harian.benefit.0":
+    "1x Gratis adaptor charging regular (senilai Rp1.000.000)",
   "ojol.campaign.harian.benefit.1":
     "1x Gratis ganti ban depan dan belakang (senilai Rp385.000)",
   "ojol.campaign.harian.benefit.2":
     "1x Gratis ganti kampas rem (1 set depan dan belakang)",
-  "ojol.campaign.harian.benefit.3": "1x Gratis servis berkala",
-  "ojol.campaign.harian.benefit.4": "2x Kunci mekanik",
-  "ojol.campaign.harian.benefit.5": "Garansi baterai 3 tahun",
-  "ojol.campaign.harian.benefit.6": "Garansi motor 2 tahun",
+  "ojol.campaign.harian.benefit.3": "Gratis servis rutin",
+  "ojol.campaign.harian.benefit.4": "1x Kunci mekanik",
+  "ojol.campaign.harian.benefit.5": "Garansi baterai 3 tahun atau 100.000 km",
+  "ojol.campaign.harian.benefit.6":
+    "Garansi motor dan rangka 3 tahun atau 100.000 km",
   "ojol.campaign.harian.term.0":
-    "Skema sewa harian berlaku selama 3 tahun (36 bulan)",
+    "Masa kontrak 36 bulan (3 tahun)",
   "ojol.campaign.harian.term.1":
-    "Mitra berhak libur 1 hari per minggu (maksimal 48 hari per tahun)",
+    "Unit tetap menjadi milik PT Wedison Nusantara Energi. STNK atas nama PT Wedison Nusantara Energi",
   "ojol.campaign.harian.term.2":
-    "Uang muka tidak dapat dikembalikan setelah mitra dinyatakan memenuhi syarat",
+    "Motor dikembalikan ke Wedison di akhir kontrak",
   "ojol.campaign.harian.term.3":
-    "Motor sepenuhnya milik PT Wedison Nusantara Energi",
+    "Mitra mendapat 2 hari libur bayar per bulan, maksimal 24 hari per tahun",
   "ojol.campaign.harian.term.4":
-    "Denda tilang dan pelanggaran lalu lintas menjadi tanggung jawab mitra",
+    "Uang muka tidak dapat dikembalikan",
   "ojol.campaign.harian.term.5":
-    "Kerusakan akibat kelalaian atau kecelakaan menjadi tanggung jawab mitra",
+    "Denda tilang dan pelanggaran lalu lintas menjadi tanggung jawab mitra",
   "ojol.campaign.harian.term.6":
-    "Mitra wajib mengikuti proses seleksi dari Wedison",
-  "ojol.campaign.harian.term.7": "Warna motor ditentukan secara acak",
+    "Kerusakan akibat kelalaian atau penyalahgunaan menjadi tanggung jawab mitra",
+  "ojol.campaign.harian.term.7":
+    "Mitra wajib lolos proses skrining dari Wedison",
+  "ojol.campaign.harian.term.8":
+    "Warna motor ditentukan secara acak sesuai ketersediaan stok",
+  "ojol.campaign.harian.term.9": "Bees tidak tersedia untuk skema Rental",
   "ojol.campaign.harian.scheme.0.label": "Athena/Victory Regular",
   "ojol.campaign.harian.scheme.0.value": "Rp 50.000/hari",
   "ojol.campaign.harian.scheme.1.label": "Athena/Victory Extended",
   "ojol.campaign.harian.scheme.1.value": "Rp 55.000/hari",
-  "ojol.campaign.harian.scheme.2.label": "EdPower Extended",
+  "ojol.campaign.harian.scheme.2.label": "EdPower",
   "ojol.campaign.harian.scheme.2.value": "Rp 75.000/hari",
-  "ojol.campaign.harian.scheme.3.label": "Deposit",
+  "ojol.campaign.harian.scheme.3.label": "Uang Muka",
   "ojol.campaign.harian.scheme.3.value": "Rp 500.000 - Rp 750.000",
 
   "ojol.dialog.programBadge": "PROGRAM",
@@ -1689,13 +1729,61 @@ export const id = {
   "ojol.cta.headline.1": "Siap Menambah Penghasilan",
   "ojol.cta.headline.2": "bersama Wedison?",
   "ojol.cta.description":
-    "Sewa harian mulai Rp50 ribu, SuperCharge gratis, dan pilihan cicilan ringan. Daftar sekarang, dan tim kami akan memandu prosesnya.",
+    "Sewa harian mulai Rp50 ribu, Rent To Own mulai Rp35 ribu per hari, adaptor charging gratis. Daftar sekarang, dan tim kami akan memandu prosesnya.",
   "ojol.cta.benefit.1": "Sewa Harian Mulai Rp50 Ribu",
-  "ojol.cta.benefit.2": "SuperCharge Gratis",
-  "ojol.cta.benefit.3": "Cicilan Ringan",
-  "ojol.cta.benefit.4": "Servis Prioritas",
+  "ojol.cta.benefit.2": "Rent To Own Mulai Rp35 Ribu/Hari",
+  "ojol.cta.benefit.3": "Adaptor Charging Gratis",
+  "ojol.cta.benefit.4": "Servis Rutin Gratis",
   "ojol.cta.button": "Hubungi Tim Wedison",
   "ojol.cta.trust": "Respons cepat, konsultasi gratis",
+
+  // Pricing (section harga di halaman produk; angka dari modul Pricing admin)
+  "pricing.kicker": "Harga & Skema",
+  "pricing.title": "Harga {model}",
+  "pricing.subtitle": "Pilih wilayah dan skema yang sesuai. Semua harga on-the-road, sudah termasuk STNK, BPKB, dan plat nomor.",
+  "pricing.startingFrom": "Mulai dari",
+  "pricing.region": "Wilayah",
+  "pricing.scheme": "Skema",
+  "pricing.otr": "Harga OTR",
+  "pricing.net": "Harga setelah diskon",
+  "pricing.save": "Hemat {amount}",
+  "pricing.perDay": "/hari",
+  "pricing.perMonth": "/bulan",
+  "pricing.dailyFee": "Biaya harian",
+  "pricing.downPayment": "Uang muka",
+  "pricing.term": "Masa kontrak",
+  "pricing.months": "{n} bulan",
+  "pricing.ownership.rent_to_own": "Motor menjadi milik Anda setelah kontrak selesai.",
+  "pricing.ownership.rental": "Motor dikembalikan ke Wedison di akhir kontrak.",
+  "pricing.installment24": "Angsuran 24 bulan",
+  "pricing.installment36": "Angsuran 36 bulan",
+  "pricing.unitPrice": "Harga unit, tanpa baterai",
+  "pricing.monthlyFee": "Langganan baterai",
+  "pricing.included": "Setiap unit termasuk",
+  "pricing.partners": "Mitra pembiayaan",
+  "pricing.terms": "Syarat dan ketentuan",
+  "pricing.validFrom": "Berlaku sejak {date}",
+  "pricing.validUntil": "sampai {date}",
+  "pricing.audience.ojol": "Khusus mitra pengemudi ojol",
+  "pricing.audience.b2b": "Untuk bisnis (B2B)",
+  "pricing.contactSales.title": "Harga untuk {region} segera tersedia",
+  "pricing.contactSales.desc":
+    "Tim sales {region} siap membantu Anda dengan penawaran terbaru dan jadwal test ride lewat WhatsApp.",
+  "pricing.contactSales.cta": "Hubungi Sales {region}",
+  "pricing.notOffered": "{model} belum tersedia untuk skema ini di {region}.",
+  "pricing.cta.testRide": "Jadwalkan Test Ride",
+  "pricing.cta.whatsapp": "Tanya Sales via WhatsApp",
+  "pricing.whatsappMessage":
+    "Halo Wedison, saya ingin bertanya tentang harga {model} ({scheme}) untuk wilayah {region}.",
+  "pricing.supercharge.label": "Tarif SuperCharge",
+  "pricing.supercharge.notSupported": "Tidak mendukung SuperCharge",
+  "pricing.summary.title": "Ringkasan harga {model} di semua wilayah dan skema",
+  "pricing.summary.region": "Wilayah",
+  "pricing.summary.scheme": "Skema",
+  "pricing.summary.variant": "Varian",
+  "pricing.summary.price": "Harga",
+  "pricing.summary.note": "Harga net on-the-road setelah diskon, atau biaya harian untuk skema sewa.",
+  "pricing.otrRegion": "OTR {region}",
 
   // Booking (modal Test Ride / Booking Kunjungan)
   "booking.title": "Jadwalkan Kunjungan Showroom",
@@ -1723,7 +1811,7 @@ export const id = {
   "booking.time.pickDateFirst": "Pilih showroom dan tanggal terlebih dahulu",
   "booking.time.none": "Tidak ada slot yang tersisa",
   "booking.hoursHint":
-    "Jam operasional: Senin–Jumat 10.00–19.00, Sabtu–Minggu 10.00–17.00.",
+    "Jam operasional: Senin–Jumat 10.00–19.00, Sabtu–Minggu 10.00–17.00, libur nasional 10.00–16.00.",
   "booking.field.note": "Catatan",
   "booking.placeholder.note": "Contoh: ingin mencoba Athena, datang berdua",
   "booking.submit": "Kirim dan Lanjutkan ke WhatsApp",

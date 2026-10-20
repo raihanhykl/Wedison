@@ -12,6 +12,8 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
 import type { Locale } from "@/app/lib/locale";
+import { getPricing } from "@/lib/cms/api";
+import { baasModelsFrom } from "./data";
 
 export async function generateMetadata({
   params,
@@ -35,6 +37,7 @@ export default async function BaasPage({
       ? (await import("@/app/lib/dictionaries/en")).en
       : (await import("@/app/lib/dictionaries/id")).id
   ) as unknown as Record<string, string>;
+  const models = baasModelsFrom(await getPricing());
   const faq = Array.from({ length: FAQ_COUNT }, (_, i) => ({
     question: dict[`baas.faq.${i + 1}.q`],
     answer: dict[`baas.faq.${i + 1}.a`],
@@ -54,9 +57,9 @@ export default async function BaasPage({
           faqSchema(faq),
         ]}
       />
-      <BaasHero />
+      <BaasHero models={models} />
       <BaasWhy />
-      <BaasConfigurator />
+      <BaasConfigurator models={models} />
       <BaasHowItWorks />
       <BaasIncluded />
       <BaasCompare />

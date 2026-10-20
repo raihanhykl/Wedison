@@ -125,31 +125,35 @@ export default function Contact({ topic = null }: Props) {
       return;
     }
 
+    if (isSubmitting) return;
     setIsSubmitting(true);
-    // Simpan ke database (menu Leads > Contact Messages di admin). Fail-soft: gagal simpan
-    // tidak boleh menggagalkan pengiriman email, dan tidak perlu ditunggu.
-    void fetch("/api/v1/public/leads/contacts/", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        topic:
-          data.title.includes("Judul Lainnya: ") && data.otherTitle
-            ? data.title + data.otherTitle
-            : data.title,
-        message: data.message,
-        locale: language,
-      }),
-      keepalive: true,
-    }).catch(() => {});
     try {
-      const result = await EmailService.sendContactEmail(
-        data,
-        recaptchaToken ?? undefined
-      );
-      if (result.success) {
+      // Sumber kebenaran = database (muncul di admin Leads > Contact Messages). Hanya bila
+      // penyimpanan ini berhasil, pengguna diberi tahu "terkirim". Server menolak kiriman
+      // ulang dengan isi sama dalam 15 menit (idempoten), jadi klik ganda tidak menduplikasi.
+      const res = await fetch("/api/v1/public/leads/contacts/", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          topic:
+            data.title.includes("Judul Lainnya: ") && data.otherTitle
+              ? data.title + data.otherTitle
+              : data.title,
+          message: data.message,
+          locale: language,
+          recaptchaToken: recaptchaToken ?? undefined,
+        }),
+      });
+      const json = (await res.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
+      if (res.ok && json?.ok) {
+        // Notifikasi email ke tim (EmailJS) bersifat tambahan: kegagalannya tidak boleh
+        // membuat pengguna mengira pesannya gagal, karena pesan sudah tersimpan.
+        void EmailService.sendContactEmail(data, recaptchaToken ?? undefined).then((r) => {
+          if (!r.success) console.warn("Contact email notification failed:", r.message);
+        });
         form.reset();
         recaptchaRef.current?.reset();
         setRecaptchaToken(null);
@@ -166,7 +170,7 @@ export default function Contact({ topic = null }: Props) {
           },
         });
       } else {
-        throw new Error(result.message);
+        throw new Error(json?.message ?? `Request failed (${res.status})`);
       }
     } catch (error) {
       console.error("Form submission error:", error);

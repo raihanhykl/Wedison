@@ -30,12 +30,14 @@ export type Showroom = {
   timeZone: "Asia/Jakarta" | "Asia/Makassar";
   /** singkatan zona waktu untuk UI/pesan */
   tzLabel: "WIB" | "WITA";
-  hours: { weekday: OpeningHours; weekend: OpeningHours };
+  hours: { weekday: OpeningHours; weekend: OpeningHours; holiday: OpeningHours };
 };
 
 const HOURS = {
   weekday: { open: 10 * 60, close: 19 * 60 },
   weekend: { open: 10 * 60, close: 17 * 60 },
+  /** hari libur nasional di luar akhir pekan */
+  holiday: { open: 10 * 60, close: 16 * 60 },
 } as const;
 
 export const SHOWROOMS: Record<ShowroomId, Showroom> = {
@@ -45,7 +47,7 @@ export const SHOWROOMS: Record<ShowroomId, Showroom> = {
     addressKey: "showroom.jakarta.address",
     name: "Wedison Jakarta",
     address:
-      "Jl. Arteri Pondok Indah No 30 A-C, Kebayoran Lama Selatan, Jakarta Selatan, DKI Jakarta 12240",
+      "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, Jakarta Selatan, DKI Jakarta 12240",
     whatsapp: "6285286126550",
     timeZone: "Asia/Jakarta",
     tzLabel: "WIB",

@@ -8,7 +8,7 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 import { SITES } from "@/data/supercharge-sites";
-import { getStations } from "@/lib/cms/api";
+import { getPricing, getStations } from "@/lib/cms/api";
 import type { Locale } from "@/app/lib/locale";
 
 export async function generateMetadata({
@@ -48,6 +48,9 @@ export default async function SuperChargePage({
   const { locale } = await params;
   const loc = (locale === "en" ? "en" : "id") as Locale;
   const stats = await networkStats();
+  const pricing = await getPricing();
+  const sc = pricing.settings.supercharge;
+  const tariff = sc.enabled ? { athena: sc.tariff.athena, victory: sc.tariff.victory, edpower: sc.tariff.edpower, unit: loc === "en" ? sc.unitEn : sc.unitId } : null;
 
   return (
     // Bukan <main>: landmark <main> tunggal disediakan layout locale (#konten).
@@ -61,7 +64,7 @@ export default async function SuperChargePage({
         ])}
       />
       <SuperChargeHero />
-      <HowItWorks />
+      <HowItWorks tariff={tariff} />
       <SuperChargeNetwork stats={stats} />
       <SuperChargeSafety />
       <AppSection />

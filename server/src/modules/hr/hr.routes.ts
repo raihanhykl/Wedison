@@ -95,16 +95,16 @@ hrRouter.use(requireAuth, requireModule("hr"));
 
 // Who am I in HR (permissions for the UI)
 hrRouter.get("/permissions", (req, res) => {
-  const r = req.user!.role;
+  const u = req.user!;
   res.json({
     ok: true,
     data: {
-      role: r,
-      write: canHr(r, "jobs.write"),
-      publish: canHr(r, "jobs.publish"),
-      delete: canHr(r, "jobs.delete"),
-      settings: canHr(r, "settings.write"),
-      taxonomy: canHr(r, "taxonomy.write"),
+      role: u.role.key,
+      write: canHr(u, "jobs.write"),
+      publish: canHr(u, "jobs.publish"),
+      delete: canHr(u, "jobs.delete"),
+      settings: canHr(u, "settings.write"),
+      taxonomy: canHr(u, "taxonomy.write"),
     },
   });
 });
@@ -252,7 +252,7 @@ hrRouter.put("/jobs/:id", requireHr("jobs.write"), validate(jobSchema), async (r
     const existing = await prisma.job.findUnique({ where: { id } });
     if (!existing) throw notFound("Job not found");
     // HR_STAFF cannot change a job that is already live; a manager must do it.
-    if (["PUBLISHED", "CLOSED"].includes(existing.status) && !canHr(req.user!.role, "jobs.publish"))
+    if (["PUBLISHED", "CLOSED"].includes(existing.status) && !canHr(req.user!, "jobs.publish"))
       throw forbidden("Only an HR manager can edit a published or closed job");
     const slug = d.slug && slugify(d.slug) !== existing.slug ? await uniqueJobSlug(d.slug, id) : existing.slug;
     const locales = d.translations.map((t) => t.locale);
@@ -287,9 +287,8 @@ hrRouter.post("/jobs/:id/transition", requireHr("jobs.write"), validate(transiti
     const { action, note } = getValidated<typeof transitionSchema>(req);
     const job = await prisma.job.findUnique({ where: { id }, include });
     if (!job) throw notFound("Job not found");
-    const role = req.user!.role;
     const needPublish = action !== "submit";
-    if (needPublish && !canHr(role, "jobs.publish")) throw forbidden("Only an HR manager can do this");
+    if (needPublish && !canHr(req.user!, "jobs.publish")) throw forbidden("Only an HR manager can do this");
 
     const now = new Date();
     let data: Prisma.JobUpdateInput;

@@ -26,7 +26,11 @@ import { useLanguage } from "../lib/language-context";
 import AppDownloadTeaser from "@/components/app-download-teaser";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
 import { ArtDirectedImage } from "@/components/art-directed-image";
+import { pick, rupiahShort, type StartingPrice } from "@/lib/pricing/select";
+import type { ProductId } from "@/lib/pricing/types";
 import { whatsappUrl } from "@/lib/seo/site";
+import SuperChargeMapSection from "./supercharge-map-section";
+import type { Site } from "@/app/[locale]/super-charge/locations/types";
 
 type Lang = "id" | "en";
 
@@ -155,6 +159,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_mq: "Nol emisi|Tanpa bensin|Perawatan minimal",
 
     familyLabel: "Jajaran Model",
+    from: "Mulai",
     familyTitle: "Empat model. Satu standar kualitas.",
     familySub:
       "Karakter dan peruntukannya berbeda, tetapi semuanya dirancang dan dirakit dengan standar yang sama.",
@@ -175,7 +180,7 @@ const COPY: Record<Lang, Record<string, string>> = {
       "Dari 10% ke 80% dalam 15 menit, di jaringan yang terus bertambah.",
     adv_battery_t: "Garansi Baterai",
     adv_battery_d:
-      "Garansi 3 tahun untuk baterai dan 2 tahun untuk unit motor.",
+      "Baterai, motor, dan rangka bergaransi 3 tahun atau 100.000 km.",
     adv_cost_t: "Biaya Harian Lebih Ringan",
     adv_cost_d:
       "Tanpa bensin dan dengan perawatan minimal, pengeluaran harian jauh lebih ringan.",
@@ -223,6 +228,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_green_mq: "Zero emission|No petrol|Minimal maintenance",
 
     familyLabel: "The Lineup",
+    from: "From",
     familyTitle: "Four motorcycles, one standard.",
     familySub:
       "Distinct characters for different needs, all built to the same standard.",
@@ -239,7 +245,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     adv_charge_t: "SuperCharge Network",
     adv_charge_d: "A 15-minute charge at a growing number of locations.",
     adv_battery_t: "Battery Warranty",
-    adv_battery_d: "Three years on the battery, two on the motorcycle.",
+    adv_battery_d: "Battery, motor, and frame covered for 3 years or 100,000 km.",
     adv_cost_t: "Lower Running Costs",
     adv_cost_d:
       "No petrol, fewer service visits, and a substantially lower cost per kilometer.",
@@ -264,9 +270,10 @@ const COPY: Record<Lang, Record<string, string>> = {
   },
 };
 
-export default function Landing() {
+export default function Landing({ sites, prices }: { sites: Site[]; prices?: Record<ProductId, StartingPrice | null> }) {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
+  const lang = language === "en" ? "en" : "id";
   // Semua link internal WAJIB berprefix locale + trailing slash: tanpa itu tiap klik/crawl
   // lewat dua redirect (307 locale dari middleware + 308 trailing slash).
   const href = (path: string) =>
@@ -457,6 +464,17 @@ export default function Landing() {
                 <h3 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   {NAMES[m.id]}
                 </h3>
+                {prices?.[m.id] && (
+                  <p className="mt-1.5 text-sm text-white/90">
+                    {c.from}{" "}
+                    <span className="font-mono text-base font-semibold tabular-nums text-white">
+                      {rupiahShort(prices[m.id]!.net, lang)}
+                    </span>{" "}
+                    <span className="text-xs text-white/70">
+                      {`OTR ${pick(prices[m.id]!.region.name, lang)}`}
+                    </span>
+                  </p>
+                )}
                 <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
                   {c.learn}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -506,6 +524,9 @@ export default function Landing() {
           </div>
         </Reveal>
       </section>
+
+      {/* ============ SUPERCHARGE MAP (peta ringkas stasiun) ============ */}
+      <SuperChargeMapSection sites={sites} />
 
       {/* ============ APP DOWNLOAD ============ */}
       <AppDownloadTeaser />

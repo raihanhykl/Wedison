@@ -110,7 +110,7 @@ const bulkSchema = z.object({
 stationsRouter.post("/bulk", requireWrite("supercharge"), validate(bulkSchema), async (req, res, next) => {
   try {
     const { ids, action, status } = getValidated<typeof bulkSchema>(req);
-    if (action === "delete" && !canDelete(req.user!.role, "supercharge")) throw badRequest("Your role cannot delete stations");
+    if (action === "delete" && !canDelete(req.user!, "supercharge")) throw badRequest("Your role cannot delete stations");
     if (action === "status" && !status) throw badRequest("status is required for the status action");
     const where = { id: { in: ids } };
     let count = 0;

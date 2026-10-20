@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authRouter } from "../modules/auth/auth.routes.js";
 import { usersRouter } from "../modules/users/users.routes.js";
+import { rolesRouter } from "../modules/roles/roles.routes.js";
 import { activityRouter } from "../modules/activity/activity.routes.js";
 import { categoriesRouter, tagsRouter, publicTaxonomyRouter } from "../modules/taxonomy/taxonomy.routes.js";
 import { articlesRouter, publicArticlesRouter } from "../modules/articles/articles.routes.js";
@@ -8,6 +9,7 @@ import { pressRouter, publicPressRouter } from "../modules/press/press.routes.js
 import { socialRouter, publicSocialRouter } from "../modules/social/social.routes.js";
 import { mediaRouter } from "../modules/media/media.routes.js";
 import { stationsRouter, publicStationsRouter } from "../modules/stations/stations.routes.js";
+import { pricingRouter, publicPricingRouter } from "../modules/pricing/pricing.routes.js";
 import { consentRouter, publicConsentRouter } from "../modules/consent/consent.routes.js";
 import { dashboardRouter } from "../modules/dashboard/dashboard.routes.js";
 import { seoRouter } from "../modules/seo/seo.routes.js";
@@ -20,6 +22,7 @@ export const api = Router();
 // ── Admin (butuh login) ─────────────────────────────────────────────
 api.use("/auth", authRouter);
 api.use("/admin/users", usersRouter);
+api.use("/admin/roles", rolesRouter); // role kustom (izin per modul), butuh users.manage
 api.use("/admin/activity", activityRouter);
 api.use("/admin/dashboard", dashboardRouter);
 api.use("/admin/hr", hrRouter); // lowongan, divisi, lokasi, kontak HR (role HR_MANAGER/HR_STAFF)
@@ -32,6 +35,7 @@ api.use("/admin/press", pressRouter);
 api.use("/admin/social", socialRouter);
 api.use("/admin/media", mediaRouter);
 api.use("/admin/stations", stationsRouter);
+api.use("/admin/pricing", pricingRouter); // harga, skema, wilayah, S&K, tarif SuperCharge
 api.use("/admin/leads", leadsRouter); // booking showroom + pesan kontak + statistik
 api.use("/admin/consent", consentRouter);
 
@@ -49,6 +53,7 @@ publicRouter.use("/careers", publicCareersRouter);
 publicRouter.use("/press", publicPressRouter);
 publicRouter.use("/social", publicSocialRouter);
 publicRouter.use("/stations", publicStationsRouter);
+publicRouter.use("/pricing", publicPricingRouter);
 publicRouter.use("/", publicTaxonomyRouter);
 api.use("/public", publicRouter);
 

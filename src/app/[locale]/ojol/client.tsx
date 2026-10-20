@@ -19,6 +19,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { whatsappUrl } from "@/lib/seo/site";
+import type { OjolPrograms } from "./programs";
 
 // Campaign meta (translatable strings live in language-context.tsx)
 const campaignMeta = [
@@ -27,9 +28,9 @@ const campaignMeta = [
     image: "/ojol/sewa-milik-banner.webp",
     waLink:
       whatsappUrl("Halo Wedison, saya tertarik dengan program Sewa Milik"),
-    benefitsCount: 6,
-    termsCount: 7,
-    schemeCount: 4,
+    benefitsCount: 7,
+    termsCount: 9,
+    schemeCount: 5,
   },
   {
     id: "harian",
@@ -37,18 +38,24 @@ const campaignMeta = [
     waLink:
       whatsappUrl("Halo Wedison, saya tertarik dengan program Sewa Harian"),
     benefitsCount: 7,
-    termsCount: 8,
+    termsCount: 10,
     schemeCount: 4,
   },
 ];
 
-export default function OjolClient() {
+export default function OjolClient({ programs }: { programs?: OjolPrograms }) {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [openDialog, setOpenDialog] = React.useState<string | null>(null);
   const carouselApi = React.useRef<any>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const lang = language === "en" ? "en" : "id";
 
   const activeCampaign = campaignMeta.find((c) => c.id === openDialog);
+  // Isi dialog dari modul Pricing (angka & S&K yang sama dengan halaman produk); kamus = fallback.
+  const program = activeCampaign ? programs?.[activeCampaign.id as "milik" | "harian"]?.[lang] ?? null : null;
+  const schemeRows = program?.scheme ?? (activeCampaign ? Array.from({ length: activeCampaign.schemeCount }, (_, idx) => ({ label: t(`ojol.campaign.${activeCampaign.id}.scheme.${idx}.label`), value: t(`ojol.campaign.${activeCampaign.id}.scheme.${idx}.value`) })) : []);
+  const benefitRows = program?.benefits ?? (activeCampaign ? Array.from({ length: activeCampaign.benefitsCount }, (_, idx) => t(`ojol.campaign.${activeCampaign.id}.benefit.${idx}`)) : []);
+  const termRows = program?.terms ?? (activeCampaign ? Array.from({ length: activeCampaign.termsCount }, (_, idx) => t(`ojol.campaign.${activeCampaign.id}.term.${idx}`)) : []);
   const items: {
     image: string;
     imageMobile: string;
@@ -163,8 +170,8 @@ export default function OjolClient() {
       image: "/bees/bees-grey.webp",
       link: "/products/bees/",
       specs: [
-        { labelKey: "ojol.models.spec.range", value: "80 km" },
-        { labelKey: "ojol.models.spec.maxSpeed", value: "60 km/h" },
+        { labelKey: "ojol.models.spec.range", value: "90 km" },
+        { labelKey: "ojol.models.spec.maxSpeed", value: "55 km/h" },
         { labelKey: "ojol.models.spec.battery", value: "1600Wh" },
       ],
     },
@@ -487,25 +494,15 @@ export default function OjolClient() {
                   {t("ojol.dialog.scheme")}
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
-                  {Array.from({ length: activeCampaign.schemeCount }).map(
-                    (_, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-muted rounded-xl p-4 border border-border"
-                      >
-                        <p className="text-muted-foreground text-sm">
-                          {t(
-                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.label`,
-                          )}
-                        </p>
-                        <p className="text-foreground font-bold text-lg">
-                          {t(
-                            `ojol.campaign.${activeCampaign.id}.scheme.${idx}.value`,
-                          )}
-                        </p>
-                      </div>
-                    ),
-                  )}
+                  {schemeRows.map((row, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-muted rounded-xl p-4 border border-border"
+                    >
+                      <p className="text-muted-foreground text-sm">{row.label}</p>
+                      <p className="text-foreground font-bold text-lg">{row.value}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -530,8 +527,7 @@ export default function OjolClient() {
                   {t("ojol.dialog.benefits")}
                 </h4>
                 <ul className="space-y-2">
-                  {Array.from({ length: activeCampaign.benefitsCount }).map(
-                    (_, idx) => (
+                  {benefitRows.map((benefit, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <svg
                           className="w-5 h-5 text-primary mt-0.5 flex-shrink-0"
@@ -544,14 +540,9 @@ export default function OjolClient() {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="text-foreground">
-                          {t(
-                            `ojol.campaign.${activeCampaign.id}.benefit.${idx}`,
-                          )}
-                        </span>
+                        <span className="text-foreground">{benefit}</span>
                       </li>
-                    ),
-                  )}
+                  ))}
                 </ul>
               </div>
 
@@ -576,18 +567,14 @@ export default function OjolClient() {
                   {t("ojol.dialog.terms")}
                 </h4>
                 <ul className="space-y-2">
-                  {Array.from({ length: activeCampaign.termsCount }).map(
-                    (_, idx) => (
+                  {termRows.map((term, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-xs font-bold text-primary mt-0.5 flex-shrink-0">
                           {idx + 1}
                         </span>
-                        <span className="text-foreground">
-                          {t(`ojol.campaign.${activeCampaign.id}.term.${idx}`)}
-                        </span>
+                        <span className="text-foreground">{term}</span>
                       </li>
-                    ),
-                  )}
+                  ))}
                 </ul>
               </div>
             </div>

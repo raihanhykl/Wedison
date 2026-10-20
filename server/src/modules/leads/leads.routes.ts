@@ -4,7 +4,7 @@ import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireModule, requireDelete } from "../../middleware/auth.js";
+import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
 import { logActivity } from "../../lib/activity.js";
 import { logger } from "../../lib/logger.js";
 import { env } from "../../config/env.js";
@@ -120,6 +120,7 @@ const contactBody = z.object({
   message: z.string().trim().min(1).max(2000),
   locale: z.enum(["id", "en"]).optional(),
   website: z.string().max(200).optional(), // honeypot
+  recaptchaToken: z.string().max(5000).optional(),
 });
 
 export const publicLeadsRouter = Router();
@@ -163,13 +164,29 @@ publicLeadsRouter.post("/bookings", publicLimiter(5), validate(bookingBody), asy
   }
 });
 
+// Pesan identik (email + isi sama) dalam jendela ini dianggap kiriman ulang, bukan pesan baru.
+const CONTACT_DEDUPE_MS = 15 * 60_000;
+
 publicLeadsRouter.post("/contacts", publicLimiter(5), validate(contactBody), async (req, res, next) => {
   try {
     const c = getValidated<typeof contactBody>(req);
     if (c.website) return res.json({ ok: true, id: null });
-    const created = await prisma.contactSubmission.create({
-      data: { name: c.name, email: c.email, phone: c.phone, topic: c.topic, message: c.message, locale: c.locale ?? null, ip: clientIp(req) },
+    const ip = clientIp(req);
+    if (!(await verifyRecaptcha(c.recaptchaToken, ip))) {
+      throw new HttpError(400, "reCAPTCHA verification failed", "RECAPTCHA");
+    }
+    // Idempoten: klik ganda / kirim ulang dengan isi sama tidak membuat duplikat di admin.
+    const email = c.email.toLowerCase();
+    const dup = await prisma.contactSubmission.findFirst({
+      where: { email: { equals: email, mode: "insensitive" }, message: c.message, createdAt: { gte: new Date(Date.now() - CONTACT_DEDUPE_MS) } },
+      select: { id: true },
+      orderBy: { createdAt: "desc" },
     });
+    if (dup) return res.json({ ok: true, id: dup.id, duplicate: true });
+    const created = await prisma.contactSubmission.create({
+      data: { name: c.name, email, phone: c.phone, topic: c.topic, message: c.message, locale: c.locale ?? null, ip },
+    });
+    logger.info({ contactId: created.id, topic: c.topic }, "pesan kontak baru");
     res.status(201).json({ ok: true, id: created.id });
   } catch (e) {
     next(e);
@@ -346,7 +363,7 @@ leadsRouter.get("/bookings/:id", async (req, res, next) => {
 
 const bookingPatch = z.object({ status: BOOKING_STATUS.optional(), adminNote: z.string().trim().max(1000).nullable().optional() });
 
-leadsRouter.patch("/bookings/:id", validate(bookingPatch), async (req, res, next) => {
+leadsRouter.patch("/bookings/:id", requireWrite("leads"), validate(bookingPatch), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const data = getValidated<typeof bookingPatch>(req);
@@ -365,7 +382,7 @@ leadsRouter.patch("/bookings/:id", validate(bookingPatch), async (req, res, next
   }
 });
 
-leadsRouter.post("/bookings/:id/calendar-sync", async (req, res, next) => {
+leadsRouter.post("/bookings/:id/calendar-sync", requireWrite("leads"), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const item = await syncBookingToCalendar(id);
@@ -418,7 +435,7 @@ leadsRouter.get("/contacts", validate(contactListQuery, "query"), async (req, re
 
 const contactPatch = z.object({ isHandled: z.boolean().optional(), adminNote: z.string().trim().max(1000).nullable().optional() });
 
-leadsRouter.patch("/contacts/:id", validate(contactPatch), async (req, res, next) => {
+leadsRouter.patch("/contacts/:id", requireWrite("leads"), validate(contactPatch), async (req, res, next) => {
   try {
     const id = req.params.id as string;
     const data = getValidated<typeof contactPatch>(req);

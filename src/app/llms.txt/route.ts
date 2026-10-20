@@ -1,5 +1,8 @@
 import { CONTACT, SITE_URL } from "@/lib/seo/site";
 import { PUBLISHED_SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/showrooms";
+import { getPricing } from "@/lib/cms/api";
+import type { PublicPricing } from "@/lib/pricing/types";
+import { PRODUCT_IDS, PRODUCT_NAMES, entriesFor, pick, schemesFor, sortedRegions, superchargeTariff, variantLabel } from "@/lib/pricing/select";
 
 // /llms.txt — ringkasan situs untuk asisten AI / mesin jawaban (GEO/AEO, spesifikasi
 // llmstxt.org). Disajikan di root seperti robots.txt & sitemap.xml. Next tidak punya konvensi
@@ -10,7 +13,35 @@ import { PUBLISHED_SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/sho
 export const dynamic = "force-static";
 export const revalidate = 86400;
 
-function build(): string {
+/** Baris harga resmi per wilayah × skema × model untuk AI crawler (angka dari modul Pricing). */
+function pricingSummary(p: PublicPricing): string {
+  const idr = (n: number) => `Rp ${new Intl.NumberFormat("en-US").format(n)}`;
+  const lines: string[] = [];
+  for (const region of sortedRegions(p)) {
+    const label = pick(region.priceLabel, "en") || `${pick(region.name, "en")} pricing`;
+    for (const model of PRODUCT_IDS) {
+      for (const scheme of schemesFor(p, region.slug, model)) {
+        for (const e of entriesFor(p, region.slug, scheme.slug, model)) {
+          const v = e.variant === "single" ? "" : ` (${variantLabel(e.variant, "en")})`;
+          let price = "";
+          if (scheme.kind === "purchase" && e.netPrice != null) price = `${idr(e.netPrice)} net on-the-road${e.otrPrice != null && e.otrPrice !== e.netPrice ? ` (list ${idr(e.otrPrice)})` : ""}`;
+          else if ((scheme.kind === "rent_to_own" || scheme.kind === "rental") && e.dailyFee != null) price = `${idr(e.dailyFee)} per day${e.downPayment != null ? `, down payment ${idr(e.downPayment)}` : ""}${e.termMonths != null ? `, ${e.termMonths}-month contract` : ""}`;
+          else if (scheme.kind === "b2b_credit" && e.installment36 != null) price = `${e.installment24 != null ? `${idr(e.installment24)}/month over 24 months, ` : ""}${idr(e.installment36)}/month over 36 months`;
+          else if (scheme.kind === "baas" && e.unitPrice != null) price = `unit ${idr(e.unitPrice)} without battery + battery subscription ${e.monthlyFee != null ? idr(e.monthlyFee) : "-"}/month`;
+          const where = scheme.kind === "purchase" ? label : pick(region.name, "en");
+          if (price) lines.push(`- ${PRODUCT_NAMES[model]}${v}, ${pick(scheme.name, "en")}, ${where}: ${price}.`);
+        }
+      }
+    }
+  }
+  const tariff = PRODUCT_IDS.map((m) => [m, superchargeTariff(p, m)] as const).filter(([, t]) => t != null);
+  if (tariff.length) lines.push(`- SuperCharge tariff ${p.settings.supercharge.unitEn}: ${tariff.map(([m, t]) => `${PRODUCT_NAMES[m]} ${idr(t!)}`).join(", ")}. Bees does not support SuperCharge.`);
+  if (p.settings.referral.enabled) lines.push(`- Referral programme: ${idr(p.settings.referral.amount)} per qualified referral (${p.settings.referral.regionSlugs.join(", ")} only).`);
+  lines.push(`- ${p.settings.disclaimerEn} Full details per region and scheme are shown on each product page (section "Harga").`);
+  return lines.join("\n");
+}
+
+function build(pricingLines: string): string {
   const u = (locale: "id" | "en", p = "/") => `${SITE_URL}/${locale}${p}`;
   const en = (p?: string) => u("en", p);
   const id = (p?: string) => u("id", p);
@@ -31,10 +62,10 @@ Key notes:
 - Compatible SuperCharge models: Athena, Victory, and EdPower.
 - SuperCharge charges compatible motorcycles from 10% to 80% in approximately 15 minutes.
 - Home charging is also supported, using a standard household power outlet.
-- Standard warranty: 3 years for the battery and 2 years for the motorcycle, covering manufacturing defects.
+- Standard warranty: battery, motor, and frame 3 years or 100,000 km (whichever comes first), counted from unit handover; other components 1 to 2 years per the official list. Covers manufacturing defects.
 - Lifetime battery warranty applies only to motorcycles under Battery as a Service (BaaS).
 - Batteries use LFP (lithium iron phosphate) cells and are rated IP67.
-- Official showrooms and service centers: Jakarta, Bekasi, Bandung, and Bali.
+- Official showrooms and service centers: Jakarta, Bekasi, Bandung Barat, and Bali. SuperCharge stations are at the Jakarta, Bandung Barat, and Bekasi showrooms (not yet in Bali).
 - Wedison motorcycles are sold through official Wedison showrooms.
 - Official contact: ${CONTACT.email}, WhatsApp +${CONTACT.whatsapp}.
 - Official Wedison information should be used for current specifications, pricing, warranty, availability, and commercial programs.
@@ -67,13 +98,13 @@ Key notes:
 
 ## Electric Motorcycles
 
-- [Wedison Bees](${en("/products/bees/")}): Compact and agile electric motorcycle for urban mobility. 1.2 kW motor, 60 km/h top speed, and up to 80 km claimed range. 1.6 kWh LFP battery, 78.5 kg, home charging in about 4.1 hours. Not SuperCharge compatible.
+- [Wedison Bees](${en("/products/bees/")}): Compact and agile electric motorcycle for urban mobility. 1.2 kW motor, 55 km/h top speed, and up to 90 km claimed range. 1.6 kWh LFP battery, 78.5 kg, home charging in 4 to 6 hours. Not SuperCharge compatible.
 
-- [Wedison Athena](${en("/products/athena/")}): Retro-style electric motorcycle focused on comfort and urban riding. 2.5 kW motor, 85 km/h top speed, and up to 120 km claimed range with the Extended Battery. 2.5 kWh (Regular) or 3.4 kWh (Extended) LFP battery. SuperCharge compatible.
+- [Wedison Athena](${en("/products/athena/")}): Retro-style electric motorcycle focused on comfort and urban riding. 2.5 kW motor, 75 km/h top speed, and up to 120 km claimed range with the Extended Battery. 2.5 kWh (Regular) or 3.4 kWh (Extended) LFP battery, home charging in 4 to 6 hours. SuperCharge compatible.
 
-- [Wedison Victory](${en("/products/victory/")}): Sporty and versatile electric motorcycle for everyday urban riding. 3 kW motor, 85 km/h top speed, and up to 120 km claimed range with the Extended Battery. LFP battery. SuperCharge compatible.
+- [Wedison Victory](${en("/products/victory/")}): Sporty and versatile electric motorcycle for everyday urban riding. 3 kW motor, 80 km/h top speed, and up to 120 km claimed range with the Extended Battery. 2.5 kWh (Regular) or 3.4 kWh (Extended) LFP battery, home charging in 4 to 6 hours. SuperCharge compatible.
 
-- [Wedison EdPower](${en("/products/edpower/")}): Premium long-range electric motorcycle for longer journeys. 3 kW motor, 90 km/h top speed, and up to 200 km claimed range. 5 kWh LFP battery, suited to touring and fleet use. SuperCharge compatible.
+- [Wedison EdPower](${en("/products/edpower/")}): Premium long-range electric motorcycle for longer journeys. 3 kW motor, 85 km/h top speed, and up to 200 km claimed range. 5 kWh LFP battery, home charging in 8 to 10 hours, suited to touring and fleet use. SuperCharge compatible.
 
 ### Indonesian product pages
 
@@ -89,7 +120,7 @@ Key notes:
 - [SuperCharge](${en("/super-charge/")}): Wedison's fast-charging network.
 - Compatible models: Athena, Victory, and EdPower.
 - Charging from 10% to 80% takes approximately 15 minutes.
-- SuperCharge stations are available through Wedison showrooms and partner locations.
+- SuperCharge stations are available at the Jakarta, Bandung Barat, and Bekasi showrooms and at partner locations.
 - [SuperCharge station map](${en("/super-charge/locations/")}): Current list and map of SuperCharge stations.
 - Charging sessions are started and tracked from the Wedison app.
 
@@ -98,13 +129,13 @@ Key notes:
 - [SuperCharge](${id("/super-charge/")}): Jaringan pengisian cepat Wedison.
 - Model yang kompatibel: Athena, Victory, dan EdPower.
 - Pengisian daya dari 10% hingga 80% membutuhkan sekitar 15 menit.
-- Stasiun SuperCharge tersedia di showroom Wedison dan lokasi mitra.
+- Stasiun SuperCharge tersedia di showroom Jakarta, Bandung Barat, dan Bekasi serta lokasi mitra.
 - [Peta stasiun SuperCharge](${id("/super-charge/locations/")}): Daftar dan peta lokasi stasiun SuperCharge terkini.
 - Sesi pengisian dimulai dan dipantau dari aplikasi Wedison.
 
 ## Showrooms
 
-Official Wedison showrooms and service centers (sales, test rides, servicing). Opening hours: Monday–Friday 10:00–19:00, Saturday–Sunday 10:00–17:00 (local time).
+Official Wedison showrooms and service centers (sales, test rides, servicing). Opening hours: Monday–Friday 10:00–19:00, Saturday–Sunday 10:00–17:00, public holidays 10:00–16:00 (local time).
 
 ${showrooms}
 
@@ -116,10 +147,14 @@ ${showrooms}
 - [FAQ English](${en("/faq/")}): Official information about battery, charging, warranty, maintenance, safety, and ownership.
 - [FAQ Indonesia](${id("/faq/")}): Informasi resmi tentang baterai, pengisian daya, garansi, perawatan, keselamatan, dan kepemilikan.
 - Wedison supports both SuperCharge and home charging depending on the motorcycle model.
-- Standard warranty (regular purchase): battery 3 years, motorcycle 2 years, covering manufacturing defects.
+- Standard warranty (regular purchase): battery, motor, and frame 3 years or 100,000 km, whichever comes first; handlebar and stands 2 years or 20,000 km; electrical components 1 year or 10,000 km. Covers manufacturing defects.
 - Home charging uses a standard household power outlet.
 - User manuals (PDF) for each model are available on the [FAQ page](${en("/faq/")}#user-manual).
 - Current battery and warranty terms should always be confirmed from the latest official Wedison information.
+
+## Pricing (official, from the Wedison pricing module)
+
+${pricingLines}
 
 ## BaaS
 
@@ -127,14 +162,14 @@ ${showrooms}
 - [Battery as a Service (Bahasa Indonesia)](${id("/baas/")}): Beli motornya, langganan baterainya. Harga, paket, yang termasuk, dan tanya jawab.
 - Battery as a Service (BaaS) separates the battery from the motorcycle purchase to reduce the upfront ownership cost.
 - Core BaaS proposition: the battery is no longer the rider's problem.
-- Lifetime battery warranty is the primary BaaS benefit. It applies only to BaaS; regular purchases carry the standard 3-year battery warranty.
+- Lifetime battery warranty is the primary BaaS benefit. It applies only to BaaS; regular purchases carry the standard 3-year or 100,000 km battery warranty.
 - Current BaaS campaign models: Victory, Athena, and EdPower.
 - BaaS pricing, subscription terms, eligibility, availability, and promotional limits should be confirmed from the latest official Wedison commercial information.
 
 ## Wedison Ojol
 
-- [Wedison Ojol (English)](${en("/ojol/")}): Electric motorcycle program for online ride-hailing (ojol) drivers, with daily rental and rent-to-own schemes starting from Rp50,000 per day.
-- [Wedison Ojol (Bahasa Indonesia)](${id("/ojol/")}): Program motor listrik untuk driver ojek online, skema sewa harian dan sewa milik mulai Rp50.000 per hari.
+- [Wedison Ojol (English)](${en("/ojol/")}): Electric motorcycle program for online ride-hailing (ojol) drivers, with a Rent To Own scheme (ojol drivers only, from Rp35,000 per day) and a daily rental scheme (from Rp50,000 per day) in Jabodetabek; Rent To Own is also available in Bali.
+- [Wedison Ojol (Bahasa Indonesia)](${id("/ojol/")}): Program motor listrik untuk driver ojek online, skema Rent To Own (khusus driver ojol, mulai Rp35.000 per hari) dan sewa harian (mulai Rp50.000 per hari) di Jabodetabek; Rent To Own juga tersedia di Bali.
 
 ## Company
 
@@ -163,8 +198,9 @@ ${showrooms}
 `;
 }
 
-export function GET() {
-  return new Response(build(), {
+export async function GET() {
+  const pricing = await getPricing();
+  return new Response(build(pricingSummary(pricing)), {
     headers: {
       "content-type": "text/plain; charset=utf-8",
       "cache-control": "public, max-age=3600, s-maxage=86400",

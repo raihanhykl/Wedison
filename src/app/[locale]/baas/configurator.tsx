@@ -20,6 +20,7 @@ import {
   isPlanId,
   perDay,
   rupiah,
+  type BaasModel,
   type ModelId,
   type PlanId,
 } from "./data";
@@ -32,12 +33,12 @@ const INCLUDED_KEYS = [1, 2, 3, 4, 5] as const;
  * harga motor dan langganan SELALU satu frame, plus satu baris "terbatas waktu & kuota".
  * State disinkronkan ke URL (?model=&plan=) supaya penawaran bisa dibagikan.
  */
-export default function BaasConfigurator() {
+export default function BaasConfigurator({ models = BAAS_MODELS }: { models?: BaasModel[] }) {
   const { t, language } = useLanguage();
-  const [modelId, setModelId] = useState<ModelId>(DEFAULT_MODEL);
+  const [modelId, setModelId] = useState<ModelId>(models.some((mo) => mo.id === DEFAULT_MODEL) ? DEFAULT_MODEL : models[0].id);
   const [planId, setPlanId] = useState<PlanId>(DEFAULT_PLAN);
 
-  const model = useMemo(() => BAAS_MODELS.find((mo) => mo.id === modelId)!, [modelId]);
+  const model = useMemo(() => models.find((mo) => mo.id === modelId) ?? models[0], [models, modelId]);
   const plan = model.plans.find((p) => p.id === planId) ?? model.plans[0];
   const hasExtended = model.plans.some((p) => p.id === "extended");
 
@@ -46,9 +47,9 @@ export default function BaasConfigurator() {
     const q = new URLSearchParams(window.location.search);
     const mo = q.get("model");
     const pl = q.get("plan");
-    if (isModelId(mo)) setModelId(mo);
+    if (isModelId(mo) && models.some((x) => x.id === mo)) setModelId(mo);
     if (isPlanId(pl)) setPlanId(pl);
-  }, []);
+  }, [models]);
 
   // Tulis balik ke URL tanpa navigasi/scroll.
   const first = useRef(true);
@@ -65,7 +66,7 @@ export default function BaasConfigurator() {
 
   const selectModel = (id: ModelId) => {
     setModelId(id);
-    const next = BAAS_MODELS.find((mo) => mo.id === id)!;
+    const next = models.find((mo) => mo.id === id) ?? models[0];
     if (!next.plans.some((p) => p.id === planId)) setPlanId("standard");
   };
 
@@ -96,7 +97,7 @@ export default function BaasConfigurator() {
               <fieldset>
                 <legend className="text-sm font-semibold text-foreground">{t("baas.calc.model")}</legend>
                 <div className="mt-3 grid grid-cols-3 gap-2 sm:gap-3">
-                  {BAAS_MODELS.map((mo) => {
+                  {models.map((mo) => {
                     const active = mo.id === modelId;
                     return (
                       <button

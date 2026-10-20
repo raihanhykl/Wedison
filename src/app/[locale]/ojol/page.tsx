@@ -3,6 +3,8 @@ import { getSEOMetadata } from "@/app/lib/seo1";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 import type { Locale } from "@/app/lib/locale";
+import { getPricing } from "@/lib/cms/api";
+import { ojolProgramsFrom } from "./programs";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -20,7 +22,7 @@ export default async function OjolPage({ params }: { params: Promise<{ locale: s
           { name: "Wedison Ojol", path: "/ojol" },
         ])}
       />
-      <OjolClient />
+      <OjolClient programs={ojolProgramsFrom(await getPricing())} />
     </div>
   );
 }

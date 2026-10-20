@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 import { prisma } from "../../lib/prisma.js";
 import { env } from "../../config/env.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requirePermission } from "../../middleware/auth.js";
 
 // Bukti persetujuan cookie dari banner di situs publik (akuntabilitas UU PDP No. 27/2022).
 // Yang disimpan: pilihan per kategori + versi kebijakan + waktu. Tanpa identitas pribadi:
@@ -59,7 +59,7 @@ publicConsentRouter.post("/", consentLimiter, validate(consentSchema), async (re
 
 // ── Admin: ringkasan untuk audit (tanpa mengekspos ipHash/userAgent) ──
 export const consentRouter = Router();
-consentRouter.use(requireAuth, requireRole("ADMIN"));
+consentRouter.use(requireAuth, requirePermission("consent.view"));
 
 const statsQuery = z.object({ days: z.coerce.number().int().min(1).max(730).default(30) });
 

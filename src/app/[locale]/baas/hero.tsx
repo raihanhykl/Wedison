@@ -10,17 +10,17 @@ import { Reveal } from "@/components/motion/reveal";
 import { ArtDirectedImage } from "@/components/art-directed-image";
 import { EASE_OUT_EXPO } from "@/components/motion/config";
 import { whatsappUrl } from "@/lib/seo/site";
-import { BAAS_MODELS, perDay, rupiah } from "./data";
+import { BAAS_MODELS, perDay, rupiah, type BaasModel } from "./data";
 
 /**
  * Hero BaaS — pesan #1 kampanye: "Baterai bukan lagi urusan Anda" (garansi seumur hidup).
  * Full-bleed foto produk + scrim forest, konten kiri-bawah, strip tiga fakta di bawahnya.
  * SEMENTARA: foto hero produk Victory sebagai placeholder sampai aset khusus BaaS tersedia.
  */
-export default function BaasHero() {
+export default function BaasHero({ models = BAAS_MODELS }: { models?: BaasModel[] }) {
   const { t, language } = useLanguage();
-  const victory = BAAS_MODELS[0];
-  const cheapest = Math.min(...BAAS_MODELS.flatMap((mo) => mo.plans.map((p) => p.monthly)));
+  const victory = models.find((mo) => mo.id === "victory") ?? models[0];
+  const cheapest = Math.min(...models.flatMap((mo) => mo.plans.map((p) => p.monthly)));
 
   const stats = [
     { label: t("baas.hero.stat.warranty"), value: t("baas.hero.stat.warrantyValue") },

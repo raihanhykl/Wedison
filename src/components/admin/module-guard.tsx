@@ -17,12 +17,12 @@ export function ModuleGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const user = useAdminUser();
   const mod = moduleForPath(pathname);
-  const allowed = !mod || canAccess(user.role, mod);
+  const allowed = !mod || canAccess(user, mod);
   const isRoot = (pathname.replace(/\/+$/, "") || "/") === "/admin";
 
   useEffect(() => {
-    if (!allowed && isRoot) router.replace(homeFor(user.role));
-  }, [allowed, isRoot, router, user.role]);
+    if (!allowed && isRoot) router.replace(homeFor(user));
+  }, [allowed, isRoot, router, user]);
 
   if (allowed) return <>{children}</>;
   if (isRoot) return null;
@@ -30,9 +30,9 @@ export function ModuleGuard({ children }: { children: React.ReactNode }) {
     <div className="mx-auto mt-16 max-w-md rounded-xl border border-border bg-card p-8 text-center">
       <ShieldAlert className="mx-auto size-8 text-muted-foreground" />
       <h1 className="mt-4 font-display text-xl font-bold tracking-tight">No access to this page</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Your role does not include this module. Ask a Super Admin if you need access.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Your role does not include this module. Ask an administrator if you need access.</p>
       <Button asChild className="mt-6">
-        <Link href={homeFor(user.role)}>Go to my workspace</Link>
+        <Link href={homeFor(user)}>Go to my workspace</Link>
       </Button>
     </div>
   );

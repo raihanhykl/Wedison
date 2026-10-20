@@ -2,14 +2,11 @@ import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireRole } from "../../middleware/auth.js";
+import { requireAuth, requirePermission } from "../../middleware/auth.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
 
 export const activityRouter = Router();
-usersGuard();
-function usersGuard() {
-  activityRouter.use(requireAuth, requireRole("ADMIN"));
-}
+activityRouter.use(requireAuth, requirePermission("activity.view", "Your role cannot view the activity log"));
 
 const query = paginationQuery.extend({
   entity: z.string().optional(),
