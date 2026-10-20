@@ -34,7 +34,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Wedison – Motor Listrik & SuperCharge Indonesia",
       description:
-        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun atau 100.000 km. Jadwalkan test ride di showroom.",
+        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun/100.000 km. Jadwalkan test ride.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -50,7 +50,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison – Electric Motorcycles & SuperCharge Indonesia",
       description:
-        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 10% to 80% in 15 minutes, 3-year or 100,000 km battery warranty. Book a test ride.",
+        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 10% to 80% in 15 minutes, 3-year/100,000 km battery warranty. Book a test ride.",
       keywords: [
         "wedison",
         "electric motorcycle",
