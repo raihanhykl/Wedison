@@ -112,22 +112,21 @@ const HERO_SLIDES = [
   },
 ] as const;
 
-// CATATAN: gambar Unsplash di bawah = PLACEHOLDER sementara (lisensi bebas, host
-// sudah di-allow di next.config). Ganti dengan aset final dari tim desain sesuai
-// spesifikasi (rasio 4:5, subjek di 2/3 atas, 1/3 bawah bersih untuk overlay teks).
-const UNSPLASH = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&crop=entropy&w=900&h=1125&q=80`;
-
+// Kartu Keunggulan (ASET-H1a–d): 4:5, subjek di atas, 40% bawah tenang untuk overlay teks.
 const ADVANTAGE = [
-  { img: UNSPLASH("1602918386084-58983c3bafac"), Icon: Zap, key: "charge" },
   {
-    img: UNSPLASH("1592318348310-f31b61a931c8"),
+    img: "/advantages/Wedison SuperCharge and EdPower.webp",
+    Icon: Zap,
+    key: "charge",
+  },
+  {
+    img: "/advantages/Wedison X-Ray Battery Showcase.webp",
     Icon: BatteryCharging,
     key: "battery",
   },
-  { img: UNSPLASH("1579621970588-a35d0e7ab9b6"), Icon: Wallet, key: "cost" },
+  { img: "/advantages/Wedison Cost Savings.webp", Icon: Wallet, key: "cost" },
   {
-    img: UNSPLASH("1771402382481-de35db6c4159"),
+    img: "/advantages/Showroom Skuter Listrik WEDISON.webp",
     Icon: Headphones,
     key: "service",
   },
@@ -245,7 +244,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     adv_charge_t: "SuperCharge Network",
     adv_charge_d: "A 15-minute charge at a growing number of locations.",
     adv_battery_t: "Battery Warranty",
-    adv_battery_d: "Battery, motor, and frame covered for 3 years or 100,000 km.",
+    adv_battery_d:
+      "Battery, motor, and frame covered for 3 years or 100,000 km.",
     adv_cost_t: "Lower Running Costs",
     adv_cost_d:
       "No petrol, fewer service visits, and a substantially lower cost per kilometer.",
@@ -270,7 +270,13 @@ const COPY: Record<Lang, Record<string, string>> = {
   },
 };
 
-export default function Landing({ sites, prices }: { sites: Site[]; prices?: Record<ProductId, StartingPrice | null> }) {
+export default function Landing({
+  sites,
+  prices,
+}: {
+  sites: Site[];
+  prices?: Record<ProductId, StartingPrice | null>;
+}) {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
   const lang = language === "en" ? "en" : "id";
