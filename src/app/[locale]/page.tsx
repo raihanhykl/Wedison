@@ -1,8 +1,9 @@
 import React from "react";
 import Landing from "@/app/_home/landing";
 import { getSEOMetadata } from "@/app/lib/seo1";
-import { getPricing } from "@/lib/cms/api";
+import { getPricing, getStations } from "@/lib/cms/api";
 import { startingPrices } from "@/lib/pricing/select";
+import { SITES } from "@/data/supercharge-sites";
 
 // const { metadata, jsonLd } = generateSeoMetadata({
 //   title: "Wedison – Ride The Future With Wedison",
@@ -24,9 +25,13 @@ export async function generateMetadata({
   return getSEOMetadata({ locale: locale as "id" | "en", path: "/" });
 }
 
+// Data stasiun untuk peta ringkas di beranda: backend (ISR, tag "stations") dengan
+// fallback GeoJSON statis — sama seperti /super-charge/locations. Halaman tetap statis/ISR.
+// Harga "mulai dari" per model dari modul Pricing (ISR, fallback snapshot statis).
 export default async function Page() {
-  // Harga "mulai dari" per model dari modul Pricing (ISR, fallback snapshot statis).
-  const prices = startingPrices(await getPricing());
+  const [remote, pricing] = await Promise.all([getStations(), getPricing()]);
+  const sites = remote?.features.length ? remote.features : SITES.features;
+  const prices = startingPrices(pricing);
   return (
     <>
       <div className="">
@@ -45,7 +50,7 @@ export default async function Page() {
         <div id="contact">
           <ContactForm />
         </div> */}
-        <Landing prices={prices} />
+        <Landing sites={sites} prices={prices} />
       </div>
     </>
   );

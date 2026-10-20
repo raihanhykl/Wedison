@@ -29,6 +29,8 @@ import { ArtDirectedImage } from "@/components/art-directed-image";
 import { pick, rupiahShort, type StartingPrice } from "@/lib/pricing/select";
 import type { ProductId } from "@/lib/pricing/types";
 import { whatsappUrl } from "@/lib/seo/site";
+import SuperChargeMapSection from "./supercharge-map-section";
+import type { Site } from "@/app/[locale]/super-charge/locations/types";
 
 type Lang = "id" | "en";
 
@@ -268,7 +270,7 @@ const COPY: Record<Lang, Record<string, string>> = {
   },
 };
 
-export default function Landing({ prices }: { prices?: Record<ProductId, StartingPrice | null> }) {
+export default function Landing({ sites, prices }: { sites: Site[]; prices?: Record<ProductId, StartingPrice | null> }) {
   const { t, language } = useLanguage();
   const c = COPY[(language as Lang) ?? "id"];
   const lang = language === "en" ? "en" : "id";
@@ -522,6 +524,9 @@ export default function Landing({ prices }: { prices?: Record<ProductId, Startin
           </div>
         </Reveal>
       </section>
+
+      {/* ============ SUPERCHARGE MAP (peta ringkas stasiun) ============ */}
+      <SuperChargeMapSection sites={sites} />
 
       {/* ============ APP DOWNLOAD ============ */}
       <AppDownloadTeaser />

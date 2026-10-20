@@ -1231,6 +1231,30 @@ export const en = {
   "supercharge.locator.empty.desc":
     "Try different keywords, or broaden the filters.",
 
+  // Home: compact SuperCharge station map (section below the Spotlight)
+  "home.map.title": "SuperCharge stations near you",
+  "home.map.desc":
+    "Pick an area to see stations that are open and those coming soon. Opening hours, amenities, and directions are on the locations page.",
+  "home.map.stats": "{n} operational · {m} coming soon",
+  "home.map.areaLabel": "Choose an area",
+  "home.map.all": "All",
+  "home.map.listLabel": "SuperCharge station list",
+  "home.map.mapLabel": "SuperCharge station map",
+  "home.map.chargers": "{n} nozzles",
+  "home.map.comingSoon": "Coming soon",
+  "home.map.more": "+{n} more locations",
+  "home.map.empty": "No stations in this area yet.",
+  "home.map.viewAll": "See all locations",
+  "home.map.nearMe": "Near me",
+  "home.map.nearMeActive": "Sorted by distance",
+  "home.map.locating": "Finding your location…",
+  "home.map.nearMeDone": "Sorted by distance from you.",
+  "home.map.geoDenied":
+    "Location access was denied. You can still choose an area above.",
+  "home.map.geoError":
+    "Your location could not be determined. Try again, or choose an area above.",
+  "home.map.distance": "{km} km",
+
   "supercharge.video.title": "How SuperCharge Works",
   "supercharge.video.description":
     "From connecting the charger to riding away, this is what charging at a SuperCharge station involves.",
