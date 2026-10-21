@@ -362,7 +362,7 @@ export type PricingData = { regions: PriceRegion[]; schemes: PricingScheme[]; en
 
 export const PRICING_MODEL_LABEL: Record<PricingModel, string> = { BEES: "Bees", ATHENA: "Athena", VICTORY: "Victory", EDPOWER: "EdPower" };
 export const PRICING_VARIANT_LABEL: Record<PricingVariant, string> = { SINGLE: "Single variant", REGULAR: "Regular battery", EXTENDED: "Extended battery" };
-export const PRICING_KIND_LABEL: Record<PricingKind, string> = { PURCHASE: "Outright purchase", RENT_TO_OWN: "Rent To Own", RENTAL: "Rental", B2B_CREDIT: "B2B credit (installments)", BAAS: "Battery as a Service" };
+export const PRICING_KIND_LABEL: Record<PricingKind, string> = { PURCHASE: "Cash", RENT_TO_OWN: "Rent To Own", RENTAL: "Rental", B2B_CREDIT: "B2B credit (installments)", BAAS: "Battery as a Service" };
 export const PRICING_AUDIENCE_LABEL: Record<PricingAudience, string> = { ALL: "Everyone", OJOL: "Ojol drivers", B2B: "Business (B2B)" };
 /** Kolom angka yang relevan per jenis skema (urutan = urutan kolom di tabel admin). */
 export const PRICING_KIND_FIELDS: Record<PricingKind, { key: keyof PriceEntry; label: string; hint?: string }[]> = {

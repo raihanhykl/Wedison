@@ -1,7 +1,6 @@
 // Snapshot harga statis = jaring pengaman saat API tidak terjangkau. Bentuk sama dengan
-// GET /api/v1/public/pricing. Sumber: server/prisma/seed-data/pricing.json (v4, 25 Sep 2026).
-// Jangan diedit manual untuk mengubah harga: ubah lewat /admin/pricing, lalu perbarui snapshot
-// ini bila perlu dengan menyalin respons endpoint publik.
+// GET /api/v1/public/pricing. DIBUAT OTOMATIS oleh server/prisma/pricing-sync.mjs --fallback dari
+// server/prisma/seed-data/pricing.json. Jangan diedit manual; ubah harga lewat /admin/pricing.
 import type { PublicPricing } from "@/lib/pricing/types";
 
 export const PRICING_FALLBACK: PublicPricing = {
@@ -49,8 +48,8 @@ export const PRICING_FALLBACK: PublicPricing = {
         "en": "Greater Bandung"
       },
       "priceLabel": {
-        "id": "Harga wilayah Bandung Raya",
-        "en": "Greater Bandung pricing"
+        "id": "Harga OTR Bandung Raya",
+        "en": "OTR price, Greater Bandung"
       },
       "coverage": {
         "id": "Kota Bandung, Kabupaten Bandung, Bandung Barat, Cimahi",
@@ -66,8 +65,8 @@ export const PRICING_FALLBACK: PublicPricing = {
       "slug": "purchase",
       "kind": "purchase",
       "name": {
-        "id": "Beli Putus",
-        "en": "Outright Purchase"
+        "id": "Cash",
+        "en": "Cash"
       },
       "tagline": {
         "id": "Motor langsung menjadi milik Anda",
@@ -696,6 +695,363 @@ export const PRICING_FALLBACK: PublicPricing = {
       "unitPrice": 33000000,
       "monthlyFee": 750000,
       "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "bees",
+      "variant": "single",
+      "otrPrice": 21900000,
+      "discount": 2400000,
+      "netPrice": 19500000,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "athena",
+      "variant": "regular",
+      "otrPrice": 36900000,
+      "discount": 3300000,
+      "netPrice": 33600000,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "athena",
+      "variant": "extended",
+      "otrPrice": 39900000,
+      "discount": 3400000,
+      "netPrice": 36500000,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "victory",
+      "variant": "regular",
+      "otrPrice": 34900000,
+      "discount": 3200000,
+      "netPrice": 31700000,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "victory",
+      "variant": "extended",
+      "otrPrice": 37900000,
+      "discount": 3400000,
+      "netPrice": 34500000,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "edpower",
+      "variant": "single",
+      "otrPrice": 56900000,
+      "discount": 4300000,
+      "netPrice": 52600000,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "bees",
+      "variant": "single",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 35000,
+      "downPayment": 100000,
+      "termMonths": 40,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "athena",
+      "variant": "regular",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 58000,
+      "downPayment": 550000,
+      "termMonths": 42,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "athena",
+      "variant": "extended",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 63000,
+      "downPayment": 600000,
+      "termMonths": 42,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "victory",
+      "variant": "regular",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 58000,
+      "downPayment": 550000,
+      "termMonths": 42,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "victory",
+      "variant": "extended",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 63000,
+      "downPayment": 600000,
+      "termMonths": 42,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "edpower",
+      "variant": "single",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 83000,
+      "downPayment": 800000,
+      "termMonths": 42,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "athena",
+      "variant": "regular",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 50000,
+      "downPayment": 500000,
+      "termMonths": 36,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "athena",
+      "variant": "extended",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 55000,
+      "downPayment": 550000,
+      "termMonths": 36,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "victory",
+      "variant": "regular",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 50000,
+      "downPayment": 500000,
+      "termMonths": 36,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "victory",
+      "variant": "extended",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 55000,
+      "downPayment": 550000,
+      "termMonths": 36,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "edpower",
+      "variant": "single",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": 75000,
+      "downPayment": 750000,
+      "termMonths": 36,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": null,
+      "monthlyFee": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "victory",
+      "variant": "regular",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": 22000000,
+      "monthlyFee": 390000,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "victory",
+      "variant": "extended",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": 22000000,
+      "monthlyFee": 490000,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "athena",
+      "variant": "regular",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": 24000000,
+      "monthlyFee": 390000,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "edpower",
+      "variant": "single",
+      "otrPrice": null,
+      "discount": null,
+      "netPrice": null,
+      "dailyFee": null,
+      "downPayment": null,
+      "termMonths": null,
+      "installment24": null,
+      "installment36": null,
+      "unitPrice": 33000000,
+      "monthlyFee": 750000,
+      "note": null
     }
   ],
   "terms": [
@@ -1012,6 +1368,214 @@ export const PRICING_FALLBACK: PublicPricing = {
         "id": "Kampanye BaaS September 2026.",
         "en": "BaaS campaign, September 2026."
       }
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "included": {
+        "id": [
+          "1x Adapter charging reguler (senilai Rp 1.700.000)",
+          "1x Ganti ban depan dan belakang (senilai Rp 385.000)",
+          "1x Ganti kampas rem (1 set depan dan belakang)",
+          "1x Servis reguler",
+          "2x Kunci mekanik",
+          "Voucher charging Rp 3.000.000 untuk Athena, Victory, dan EdPower (tidak berlaku untuk Bees)",
+          "Garansi baterai, motor, dan rangka 3 tahun atau 100.000 km"
+        ],
+        "en": [
+          "1x Regular charging adapter (worth Rp 1,700,000)",
+          "1x Front and rear tire replacement (worth Rp 385,000)",
+          "1x Brake pad replacement (1 set, front and rear)",
+          "1x Regular service",
+          "2x Mechanical keys",
+          "Rp 3,000,000 charging voucher for Athena, Victory, and EdPower (not valid for Bees)",
+          "Battery, motor, and frame warranty of 3 years or 100,000 km"
+        ]
+      },
+      "terms": {
+        "id": [
+          "Harga net berlaku untuk pembelian cash, kredit, dan financing.",
+          "Harga adalah OTR Bandung Raya (Kota Bandung, Kabupaten Bandung, Bandung Barat, Cimahi). Wilayah lain memiliki harga tersendiri.",
+          "Voucher charging Rp 3.000.000 berlaku untuk pembelian langsung, kredit, dan financing pada Athena, Victory, dan EdPower. Tidak berlaku untuk Bees, Rental, maupun Rent To Own.",
+          "Voucher charging tidak bisa diuangkan atau ditukar.",
+          "Diskon memotong harga OTR, sehingga DP dan angsuran ikut menjadi lebih ringan.",
+          "Promo bersifat terbatas waktu dan terbatas kuota."
+        ],
+        "en": [
+          "The net price applies to cash, credit, and financing purchases.",
+          "Prices are OTR Greater Bandung (Bandung City, Bandung Regency, West Bandung, Cimahi). Other regions have their own pricing.",
+          "The Rp 3,000,000 charging voucher applies to outright, credit, and financing purchases of Athena, Victory, and EdPower. Not valid for Bees, Rental, or Rent To Own.",
+          "The charging voucher cannot be exchanged for cash or other items.",
+          "The discount reduces the OTR price, so down payments and installments become lighter too.",
+          "Promotions are limited by time and quota."
+        ]
+      },
+      "partners": [
+        "Kredivo (personal)",
+        "WOM Finance (personal)",
+        "AEON Credit (B2B)",
+        "Mandiri (B2B)"
+      ],
+      "validFrom": "2026-09-25T00:00:00.000Z",
+      "validUntil": null,
+      "note": {
+        "id": "Pricelist 25 September 2026.",
+        "en": "Price list of 25 September 2026."
+      }
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "included": {
+        "id": [
+          "Adapter pengisian daya reguler gratis (senilai Rp 1.000.000)",
+          "Gratis 1x penggantian ban depan dan belakang (senilai Rp 385.000)",
+          "Gratis 1x penggantian kampas rem depan dan belakang (1 set)",
+          "Gratis servis rutin",
+          "1x Kunci mekanik",
+          "Pengurusan BPKB ditanggung Wedison",
+          "Garansi baterai, motor, dan rangka 3 tahun atau 100.000 km; komponen elektrikal lain 2 tahun atau 20.000 km"
+        ],
+        "en": [
+          "Free regular charging adapter (worth Rp 1,000,000)",
+          "Free 1x front and rear tire replacement (worth Rp 385,000)",
+          "Free 1x front and rear brake pad replacement (1 set)",
+          "Free routine servicing",
+          "1x Mechanical key",
+          "BPKB processing covered by Wedison",
+          "Battery, motor, and frame warranty of 3 years or 100,000 km; other electrical components 2 years or 20,000 km"
+        ]
+      },
+      "terms": {
+        "id": [
+          "Masa kontrak 42 bulan untuk Athena, Victory, dan EdPower. 40 bulan untuk Bees.",
+          "Khusus driver ojol, termasuk komunitas ojol.",
+          "Motor menjadi hak milik Anda setelah kontrak selesai.",
+          "Biaya harian adalah murni biaya sewa, tidak ada komponen tabungan.",
+          "Uang muka bersifat non-refundable (tidak dapat dikembalikan).",
+          "Denda tilang menjadi tanggung jawab Anda.",
+          "Kerusakan akibat kelalaian atau penyalahgunaan menjadi tanggung jawab Anda.",
+          "Wajib lolos proses skrining Wedison.",
+          "Warna motor ditentukan secara acak sesuai ketersediaan stok.",
+          "Garansi berlaku hanya untuk kerusakan karena kesalahan pabrik, bukan human error, dan hangus jika terjadi kecelakaan akibat kelalaian sendiri."
+        ],
+        "en": [
+          "Contract term of 42 months for Athena, Victory, and EdPower. 40 months for Bees.",
+          "For ojol drivers only, including ojol communities.",
+          "The motorcycle becomes yours once the contract ends.",
+          "The daily fee is purely a rental fee; there is no savings component.",
+          "The down payment is non-refundable.",
+          "Traffic fines are your responsibility.",
+          "Damage caused by negligence or misuse is your responsibility.",
+          "You must pass Wedison's screening process.",
+          "Motorcycle color is assigned at random based on stock availability.",
+          "The warranty covers factory defects only, not human error, and is void after an accident caused by your own negligence."
+        ]
+      },
+      "partners": [],
+      "validFrom": "2026-08-01T00:00:00.000Z",
+      "validUntil": null,
+      "note": {
+        "id": "Pricelist Rent To Own Agustus 2026.",
+        "en": "Rent To Own price list, August 2026."
+      }
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "included": {
+        "id": [
+          "Adapter pengisian daya reguler gratis (senilai Rp 1.000.000)",
+          "Gratis 1x penggantian ban depan dan belakang (senilai Rp 385.000)",
+          "Gratis 1x penggantian kampas rem depan dan belakang (1 set)",
+          "Gratis servis rutin",
+          "1x Kunci mekanik",
+          "Garansi baterai, motor, dan rangka 3 tahun atau 100.000 km; komponen elektrikal lain 2 tahun atau 20.000 km"
+        ],
+        "en": [
+          "Free regular charging adapter (worth Rp 1,000,000)",
+          "Free 1x front and rear tire replacement (worth Rp 385,000)",
+          "Free 1x front and rear brake pad replacement (1 set)",
+          "Free routine servicing",
+          "1x Mechanical key",
+          "Battery, motor, and frame warranty of 3 years or 100,000 km; other electrical components 2 years or 20,000 km"
+        ]
+      },
+      "terms": {
+        "id": [
+          "Masa kontrak 36 bulan.",
+          "Unit tetap menjadi milik PT Wedison Nusantara Energi. STNK atas nama PT Wedison Nusantara Energi.",
+          "Motor dikembalikan ke Wedison di akhir kontrak.",
+          "Anda mendapat 2 hari libur bayar per bulan, maksimal 24 hari per tahun.",
+          "Uang muka bersifat non-refundable (tidak dapat dikembalikan).",
+          "Denda tilang menjadi tanggung jawab Anda.",
+          "Kerusakan akibat kelalaian atau penyalahgunaan menjadi tanggung jawab Anda.",
+          "Wajib lolos proses skrining Wedison.",
+          "Warna motor ditentukan secara acak sesuai ketersediaan stok.",
+          "Bees tidak tersedia untuk skema Rental."
+        ],
+        "en": [
+          "Contract term of 36 months.",
+          "The unit remains the property of PT Wedison Nusantara Energi. The STNK is registered to PT Wedison Nusantara Energi.",
+          "The motorcycle is returned to Wedison at the end of the contract.",
+          "You get 2 payment-free days per month, up to 24 days per year.",
+          "The down payment is non-refundable.",
+          "Traffic fines are your responsibility.",
+          "Damage caused by negligence or misuse is your responsibility.",
+          "You must pass Wedison's screening process.",
+          "Motorcycle color is assigned at random based on stock availability.",
+          "Bees is not available for the Rental scheme."
+        ]
+      },
+      "partners": [],
+      "validFrom": null,
+      "validUntil": null,
+      "note": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "included": {
+        "id": [
+          "Garansi baterai seumur hidup selama berlangganan",
+          "Insentif pengisian daya Rp 2.000.000",
+          "Adapter pengisian gratis (senilai Rp 1.700.000)",
+          "Garansi kendaraan 3 tahun atau 100.000 km",
+          "2x Kunci mekanik"
+        ],
+        "en": [
+          "Lifetime battery warranty while subscribed",
+          "Rp 2,000,000 charging incentive",
+          "Free charging adapter (worth Rp 1,700,000)",
+          "Vehicle warranty of 3 years or 100,000 km",
+          "2x Mechanical keys"
+        ]
+      },
+      "terms": {
+        "id": [
+          "Harga unit tidak termasuk baterai. Baterai disediakan melalui langganan bulanan.",
+          "Bees tidak termasuk dalam skema Battery as a Service.",
+          "Pembayaran unit bisa cash, kredit, atau financing melalui Kredivo dan WOM Finance (personal) serta Mandiri (bisnis).",
+          "Program terbatas waktu dan kuota. Harga dapat berbeda per wilayah. Penawaran tertulis diberikan di showroom."
+        ],
+        "en": [
+          "The unit price excludes the battery. The battery is provided through a monthly subscription.",
+          "Bees is not part of the Battery as a Service scheme.",
+          "The unit can be paid in cash, by credit, or through financing via Kredivo and WOM Finance (personal) and Mandiri (business).",
+          "The programme is limited by time and quota. Prices may differ by region. Written offers are provided at the showroom."
+        ]
+      },
+      "partners": [
+        "Kredivo (personal)",
+        "WOM Finance (personal)",
+        "Mandiri (B2B)"
+      ],
+      "validFrom": "2026-09-01T00:00:00.000Z",
+      "validUntil": null,
+      "note": {
+        "id": "Kampanye BaaS September 2026.",
+        "en": "BaaS campaign, September 2026."
+      }
     }
   ],
   "settings": {
@@ -1027,8 +1591,8 @@ export const PRICING_FALLBACK: PublicPricing = {
         "victory": 16500,
         "edpower": 27000
       },
-      "noteId": "±15 menit dari 10% ke 80%. Tarif sama di semua stasiun SuperCharge.",
-      "noteEn": "About 15 minutes from 10% to 80%. The same tariff applies at every SuperCharge station."
+      "noteId": "±15 menit dari 15% ke 95%. Tarif sama di semua stasiun SuperCharge.",
+      "noteEn": "About 15 minutes from 15% to 95%. The same tariff applies at every SuperCharge station."
     },
     "referral": {
       "enabled": true,
@@ -1042,7 +1606,7 @@ export const PRICING_FALLBACK: PublicPricing = {
       "descriptionEn": "A Rp 300,000 bonus for every person you refer who qualifies. Anyone can take part, not only Wedison owners. Paid out within 2 weeks of unit handover."
     }
   },
-  "updatedAt": "2026-10-20T00:00:00.000Z"
+  "updatedAt": "2026-10-21T00:00:00.000Z"
 };
 
 export default PRICING_FALLBACK;

@@ -34,7 +34,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Wedison – Motor Listrik & SuperCharge Indonesia",
       description:
-        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun/100.000 km. Jadwalkan test ride.",
+        "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 15% ke 95% dalam 15 menit, garansi baterai 3 tahun/100.000 km. Jadwalkan test ride.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -50,7 +50,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison – Electric Motorcycles & SuperCharge Indonesia",
       description:
-        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 10% to 80% in 15 minutes, 3-year/100,000 km battery warranty. Book a test ride.",
+        "Wedison electric motorcycles: Athena, Bees, Victory and EdPower. SuperCharge 15% to 95% in 15 minutes, 3-year/100,000 km battery warranty. Book a test ride.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -194,7 +194,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Wedison Athena – Motor Listrik Retro, 120 km, SuperCharge",
       description:
-        "Athena, motor listrik retro premium Wedison: jarak tempuh hingga 120 km, 75 km/jam, SuperCharge 10% ke 80% dalam 15 menit. Lihat spesifikasi lengkapnya.",
+        "Athena, motor listrik retro premium Wedison: jarak tempuh hingga 120 km, 75 km/jam, SuperCharge 15% ke 95% dalam 15 menit. Lihat spesifikasi lengkapnya.",
       keywords: [
         "wedison",
         "motor listrik",
@@ -209,7 +209,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison Athena – Retro Electric Motorcycle, 120 km Range",
       description:
-        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 75 km/h, SuperCharge 10% to 80% in 15 minutes. See full specs.",
+        "Athena, Wedison's premium retro electric motorcycle: up to 120 km range, 75 km/h, SuperCharge 15% to 95% in 15 minutes. See full specs.",
       keywords: [
         "wedison",
         "electric motorcycle",
@@ -334,7 +334,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "SuperCharge Wedison – Isi Daya Motor Listrik 15 Menit",
       description:
-        "SuperCharge, jaringan pengisian cepat Wedison: baterai 10% ke 80% dalam 15 menit, mulai dari aplikasi, tersebar di banyak kota. Pelajari cara kerjanya.",
+        "SuperCharge, jaringan pengisian cepat Wedison: baterai 15% ke 95% dalam 15 menit, mulai dari aplikasi, tersebar di banyak kota. Pelajari cara kerjanya.",
       keywords: [
         "wedison",
         "supercharge",
@@ -349,7 +349,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Wedison SuperCharge – 15-Minute Fast Charging Network",
       description:
-        "SuperCharge, Wedison's fast-charging network: 10% to 80% in 15 minutes, started from the app, available across Indonesian cities. See how it works.",
+        "SuperCharge, Wedison's fast-charging network: 15% to 95% in 15 minutes, started from the app, available across Indonesian cities. See how it works.",
       keywords: [
         "wedison",
         "supercharge",

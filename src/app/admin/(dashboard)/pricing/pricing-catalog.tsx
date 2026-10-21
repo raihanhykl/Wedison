@@ -263,7 +263,7 @@ function SchemeForm({ scheme, onDone }: { scheme: PricingScheme | null; onDone: 
       <form onSubmit={form.handleSubmit((v) => save.mutate(v))} className="flex h-full flex-col">
         <SheetHeader><SheetTitle>{scheme ? `Edit ${scheme.nameId}` : "Add scheme"}</SheetTitle><SheetDescription>The kind decides which price columns the scheme uses. Changing the kind of an existing scheme keeps its rows but hides columns that no longer apply.</SheetDescription></SheetHeader>
         <div className="flex-1 space-y-4 px-4 pb-4">
-          <div className="grid gap-4 sm:grid-cols-2">{text("nameId", "Name (ID)", "Beli Putus")}{text("nameEn", "Name (EN)", "Outright Purchase")}</div>
+          <div className="grid gap-4 sm:grid-cols-2">{text("nameId", "Name (ID)", "Cash")}{text("nameEn", "Name (EN)", "Cash")}</div>
           <div className="grid gap-4 sm:grid-cols-[1fr_1fr]">
             <FormField control={form.control} name="slug" render={({ field }) => (
               <FormItem><FormLabel>Slug</FormLabel><FormControl><Input className="font-mono text-xs" placeholder="purchase" {...field} /></FormControl><FormMessage /></FormItem>
