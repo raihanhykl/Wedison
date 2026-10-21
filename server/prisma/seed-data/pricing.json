@@ -29,8 +29,8 @@
       "slug": "bandung",
       "nameId": "Bandung Raya",
       "nameEn": "Greater Bandung",
-      "priceLabelId": "Harga wilayah Bandung Raya",
-      "priceLabelEn": "Greater Bandung pricing",
+      "priceLabelId": "Harga OTR Bandung Raya",
+      "priceLabelEn": "OTR price, Greater Bandung",
       "coverageId": "Kota Bandung, Kabupaten Bandung, Bandung Barat, Cimahi",
       "coverageEn": "Bandung City, Bandung Regency, West Bandung, Cimahi",
       "salesWhatsapp": "6285286126558",
@@ -42,8 +42,8 @@
     {
       "slug": "purchase",
       "kind": "PURCHASE",
-      "nameId": "Beli Putus",
-      "nameEn": "Outright Purchase",
+      "nameId": "Cash",
+      "nameEn": "Cash",
       "taglineId": "Motor langsung menjadi milik Anda",
       "taglineEn": "The motorcycle is yours from day one",
       "descriptionId": "Harga net berlaku sama untuk pembelian cash, kredit, maupun financing. Sudah termasuk STNK, BPKB, dan plat nomor.",
@@ -94,8 +94,8 @@
     {
       "slug": "b2b-purchase",
       "kind": "PURCHASE",
-      "nameId": "Beli Putus Bisnis (B2B)",
-      "nameEn": "Business Purchase (B2B)",
+      "nameId": "Cash Bisnis (B2B)",
+      "nameEn": "Business Cash (B2B)",
       "taglineId": "Harga khusus perusahaan, fleet, dan badan usaha",
       "taglineEn": "Special pricing for companies, fleets, and business entities",
       "descriptionId": "Untuk PT, CV, perusahaan, fleet, dan badan usaha sejenis. Komunitas ojol bukan B2B. Proses pengajuan melalui tim sales.",
@@ -119,58 +119,592 @@
     }
   ],
   "entries": [
-    { "region": "jabodetabek", "scheme": "purchase", "model": "BEES", "variant": "SINGLE", "otrPrice": 21900000, "discount": 2400000, "netPrice": 19500000 },
-    { "region": "jabodetabek", "scheme": "purchase", "model": "ATHENA", "variant": "REGULAR", "otrPrice": 36900000, "discount": 3300000, "netPrice": 33600000 },
-    { "region": "jabodetabek", "scheme": "purchase", "model": "ATHENA", "variant": "EXTENDED", "otrPrice": 39900000, "discount": 3400000, "netPrice": 36500000 },
-    { "region": "jabodetabek", "scheme": "purchase", "model": "VICTORY", "variant": "REGULAR", "otrPrice": 34900000, "discount": 3200000, "netPrice": 31700000 },
-    { "region": "jabodetabek", "scheme": "purchase", "model": "VICTORY", "variant": "EXTENDED", "otrPrice": 37900000, "discount": 3400000, "netPrice": 34500000 },
-    { "region": "jabodetabek", "scheme": "purchase", "model": "EDPOWER", "variant": "SINGLE", "otrPrice": 56900000, "discount": 4300000, "netPrice": 52600000 },
-
-    { "region": "bali", "scheme": "purchase", "model": "BEES", "variant": "SINGLE", "otrPrice": 21900000, "discount": 1095000, "netPrice": 20805000 },
-    { "region": "bali", "scheme": "purchase", "model": "ATHENA", "variant": "REGULAR", "otrPrice": 36900000, "discount": 1845000, "netPrice": 35055000 },
-    { "region": "bali", "scheme": "purchase", "model": "ATHENA", "variant": "EXTENDED", "otrPrice": 39900000, "discount": 1995000, "netPrice": 37905000 },
-    { "region": "bali", "scheme": "purchase", "model": "VICTORY", "variant": "REGULAR", "otrPrice": 34900000, "discount": 1745000, "netPrice": 33155000 },
-    { "region": "bali", "scheme": "purchase", "model": "VICTORY", "variant": "EXTENDED", "otrPrice": 37900000, "discount": 1895000, "netPrice": 36005000 },
-    { "region": "bali", "scheme": "purchase", "model": "EDPOWER", "variant": "SINGLE", "otrPrice": 56900000, "discount": 2845000, "netPrice": 54055000 },
-
-    { "region": "bali", "scheme": "b2b-purchase", "model": "BEES", "variant": "SINGLE", "otrPrice": 21900000, "discount": 3468000, "netPrice": 18432000 },
-    { "region": "bali", "scheme": "b2b-purchase", "model": "ATHENA", "variant": "REGULAR", "otrPrice": 36900000, "discount": 6018000, "netPrice": 30882000 },
-    { "region": "bali", "scheme": "b2b-purchase", "model": "ATHENA", "variant": "EXTENDED", "otrPrice": 39900000, "discount": 6528000, "netPrice": 33372000 },
-    { "region": "bali", "scheme": "b2b-purchase", "model": "VICTORY", "variant": "REGULAR", "otrPrice": 34900000, "discount": 5678000, "netPrice": 29222000 },
-    { "region": "bali", "scheme": "b2b-purchase", "model": "VICTORY", "variant": "EXTENDED", "otrPrice": 37900000, "discount": 6188000, "netPrice": 31712000 },
-    { "region": "bali", "scheme": "b2b-purchase", "model": "EDPOWER", "variant": "SINGLE", "otrPrice": 56900000, "discount": 9418000, "netPrice": 47482000 },
-
-    { "region": "bali", "scheme": "b2b-credit", "model": "BEES", "variant": "SINGLE", "otrPrice": 21900000, "installment24": 1150000, "installment36": 900000 },
-    { "region": "bali", "scheme": "b2b-credit", "model": "ATHENA", "variant": "REGULAR", "otrPrice": 36900000, "installment24": 1900000, "installment36": 1500000 },
-    { "region": "bali", "scheme": "b2b-credit", "model": "ATHENA", "variant": "EXTENDED", "otrPrice": 39900000, "installment24": 2100000, "installment36": 1700000 },
-    { "region": "bali", "scheme": "b2b-credit", "model": "VICTORY", "variant": "REGULAR", "otrPrice": 34900000, "installment24": 1800000, "installment36": 1400000 },
-    { "region": "bali", "scheme": "b2b-credit", "model": "VICTORY", "variant": "EXTENDED", "otrPrice": 37900000, "installment24": 2000000, "installment36": 1600000 },
-    { "region": "bali", "scheme": "b2b-credit", "model": "EDPOWER", "variant": "SINGLE", "otrPrice": 56900000, "installment24": 3000000, "installment36": 2500000 },
-
-    { "region": "jabodetabek", "scheme": "rent-to-own", "model": "BEES", "variant": "SINGLE", "dailyFee": 35000, "downPayment": 100000, "termMonths": 40 },
-    { "region": "jabodetabek", "scheme": "rent-to-own", "model": "ATHENA", "variant": "REGULAR", "dailyFee": 58000, "downPayment": 550000, "termMonths": 42 },
-    { "region": "jabodetabek", "scheme": "rent-to-own", "model": "ATHENA", "variant": "EXTENDED", "dailyFee": 63000, "downPayment": 600000, "termMonths": 42 },
-    { "region": "jabodetabek", "scheme": "rent-to-own", "model": "VICTORY", "variant": "REGULAR", "dailyFee": 58000, "downPayment": 550000, "termMonths": 42 },
-    { "region": "jabodetabek", "scheme": "rent-to-own", "model": "VICTORY", "variant": "EXTENDED", "dailyFee": 63000, "downPayment": 600000, "termMonths": 42 },
-    { "region": "jabodetabek", "scheme": "rent-to-own", "model": "EDPOWER", "variant": "SINGLE", "dailyFee": 83000, "downPayment": 800000, "termMonths": 42 },
-
-    { "region": "bali", "scheme": "rent-to-own", "model": "BEES", "variant": "SINGLE", "dailyFee": 35000, "downPayment": 350000, "termMonths": 42 },
-    { "region": "bali", "scheme": "rent-to-own", "model": "ATHENA", "variant": "REGULAR", "dailyFee": 70000, "downPayment": 700000, "termMonths": 42 },
-    { "region": "bali", "scheme": "rent-to-own", "model": "ATHENA", "variant": "EXTENDED", "dailyFee": 80000, "downPayment": 800000, "termMonths": 42 },
-    { "region": "bali", "scheme": "rent-to-own", "model": "VICTORY", "variant": "REGULAR", "dailyFee": 60000, "downPayment": 600000, "termMonths": 42 },
-    { "region": "bali", "scheme": "rent-to-own", "model": "VICTORY", "variant": "EXTENDED", "dailyFee": 70000, "downPayment": 700000, "termMonths": 42 },
-    { "region": "bali", "scheme": "rent-to-own", "model": "EDPOWER", "variant": "SINGLE", "dailyFee": 100000, "downPayment": 1000000, "termMonths": 42 },
-
-    { "region": "jabodetabek", "scheme": "rental", "model": "ATHENA", "variant": "REGULAR", "dailyFee": 50000, "downPayment": 500000, "termMonths": 36 },
-    { "region": "jabodetabek", "scheme": "rental", "model": "ATHENA", "variant": "EXTENDED", "dailyFee": 55000, "downPayment": 550000, "termMonths": 36 },
-    { "region": "jabodetabek", "scheme": "rental", "model": "VICTORY", "variant": "REGULAR", "dailyFee": 50000, "downPayment": 500000, "termMonths": 36 },
-    { "region": "jabodetabek", "scheme": "rental", "model": "VICTORY", "variant": "EXTENDED", "dailyFee": 55000, "downPayment": 550000, "termMonths": 36 },
-    { "region": "jabodetabek", "scheme": "rental", "model": "EDPOWER", "variant": "SINGLE", "dailyFee": 75000, "downPayment": 750000, "termMonths": 36 },
-
-    { "region": "jabodetabek", "scheme": "baas", "model": "VICTORY", "variant": "REGULAR", "unitPrice": 22000000, "monthlyFee": 390000 },
-    { "region": "jabodetabek", "scheme": "baas", "model": "VICTORY", "variant": "EXTENDED", "unitPrice": 22000000, "monthlyFee": 490000 },
-    { "region": "jabodetabek", "scheme": "baas", "model": "ATHENA", "variant": "REGULAR", "unitPrice": 24000000, "monthlyFee": 390000 },
-    { "region": "jabodetabek", "scheme": "baas", "model": "EDPOWER", "variant": "SINGLE", "unitPrice": 33000000, "monthlyFee": 750000 }
+    {
+      "region": "jabodetabek",
+      "scheme": "purchase",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "otrPrice": 21900000,
+      "discount": 2400000,
+      "netPrice": 19500000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "purchase",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "otrPrice": 36900000,
+      "discount": 3300000,
+      "netPrice": 33600000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "purchase",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "otrPrice": 39900000,
+      "discount": 3400000,
+      "netPrice": 36500000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "purchase",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "otrPrice": 34900000,
+      "discount": 3200000,
+      "netPrice": 31700000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "purchase",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "otrPrice": 37900000,
+      "discount": 3400000,
+      "netPrice": 34500000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "purchase",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "otrPrice": 56900000,
+      "discount": 4300000,
+      "netPrice": 52600000
+    },
+    {
+      "region": "bali",
+      "scheme": "purchase",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "otrPrice": 21900000,
+      "discount": 1095000,
+      "netPrice": 20805000
+    },
+    {
+      "region": "bali",
+      "scheme": "purchase",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "otrPrice": 36900000,
+      "discount": 1845000,
+      "netPrice": 35055000
+    },
+    {
+      "region": "bali",
+      "scheme": "purchase",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "otrPrice": 39900000,
+      "discount": 1995000,
+      "netPrice": 37905000
+    },
+    {
+      "region": "bali",
+      "scheme": "purchase",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "otrPrice": 34900000,
+      "discount": 1745000,
+      "netPrice": 33155000
+    },
+    {
+      "region": "bali",
+      "scheme": "purchase",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "otrPrice": 37900000,
+      "discount": 1895000,
+      "netPrice": 36005000
+    },
+    {
+      "region": "bali",
+      "scheme": "purchase",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "otrPrice": 56900000,
+      "discount": 2845000,
+      "netPrice": 54055000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-purchase",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "otrPrice": 21900000,
+      "discount": 3468000,
+      "netPrice": 18432000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-purchase",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "otrPrice": 36900000,
+      "discount": 6018000,
+      "netPrice": 30882000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-purchase",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "otrPrice": 39900000,
+      "discount": 6528000,
+      "netPrice": 33372000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-purchase",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "otrPrice": 34900000,
+      "discount": 5678000,
+      "netPrice": 29222000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-purchase",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "otrPrice": 37900000,
+      "discount": 6188000,
+      "netPrice": 31712000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-purchase",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "otrPrice": 56900000,
+      "discount": 9418000,
+      "netPrice": 47482000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-credit",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "otrPrice": 21900000,
+      "installment24": 1150000,
+      "installment36": 900000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-credit",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "otrPrice": 36900000,
+      "installment24": 1900000,
+      "installment36": 1500000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-credit",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "otrPrice": 39900000,
+      "installment24": 2100000,
+      "installment36": 1700000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-credit",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "otrPrice": 34900000,
+      "installment24": 1800000,
+      "installment36": 1400000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-credit",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "otrPrice": 37900000,
+      "installment24": 2000000,
+      "installment36": 1600000
+    },
+    {
+      "region": "bali",
+      "scheme": "b2b-credit",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "otrPrice": 56900000,
+      "installment24": 3000000,
+      "installment36": 2500000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rent-to-own",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "dailyFee": 35000,
+      "downPayment": 100000,
+      "termMonths": 40
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rent-to-own",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "dailyFee": 58000,
+      "downPayment": 550000,
+      "termMonths": 42
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rent-to-own",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "dailyFee": 63000,
+      "downPayment": 600000,
+      "termMonths": 42
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rent-to-own",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "dailyFee": 58000,
+      "downPayment": 550000,
+      "termMonths": 42
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rent-to-own",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "dailyFee": 63000,
+      "downPayment": 600000,
+      "termMonths": 42
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rent-to-own",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "dailyFee": 83000,
+      "downPayment": 800000,
+      "termMonths": 42
+    },
+    {
+      "region": "bali",
+      "scheme": "rent-to-own",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "dailyFee": 35000,
+      "downPayment": 350000,
+      "termMonths": 42
+    },
+    {
+      "region": "bali",
+      "scheme": "rent-to-own",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "dailyFee": 70000,
+      "downPayment": 700000,
+      "termMonths": 42
+    },
+    {
+      "region": "bali",
+      "scheme": "rent-to-own",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "dailyFee": 80000,
+      "downPayment": 800000,
+      "termMonths": 42
+    },
+    {
+      "region": "bali",
+      "scheme": "rent-to-own",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "dailyFee": 60000,
+      "downPayment": 600000,
+      "termMonths": 42
+    },
+    {
+      "region": "bali",
+      "scheme": "rent-to-own",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "dailyFee": 70000,
+      "downPayment": 700000,
+      "termMonths": 42
+    },
+    {
+      "region": "bali",
+      "scheme": "rent-to-own",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "dailyFee": 100000,
+      "downPayment": 1000000,
+      "termMonths": 42
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rental",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "dailyFee": 50000,
+      "downPayment": 500000,
+      "termMonths": 36
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rental",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "dailyFee": 55000,
+      "downPayment": 550000,
+      "termMonths": 36
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rental",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "dailyFee": 50000,
+      "downPayment": 500000,
+      "termMonths": 36
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rental",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "dailyFee": 55000,
+      "downPayment": 550000,
+      "termMonths": 36
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "rental",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "dailyFee": 75000,
+      "downPayment": 750000,
+      "termMonths": 36
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "baas",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "unitPrice": 22000000,
+      "monthlyFee": 390000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "baas",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "unitPrice": 22000000,
+      "monthlyFee": 490000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "baas",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "unitPrice": 24000000,
+      "monthlyFee": 390000
+    },
+    {
+      "region": "jabodetabek",
+      "scheme": "baas",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "unitPrice": 33000000,
+      "monthlyFee": 750000
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "otrPrice": 21900000,
+      "discount": 2400000,
+      "netPrice": 19500000
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "otrPrice": 36900000,
+      "discount": 3300000,
+      "netPrice": 33600000
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "otrPrice": 39900000,
+      "discount": 3400000,
+      "netPrice": 36500000
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "otrPrice": 34900000,
+      "discount": 3200000,
+      "netPrice": 31700000
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "otrPrice": 37900000,
+      "discount": 3400000,
+      "netPrice": 34500000
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "otrPrice": 56900000,
+      "discount": 4300000,
+      "netPrice": 52600000
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "BEES",
+      "variant": "SINGLE",
+      "dailyFee": 35000,
+      "downPayment": 100000,
+      "termMonths": 40
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "dailyFee": 58000,
+      "downPayment": 550000,
+      "termMonths": 42
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "dailyFee": 63000,
+      "downPayment": 600000,
+      "termMonths": 42
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "dailyFee": 58000,
+      "downPayment": 550000,
+      "termMonths": 42
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "dailyFee": 63000,
+      "downPayment": 600000,
+      "termMonths": 42
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "dailyFee": 83000,
+      "downPayment": 800000,
+      "termMonths": 42
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "dailyFee": 50000,
+      "downPayment": 500000,
+      "termMonths": 36
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "ATHENA",
+      "variant": "EXTENDED",
+      "dailyFee": 55000,
+      "downPayment": 550000,
+      "termMonths": 36
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "dailyFee": 50000,
+      "downPayment": 500000,
+      "termMonths": 36
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "dailyFee": 55000,
+      "downPayment": 550000,
+      "termMonths": 36
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "dailyFee": 75000,
+      "downPayment": 750000,
+      "termMonths": 36
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "VICTORY",
+      "variant": "REGULAR",
+      "unitPrice": 22000000,
+      "monthlyFee": 390000
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "VICTORY",
+      "variant": "EXTENDED",
+      "unitPrice": 22000000,
+      "monthlyFee": 490000
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "ATHENA",
+      "variant": "REGULAR",
+      "unitPrice": 24000000,
+      "monthlyFee": 390000
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "model": "EDPOWER",
+      "variant": "SINGLE",
+      "unitPrice": 33000000,
+      "monthlyFee": 750000
+    }
   ],
   "terms": [
     {
@@ -210,7 +744,12 @@
         "The discount reduces the OTR price, so down payments and installments become lighter too.",
         "Promotions are limited by time and quota."
       ],
-      "partners": ["Kredivo (personal)", "WOM Finance (personal)", "AEON Credit (B2B)", "Mandiri (B2B)"],
+      "partners": [
+        "Kredivo (personal)",
+        "WOM Finance (personal)",
+        "AEON Credit (B2B)",
+        "Mandiri (B2B)"
+      ],
       "validFrom": "2026-09-25T00:00:00.000Z",
       "validUntil": null,
       "noteId": "Pricelist 25 September 2026. Partner leasing hanya berlaku di Jabodetabek.",
@@ -521,7 +1060,198 @@
         "The unit can be paid in cash, by credit, or through financing via Kredivo and WOM Finance (personal) and Mandiri (business).",
         "The programme is limited by time and quota. Prices may differ by region. Written offers are provided at the showroom."
       ],
-      "partners": ["Kredivo (personal)", "WOM Finance (personal)", "Mandiri (B2B)"],
+      "partners": [
+        "Kredivo (personal)",
+        "WOM Finance (personal)",
+        "Mandiri (B2B)"
+      ],
+      "validFrom": "2026-09-01T00:00:00.000Z",
+      "validUntil": null,
+      "noteId": "Kampanye BaaS September 2026.",
+      "noteEn": "BaaS campaign, September 2026."
+    },
+    {
+      "region": "bandung",
+      "scheme": "purchase",
+      "includedId": [
+        "1x Adapter charging reguler (senilai Rp 1.700.000)",
+        "1x Ganti ban depan dan belakang (senilai Rp 385.000)",
+        "1x Ganti kampas rem (1 set depan dan belakang)",
+        "1x Servis reguler",
+        "2x Kunci mekanik",
+        "Voucher charging Rp 3.000.000 untuk Athena, Victory, dan EdPower (tidak berlaku untuk Bees)",
+        "Garansi baterai, motor, dan rangka 3 tahun atau 100.000 km"
+      ],
+      "includedEn": [
+        "1x Regular charging adapter (worth Rp 1,700,000)",
+        "1x Front and rear tire replacement (worth Rp 385,000)",
+        "1x Brake pad replacement (1 set, front and rear)",
+        "1x Regular service",
+        "2x Mechanical keys",
+        "Rp 3,000,000 charging voucher for Athena, Victory, and EdPower (not valid for Bees)",
+        "Battery, motor, and frame warranty of 3 years or 100,000 km"
+      ],
+      "termsId": [
+        "Harga net berlaku untuk pembelian cash, kredit, dan financing.",
+        "Harga adalah OTR Bandung Raya (Kota Bandung, Kabupaten Bandung, Bandung Barat, Cimahi). Wilayah lain memiliki harga tersendiri.",
+        "Voucher charging Rp 3.000.000 berlaku untuk pembelian langsung, kredit, dan financing pada Athena, Victory, dan EdPower. Tidak berlaku untuk Bees, Rental, maupun Rent To Own.",
+        "Voucher charging tidak bisa diuangkan atau ditukar.",
+        "Diskon memotong harga OTR, sehingga DP dan angsuran ikut menjadi lebih ringan.",
+        "Promo bersifat terbatas waktu dan terbatas kuota."
+      ],
+      "termsEn": [
+        "The net price applies to cash, credit, and financing purchases.",
+        "Prices are OTR Greater Bandung (Bandung City, Bandung Regency, West Bandung, Cimahi). Other regions have their own pricing.",
+        "The Rp 3,000,000 charging voucher applies to outright, credit, and financing purchases of Athena, Victory, and EdPower. Not valid for Bees, Rental, or Rent To Own.",
+        "The charging voucher cannot be exchanged for cash or other items.",
+        "The discount reduces the OTR price, so down payments and installments become lighter too.",
+        "Promotions are limited by time and quota."
+      ],
+      "partners": [
+        "Kredivo (personal)",
+        "WOM Finance (personal)",
+        "AEON Credit (B2B)",
+        "Mandiri (B2B)"
+      ],
+      "validFrom": "2026-09-25T00:00:00.000Z",
+      "validUntil": null,
+      "noteId": "Pricelist 25 September 2026.",
+      "noteEn": "Price list of 25 September 2026."
+    },
+    {
+      "region": "bandung",
+      "scheme": "rent-to-own",
+      "includedId": [
+        "Adapter pengisian daya reguler gratis (senilai Rp 1.000.000)",
+        "Gratis 1x penggantian ban depan dan belakang (senilai Rp 385.000)",
+        "Gratis 1x penggantian kampas rem depan dan belakang (1 set)",
+        "Gratis servis rutin",
+        "1x Kunci mekanik",
+        "Pengurusan BPKB ditanggung Wedison",
+        "Garansi baterai, motor, dan rangka 3 tahun atau 100.000 km; komponen elektrikal lain 2 tahun atau 20.000 km"
+      ],
+      "includedEn": [
+        "Free regular charging adapter (worth Rp 1,000,000)",
+        "Free 1x front and rear tire replacement (worth Rp 385,000)",
+        "Free 1x front and rear brake pad replacement (1 set)",
+        "Free routine servicing",
+        "1x Mechanical key",
+        "BPKB processing covered by Wedison",
+        "Battery, motor, and frame warranty of 3 years or 100,000 km; other electrical components 2 years or 20,000 km"
+      ],
+      "termsId": [
+        "Masa kontrak 42 bulan untuk Athena, Victory, dan EdPower. 40 bulan untuk Bees.",
+        "Khusus driver ojol, termasuk komunitas ojol.",
+        "Motor menjadi hak milik Anda setelah kontrak selesai.",
+        "Biaya harian adalah murni biaya sewa, tidak ada komponen tabungan.",
+        "Uang muka bersifat non-refundable (tidak dapat dikembalikan).",
+        "Denda tilang menjadi tanggung jawab Anda.",
+        "Kerusakan akibat kelalaian atau penyalahgunaan menjadi tanggung jawab Anda.",
+        "Wajib lolos proses skrining Wedison.",
+        "Warna motor ditentukan secara acak sesuai ketersediaan stok.",
+        "Garansi berlaku hanya untuk kerusakan karena kesalahan pabrik, bukan human error, dan hangus jika terjadi kecelakaan akibat kelalaian sendiri."
+      ],
+      "termsEn": [
+        "Contract term of 42 months for Athena, Victory, and EdPower. 40 months for Bees.",
+        "For ojol drivers only, including ojol communities.",
+        "The motorcycle becomes yours once the contract ends.",
+        "The daily fee is purely a rental fee; there is no savings component.",
+        "The down payment is non-refundable.",
+        "Traffic fines are your responsibility.",
+        "Damage caused by negligence or misuse is your responsibility.",
+        "You must pass Wedison's screening process.",
+        "Motorcycle color is assigned at random based on stock availability.",
+        "The warranty covers factory defects only, not human error, and is void after an accident caused by your own negligence."
+      ],
+      "partners": [],
+      "validFrom": "2026-08-01T00:00:00.000Z",
+      "validUntil": null,
+      "noteId": "Pricelist Rent To Own Agustus 2026.",
+      "noteEn": "Rent To Own price list, August 2026."
+    },
+    {
+      "region": "bandung",
+      "scheme": "rental",
+      "includedId": [
+        "Adapter pengisian daya reguler gratis (senilai Rp 1.000.000)",
+        "Gratis 1x penggantian ban depan dan belakang (senilai Rp 385.000)",
+        "Gratis 1x penggantian kampas rem depan dan belakang (1 set)",
+        "Gratis servis rutin",
+        "1x Kunci mekanik",
+        "Garansi baterai, motor, dan rangka 3 tahun atau 100.000 km; komponen elektrikal lain 2 tahun atau 20.000 km"
+      ],
+      "includedEn": [
+        "Free regular charging adapter (worth Rp 1,000,000)",
+        "Free 1x front and rear tire replacement (worth Rp 385,000)",
+        "Free 1x front and rear brake pad replacement (1 set)",
+        "Free routine servicing",
+        "1x Mechanical key",
+        "Battery, motor, and frame warranty of 3 years or 100,000 km; other electrical components 2 years or 20,000 km"
+      ],
+      "termsId": [
+        "Masa kontrak 36 bulan.",
+        "Unit tetap menjadi milik PT Wedison Nusantara Energi. STNK atas nama PT Wedison Nusantara Energi.",
+        "Motor dikembalikan ke Wedison di akhir kontrak.",
+        "Anda mendapat 2 hari libur bayar per bulan, maksimal 24 hari per tahun.",
+        "Uang muka bersifat non-refundable (tidak dapat dikembalikan).",
+        "Denda tilang menjadi tanggung jawab Anda.",
+        "Kerusakan akibat kelalaian atau penyalahgunaan menjadi tanggung jawab Anda.",
+        "Wajib lolos proses skrining Wedison.",
+        "Warna motor ditentukan secara acak sesuai ketersediaan stok.",
+        "Bees tidak tersedia untuk skema Rental."
+      ],
+      "termsEn": [
+        "Contract term of 36 months.",
+        "The unit remains the property of PT Wedison Nusantara Energi. The STNK is registered to PT Wedison Nusantara Energi.",
+        "The motorcycle is returned to Wedison at the end of the contract.",
+        "You get 2 payment-free days per month, up to 24 days per year.",
+        "The down payment is non-refundable.",
+        "Traffic fines are your responsibility.",
+        "Damage caused by negligence or misuse is your responsibility.",
+        "You must pass Wedison's screening process.",
+        "Motorcycle color is assigned at random based on stock availability.",
+        "Bees is not available for the Rental scheme."
+      ],
+      "partners": [],
+      "validFrom": null,
+      "validUntil": null,
+      "noteId": null,
+      "noteEn": null
+    },
+    {
+      "region": "bandung",
+      "scheme": "baas",
+      "includedId": [
+        "Garansi baterai seumur hidup selama berlangganan",
+        "Insentif pengisian daya Rp 2.000.000",
+        "Adapter pengisian gratis (senilai Rp 1.700.000)",
+        "Garansi kendaraan 3 tahun atau 100.000 km",
+        "2x Kunci mekanik"
+      ],
+      "includedEn": [
+        "Lifetime battery warranty while subscribed",
+        "Rp 2,000,000 charging incentive",
+        "Free charging adapter (worth Rp 1,700,000)",
+        "Vehicle warranty of 3 years or 100,000 km",
+        "2x Mechanical keys"
+      ],
+      "termsId": [
+        "Harga unit tidak termasuk baterai. Baterai disediakan melalui langganan bulanan.",
+        "Bees tidak termasuk dalam skema Battery as a Service.",
+        "Pembayaran unit bisa cash, kredit, atau financing melalui Kredivo dan WOM Finance (personal) serta Mandiri (bisnis).",
+        "Program terbatas waktu dan kuota. Harga dapat berbeda per wilayah. Penawaran tertulis diberikan di showroom."
+      ],
+      "termsEn": [
+        "The unit price excludes the battery. The battery is provided through a monthly subscription.",
+        "Bees is not part of the Battery as a Service scheme.",
+        "The unit can be paid in cash, by credit, or through financing via Kredivo and WOM Finance (personal) and Mandiri (business).",
+        "The programme is limited by time and quota. Prices may differ by region. Written offers are provided at the showroom."
+      ],
+      "partners": [
+        "Kredivo (personal)",
+        "WOM Finance (personal)",
+        "Mandiri (B2B)"
+      ],
       "validFrom": "2026-09-01T00:00:00.000Z",
       "validUntil": null,
       "noteId": "Kampanye BaaS September 2026.",

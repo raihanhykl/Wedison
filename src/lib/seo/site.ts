@@ -89,8 +89,8 @@ export const HQ_ADDRESS = {
 } as const;
 
 export const ORG_DESCRIPTION: Record<Locale, string> = {
-  id: "Wedison adalah perusahaan motor listrik pengisian cepat pertama di Indonesia: motor listrik Athena, Bees, Victory, EdPower, dan jaringan pengisian SuperCharge (10% ke 80% dalam 15 menit).",
-  en: "Wedison is Indonesia's first fast-charging electric motorcycle company: the Athena, Bees, Victory and EdPower electric motorcycles plus the SuperCharge charging network (10% to 80% in 15 minutes).",
+  id: "Wedison adalah perusahaan motor listrik pengisian cepat pertama di Indonesia: motor listrik Athena, Bees, Victory, EdPower, dan jaringan pengisian SuperCharge (15% ke 95% dalam 15 menit).",
+  en: "Wedison is Indonesia's first fast-charging electric motorcycle company: the Athena, Bees, Victory and EdPower electric motorcycles plus the SuperCharge charging network (15% to 95% in 15 minutes).",
 };
 
 export const LOGO_URL = `${SITE_URL}/logo/wedison-logo.png`;

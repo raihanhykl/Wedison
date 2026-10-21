@@ -16,7 +16,7 @@ export const en = {
   //SEO Landing
   "landing.title": "Wedison - Electric Motorcycles and SuperCharge",
   "landing.description":
-    "Wedison electric motorcycles, backed by the SuperCharge network. Charge from 10% to 80% in 15 minutes.",
+    "Wedison electric motorcycles, backed by the SuperCharge network. Charge from 15% to 95% in 15 minutes.",
 
   // compare table
   "compare.model": "Compare Models",
@@ -188,7 +188,7 @@ export const en = {
     "A single charge covers several days of city riding, depending on the model and battery selected.",
   "features.rapidCharging": "SuperCharge in 15 Minutes",
   "features.rapidChargingDesc":
-    "Charge from 10% to 80% in 15 minutes at any Wedison SuperCharge station.",
+    "Charge from 15% to 95% in 15 minutes at any Wedison SuperCharge station.",
   "features.impressivePerformance": "Full Torque From a Standstill",
   "features.impressivePerformanceDesc":
     "An electric motor delivers full torque from the first turn of the throttle, making initial acceleration immediate.",
@@ -437,7 +437,7 @@ export const en = {
     "Several models with distinct characters, from a compact commuter to a long-range maxi-scooter.",
   "about.offers.charging.title": "SuperCharge Stations",
   "about.offers.charging.description":
-    "Fast-charging stations that bring a battery from 10% to 80% in 15 minutes, keeping stops brief.",
+    "Fast-charging stations that bring a battery from 15% to 95% in 15 minutes, keeping stops brief.",
   "about.joinUs": "Join Our Mission",
   "about.joinUsDescription":
     "We are building electric transport in Indonesia designed for the long term. We would welcome your part in it.",
@@ -515,7 +515,7 @@ export const en = {
     "The battery, motor, and frame are covered for 3 years or 100,000 km, whichever comes first. Other components carry a 1 to 2 year warranty per the official list. The warranty covers manufacturing defects.",
   "contact.page.faq.q3": "How long does charging take?",
   "contact.page.faq.a3":
-    "At a SuperCharge station, Athena, Victory, and EdPower charge from 10% to 80% in about 15 minutes. On a household outlet, a full charge takes 4 to 6 hours for Bees, Athena, and Victory, and 8 to 10 hours for EdPower.",
+    "At a SuperCharge station, Athena, Victory, and EdPower charge from 15% to 95% in about 15 minutes. On a household outlet, a full charge takes 4 to 6 hours for Bees, Athena, and Victory, and 8 to 10 hours for EdPower.",
   "contact.page.faq.q4": "Are financing options available?",
   "contact.page.faq.a4":
     "Yes. We offer several installment plans, and our team can help you select the one best suited to your budget.",
@@ -555,7 +555,7 @@ export const en = {
   "specs.category.battery.batteryCapacity": "Battery Capacity",
   "specs.category.battery.voltage": "Voltage",
   "specs.category.battery.chargingTimeSuperCharge":
-    "Charging Time with SuperCharge (10-80%)",
+    "Charging Time with SuperCharge (15-95%)",
   "specs.category.battery.chargingTimeHome":
     "Charging Time with Home Charging (0-100%)",
   "specs.category.battery.range": "Cruising Range",
@@ -611,8 +611,8 @@ export const en = {
   "edmax.feature2.title": "Power Up in Minutes",
   "edmax.feature2.subtitle": "SuperCharge Technology",
   "edmax.feature2.description":
-    "From 10% to 80% in 15 minutes, roughly the length of a coffee break before you are on the road again.",
-  "edmax.feature2.charge": "10% to 80% Charge",
+    "From 15% to 95% in 15 minutes, roughly the length of a coffee break before you are on the road again.",
+  "edmax.feature2.charge": "15% to 95% Charge",
   "edmax.feature2.universal": "Universal",
   "edmax.feature2.chargingPort": "Charging Port",
   "edmax.feature2.smart": "Smart",
@@ -659,7 +659,7 @@ export const en = {
   "edpower.productPage.techSpecs2.title": 15,
   "edpower.productPage.techSpecs2.unit": "minutes",
   "edpower.productPage.techSpecs2.desc":
-    "Charge from 10% to 80% with SuperCharge",
+    "Charge from 15% to 95% with SuperCharge",
 
   "edpower.productPage.techSpecs3.title": 85,
   "edpower.productPage.techSpecs3.unit": "km/h",
@@ -715,7 +715,7 @@ export const en = {
   "edpower.productPage.chargingHighlight1.title": "Wedison SuperCharge",
   "edpower.productPage.chargingHighlight1.description": (
     <>
-      Charge from 10% to 80% in 15 minutes, suited to a brief stop between
+      Charge from 15% to 95% in 15 minutes, suited to a brief stop between
       errands. Available at the Jakarta, Bandung Barat, and Bekasi showrooms.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
@@ -842,7 +842,7 @@ export const en = {
   "victory.productPage.techSpecs2.title": 15,
   "victory.productPage.techSpecs2.unit": "minutes",
   "victory.productPage.techSpecs2.desc":
-    "Charge from 10% to 80% with SuperCharge",
+    "Charge from 15% to 95% with SuperCharge",
 
   "victory.productPage.techSpecs3.title": 80,
   "victory.productPage.techSpecs3.unit": "km/h",
@@ -868,7 +868,7 @@ export const en = {
     "Close-up of SuperCharge port with Wedison branding",
   "victory.productPage.productHighlight3.title": "SuperCharge Ready",
   "victory.productPage.productHighlight3.description":
-    "Charge from 10% to 80% in 15 minutes at a SuperCharge station, or charge at home when time allows.",
+    "Charge from 15% to 95% in 15 minutes at a SuperCharge station, or charge at home when time allows.",
 
   "victory.productPage.chargingOverview.imageAlt":
     "Victory parked at a Wedison showroom, SuperCharge station in view",
@@ -881,7 +881,7 @@ export const en = {
   "victory.productPage.chargingHighlight1.title": "Ultra-Fast SuperCharge",
   "victory.productPage.chargingHighlight1.description": (
     <>
-      Go from 10% to 80% in 15 minutes, enough time for a short break on a busy
+      Go from 15% to 95% in 15 minutes, enough time for a short break on a busy
       day. Available at the Jakarta, Bandung Barat, and Bekasi showrooms.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
@@ -964,7 +964,7 @@ export const en = {
   "athena.productPage.techSpecs2.title": 15,
   "athena.productPage.techSpecs2.unit": "minutes",
   "athena.productPage.techSpecs2.desc":
-    "Charge from 10% to 80% with SuperCharge",
+    "Charge from 15% to 95% with SuperCharge",
 
   "athena.productPage.techSpecs3.title": 75,
   "athena.productPage.techSpecs3.unit": "km/h",
@@ -983,7 +983,7 @@ export const en = {
   "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
   "athena.productPage.productHighlight2.title": "SuperCharge",
   "athena.productPage.productHighlight2.description":
-    "At a SuperCharge station, Athena charges from 10% to 80% in 15 minutes. At home, a full charge from 0% takes about 4 to 6 hours.",
+    "At a SuperCharge station, Athena charges from 15% to 95% in 15 minutes. At home, a full charge from 0% takes about 4 to 6 hours.",
 
   "athena.productPage.productHighlight3.imageAlt": "CBS Breaking System Athena",
   "athena.productPage.productHighlight3.title": "Designed for the City",
@@ -1000,7 +1000,7 @@ export const en = {
   "athena.productPage.chargingHighlight1.title": "15-Minute SuperCharge",
   "athena.productPage.chargingHighlight1.description": (
     <>
-      SuperCharge takes the battery from 10% to 80% in 15 minutes, so you are
+      SuperCharge takes the battery from 15% to 95% in 15 minutes, so you are
       not standing around waiting to move again.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Learn More
@@ -1139,10 +1139,10 @@ export const en = {
   //SuperCharge
   "supercharge.landing.title": "Your Trip",
   "supercharge.landing.description":
-    "The Wedison fast-charging network. Charge from 10% to 80% in 15 minutes.",
+    "The Wedison fast-charging network. Charge from 15% to 95% in 15 minutes.",
 
   "supercharge.hero.tag": "Fast Charging",
-  "supercharge.hero.title": "Charge from 10% to 80% in",
+  "supercharge.hero.title": "Charge from 15% to 95% in",
   "supercharge.hero.titleHighlight": "Just 15 Minutes",
   "supercharge.hero.description":
     "SuperCharge is the fast-charging network Wedison builds and operates itself, compatible with Athena, Victory, and EdPower.",
@@ -1165,7 +1165,7 @@ export const en = {
     "Tap start in the Wedison app. The session uses your charging package.",
   "supercharge.how.step3.title": "Ride on",
   "supercharge.how.step3.desc":
-    "About 15 minutes later the battery is at 80%. The app lets you know when it's done.",
+    "About 15 minutes later the battery is at 95%. The app lets you know when it's done.",
   "supercharge.network.upcomingLabel": "Coming soon",
   "supercharge.safety.imageAlt": "The charging module inside a Wedison SuperCharge station",
   "supercharge.safety.fact1.title": "IEC certified",
@@ -1261,7 +1261,7 @@ export const en = {
 
   "supercharge.feature1.title": "Fifteen Minutes, Not Five Hours",
   "supercharge.feature1.description":
-    "SuperCharge brings a battery from 10% to 80% in 15 minutes. The current is regulated automatically, so the speed comes at no cost to battery life.",
+    "SuperCharge brings a battery from 15% to 95% in 15 minutes. The current is regulated automatically, so the speed comes at no cost to battery life.",
 
   "supercharge.feature2.subtitle": "Check the nearest point before setting off",
   "supercharge.feature2.description":
@@ -1408,10 +1408,10 @@ export const en = {
     "Wedison batteries carry a 3-year or 100,000 km warranty, whichever comes first, counted from the handover date.",
   "faq.Battery.questions.1.question": "How long does a full charge take?",
   "faq.Battery.questions.1.answer":
-    "SuperCharge: 10% to 80% in 15 minutes, or 10% to 95% in 20 minutes.\nHome charging: roughly 2 to 10 hours, depending on the adapter and battery size.",
+    "SuperCharge: 15% to 95% in 15 minutes.\nHome charging: roughly 2 to 10 hours, depending on the adapter and battery size.",
   "faq.Battery.questions.2.question": "What type of battery does Wedison use?",
   "faq.Battery.questions.2.answer":
-    "Wedison uses a Lithium-ion (LFP) battery, the same chemistry family found in smartphones, laptops, and electric cars.\n\nThe resulting benefits:\nA. High energy density: substantial stored energy in a small, light pack.\nB. Heat tolerance: it operates efficiently at temperatures up to 45 degrees Celsius.\nC. Low self-discharge: it retains its charge even when the motorcycle is left unused for days.\nD. Long life: more than 5,000 charge cycles while keeping nearly all of its original capacity.\nE. Quick charging: 10% to 80% in 15 minutes at a SuperCharge station.",
+    "Wedison uses a Lithium-ion (LFP) battery, the same chemistry family found in smartphones, laptops, and electric cars.\n\nThe resulting benefits:\nA. High energy density: substantial stored energy in a small, light pack.\nB. Heat tolerance: it operates efficiently at temperatures up to 45 degrees Celsius.\nC. Low self-discharge: it retains its charge even when the motorcycle is left unused for days.\nD. Long life: more than 5,000 charge cycles while keeping nearly all of its original capacity.\nE. Quick charging: 15% to 95% in 15 minutes at a SuperCharge station.",
   "faq.Battery.questions.3.question":
     "How many battery options does Wedison sell?",
   "faq.Battery.questions.3.answer":
@@ -1420,7 +1420,7 @@ export const en = {
   "faq.Battery.questions.4.answer": "Wedison develops its batteries in-house.",
   "faq.Battery.questions.5.question": "How long will the battery last?",
   "faq.Battery.questions.5.answer":
-    "Under normal use, Wedison batteries are designed to last up to 12 years.",
+    "Wedison batteries have a service life of up to 8 years under normal use. This is the expected battery lifespan, separate from the warranty period (3 years or 100,000 km).",
   "faq.Battery.questions.6.question":
     "Can I use a third-party battery or charger?",
   "faq.Battery.questions.6.answer":
@@ -1678,12 +1678,12 @@ export const en = {
   "ojol.dialog.terms": "Terms & Conditions",
   "ojol.dialog.registerNow": "Register for This Program Now",
 
-  "ojol.supercharge.badge": "10% to 80% in 15 Minutes",
+  "ojol.supercharge.badge": "15% to 95% in 15 Minutes",
   "ojol.supercharge.descriptionPart1":
     "For a driver, downtime is costly. At SuperCharge it takes ",
   "ojol.supercharge.descriptionBold": "15 minutes",
   "ojol.supercharge.descriptionPart2":
-    " to bring the battery from 10% to 80% before you return to the road. A single charge covers up to 200 km*, which means more hours available and more orders completed.",
+    " to bring the battery from 15% to 95% before you return to the road. A single charge covers up to 200 km*, which means more hours available and more orders completed.",
   "ojol.supercharge.disclaimer":
     "*Range of 200 km applies to EdPower with the Extended battery",
   "ojol.supercharge.cta": "Learn More",
@@ -1948,7 +1948,7 @@ export const en = {
   "baas.charging.kicker": "Charging",
   "baas.charging.title": "At home every day. SuperCharge when you travel.",
   "baas.charging.desc":
-    "A home charging adapter is included. For longer trips, SuperCharge stations take the battery from 10% to 80% in 15 minutes in the cities our network already covers.",
+    "A home charging adapter is included. For longer trips, SuperCharge stations take the battery from 15% to 95% in 15 minutes in the cities our network already covers.",
   "baas.charging.cta": "See SuperCharge locations",
   "baas.charging.imageAlt": "A Wedison motorcycle charging at a SuperCharge station",
 
