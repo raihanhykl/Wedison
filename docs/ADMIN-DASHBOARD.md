@@ -183,7 +183,7 @@ Satu sumber kebenaran harga publik, dikelola di **/admin/pricing** (izin `pricin
 
 **Model data** (`server/prisma/schema.prisma`):
 - `PriceRegion` — wilayah (Jabodetabek, Bali, Bandung Raya, …): nama ID/EN, label harga ("Harga OTR Jabodetabek"), cakupan kota, WA sales, `isDefault` (dipakai untuk "mulai dari" di landing), `isActive`, urutan. Wilayah **tanpa baris harga** tampil sebagai panel "Hubungi Sales {wilayah}".
-- `PricingScheme` — skema dengan `kind`: `PURCHASE` (OTR, diskon, net), `RENT_TO_OWN` / `RENTAL` (biaya harian, DP, masa kontrak), `B2B_CREDIT` (angsuran 24/36 bln), `BAAS` (harga unit + langganan baterai). `audience` (ALL/OJOL/B2B) jadi label kecil; `isPublic=false` = tersimpan tapi tidak tampil (default untuk B2B Bali).
+- `PricingScheme` — skema dengan `kind`: `PURCHASE` ("Cash": OTR, diskon, net), `RENT_TO_OWN` / `RENTAL` (biaya harian, DP, masa kontrak), `B2B_CREDIT` (angsuran 24/36 bln), `BAAS` (harga unit + langganan baterai). `audience` (ALL/OJOL/B2B) jadi label kecil; `isPublic=false` = tersimpan tapi tidak tampil (default untuk B2B Bali).
 - `PriceEntry` — baris harga unik per wilayah × skema × model (`BEES|ATHENA|VICTORY|EDPOWER`) × varian (`SINGLE|REGULAR|EXTENDED`). Beli putus divalidasi `net = OTR − diskon`.
 - `PricingTerms` — per wilayah × skema: "Setiap unit termasuk", S&K, mitra pembiayaan, masa berlaku, catatan (ID/EN).
 - `Setting` key `pricing_settings` — disclaimer, tarif SuperCharge per model + satuan + catatan, program referral (nominal, wilayah, deskripsi).
@@ -195,7 +195,16 @@ Satu sumber kebenaran harga publik, dikelola di **/admin/pricing** (izin `pricin
 - `/ojol`: isi dialog Sewa Milik/Sewa Harian dari skema `rent-to-own`/`rental` (`src/app/[locale]/ojol/programs.ts`).
 - `/super-charge`: baris tarif SuperCharge. `llms.txt`: bagian "Pricing" lengkap untuk AI crawler.
 
-Setiap simpan di admin mem-bust cache API (tag `pricing`) dan memanggil webhook `/api/revalidate` Next, jadi perubahan tampil dalam hitungan detik. Seed awal: `server/prisma/seed-data/pricing.json` (sumber: knowledge source Dion v4, 25 Sep 2026; BaaS dari kampanye Sep 2026), dijalankan `npm run db:seed` (idempoten, tidak menimpa perubahan admin). Jika snapshot statis perlu diperbarui, salin respons `GET /public/pricing` ke `src/data/pricing-fallback.ts`. Tes: `server/test/pricing.api.test.ts`.
+Setiap simpan di admin mem-bust cache API (tag `pricing`) dan memanggil webhook `/api/revalidate` Next, jadi perubahan tampil dalam hitungan detik. Seed awal: `server/prisma/seed-data/pricing.json` (sumber: knowledge source Dion v4, 25 Sep 2026; BaaS dari kampanye Sep 2026), dijalankan `npm run db:seed` (idempoten, tidak menimpa perubahan admin). Snapshot statis dibuat ulang dengan `node server/prisma/pricing-sync.mjs --fallback`.
+
+**Mengisi/menyinkronkan DB yang sudah berjalan (staging/produksi)** dari `seed-data/pricing.json` tanpa menyentuh tabel lain:
+```bash
+node server/prisma/pricing-sync.mjs > /tmp/pricing-sync.sql     # tinjau dulu isinya
+# di VPS: backup lalu jalankan (satu transaksi, aman diulang)
+~/wedison-prod/bin/backup-db.sh pre-pricing-sync
+psql "${DATABASE_URL%%\?*}" -v ON_ERROR_STOP=1 -f /tmp/pricing-sync.sql
+```
+Nilai di seed menimpa baris dengan kunci yang sama (slug wilayah/skema, wilayah × skema × model × varian); baris tambahan dari admin dibiarkan. Cache API publik habis dalam `CACHE_TTL_PUBLIC` (300 dtk), lalu panggil `/api/revalidate` dengan tag `pricing` atau tunggu ISR. Tes: `server/test/pricing.api.test.ts`.
 
 ## Roadmap modul
 

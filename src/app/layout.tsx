@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Wedison – Motor Listrik & SuperCharge Indonesia",
   description:
-    "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 10% ke 80% dalam 15 menit, garansi baterai 3 tahun/100.000 km. Jadwalkan test ride.",
+    "Motor listrik Wedison: Athena, Bees, Victory, dan EdPower. SuperCharge 15% ke 95% dalam 15 menit, garansi baterai 3 tahun/100.000 km. Jadwalkan test ride.",
   applicationName: SITE_NAME,
   robots: robotsFor(),
 };

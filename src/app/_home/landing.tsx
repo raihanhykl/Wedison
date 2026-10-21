@@ -176,7 +176,7 @@ const COPY: Record<Lang, Record<string, string>> = {
       "Nyaman untuk perjalanan harian. Tenang untuk tahun-tahun ke depan.",
     adv_charge_t: "Jaringan SuperCharge",
     adv_charge_d:
-      "Dari 10% ke 80% dalam 15 menit, di jaringan yang terus bertambah.",
+      "Dari 15% ke 95% dalam 15 menit, di jaringan yang terus bertambah.",
     adv_battery_t: "Garansi Baterai",
     adv_battery_d:
       "Baterai, motor, dan rangka bergaransi 3 tahun atau 100.000 km.",

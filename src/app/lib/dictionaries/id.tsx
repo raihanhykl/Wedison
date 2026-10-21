@@ -16,7 +16,7 @@ export const id = {
   //SEO Landing
   "landing.title": "Wedison - Motor Listrik dan Pengisian SuperCharge",
   "landing.description":
-    "Motor listrik Wedison dengan jaringan pengisian cepat SuperCharge. Isi daya dari 10% ke 80% hanya dalam 15 menit.",
+    "Motor listrik Wedison dengan jaringan pengisian cepat SuperCharge. Isi daya dari 15% ke 95% hanya dalam 15 menit.",
 
   // compare table
   "compare.model": "Bandingkan Model",
@@ -189,7 +189,7 @@ export const id = {
     "Sekali pengisian cukup untuk beberapa hari perjalanan dalam kota, tergantung model dan pilihan baterai Anda.",
   "features.rapidCharging": "SuperCharge 15 Menit",
   "features.rapidChargingDesc":
-    "Dari 10% ke 80% hanya dalam 15 menit di stasiun SuperCharge Wedison. Singgah sebentar, lalu lanjutkan perjalanan.",
+    "Dari 15% ke 95% hanya dalam 15 menit di stasiun SuperCharge Wedison. Singgah sebentar, lalu lanjutkan perjalanan.",
   "features.impressivePerformance": "Torsi Penuh Sejak Detik Pertama",
   "features.impressivePerformanceDesc":
     "Motor listrik mengeluarkan torsi maksimal sejak putaran pertama. Tarikan awal terasa spontan dan halus.",
@@ -430,7 +430,7 @@ export const id = {
     "Beberapa model dengan karakter berbeda, dari komuter ringkas hingga maxi-scooter untuk perjalanan jauh.",
   "about.offers.charging.title": "Stasiun Pengisian SuperCharge",
   "about.offers.charging.description":
-    "Stasiun pengisian cepat yang mengisi baterai dari 10% ke 80% dalam 15 menit. Waktu berhenti jadi jauh lebih singkat.",
+    "Stasiun pengisian cepat yang mengisi baterai dari 15% ke 95% dalam 15 menit. Waktu berhenti jadi jauh lebih singkat.",
   "about.joinUs": "Bergabung dalam Misi Kami",
   "about.joinUsDescription":
     "Kami sedang membangun transportasi listrik yang bisa diandalkan Indonesia untuk jangka panjang. Mari mewujudkannya bersama.",
@@ -509,7 +509,7 @@ export const id = {
     "Baterai, motor, dan rangka dilindungi garansi 3 tahun atau 100.000 km, mana yang tercapai lebih dulu. Komponen lain bergaransi 1 sampai 2 tahun sesuai daftar resmi. Garansi mencakup kerusakan akibat cacat pabrik.",
   "contact.page.faq.q3": "Berapa lama waktu pengisian dayanya?",
   "contact.page.faq.a3":
-    "Di stasiun SuperCharge, Athena, Victory, dan EdPower terisi dari 10% ke 80% dalam sekitar 15 menit. Dengan charger rumah, pengisian penuh membutuhkan 4 sampai 6 jam untuk Bees, Athena, dan Victory, serta 8 sampai 10 jam untuk EdPower.",
+    "Di stasiun SuperCharge, Athena, Victory, dan EdPower terisi dari 15% ke 95% dalam sekitar 15 menit. Dengan charger rumah, pengisian penuh membutuhkan 4 sampai 6 jam untuk Bees, Athena, dan Victory, serta 8 sampai 10 jam untuk EdPower.",
   "contact.page.faq.q4": "Apakah tersedia skema cicilan?",
   "contact.page.faq.a4":
     "Tersedia. Kami bekerja sama dengan beberapa mitra pembiayaan, dan tim kami akan membantu Anda memilih skema yang paling sesuai dengan anggaran.",
@@ -549,7 +549,7 @@ export const id = {
   "specs.category.battery.batteryCapacity": "Kapasitas Baterai",
   "specs.category.battery.voltage": "Tegangan Baterai (Volt)",
   "specs.category.battery.chargingTimeSuperCharge":
-    "Waktu Pengisian dengan SuperCharge (10-80%)",
+    "Waktu Pengisian dengan SuperCharge (15-95%)",
   "specs.category.battery.chargingTimeHome":
     "Waktu Pengisian dengan Home Charging (0-100%)",
   "specs.category.battery.range": "Jarak Tempuh",
@@ -606,8 +606,8 @@ export const id = {
   "edmax.feature2.title": "Terisi dalam Hitungan Menit",
   "edmax.feature2.subtitle": "Teknologi Pengisian Super Cepat",
   "edmax.feature2.description":
-    "Dari 10% ke 80% dalam 15 menit. Cukup waktu untuk secangkir kopi, lalu lanjutkan perjalanan.",
-  "edmax.feature2.charge": "Pengisian 10-80%",
+    "Dari 15% ke 95% dalam 15 menit. Cukup waktu untuk secangkir kopi, lalu lanjutkan perjalanan.",
+  "edmax.feature2.charge": "Pengisian 15-95%",
   "edmax.feature2.universal": "Universal",
   "edmax.feature2.chargingPort": "Port Pengisian",
   "edmax.feature2.smart": "Pintar",
@@ -654,7 +654,7 @@ export const id = {
   "edpower.productPage.techSpecs2.title": 15,
   "edpower.productPage.techSpecs2.unit": "menit",
   "edpower.productPage.techSpecs2.desc":
-    "Isi daya 10% ke 80% dengan SuperCharge",
+    "Isi daya 15% ke 95% dengan SuperCharge",
 
   "edpower.productPage.techSpecs3.title": 85,
   "edpower.productPage.techSpecs3.unit": "km/jam",
@@ -711,7 +711,7 @@ export const id = {
   "edpower.productPage.chargingHighlight1.title": "Wedison SuperCharge",
   "edpower.productPage.chargingHighlight1.description": (
     <>
-      Dari 10% ke 80% dalam 15 menit, cukup untuk singgah sejenak di sela
+      Dari 15% ke 95% dalam 15 menit, cukup untuk singgah sejenak di sela
       aktivitas. Tersedia di showroom Jakarta, Bandung Barat, dan Bekasi.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
@@ -835,7 +835,7 @@ export const id = {
   "victory.productPage.techSpecs2.title": 15,
   "victory.productPage.techSpecs2.unit": "menit",
   "victory.productPage.techSpecs2.desc":
-    "Isi daya 10% ke 80% dengan SuperCharge",
+    "Isi daya 15% ke 95% dengan SuperCharge",
 
   "victory.productPage.techSpecs3.title": 80,
   "victory.productPage.techSpecs3.unit": "km/jam",
@@ -863,7 +863,7 @@ export const id = {
     "Tampilan dekat port SuperCharge dengan branding Wedison",
   "victory.productPage.productHighlight3.title": "Siap SuperCharge",
   "victory.productPage.productHighlight3.description":
-    "Isi daya dari 10% ke 80% dalam 15 menit di SuperCharge, atau colokkan di rumah saat Anda tidak sedang terburu-buru.",
+    "Isi daya dari 15% ke 95% dalam 15 menit di SuperCharge, atau colokkan di rumah saat Anda tidak sedang terburu-buru.",
 
   "victory.productPage.chargingOverview.imageAlt":
     "Victory terparkir di showroom Wedison, dengan stasiun SuperCharge di latar",
@@ -876,7 +876,7 @@ export const id = {
   "victory.productPage.chargingHighlight1.title": "SuperCharge, Secepat Itu",
   "victory.productPage.chargingHighlight1.description": (
     <>
-      Dari 10% ke 80% dalam 15 menit, pas untuk jeda singkat di tengah hari yang
+      Dari 15% ke 95% dalam 15 menit, pas untuk jeda singkat di tengah hari yang
       padat. Tersedia di showroom Jakarta, Bandung Barat, dan Bekasi.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
@@ -960,7 +960,7 @@ export const id = {
   "athena.productPage.techSpecs2.title": 15,
   "athena.productPage.techSpecs2.unit": "menit",
   "athena.productPage.techSpecs2.desc":
-    "Isi daya 10% ke 80% dengan SuperCharge",
+    "Isi daya 15% ke 95% dengan SuperCharge",
 
   "athena.productPage.techSpecs3.title": 75,
   "athena.productPage.techSpecs3.unit": "km/jam",
@@ -980,7 +980,7 @@ export const id = {
   "athena.productPage.productHighlight2.imageAlt": "Athena SuperCharge",
   "athena.productPage.productHighlight2.title": "SuperCharge",
   "athena.productPage.productHighlight2.description":
-    "Di stasiun SuperCharge, Athena terisi dari 10% ke 80% dalam 15 menit. Di rumah, pengisian penuh dari 0% membutuhkan sekitar 4 sampai 6 jam.",
+    "Di stasiun SuperCharge, Athena terisi dari 15% ke 95% dalam 15 menit. Di rumah, pengisian penuh dari 0% membutuhkan sekitar 4 sampai 6 jam.",
 
   "athena.productPage.productHighlight3.imageAlt":
     "Sistem Pengereman CBS Athena",
@@ -998,7 +998,7 @@ export const id = {
   "athena.productPage.chargingHighlight1.title": "15 Menit dengan SuperCharge",
   "athena.productPage.chargingHighlight1.description": (
     <>
-      SuperCharge mengisi baterai Athena dari 10% ke 80% dalam 15 menit. Tidak
+      SuperCharge mengisi baterai Athena dari 15% ke 95% dalam 15 menit. Tidak
       perlu menunggu lama untuk kembali melaju.{" "}
       <LocaleLink href="/super-charge" className="underline text-primary">
         Pelajari Lebih Lanjut
@@ -1141,9 +1141,9 @@ export const id = {
 
   "supercharge.landing.title": "Perjalanan Anda",
   "supercharge.landing.description":
-    "Jaringan pengisian cepat milik Wedison. Dari 10% ke 80% hanya dalam 15 menit.",
+    "Jaringan pengisian cepat milik Wedison. Dari 15% ke 95% hanya dalam 15 menit.",
   "supercharge.hero.tag": "Pengisian Cepat",
-  "supercharge.hero.title": "Dari 10% ke 80%",
+  "supercharge.hero.title": "Dari 15% ke 95%",
   "supercharge.hero.titleHighlight": "dalam 15 Menit",
   "supercharge.hero.description":
     "SuperCharge adalah jaringan pengisian cepat yang dibangun Wedison sendiri, kompatibel dengan Athena, Victory, dan EdPower.",
@@ -1166,7 +1166,7 @@ export const id = {
     "Ketuk mulai di aplikasi Wedison. Pengisian memakai paket isi daya Anda.",
   "supercharge.how.step3.title": "Siap melaju lagi",
   "supercharge.how.step3.desc":
-    "Sekitar 15 menit kemudian baterai sudah di 80%. Aplikasi memberi tahu saat pengisian selesai.",
+    "Sekitar 15 menit kemudian baterai sudah di 95%. Aplikasi memberi tahu saat pengisian selesai.",
   "supercharge.network.upcomingLabel": "Segera hadir",
   "supercharge.safety.imageAlt": "Modul pengisian daya di dalam stasiun Wedison SuperCharge",
   "supercharge.safety.fact1.title": "Tersertifikasi IEC",
@@ -1261,7 +1261,7 @@ export const id = {
 
   "supercharge.feature1.title": "Lima Belas Menit, Bukan Lima Jam",
   "supercharge.feature1.description":
-    "SuperCharge mengisi baterai dari 10% ke 80% dalam 15 menit. Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
+    "SuperCharge mengisi baterai dari 15% ke 95% dalam 15 menit. Arus pengisian diatur otomatis, sehingga kecepatan tidak mengorbankan umur baterai.",
 
   "supercharge.feature2.subtitle": "Cek titik terdekat sebelum berangkat",
   "supercharge.feature2.description":
@@ -1416,11 +1416,11 @@ export const id = {
   "faq.Battery.questions.1.question":
     "Berapa lama waktu mengisi baterai hingga penuh?",
   "faq.Battery.questions.1.answer":
-    "Wedison SuperCharge: 10% ke 80% dalam 15 menit, atau 10% ke 95% dalam 20 menit.\nWedison Regular Charge: bervariasi tergantung adaptor dan kapasitas baterai, antara 2 hingga 10 jam.",
+    "Wedison SuperCharge: 15% ke 95% dalam 15 menit.\nWedison Regular Charge: bervariasi tergantung adaptor dan kapasitas baterai, antara 2 hingga 10 jam.",
   "faq.Battery.questions.2.question":
     "Baterai jenis apa yang digunakan Wedison?",
   "faq.Battery.questions.2.answer":
-    "Wedison menggunakan baterai Lithium-ion (LFP), teknologi yang sama dengan yang dipakai smartphone, laptop, dan mobil listrik.\n\nKeunggulannya:\nA. Padat energi: menyimpan daya besar dalam ukuran yang ringkas dan ringan.\nB. Tahan panas: tetap bekerja optimal hingga suhu 45 derajat Celsius.\nC. Minim kebocoran daya: daya tetap tersimpan meski motor tidak dipakai berhari-hari.\nD. Awet: mampu lebih dari 5.000 siklus pengisian dengan kapasitas yang tetap terjaga.\nE. Cepat diisi: di stasiun SuperCharge, baterai terisi dari 10% ke 80% dalam 15 menit.",
+    "Wedison menggunakan baterai Lithium-ion (LFP), teknologi yang sama dengan yang dipakai smartphone, laptop, dan mobil listrik.\n\nKeunggulannya:\nA. Padat energi: menyimpan daya besar dalam ukuran yang ringkas dan ringan.\nB. Tahan panas: tetap bekerja optimal hingga suhu 45 derajat Celsius.\nC. Minim kebocoran daya: daya tetap tersimpan meski motor tidak dipakai berhari-hari.\nD. Awet: mampu lebih dari 5.000 siklus pengisian dengan kapasitas yang tetap terjaga.\nE. Cepat diisi: di stasiun SuperCharge, baterai terisi dari 15% ke 95% dalam 15 menit.",
   "faq.Battery.questions.3.question": "Ada berapa pilihan baterai?",
   "faq.Battery.questions.3.answer":
     "Untuk model tertentu tersedia dua pilihan: Regular dan Extended.\nJarak tempuhnya berbeda-beda tergantung model, mulai dari 90 km hingga 200 km dalam sekali pengisian.",
@@ -1429,7 +1429,7 @@ export const id = {
     "Baterai Wedison dikembangkan sendiri oleh tim internal kami.",
   "faq.Battery.questions.5.question": "Berapa lama usia pakai baterainya?",
   "faq.Battery.questions.5.answer":
-    "Dalam pemakaian normal, baterai Wedison dirancang untuk bertahan hingga 12 tahun.",
+    "Masa pakai baterai Wedison hingga 8 tahun dalam pemakaian normal. Ini adalah perkiraan umur pakai baterai, berbeda dari masa garansi (3 tahun atau 100.000 km).",
   "faq.Battery.questions.6.question":
     "Bolehkah memakai baterai atau charger merek lain?",
   "faq.Battery.questions.6.answer":
@@ -1695,12 +1695,12 @@ export const id = {
   "ojol.dialog.terms": "Syarat dan Ketentuan",
   "ojol.dialog.registerNow": "Daftar Program Ini",
 
-  "ojol.supercharge.badge": "10% ke 80% dalam 15 menit",
+  "ojol.supercharge.badge": "15% ke 95% dalam 15 menit",
   "ojol.supercharge.descriptionPart1":
     "Bagi pengemudi, setiap menit berhenti itu berharga. Di SuperCharge, cukup ",
   "ojol.supercharge.descriptionBold": "15 menit",
   "ojol.supercharge.descriptionPart2":
-    " untuk mengisi baterai dari 10% ke 80%, lalu langsung kembali mengambil order. Sekali pengisian bisa menempuh hingga 200 km*, artinya lebih banyak waktu di jalan dan lebih banyak order yang bisa diambil.",
+    " untuk mengisi baterai dari 15% ke 95%, lalu langsung kembali mengambil order. Sekali pengisian bisa menempuh hingga 200 km*, artinya lebih banyak waktu di jalan dan lebih banyak order yang bisa diambil.",
   "ojol.supercharge.disclaimer":
     "*Jarak tempuh 200 km berlaku untuk EdPower dengan baterai Extended",
   "ojol.supercharge.cta": "Pelajari Lebih Lanjut",
@@ -1968,7 +1968,7 @@ export const id = {
   "baas.charging.kicker": "Pengisian daya",
   "baas.charging.title": "Di rumah setiap hari. SuperCharge saat bepergian.",
   "baas.charging.desc":
-    "Adapter pengisian rumah sudah termasuk dalam paket. Untuk perjalanan jauh, stasiun SuperCharge mengisi 10% ke 80% dalam 15 menit di kota-kota yang sudah terjangkau jaringan.",
+    "Adapter pengisian rumah sudah termasuk dalam paket. Untuk perjalanan jauh, stasiun SuperCharge mengisi 15% ke 95% dalam 15 menit di kota-kota yang sudah terjangkau jaringan.",
   "baas.charging.cta": "Lihat lokasi SuperCharge",
   "baas.charging.imageAlt": "Motor Wedison mengisi daya di stasiun SuperCharge",
 

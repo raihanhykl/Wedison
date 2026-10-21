@@ -32,8 +32,8 @@ export const pricingSettingsSchema = z.object({
           edpower: money.nullable().default(27000),
         })
         .default({ bees: null, athena: 16500, victory: 16500, edpower: 27000 }),
-      noteId: z.string().trim().max(240).nullable().default("±15 menit dari 10% ke 80%. Tarif sama di semua stasiun SuperCharge."),
-      noteEn: z.string().trim().max(240).nullable().default("About 15 minutes from 10% to 80%. The same tariff applies at every SuperCharge station."),
+      noteId: z.string().trim().max(240).nullable().default("±15 menit dari 15% ke 95%. Tarif sama di semua stasiun SuperCharge."),
+      noteEn: z.string().trim().max(240).nullable().default("About 15 minutes from 15% to 95%. The same tariff applies at every SuperCharge station."),
     })
     .default({}),
   referral: z

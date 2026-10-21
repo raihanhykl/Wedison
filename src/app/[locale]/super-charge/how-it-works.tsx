@@ -9,7 +9,7 @@ import { rupiah } from "@/lib/pricing/select";
 export type SuperChargeTariff = { athena: number | null; victory: number | null; edpower: number | null; unit: string } | null;
 
 // Angka perbandingan dari spesifikasi produk (kamus *.specs.battery.chargingTime*):
-// SuperCharge 10–80% = 15 menit; isi di rumah 0–100% Athena/Victory baterai Regular = 5 jam.
+// SuperCharge 15–95% = 15 menit; isi di rumah 0–100% Athena/Victory baterai Regular = 5 jam.
 const SUPERCHARGE_MIN = 15;
 const HOME_MIN = 5 * 60;
 
@@ -43,7 +43,7 @@ export default function HowItWorks({ tariff = null }: { tariff?: SuperChargeTari
             <dl className="mt-10 space-y-6">
               <CompareRow
                 label={t("supercharge.how.compare.super")}
-                range="10% → 80%"
+                range="15% → 95%"
                 value={t("supercharge.how.compare.superValue")}
                 ratio={SUPERCHARGE_MIN / HOME_MIN}
                 strong

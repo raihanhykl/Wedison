@@ -60,11 +60,12 @@ Key notes:
 - Current motorcycle lineup: Bees, Athena, Victory, and EdPower.
 - SuperCharge is Wedison's fast-charging network.
 - Compatible SuperCharge models: Athena, Victory, and EdPower.
-- SuperCharge charges compatible motorcycles from 10% to 80% in approximately 15 minutes.
+- SuperCharge charges compatible motorcycles from 15% to 95% in approximately 15 minutes.
 - Home charging is also supported, using a standard household power outlet.
 - Standard warranty: battery, motor, and frame 3 years or 100,000 km (whichever comes first), counted from unit handover; other components 1 to 2 years per the official list. Covers manufacturing defects.
 - Lifetime battery warranty applies only to motorcycles under Battery as a Service (BaaS).
 - Batteries use LFP (lithium iron phosphate) cells and are rated IP67.
+- Battery service life: up to 8 years under normal use (expected lifespan, not the warranty period).
 - Official showrooms and service centers: Jakarta, Bekasi, Bandung Barat, and Bali. SuperCharge stations are at the Jakarta, Bandung Barat, and Bekasi showrooms (not yet in Bali).
 - Wedison motorcycles are sold through official Wedison showrooms.
 - Official contact: ${CONTACT.email}, WhatsApp +${CONTACT.whatsapp}.
@@ -119,7 +120,7 @@ Key notes:
 
 - [SuperCharge](${en("/super-charge/")}): Wedison's fast-charging network.
 - Compatible models: Athena, Victory, and EdPower.
-- Charging from 10% to 80% takes approximately 15 minutes.
+- Charging from 15% to 95% takes approximately 15 minutes.
 - SuperCharge stations are available at the Jakarta, Bandung Barat, and Bekasi showrooms and at partner locations.
 - [SuperCharge station map](${en("/super-charge/locations/")}): Current list and map of SuperCharge stations.
 - Charging sessions are started and tracked from the Wedison app.
@@ -128,7 +129,7 @@ Key notes:
 
 - [SuperCharge](${id("/super-charge/")}): Jaringan pengisian cepat Wedison.
 - Model yang kompatibel: Athena, Victory, dan EdPower.
-- Pengisian daya dari 10% hingga 80% membutuhkan sekitar 15 menit.
+- Pengisian daya dari 15% hingga 95% membutuhkan sekitar 15 menit.
 - Stasiun SuperCharge tersedia di showroom Jakarta, Bandung Barat, dan Bekasi serta lokasi mitra.
 - [Peta stasiun SuperCharge](${id("/super-charge/locations/")}): Daftar dan peta lokasi stasiun SuperCharge terkini.
 - Sesi pengisian dimulai dan dipantau dari aplikasi Wedison.
