@@ -25,8 +25,12 @@ const isProdBuild = process.env.NODE_ENV === "production";
 // CSP: daftar origin = layanan pihak ketiga yang dipakai situs saat ini. Menambah tag baru di
 // GTM (mis. TikTok Pixel) = tambahkan origin-nya di sini, lalu cek console browser.
 //   - GTM/GA4/Google Ads : googletagmanager.com, google-analytics.com, analytics.google.com,
-//                          doubleclick.net, googleadservices.com, google.com, google.co.id
-//   - Meta Pixel         : connect.facebook.net, facebook.com
+//                          doubleclick.net, googleadservices.com, google.com, google.co.id,
+//                          pagead2.googlesyndication.com (ccm/collect tag Google Ads)
+//   - Meta Pixel         : connect.facebook.net, facebook.com (PageView dikirim lewat POST form
+//                          ke facebook.com/tr -> wajib ada di form-action, bukan hanya connect-src)
+//   - Microsoft Clarity  : clarity.ms (skrip + kirim data), via GTM
+//   - Promptwatch        : ingest.promptwatch.com (skrip + kirim data), via GTM
 //   - reCAPTCHA          : google.com/recaptcha, gstatic.com
 //   - EmailJS (form)     : api.emailjs.com
 //   - Peta locator       : tiles.openfreemap.org (style, tiles, glyph, sprite) + worker blob:
@@ -39,14 +43,14 @@ const CSP = [
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'self'",
-  "form-action 'self'",
+  "form-action 'self' https://www.facebook.com",
   "manifest-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.gstatic.com https://connect.facebook.net",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.gstatic.com https://connect.facebook.net https://www.clarity.ms https://*.clarity.ms https://ingest.promptwatch.com",
   "style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https://fonts.gstatic.com",
   "media-src 'self' blob: data:",
-  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com https://*.google.co.id https://www.facebook.com https://connect.facebook.net https://api.emailjs.com https://tiles.openfreemap.org https://*.openfreemap.org https://www.gstatic.com",
+  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com https://*.google.co.id https://pagead2.googlesyndication.com https://www.facebook.com https://connect.facebook.net https://*.clarity.ms https://ingest.promptwatch.com https://api.emailjs.com https://tiles.openfreemap.org https://*.openfreemap.org https://www.gstatic.com",
   "frame-src 'self' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://*.doubleclick.net https://www.facebook.com https://www.youtube.com https://www.youtube-nocookie.com https://calendar.google.com",
   "worker-src 'self' blob:",
   "child-src 'self' blob:",
