@@ -7,7 +7,6 @@ import { validate, getValidated } from "../../middleware/validate.js";
 import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
 import { logActivity } from "../../lib/activity.js";
 import { logger } from "../../lib/logger.js";
-import { env } from "../../config/env.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
 import { HttpError, notFound } from "../../lib/errors.js";
 import {
@@ -63,22 +62,6 @@ async function removeCalendarEvent(b: { showroom: string; calendarEventId: strin
   }
 }
 
-async function verifyRecaptcha(token: string | undefined, ip: string | null): Promise<boolean> {
-  if (!env.RECAPTCHA_SECRET_KEY) return true;
-  if (!token) return false;
-  try {
-    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ secret: env.RECAPTCHA_SECRET_KEY, response: token, ...(ip ? { remoteip: ip } : {}) }),
-    });
-    const data = (await res.json()) as { success?: boolean };
-    return data.success === true;
-  } catch {
-    return false;
-  }
-}
-
 // ─────────────────────────── Publik ───────────────────────────
 
 const publicLimiter = (limit: number) =>
@@ -109,7 +92,6 @@ const bookingBody = z.object({
   website: z.string().max(200).optional(), // honeypot
   source: z.string().trim().max(40).optional(),
   locale: z.enum(["id", "en"]).optional(),
-  recaptchaToken: z.string().max(5000).optional(),
 });
 
 const contactBody = z.object({
@@ -120,7 +102,6 @@ const contactBody = z.object({
   message: z.string().trim().min(1).max(2000),
   locale: z.enum(["id", "en"]).optional(),
   website: z.string().max(200).optional(), // honeypot
-  recaptchaToken: z.string().max(5000).optional(),
 });
 
 export const publicLeadsRouter = Router();
@@ -132,9 +113,6 @@ publicLeadsRouter.post("/bookings", publicLimiter(5), validate(bookingBody), asy
     if (b.website) return res.json({ ok: true, id: null, calendar: "skipped" });
 
     const ip = clientIp(req);
-    if (!(await verifyRecaptcha(b.recaptchaToken, ip))) {
-      throw new HttpError(400, "reCAPTCHA verification failed", "RECAPTCHA");
-    }
     if (!availableSlots(b.showroom, b.date).includes(b.time)) {
       throw new HttpError(400, "That time slot is not available", "SLOT_UNAVAILABLE");
     }
@@ -172,9 +150,6 @@ publicLeadsRouter.post("/contacts", publicLimiter(5), validate(contactBody), asy
     const c = getValidated<typeof contactBody>(req);
     if (c.website) return res.json({ ok: true, id: null });
     const ip = clientIp(req);
-    if (!(await verifyRecaptcha(c.recaptchaToken, ip))) {
-      throw new HttpError(400, "reCAPTCHA verification failed", "RECAPTCHA");
-    }
     // Idempoten: klik ganda / kirim ulang dengan isi sama tidak membuat duplikat di admin.
     const email = c.email.toLowerCase();
     const dup = await prisma.contactSubmission.findFirst({

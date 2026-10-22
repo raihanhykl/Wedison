@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils";
 import { CheckCircle2, Send, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/app/lib/language-context";
 import { toast } from "sonner";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import {
   ContactFormData,
@@ -35,14 +35,7 @@ import {
 } from "@/lib/contact-schema";
 import { EmailService } from "@/service/email-service";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  RecaptchaCheckbox,
-  type RecaptchaHandle,
-} from "@/components/recaptcha-checkbox";
 // Import our schema and service
-
-// Aktif hanya bila site key di-set (env). Tanpa key, form jalan seperti biasa.
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 type Props = {
   /** Topik yang dipilih dari luar (mis. baris "Kemitraan" di halaman Kontak). */
@@ -52,11 +45,8 @@ type Props = {
 export default function Contact({ topic = null }: Props) {
   const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<RecaptchaHandle>(null);
   // Honeypot: field tersembunyi yang hanya diisi bot
   const honeypotRef = useRef<HTMLInputElement>(null);
-  const recaptchaEnabled = Boolean(RECAPTCHA_SITE_KEY);
 
   // Throttle anti-spam sisi client (1 kirim / 10 detik) + tolak headless browser
   useEffect(() => {
@@ -69,11 +59,6 @@ export default function Contact({ topic = null }: Props) {
       });
     }
   }, []);
-
-  const handleRecaptchaChange = useCallback(
-    (token: string | null) => setRecaptchaToken(token),
-    []
-  );
 
 
   // Initialize react-hook-form with Zod validation
@@ -113,18 +98,6 @@ export default function Contact({ topic = null }: Props) {
       return;
     }
 
-    // Wajib reCAPTCHA bila fitur diaktifkan
-    if (recaptchaEnabled && !recaptchaToken) {
-      toast(t("form.sending.error.title"), {
-        description: t("form.sending.error.description"),
-        icon: <AlertCircle className="text-red-500 mr-2" />,
-        duration: 4000,
-        position: "top-center",
-        style: { backgroundColor: "white", color: "black", gap: "1rem" },
-      });
-      return;
-    }
-
     if (isSubmitting) return;
     setIsSubmitting(true);
     try {
@@ -144,19 +117,16 @@ export default function Contact({ topic = null }: Props) {
               : data.title,
           message: data.message,
           locale: language,
-          recaptchaToken: recaptchaToken ?? undefined,
         }),
       });
       const json = (await res.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
       if (res.ok && json?.ok) {
         // Notifikasi email ke tim (EmailJS) bersifat tambahan: kegagalannya tidak boleh
         // membuat pengguna mengira pesannya gagal, karena pesan sudah tersimpan.
-        void EmailService.sendContactEmail(data, recaptchaToken ?? undefined).then((r) => {
+        void EmailService.sendContactEmail(data).then((r) => {
           if (!r.success) console.warn("Contact email notification failed:", r.message);
         });
         form.reset();
-        recaptchaRef.current?.reset();
-        setRecaptchaToken(null);
         toast(t("form.sending.success.title"), {
           description: t("form.sending.success.description"),
           descriptionClassName: "text-black/90",
@@ -174,8 +144,6 @@ export default function Contact({ topic = null }: Props) {
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      recaptchaRef.current?.reset();
-      setRecaptchaToken(null);
 
       toast(t("form.sending.error.title"), {
         description: t("form.sending.error.description"),
@@ -376,22 +344,9 @@ export default function Contact({ topic = null }: Props) {
                 />
               </div>
 
-              {/* reCAPTCHA v2 (aktif hanya bila site key di-set) */}
-              {recaptchaEnabled && RECAPTCHA_SITE_KEY && (
-                <RecaptchaCheckbox
-                  siteKey={RECAPTCHA_SITE_KEY}
-                  onChange={handleRecaptchaChange}
-                  ref={recaptchaRef}
-                />
-              )}
-
               <Button
                 type="submit"
-                disabled={
-                  isSubmitting ||
-                  !form.formState.isValid ||
-                  (recaptchaEnabled && !recaptchaToken)
-                }
+                disabled={isSubmitting || !form.formState.isValid}
                 className={cn(
                   "w-full bg-primary hover:bg-[var(--primary-dark)] text-white group transition-all duration-300",
                   !isSubmitting && "hover:-translate-y-1"

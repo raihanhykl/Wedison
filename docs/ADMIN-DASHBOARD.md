@@ -161,7 +161,7 @@ Sejak migrasi `custom_roles` (2026-10-09) kolom enum `User.role` diganti relasi 
 
 ## Form kontak (Leads › Contact Messages)
 
-`POST /public/leads/contacts` adalah sumber kebenaran: form `/corporate/contact` menunggu respons ini sebelum menampilkan "terkirim"; notifikasi email via EmailJS dikirim setelahnya secara best-effort (gagal hanya dicatat di console). Server memverifikasi reCAPTCHA (bila `RECAPTCHA_SECRET_KEY` diset) dan **idempoten**: email + isi pesan yang sama dalam 15 menit mengembalikan id yang sama (`duplicate: true`) sehingga klik ganda/kirim ulang tidak menggandakan pesan di admin. Tombol **Reply by email** membuka mailto berisi sapaan, topik, slot balasan, dan kutipan pesan asli (bahasa mengikuti locale form) — `src/lib/admin/contact-reply.ts`.
+`POST /public/leads/contacts` adalah sumber kebenaran: form `/corporate/contact` menunggu respons ini sebelum menampilkan "terkirim"; notifikasi email via EmailJS dikirim setelahnya secara best-effort (gagal hanya dicatat di console). Server **idempoten**: email + isi pesan yang sama dalam 15 menit mengembalikan id yang sama (`duplicate: true`) sehingga klik ganda/kirim ulang tidak menggandakan pesan di admin. Tombol **Reply by email** membuka mailto berisi sapaan, topik, slot balasan, dan kutipan pesan asli (bahasa mengikuti locale form) — `src/lib/admin/contact-reply.ts`.
 
 ## Editor artikel: impor dokumen & toolbar melayang
 

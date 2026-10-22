@@ -102,7 +102,6 @@ export function createBookingSchema(m: Partial<BookingMessages> = {}) {
     website: z.string().max(200).optional(),
     source: z.enum(BOOKING_SOURCES).optional(),
     locale: z.enum(["id", "en"]).optional(),
-    recaptchaToken: z.string().optional(),
   });
 }
 

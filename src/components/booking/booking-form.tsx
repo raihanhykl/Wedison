@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Loader2, Send } from "lucide-react";
@@ -27,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { RecaptchaCheckbox, type RecaptchaHandle } from "@/components/recaptcha-checkbox";
 import { cn } from "@/lib/utils";
 import { SHOWROOM_LIST, SHOWROOMS, type ShowroomId } from "@/lib/booking/showrooms";
 import {
@@ -47,8 +46,6 @@ import {
 import { buildWhatsappUrl } from "@/lib/booking/whatsapp";
 import { trackBookingError, trackBookingSuccess } from "@/lib/booking/analytics";
 import type { BookingPrefill } from "./booking-context";
-
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 type FormValues = {
   showroom: ShowroomId | "";
@@ -84,9 +81,6 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
   const { t, language } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [dateOpen, setDateOpen] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<RecaptchaHandle>(null);
-  const recaptchaEnabled = Boolean(RECAPTCHA_SITE_KEY);
 
   const schema = useMemo(
     () =>
@@ -145,10 +139,6 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
   const purposeLabel = (p: BookingPurpose) => t(`booking.purpose.${p}`);
 
   const onSubmit = async (values: FormValues) => {
-    if (recaptchaEnabled && !recaptchaToken) {
-      toast(t("booking.error.submit.title"), { description: t("booking.error.recaptcha") });
-      return;
-    }
     // Nilai sudah lolos zod, jadi showroom/purpose pasti terisi.
     const showroomId = values.showroom as ShowroomId;
     const purpose = values.purpose as BookingPurpose;
@@ -173,7 +163,6 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
           note: values.note.trim(),
           source: prefill.source,
           locale: language,
-          recaptchaToken: recaptchaToken ?? undefined,
         }),
       });
       const data = (await res.json().catch(() => ({}))) as {
@@ -185,8 +174,6 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
 
       if (!res.ok || !data.ok) {
         waWin?.close();
-        recaptchaRef.current?.reset();
-        setRecaptchaToken(null);
         const reason = data.code ?? `http_${res.status}`;
         trackBookingError(reason);
         if (reason === "SLOT_UNAVAILABLE") {
@@ -197,9 +184,7 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
           description:
             reason === "RATE_LIMIT"
               ? t("booking.error.rateLimited")
-              : reason === "RECAPTCHA"
-                ? t("booking.error.recaptcha")
-                : t("booking.error.submit.desc"),
+              : t("booking.error.submit.desc"),
         });
         return;
       }
@@ -512,14 +497,6 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
             </FormItem>
           )}
         />
-
-        {recaptchaEnabled && (
-          <RecaptchaCheckbox
-            ref={recaptchaRef}
-            siteKey={RECAPTCHA_SITE_KEY as string}
-            onChange={setRecaptchaToken}
-          />
-        )}
 
         <div className="space-y-3 pt-1">
           {/* ID tetap untuk trigger klik GTM/GA4 (Click ID = booking-submit). Jangan diubah tanpa update GTM. */}
