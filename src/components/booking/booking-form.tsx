@@ -522,7 +522,8 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
         )}
 
         <div className="space-y-3 pt-1">
-          <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+          {/* ID tetap untuk trigger klik GTM/GA4 (Click ID = booking-submit). Jangan diubah tanpa update GTM. */}
+          <Button id="booking-submit" type="submit" size="lg" className="w-full" disabled={submitting}>
             {submitting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
