@@ -44,8 +44,6 @@ const schema = z.object({
   GOOGLE_CALENDAR_ID_BEKASI: z.string().optional(),
   GOOGLE_CALENDAR_ID_BANDUNG: z.string().optional(),
   GOOGLE_CALENDAR_ID_BALI: z.string().optional(),
-  // Verifikasi reCAPTCHA v2 server-side untuk form booking (secret key). Kosong = tidak diverifikasi.
-  RECAPTCHA_SECRET_KEY: z.string().optional(),
 });
 
 const parsed = schema.safeParse(process.env);

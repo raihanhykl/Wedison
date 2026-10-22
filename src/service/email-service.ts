@@ -31,17 +31,10 @@ export class EmailService {
   }
 
   static async sendContactEmail(
-    formData: ContactFormData,
-    recaptchaToken?: string
+    formData: ContactFormData
   ): Promise<EmailServiceResult> {
     try {
       const emailData = this.prepareEmailData(formData);
-
-      // EmailJS hanya memvalidasi reCAPTCHA v2 bila template mengaktifkannya,
-      // dan token harus dikirim dengan key persis "g-recaptcha-response".
-      if (recaptchaToken) {
-        emailData["g-recaptcha-response"] = recaptchaToken;
-      }
 
       const result = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAIL_CONFIG_serviceId || "",

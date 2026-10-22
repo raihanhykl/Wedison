@@ -280,6 +280,7 @@ export const en = {
   "footer.privacy": "Privacy",
   "footer.terms": "Terms",
   "footer.cookies": "Cookies",
+  "footer.privacyPolicy": "Privacy Policy",
   "footer.cookiePolicy": "Cookie Policy",
   "footer.cookieSettings": "Cookie Settings",
   "consent.title": "We use cookies",
@@ -1809,7 +1810,6 @@ export const en = {
   "booking.error.date": "Pick a visit date",
   "booking.error.time": "Pick a visit time",
   "booking.error.note": "Note is too long (max. 500 characters)",
-  "booking.error.recaptcha": "Please complete the \"I'm not a robot\" check first.",
   "booking.error.submit.title": "Booking not sent",
   "booking.error.submit.desc":
     "Please try again in a moment, or contact us directly on WhatsApp.",

@@ -180,7 +180,13 @@ export default function Footer() {
             <p>{t("footer.copyright")}</p>
             <p>{t("footer.tagline")}</p>
           </div>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link
+              href={`${base}/privacy-policy/`}
+              className="text-xs text-forest-muted transition-colors duration-300 hover:text-on-forest-accent md:text-sm"
+            >
+              {t("footer.privacyPolicy")}
+            </Link>
             <Link
               href={`${base}/cookie-policy/`}
               className="text-xs text-forest-muted transition-colors duration-300 hover:text-on-forest-accent md:text-sm"

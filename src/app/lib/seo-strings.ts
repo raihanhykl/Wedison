@@ -151,6 +151,24 @@ export const seoContent: Record<string, PageSEO> = {
     },
   },
 
+  "/privacy-policy": {
+    image: "/og/default.jpg",
+    priority: 0.2,
+    changeFrequency: "yearly",
+    id: {
+      title: "Kebijakan Privasi Wedison – Integrasi Pelaporan Iklan",
+      description:
+        "Data apa yang diakses integrasi pelaporan iklan Wedison dari Meta Ads, tujuannya, siapa penerimanya, dan cara mencabut akses atau meminta penghapusan data.",
+      keywords: ["wedison", "kebijakan privasi", "privasi", "penghapusan data"],
+    },
+    en: {
+      title: "Wedison Privacy Policy – Advertising Reporting Integration",
+      description:
+        "What data the Wedison advertising reporting integration accesses from Meta Ads, why, who receives it, and how to revoke access or request data deletion.",
+      keywords: ["wedison", "privacy policy", "privacy", "data deletion"],
+    },
+  },
+
   "/products": {
     image: "/og/default.jpg",
     priority: 0.9,

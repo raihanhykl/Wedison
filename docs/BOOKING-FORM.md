@@ -7,10 +7,10 @@ Modal booking untuk tombol **Test Ride** (navbar desktop, sheet mobile, hero lan
 1. User klik tombol -> `openBooking({ showroom?, purpose?, source })` dari `useBooking()` (`src/components/booking/`).
    - **Test Ride** -> `purpose: "testRide"` terisi, showroom dipilih user.
    - **Book a Visit** di kartu showroom -> `showroom` terisi (mis. `bekasi`), tujuan dipilih user.
-2. Form (react-hook-form + zod, `src/lib/booking/schema.ts`): showroom, tujuan, nama, no. HP, email (opsional), tanggal, waktu, catatan (opsional), honeypot, reCAPTCHA (bila site key ada).
+2. Form (react-hook-form + zod, `src/lib/booking/schema.ts`): showroom, tujuan, nama, no. HP, email (opsional), tanggal, waktu, catatan (opsional), honeypot.
    - Slot waktu (`src/lib/booking/slots.ts`): Sen-Jum 10:00-19:00, Sab-Min 10:00-17:00, tiap 30 menit, sesi 60 menit, hari ini minimal 60 menit dari sekarang, maksimal 60 hari ke depan. Bali memakai WITA.
 3. Submit -> `POST /api/v1/public/leads/bookings/` (Next me-rewrite `/api/v1/*` ke backend Express `server/`):
-   - validasi ulang + cek slot (`server/src/modules/leads/booking-rules.ts`, cermin dari lib client), honeypot, rate limit 5 / 10 menit / IP, reCAPTCHA v2 (hanya bila `RECAPTCHA_SECRET_KEY` di-set),
+   - validasi ulang + cek slot (`server/src/modules/leads/booking-rules.ts`, cermin dari lib client), honeypot, rate limit 5 / 10 menit / IP,
    - **simpan ke tabel `Booking`** (status `NEW`),
    - **sinkron ke Google Calendar** cabang (`server/src/modules/leads/google-calendar.ts`, service account). Hasil dicatat di `calendarStatus` (`SAVED | FAILED | SKIPPED`), event ID & link disimpan. Gagal/belum dikonfigurasi TIDAK menggagalkan booking.
 4. Setelah sukses, di browser:
