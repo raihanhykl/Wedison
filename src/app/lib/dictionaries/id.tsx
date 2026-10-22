@@ -267,6 +267,7 @@ export const id = {
   "footer.privacy": "Privasi",
   "footer.terms": "Ketentuan",
   "footer.cookies": "Cookies",
+  "footer.privacyPolicy": "Kebijakan Privasi",
   "footer.cookiePolicy": "Kebijakan Cookie",
   "footer.cookieSettings": "Pengaturan Cookie",
   "consent.title": "Situs ini menggunakan cookie",
@@ -1827,8 +1828,6 @@ export const id = {
   "booking.error.date": "Pilih tanggal kunjungan",
   "booking.error.time": "Pilih waktu kunjungan",
   "booking.error.note": "Catatan terlalu panjang (maks. 500 karakter)",
-  "booking.error.recaptcha":
-    'Centang verifikasi "Saya bukan robot" terlebih dahulu.',
   "booking.error.submit.title": "Permintaan belum terkirim",
   "booking.error.submit.desc":
     "Silakan coba beberapa saat lagi, atau hubungi kami langsung melalui WhatsApp.",

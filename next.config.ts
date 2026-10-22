@@ -31,7 +31,6 @@ const isProdBuild = process.env.NODE_ENV === "production";
 //                          ke facebook.com/tr -> wajib ada di form-action, bukan hanya connect-src)
 //   - Microsoft Clarity  : clarity.ms (skrip + kirim data), via GTM
 //   - Promptwatch        : ingest.promptwatch.com (skrip + kirim data), via GTM
-//   - reCAPTCHA          : google.com/recaptcha, gstatic.com
 //   - EmailJS (form)     : api.emailjs.com
 //   - Peta locator       : tiles.openfreemap.org (style, tiles, glyph, sprite) + worker blob:
 //   - Google Maps embed  : maps.google.com / google.com (iframe)
