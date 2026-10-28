@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { BookingStatusBadge } from "@/components/admin/status-badge";
 import { timeAgo } from "@/lib/admin/format";
 import { BOOKING_PURPOSE_LABEL, SHOWROOM_LABEL, SHOWROOM_TZ, waLink, type Booking, type ContactSubmission } from "@/lib/admin/types";
+import { sourceLabel, useContactSources } from "@/lib/admin/contact-sources";
 
 /** "Wed, 30 Sep · 10:30 WIB" dari tanggal/jam booking (zona waktu showroom, bukan browser). */
 export function formatVisit(b: Pick<Booking, "date" | "time" | "showroom">, opts: { year?: boolean } = {}) {
@@ -37,11 +38,12 @@ export function BookingRow({ b, href }: { b: Booking; href?: string }) {
 }
 
 export function ContactRow({ c }: { c: ContactSubmission }) {
+  const sources = useContactSources();
   return (
     <div className="-mx-2 flex items-start gap-3 rounded-md px-2 py-2.5 hover:bg-muted/40">
       <div className="min-w-0 flex-1">
         <p className="truncate font-medium">
-          {c.name} <span className="font-normal text-muted-foreground">· {c.topic}</span>
+          {c.name} <span className="font-normal text-muted-foreground">· {c.topic}{c.source && c.source !== "contact-page" ? ` · ${sourceLabel(sources.data, c.source)}` : ""}</span>
         </p>
         <p className="line-clamp-1 text-xs text-muted-foreground">{c.message}</p>
       </div>

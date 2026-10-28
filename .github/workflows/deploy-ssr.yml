@@ -76,23 +76,45 @@ jobs:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
       - name: Add VPS to known_hosts
-        run: ssh-keyscan -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts
+        run: |
+          # Koneksi SSH tahan gangguan sesaat: timeout jelas + percobaan ulang koneksi otomatis
+          # (deploy 2026-10-28 gagal karena satu kali "connect ... Connection timed out" dari runner).
+          mkdir -p ~/.ssh
+          cat >> ~/.ssh/config <<EOF
+          Host ${{ env.VPS_HOST }}
+            ConnectTimeout 20
+            ConnectionAttempts 4
+            ServerAliveInterval 15
+            ServerAliveCountMax 4
+          EOF
+          for i in 1 2 3 4 5; do
+            ssh-keyscan -T 15 -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null && grep -q . ~/.ssh/known_hosts && break
+            echo "ssh-keyscan gagal (percobaan $i), ulang 15 dtk lagi"; sleep 15
+          done
+          grep -q . ~/.ssh/known_hosts
 
       - name: Rsync standalone artifact
         run: |
-          rsync -az --delete \
-            .next/standalone/ \
-            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/.next/standalone/
+          # rsync diulang bila koneksi putus (melanjutkan, bukan mengirim ulang semua).
+          for i in 1 2 3; do
+            rsync -az --delete \
+              .next/standalone/ \
+              ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/.next/standalone/ && break
+            [ "$i" = 3 ] && exit 1; echo "rsync gagal (percobaan $i), ulang 20 dtk lagi"; sleep 20
+          done
 
       - name: Rsync backend source + PM2 ecosystem
         run: |
-          rsync -az --delete \
-            --exclude node_modules --exclude dist --exclude src/generated \
-            --exclude .env --exclude uploads --exclude .seeded \
-            server/ \
-            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/server/
-          rsync -az ecosystem.config.js \
-            ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/ecosystem.config.js
+          for i in 1 2 3; do
+            rsync -az --delete \
+              --exclude node_modules --exclude dist --exclude src/generated \
+              --exclude .env --exclude uploads --exclude .seeded \
+              server/ \
+              ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/server/ \
+            && rsync -az ecosystem.config.js \
+              ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DEPLOY_DIR }}/ecosystem.config.js && break
+            [ "$i" = 3 ] && exit 1; echo "rsync gagal (percobaan $i), ulang 20 dtk lagi"; sleep 20
+          done
 
       - name: Build backend + migrate DB (+ seed sekali)
         run: |
@@ -126,3 +148,12 @@ jobs:
           for i in $(seq 1 20); do curl -fsS -o /dev/null http://127.0.0.1:3002/id/ && break; sleep 2; done
           curl -fsS -X POST -H "x-revalidate-secret: $SECRET" http://127.0.0.1:3002/api/revalidate/ || echo "revalidate gagal (tidak fatal)"
           REMOTE
+
+      # Backend memanggil webhook ini setiap admin menyimpan konten (artikel, harga, teaser, ...).
+      # URL/secret salah = perubahan baru tampil setelah ISR kedaluwarsa. Dicek untuk staging DAN
+      # produksi (VPS sama) tanpa mencetak secret. Rilis sudah aktif saat langkah ini jalan.
+      - name: Cek webhook revalidate (staging + produksi)
+        run: |
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} bash -s -- ${{ env.DEPLOY_DIR }}/server/.env 3002 < deploy/check-revalidate.sh
+          echo
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} bash -s -- /home/wedison/wedison-prod/shared/server.env 3003,3013 < deploy/check-revalidate.sh

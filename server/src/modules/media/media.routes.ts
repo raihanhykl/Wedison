@@ -9,14 +9,24 @@ import { env } from "../../config/env.js";
 import { prisma } from "../../lib/prisma.js";
 import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
-import { requireAuth, requireModule, requireWrite } from "../../middleware/auth.js";
+import type { Request, Response, NextFunction } from "express";
+import { requireAuth, requireWrite } from "../../middleware/auth.js";
+import { canAccess, canWrite, has } from "../../lib/permissions.js";
 import { invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
-import { badRequest, notFound } from "../../lib/errors.js";
+import { badRequest, forbidden, notFound } from "../../lib/errors.js";
 
 export const mediaRouter = Router();
-mediaRouter.use(requireAuth, requireModule("cms"));
+
+// Media Library milik CMS, tetapi modul lain yang butuh gambar (Showroom Teasers) boleh melihat
+// dan mengunggah. Mengubah/menghapus media tetap khusus CMS.
+const viewMedia = (req: Request, _res: Response, next: NextFunction) =>
+  req.user && (canAccess(req.user, "cms") || has(req.user, "teasers.view")) ? next() : next(forbidden("Your role does not have access to the media library"));
+const uploadMedia = (req: Request, _res: Response, next: NextFunction) =>
+  req.user && (canWrite(req.user, "cms") || has(req.user, "teasers.write")) ? next() : next(forbidden("Your role cannot upload media"));
+
+mediaRouter.use(requireAuth, viewMedia);
 
 const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif", "image/svg+xml"]);
 
@@ -128,7 +138,7 @@ mediaRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {
 });
 
 // multipart: field "files" (bisa banyak), opsional "folder", "alt"
-mediaRouter.post("/upload", requireWrite("cms"), upload.array("files", 10), async (req, res, next) => {
+mediaRouter.post("/upload", uploadMedia, upload.array("files", 10), async (req, res, next) => {
   try {
     const files = (req.files as Express.Multer.File[] | undefined) ?? [];
     if (!files.length) throw badRequest("No files were uploaded");
