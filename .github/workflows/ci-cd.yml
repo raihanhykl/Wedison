@@ -66,25 +66,53 @@ jobs:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
       - name: Add VPS to known_hosts
-        run: ssh-keyscan -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts
+        run: |
+          # Koneksi SSH tahan gangguan sesaat: timeout jelas + percobaan ulang koneksi otomatis
+          # (deploy 2026-10-28 gagal karena satu kali "connect ... Connection timed out" dari runner).
+          mkdir -p ~/.ssh
+          cat >> ~/.ssh/config <<EOF
+          Host ${{ env.VPS_HOST }}
+            ConnectTimeout 20
+            ConnectionAttempts 4
+            ServerAliveInterval 15
+            ServerAliveCountMax 4
+          EOF
+          for i in 1 2 3 4 5; do
+            ssh-keyscan -T 15 -H ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null && grep -q . ~/.ssh/known_hosts && break
+            echo "ssh-keyscan gagal (percobaan $i), ulang 15 dtk lagi"; sleep 15
+          done
+          grep -q . ~/.ssh/known_hosts
 
       - name: Upload rilis
         run: |
           DEST=${{ env.VPS_USER }}@${{ env.VPS_HOST }}
           REL=${{ env.PROD_ROOT }}/releases/${{ github.sha }}
-          ssh $DEST "mkdir -p $REL/web $REL/server"
-          # --link-dest + --checksum: file yang isinya sama dengan rilis aktif di-hardlink (mtime
-          # hasil build selalu baru, jadi bandingkan isi) -> hanya file berubah yang dikirim.
-          rsync -az --checksum --delete --link-dest=${{ env.PROD_ROOT }}/current/web/ \
-            .next/standalone/ $DEST:$REL/web/
-          rsync -az --delete \
-            --exclude node_modules --exclude dist --exclude src/generated \
-            --exclude .env --exclude uploads --exclude .seeded \
-            server/ $DEST:$REL/server/
-          rsync -az ecosystem.prod.config.js $DEST:${{ env.PROD_ROOT }}/ecosystem.prod.config.js
-          rsync -az --delete deploy/prod/bin/ $DEST:${{ env.PROD_ROOT }}/bin/
+          upload() {
+            ssh $DEST "mkdir -p $REL/web $REL/server" &&
+            # --link-dest + --checksum: file yang isinya sama dengan rilis aktif di-hardlink (mtime
+            # hasil build selalu baru, jadi bandingkan isi) -> hanya file berubah yang dikirim.
+            rsync -az --checksum --delete --link-dest=${{ env.PROD_ROOT }}/current/web/ \
+              .next/standalone/ $DEST:$REL/web/ &&
+            rsync -az --delete \
+              --exclude node_modules --exclude dist --exclude src/generated \
+              --exclude .env --exclude uploads --exclude .seeded \
+              server/ $DEST:$REL/server/ &&
+            rsync -az ecosystem.prod.config.js $DEST:${{ env.PROD_ROOT }}/ecosystem.prod.config.js &&
+            rsync -az --delete deploy/prod/bin/ $DEST:${{ env.PROD_ROOT }}/bin/
+          }
+          # Upload ke folder rilis baru (belum aktif) -> aman diulang bila koneksi putus.
+          for i in 1 2 3; do
+            upload && break
+            [ "$i" = 3 ] && exit 1; echo "upload gagal (percobaan $i), ulang 20 dtk lagi"; sleep 20
+          done
 
       - name: Aktifkan rilis (migrasi + reload tanpa downtime)
         run: |
           ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
             "bash ${{ env.PROD_ROOT }}/bin/deploy-release.sh ${{ github.sha }}"
+
+      # Backend memanggil webhook ini setiap admin menyimpan konten. URL/secret salah = perubahan
+      # baru tampil setelah ISR kedaluwarsa. Rilis sudah aktif saat langkah ini jalan.
+      - name: Cek webhook revalidate produksi
+        run: |
+          ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }} bash -s -- ${{ env.PROD_ROOT }}/shared/server.env 3003,3013 < deploy/check-revalidate.sh
