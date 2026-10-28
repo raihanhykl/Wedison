@@ -9,7 +9,7 @@
  * `canDelete`, `canHr`), implemented on top of `has()`.
  */
 
-export type Module = "dashboard" | "cms" | "supercharge" | "pricing" | "leads" | "hr" | "users" | "activity" | "consent";
+export type Module = "dashboard" | "cms" | "supercharge" | "pricing" | "leads" | "teasers" | "hr" | "users" | "activity" | "consent";
 
 export type PermissionDef = {
   key: string;
@@ -65,6 +65,17 @@ export const PERMISSION_CATALOG: ModuleDef[] = [
       { key: "leads.view", label: "View", description: "Open bookings, contact messages, calendar and analytics." },
       { key: "leads.write", label: "Handle leads", description: "Update booking status, mark messages handled, add notes, sync calendar.", implies: ["leads.view"] },
       { key: "leads.delete", label: "Delete", description: "Delete bookings and contact messages.", implies: ["leads.write"] },
+    ],
+  },
+  {
+    key: "teasers",
+    label: "Showroom Teasers",
+    description: "Landing pages that announce a new showroom opening (wording, countdown, images, contact points).",
+    permissions: [
+      { key: "teasers.view", label: "View", description: "Open the teaser list and preview drafts." },
+      { key: "teasers.write", label: "Create & edit drafts", description: "Create, edit and duplicate teasers that are not live yet.", implies: ["teasers.view"] },
+      { key: "teasers.publish", label: "Publish & archive", description: "Publish, unpublish and archive teasers, and edit teasers that are live.", implies: ["teasers.write"] },
+      { key: "teasers.delete", label: "Delete", description: "Permanently delete teasers that are not live.", implies: ["teasers.write"] },
     ],
   },
   {
@@ -143,6 +154,7 @@ export const MODULE_VIEW_PERMISSION: Record<Module, string> = {
   supercharge: "supercharge.view",
   pricing: "pricing.view",
   leads: "leads.view",
+  teasers: "teasers.view",
   hr: "hr.view",
   users: "users.manage",
   activity: "activity.view",

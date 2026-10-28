@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { ColumnDef } from "@tanstack/react-table";
 import { toast } from "sonner";
@@ -21,7 +22,8 @@ import { useCan } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
 import { formatDateTime, timeAgo } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
-import { waLink, type ContactSubmission, type Paginated } from "@/lib/admin/types";
+import { waLink, type ContactSourceOption, type ContactSubmission, type Paginated } from "@/lib/admin/types";
+import { sourceLabel, useContactSources } from "@/lib/admin/contact-sources";
 import { contactReplyMailto } from "@/lib/admin/contact-reply";
 import { cn } from "@/lib/utils";
 
@@ -40,11 +42,15 @@ export function ContactsView() {
   const [limit, setLimit] = useState(20);
   const [q, setQ] = useState("");
   const [handled, setHandled] = useState<"all" | "false" | "true">("all");
+  // ?source=teaser-<id> (dari daftar Opening Teasers) langsung memfilter.
+  const params = useSearchParams();
+  const [source, setSource] = useState(params.get("source") || "all");
+  const sources = useContactSources();
   const dq = useDebounce(q);
   const [selected, setSelected] = useState<ContactSubmission | null>(null);
   const [toDelete, setToDelete] = useState<ContactSubmission | null>(null);
 
-  const query = { page, limit, q: dq, handled: handled === "all" ? undefined : handled };
+  const query = { page, limit, q: dq, handled: handled === "all" ? undefined : handled, source: source === "all" ? undefined : source };
   const { data, isLoading } = useQuery({
     queryKey: ["contacts", query],
     queryFn: () => api<Paginated<ContactSubmission>>("/admin/leads/contacts", { query }),
@@ -75,6 +81,7 @@ export function ContactsView() {
       ),
     },
     { id: "topic", header: "Topic", size: 190, cell: ({ row }) => <Badge variant="outline" className="max-w-[180px] truncate">{row.original.topic}</Badge> },
+    { id: "source", header: "Source", size: 150, cell: ({ row }) => <span className="whitespace-nowrap text-sm text-muted-foreground">{sourceLabel(sources.data, row.original.source)}</span> },
     { id: "message", header: "Message", cell: ({ row }) => <p className="line-clamp-2 max-w-[360px] text-sm text-muted-foreground">{row.original.message}</p> },
     { id: "status", header: "Status", size: 110, cell: ({ row }) => <HandledBadge c={row.original} /> },
     {
@@ -98,11 +105,11 @@ export function ContactsView() {
         );
       },
     },
-  ], [can.deleteHard, patch]);
+  ], [can.deleteHard, patch, sources.data]);
 
   return (
     <>
-      <PageHeader title="Contact Messages" description="Messages sent through the contact form (/corporate/contact). The email copy is still delivered via EmailJS; this list is the follow-up queue." />
+      <PageHeader title="Contact Messages" description="Messages sent through the website contact forms (Contact page and showroom opening teasers). The email copy is still delivered via EmailJS; this list is the follow-up queue." />
       <div className="flex flex-col gap-2 sm:flex-row">
         <Input placeholder="Search name / email / phone / message…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} className="sm:max-w-sm" />
         <Select value={handled} onValueChange={(v) => { setHandled(v as typeof handled); setPage(1); }}>
@@ -111,6 +118,16 @@ export function ContactsView() {
             <SelectItem value="all">All messages</SelectItem>
             <SelectItem value="false">Unhandled</SelectItem>
             <SelectItem value="true">Handled</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={source} onValueChange={(v) => { setSource(v); setPage(1); }}>
+          <SelectTrigger className="sm:w-[190px]" aria-label="Filter by source"><SelectValue /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All sources</SelectItem>
+            {sources.data?.map((o) => (
+              <SelectItem key={o.value} value={o.value}>{o.label} <span className="text-muted-foreground">({o.count})</span></SelectItem>
+            ))}
+            {source !== "all" && !sources.data?.some((o) => o.value === source) && <SelectItem value={source}>{sourceLabel(sources.data, source)}</SelectItem>}
           </SelectContent>
         </Select>
       </div>
@@ -126,7 +143,7 @@ export function ContactsView() {
 
       <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
         <SheetContent className="overflow-y-auto sm:max-w-lg">
-          {selected && <ContactDetail key={selected.id} c={selected} saving={patch.isPending} onHandled={(v) => patch.mutate({ id: selected.id, isHandled: v })} onNote={(n) => patch.mutate({ id: selected.id, adminNote: n })} />}
+          {selected && <ContactDetail key={selected.id} c={selected} sources={sources.data} saving={patch.isPending} onHandled={(v) => patch.mutate({ id: selected.id, isHandled: v })} onNote={(n) => patch.mutate({ id: selected.id, adminNote: n })} />}
         </SheetContent>
       </Sheet>
       <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Delete message?" description={toDelete ? `${toDelete.name} · ${toDelete.topic}` : undefined} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
@@ -134,7 +151,7 @@ export function ContactsView() {
   );
 }
 
-function ContactDetail({ c, saving, onHandled, onNote }: { c: ContactSubmission; saving: boolean; onHandled: (v: boolean) => void; onNote: (n: string) => void }) {
+function ContactDetail({ c, sources, saving, onHandled, onNote }: { c: ContactSubmission; sources?: ContactSourceOption[]; saving: boolean; onHandled: (v: boolean) => void; onNote: (n: string) => void }) {
   const [note, setNote] = useState(c.adminNote ?? "");
   useEffect(() => setNote(c.adminNote ?? ""), [c.adminNote]);
   return (
@@ -155,6 +172,7 @@ function ContactDetail({ c, saving, onHandled, onNote }: { c: ContactSubmission;
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
           <div><dt className="text-xs uppercase tracking-wide text-muted-foreground">Email</dt><dd className="mt-0.5 break-all">{c.email}</dd></div>
           <div><dt className="text-xs uppercase tracking-wide text-muted-foreground">Phone</dt><dd className="mt-0.5 font-mono">{c.phone}</dd></div>
+          <div><dt className="text-xs uppercase tracking-wide text-muted-foreground">Source</dt><dd className="mt-0.5">{sourceLabel(sources, c.source)}</dd></div>
           <div><dt className="text-xs uppercase tracking-wide text-muted-foreground">Language</dt><dd className="mt-0.5">{c.locale?.toUpperCase() ?? "—"}</dd></div>
           <div><dt className="text-xs uppercase tracking-wide text-muted-foreground">Handled at</dt><dd className="mt-0.5">{c.handledAt ? formatDateTime(c.handledAt) : "—"}</dd></div>
         </dl>

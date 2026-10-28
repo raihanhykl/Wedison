@@ -8,6 +8,8 @@ type Tag = "div" | "section" | "span" | "li" | "ul" | "h2" | "h3" | "p";
 
 type RevealProps = {
   children: React.ReactNode;
+  /** ID elemen (mis. untuk trigger GTM) */
+  id?: string;
   className?: string;
   /** entrance delay in SECONDS (Motion uses seconds, not ms) */
   delay?: number;
@@ -22,10 +24,11 @@ type RevealProps = {
  * Fade + rise on scroll-into-view. Reduced motion handled globally via MotionConfig
  * (lazy-motion-provider). Drop-in replacement for the old IntersectionObserver Reveal.
  */
-export function Reveal({ children, className, delay = 0, y = 16, amount, as = "div" }: RevealProps) {
+export function Reveal({ children, id, className, delay = 0, y = 16, amount, as = "div" }: RevealProps) {
   const Comp = m[as] as typeof m.div;
   return (
     <Comp
+      id={id}
       className={cn("reveal-init", className)}
       initial="hidden"
       whileInView="show"

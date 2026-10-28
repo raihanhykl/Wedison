@@ -213,6 +213,40 @@ export function showroomsSchema(locale: Locale): JsonLdObject {
   };
 }
 
+export type EventSchemaInput = {
+  locale: Locale;
+  name: string;
+  description: string;
+  /** Path halaman acara (locale-agnostic) */
+  path: string;
+  startDate: string;
+  endDate: string;
+  image: string;
+  place: { name: string; address: Record<string, string> };
+};
+
+/** Acara offline gratis (mis. pembukaan showroom) yang diselenggarakan Wedison. */
+export function eventSchema(e: EventSchemaInput): JsonLdObject {
+  const url = localeUrl(e.locale, e.path);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: e.name,
+    description: e.description,
+    url,
+    inLanguage: langTag(e.locale),
+    startDate: e.startDate,
+    endDate: e.endDate,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    image: [absUrl(e.image)],
+    location: { "@type": "Place", name: e.place.name, address: { "@type": "PostalAddress", ...e.place.address } },
+    organizer: { "@id": ORG_ID, "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: 0, priceCurrency: "IDR", availability: "https://schema.org/InStock", url },
+  };
+}
+
 export type ArticleSchemaInput = {
   locale: Locale;
   url: string;

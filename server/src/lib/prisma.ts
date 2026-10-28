@@ -10,4 +10,4 @@ export const prisma = new PrismaClient({
   log: isProd ? ["error"] : ["warn", "error"],
 });
 
-export type { Prisma } from "../generated/prisma/client.js";
+export type { Prisma, ShowroomTeaser } from "../generated/prisma/client.js";

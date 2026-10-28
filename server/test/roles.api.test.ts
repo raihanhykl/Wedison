@@ -306,4 +306,13 @@ describe("public contact form", () => {
     expect(bot.body.id).toBeNull();
     expect(await prisma.contactSubmission.count({ where: { email: msg.email, message: "bot" } })).toBe(0);
   });
+
+  it("stores the form source slug and rejects malformed ones", async () => {
+    // IP sendiri: tes di atas sudah menghabiskan kuota rate limit (5 / 10 menit) IP default.
+    const post = (body: object) => request(app).post("/api/v1/public/leads/contacts").set("x-forwarded-for", "203.0.113.27").send(body);
+    const res = await post({ ...msg, message: `${msg.message} (sby)`, source: "surabaya-opening" });
+    expect(res.status).toBe(201);
+    expect((await prisma.contactSubmission.findUnique({ where: { id: res.body.id } }))?.source).toBe("surabaya-opening");
+    expect((await post({ ...msg, message: `${msg.message} (bad)`, source: "Surabaya Opening" })).status).toBe(400);
+  });
 });
