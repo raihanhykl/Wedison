@@ -506,6 +506,8 @@ model ContactSubmission {
   phone     String
   topic     String
   message   String
+  /// Halaman asal form, mis. "contact-page", "surabaya-opening". Null = data lama (halaman Kontak).
+  source    String?
   locale    Locale?
   isHandled Boolean   @default(false)
   handledAt DateTime?
@@ -516,6 +518,7 @@ model ContactSubmission {
 
   @@index([isHandled, createdAt])
   @@index([createdAt])
+  @@index([source, createdAt])
 }
 
 
@@ -646,4 +649,47 @@ model JobApplyClick {
   createdAt DateTime @default(now())
 
   @@index([jobId, createdAt])
+}
+
+// ───────────────────────── Showroom teaser (landing pembukaan cabang) ─────────────────────────
+
+enum TeaserStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED // halaman publik dialihkan ke /showroom/
+}
+
+/// Landing page teaser pembukaan showroom: /[locale]/showroom/<slug>. Desain tetap di kode;
+/// yang diatur admin hanya wording (content), jadwal (timer), gambar, dan titik kontak.
+model ShowroomTeaser {
+  id              String       @id @default(cuid())
+  slug            String       @unique
+  city            String
+  showroomName    String
+  status          TeaserStatus @default(DRAFT)
+  /// true = tetap noindex walau sudah tayang (mis. kampanye tertutup)
+  noIndex         Boolean      @default(false)
+  timeZone        String       @default("Asia/Jakarta")
+  startAt         DateTime
+  endAt           DateTime
+  showCountdown   Boolean      @default(true)
+  streetAddress   String       @default("")
+  addressLocality String       @default("")
+  addressRegion   String       @default("")
+  postalCode      String       @default("")
+  mapsUrl         String?
+  /// nomor WhatsApp format internasional tanpa "+", mis. 6285286126550
+  whatsapp        String
+  email           String
+  /// kunci model yang ditampilkan: athena | bees | victory | edpower (urutan tampil)
+  models          String[]     @default([])
+  /// { heroDesktop, heroMobile, event, experienceMain, experienceLounge, promo, og } -> URL | null
+  images          Json         @default("{}")
+  /// { id: TeaserContent, en: TeaserContent } — lihat server/src/modules/teasers/teaser.schema.ts
+  content         Json
+  publishedAt     DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([status, startAt])
 }

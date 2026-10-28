@@ -206,6 +206,20 @@ psql "${DATABASE_URL%%\?*}" -v ON_ERROR_STOP=1 -f /tmp/pricing-sync.sql
 ```
 Nilai di seed menimpa baris dengan kunci yang sama (slug wilayah/skema, wilayah × skema × model × varian); baris tambahan dari admin dibiarkan. Cache API publik habis dalam `CACHE_TTL_PUBLIC` (300 dtk), lalu panggil `/api/revalidate` dengan tag `pricing` atau tunggu ISR. Tes: `server/test/pricing.api.test.ts`.
 
+## Modul Opening Teasers (landing pembukaan showroom)
+
+Landing page teaser pembukaan cabang baru dikelola di **/admin/teasers** (menu *Showrooms › Opening Teasers*); halaman publiknya `/{id|en}/showroom/{slug}/`. **Desain tetap di kode** (`src/app/[locale]/showroom/[slug]/`); admin hanya mengatur wording ID/EN, jadwal + hitung mundur, 7 slot gambar, alamat, dan titik kontak (WhatsApp, email, Google Maps). Tidak perlu developer untuk kota berikutnya.
+
+- **Izin** (`server/src/lib/permissions.ts`): `teasers.view` (lihat + preview), `teasers.write` (buat/ubah draf, duplikat, upload media), `teasers.publish` (publish/unpublish/arsip + mengubah teaser yang sedang tayang), `teasers.delete` (hapus teaser yang tidak tayang). Pemegang `teasers.view/write` juga boleh membuka/mengunggah ke Media Library (ubah/hapus media tetap khusus CMS). Role bawaan (migrasi `20261028020100_teaser_role_permissions`): `admin` semua, `marketing` view+write+publish, `editor` view+write.
+- **Status**: `DRAFT` (404 publik, hanya preview) → `PUBLISHED` → `ARCHIVED` (URL lama 308 ke `/showroom/`). Publish ditolak server selama checklist belum beres (`teaserIssues()` di `server/src/modules/teasers/teaser.schema.ts`, mirror `src/lib/teasers/issues.ts`): alamat, minimal satu model & promo, judul tiap section di kedua bahasa, dan tidak ada teks `[placeholder]` sisa template. Teaser yang sedang tayang juga harus tetap lengkap saat disimpan.
+- **Template**: teaser baru terisi wording standar (`src/lib/teasers/template.ts`) dengan token `{city}` `{showroom}` `{date}` `{time}` `{address}` yang diisi otomatis saat tampil; tiap section bisa di-reset ke template.
+- **Jadwal**: disimpan UTC (`startAt`/`endAt`), diedit dalam zona waktu showroom (WIB/WITA/WIT), bukan zona browser admin.
+- **Gambar**: slot kosong memakai foto default (tidak pernah kotak kosong); editor menampilkan rasio/ukuran ideal dan memperingatkan bila rasio/resolusi tidak cocok. Spesifikasi di `IMAGE_SLOT_SPEC` (`src/lib/teasers/teaser.ts`).
+- **Preview draf**: tombol Preview → `/api/preview/teaser/?slug=…&locale=…` (cek sesi admin + izin) → Next **draft mode** → halaman dirender dengan data admin, bilah "Preview", `noindex`, form tidak mengirim apa pun. Keluar: `/api/preview/exit/`.
+- **Inquiry**: form di halaman memakai komponen form kontak yang sama, `source = teaser-{id}` (stabil walau slug diganti). Muncul di *Leads › Contact Messages* dengan Source "Teaser: {kota}" (filter dinamis dari `GET /admin/leads/contacts/sources`); jumlahnya tampil di daftar teaser. Event GTM: `contact_submit_success` (`contact_source`, `contact_topic`, `contact_locale`). Semua elemen halaman ber-ID awalan `teaser-` untuk trigger GTM.
+- **SEO**: title/description/keywords per bahasa, opsi "Hide from search engines", JSON-LD BreadcrumbList + Event + FAQPage, masuk `sitemap.xml` bila tayang dan tidak noindex. Simpan/publish mem-bust cache API (tag `teasers`) dan memanggil webhook `/api/revalidate`.
+- **API**: admin `GET|POST /admin/teasers`, `GET|PUT|DELETE /admin/teasers/:id`, `POST /admin/teasers/:id/transition` (`publish|unpublish|archive|restore`), `POST /admin/teasers/:id/duplicate`, `GET /admin/teasers/check-slug`, `GET /admin/teasers/by-slug/:slug` (preview); publik `GET /public/teasers` dan `GET /public/teasers/:slug`. Tes: `server/test/teasers.api.test.ts`.
+
 ## Roadmap modul
 
 - [x] CMS: artikel dwibahasa (Tiptap, cover + alt, topics, tag, jadwal otomatis tayang, sampah, aksi massal), liputan pers (scrape OG), sosial media (thumbnail lokal, urutan), media library (WebP otomatis), topics/tag.
@@ -216,4 +230,5 @@ Nilai di seed menimpa baris dengan kunci yang sama (slug wilayah/skema, wilayah 
 - [x] Editor artikel: impor Word/PDF ke body, toolbar sticky + bubble menu seleksi, tabel.
 - [x] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta + aksi massal.
 - [x] Pricing: wilayah × skema × model × varian, S&K, tarif SuperCharge, referral; section harga di produk, landing, BaaS, ojol; JSON-LD Offer; llms.txt.
+- [x] Opening Teasers: landing pembukaan showroom dari admin (template + token, checklist publish, preview draft mode, inquiry ke Leads).
 - [ ] Modul berikutnya (menyusul).

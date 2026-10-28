@@ -35,14 +35,32 @@ import {
 } from "@/lib/contact-schema";
 import { EmailService } from "@/service/email-service";
 import { Checkbox } from "@/components/ui/checkbox";
-// Import our schema and service
+import { pushDataLayer } from "@/lib/booking/analytics";
 
 type Props = {
   /** Topik yang dipilih dari luar (mis. baris "Kemitraan" di halaman Kontak). */
   topic?: FormTopic | null;
+  /** Prefix ID elemen form (stabil untuk trigger GTM), mis. "sby-inquiry" -> #sby-inquiry-submit. */
+  idPrefix?: string;
+  /** Slug halaman asal; disimpan di admin (Leads > Contact Messages) untuk filter. */
+  source?: string;
+  /** Subset topik yang ditawarkan (default: semua). */
+  topics?: readonly FormTopic[];
+  /** Awalan subjek email notifikasi tim, mis. "[Teaser Surabaya] ". */
+  emailTopicPrefix?: string;
+  /** Preview admin: validasi jalan, tetapi tidak ada yang dikirim/disimpan. */
+  dryRun?: boolean;
 };
 
-export default function Contact({ topic = null }: Props) {
+export default function Contact({
+  topic = null,
+  idPrefix = "contact-form",
+  source = "contact-page",
+  topics = FORM_TOPICS,
+  emailTopicPrefix = "",
+  dryRun = false,
+}: Props) {
+  const fid = (name: string) => `${idPrefix}-${name}`;
   const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Honeypot: field tersembunyi yang hanya diisi bot
@@ -99,7 +117,15 @@ export default function Contact({ topic = null }: Props) {
     }
 
     if (isSubmitting) return;
+    if (dryRun) {
+      toast("Preview mode", { description: "The form is valid. Nothing was sent: messages are only saved on the live page.", position: "top-center" });
+      return;
+    }
     setIsSubmitting(true);
+    const topicValue =
+      data.title.includes("Judul Lainnya: ") && data.otherTitle
+        ? data.title + data.otherTitle
+        : data.title;
     try {
       // Sumber kebenaran = database (muncul di admin Leads > Contact Messages). Hanya bila
       // penyimpanan ini berhasil, pengguna diberi tahu "terkirim". Server menolak kiriman
@@ -111,11 +137,9 @@ export default function Contact({ topic = null }: Props) {
           name: data.name,
           email: data.email,
           phone: data.phone,
-          topic:
-            data.title.includes("Judul Lainnya: ") && data.otherTitle
-              ? data.title + data.otherTitle
-              : data.title,
+          topic: topicValue,
           message: data.message,
+          source,
           locale: language,
         }),
       });
@@ -123,8 +147,15 @@ export default function Contact({ topic = null }: Props) {
       if (res.ok && json?.ok) {
         // Notifikasi email ke tim (EmailJS) bersifat tambahan: kegagalannya tidak boleh
         // membuat pengguna mengira pesannya gagal, karena pesan sudah tersimpan.
-        void EmailService.sendContactEmail(data).then((r) => {
+        void EmailService.sendContactEmail({ ...data, title: emailTopicPrefix + data.title }).then((r) => {
           if (!r.success) console.warn("Contact email notification failed:", r.message);
+        });
+        // Konversi untuk GTM (Custom Event): hanya setelah pesan benar-benar tersimpan.
+        pushDataLayer({
+          event: "contact_submit_success",
+          contact_source: source,
+          contact_topic: topicValue,
+          contact_locale: language,
         });
         form.reset();
         toast(t("form.sending.success.title"), {
@@ -163,22 +194,24 @@ export default function Contact({ topic = null }: Props) {
 
   return (
     // Pembungkus netral: judul & latar diatur halaman pemakainya.
-    <div>
-      <div>
-        <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-sm)] md:p-8">
+    <div id={fid("container")}>
+      <div id={fid("inner")}>
+        <div id={fid("card")} className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-sm)] md:p-8">
           <Form {...form}>
             <form
+              id={idPrefix}
+              name={idPrefix}
               onSubmit={form.handleSubmit(handleFormSubmit)}
               className="space-y-6"
             >
               {/* Name and Email Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              <div id={fid("row-name-email")} className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("contact.name")}</FormLabel>
+                    <FormItem id={fid("field-name")} controlId={fid("name")}>
+                      <FormLabel id={fid("label-name")}>{t("contact.name")}</FormLabel>
                       <FormControl>
                         <Input
                           placeholder={t("contact.name")}
@@ -195,8 +228,8 @@ export default function Contact({ topic = null }: Props) {
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("contact.email")}</FormLabel>
+                    <FormItem id={fid("field-email")} controlId={fid("email")}>
+                      <FormLabel id={fid("label-email")}>{t("contact.email")}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
@@ -216,8 +249,8 @@ export default function Contact({ topic = null }: Props) {
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("contact.phone")}</FormLabel>
+                  <FormItem id={fid("field-phone")} controlId={fid("phone")}>
+                    <FormLabel id={fid("label-phone")}>{t("contact.phone")}</FormLabel>
                     <FormControl>
                       <Input
                         type="tel"
@@ -236,8 +269,8 @@ export default function Contact({ topic = null }: Props) {
                 control={form.control}
                 name="title"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("contact.subject")}</FormLabel>
+                  <FormItem id={fid("field-topic")} controlId={fid("topic")}>
+                    <FormLabel id={fid("label-topic")}>{t("contact.subject")}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       value={field.value}
@@ -251,9 +284,10 @@ export default function Contact({ topic = null }: Props) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {FORM_TOPICS.map((topic) => (
+                        {topics.map((topic) => (
                           <SelectItem
                             key={topic}
+                            id={fid(`topic-option-${topic}`)}
                             value={t(`form.title.${topic}.value`)}
                           >
                             {t(`form.title.${topic}`)}
@@ -272,8 +306,8 @@ export default function Contact({ topic = null }: Props) {
                   control={form.control}
                   name="otherTitle"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Other Title</FormLabel>
+                    <FormItem id={fid("field-topic-other")} controlId={fid("topic-other")}>
+                      <FormLabel id={fid("label-topic-other")}>Other Title</FormLabel>
                       <FormControl>
                         <Input
                           placeholder={t("contact.subjectPlaceholder")}
@@ -292,8 +326,8 @@ export default function Contact({ topic = null }: Props) {
                 control={form.control}
                 name="message"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("contact.message")}</FormLabel>
+                  <FormItem id={fid("field-message")} controlId={fid("message")}>
+                    <FormLabel id={fid("label-message")}>{t("contact.message")}</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder={t("contact.messagePlaceholder")}
@@ -311,16 +345,19 @@ export default function Contact({ topic = null }: Props) {
                 control={form.control}
                 name="agreePrivacy"
                 render={({ field }) => (
-                  <FormItem className="flex items-center space-3">
+                  <FormItem
+                    id={fid("field-agree-privacy")}
+                    controlId={fid("agree-privacy")}
+                    className="flex items-center space-3"
+                  >
                     <FormControl>
                       <Checkbox
-                        id="agreePrivacy"
                         checked={field.value}
                         onCheckedChange={field.onChange}
                         disabled={isSubmitting}
                       />
                     </FormControl>
-                    <div>
+                    <div id={fid("agree-privacy-text")}>
                       <FormDescription>
                         {t("form.agreePrivacy.description")}
                       </FormDescription>
@@ -332,10 +369,12 @@ export default function Contact({ topic = null }: Props) {
 
               {/* Honeypot anti-bot: tersembunyi dari user, hanya diisi bot */}
               <div
+                id={fid("hp")}
                 aria-hidden="true"
                 className="absolute -left-[9999px] -top-[9999px] h-0 w-0 overflow-hidden"
               >
                 <input
+                  id={fid("hp-company")}
                   type="text"
                   ref={honeypotRef}
                   name="company"
@@ -345,6 +384,7 @@ export default function Contact({ topic = null }: Props) {
               </div>
 
               <Button
+                id={fid("submit")}
                 type="submit"
                 disabled={isSubmitting || !form.formState.isValid}
                 className={cn(
@@ -354,13 +394,13 @@ export default function Contact({ topic = null }: Props) {
               >
                 {isSubmitting ? (
                   <>
-                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    <div id={fid("submit-spinner")} className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                     {t("form.sending.sending")}
                   </>
                 ) : (
                   <>
                     {t("contact.send")}
-                    <Send className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <Send id={fid("submit-icon")} className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </>
                 )}
               </Button>

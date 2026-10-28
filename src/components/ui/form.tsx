@@ -53,31 +53,38 @@ const useFormField = () => {
     throw new Error("useFormField should be used within <FormField>")
   }
 
-  const { id } = itemContext
+  const { id, controlId } = itemContext
+  const base = controlId ?? `${id}-form-item`
 
   return {
     id,
     name: fieldContext.name,
-    formItemId: `${id}-form-item`,
-    formDescriptionId: `${id}-form-item-description`,
-    formMessageId: `${id}-form-item-message`,
+    formItemId: base,
+    formDescriptionId: `${base}-description`,
+    formMessageId: `${base}-message`,
     ...fieldState,
   }
 }
 
 type FormItemContextValue = {
   id: string
+  /** ID stabil untuk kontrol (input/select), mis. untuk trigger GTM. */
+  controlId?: string
 }
 
 const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 )
 
-function FormItem({ className, ...props }: React.ComponentProps<"div">) {
+function FormItem({
+  className,
+  controlId,
+  ...props
+}: React.ComponentProps<"div"> & { controlId?: string }) {
   const id = React.useId()
 
   return (
-    <FormItemContext.Provider value={{ id }}>
+    <FormItemContext.Provider value={{ id, controlId }}>
       <div
         data-slot="form-item"
         className={cn("grid gap-2", className)}

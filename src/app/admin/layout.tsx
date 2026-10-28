@@ -15,7 +15,8 @@ export default function AdminRootLayout({ children }: { children: React.ReactNod
     <html lang="en">
       <body className={`${fontVariables} antialiased bg-background text-foreground`}>
         {children}
-        <Toaster position="top-right" richColors closeButton />
+        {/* Kanan bawah: tidak menutupi tombol aksi di header/bilah aksi yang sticky di atas. */}
+        <Toaster position="bottom-right" richColors closeButton />
       </body>
     </html>
   );

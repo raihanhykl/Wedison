@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { seoContent } from "@/app/lib/seo-strings";
 import { LOCALES, type Locale } from "@/app/lib/locale";
 import { PRESS_URLS } from "@public/data/press-urls";
-import { getArticles, getCareers, getPress } from "@/lib/cms/api";
+import { getArticles, getCareers, getPress, getTeaserList } from "@/lib/cms/api";
 import { localeUrl } from "@/lib/seo/site";
 
 // Sitemap multi-locale. Halaman statis dari seoContent (id + en dengan hreflang), liputan pers
@@ -82,6 +82,22 @@ async function jobEntries(): Promise<MetadataRoute.Sitemap> {
   );
 }
 
+// Landing teaser pembukaan showroom yang tayang (modul admin Showroom Teasers), kecuali noindex.
+async function teaserEntries(): Promise<MetadataRoute.Sitemap> {
+  const items = await getTeaserList();
+  return items
+    .filter((t) => !t.noIndex)
+    .flatMap((t) =>
+      LOCALES.map((locale) => ({
+        url: localeUrl(locale, `/showroom/${t.slug}`),
+        lastModified: new Date(t.updatedAt),
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+        alternates: alternates(`/showroom/${t.slug}`),
+      })),
+    );
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = Object.entries(seoContent).flatMap(([path, seo]) =>
     LOCALES.map((locale) => ({
@@ -93,6 +109,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  const [press, articles, jobs] = await Promise.all([pressEntries(), articleEntries(), jobEntries()]);
-  return [...staticEntries, ...press, ...articles, ...jobs];
+  const [press, articles, jobs, teasers] = await Promise.all([pressEntries(), articleEntries(), jobEntries(), teaserEntries()]);
+  return [...staticEntries, ...press, ...articles, ...jobs, ...teasers];
 }

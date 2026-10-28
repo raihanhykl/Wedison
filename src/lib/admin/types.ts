@@ -1,5 +1,6 @@
 // Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
 // "Topics" in the UI map to the Category model in the database.
+import type { ModelKey, TeaserContent, TeaserImages, TeaserLocale, TeaserStatus } from "@/lib/teasers/teaser";
 /** Badge colors a role may use (mirrors server/src/lib/roles.ts). */
 export type RoleColor = "emerald" | "blue" | "violet" | "pink" | "amber" | "teal" | "cyan" | "rose" | "orange" | "indigo" | "lime" | "slate";
 export type RoleRef = { id: string; key: string; name: string; color: RoleColor | null; isSystem: boolean };
@@ -419,6 +420,8 @@ export type ContactSubmission = {
   phone: string;
   topic: string;
   message: string;
+  /** Halaman asal form; null = data lama dari halaman Kontak. */
+  source: string | null;
   locale: Locale | null;
   isHandled: boolean;
   handledAt: string | null;
@@ -488,6 +491,46 @@ export const BOOKING_SOURCE_LABEL: Record<string, string> = {
   "contact-page": "Contact page",
   other: "Other",
   unknown: "Unknown",
+};
+
+/** Pilihan filter Source di Contact Messages (label dinamis, mis. "Teaser: Surabaya"). */
+export type ContactSourceOption = { value: string; label: string; count: number };
+
+export type TeaserIssue = { path: string; message: string };
+
+/** Showroom teaser seperti dikirim API admin (/admin/teasers). */
+export type AdminTeaser = {
+  id: string;
+  slug: string;
+  city: string;
+  showroomName: string;
+  status: TeaserStatus;
+  noIndex: boolean;
+  timeZone: string;
+  startAt: string;
+  endAt: string;
+  /** jadwal dalam zona waktu showroom (bukan zona browser) */
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+  showCountdown: boolean;
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
+  mapsUrl: string | null;
+  whatsapp: string;
+  email: string;
+  models: ModelKey[];
+  images: TeaserImages;
+  content: Record<TeaserLocale, TeaserContent>;
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  source: string;
+  inquiries: number;
+  issues: TeaserIssue[];
 };
 
 /** Nomor WhatsApp internasional dari nomor kanonik 08xx. */

@@ -100,6 +100,8 @@ const contactBody = z.object({
   phone: z.string().trim().min(6).max(24),
   topic: z.string().trim().min(1).max(160),
   message: z.string().trim().min(1).max(2000),
+  // Halaman asal form (slug), mis. "contact-page" | "surabaya-opening" — untuk filter di admin.
+  source: z.string().trim().max(40).regex(/^[a-z0-9-]+$/).optional(),
   locale: z.enum(["id", "en"]).optional(),
   website: z.string().max(200).optional(), // honeypot
 });
@@ -159,9 +161,9 @@ publicLeadsRouter.post("/contacts", publicLimiter(5), validate(contactBody), asy
     });
     if (dup) return res.json({ ok: true, id: dup.id, duplicate: true });
     const created = await prisma.contactSubmission.create({
-      data: { name: c.name, email, phone: c.phone, topic: c.topic, message: c.message, locale: c.locale ?? null, ip },
+      data: { name: c.name, email, phone: c.phone, topic: c.topic, message: c.message, source: c.source ?? null, locale: c.locale ?? null, ip },
     });
-    logger.info({ contactId: created.id, topic: c.topic }, "pesan kontak baru");
+    logger.info({ contactId: created.id, topic: c.topic, source: c.source }, "pesan kontak baru");
     res.status(201).json({ ok: true, id: created.id });
   } catch (e) {
     next(e);
@@ -384,13 +386,47 @@ leadsRouter.delete("/bookings/:id", requireDelete("leads"), async (req, res, nex
 });
 
 // ── Contacts ──
-const contactListQuery = paginationQuery.extend({ handled: z.enum(["true", "false"]).optional(), from: ymdOpt, to: ymdOpt });
+const contactListQuery = paginationQuery.extend({ handled: z.enum(["true", "false"]).optional(), source: z.string().trim().max(40).optional(), from: ymdOpt, to: ymdOpt });
+
+// Data sebelum kolom `source` ada (null) berasal dari halaman Kontak.
+const LEGACY_CONTACT_SOURCE = "contact-page";
+
+// Pilihan filter "Source" di admin: semua sumber yang pernah mengirim pesan + label yang bisa
+// dibaca (teaser-<id> -> "Teaser: <kota>"). Teaser yang sudah dihapus tetap muncul dengan id-nya.
+leadsRouter.get("/contacts/sources", async (_req, res, next) => {
+  try {
+    const [rows, teasers] = await Promise.all([
+      prisma.contactSubmission.groupBy({ by: ["source"], _count: true }),
+      prisma.showroomTeaser.findMany({ select: { id: true, city: true } }),
+    ]);
+    const city = new Map(teasers.map((t) => [`teaser-${t.id}`, t.city]));
+    const counts = new Map<string, number>();
+    for (const r of rows) {
+      const key = r.source ?? LEGACY_CONTACT_SOURCE;
+      counts.set(key, (counts.get(key) ?? 0) + r._count);
+    }
+    // Teaser tanpa pesan pun ditampilkan agar bisa dipilih sebelum ada inquiry.
+    for (const key of city.keys()) if (!counts.has(key)) counts.set(key, 0);
+    if (!counts.has(LEGACY_CONTACT_SOURCE)) counts.set(LEGACY_CONTACT_SOURCE, 0);
+    const label = (key: string) =>
+      key === LEGACY_CONTACT_SOURCE ? "Contact page" : city.has(key) ? `Teaser: ${city.get(key)}` : key.startsWith("teaser-") ? "Teaser (deleted)" : key;
+    const items = [...counts.entries()]
+      .map(([value, count]) => ({ value, label: label(value), count }))
+      .sort((a, b) => (a.value === LEGACY_CONTACT_SOURCE ? -1 : b.value === LEGACY_CONTACT_SOURCE ? 1 : a.label.localeCompare(b.label)));
+    res.json({ ok: true, items });
+  } catch (e) {
+    next(e);
+  }
+});
 
 leadsRouter.get("/contacts", validate(contactListQuery, "query"), async (req, res, next) => {
   try {
     const q = getValidated<typeof contactListQuery>(req, "query");
     const where: Prisma.ContactSubmissionWhereInput = {
       ...(q.handled ? { isHandled: q.handled === "true" } : {}),
+      ...(q.source
+        ? { AND: [q.source === LEGACY_CONTACT_SOURCE ? { OR: [{ source: null }, { source: q.source }] } : { source: q.source }] }
+        : {}),
       ...(q.from || q.to
         ? { createdAt: { ...(q.from ? { gte: zonedToUtc(q.from, "00:00", ADMIN_TZ) } : {}), ...(q.to ? { lt: new Date(zonedToUtc(q.to, "00:00", ADMIN_TZ).getTime() + 86_400_000) } : {}) } }
         : {}),

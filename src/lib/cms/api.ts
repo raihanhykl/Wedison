@@ -8,6 +8,7 @@ import "server-only";
 import type { SiteCollection } from "@/app/[locale]/super-charge/locations/types";
 import type { PublicPricing } from "@/lib/pricing/types";
 import { PRICING_FALLBACK } from "@/data/pricing-fallback";
+import type { PublicTeaser } from "@/lib/teasers/teaser";
 
 const API = process.env.API_INTERNAL_URL ?? "http://127.0.0.1:4000";
 const REVALIDATE = Number(process.env.CMS_REVALIDATE_SECONDS ?? 300);
@@ -189,4 +190,47 @@ export async function getCareer(locale: Locale, slug: string) {
     null,
   );
   return res?.ok ? res.data : null;
+}
+
+// ─── Showroom teaser (/[locale]/showroom/[slug]) ───────────────────────────
+
+export type TeaserResult = { kind: "live"; teaser: PublicTeaser } | { kind: "archived" } | null;
+
+/** null = tidak ada / masih draf / backend mati (halaman -> 404). */
+export async function getTeaser(slug: string): Promise<TeaserResult> {
+  const res = await get<{ ok: boolean; data: PublicTeaser | { status: "ARCHIVED"; slug: string } } | null>(
+    `/api/v1/public/teasers/${encodeURIComponent(slug)}`,
+    ["teasers"],
+    null,
+  );
+  if (!res?.ok) return null;
+  return res.data.status === "ARCHIVED" ? { kind: "archived" } : { kind: "live", teaser: res.data as PublicTeaser };
+}
+
+/** Teaser yang tayang (sitemap + generateStaticParams). Backend mati -> []. */
+export async function getTeaserList(): Promise<{ slug: string; noIndex: boolean; updatedAt: string }[]> {
+  const res = await get<{ ok: boolean; items: { slug: string; noIndex: boolean; updatedAt: string }[] } | null>("/api/v1/public/teasers", ["teasers"], null);
+  return res?.ok ? res.items : [];
+}
+
+/**
+ * Preview draf (draft mode): status apa pun, lewat endpoint admin dengan cookie sesi admin.
+ * Hanya dipanggil saat draft mode aktif, jadi `cookies()` tidak membuat halaman statis jadi dinamis.
+ */
+export async function getTeaserPreview(slug: string): Promise<PublicTeaser | null> {
+  const { cookies } = await import("next/headers");
+  const name = process.env.ADMIN_COOKIE_NAME ?? "wd_admin_token";
+  const token = (await cookies()).get(name)?.value;
+  if (!token) return null;
+  try {
+    const res = await fetch(`${API}/api/v1/admin/teasers/by-slug/${encodeURIComponent(slug)}`, {
+      headers: { cookie: `${name}=${token}`, accept: "application/json" },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { ok: boolean; data: PublicTeaser };
+    return json.ok ? json.data : null;
+  } catch {
+    return null;
+  }
 }

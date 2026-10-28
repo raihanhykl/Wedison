@@ -30,6 +30,7 @@ export const CacheTags = {
   pricing: "pricing",
   dashboard: "dashboard",
   jobs: "jobs",
+  teasers: "teasers",
 } as const;
 export type CacheTag = (typeof CacheTags)[keyof typeof CacheTags];
 
