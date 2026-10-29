@@ -414,8 +414,11 @@ publicArticlesRouter.get("/:slug", async (req, res, next) => {
       return { ...toPublic(a, locale), contentHtml: t.contentHtml };
     });
     if (!data) throw notFound("Article not found");
-    // view count: fire-and-forget, tidak ikut cache
-    prisma.article.update({ where: { id: data.id }, data: { viewCount: { increment: 1 } } }).catch(() => {});
+    // view count: fire-and-forget, tidak ikut cache. SQL langsung (bukan prisma.update) agar
+    // `updatedAt` tidak ikut berubah: Prisma menyetel @updatedAt pada SETIAP update, sehingga
+    // kolom "Updated" di admin, lastmod sitemap, dan dateModified artikel ikut bergeser setiap
+    // halaman di-render ulang (ISR/deploy) padahal isinya tidak diubah.
+    void prisma.$executeRaw`UPDATE "Article" SET "viewCount" = "viewCount" + 1 WHERE "id" = ${data.id}`.catch(() => {});
     res.json({ ok: true, data });
   } catch (e) {
     next(e);

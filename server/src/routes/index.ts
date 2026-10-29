@@ -16,6 +16,7 @@ import { seoRouter } from "../modules/seo/seo.routes.js";
 import { hrRouter, publicCareersRouter } from "../modules/hr/hr.routes.js";
 import { leadsRouter, publicLeadsRouter } from "../modules/leads/leads.routes.js";
 import { teasersRouter, publicTeasersRouter } from "../modules/teasers/teasers.routes.js";
+import { showroomsRouter, publicShowroomsRouter } from "../modules/showrooms/showrooms.routes.js";
 import { env } from "../config/env.js";
 
 export const api = Router();
@@ -38,6 +39,7 @@ api.use("/admin/media", mediaRouter);
 api.use("/admin/stations", stationsRouter);
 api.use("/admin/pricing", pricingRouter); // harga, skema, wilayah, S&K, tarif SuperCharge
 api.use("/admin/leads", leadsRouter); // booking showroom + pesan kontak + statistik
+api.use("/admin/showrooms", showroomsRouter); // lokasi showroom (booking, /showroom, kontak)
 api.use("/admin/teasers", teasersRouter); // landing teaser pembukaan showroom
 api.use("/admin/consent", consentRouter);
 
@@ -57,6 +59,7 @@ publicRouter.use("/social", publicSocialRouter);
 publicRouter.use("/stations", publicStationsRouter);
 publicRouter.use("/pricing", publicPricingRouter);
 publicRouter.use("/teasers", publicTeasersRouter);
+publicRouter.use("/showrooms", publicShowroomsRouter);
 publicRouter.use("/", publicTaxonomyRouter);
 api.use("/public", publicRouter);
 

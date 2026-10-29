@@ -8,6 +8,7 @@ import { has } from "../../lib/permissions.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
 import { badRequest, conflict, forbidden, notFound } from "../../lib/errors.js";
+import { allShowrooms, getShowroom, teaserFieldsFrom } from "../showrooms/showroom.data.js";
 import {
   SLUG_RE,
   teaserInputSchema,
@@ -31,12 +32,22 @@ export const teaserSource = (id: string) => `teaser-${id}`;
 /** Path yang tak boleh dipakai sebagai slug (bentrok dengan URL lain di bawah /showroom/). */
 const RESERVED_SLUGS = new Set(["new", "preview", "admin", "api"]);
 
-function toData(input: TeaserInput) {
-  const { startDate, startTime, endDate, endTime, ...rest } = input;
+/**
+ * Input -> data DB. Bila terhubung ke showroom, alamat/kontak/zona waktu diambil dari showroom
+ * (sumber kebenaran) sehingga tidak bisa berbeda dengan halaman Showroom dan form booking.
+ */
+async function toData(input: TeaserInput) {
+  let merged: TeaserInput = input;
+  if (input.showroomId) {
+    const s = await getShowroom(input.showroomId);
+    if (!s) throw badRequest("The linked showroom no longer exists", [{ path: "showroomId", message: "not found" }]);
+    merged = { ...input, ...teaserFieldsFrom(s), timeZone: s.timeZone as TeaserInput["timeZone"] };
+  }
+  const { startDate, startTime, endDate, endTime, ...rest } = merged;
   return {
     ...rest,
-    startAt: zonedToUtc(startDate, startTime, input.timeZone),
-    endAt: zonedToUtc(endDate, endTime, input.timeZone),
+    startAt: zonedToUtc(startDate, startTime, merged.timeZone),
+    endAt: zonedToUtc(endDate, endTime, merged.timeZone),
     images: rest.images as Prisma.InputJsonValue,
     content: rest.content as unknown as Prisma.InputJsonValue,
   };
@@ -114,6 +125,20 @@ teasersRouter.get("/", validate(listQuery, "query"), async (req, res, next) => {
   }
 });
 
+// Showroom yang bisa dihubungkan ke teaser (tanpa mewajibkan izin modul Showrooms).
+teasersRouter.get("/showroom-options", async (_req, res, next) => {
+  try {
+    const items = (await allShowrooms()).map((s) => ({
+      id: s.id, name: s.name, city: s.city, status: s.status, timeZone: s.timeZone,
+      streetAddress: s.streetAddress, addressLocality: s.addressLocality, addressRegion: s.addressRegion, postalCode: s.postalCode,
+      mapsUrl: s.mapsUrl, whatsapp: s.whatsapp, email: s.email,
+    }));
+    res.json({ ok: true, items });
+  } catch (e) {
+    next(e);
+  }
+});
+
 // Cek ketersediaan slug saat mengetik di form (tanpa menyimpan).
 const slugQuery = z.object({ slug: z.string().trim().toLowerCase().max(60), id: z.string().optional() });
 teasersRouter.get("/check-slug", validate(slugQuery, "query"), async (req, res, next) => {
@@ -154,7 +179,7 @@ teasersRouter.post("/", requireWrite("teasers"), validate(teaserInputSchema), as
   try {
     const input = getValidated<typeof teaserInputSchema>(req);
     await assertSlugFree(input.slug);
-    const t = await prisma.showroomTeaser.create({ data: toData(input) });
+    const t = await prisma.showroomTeaser.create({ data: await toData(input) });
     logActivity(req, { action: "create", entity: "teaser", entityId: t.id, summary: `Created showroom teaser ${t.city}` });
     res.status(201).json({ ok: true, data: serialize(t) });
   } catch (e) {
@@ -170,12 +195,12 @@ teasersRouter.put("/:id", requireWrite("teasers"), validate(teaserInputSchema), 
     if (!current) throw notFound("Teaser not found");
     if (current.status === "PUBLISHED") {
       if (!canPublish(req)) throw forbidden("This teaser is live. Only roles that can publish teasers may edit it.");
-      const data = toData(input);
-      const issues = teaserIssues({ ...input, startAt: data.startAt, endAt: data.endAt });
+      const data = await toData(input);
+      const issues = teaserIssues({ ...data, content: input.content });
       if (issues.length) throw badRequest("This teaser is live, so it must stay complete. Fix these first or unpublish it.", issues);
     }
     await assertSlugFree(input.slug, id);
-    const t = await prisma.showroomTeaser.update({ where: { id }, data: toData(input) });
+    const t = await prisma.showroomTeaser.update({ where: { id }, data: await toData(input) });
     if (t.status !== "DRAFT") bust();
     logActivity(req, { action: "update", entity: "teaser", entityId: id, summary: `Updated showroom teaser ${t.city}` });
     const counts = await inquiryCounts([id]);

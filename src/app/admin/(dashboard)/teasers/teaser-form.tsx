@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
   Archive, ArrowLeft, CheckCircle2, CircleAlert, Copy, ExternalLink, Eye, Link2, Loader2, Lock, MessageSquareText, RotateCcw, Save, Send, Trash2, Undo2,
@@ -22,7 +22,8 @@ import { cn } from "@/lib/utils";
 import { issueTab, teaserIssues, type TeaserIssue } from "@/lib/teasers/issues";
 import type { TeaserContent, TeaserLocale } from "@/lib/teasers/teaser";
 import type { AdminTeaser } from "@/lib/admin/types";
-import { formFacts, initialState, toPayload, zonedIso, type TeaserFormState } from "./form-state";
+import { fieldsFromShowroom, formFacts, initialState, toPayload, zonedIso, type ShowroomOption, type TeaserFormState } from "./form-state";
+import { slugify } from "@/lib/admin/format";
 import { EventTab } from "./event-tab";
 import { TextTab } from "./text-tab";
 import { ImagesTab } from "./images-tab";
@@ -41,7 +42,7 @@ function showError(e: unknown) {
   } else toast.error(errorMessage(e));
 }
 
-export function TeaserForm({ teaser }: { teaser?: AdminTeaser }) {
+export function TeaserForm({ teaser, presetShowroom }: { teaser?: AdminTeaser; /** ?showroom=<kode> dari halaman showroom */ presetShowroom?: string }) {
   const router = useRouter();
   const qc = useQueryClient();
   const perm = useTeaserPermissions().data;
@@ -72,6 +73,30 @@ export function TeaserForm({ teaser }: { teaser?: AdminTeaser }) {
     });
     setDirty(true);
   }, []);
+
+  const optionsQuery = useQuery({
+    queryKey: ["teaser-showroom-options"],
+    queryFn: () => api<{ items: ShowroomOption[] }>("/admin/teasers/showroom-options").then((r) => r.items),
+    staleTime: 60_000,
+  });
+  const showroomOptions = useMemo(() => optionsQuery.data ?? [], [optionsQuery.data]);
+
+  /** Tautkan/lepas showroom: field alamat/kontak/zona waktu diambil dari showroom itu. */
+  const link = useCallback((o: ShowroomOption | null) => {
+    setS((prev) => (o
+      ? { ...prev, ...fieldsFromShowroom(o, prev), city: prev.city || o.city, slug: prev.slug || slugify(o.city) }
+      : { ...prev, showroomId: null }));
+    setDirty(true);
+  }, []);
+
+  // Teaser baru dari halaman showroom (?showroom=surabaya): langsung tertaut.
+  const presetDone = useRef(false);
+  useEffect(() => {
+    if (isEdit || !presetShowroom || presetDone.current || !showroomOptions.length) return;
+    presetDone.current = true;
+    const o = showroomOptions.find((x) => x.id === presetShowroom);
+    if (o) link(o);
+  }, [isEdit, presetShowroom, showroomOptions, link]);
 
   const facts = useMemo(() => ({ id: formFacts(s, "id"), en: formFacts(s, "en") }), [s]);
   const issues = useMemo<TeaserIssue[]>(() => teaserIssues(s), [s]);
@@ -235,7 +260,7 @@ export function TeaserForm({ teaser }: { teaser?: AdminTeaser }) {
             ))}
           </TabsList>
           <TabsContent value="event" className="mt-4">
-            <EventTab s={s} set={set} edit={edit} readOnly={readOnly} facts={facts} teaserId={saved?.id} slugTouched={slugTouched} onSlugTouched={() => setSlugTouched(true)} issuePaths={issuePaths} />
+            <EventTab s={s} set={set} edit={edit} readOnly={readOnly} facts={facts} teaserId={saved?.id} slugTouched={slugTouched} onSlugTouched={() => setSlugTouched(true)} issuePaths={issuePaths} showroomOptions={showroomOptions} onLink={link} />
           </TabsContent>
           <TabsContent value="text" className="mt-4">
             <TextTab s={s} set={set} edit={edit} readOnly={readOnly} facts={facts} locale={locale} onLocale={setLocale} issueCount={issueCount} focus={focus} />

@@ -16,11 +16,8 @@ import {
   absUrl,
   localeUrl,
 } from "./site";
-import {
-  PUBLISHED_SHOWROOM_LOCATIONS,
-  SHOWROOM_OPENING_HOURS,
-  type ShowroomLocation,
-} from "./showrooms";
+import { listedShowrooms } from "./showrooms";
+import { DAY_KEYS, type PublicShowroom } from "@/lib/showrooms/showroom";
 
 export type JsonLdObject = Record<string, unknown>;
 
@@ -182,34 +179,61 @@ export function faqSchema(items: { question: string; answer: string }[]): JsonLd
   };
 }
 
-function dealerSchema(locale: Locale, s: ShowroomLocation): JsonLdObject {
+const SCHEMA_DAY: Record<(typeof DAY_KEYS)[number], string> = {
+  sun: "Sunday", mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday",
+};
+
+/** Jam buka per hari -> OpeningHoursSpecification (hari dengan jam sama digabung). */
+function openingHours(s: PublicShowroom) {
+  const groups = new Map<string, string[]>();
+  for (const d of ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const) {
+    const h = s.hours[d];
+    if (!h) continue;
+    const key = `${h.open}-${h.close}`;
+    groups.set(key, [...(groups.get(key) ?? []), SCHEMA_DAY[d]]);
+  }
+  return [...groups.entries()].map(([key, days]) => {
+    const [opens, closes] = key.split("-");
+    return { "@type": "OpeningHoursSpecification", dayOfWeek: days, opens, closes };
+  });
+}
+
+function dealerSchema(locale: Locale, s: PublicShowroom): JsonLdObject {
   return {
     "@type": ["MotorcycleDealer", "LocalBusiness"],
     "@id": `${SITE_URL}/#showroom-${s.id}`,
     name: s.name,
     url: localeUrl(locale, "/showroom"),
-    image: absUrl("/og/showroom.jpg"),
+    image: absUrl(s.photoUrl ?? "/og/showroom.jpg"),
     telephone: `+${s.whatsapp}`,
+    ...(s.email ? { email: s.email } : {}),
     address: { "@type": "PostalAddress", ...s.address, addressCountry: s.country },
-    geo: { "@type": "GeoCoordinates", latitude: s.geo.latitude, longitude: s.geo.longitude },
-    hasMap: s.mapsUrl,
+    ...(s.lat != null && s.lng != null ? { geo: { "@type": "GeoCoordinates", latitude: s.lat, longitude: s.lng } } : {}),
+    ...(s.mapsUrl ? { hasMap: s.mapsUrl } : {}),
     parentOrganization: { "@id": ORG_ID },
     brand: { "@type": "Brand", name: SITE_NAME },
     currenciesAccepted: "IDR",
-    openingHoursSpecification: SHOWROOM_OPENING_HOURS.map((h) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [...h.days],
-      opens: h.opens,
-      closes: h.closes,
-    })),
+    openingHoursSpecification: openingHours(s),
+    // Tanggal tutup khusus (libur Lebaran, renovasi): cara Google menandai "tutup" = jam 00:00–00:00.
+    ...(s.closures.length
+      ? {
+          specialOpeningHoursSpecification: s.closures.map((c) => ({
+            "@type": "OpeningHoursSpecification",
+            validFrom: c.from,
+            validThrough: c.to,
+            opens: "00:00",
+            closes: "00:00",
+          })),
+        }
+      : {}),
   };
 }
 
-/** Semua showroom (Jakarta, Bekasi, Bandung, Bali) sebagai satu graph. */
-export function showroomsSchema(locale: Locale): JsonLdObject {
+/** Semua showroom yang tampil sebagai lokasi (dari admin) sebagai satu graph. */
+export function showroomsSchema(locale: Locale, showrooms: PublicShowroom[]): JsonLdObject {
   return {
     "@context": "https://schema.org",
-    "@graph": PUBLISHED_SHOWROOM_LOCATIONS.map((s) => dealerSchema(locale, s)),
+    "@graph": listedShowrooms(showrooms).map((s) => dealerSchema(locale, s)),
   };
 }
 

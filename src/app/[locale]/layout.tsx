@@ -6,6 +6,8 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { BookingProvider } from "@/components/booking/booking-provider";
+import { ShowroomsProvider } from "@/components/showrooms/showrooms-context";
+import { getShowrooms } from "@/lib/cms/api";
 import { notFound } from "next/navigation";
 import { LOCALES, isLocale } from "@/app/lib/locale";
 import { ConsentModeDefault, GoogleTagManager } from "@/components/gtm";
@@ -35,6 +37,9 @@ export default async function LocaleLayout({
     locale === "en"
       ? (await import("@/app/lib/dictionaries/en")).en
       : (await import("@/app/lib/dictionaries/id")).id;
+  // Data showroom dari admin (ISR + tag "showrooms"; backend mati -> snapshot) untuk form booking,
+  // halaman Showroom, dan Kontak.
+  const showrooms = await getShowrooms();
 
   return (
     <html lang={locale}>
@@ -52,17 +57,19 @@ export default async function LocaleLayout({
         <LanguageProvider locale={locale} dictionary={dictionary}>
           {/* Satu modal booking (Test Ride / Book a Visit) untuk seluruh situs;
               tombol di navbar, landing, dan kartu showroom membukanya lewat useBooking(). */}
-          <BookingProvider>
-            <Navbar />
-            <LazyMotionProvider>
-              {/* Landmark <main> tunggal untuk seluruh halaman publik (target skip-link navbar).
-                  Halaman TIDAK boleh merender <main> sendiri (nested main = HTML invalid). */}
-              <main id="konten" tabIndex={-1}>
-                {children}
-              </main>
-            </LazyMotionProvider>
-            <Footer />
-          </BookingProvider>
+          <ShowroomsProvider showrooms={showrooms}>
+            <BookingProvider>
+              <Navbar />
+              <LazyMotionProvider>
+                {/* Landmark <main> tunggal untuk seluruh halaman publik (target skip-link navbar).
+                    Halaman TIDAK boleh merender <main> sendiri (nested main = HTML invalid). */}
+                <main id="konten" tabIndex={-1}>
+                  {children}
+                </main>
+              </LazyMotionProvider>
+              <Footer />
+            </BookingProvider>
+          </ShowroomsProvider>
           <CookieConsent />
         </LanguageProvider>
         <Toaster

@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Newspaper, FileText, Share2, Tags, Images, MapPin, Users, ScrollText, Settings, Gauge,
-  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, Briefcase, Building2, Contact, LayoutGrid, BadgeDollarSign, Megaphone, type LucideIcon,
+  ChartColumnBig, CalendarCheck, MessageSquareText, CalendarDays, Briefcase, Building2, Contact, LayoutGrid, BadgeDollarSign, Megaphone, Store, type LucideIcon,
 } from "lucide-react";
 import type { Module } from "@/lib/admin/permissions";
 
@@ -43,7 +43,10 @@ export const NAV: NavGroup[] = [
   },
   {
     label: "Showrooms",
-    items: [{ title: "Opening Teasers", href: "/admin/teasers", icon: Megaphone, module: "teasers" }],
+    items: [
+      { title: "Locations", href: "/admin/showrooms", icon: Store, module: "showrooms" },
+      { title: "Opening Teasers", href: "/admin/teasers", icon: Megaphone, module: "teasers" },
+    ],
   },
   {
     label: "HR · Careers",
@@ -90,4 +93,5 @@ export const SEGMENT_LABEL: Record<string, string> = {
   jobs: "Job Openings",
   structure: "Divisions & Locations",
   teasers: "Opening Teasers",
+  showrooms: "Showroom Locations",
 };

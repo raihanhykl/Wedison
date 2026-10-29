@@ -3,7 +3,6 @@
 import { CalendarCheck, CheckCircle2, MapPin, MessageCircle, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/app/lib/language-context";
-import { SHOWROOMS } from "@/lib/booking/showrooms";
 import { formatLongDate } from "@/lib/booking/slots";
 import type { BookingResult } from "./booking-form";
 
@@ -16,15 +15,14 @@ type Props = { result: BookingResult; onClose: () => void };
  */
 export function BookingSuccess({ result, onClose }: Props) {
   const { t, language } = useLanguage();
-  const showroom = SHOWROOMS[result.showroom];
 
   const rows = [
-    { Icon: MapPin, label: t("booking.field.showroom"), value: t(showroom.nameKey) },
+    { Icon: MapPin, label: t("booking.field.showroom"), value: result.showroomName },
     { Icon: Tag, label: t("booking.field.purpose"), value: result.purposeLabel },
     {
       Icon: CalendarCheck,
       label: t("booking.success.schedule"),
-      value: `${formatLongDate(result.date, language)} · ${result.time} ${showroom.tzLabel}`,
+      value: `${formatLongDate(result.date, language)} · ${result.time} ${result.tzLabel}`,
     },
   ];
 

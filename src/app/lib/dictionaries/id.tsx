@@ -304,18 +304,6 @@ export const id = {
   "showroom.tag": "Experience Center",
   "showroom.address":
     "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, Jakarta Selatan, DKI Jakarta 12240",
-  "showroom.jakarta.name": "Wedison Jakarta",
-  "showroom.jakarta.address":
-    "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, Jakarta Selatan, DKI Jakarta 12240",
-  "showroom.bandung.name": "Wedison Bandung",
-  "showroom.bandung.address":
-    "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
-  "showroom.bali.name": "Wedison Bali",
-  "showroom.bekasi.name": "Wedison Bekasi",
-  "showroom.bekasi.address":
-    "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, Kec. Bekasi Timur, Kota Bekasi, Jawa Barat 17113",
-  "showroom.bali.address":
-    "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80118",
   "showroom.weekdays": "Senin - Jumat: 10.00 - 19.00",
   "showroom.weekend": "Sabtu - Minggu: 10.00 - 17.00",
   "showroom.holiday": "Hari libur nasional: 10.00 - 16.00",
@@ -353,6 +341,8 @@ export const id = {
   "showroomPage.locations.next": "Showroom berikutnya",
   "showroomPage.locations.showAll": "Lihat semua",
   "showroomPage.locations.listLabel": "Daftar showroom di {country}",
+  "showroomPage.locations.carousel": "korsel",
+  "showroomPage.locations.slide": "kartu",
   "showroomPage.card.showOnMap": "Tampilkan {name} di peta",
   "showroomPage.card.facilities": "Showroom · Servis · SuperCharge",
   "showroomPage.card.facilitiesNoCharge": "Showroom · Servis",
@@ -361,6 +351,14 @@ export const id = {
   "showroomPage.card.weekdays": "Sen–Jum",
   "showroomPage.card.weekend": "Sab–Min",
   "showroomPage.card.holiday": "Libur nasional",
+  "showroomPage.card.service": "Servis",
+  "showroomPage.card.closedDay": "Tutup",
+  "showroomPage.card.closedUntilDay": "Tutup · buka {day} {time}",
+  "showroomPage.card.closedTomorrow": "Tutup · buka besok {time}",
+  "showroomPage.card.closedToday": "Tutup hari ini",
+  "showroomPage.card.temporarilyClosed": "Tutup sementara",
+  "showroomPage.card.closure": "Tutup {date}",
+  "showroomPage.card.bookingUnavailable": "Booking belum tersedia",
   "showroomPage.card.directions": "Rute",
   "showroomPage.upcoming.label": "Segera hadir",
   "showroomPage.upcoming.desc":
@@ -1834,6 +1832,7 @@ export const id = {
   "booking.error.rateLimited":
     "Terlalu banyak percobaan. Silakan coba lagi dalam beberapa menit.",
   "booking.error.slot": "Slot tersebut sudah terisi. Silakan pilih waktu lain.",
+  "booking.error.showroomUnavailable": "Showroom ini sedang tidak menerima booking. Silakan pilih showroom lain.",
   "booking.success.title": "Terima kasih, {name}!",
   "booking.success.desc":
     "Permintaan Anda sudah kami terima. Tim showroom akan mengonfirmasi jadwalnya melalui WhatsApp.",

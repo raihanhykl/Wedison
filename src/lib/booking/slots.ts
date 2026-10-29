@@ -2,7 +2,10 @@
 // Semua tanggal direpresentasikan sebagai string "YYYY-MM-DD" dan jam "HH:mm"
 // dalam zona waktu SHOWROOM (bukan zona waktu browser/server).
 
-import { SHOWROOMS, type ShowroomId } from "./showrooms";
+import { hoursOn, type PublicShowroom } from "@/lib/showrooms/showroom";
+
+/** Bagian data showroom yang menentukan slot. */
+type SlotShowroom = Pick<PublicShowroom, "timeZone" | "hours" | "closures">;
 
 /** Durasi default satu sesi kunjungan (menit). Dipakai untuk event kalender. */
 export const SLOT_DURATION_MIN = 60;
@@ -74,21 +77,22 @@ export function nowInTimeZone(timeZone: string, now: Date = new Date()): {
 
 /**
  * Daftar slot ("HH:mm") yang bisa dipilih untuk showroom + tanggal tertentu.
- * - mengikuti jam buka weekday/weekend
+ * - mengikuti jam buka per hari dari admin; tanggal tutup khusus & hari libur mingguan = kosong
  * - slot terakhir = tutup - durasi sesi
  * - untuk hari ini: buang slot yang kurang dari MIN_LEAD_MIN dari sekarang
+ * Aturan yang sama dicek ulang di server (server/src/modules/showrooms/showroom.rules.ts).
  */
 export function availableSlots(
-  showroomId: ShowroomId,
+  showroom: SlotShowroom,
   ymd: string,
   now: Date = new Date(),
 ): string[] {
-  const showroom = SHOWROOMS[showroomId];
-  const hours = isWeekend(ymd) ? showroom.hours.weekend : showroom.hours.weekday;
   const current = nowInTimeZone(showroom.timeZone, now);
 
   if (ymd < current.ymd) return [];
   if (ymd > addDaysYmd(current.ymd, MAX_DAYS_AHEAD)) return [];
+  const hours = hoursOn(showroom, ymd);
+  if (!hours) return [];
 
   const slots: string[] = [];
   for (let m = hours.open; m + SLOT_DURATION_MIN <= hours.close; m += SLOT_STEP_MIN) {
@@ -99,8 +103,8 @@ export function availableSlots(
 }
 
 /** Tanggal yang masih punya minimal satu slot. Dipakai untuk men-disable hari di kalender. */
-export function isDateBookable(showroomId: ShowroomId, ymd: string, now: Date = new Date()): boolean {
-  return availableSlots(showroomId, ymd, now).length > 0;
+export function isDateBookable(showroom: SlotShowroom, ymd: string, now: Date = new Date()): boolean {
+  return availableSlots(showroom, ymd, now).length > 0;
 }
 
 /** Format tanggal panjang per bahasa, mis. "Rabu, 1 Oktober 2026". */

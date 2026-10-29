@@ -383,7 +383,8 @@ export type StationsMeta = {
 };
 
 // ───────────────────────── Leads (booking showroom & pesan kontak) ─────────────────────────
-export type ShowroomId = "jakarta" | "bekasi" | "bandung" | "bali";
+/** Kode showroom (tabel Showroom, admin › Showrooms), mis. "jakarta". */
+export type ShowroomId = string;
 export type BookingPurpose = "TEST_RIDE" | "CONSULTATION" | "FINANCING" | "SERVICE" | "OTHER";
 export type BookingStatus = "NEW" | "CONTACTED" | "CONFIRMED" | "COMPLETED" | "CANCELLED" | "NO_SHOW";
 export type CalendarSyncStatus = "PENDING" | "SAVED" | "FAILED" | "SKIPPED";
@@ -455,8 +456,6 @@ export type LeadsStats = {
   generatedAt: string;
 };
 
-export const SHOWROOM_LABEL: Record<ShowroomId, string> = { jakarta: "Wedison Jakarta", bekasi: "Wedison Bekasi", bandung: "Wedison Bandung", bali: "Wedison Bali" };
-export const SHOWROOM_TZ: Record<ShowroomId, string> = { jakarta: "WIB", bekasi: "WIB", bandung: "WIB", bali: "WITA" };
 export const BOOKING_PURPOSE_LABEL: Record<BookingPurpose, string> = {
   TEST_RIDE: "Test Ride",
   CONSULTATION: "Product consultation",
@@ -528,6 +527,8 @@ export type AdminTeaser = {
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string;
+  /** showroom terkait (alamat/kontak/zona waktu disalin dari showroom) */
+  showroomId: string | null;
   source: string;
   inquiries: number;
   issues: TeaserIssue[];
@@ -535,3 +536,51 @@ export type AdminTeaser = {
 
 /** Nomor WhatsApp internasional dari nomor kanonik 08xx. */
 export const waLink = (phone: string) => `https://wa.me/${phone.replace(/\D/g, "").replace(/^0/, "62")}`;
+
+// ───────────────────────── Showrooms (admin › Showrooms › Locations) ─────────────────────────
+export type ShowroomStatus = "OPEN" | "COMING_SOON" | "TEMPORARILY_CLOSED" | "CLOSED";
+export type DayKey = "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
+export type DayHours = { open: string; close: string } | null;
+export type WeekHours = Record<DayKey | "holiday", DayHours>;
+export type ShowroomClosure = { from: string; to: string; note: string };
+
+export type AdminShowroom = {
+  id: string;
+  name: string;
+  city: string;
+  status: ShowroomStatus;
+  isPublic: boolean;
+  bookable: boolean;
+  country: string;
+  sortOrder: number;
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
+  lat: number | null;
+  lng: number | null;
+  mapsUrl: string | null;
+  whatsapp: string;
+  phone: string | null;
+  email: string | null;
+  timeZone: string;
+  tzLabel: string;
+  hours: WeekHours;
+  closures: ShowroomClosure[];
+  hasWorkshop: boolean;
+  hasSupercharge: boolean;
+  photoUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+  /** bisa dipilih di form booking sekarang (OPEN + tampil + booking aktif) */
+  bookableNow: boolean;
+  visible: boolean;
+  bookings: { total: number; upcoming: number };
+  teasers: number;
+};
+
+export type AdminShowroomDetail = AdminShowroom & {
+  linkedTeasers: { id: string; city: string; slug: string; status: TeaserStatus; startAt: string }[];
+  upcomingBookingDates: { date: string; count: number }[];
+  syncedTeasers?: number;
+};
