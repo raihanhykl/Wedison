@@ -28,15 +28,15 @@ import { useCan } from "@/components/admin/providers";
 import { api, errorMessage, qs } from "@/lib/admin/api";
 import { formatDateTime, timeAgo } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
+import { useShowroomLabels } from "@/lib/admin/showroom-options";
 import {
-  BOOKING_PURPOSE_LABEL, BOOKING_SOURCE_LABEL, BOOKING_STATUS_LABEL, CALENDAR_STATUS_LABEL, SHOWROOM_LABEL, SHOWROOM_TZ, waLink,
+  BOOKING_PURPOSE_LABEL, BOOKING_SOURCE_LABEL, BOOKING_STATUS_LABEL, CALENDAR_STATUS_LABEL, waLink,
   type Booking, type BookingPurpose, type BookingStatus, type Paginated, type ShowroomId,
 } from "@/lib/admin/types";
 import { formatVisit } from "../leads-shared";
 
 const STATUSES = Object.keys(BOOKING_STATUS_LABEL) as BookingStatus[];
 const PURPOSES = Object.keys(BOOKING_PURPOSE_LABEL) as BookingPurpose[];
-const SHOWROOMS = Object.keys(SHOWROOM_LABEL) as ShowroomId[];
 
 type Filters = {
   q: string;
@@ -52,6 +52,7 @@ export function BookingsView() {
   const params = useSearchParams();
   const qc = useQueryClient();
   const can = useCan("leads");
+  const showroom = useShowroomLabels();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [f, setF] = useState<Filters>(() => ({
@@ -110,8 +111,8 @@ export function BookingsView() {
       id: "visit", header: "Visit", size: 170,
       cell: ({ row }) => (
         <button type="button" onClick={() => setSelected(row.original)} className="text-left">
-          <p className="font-medium">{formatVisit(row.original)}</p>
-          <p className="text-xs text-muted-foreground">{SHOWROOM_LABEL[row.original.showroom]}</p>
+          <p className="font-medium">{formatVisit(row.original, showroom.tz(row.original.showroom))}</p>
+          <p className="text-xs text-muted-foreground">{showroom.name(row.original.showroom)}</p>
         </button>
       ),
     },
@@ -159,7 +160,7 @@ export function BookingsView() {
         );
       },
     },
-  ], [can.deleteHard, patch, sync]);
+  ], [can.deleteHard, patch, sync, showroom]);
 
   const exportHref = `/api/v1/admin/leads/bookings/export/${qs({ ...query, page: undefined, limit: undefined })}`;
 
@@ -175,7 +176,7 @@ export function BookingsView() {
         <Input placeholder="Search name / phone / email…" value={f.q} onChange={(e) => set("q", e.target.value)} className="lg:max-w-xs" />
         <Select value={f.showroom} onValueChange={(v) => set("showroom", v as Filters["showroom"])}>
           <SelectTrigger className="lg:w-[170px]"><SelectValue /></SelectTrigger>
-          <SelectContent><SelectItem value="all">All showrooms</SelectItem>{SHOWROOMS.map((s) => <SelectItem key={s} value={s}>{SHOWROOM_LABEL[s]}</SelectItem>)}</SelectContent>
+          <SelectContent><SelectItem value="all">All showrooms</SelectItem>{showroom.options.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}{s.status === "CLOSED" ? " (closed)" : ""}</SelectItem>)}</SelectContent>
         </Select>
         <Select value={f.purpose} onValueChange={(v) => set("purpose", v as Filters["purpose"])}>
           <SelectTrigger className="lg:w-[190px]"><SelectValue /></SelectTrigger>
@@ -221,7 +222,7 @@ export function BookingsView() {
           )}
         </SheetContent>
       </Sheet>
-      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Delete booking?" description={toDelete ? `${toDelete.name} · ${formatVisit(toDelete)}` : undefined} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
+      <ConfirmDialog open={!!toDelete} onOpenChange={(o) => !o && setToDelete(null)} title="Delete booking?" description={toDelete ? `${toDelete.name} · ${formatVisit(toDelete, showroom.tz(toDelete.showroom))}` : undefined} loading={remove.isPending} onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }} />
     </>
   );
 }
@@ -244,13 +245,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 function BookingDetail({ b, saving, syncing, onStatus, onNote, onSync }: { b: Booking; saving: boolean; syncing: boolean; onStatus: (s: BookingStatus) => void; onNote: (n: string) => void; onSync: () => void }) {
+  const showroom = useShowroomLabels();
   const [note, setNote] = useState(b.adminNote ?? "");
   useEffect(() => setNote(b.adminNote ?? ""), [b.adminNote]);
   return (
     <>
       <SheetHeader>
         <SheetTitle className="font-display text-xl">{b.name}</SheetTitle>
-        <SheetDescription>{BOOKING_PURPOSE_LABEL[b.purpose]} · {formatVisit(b, { year: true })}</SheetDescription>
+        <SheetDescription>{BOOKING_PURPOSE_LABEL[b.purpose]} · {formatVisit(b, showroom.tz(b.showroom), { year: true })}</SheetDescription>
       </SheetHeader>
       <div className="space-y-5 px-4 pb-6">
         <div className="flex flex-wrap gap-2">
@@ -273,8 +275,8 @@ function BookingDetail({ b, saving, syncing, onStatus, onNote, onSync }: { b: Bo
         </div>
 
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 rounded-lg border border-border p-4">
-          <Field label="Showroom">{SHOWROOM_LABEL[b.showroom]}</Field>
-          <Field label="Visit">{b.date} · {b.time} {SHOWROOM_TZ[b.showroom]}</Field>
+          <Field label="Showroom">{showroom.name(b.showroom)}</Field>
+          <Field label="Visit">{b.date} · {b.time} {showroom.tz(b.showroom)}</Field>
           <Field label="Phone"><span className="font-mono">{b.phone}</span></Field>
           <Field label="Email">{b.email ?? "—"}</Field>
           <Field label="Entry point">{BOOKING_SOURCE_LABEL[b.source ?? "unknown"] ?? b.source}</Field>

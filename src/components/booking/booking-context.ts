@@ -1,12 +1,11 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import type { ShowroomId } from "@/lib/booking/showrooms";
 import type { BookingPurpose, BookingSource } from "@/lib/booking/schema";
 
 export type BookingPrefill = {
   /** Terisi otomatis bila dibuka dari kartu showroom tertentu. */
-  showroom?: ShowroomId;
+  showroom?: string;
   /** Terisi otomatis bila dibuka dari tombol "Test Ride". */
   purpose?: BookingPurpose;
   /** Asal klik, untuk analytics (dataLayer). */

@@ -13,10 +13,11 @@ import { PageHeader } from "@/components/admin/page-header";
 import { BarList, StackedBar, TrendChart } from "@/components/admin/charts";
 import { api, qs } from "@/lib/admin/api";
 import {
-  BOOKING_PURPOSE_LABEL, BOOKING_SOURCE_LABEL, BOOKING_STATUS_LABEL, SHOWROOM_LABEL,
+  BOOKING_PURPOSE_LABEL, BOOKING_SOURCE_LABEL, BOOKING_STATUS_LABEL,
   type BookingPurpose, type BookingStatus, type LeadsStats, type ShowroomId,
 } from "@/lib/admin/types";
 import { BookingRow, ContactRow, ListCard } from "./leads-shared";
+import { useShowroomLabels } from "@/lib/admin/showroom-options";
 
 const RANGES = [
   { key: "7", label: "Last 7 days" },
@@ -56,6 +57,7 @@ const STATUS_DOT: Record<BookingStatus, string> = {
 };
 
 export function LeadsOverviewView() {
+  const showroom = useShowroomLabels();
   const [range, setRange] = useState<(typeof RANGES)[number]["key"]>("30");
   const { from, to } = useMemo(() => {
     const t = new Date();
@@ -150,7 +152,7 @@ export function LeadsOverviewView() {
             <CardTitle className="font-display text-lg">By showroom</CardTitle>
             <CardDescription>Where visitors want to go ({rangeLabel}).</CardDescription>
           </CardHeader>
-          <CardContent>{isLoading || !data ? <Skeleton className="h-40" /> : <BarList items={sorted<ShowroomId>(data.byShowroom, (k) => SHOWROOM_LABEL[k] ?? k)} />}</CardContent>
+          <CardContent>{isLoading || !data ? <Skeleton className="h-40" /> : <BarList items={sorted<ShowroomId>(data.byShowroom, (k) => showroom.name(k))} />}</CardContent>
         </Card>
         <Card>
           <CardHeader>

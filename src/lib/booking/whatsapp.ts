@@ -1,10 +1,10 @@
-// Pesan WhatsApp prefilled + URL wa.me, memakai nomor cabang dari registry showroom.
-import { SHOWROOMS, type ShowroomId } from "./showrooms";
+// Pesan WhatsApp prefilled + URL wa.me, memakai nomor cabang dari data showroom (admin).
+import type { PublicShowroom } from "@/lib/showrooms/showroom";
 import { displayPhone, type BookingPurpose } from "./schema";
 import { formatLongDate } from "./slots";
 
 export type WhatsappBookingInput = {
-  showroom: ShowroomId;
+  showroom: Pick<PublicShowroom, "name" | "tzLabel" | "whatsapp">;
   purpose: BookingPurpose;
   purposeLabel: string;
   name: string;
@@ -17,7 +17,7 @@ export type WhatsappBookingInput = {
 };
 
 export function buildWhatsappMessage(b: WhatsappBookingInput): string {
-  const s = SHOWROOMS[b.showroom];
+  const s = b.showroom;
   const when = `${formatLongDate(b.date, b.locale)}, ${b.time} ${s.tzLabel}`;
   const phone = displayPhone(b.phone);
 
@@ -55,6 +55,6 @@ export function buildWhatsappMessage(b: WhatsappBookingInput): string {
 }
 
 export function buildWhatsappUrl(b: WhatsappBookingInput): string {
-  const number = SHOWROOMS[b.showroom].whatsapp;
+  const number = b.showroom.whatsapp;
   return `https://wa.me/${number}?text=${encodeURIComponent(buildWhatsappMessage(b))}`;
 }

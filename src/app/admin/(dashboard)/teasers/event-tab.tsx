@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { CheckCircle2, CircleAlert, ExternalLink, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -14,11 +15,15 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { cn } from "@/lib/utils";
 import { MODEL_CATALOG, MODEL_KEYS, TIME_ZONES, type ModelKey } from "@/lib/teasers/teaser";
 import { Field } from "./fields";
-import { normalizeWhatsapp, zonedIso, type EditorProps } from "./form-state";
+import { normalizeWhatsapp, zonedIso, type EditorProps, type ShowroomOption } from "./form-state";
 
-export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlugTouched, issuePaths }: EditorProps & {
+export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlugTouched, issuePaths, showroomOptions, onLink }: EditorProps & {
   slugTouched: boolean; onSlugTouched: () => void; issuePaths: Set<string>;
+  showroomOptions: ShowroomOption[]; onLink: (o: ShowroomOption | null) => void;
 }) {
+  const linked = showroomOptions.find((o) => o.id === s.showroomId) ?? null;
+  // Terhubung ke showroom: alamat, kontak, zona waktu dikelola di Showroom Locations.
+  const locked = !!s.showroomId;
   const startAt = zonedIso(s.startDate, s.startTime, s.timeZone);
   const endAt = zonedIso(s.endDate, s.endTime, s.timeZone);
   const badSchedule = issuePaths.has("schedule");
@@ -32,6 +37,7 @@ export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlu
     set("city", city);
     if (!slugTouched) set("slug", slugify(city));
     // Kota di alamat mengikuti nama kota selama belum diisi berbeda.
+    if (locked) return; // nama & alamat mengikuti showroom terkait
     if (!s.addressLocality || s.addressLocality === s.city) set("addressLocality", city);
     // Nama showroom ikut kota selama masih nama otomatis (bandingkan tanpa spasi tepi: "New " saat mengetik).
     const auto = (c: string) => `Wedison Experience Center ${c}`.trim();
@@ -49,11 +55,27 @@ export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlu
           <CardDescription>Which showroom this page announces and where it lives on the site.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
+          <Field
+            label="Linked showroom" htmlFor="t-showroom" className="sm:col-span-2"
+            hint={linked
+              ? <>Showroom name, address, contacts and time zone come from <Link href={`/admin/showrooms/${linked.id}`} className="text-primary underline underline-offset-4">{linked.name}</Link> and stay in sync when it changes.</>
+              : "Link a showroom from Showroom Locations to reuse its address and contacts, or leave it unlinked and fill them in here."}
+          >
+            <Select value={s.showroomId ?? "none"} onValueChange={(v) => onLink(v === "none" ? null : showroomOptions.find((o) => o.id === v) ?? null)} disabled={readOnly}>
+              <SelectTrigger id="t-showroom" className="sm:max-w-md"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Not linked (enter manually)</SelectItem>
+                {showroomOptions.filter((o) => o.status !== "CLOSED" || o.id === s.showroomId).map((o) => (
+                  <SelectItem key={o.id} value={o.id}>{o.name}{o.status === "COMING_SOON" ? " · coming soon" : ""}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </Field>
           <Field label="City" htmlFor="t-city" hint="Used in the page text through {city}, e.g. “coming to Surabaya”.">
             <Input id="t-city" value={s.city} maxLength={60} onChange={(e) => setCity(e.target.value)} placeholder="e.g. Surabaya" className="text-base font-medium" />
           </Field>
           <Field label="Showroom name" htmlFor="t-name" hint="Shown with the address and used through {showroom}.">
-            <Input id="t-name" value={s.showroomName} maxLength={120} onChange={(e) => set("showroomName", e.target.value)} placeholder="e.g. Wedison Experience Center Surabaya" />
+            <Input id="t-name" disabled={locked} value={s.showroomName} maxLength={120} onChange={(e) => set("showroomName", e.target.value)} placeholder="e.g. Wedison Experience Center Surabaya" />
           </Field>
           <SlugField slug={s.slug} onChange={(v) => { set("slug", v); onSlugTouched(); }} teaserId={teaserId} />
         </CardContent>
@@ -66,7 +88,7 @@ export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlu
         </CardHeader>
         <CardContent className="space-y-4">
           <Field label="Time zone" htmlFor="t-tz">
-            <Select value={s.timeZone} onValueChange={(v) => set("timeZone", v)} disabled={readOnly}>
+            <Select value={s.timeZone} onValueChange={(v) => set("timeZone", v)} disabled={readOnly || locked}>
               <SelectTrigger id="t-tz" className="sm:max-w-sm"><SelectValue /></SelectTrigger>
               <SelectContent>{TIME_ZONES.map((z) => <SelectItem key={z.value} value={z.value}>{z.name}</SelectItem>)}</SelectContent>
             </Select>
@@ -117,23 +139,23 @@ export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlu
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <Field label="Street address" htmlFor="t-street" className="sm:col-span-2" warn={issuePaths.has("streetAddress") ? "Required before publishing." : null}>
-            <Input id="t-street" value={s.streetAddress} maxLength={200} onChange={(e) => set("streetAddress", e.target.value)} placeholder="e.g. Jl. Raya Darmo No. 1, Wonokromo" />
+            <Input id="t-street" disabled={locked} value={s.streetAddress} maxLength={200} onChange={(e) => set("streetAddress", e.target.value)} placeholder="e.g. Jl. Raya Darmo No. 1, Wonokromo" />
           </Field>
           <Field label="City" htmlFor="t-locality" warn={issuePaths.has("addressLocality") ? "Required before publishing." : null}>
-            <Input id="t-locality" value={s.addressLocality} maxLength={80} onChange={(e) => set("addressLocality", e.target.value)} placeholder="e.g. Surabaya" />
+            <Input id="t-locality" disabled={locked} value={s.addressLocality} maxLength={80} onChange={(e) => set("addressLocality", e.target.value)} placeholder="e.g. Surabaya" />
           </Field>
           <Field label="Province" htmlFor="t-region" optional>
-            <Input id="t-region" value={s.addressRegion} maxLength={80} onChange={(e) => set("addressRegion", e.target.value)} placeholder="e.g. Jawa Timur" />
+            <Input id="t-region" disabled={locked} value={s.addressRegion} maxLength={80} onChange={(e) => set("addressRegion", e.target.value)} placeholder="e.g. Jawa Timur" />
           </Field>
           <Field label="Postal code" htmlFor="t-postal" optional>
-            <Input id="t-postal" value={s.postalCode} maxLength={10} inputMode="numeric" onChange={(e) => set("postalCode", e.target.value.replace(/\D/g, ""))} placeholder="e.g. 60241" />
+            <Input id="t-postal" disabled={locked} value={s.postalCode} maxLength={10} inputMode="numeric" onChange={(e) => set("postalCode", e.target.value.replace(/\D/g, ""))} placeholder="e.g. 60241" />
           </Field>
           <Field
             label="Google Maps link" htmlFor="t-maps" optional
             error={mapsValid ? null : "Must start with https://"}
             hint={<>Shows a “Get directions” button. Empty = no button. {s.mapsUrl && mapsValid && <a href={s.mapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary underline underline-offset-4">Test link <ExternalLink className="size-3" /></a>}</>}
           >
-            <Input id="t-maps" value={s.mapsUrl} maxLength={1000} onChange={(e) => set("mapsUrl", e.target.value)} placeholder="https://maps.app.goo.gl/…" />
+            <Input id="t-maps" disabled={locked} value={s.mapsUrl} maxLength={1000} onChange={(e) => set("mapsUrl", e.target.value)} placeholder="https://maps.app.goo.gl/…" />
           </Field>
         </CardContent>
       </Card>
@@ -151,10 +173,10 @@ export function EventTab({ s, set, readOnly, facts, teaserId, slugTouched, onSlu
             error={s.whatsapp && !waValid ? "Enter an Indonesian number, e.g. 0852 8612 6550" : null}
             hint={waValid ? <>Saved as +{wa}. <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary underline underline-offset-4">Test chat <ExternalLink className="size-3" /></a></> : "The branch number. 08…, +62… and 62… are all fine."}
           >
-            <Input id="t-wa" value={s.whatsapp} inputMode="tel" maxLength={24} onChange={(e) => set("whatsapp", e.target.value)} placeholder="e.g. 0852 8612 6550" />
+            <Input id="t-wa" disabled={locked} value={s.whatsapp} inputMode="tel" maxLength={24} onChange={(e) => set("whatsapp", e.target.value)} placeholder="e.g. 0852 8612 6550" />
           </Field>
           <Field label="Email" htmlFor="t-email" error={s.email && !emailValid ? "Enter a valid email address" : null} hint="Shown as a mailto link.">
-            <Input id="t-email" type="email" value={s.email} maxLength={120} onChange={(e) => set("email", e.target.value)} placeholder="support@wedison.co" />
+            <Input id="t-email" disabled={locked} type="email" value={s.email} maxLength={120} onChange={(e) => set("email", e.target.value)} placeholder="support@wedison.co" />
           </Field>
         </CardContent>
       </Card>

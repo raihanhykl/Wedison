@@ -7,16 +7,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BookingStatusBadge } from "@/components/admin/status-badge";
 import { timeAgo } from "@/lib/admin/format";
-import { BOOKING_PURPOSE_LABEL, SHOWROOM_LABEL, SHOWROOM_TZ, waLink, type Booking, type ContactSubmission } from "@/lib/admin/types";
+import { BOOKING_PURPOSE_LABEL, waLink, type Booking, type ContactSubmission } from "@/lib/admin/types";
+import { useShowroomLabels } from "@/lib/admin/showroom-options";
 import { sourceLabel, useContactSources } from "@/lib/admin/contact-sources";
 
 /** "Wed, 30 Sep · 10:30 WIB" dari tanggal/jam booking (zona waktu showroom, bukan browser). */
-export function formatVisit(b: Pick<Booking, "date" | "time" | "showroom">, opts: { year?: boolean } = {}) {
+export function formatVisit(b: Pick<Booking, "date" | "time">, tz: string, opts: { year?: boolean } = {}) {
   const d = new Date(`${b.date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", ...(opts.year ? { year: "numeric" } : {}), timeZone: "UTC" });
-  return `${d} · ${b.time} ${SHOWROOM_TZ[b.showroom]}`;
+  return `${d} · ${b.time}${tz ? ` ${tz}` : ""}`;
 }
 
 export function BookingRow({ b, href }: { b: Booking; href?: string }) {
+  const showroom = useShowroomLabels();
   return (
     <div className="-mx-2 flex items-center gap-3 rounded-md px-2 py-2.5 hover:bg-muted/40">
       <div className="min-w-0 flex-1">
@@ -24,7 +26,7 @@ export function BookingRow({ b, href }: { b: Booking; href?: string }) {
           {b.name} <span className="font-normal text-muted-foreground">· {BOOKING_PURPOSE_LABEL[b.purpose]}</span>
         </p>
         <p className="truncate text-xs text-muted-foreground">
-          {formatVisit(b)} · {SHOWROOM_LABEL[b.showroom]}
+          {formatVisit(b, showroom.tz(b.showroom))} · {showroom.name(b.showroom)}
         </p>
       </div>
       <BookingStatusBadge status={b.status} />

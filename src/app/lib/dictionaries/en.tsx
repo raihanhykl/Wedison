@@ -313,18 +313,6 @@ export const en = {
   "showroom.tag": "Experience Center",
   "showroom.address":
     "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, South Jakarta, DKI Jakarta 12240",
-  "showroom.jakarta.name": "Wedison Jakarta",
-  "showroom.jakarta.address":
-    "Jl. Sultan Iskandar Muda No.30 A-C, Kebayoran Lama, South Jakarta, DKI Jakarta 12240",
-  "showroom.bandung.name": "Wedison Bandung",
-  "showroom.bandung.address":
-    "Jl. Raya Gadobangkong No.154, Gadobangkong, Kec. Ngamprah, Kabupaten Bandung Barat, Jawa Barat 40552",
-  "showroom.bali.name": "Wedison Bali",
-  "showroom.bekasi.name": "Wedison Bekasi",
-  "showroom.bekasi.address":
-    "Jl. HM. Joyo Martono, RT.003/RW.021, Margahayu, East Bekasi, Bekasi City, West Java 17113",
-  "showroom.bali.address":
-    "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, North Denpasar, Denpasar City, Bali 80118",
   "showroom.weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
   "showroom.weekend": "Saturday - Sunday: 10:00 AM - 5:00 PM",
   "showroom.holiday": "Public holidays: 10:00 AM - 4:00 PM",
@@ -370,6 +358,14 @@ export const en = {
   "showroomPage.card.weekdays": "Mon–Fri",
   "showroomPage.card.weekend": "Sat–Sun",
   "showroomPage.card.holiday": "Public holidays",
+  "showroomPage.card.service": "Service",
+  "showroomPage.card.closedDay": "Closed",
+  "showroomPage.card.closedUntilDay": "Closed · opens {day} {time}",
+  "showroomPage.card.closedTomorrow": "Closed · opens tomorrow {time}",
+  "showroomPage.card.closedToday": "Closed today",
+  "showroomPage.card.temporarilyClosed": "Temporarily closed",
+  "showroomPage.card.closure": "Closed {date}",
+  "showroomPage.card.bookingUnavailable": "Booking not available",
   "showroomPage.card.directions": "Directions",
   "showroomPage.upcoming.label": "Coming soon",
   "showroomPage.upcoming.desc": "Our next Experience Center is on its way. Stay tuned.",
@@ -1815,6 +1811,7 @@ export const en = {
     "Please try again in a moment, or contact us directly on WhatsApp.",
   "booking.error.rateLimited": "Too many attempts. Please try again in a few minutes.",
   "booking.error.slot": "That slot is no longer available, please pick another time.",
+  "booking.error.showroomUnavailable": "This showroom is not taking bookings right now. Please choose another showroom.",
   "booking.success.title": "Thank you, {name}!",
   "booking.success.desc":
     "We've received your booking request. The showroom team will confirm via WhatsApp.",

@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { SHOWROOM_LIST, SHOWROOMS, type ShowroomId } from "@/lib/booking/showrooms";
+import { useBookableShowrooms } from "@/components/showrooms/showrooms-context";
 import {
   BOOKING_PURPOSES,
   createBookingSchema,
@@ -48,7 +48,7 @@ import { trackBookingError, trackBookingSuccess } from "@/lib/booking/analytics"
 import type { BookingPrefill } from "./booking-context";
 
 type FormValues = {
-  showroom: ShowroomId | "";
+  showroom: string;
   purpose: BookingPurpose | "";
   name: string;
   phone: string;
@@ -60,7 +60,9 @@ type FormValues = {
 };
 
 export type BookingResult = {
-  showroom: ShowroomId;
+  showroom: string;
+  showroomName: string;
+  tzLabel: string;
   purpose: BookingPurpose;
   purposeLabel: string;
   name: string;
@@ -81,6 +83,8 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
   const { t, language } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [dateOpen, setDateOpen] = useState(false);
+  // Cabang yang bisa di-booking (dikelola admin › Showrooms; status, jam buka, tanggal tutup).
+  const showrooms = useBookableShowrooms();
 
   const schema = useMemo(
     () =>
@@ -102,7 +106,8 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
     resolver: zodResolver(schema) as unknown as Resolver<FormValues>,
     mode: "onTouched",
     defaultValues: {
-      showroom: prefill.showroom ?? "",
+      // Prefill hanya bila cabang itu memang bisa di-booking saat ini.
+      showroom: prefill.showroom && showrooms.some((s) => s.id === prefill.showroom) ? prefill.showroom : "",
       purpose: prefill.purpose ?? "",
       name: "",
       phone: "",
@@ -117,18 +122,19 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
   const showroom = form.watch("showroom");
   const date = form.watch("date");
   const time = form.watch("time");
+  const selected = useMemo(() => showrooms.find((s) => s.id === showroom) ?? null, [showrooms, showroom]);
 
-  // Slot jam mengikuti showroom (zona waktu & jam buka) + tanggal terpilih.
+  // Slot jam mengikuti showroom (zona waktu, jam buka per hari, tanggal tutup) + tanggal terpilih.
   const slots = useMemo(
-    () => (showroom && date ? availableSlots(showroom, date) : []),
-    [showroom, date],
+    () => (selected && date ? availableSlots(selected, date) : []),
+    [selected, date],
   );
   // Kalau showroom/tanggal berubah dan jam yang dipilih tak lagi tersedia -> kosongkan.
   useEffect(() => {
     if (time && !slots.includes(time)) form.setValue("time", "", { shouldValidate: false });
   }, [slots, time, form]);
 
-  const tzLabel = showroom ? SHOWROOMS[showroom].tzLabel : "";
+  const tzLabel = selected?.tzLabel ?? "";
   const today = useMemo(() => new Date(), []);
   const endMonth = useMemo(() => {
     const d = new Date(today);
@@ -140,7 +146,12 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
 
   const onSubmit = async (values: FormValues) => {
     // Nilai sudah lolos zod, jadi showroom/purpose pasti terisi.
-    const showroomId = values.showroom as ShowroomId;
+    const branch = showrooms.find((s) => s.id === values.showroom);
+    if (!branch) {
+      form.setError("showroom", { message: t("booking.error.showroomUnavailable") });
+      return;
+    }
+    const showroomId = branch.id;
     const purpose = values.purpose as BookingPurpose;
     const phone = normalizePhone(values.phone);
 
@@ -180,6 +191,10 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
           form.setError("time", { message: t("booking.error.slot") });
           return;
         }
+        if (reason === "SHOWROOM_UNAVAILABLE") {
+          form.setError("showroom", { message: t("booking.error.showroomUnavailable") });
+          return;
+        }
         toast(t("booking.error.submit.title"), {
           description:
             reason === "RATE_LIMIT"
@@ -190,7 +205,7 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
       }
 
       const whatsappUrl = buildWhatsappUrl({
-        showroom: showroomId,
+        showroom: branch,
         purpose,
         purposeLabel: purposeLabel(purpose),
         name: values.name.trim(),
@@ -223,6 +238,8 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
 
       onSuccess({
         showroom: showroomId,
+        showroomName: branch.name,
+        tzLabel: branch.tzLabel,
         purpose,
         purposeLabel: purposeLabel(purpose),
         name: values.name.trim(),
@@ -275,9 +292,9 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {SHOWROOM_LIST.map((s) => (
+                    {showrooms.map((s) => (
                       <SelectItem key={s.id} value={s.id}>
-                        {t(s.nameKey)}
+                        {s.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -421,7 +438,12 @@ export function BookingForm({ prefill, onSubmittingChange, onSuccess }: Props) {
                       }}
                       startMonth={today}
                       endMonth={endMonth}
-                      disabled={(d) => !isDateBookable(showroom || "jakarta", ymdFromLocalDate(d))}
+                      // Belum pilih cabang: tanggal dibatasi oleh cabang pertama (aturan umum hari lalu/batas
+                      // 60 hari); setelah dipilih, mengikuti jam buka & tanggal tutup cabang itu.
+                      disabled={(d) => {
+                        const ref = selected ?? showrooms[0];
+                        return !ref || !isDateBookable(ref, ymdFromLocalDate(d));
+                      }}
                       autoFocus
                     />
                   </PopoverContent>

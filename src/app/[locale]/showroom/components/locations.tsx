@@ -7,7 +7,8 @@ import { useLanguage } from "@/app/lib/language-context";
 import { Reveal } from "@/components/motion/reveal";
 import { useIdleVisible } from "@/hooks/use-idle-visible";
 import { showroomNetwork, type CountryNetwork } from "@/lib/seo/showrooms";
-import { SHOWROOMS } from "@/lib/booking/showrooms";
+import { useShowrooms } from "@/components/showrooms/showrooms-context";
+import { locationsDesc } from "./faq-data";
 import { cn } from "@/lib/utils";
 import { ShowroomCard, UpcomingCard } from "./showroom-card";
 
@@ -26,8 +27,9 @@ function MapPlaceholder() {
  * kartu yang bisa digeser ke samping, saling tersinkron dua arah.
  */
 export default function ShowroomLocations() {
-  const { t } = useLanguage();
-  const network = showroomNetwork();
+  const { t, language } = useLanguage();
+  const showrooms = useShowrooms();
+  const network = showroomNetwork(showrooms);
 
   return (
     <section id="lokasi" className="scroll-mt-20 bg-muted py-16 sm:py-24">
@@ -37,7 +39,8 @@ export default function ShowroomLocations() {
             {t("showroomPage.locations.title")}
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {t("showroomPage.locations.desc")}
+            {/* Fasilitas & kota SuperCharge dari data admin (bukan teks statis) */}
+            {locationsDesc(showrooms, language)}
           </p>
         </Reveal>
       </div>
@@ -96,12 +99,9 @@ function CountryBlock({ network }: { network: CountryNetwork }) {
     revealCard(id);
   };
 
-  const pins = open.map((s) => ({
-    id: s.id,
-    name: t(SHOWROOMS[s.id].nameKey),
-    lat: s.geo.latitude,
-    lng: s.geo.longitude,
-  }));
+  const pins = open
+    .filter((s) => s.lat != null && s.lng != null)
+    .map((s) => ({ id: s.id, name: s.name, lat: s.lat!, lng: s.lng! }));
 
   const countLine = [
     t("showroomPage.locations.countOpen").replace("{n}", String(open.length)),

@@ -10,10 +10,12 @@ import { logger } from "../../lib/logger.js";
 import { paginationQuery, paginate, skipTake } from "../../lib/pagination.js";
 import { HttpError, notFound } from "../../lib/errors.js";
 import {
-  SHOWROOM_IDS, SHOWROOMS, PURPOSE_FROM_FORM, PURPOSE_LABEL, DATE_RE, TIME_RE, PHONE_RE,
-  normalizePhone, canonicalPhone, availableSlots, zonedToUtc, type ShowroomId,
+  PURPOSE_FROM_FORM, PURPOSE_LABEL, DATE_RE, TIME_RE, PHONE_RE,
+  normalizePhone, canonicalPhone, availableSlots, zonedToUtc,
 } from "./booking-rules.js";
 import { createBookingEvent, deleteBookingEvent, isCalendarConfigured } from "./google-calendar.js";
+import { allShowrooms, getShowroom } from "../showrooms/showroom.data.js";
+import { isBookable, tzLabel } from "../showrooms/showroom.rules.js";
 
 // Modul Leads: booking showroom (Test Ride / kunjungan) + pesan form kontak.
 // - Publik : POST /public/leads/bookings, POST /public/leads/contacts (rate limit + honeypot)
@@ -33,8 +35,8 @@ async function syncBookingToCalendar(id: string) {
   const b = await prisma.booking.findUnique({ where: { id } });
   if (!b) return null;
   if (b.calendarEventId) return b; // sudah ada event
-  const showroom = b.showroom as ShowroomId;
-  if (!isCalendarConfigured(showroom)) {
+  const showroom = await getShowroom(b.showroom);
+  if (!showroom || !isCalendarConfigured(showroom.id)) {
     return prisma.booking.update({ where: { id }, data: { calendarStatus: "SKIPPED", calendarError: null } });
   }
   try {
@@ -56,7 +58,7 @@ async function syncBookingToCalendar(id: string) {
 async function removeCalendarEvent(b: { showroom: string; calendarEventId: string | null }) {
   if (!b.calendarEventId) return;
   try {
-    await deleteBookingEvent(b.showroom as ShowroomId, b.calendarEventId);
+    await deleteBookingEvent(b.showroom, b.calendarEventId);
   } catch (err) {
     logger.warn({ err }, "gagal menghapus event Google Calendar");
   }
@@ -81,7 +83,8 @@ const optionalEmail = z
   .refine((v) => v === "" || z.string().email().safeParse(v).success, "Invalid email address");
 
 const bookingBody = z.object({
-  showroom: z.enum(SHOWROOM_IDS),
+  // kode showroom (tabel Showroom); harus OPEN + tampil + bisa di-booking, dicek di handler
+  showroom: z.string().trim().min(1).max(40),
   purpose: z.enum(["testRide", "consultation", "financing", "service", "other"]),
   name: z.string().trim().min(2).max(80),
   phone: z.string().trim().transform(normalizePhone).refine((v) => PHONE_RE.test(v), "Invalid phone number"),
@@ -115,7 +118,11 @@ publicLeadsRouter.post("/bookings", publicLimiter(5), validate(bookingBody), asy
     if (b.website) return res.json({ ok: true, id: null, calendar: "skipped" });
 
     const ip = clientIp(req);
-    if (!availableSlots(b.showroom, b.date).includes(b.time)) {
+    const showroom = await getShowroom(b.showroom);
+    if (!showroom || !isBookable(showroom)) {
+      throw new HttpError(400, "This showroom is not taking bookings right now", "SHOWROOM_UNAVAILABLE");
+    }
+    if (!availableSlots(showroom, b.date).includes(b.time)) {
       throw new HttpError(400, "That time slot is not available", "SLOT_UNAVAILABLE");
     }
 
@@ -128,7 +135,7 @@ publicLeadsRouter.post("/bookings", publicLimiter(5), validate(bookingBody), asy
         email: b.email || null,
         date: b.date,
         time: b.time,
-        startAt: zonedToUtc(b.date, b.time, SHOWROOMS[b.showroom].timeZone),
+        startAt: zonedToUtc(b.date, b.time, showroom.timeZone),
         note: b.note || null,
         source: b.source ?? null,
         locale: b.locale ?? null,
@@ -255,7 +262,7 @@ leadsRouter.get("/stats", validate(statsQuery, "query"), async (req, res, next) 
         recentBookings,
         upcomingBookings,
         recentContacts,
-        calendarConfigured: isCalendarConfigured("jakarta"),
+        calendarConfigured: isCalendarConfigured(),
         generatedAt: new Date().toISOString(),
       },
     });
@@ -266,7 +273,7 @@ leadsRouter.get("/stats", validate(statsQuery, "query"), async (req, res, next) 
 
 // ── Bookings ──
 const bookingListQuery = paginationQuery.extend({
-  showroom: z.enum(SHOWROOM_IDS).optional(),
+  showroom: z.string().trim().max(40).optional(),
   purpose: BOOKING_PURPOSE.optional(),
   status: BOOKING_STATUS.optional(),
   from: ymdOpt, // rentang berdasarkan tanggal kunjungan (date)
@@ -288,6 +295,17 @@ function bookingWhere(q: z.infer<typeof bookingListQuery>): Prisma.BookingWhereI
 }
 const bookingOrder = (q: { sort?: string; order: "asc" | "desc" }): Prisma.BookingOrderByWithRelationInput =>
   q.sort === "startAt" ? { startAt: q.order } : q.sort === "name" ? { name: q.order } : { createdAt: q.order };
+
+// Daftar semua showroom (termasuk yang tutup) untuk label & filter di admin Leads, tanpa
+// mewajibkan izin modul Showrooms.
+leadsRouter.get("/showrooms", async (_req, res, next) => {
+  try {
+    const items = (await allShowrooms()).map((s) => ({ id: s.id, name: s.name, city: s.city, status: s.status, timeZone: s.timeZone, tzLabel: tzLabel(s.timeZone) }));
+    res.json({ ok: true, items });
+  } catch (e) {
+    next(e);
+  }
+});
 
 leadsRouter.get("/bookings", validate(bookingListQuery, "query"), async (req, res, next) => {
   try {
@@ -311,10 +329,14 @@ const csvCell = (v: unknown) => {
 leadsRouter.get("/bookings/export", validate(bookingListQuery, "query"), async (req, res, next) => {
   try {
     const q = getValidated<typeof bookingListQuery>(req, "query");
-    const rows = await prisma.booking.findMany({ where: bookingWhere(q), orderBy: { startAt: "desc" }, take: 5000 });
+    const [rows, showrooms] = await Promise.all([
+      prisma.booking.findMany({ where: bookingWhere(q), orderBy: { startAt: "desc" }, take: 5000 }),
+      allShowrooms(),
+    ]);
+    const showroomName = new Map(showrooms.map((s) => [s.id, s.name]));
     const head = ["id", "created_at", "status", "showroom", "purpose", "name", "phone", "email", "visit_date", "visit_time", "note", "source", "locale", "calendar_status", "admin_note"];
     const lines = rows.map((b) =>
-      [b.id, b.createdAt.toISOString(), b.status, SHOWROOMS[b.showroom as ShowroomId]?.name ?? b.showroom, PURPOSE_LABEL[b.purpose], b.name, b.phone, b.email, b.date, b.time, b.note, b.source, b.locale, b.calendarStatus, b.adminNote]
+      [b.id, b.createdAt.toISOString(), b.status, showroomName.get(b.showroom) ?? b.showroom, PURPOSE_LABEL[b.purpose], b.name, b.phone, b.email, b.date, b.time, b.note, b.source, b.locale, b.calendarStatus, b.adminNote]
         .map(csvCell)
         .join(","),
     );

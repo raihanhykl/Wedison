@@ -10,11 +10,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { SHOWROOMS } from "@/lib/booking/showrooms";
-import { SHOWROOM_FAQ_COUNT } from "./faq-data";
+import { useShowrooms } from "@/components/showrooms/showrooms-context";
+import { CONTACT } from "@/lib/seo/site";
+import { SHOWROOM_FAQ_COUNT, showroomFaqAnswer } from "./faq-data";
 
 export default function ShowroomFaq() {
   const { t, language } = useLanguage();
+  const showrooms = useShowrooms();
   const items = Array.from({ length: SHOWROOM_FAQ_COUNT }, (_, i) => i + 1);
 
   return (
@@ -29,8 +31,8 @@ export default function ShowroomFaq() {
           </p>
           <Button asChild variant="outline" size="lg" className="mt-6">
             <a
-              // Nomor cabang Jakarta = kontak utama Wedison.
-              href={`https://wa.me/${SHOWROOMS.jakarta.whatsapp}?text=${encodeURIComponent(
+              // Kontak utama Wedison (pertanyaan umum, bukan per cabang).
+              href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(
                 language === "id"
                   ? "Halo Wedison, saya ingin bertanya tentang kunjungan ke showroom."
                   : "Hi Wedison, I have a question about visiting a showroom.",
@@ -51,7 +53,7 @@ export default function ShowroomFaq() {
                 {t(`showroomPage.faq.q${n}`)}
               </AccordionTrigger>
               <AccordionContent className="max-w-[62ch] pb-6 text-base leading-relaxed text-muted-foreground">
-                {t(`showroomPage.faq.a${n}`)}
+                {showroomFaqAnswer(n, showrooms, language) ?? t(`showroomPage.faq.a${n}`)}
               </AccordionContent>
             </AccordionItem>
           ))}
