@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useOpenStatus } from "./use-open-status";
 
-export const CARD_WIDTH = "w-[84vw] max-w-[360px] sm:w-[340px]";
+export const CARD_WIDTH = "w-[78vw] max-w-[340px] sm:w-[340px]";
 
 type Props = {
   location: PublicShowroom;
@@ -45,7 +45,7 @@ export function ShowroomCard({ location: s, selected, onSelect }: Props) {
     <article
       className={cn(
         CARD_WIDTH,
-        "flex shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-card shadow-[var(--shadow-md)] transition-[border-color,box-shadow] duration-300",
+        "flex shrink-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-[var(--shadow-md)] transition-[border-color,box-shadow] duration-300",
         selected ? "border-primary shadow-[var(--shadow-lg)]" : "border-border",
       )}
     >
@@ -62,7 +62,7 @@ export function ShowroomCard({ location: s, selected, onSelect }: Props) {
             src={s.photoUrl || DEFAULT_PHOTO}
             alt={name}
             fill
-            sizes="(max-width: 640px) 84vw, 340px"
+            sizes="(max-width: 640px) 78vw, 340px"
             className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
           />
           <StatusPill status={status} />
@@ -176,7 +176,7 @@ export function UpcomingCard({ upcoming }: { upcoming: PublicShowroom }) {
     <article
       className={cn(
         CARD_WIDTH,
-        "relative flex shrink-0 snap-start flex-col justify-between overflow-hidden rounded-2xl bg-forest-deep p-6 text-forest-foreground shadow-[var(--shadow-md)]",
+        "relative flex shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-forest-deep p-6 text-forest-foreground shadow-[var(--shadow-md)]",
       )}
     >
       {/* Kontur halus sebagai tekstur — sampai aset teaser kota (ASET-S03) tersedia. */}

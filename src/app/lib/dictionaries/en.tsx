@@ -350,6 +350,8 @@ export const en = {
   "showroomPage.locations.next": "Next showroom",
   "showroomPage.locations.showAll": "Show all",
   "showroomPage.locations.listLabel": "Showrooms in {country}",
+  "showroomPage.locations.carousel": "carousel",
+  "showroomPage.locations.slide": "card",
   "showroomPage.card.showOnMap": "Show {name} on the map",
   "showroomPage.card.facilities": "Showroom · Service · SuperCharge",
   "showroomPage.card.facilitiesNoCharge": "Showroom · Service",

@@ -341,6 +341,8 @@ export const id = {
   "showroomPage.locations.next": "Showroom berikutnya",
   "showroomPage.locations.showAll": "Lihat semua",
   "showroomPage.locations.listLabel": "Daftar showroom di {country}",
+  "showroomPage.locations.carousel": "korsel",
+  "showroomPage.locations.slide": "kartu",
   "showroomPage.card.showOnMap": "Tampilkan {name} di peta",
   "showroomPage.card.facilities": "Showroom · Servis · SuperCharge",
   "showroomPage.card.facilitiesNoCharge": "Showroom · Servis",
