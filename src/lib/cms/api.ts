@@ -9,6 +9,8 @@ import type { SiteCollection } from "@/app/[locale]/super-charge/locations/types
 import type { PublicPricing } from "@/lib/pricing/types";
 import { PRICING_FALLBACK } from "@/data/pricing-fallback";
 import type { PublicTeaser } from "@/lib/teasers/teaser";
+import type { PublicShowroom } from "@/lib/showrooms/showroom";
+import { SHOWROOMS_FALLBACK } from "@/data/showrooms-fallback";
 
 const API = process.env.API_INTERNAL_URL ?? "http://127.0.0.1:4000";
 const REVALIDATE = Number(process.env.CMS_REVALIDATE_SECONDS ?? 300);
@@ -233,4 +235,12 @@ export async function getTeaserPreview(slug: string): Promise<PublicTeaser | nul
   } catch {
     return null;
   }
+}
+
+// ─── Showroom (form booking, /showroom, Kontak, JSON-LD, llms.txt) ─────────
+
+/** Showroom yang tampil di situs. Backend mati -> snapshot fallback (tidak pernah kosong). */
+export async function getShowrooms(): Promise<PublicShowroom[]> {
+  const res = await get<{ ok: boolean; items: PublicShowroom[] } | null>("/api/v1/public/showrooms", ["showrooms"], null);
+  return res?.ok ? res.items : SHOWROOMS_FALLBACK;
 }

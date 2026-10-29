@@ -9,7 +9,31 @@ import {
 } from "@/lib/teasers/teaser";
 import type { AdminTeaser } from "@/lib/admin/types";
 
+/** Showroom yang bisa dihubungkan (GET /admin/teasers/showroom-options). */
+export type ShowroomOption = {
+  id: string; name: string; city: string; status: string; timeZone: string;
+  streetAddress: string; addressLocality: string; addressRegion: string; postalCode: string;
+  mapsUrl: string | null; whatsapp: string; email: string | null;
+};
+
+/** Field yang diambil dari showroom terkait (dikunci di editor, sama dengan server). */
+export function fieldsFromShowroom(o: ShowroomOption, current: TeaserFormState): Partial<TeaserFormState> {
+  return {
+    showroomId: o.id,
+    showroomName: o.name,
+    streetAddress: o.streetAddress,
+    addressLocality: o.addressLocality,
+    addressRegion: o.addressRegion,
+    postalCode: o.postalCode,
+    mapsUrl: o.mapsUrl ?? "",
+    whatsapp: o.whatsapp,
+    timeZone: o.timeZone,
+    email: o.email ?? current.email,
+  };
+}
+
 export type TeaserFormState = {
+  showroomId: string | null;
   slug: string;
   city: string;
   showroomName: string;
@@ -42,6 +66,7 @@ export function initialState(t?: AdminTeaser): TeaserFormState {
   if (!t) {
     const date = ymdPlusDays(30);
     return {
+      showroomId: null,
       slug: "",
       city: "",
       showroomName: "",
@@ -65,6 +90,7 @@ export function initialState(t?: AdminTeaser): TeaserFormState {
     };
   }
   return {
+    showroomId: t.showroomId ?? null,
     slug: t.slug,
     city: t.city,
     showroomName: t.showroomName,

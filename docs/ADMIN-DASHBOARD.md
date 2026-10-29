@@ -206,6 +206,18 @@ psql "${DATABASE_URL%%\?*}" -v ON_ERROR_STOP=1 -f /tmp/pricing-sync.sql
 ```
 Nilai di seed menimpa baris dengan kunci yang sama (slug wilayah/skema, wilayah × skema × model × varian); baris tambahan dari admin dibiarkan. Cache API publik habis dalam `CACHE_TTL_PUBLIC` (300 dtk), lalu panggil `/api/revalidate` dengan tag `pricing` atau tunggu ISR. Tes: `server/test/pricing.api.test.ts`.
 
+## Modul Showroom Locations (Showrooms › Locations)
+
+Satu sumber data cabang di **/admin/showrooms** (tabel `Showroom`). Dipakai: form booking (daftar cabang, jam slot, WA cabang), halaman `/showroom` (peta, kartu, status buka/tutup, kartu "Segera hadir"), halaman Kontak, JSON-LD `MotorcycleDealer` (jam buka + `specialOpeningHoursSpecification` untuk tanggal tutup), `llms.txt`, FAQ showroom (fasilitas & jam), label cabang di admin Leads, Google Calendar (nama/alamat/zona waktu), dan Opening Teasers.
+
+- **Izin**: `showrooms.view` (lihat), `showrooms.write` (tambah/ubah, aksi cepat), `showrooms.delete` (hapus showroom tanpa booking). Role bawaan via migrasi `20261028080000_showrooms`: `admin` semua, `marketing` view+write, `sales` view. Admin Leads mendapat label cabang lewat `GET /admin/leads/showrooms`, editor teaser lewat `GET /admin/teasers/showroom-options` (tanpa izin modul Showrooms).
+- **Status**: `OPEN` (tampil + bisa di-booking bila "Accept bookings"), `COMING_SOON` (default tersembunyi; bila "Show on the site" aktif hanya kartu kota "Segera hadir"), `TEMPORARILY_CLOSED` (tetap tampil berlabel, tidak bisa di-booking), `CLOSED` (hilang dari situs, riwayat booking tetap). Showroom yang ditampilkan sebagai lokasi wajib punya alamat, kota, dan titik peta; yang OPEN wajib punya minimal satu hari buka (divalidasi server & editor).
+- **Kode** (`id`, mis. `jakarta`) tetap selamanya karena disimpan di `Booking.showroom`. Showroom yang punya riwayat booking tidak bisa dihapus (409) — ubah ke `CLOSED`.
+- **Jam buka** per hari (Senin–Minggu, null = tutup) + jam libur nasional (hanya tampilan) di zona waktu cabang; **tanggal tutup khusus** (rentang + catatan) menghapus slot booking dan tampil di kartu ("Tutup 2–3 Nov · Renovasi"). Editor memperingatkan bila tanggal tutup bentrok dengan booking aktif.
+- **Opening Teasers**: teaser bisa ditautkan ke showroom; nama, alamat, Maps, WA, email, dan zona waktu disalin dari showroom saat disimpan dan disinkronkan otomatis setiap showroom diubah. Saat status berubah `COMING_SOON → OPEN`, editor menawarkan mengarsipkan teaser yang masih tayang (URL-nya lalu 308 ke `/showroom/`).
+- **Data publik**: `GET /public/showrooms` (cache tag `showrooms`, revalidate webhook). Next mengambilnya sekali di layout locale (`getShowrooms()` → `ShowroomsProvider`); backend tidak terjangkau → snapshot `src/data/showrooms-fallback.ts`.
+- **API admin**: `GET|POST /admin/showrooms`, `GET|PUT|PATCH|DELETE /admin/showrooms/:id` (PATCH = aksi cepat status/tampil/booking, divalidasi ulang dengan aturan lengkap), `GET /admin/showrooms/check-id`. Tes: `server/test/showrooms.api.test.ts`.
+
 ## Modul Opening Teasers (landing pembukaan showroom)
 
 Landing page teaser pembukaan cabang baru dikelola di **/admin/teasers** (menu *Showrooms › Opening Teasers*); halaman publiknya `/{id|en}/showroom/{slug}/`. **Desain tetap di kode** (`src/app/[locale]/showroom/[slug]/`); admin hanya mengatur wording ID/EN, jadwal + hitung mundur, 7 slot gambar, alamat, dan titik kontak (WhatsApp, email, Google Maps). Tidak perlu developer untuk kota berikutnya.
@@ -230,5 +242,6 @@ Landing page teaser pembukaan cabang baru dikelola di **/admin/teasers** (menu *
 - [x] Editor artikel: impor Word/PDF ke body, toolbar sticky + bubble menu seleksi, tabel.
 - [x] SuperCharge: form tambah/edit lokasi + pemilih koordinat di peta + aksi massal.
 - [x] Pricing: wilayah × skema × model × varian, S&K, tarif SuperCharge, referral; section harga di produk, landing, BaaS, ojol; JSON-LD Offer; llms.txt.
+- [x] Showroom Locations: CRUD cabang (status, jam buka per hari, tanggal tutup, titik peta, kontak, foto) sebagai sumber tunggal booking, halaman Showroom/Kontak, JSON-LD, llms.txt, dan teaser.
 - [x] Opening Teasers: landing pembukaan showroom dari admin (template + token, checklist publish, preview draft mode, inquiry ke Leads).
 - [ ] Modul berikutnya (menyusul).

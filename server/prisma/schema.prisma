@@ -659,6 +659,54 @@ enum TeaserStatus {
   ARCHIVED // halaman publik dialihkan ke /showroom/
 }
 
+enum ShowroomStatus {
+  OPEN               // beroperasi normal
+  COMING_SOON        // segera dibuka (kartu teaser bila isPublic)
+  TEMPORARILY_CLOSED // tutup sementara (tetap tampil, tidak bisa di-booking)
+  CLOSED             // tutup permanen (tidak tampil di mana pun; riwayat booking tetap)
+}
+
+/// Showroom / Experience Center. Satu sumber data untuk form booking (cabang, jam slot, WA),
+/// halaman /showroom, halaman Kontak, JSON-LD, llms.txt, Google Calendar, dan Opening Teasers.
+model Showroom {
+  /// kode tetap, mis. "jakarta" — disimpan di Booking.showroom, jadi tidak bisa diubah
+  id              String           @id
+  name            String
+  /// nama kota pendek ("Bandung") untuk kartu "Segera hadir" dan teks
+  city            String
+  status          ShowroomStatus   @default(OPEN)
+  /// tampil di situs (halaman Showroom, Kontak, JSON-LD). COMING_SOON default tersembunyi.
+  isPublic        Boolean          @default(false)
+  /// bisa dipilih di form booking (hanya berlaku bila OPEN + isPublic)
+  bookable        Boolean          @default(true)
+  country         String           @default("ID")
+  sortOrder       Int              @default(0)
+  streetAddress   String           @default("")
+  addressLocality String           @default("")
+  addressRegion   String           @default("")
+  postalCode      String           @default("")
+  lat             Float?
+  lng             Float?
+  mapsUrl         String?
+  /// format internasional tanpa "+", mis. 6285286126550
+  whatsapp        String
+  phone           String?
+  email           String?
+  timeZone        String           @default("Asia/Jakarta")
+  /// { mon..sun: { open: "HH:MM", close: "HH:MM" } | null, holiday: {...} | null }
+  hours           Json
+  /// tanggal tutup khusus: [{ from: "YYYY-MM-DD", to: "YYYY-MM-DD", note: string }]
+  closures        Json             @default("[]")
+  hasWorkshop     Boolean          @default(true)
+  hasSupercharge  Boolean          @default(false)
+  photoUrl        String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  teasers         ShowroomTeaser[]
+
+  @@index([status, isPublic, sortOrder])
+}
+
 /// Landing page teaser pembukaan showroom: /[locale]/showroom/<slug>. Desain tetap di kode;
 /// yang diatur admin hanya wording (content), jadwal (timer), gambar, dan titik kontak.
 model ShowroomTeaser {
@@ -687,9 +735,13 @@ model ShowroomTeaser {
   images          Json         @default("{}")
   /// { id: TeaserContent, en: TeaserContent } — lihat server/src/modules/teasers/teaser.schema.ts
   content         Json
+  /// showroom terkait (opsional): alamat, kontak, zona waktu disalin otomatis dari showroom ini
+  showroomId      String?
+  showroom        Showroom?    @relation(fields: [showroomId], references: [id], onDelete: SetNull)
   publishedAt     DateTime?
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
 
   @@index([status, startAt])
+  @@index([showroomId])
 }

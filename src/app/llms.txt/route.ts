@@ -1,6 +1,7 @@
 import { CONTACT, SITE_URL } from "@/lib/seo/site";
-import { PUBLISHED_SHOWROOM_LOCATIONS, showroomFullAddress } from "@/lib/seo/showrooms";
-import { getPricing } from "@/lib/cms/api";
+import { joinCities, listedShowrooms } from "@/lib/seo/showrooms";
+import { getPricing, getShowrooms } from "@/lib/cms/api";
+import { addressLine, closureRange, dayRange, hoursRows, type PublicShowroom } from "@/lib/showrooms/showroom";
 import type { PublicPricing } from "@/lib/pricing/types";
 import { PRODUCT_IDS, PRODUCT_NAMES, entriesFor, pick, schemesFor, sortedRegions, superchargeTariff, variantLabel } from "@/lib/pricing/select";
 
@@ -41,13 +42,29 @@ function pricingSummary(p: PublicPricing): string {
   return lines.join("\n");
 }
 
-function build(pricingLines: string): string {
+/** Satu baris per showroom (dari admin › Showrooms): alamat, kontak, jam buka, tanggal tutup. */
+function showroomLine(s: PublicShowroom): string {
+  const hours = hoursRows(s)
+    .map((r) => `${dayRange(r.days, "en")} ${r.hours ? `${r.hours.open}–${r.hours.close}` : "closed"}`)
+    .join(", ");
+  const holiday = s.hours.holiday ? `, public holidays ${s.hours.holiday.open}–${s.hours.holiday.close}` : "";
+  const status = s.status === "TEMPORARILY_CLOSED" ? " Temporarily closed." : "";
+  const closures = s.closures.length ? ` Closed on ${s.closures.map((c) => `${closureRange(c, "en")}${c.note ? ` (${c.note})` : ""}`).join("; ")}.` : "";
+  const facilities = [s.hasWorkshop && "official service center", s.hasSupercharge && "SuperCharge station"].filter(Boolean).join(", ");
+  return `- ${s.name}: ${addressLine(s)}. WhatsApp +${s.whatsapp}.${facilities ? ` Facilities: showroom, ${facilities}.` : ""} Opening hours (${s.tzLabel}): ${hours}${holiday}.${status}${closures}`;
+}
+
+function build(pricingLines: string, all: PublicShowroom[]): string {
   const u = (locale: "id" | "en", p = "/") => `${SITE_URL}/${locale}${p}`;
   const en = (p?: string) => u("en", p);
   const id = (p?: string) => u("id", p);
-  const showrooms = PUBLISHED_SHOWROOM_LOCATIONS.map(
-    (s) => `- ${s.name}: ${showroomFullAddress(s)}. WhatsApp +${s.whatsapp}.`,
-  ).join("\n");
+  const listed = listedShowrooms(all);
+  const showrooms = listed.map(showroomLine).join("\n");
+  const cities = joinCities(listed.map((s) => s.city), "en");
+  const chargeCities = listed.filter((s) => s.hasSupercharge).map((s) => s.city);
+  const noCharge = listed.filter((s) => !s.hasSupercharge).map((s) => s.city);
+  const chargeEn = joinCities(chargeCities, "en");
+  const chargeId = joinCities(chargeCities, "id");
 
   return `# Wedison - Electric Motorcycles & SuperCharge Indonesia
 
@@ -66,7 +83,7 @@ Key notes:
 - Lifetime battery warranty applies only to motorcycles under Battery as a Service (BaaS).
 - Batteries use LFP (lithium iron phosphate) cells and are rated IP67.
 - Battery service life: up to 8 years under normal use (expected lifespan, not the warranty period).
-- Official showrooms and service centers: Jakarta, Bekasi, Bandung Barat, and Bali. SuperCharge stations are at the Jakarta, Bandung Barat, and Bekasi showrooms (not yet in Bali).
+- Official showrooms and service centers: ${cities}.${chargeCities.length ? ` SuperCharge stations are at the ${chargeEn} showroom${chargeCities.length > 1 ? "s" : ""}${noCharge.length ? ` (not yet in ${joinCities(noCharge, "en")})` : ""}.` : ""}
 - Wedison motorcycles are sold through official Wedison showrooms.
 - Official contact: ${CONTACT.email}, WhatsApp +${CONTACT.whatsapp}.
 - Official Wedison information should be used for current specifications, pricing, warranty, availability, and commercial programs.
@@ -121,7 +138,7 @@ Key notes:
 - [SuperCharge](${en("/super-charge/")}): Wedison's fast-charging network.
 - Compatible models: Athena, Victory, and EdPower.
 - Charging from 15% to 95% takes approximately 15 minutes.
-- SuperCharge stations are available at the Jakarta, Bandung Barat, and Bekasi showrooms and at partner locations.
+- SuperCharge stations are available at the ${chargeEn} showroom${chargeCities.length > 1 ? "s" : ""} and at partner locations.
 - [SuperCharge station map](${en("/super-charge/locations/")}): Current list and map of SuperCharge stations.
 - Charging sessions are started and tracked from the Wedison app.
 
@@ -130,13 +147,13 @@ Key notes:
 - [SuperCharge](${id("/super-charge/")}): Jaringan pengisian cepat Wedison.
 - Model yang kompatibel: Athena, Victory, dan EdPower.
 - Pengisian daya dari 15% hingga 95% membutuhkan sekitar 15 menit.
-- Stasiun SuperCharge tersedia di showroom Jakarta, Bandung Barat, dan Bekasi serta lokasi mitra.
+- Stasiun SuperCharge tersedia di showroom ${chargeId} serta lokasi mitra.
 - [Peta stasiun SuperCharge](${id("/super-charge/locations/")}): Daftar dan peta lokasi stasiun SuperCharge terkini.
 - Sesi pengisian dimulai dan dipantau dari aplikasi Wedison.
 
 ## Showrooms
 
-Official Wedison showrooms and service centers (sales, test rides, servicing). Opening hours: Monday–Friday 10:00–19:00, Saturday–Sunday 10:00–17:00, public holidays 10:00–16:00 (local time).
+Official Wedison showrooms and service centers (sales, test rides, servicing). Opening hours are local time and listed per showroom.
 
 ${showrooms}
 
@@ -200,8 +217,8 @@ ${pricingLines}
 }
 
 export async function GET() {
-  const pricing = await getPricing();
-  return new Response(build(pricingSummary(pricing)), {
+  const [pricing, showrooms] = await Promise.all([getPricing(), getShowrooms()]);
+  return new Response(build(pricingSummary(pricing), showrooms), {
     headers: {
       "content-type": "text/plain; charset=utf-8",
       "cache-control": "public, max-age=3600, s-maxage=86400",

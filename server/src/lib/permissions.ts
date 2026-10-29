@@ -9,7 +9,7 @@
  * `canDelete`, `canHr`), implemented on top of `has()`.
  */
 
-export type Module = "dashboard" | "cms" | "supercharge" | "pricing" | "leads" | "teasers" | "hr" | "users" | "activity" | "consent";
+export type Module = "dashboard" | "cms" | "supercharge" | "pricing" | "leads" | "showrooms" | "teasers" | "hr" | "users" | "activity" | "consent";
 
 export type PermissionDef = {
   key: string;
@@ -68,8 +68,18 @@ export const PERMISSION_CATALOG: ModuleDef[] = [
     ],
   },
   {
+    key: "showrooms",
+    label: "Showrooms · Locations",
+    description: "Showroom locations used by the booking form, Showroom and Contact pages: address, map pin, contacts, opening hours, closure dates, status.",
+    permissions: [
+      { key: "showrooms.view", label: "View", description: "Open the showroom list and details." },
+      { key: "showrooms.write", label: "Create & edit", description: "Add showrooms, edit details, opening hours and closure dates, change status and visibility.", implies: ["showrooms.view"] },
+      { key: "showrooms.delete", label: "Delete", description: "Delete showrooms that have no bookings.", implies: ["showrooms.write"] },
+    ],
+  },
+  {
     key: "teasers",
-    label: "Showroom Teasers",
+    label: "Showrooms · Opening Teasers",
     description: "Landing pages that announce a new showroom opening (wording, countdown, images, contact points).",
     permissions: [
       { key: "teasers.view", label: "View", description: "Open the teaser list and preview drafts." },
@@ -154,6 +164,7 @@ export const MODULE_VIEW_PERMISSION: Record<Module, string> = {
   supercharge: "supercharge.view",
   pricing: "pricing.view",
   leads: "leads.view",
+  showrooms: "showrooms.view",
   teasers: "teasers.view",
   hr: "hr.view",
   users: "users.manage",

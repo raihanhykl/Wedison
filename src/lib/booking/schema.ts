@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { SHOWROOM_IDS } from "./showrooms";
 import { DATE_RE, TIME_RE } from "./slots";
 
 // Tujuan booking = aktivitas yang tersedia di showroom (lihat section "Yang Bisa Kamu Lakukan").
@@ -78,7 +77,8 @@ const DEFAULT_MESSAGES: BookingMessages = {
 export function createBookingSchema(m: Partial<BookingMessages> = {}) {
   const msg = { ...DEFAULT_MESSAGES, ...m };
   return z.object({
-    showroom: z.enum(SHOWROOM_IDS, { errorMap: () => ({ message: msg.showroom }) }),
+    // Kode showroom dari admin; ketersediaan (bisa di-booking) dicek ulang di server.
+    showroom: z.string({ required_error: msg.showroom }).trim().min(1, msg.showroom).max(40, msg.showroom),
     name: z.string().trim().min(2, msg.name).max(80, msg.nameMax),
     phone: z
       .string()

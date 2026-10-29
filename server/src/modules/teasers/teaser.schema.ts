@@ -95,6 +95,8 @@ export const teaserInputSchema = z
   .object({
     slug: z.string().trim().toLowerCase().max(60).regex(SLUG_RE, "Use lowercase letters, numbers and dashes, e.g. surabaya"),
     city: z.string().trim().min(2, "City is required").max(60),
+    /** showroom terkait: alamat, kontak, dan zona waktu disalin dari showroom saat disimpan */
+    showroomId: z.string().trim().max(40).nullable().default(null),
     showroomName: z.string().trim().min(3, "Showroom name is required").max(120),
     noIndex: z.boolean().default(false),
     timeZone: z.enum(TIME_ZONES).default("Asia/Jakarta"),

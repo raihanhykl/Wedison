@@ -16,8 +16,9 @@ import {
 } from "@/components/ui/accordion";
 import Contact from "@/components/contact3";
 import { CONTACT, SOCIAL_PROFILES } from "@/lib/seo/site";
-import { PUBLISHED_SHOWROOM_LOCATIONS } from "@/lib/seo/showrooms";
-import { SHOWROOMS } from "@/lib/booking/showrooms";
+import { listedShowrooms } from "@/lib/seo/showrooms";
+import { useShowrooms } from "@/components/showrooms/showrooms-context";
+import { addressLine } from "@/lib/showrooms/showroom";
 import type { FormTopic } from "@/lib/contact-schema";
 
 /** SEMENTARA: foto area resepsionis. Ganti dengan ASET-K01 (meja layanan/CS, 4:5). */
@@ -33,6 +34,7 @@ const SOCIAL_LABEL: Record<string, string> = {
 export default function ContactPage() {
   const { t, language } = useLanguage();
   const [topic, setTopic] = useState<FormTopic | null>(null);
+  const branches = listedShowrooms(useShowrooms());
   const href = (path: string) => `/${language}${path}`;
   const wa = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(
     language === "id"
@@ -231,23 +233,23 @@ export default function ContactPage() {
             </Link>
           </Reveal>
           <ul className="mt-10 grid grid-cols-1 border-t border-border sm:grid-cols-2">
-            {PUBLISHED_SHOWROOM_LOCATIONS.map((s) => {
-              const b = SHOWROOMS[s.id];
-              return (
-                <li key={s.id} className="border-b border-border py-6 sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
-                  <p className="font-display text-xl font-bold tracking-tight text-foreground">{t(b.nameKey)}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t(b.addressKey)}</p>
-                  <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-primary">
-                    <a href={`https://wa.me/${b.whatsapp}`} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
-                      WhatsApp
-                    </a>
+            {/* Cabang dari admin › Showrooms (alamat & WA per cabang) */}
+            {branches.map((s) => (
+              <li key={s.id} className="border-b border-border py-6 sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
+                <p className="font-display text-xl font-bold tracking-tight text-foreground">{s.name}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{addressLine(s)}</p>
+                <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-primary">
+                  <a href={`https://wa.me/${s.whatsapp}`} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+                    WhatsApp
+                  </a>
+                  {s.mapsUrl && (
                     <a href={s.mapsUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
                       {t("showroomPage.card.directions")}
                     </a>
-                  </p>
-                </li>
-              );
-            })}
+                  )}
+                </p>
+              </li>
+            ))}
           </ul>
         </div>
       </section>

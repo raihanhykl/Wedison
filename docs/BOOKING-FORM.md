@@ -8,9 +8,10 @@ Modal booking untuk tombol **Test Ride** (navbar desktop, sheet mobile, hero lan
    - **Test Ride** -> `purpose: "testRide"` terisi, showroom dipilih user.
    - **Book a Visit** di kartu showroom -> `showroom` terisi (mis. `bekasi`), tujuan dipilih user.
 2. Form (react-hook-form + zod, `src/lib/booking/schema.ts`): showroom, tujuan, nama, no. HP, email (opsional), tanggal, waktu, catatan (opsional), honeypot.
-   - Slot waktu (`src/lib/booking/slots.ts`): Sen-Jum 10:00-19:00, Sab-Min 10:00-17:00, tiap 30 menit, sesi 60 menit, hari ini minimal 60 menit dari sekarang, maksimal 60 hari ke depan. Bali memakai WITA.
+   - Daftar cabang, jam buka per hari, tanggal tutup khusus, zona waktu, dan nomor WA dari **admin › Showrooms › Locations** (tabel `Showroom`, lihat docs/ADMIN-DASHBOARD.md). Hanya cabang berstatus Open + tampil + "Accept bookings" yang muncul di form.
+   - Slot waktu (`src/lib/booking/slots.ts`): mengikuti jam buka cabang pada hari itu, tiap 30 menit, sesi 60 menit, hari ini minimal 60 menit dari sekarang, maksimal 60 hari ke depan. Hari libur mingguan & tanggal tutup khusus tidak punya slot.
 3. Submit -> `POST /api/v1/public/leads/bookings/` (Next me-rewrite `/api/v1/*` ke backend Express `server/`):
-   - validasi ulang + cek slot (`server/src/modules/leads/booking-rules.ts`, cermin dari lib client), honeypot, rate limit 5 / 10 menit / IP,
+   - validasi ulang: cabang harus bisa di-booking (`SHOWROOM_UNAVAILABLE`) dan slot valid menurut data showroom di DB (`server/src/modules/showrooms/showroom.rules.ts`, aturan yang sama dengan lib client), honeypot, rate limit 5 / 10 menit / IP,
    - **simpan ke tabel `Booking`** (status `NEW`),
    - **sinkron ke Google Calendar** cabang (`server/src/modules/leads/google-calendar.ts`, service account). Hasil dicatat di `calendarStatus` (`SAVED | FAILED | SKIPPED`), event ID & link disimpan. Gagal/belum dikonfigurasi TIDAK menggagalkan booking.
 4. Setelah sukses, di browser:
@@ -18,13 +19,7 @@ Modal booking untuk tombol **Test Ride** (navbar desktop, sheet mobile, hero lan
    2. **Tab WhatsApp** `wa.me/<nomor cabang>` dengan pesan prefilled (`src/lib/booking/whatsapp.ts`). Tab dibuka saat klik submit (anti popup-blocker) lalu diarahkan setelah server menjawab; ada tombol cadangan "Buka WhatsApp".
 5. Form kontak (`/[locale]/corporate/contact`, `src/components/contact3.tsx`) kini juga mengirim salinan ke `POST /api/v1/public/leads/contacts/` (fail-soft, tidak memblokir EmailJS) -> tabel `ContactSubmission`.
 
-Nomor WhatsApp per cabang (`src/lib/booking/showrooms.ts` dan `server/src/modules/leads/booking-rules.ts`, **ubah di keduanya**):
-
-| Cabang | Nomor |
-|---|---|
-| Jakarta, Bekasi | 6285286126550 |
-| Bandung | 6285286126558 |
-| Bali | 6285801011969 |
+Nomor WhatsApp per cabang diatur di **admin › Showrooms › Locations** (satu tempat; dulu di-hardcode di dua file). Nilai awal dari migrasi `20261028080000_showrooms`: Jakarta & Bekasi 6285286126550, Bandung 6285286126558, Bali 6285801011969.
 
 ## Modul Leads di admin (`/admin/leads`)
 
@@ -87,7 +82,7 @@ curl -s -X POST http://localhost:3000/api/v1/public/leads/contacts/ -H 'Content-
 
 ## File terkait
 
-- Client: `src/lib/booking/{showrooms,schema,slots,whatsapp,analytics}.ts`, `src/components/booking/*`, `src/components/contact3.tsx`
-- Backend: `server/src/modules/leads/{booking-rules,google-calendar,leads.routes}.ts`, `server/prisma/schema.prisma`
+- Client: `src/lib/booking/{schema,slots,whatsapp,analytics}.ts`, `src/lib/showrooms/showroom.ts`, `src/components/showrooms/showrooms-context.tsx`, `src/components/booking/*`, `src/components/contact3.tsx`
+- Backend: `server/src/modules/leads/{booking-rules,google-calendar,leads.routes}.ts`, `server/src/modules/showrooms/*`, `server/prisma/schema.prisma`
 - Admin: `src/app/admin/(dashboard)/leads/**`, `src/components/admin/charts.tsx`, `src/lib/admin/{types,calendar}.ts`, `src/components/admin/nav-config.ts`
 - Pemasangan tombol: `src/app/[locale]/layout.tsx`, `src/components/navbar.tsx`, `src/components/nav/nav-sheet.tsx`, `src/app/_home/landing.tsx`, `src/app/[locale]/showroom/components/structure.tsx`

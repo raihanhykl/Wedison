@@ -1,5 +1,4 @@
 import { prisma } from "./prisma.js";
-import type { Prisma } from "./prisma.js";
 import { analyzeContent } from "./content-score.js";
 import { env } from "../config/env.js";
 
@@ -36,7 +35,9 @@ export async function rescoreArticle(articleId: string) {
       noIndex: a.noIndex,
       siteOrigin: env.SITE_AUDIT_PUBLIC_ORIGIN,
     });
-    await prisma.articleTranslation.update({ where: { id: t.id }, data: { contentScore: score as unknown as Prisma.InputJsonValue } });
+    // Skor = data turunan, bukan suntingan: SQL langsung agar `updatedAt` terjemahan tidak bergeser
+    // (mis. saat "Rescore all" di SEO & AI Readiness).
+    await prisma.$executeRaw`UPDATE "ArticleTranslation" SET "contentScore" = ${JSON.stringify(score)}::jsonb WHERE "id" = ${t.id}`;
   }
   return a.translations.length;
 }

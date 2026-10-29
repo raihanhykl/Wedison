@@ -603,7 +603,8 @@ publicCareersRouter.get("/:slug", async (req, res, next) => {
       return { job: toPublic(j, locale), settings: publicSettings(await getHrSettings(), locale) };
     });
     if (!data) throw notFound("Job not found");
-    if (data.job.status === "PUBLISHED") prisma.job.update({ where: { id: data.job.id }, data: { viewCount: { increment: 1 } } }).catch(() => {});
+    // SQL langsung agar `updatedAt` tidak bergeser setiap halaman di-render ulang (lihat articles.routes).
+    if (data.job.status === "PUBLISHED") void prisma.$executeRaw`UPDATE "Job" SET "viewCount" = "viewCount" + 1 WHERE "id" = ${data.job.id}`.catch(() => {});
     res.json({ ok: true, data });
   } catch (e) {
     next(e);

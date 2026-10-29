@@ -4,7 +4,9 @@
 import { createSign } from "node:crypto";
 import { env } from "../../config/env.js";
 import { logger } from "../../lib/logger.js";
-import { SHOWROOMS, SLOT_DURATION_MIN, minutesToTime, timeToMinutes, waPhone, type ShowroomId } from "./booking-rules.js";
+import { SLOT_DURATION_MIN, minutesToTime, timeToMinutes, waPhone } from "./booking-rules.js";
+import { addressLine } from "../showrooms/showroom.rules.js";
+import type { Showroom } from "../../lib/prisma.js";
 
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const SCOPE = "https://www.googleapis.com/auth/calendar.events";
@@ -28,8 +30,9 @@ function readServiceAccount(): ServiceAccount | null {
   return { email, privateKey: key.replace(/\\n/g, "\n").replace(/^"|"$/g, "") };
 }
 
-export function calendarIdFor(showroom: ShowroomId): string | null {
-  const per: Record<ShowroomId, string | undefined> = {
+/** Satu kalender untuk semua cabang (GOOGLE_CALENDAR_ID); env per cabang lama tetap dihormati bila diisi. */
+export function calendarIdFor(showroom: string): string | null {
+  const per: Record<string, string | undefined> = {
     jakarta: env.GOOGLE_CALENDAR_ID_JAKARTA,
     bekasi: env.GOOGLE_CALENDAR_ID_BEKASI,
     bandung: env.GOOGLE_CALENDAR_ID_BANDUNG,
@@ -38,7 +41,7 @@ export function calendarIdFor(showroom: ShowroomId): string | null {
   return per[showroom] || env.GOOGLE_CALENDAR_ID || null;
 }
 
-export function isCalendarConfigured(showroom: ShowroomId): boolean {
+export function isCalendarConfigured(showroom = ""): boolean {
   return readServiceAccount() !== null && calendarIdFor(showroom) !== null;
 }
 
@@ -65,7 +68,7 @@ async function accessToken(sa: ServiceAccount): Promise<string> {
 }
 
 export type CalendarEventInput = {
-  showroom: ShowroomId;
+  showroom: Pick<Showroom, "id" | "name" | "timeZone" | "streetAddress" | "addressLocality" | "addressRegion" | "postalCode">;
   purposeLabel: string;
   name: string;
   phone: string; // kanonik 08…
@@ -80,9 +83,9 @@ export type CalendarEventInput = {
 
 export async function createBookingEvent(input: CalendarEventInput): Promise<{ id: string; htmlLink?: string }> {
   const sa = readServiceAccount();
-  const calendarId = calendarIdFor(input.showroom);
+  const calendarId = calendarIdFor(input.showroom.id);
   if (!sa || !calendarId) throw new Error("Google Calendar is not configured");
-  const s = SHOWROOMS[input.showroom];
+  const s = input.showroom;
   const endTime = minutesToTime(timeToMinutes(input.time) + SLOT_DURATION_MIN);
   const description = [
     `Tujuan   : ${input.purposeLabel}`,
@@ -103,11 +106,11 @@ export async function createBookingEvent(input: CalendarEventInput): Promise<{ i
     body: JSON.stringify({
       summary: `[${input.purposeLabel}] ${input.name} — ${s.name}`,
       description,
-      location: s.address,
+      location: addressLine(s),
       start: { dateTime: `${input.date}T${input.time}:00`, timeZone: s.timeZone },
       end: { dateTime: `${input.date}T${endTime}:00`, timeZone: s.timeZone },
       reminders: { useDefault: false, overrides: [{ method: "popup", minutes: 60 }] },
-      extendedProperties: { private: { wedison_booking_id: input.bookingId, wedison_showroom: input.showroom, wedison_phone: input.phone } },
+      extendedProperties: { private: { wedison_booking_id: input.bookingId, wedison_showroom: s.id, wedison_phone: input.phone } },
     }),
   });
   if (!res.ok) throw new Error(`Google Calendar insert failed (${res.status}): ${await res.text()}`);
@@ -115,7 +118,7 @@ export async function createBookingEvent(input: CalendarEventInput): Promise<{ i
   return { id: data.id, htmlLink: data.htmlLink };
 }
 
-export async function deleteBookingEvent(showroom: ShowroomId, eventId: string): Promise<void> {
+export async function deleteBookingEvent(showroom: string, eventId: string): Promise<void> {
   const sa = readServiceAccount();
   const calendarId = calendarIdFor(showroom);
   if (!sa || !calendarId) return;
