@@ -67,7 +67,7 @@ jobs:
           NEXT_PUBLIC_EMAIL_CONFIG_publicKey: ${{ secrets.EMAIL_PUBLIC_KEY }}
           # ID container GTM testing (publik) — terpisah dari produksi
           NEXT_PUBLIC_GTM_ID: GTM-MBLHDFJ2
-          # Chatbot AI Cekat (kunci publik, ikut ke bundle). Produksi: isi di ci-cd.yml dengan kunci produksi.
+          # Chatbot AI Cekat (kunci publik, ikut ke bundle) — produksi memakai kunci yang sama (ci-cd.yml)
           NEXT_PUBLIC_CEKAT_ACCESS_KEY: Testing-JPAYuDWT
           # Rewrite /api/* di next.config dibaca saat BUILD -> wajib menunjuk port backend VPS
           API_INTERNAL_URL: http://127.0.0.1:${{ env.API_PORT }}

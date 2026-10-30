@@ -57,6 +57,8 @@ jobs:
           NEXT_PUBLIC_GTM_ID: GTM-TGNBLQ37
           # Meta (Facebook) Pixel — produksi saja (publik, bukan secret)
           NEXT_PUBLIC_META_PIXEL_ID: "1869176430902673"
+          # Chatbot AI Cekat (kunci publik, ikut ke bundle) — sama dengan staging
+          NEXT_PUBLIC_CEKAT_ACCESS_KEY: Testing-JPAYuDWT
           # Rewrite /api/* di next.config dibaca saat BUILD -> port backend produksi
           API_INTERNAL_URL: http://127.0.0.1:${{ env.API_PORT }}
 
