@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import type { ColumnDef } from "@tanstack/react-table";
 import { toast } from "sonner";
-import { Archive, Briefcase, Copy, ExternalLink, Lock, MoreHorizontal, Pencil, Plus, RotateCcw, Send, Trash2, Undo2 } from "lucide-react";
+import { Archive, ArrowDown, ArrowUp, ArrowUpDown, Briefcase, Copy, ExternalLink, Lock, MoreHorizontal, Pencil, Plus, RotateCcw, Send, Trash2, Undo2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -17,15 +17,38 @@ import { PageHeader } from "@/components/admin/page-header";
 import { DataTable } from "@/components/admin/data-table";
 import { EmptyState } from "@/components/admin/empty-state";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
-import { JobStatusBadge, jobTitle, locationLabel, useDepartments, useHrPermissions, useLocations } from "@/components/admin/hr/shared";
+import { AuditStamp, JobStatusBadge, jobTitle, locationLabel, useDepartments, useHrPermissions, useLocations } from "@/components/admin/hr/shared";
+import { DateRangeFilter, presetRange, rangeQuery, type DateTimeRange } from "@/components/admin/date-range-filter";
+import { cn } from "@/lib/utils";
 import { api, errorMessage } from "@/lib/admin/api";
-import { formatDate, timeAgo } from "@/lib/admin/format";
+import { formatDate } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
-import { EMPLOYMENT_LABEL, WORKPLACE_LABEL, type EmploymentType, type Job, type JobStatus, type Paginated } from "@/lib/admin/types";
+import { EMPLOYMENT_LABEL, WORKPLACE_LABEL, type EmploymentType, type Job, type JobStatus, type Paginated, type WorkplaceType } from "@/lib/admin/types";
 
 type Tab = "all" | JobStatus;
 type JobsPage = Paginated<Job> & { counts: Partial<Record<JobStatus, number>> };
 type Transition = "submit" | "return" | "publish" | "close" | "reopen" | "archive" | "unarchive";
+type SortKey = "createdAt" | "updatedAt" | "publishedAt" | "closesAt" | "viewCount" | "applyClicks" | "openings";
+type Sort = { key: SortKey; dir: "asc" | "desc" } | null;
+type DateField = "createdAt" | "updatedAt" | "publishedAt" | "closesAt";
+const DATE_FIELD_LABEL: Record<DateField, string> = { createdAt: "Created", updatedAt: "Updated", publishedAt: "Published", closesAt: "Closes" };
+
+/** Header button cycling desc → asc → default order (server-side sort). */
+function SortButton({ label, k, sort, onSort, align }: { label: string; k: SortKey; sort: Sort; onSort: (s: Sort) => void; align?: "right" }) {
+  const active = sort?.key === k;
+  const Icon = !active ? ArrowUpDown : sort.dir === "asc" ? ArrowUp : ArrowDown;
+  const next: Sort = !active ? { key: k, dir: k === "closesAt" ? "asc" : "desc" } : sort.dir === (k === "closesAt" ? "asc" : "desc") ? { key: k, dir: k === "closesAt" ? "desc" : "asc" } : null;
+  return (
+    <button
+      type="button"
+      onClick={() => onSort(next)}
+      aria-label={`Sort by ${label}`}
+      className={cn("-ml-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-wider hover:bg-muted hover:text-foreground", active && "text-foreground", align === "right" && "ml-auto")}
+    >
+      {label} <Icon className={cn("size-3.5", !active && "opacity-40")} />
+    </button>
+  );
+}
 
 export function JobsView() {
   const qc = useQueryClient();
@@ -40,6 +63,10 @@ export function JobsView() {
   const [departmentId, setDepartmentId] = useState("all");
   const [locationId, setLocationId] = useState("all");
   const [employmentType, setEmploymentType] = useState<"all" | EmploymentType>("all");
+  const [workplaceType, setWorkplaceType] = useState<"all" | WorkplaceType>("all");
+  const [sort, setSort] = useState<Sort>(null);
+  const [dateField, setDateField] = useState<DateField>("createdAt");
+  const [range, setRange] = useState<DateTimeRange>(() => presetRange("all"));
   const [toDelete, setToDelete] = useState<Job | null>(null);
   const dq = useDebounce(q);
 
@@ -49,7 +76,12 @@ export function JobsView() {
     departmentId: departmentId === "all" ? undefined : departmentId,
     locationId: locationId === "all" ? undefined : locationId,
     employmentType: employmentType === "all" ? undefined : employmentType,
+    workplaceType: workplaceType === "all" ? undefined : workplaceType,
+    sort: sort?.key,
+    order: sort?.dir,
+    ...(range.from || range.to ? { dateField, ...rangeQuery(range) } : {}),
   };
+  const onSort = (s: Sort) => { setSort(s); setPage(1); };
   const { data, isLoading } = useQuery({ queryKey: ["hr-jobs", params], queryFn: () => api<JobsPage>("/admin/hr/jobs", { query: params }), placeholderData: keepPreviousData });
 
   const refresh = () => {
@@ -80,7 +112,7 @@ export function JobsView() {
         const j = row.original;
         const langs = j.translations.map((t) => t.locale);
         return (
-          <div className="min-w-[240px]">
+          <div className="min-w-[200px] whitespace-normal">
             <Link href={`/admin/hr/jobs/${j.id}`} className="font-medium hover:text-primary">{jobTitle(j)}</Link>
             <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
               {langs.map((l) => <Badge key={l} variant="outline" className="h-4 px-1 font-mono text-[10px] uppercase">{l}</Badge>)}
@@ -93,21 +125,16 @@ export function JobsView() {
       },
     },
     { id: "department", header: "Division", size: 140, cell: ({ row }) => <span className="text-sm">{row.original.department?.nameId ?? <span className="text-muted-foreground">—</span>}</span> },
-    { id: "locations", header: "Location", size: 160, cell: ({ row }) => <span className="text-sm">{row.original.locations.map(locationLabel).join(", ") || <span className="text-muted-foreground">—</span>}</span> },
+    { id: "locations", header: "Location", size: 160, cell: ({ row }) => <span className="block min-w-[110px] whitespace-normal text-sm">{row.original.locations.map(locationLabel).join(", ") || <span className="text-muted-foreground">—</span>}</span> },
     { id: "status", header: "Status", size: 130, cell: ({ row }) => <JobStatusBadge status={row.original.status} /> },
+    { id: "created", header: () => <SortButton label="Created" k="createdAt" sort={sort} onSort={onSort} />, size: 150, cell: ({ row }) => <div className="text-xs"><AuditStamp stacked user={row.original.createdBy} at={row.original.createdAt} /></div> },
+    { id: "updated", header: () => <SortButton label="Updated" k="updatedAt" sort={sort} onSort={onSort} />, size: 150, cell: ({ row }) => <div className="text-xs"><AuditStamp stacked user={row.original.updatedBy} at={row.original.updatedAt} /></div> },
+    { id: "closes", header: () => <SortButton label="Closes" k="closesAt" sort={sort} onSort={onSort} />, size: 110, cell: ({ row }) => <span className="whitespace-nowrap text-xs">{row.original.closesAt ? formatDate(row.original.closesAt) : <span className="text-muted-foreground">—</span>}</span> },
     {
-      id: "dates", header: "Dates", size: 150,
-      cell: ({ row }) => {
-        const j = row.original;
-        return (
-          <div className="text-xs">
-            <div>{j.closesAt ? <>closes {formatDate(j.closesAt)}</> : <span className="text-muted-foreground">no closing date</span>}</div>
-            <div className="text-muted-foreground">updated {timeAgo(j.updatedAt)}</div>
-          </div>
-        );
-      },
+      id: "metrics", size: 130,
+      header: () => <span className="inline-flex items-center whitespace-nowrap"><SortButton label="Views" k="viewCount" sort={sort} onSort={onSort} /><span aria-hidden className="pl-0.5 pr-2.5">·</span><SortButton label="Apply" k="applyClicks" sort={sort} onSort={onSort} /></span>,
+      cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount} · {row.original._count?.applyClicks ?? 0}</span>,
     },
-    { id: "metrics", header: "Views · Apply", size: 110, cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount} · {row.original._count?.applyClicks ?? 0}</span> },
     {
       id: "actions", size: 48,
       cell: ({ row }) => {
@@ -134,7 +161,7 @@ export function JobsView() {
         );
       },
     },
-  ], [p, duplicate, transition]);
+  ], [p, duplicate, transition, sort]);
 
   const counts = data?.counts ?? {};
   const tabLabel = (label: string, n?: number) => <>{label}{n ? <span className="ml-1.5 font-mono text-[11px] text-muted-foreground">{n}</span> : null}</>;
@@ -173,12 +200,29 @@ export function JobsView() {
           </SelectContent>
         </Select>
         <Select value={employmentType} onValueChange={(v) => { setEmploymentType(v as typeof employmentType); setPage(1); }}>
-          <SelectTrigger className="lg:w-[170px]"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="lg:w-[150px]"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All types</SelectItem>
             {(Object.keys(EMPLOYMENT_LABEL) as EmploymentType[]).map((t) => <SelectItem key={t} value={t}>{EMPLOYMENT_LABEL[t]}</SelectItem>)}
           </SelectContent>
         </Select>
+        <Select value={workplaceType} onValueChange={(v) => { setWorkplaceType(v as typeof workplaceType); setPage(1); }}>
+          <SelectTrigger className="lg:w-[150px]" aria-label="Workplace"><SelectValue /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Any workplace</SelectItem>
+            {(Object.keys(WORKPLACE_LABEL) as WorkplaceType[]).map((t) => <SelectItem key={t} value={t}>{WORKPLACE_LABEL[t]}</SelectItem>)}
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+        <Select value={dateField} onValueChange={(v) => { setDateField(v as DateField); setPage(1); }}>
+          <SelectTrigger className="sm:w-[150px]" aria-label="Date field"><SelectValue /></SelectTrigger>
+          <SelectContent>{(Object.keys(DATE_FIELD_LABEL) as DateField[]).map((f) => <SelectItem key={f} value={f}>{DATE_FIELD_LABEL[f]} date</SelectItem>)}</SelectContent>
+        </Select>
+        <DateRangeFilter value={range} onChange={(r) => { setRange(r); setPage(1); }} align="start" className="sm:w-[280px]" />
+        {(sort || range.from || range.to) && (
+          <Button variant="ghost" size="sm" onClick={() => { setSort(null); setRange(presetRange("all")); setPage(1); }}><RotateCcw /> Reset sort &amp; dates</Button>
+        )}
       </div>
       <DataTable
         columns={columns}

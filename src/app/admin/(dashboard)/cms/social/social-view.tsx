@@ -24,6 +24,7 @@ import { useCan } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
 import { cn } from "@/lib/utils";
 import { PLATFORM_LABEL, type Paginated, type SocialPlatform, type SocialPost } from "@/lib/admin/types";
+import { AuditLine } from "@/components/admin/audit";
 
 const schema = z.object({
   platform: z.enum(["INSTAGRAM", "TIKTOK", "YOUTUBE", "X", "FACEBOOK", "LINKEDIN"]),
@@ -108,6 +109,7 @@ export function SocialView() {
               </div>
               <div className="space-y-3 p-3">
                 <p className="line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">{p.caption || <span className="italic">No caption</span>}</p>
+                <AuditLine item={p} className="truncate" />
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs">
                     <Switch checked={p.isActive} onCheckedChange={(v) => toggle.mutate({ id: p.id, isActive: v })} aria-label="Visible" />

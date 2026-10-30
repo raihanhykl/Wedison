@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Check, ExternalLink, Mail, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { CareerSettings, PublicJob } from "@/lib/cms/api";
-import { CAREER_COPY, mailtoFor, type CareerLocale } from "../copy";
+import { CAREER_COPY, applicationRecipients, mailtoFor, type CareerLocale } from "../copy";
 
 /** Catat klik tombol lamar (fire-and-forget) untuk metrik di admin HR. */
 function track(slug: string, channel: string) {
@@ -23,8 +23,8 @@ function track(slug: string, channel: string) {
 export function ApplyPanel({ job, settings, locale }: { job: PublicJob; settings: CareerSettings; locale: CareerLocale }) {
   const c = CAREER_COPY[locale];
   const [copied, setCopied] = useState(false);
-  const email = job.applyEmail || settings.contactEmail;
-  const href = mailtoFor(email, settings.emailSubject, job.title, job.department?.name, settings.ccEmail);
+  const { to, cc } = applicationRecipients(settings, job);
+  const href = mailtoFor(to, settings.emailSubject, job.title, job.department?.name, cc);
 
   const share = async () => {
     const url = window.location.href;
@@ -46,7 +46,7 @@ export function ApplyPanel({ job, settings, locale }: { job: PublicJob; settings
       <Button asChild size="lg" className="mt-4 w-full">
         <a href={href} onClick={() => track(job.slug, "email")}><Mail /> {c.applyEmail}</a>
       </Button>
-      <p className="mt-2 text-center text-xs text-muted-foreground">{c.applyEmailHint(email)}</p>
+      <p className="mt-2 text-center text-xs text-muted-foreground">{c.applyEmailHint(to.join(", "))}</p>
 
       {job.portals.length > 0 && (
         <div className="mt-5">

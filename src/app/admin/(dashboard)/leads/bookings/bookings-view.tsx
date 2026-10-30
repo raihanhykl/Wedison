@@ -26,7 +26,7 @@ import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { BookingStatusBadge } from "@/components/admin/status-badge";
 import { useCan } from "@/components/admin/providers";
 import { api, errorMessage, qs } from "@/lib/admin/api";
-import { formatDateTime, timeAgo } from "@/lib/admin/format";
+import { formatDateTime } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useShowroomLabels } from "@/lib/admin/showroom-options";
 import {
@@ -34,6 +34,7 @@ import {
   type Booking, type BookingPurpose, type BookingStatus, type Paginated, type ShowroomId,
 } from "@/lib/admin/types";
 import { formatVisit } from "../leads-shared";
+import { auditColumn } from "@/components/admin/audit";
 
 const STATUSES = Object.keys(BOOKING_STATUS_LABEL) as BookingStatus[];
 const PURPOSES = Object.keys(BOOKING_PURPOSE_LABEL) as BookingPurpose[];
@@ -131,7 +132,7 @@ export function BookingsView() {
       id: "calendar", header: "Calendar", size: 90,
       cell: ({ row }) => <CalendarCell b={row.original} />,
     },
-    { id: "created", header: "Submitted", size: 110, cell: ({ row }) => <span className="text-xs text-muted-foreground" title={formatDateTime(row.original.createdAt)}>{timeAgo(row.original.createdAt)}</span> },
+    auditColumn<Booking>({ createdFallback: "website", updatedFallback: "website" }),
     {
       id: "actions", header: "", size: 48,
       cell: ({ row }) => {

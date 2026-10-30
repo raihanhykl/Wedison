@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Loader2, MoreHorizontal, Pencil, Plus, Trash2, Users, X } from "lucide-react";
+import { ArchiveRestore, Loader2, MoreHorizontal, Pencil, Plus, Trash2, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -25,6 +25,8 @@ import { api, errorMessage } from "@/lib/admin/api";
 import { formatDateTime } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { cn } from "@/lib/utils";
+import { ApiError } from "@/lib/admin/api";
+import { AuditStamp, auditColumn } from "@/components/admin/audit";
 import type { Paginated, Role, User } from "@/lib/admin/types";
 import { RoleBadge, RoleDot, useRoles } from "./role-shared";
 
@@ -42,16 +44,17 @@ export function UsersView({ roleFilter, onRoleFilterChange }: { roleFilter?: str
   const me = useAdminUser();
   const [page, setPage] = useState(1);
   const [q, setQ] = useState("");
-  const [active, setActive] = useState<"all" | "true" | "false">("all");
+  const [status, setStatus] = useState<"live" | "active" | "inactive" | "deleted">("live");
   const [editing, setEditing] = useState<User | "new" | null>(null);
   const [toDelete, setToDelete] = useState<User | null>(null);
+  const [toRestore, setToRestore] = useState<User | null>(null);
   const dq = useDebounce(q);
   const roles = useRoles();
 
-  const query = { page, limit: 20, q: dq, roleId: roleFilter, active: active === "all" ? undefined : active };
+  const query = { page, limit: 20, q: dq, roleId: roleFilter, status: status === "live" ? undefined : status };
   const { data, isLoading } = useQuery({
     queryKey: ["users", query],
-    queryFn: () => api<Paginated<User>>("/admin/users", { query }),
+    queryFn: () => api<Paginated<User> & { deletedCount: number }>("/admin/users", { query }),
     placeholderData: keepPreviousData,
   });
   const invalidate = () => { qc.invalidateQueries({ queryKey: ["users"] }); qc.invalidateQueries({ queryKey: ["roles"] }); };
@@ -62,7 +65,7 @@ export function UsersView({ roleFilter, onRoleFilterChange }: { roleFilter?: str
   });
   const remove = useMutation({
     mutationFn: (id: string) => api(`/admin/users/${id}`, { method: "DELETE" }),
-    onSuccess: () => { toast.success("User deleted"); setToDelete(null); invalidate(); },
+    onSuccess: () => { toast.success("User deleted. Their history is kept; restore them from the Deleted filter."); setToDelete(null); invalidate(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -75,19 +78,28 @@ export function UsersView({ roleFilter, onRoleFilterChange }: { roleFilter?: str
           <div className="flex items-center gap-3">
             <Avatar className="size-9"><AvatarImage src={u.avatarUrl ?? undefined} /><AvatarFallback className="text-xs">{initials(u.name)}</AvatarFallback></Avatar>
             <div className="min-w-0">
-              <p className={cn("font-medium", !u.isActive && "text-muted-foreground line-through decoration-muted-foreground/50")}>{u.name} {u.id === me.id && <span className="text-xs font-normal text-muted-foreground">(you)</span>}</p>
+              <p className={cn("font-medium", (!u.isActive || u.deletedAt) && "text-muted-foreground")}>
+                {u.name} {u.id === me.id && <span className="text-xs font-normal text-muted-foreground">(you)</span>}
+                {u.deletedAt && <span className="ml-1.5 rounded bg-destructive/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-destructive">Deleted</span>}
+              </p>
               <p className="truncate text-xs text-muted-foreground">{u.email}</p>
             </div>
           </div>
         );
       },
     },
-    { id: "role", header: "Role", size: 170, cell: ({ row }) => <RoleBadge role={row.original.role} /> },
+    { id: "role", header: "Role", size: 170, cell: ({ row }) => (row.original.role ? <RoleBadge role={row.original.role} /> : <span className="text-xs text-muted-foreground">role removed</span>) },
     { id: "articles", header: "Articles", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original._count?.articles ?? 0}</span> },
     { id: "lastLogin", header: "Last sign-in", size: 160, cell: ({ row }) => <span className="text-xs text-muted-foreground">{formatDateTime(row.original.lastLoginAt)}</span> },
+    auditColumn<User>(),
     {
       id: "active", header: "Active", size: 80,
-      cell: ({ row }) => <Switch checked={row.original.isActive} disabled={row.original.id === me.id || toggle.isPending} onCheckedChange={(v) => toggle.mutate({ id: row.original.id, isActive: v })} aria-label="Active" />,
+      cell: ({ row }) =>
+        row.original.deletedAt ? (
+          <span className="text-xs text-muted-foreground"><AuditStamp stacked user={row.original.deletedBy} at={row.original.deletedAt} /></span>
+        ) : (
+          <Switch checked={row.original.isActive} disabled={row.original.id === me.id || toggle.isPending} onCheckedChange={(v) => toggle.mutate({ id: row.original.id, isActive: v })} aria-label="Active" />
+        ),
     },
     {
       id: "actions", size: 48,
@@ -95,8 +107,14 @@ export function UsersView({ roleFilter, onRoleFilterChange }: { roleFilter?: str
         <DropdownMenu>
           <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="size-8" aria-label="Actions"><MoreHorizontal /></Button></DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setEditing(row.original)}><Pencil /> Edit</DropdownMenuItem>
-            {row.original.id !== me.id && (<><DropdownMenuSeparator /><DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setToDelete(row.original)}><Trash2 /> Delete</DropdownMenuItem></>)}
+            {row.original.deletedAt ? (
+              <DropdownMenuItem onClick={() => setToRestore(row.original)}><ArchiveRestore /> Restore</DropdownMenuItem>
+            ) : (
+              <>
+                <DropdownMenuItem onClick={() => setEditing(row.original)}><Pencil /> Edit</DropdownMenuItem>
+                {row.original.id !== me.id && (<><DropdownMenuSeparator /><DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setToDelete(row.original)}><Trash2 /> Delete</DropdownMenuItem></>)}
+              </>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       ),
@@ -118,12 +136,13 @@ export function UsersView({ roleFilter, onRoleFilterChange }: { roleFilter?: str
             ))}
           </SelectContent>
         </Select>
-        <Select value={active} onValueChange={(v) => { setActive(v as typeof active); setPage(1); }}>
-          <SelectTrigger className="w-full sm:w-40" aria-label="Filter by status"><SelectValue /></SelectTrigger>
+        <Select value={status} onValueChange={(v) => { setStatus(v as typeof status); setPage(1); }}>
+          <SelectTrigger className="w-full sm:w-44" aria-label="Filter by status"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Active & inactive</SelectItem>
-            <SelectItem value="true">Active only</SelectItem>
-            <SelectItem value="false">Inactive only</SelectItem>
+            <SelectItem value="live">Active &amp; inactive</SelectItem>
+            <SelectItem value="active">Active only</SelectItem>
+            <SelectItem value="inactive">Inactive only</SelectItem>
+            <SelectItem value="deleted">Deleted{data?.deletedCount ? ` · ${data.deletedCount}` : ""}</SelectItem>
           </SelectContent>
         </Select>
         {filterRole && (
@@ -158,10 +177,15 @@ export function UsersView({ roleFilter, onRoleFilterChange }: { roleFilter?: str
         open={!!toDelete}
         onOpenChange={(o) => !o && setToDelete(null)}
         title={`Delete ${toDelete?.name}?`}
-        description="Their articles and uploads are kept (author becomes empty). This cannot be undone."
+        description="They can no longer sign in and disappear from this list. Their name stays on everything they created or changed, and you can restore the account from the Deleted filter."
         loading={remove.isPending}
         onConfirm={() => { if (toDelete) remove.mutate(toDelete.id); }}
       />
+      <Dialog open={!!toRestore} onOpenChange={(o) => !o && setToRestore(null)}>
+        <DialogContent className="sm:max-w-md">
+          {toRestore && <RestoreForm key={toRestore.id} user={toRestore} roles={roles.data ?? []} onDone={() => { setToRestore(null); setStatus("live"); invalidate(); }} />}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
@@ -171,7 +195,7 @@ function UserForm({ user, isSelf, roles, defaultRoleId, onDone }: { user: User |
   const form = useForm<Values>({
     resolver: zodResolver(schema.refine((v) => user || (v.password && v.password.length >= 8), { message: "Password must be at least 8 characters", path: ["password"] })),
     defaultValues: user
-      ? { name: user.name, email: user.email, roleId: user.role.id, password: "", isActive: user.isActive }
+      ? { name: user.name, email: user.email, roleId: user.role?.id ?? "", password: "", isActive: user.isActive }
       : { name: "", email: "", roleId: defaultRoleId ?? fallbackRole, password: "", isActive: true },
   });
   const save = useMutation({
@@ -180,6 +204,22 @@ function UserForm({ user, isSelf, roles, defaultRoleId, onDone }: { user: User |
       return user ? api(`/admin/users/${user.id}`, { method: "PATCH", body }) : api("/admin/users", { method: "POST", body });
     },
     onSuccess: () => { toast.success(user ? "User updated" : "User added"); onDone(); },
+    onError: (e) => {
+      // The email belongs to a deleted account: offer to restore it with the role chosen here.
+      if (e instanceof ApiError && e.code === "USER_DELETED") {
+        const deletedId = (e.details as unknown as { userId?: string } | undefined)?.userId;
+        toast.error(e.message, {
+          duration: 10_000,
+          action: deletedId ? { label: "Restore account", onClick: () => restore.mutate(deletedId) } : undefined,
+        });
+        return;
+      }
+      toast.error(errorMessage(e));
+    },
+  });
+  const restore = useMutation({
+    mutationFn: (id: string) => api(`/admin/users/${id}/restore`, { method: "POST", body: { roleId: form.getValues("roleId") || undefined, isActive: form.getValues("isActive") } }),
+    onSuccess: () => { toast.success("Account restored. Set a new password if needed."); onDone(); },
     onError: (e) => toast.error(errorMessage(e)),
   });
   const selectedRole = roles.find((r) => r.id === form.watch("roleId"));
@@ -234,5 +274,42 @@ function UserForm({ user, isSelf, roles, defaultRoleId, onDone }: { user: User |
         </DialogFooter>
       </form>
     </Form>
+  );
+}
+
+function RestoreForm({ user, roles, onDone }: { user: User; roles: Role[]; onDone: () => void }) {
+  const [roleId, setRoleId] = useState(user.role && roles.some((r) => r.id === user.role!.id) ? user.role.id : "");
+  const [isActive, setIsActive] = useState(true);
+  const restore = useMutation({
+    mutationFn: () => api(`/admin/users/${user.id}/restore`, { method: "POST", body: { roleId: roleId || undefined, isActive } }),
+    onSuccess: () => { toast.success(`${user.name} restored`); onDone(); },
+    onError: (e) => toast.error(errorMessage(e)),
+  });
+  return (
+    <div className="space-y-4">
+      <DialogHeader>
+        <DialogTitle>Restore {user.name}?</DialogTitle>
+        <DialogDescription>
+          {user.email} was deleted <AuditStamp user={user.deletedBy} at={user.deletedAt} verb="" />. Restoring brings the account back with its history.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="space-y-1.5">
+        <p className="text-sm font-medium">Role</p>
+        <Select value={roleId} onValueChange={setRoleId}>
+          <SelectTrigger aria-label="Role"><SelectValue placeholder="Choose a role" /></SelectTrigger>
+          <SelectContent>
+            {roles.map((r) => <SelectItem key={r.id} value={r.id}><span className="flex items-center gap-2"><RoleDot role={r} /> {r.name}</span></SelectItem>)}
+          </SelectContent>
+        </Select>
+        {!user.role && <p className="text-xs text-chart-4">Their previous role was deleted. Choose a role to continue.</p>}
+      </div>
+      <div className="flex items-center justify-between rounded-lg border border-border p-3">
+        <div><p className="text-sm">Active after restore</p><p className="text-xs text-muted-foreground">Turn off to restore the account without letting it sign in yet.</p></div>
+        <Switch checked={isActive} onCheckedChange={setIsActive} aria-label="Active after restore" />
+      </div>
+      <DialogFooter>
+        <Button onClick={() => restore.mutate()} disabled={!roleId || restore.isPending}>{restore.isPending ? <Loader2 className="animate-spin" /> : <ArchiveRestore />} Restore account</Button>
+      </DialogFooter>
+    </div>
   );
 }

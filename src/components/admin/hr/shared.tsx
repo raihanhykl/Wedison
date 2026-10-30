@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { api } from "@/lib/admin/api";
-import { JOB_STATUS_LABEL, type HrPermissions, type Job, type JobDepartment, type JobLocation, type JobStatus } from "@/lib/admin/types";
+import { JOB_STATUS_LABEL, type HrPermissions, type HrSettings, type Job, type JobDepartment, type JobLocation, type JobStatus } from "@/lib/admin/types";
 
 /** Permissions of the current user inside the HR module (from the backend). */
 export function useHrPermissions() {
@@ -15,6 +15,13 @@ export function useHrPermissions() {
     staleTime: 5 * 60_000,
   });
 }
+
+/** HR contact & application settings (default recipients etc.). */
+export function useHrSettings() {
+  return useQuery({ queryKey: ["hr-settings"], queryFn: () => api<{ data: HrSettings }>("/admin/hr/settings").then((r) => r.data), staleTime: 60_000 });
+}
+
+export { AuditStamp } from "@/components/admin/audit";
 
 export function useDepartments() {
   return useQuery({ queryKey: ["hr-departments"], queryFn: () => api<{ items: JobDepartment[] }>("/admin/hr/departments").then((r) => r.items) });

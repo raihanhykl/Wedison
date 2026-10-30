@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import { LOCALES, isLocale } from "@/app/lib/locale";
 import { ConsentModeDefault, GoogleTagManager } from "@/components/gtm";
 import CookieConsent from "@/components/cookie-consent";
+import { CekatChat } from "@/components/chatbot/cekat-chat";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationSchema, webSiteSchema } from "@/lib/seo/schema";
 
@@ -80,6 +81,8 @@ export default async function LocaleLayout({
           }}
         />
         <GoogleTagManager />
+        {/* Chatbot AI Cekat: hanya situs publik (admin tidak memakai layout ini). */}
+        <CekatChat />
       </body>
     </html>
   );

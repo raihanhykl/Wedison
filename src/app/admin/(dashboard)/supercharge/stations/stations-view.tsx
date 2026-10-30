@@ -20,11 +20,11 @@ import { EmptyState } from "@/components/admin/empty-state";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { useCan } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
-import { timeAgo } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { cn } from "@/lib/utils";
 import { STATION_STATUS_LABEL, STATION_TIER_LABEL, type Paginated, type Station, type StationStatus, type StationTier, type StationsMeta } from "@/lib/admin/types";
 import { StationForm } from "./station-form";
+import { auditColumn } from "@/components/admin/audit";
 
 const STATUSES = Object.keys(STATION_STATUS_LABEL) as StationStatus[];
 const TIERS = Object.keys(STATION_TIER_LABEL) as StationTier[];
@@ -80,7 +80,7 @@ export function StationsView() {
       cell: ({ row }) => {
         const s = row.original;
         return (
-          <button type="button" onClick={() => setEditing(s)} className="flex min-w-[260px] items-center gap-3 text-left">
+          <button type="button" onClick={() => setEditing(s)} className="flex min-w-[220px] items-center gap-3 whitespace-normal text-left">
             <div className="relative size-10 shrink-0 overflow-hidden rounded-md border border-border bg-muted">
               {s.photoUrl ? <Image src={s.photoUrl} alt="" fill sizes="40px" className="object-cover" unoptimized /> : <MapPin className="absolute inset-0 m-auto size-4 text-muted-foreground" />}
             </div>
@@ -102,7 +102,7 @@ export function StationsView() {
         ? <span className="inline-flex items-center gap-1 text-xs text-primary"><Eye className="size-3.5" /> Shown</span>
         : <span className="inline-flex items-center gap-1 text-xs text-muted-foreground"><EyeOff className="size-3.5" /> Hidden</span>,
     },
-    { id: "updated", header: "Updated", size: 110, cell: ({ row }) => <span className="text-xs text-muted-foreground">{timeAgo(row.original.updatedAt)}</span> },
+    auditColumn<Station>(),
     {
       id: "actions", header: "", size: 48,
       cell: ({ row }) => {

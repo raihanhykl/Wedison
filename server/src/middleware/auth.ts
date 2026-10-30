@@ -4,6 +4,7 @@ import { env } from "../config/env.js";
 import { prisma } from "../lib/prisma.js";
 import { unauthorized, forbidden } from "../lib/errors.js";
 import { canAccess, canDelete, canHr, canWrite, has, type HrAction, type Module } from "../lib/permissions.js";
+import { setAuditUser } from "../lib/audit.js";
 
 export type AuthRole = { id: string; key: string; name: string; color: string | null; isSystem: boolean };
 export type AuthUser = {
@@ -47,6 +48,7 @@ export const authUserSelect = {
   name: true,
   avatarUrl: true,
   isActive: true,
+  deletedAt: true,
   role: { select: { id: true, key: true, name: true, color: true, isSystem: true, permissions: true } },
 } as const;
 
@@ -75,8 +77,9 @@ export async function requireAuth(req: Request, _res: Response, next: NextFuncti
     return next(unauthorized("Session is invalid or has expired"));
   }
   const user = await prisma.user.findUnique({ where: { id: payload.sub }, select: authUserSelect });
-  if (!user || !user.isActive) return next(unauthorized("Account is inactive"));
-  req.user = toAuthUser(user);
+  if (!user || !user.isActive || user.deletedAt || !user.role) return next(unauthorized("Account is inactive"));
+  req.user = toAuthUser({ ...user, role: user.role });
+  setAuditUser(user.id);
   next();
 }
 

@@ -125,6 +125,7 @@ function PreviewBar({ status, slug }: { status: PublicTeaser["status"]; slug: st
     <div
       id="teaser-preview-bar"
       role="status"
+      data-chat-obstruct="always"
       className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-forest-deep/95 text-white backdrop-blur"
     >
       <div className="main-container flex flex-wrap items-center gap-x-4 gap-y-2 py-3 text-sm">

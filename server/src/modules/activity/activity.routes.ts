@@ -26,7 +26,7 @@ activityRouter.get("/", validate(query, "query"), async (req, res, next) => {
     const [items, total] = await Promise.all([
       prisma.activityLog.findMany({
         where,
-        include: { user: { select: { id: true, name: true, email: true, avatarUrl: true } } },
+        include: { user: { select: { id: true, name: true, email: true, avatarUrl: true, deletedAt: true } } },
         orderBy: { createdAt: "desc" },
         ...skipTake(q),
       }),

@@ -12,14 +12,18 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageHeader } from "@/components/admin/page-header";
+import { EmailChipsInput } from "@/components/admin/email-chips-input";
 import { useHrPermissions } from "@/components/admin/hr/shared";
 import { api, errorMessage } from "@/lib/admin/api";
-import type { HrSettings } from "@/lib/admin/types";
+import type { AuditFields, HrSettings } from "@/lib/admin/types";
+import { AuditLine } from "@/components/admin/audit";
 
 export function HrSettingsView() {
   const qc = useQueryClient();
   const perm = useHrPermissions();
   const { data, isLoading } = useQuery({ queryKey: ["hr-settings"], queryFn: () => api<{ data: HrSettings }>("/admin/hr/settings").then((r) => r.data) });
+  // Who/when the settings were last changed (separate key: ["hr-settings"] holds only the values).
+  const meta = useQuery({ queryKey: ["hr-settings-meta"], queryFn: () => api<{ meta: AuditFields | null }>("/admin/hr/settings").then((r) => r.meta) });
   const [s, setS] = useState<HrSettings | null>(null);
   useEffect(() => { if (data) setS(data); }, [data]);
   const can = !!perm.data?.settings;
@@ -27,9 +31,9 @@ export function HrSettingsView() {
   const save = useMutation({
     mutationFn: () => api<{ data: HrSettings }>("/admin/hr/settings", {
       method: "PUT",
-      body: { ...s!, ccEmail: s!.ccEmail || null, phone: s!.phone || null, whatsapp: s!.whatsapp || null, applicationNoteId: s!.applicationNoteId || null, applicationNoteEn: s!.applicationNoteEn || null, companyPortals: s!.companyPortals.filter((p) => p.name.trim() && p.url.trim()) },
+      body: { ...s!, phone: s!.phone || null, whatsapp: s!.whatsapp || null, applicationNoteId: s!.applicationNoteId || null, applicationNoteEn: s!.applicationNoteEn || null, companyPortals: s!.companyPortals.filter((p) => p.name.trim() && p.url.trim()) },
     }).then((r) => r.data),
-    onSuccess: (d) => { qc.setQueryData(["hr-settings"], d); toast.success("HR settings saved. The careers page updates within a minute."); },
+    onSuccess: (d) => { qc.setQueryData(["hr-settings"], d); qc.invalidateQueries({ queryKey: ["hr-settings-meta"] }); toast.success("HR settings saved. The careers page updates within a minute."); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -42,16 +46,24 @@ export function HrSettingsView() {
       <PageHeader
         title="HR Contact & Settings"
         description="Contact details applicants see on the careers page, and how application emails are prepared."
-        actions={can && <Button onClick={() => save.mutate()} disabled={save.isPending}>{save.isPending ? <Loader2 className="animate-spin" /> : <Save />} Save</Button>}
+        actions={can && <Button onClick={() => save.mutate()} disabled={save.isPending || !s.contactEmails.length}>{save.isPending ? <Loader2 className="animate-spin" /> : <Save />} Save</Button>}
       />
+      {meta.data && <AuditLine item={meta.data} className="-mt-3" />}
       {!can && <p className="text-sm text-muted-foreground">You can view these settings. Only an HR Manager can change them.</p>}
       <fieldset disabled={!can} className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader><CardTitle className="text-base">HR contact</CardTitle><CardDescription>Applicants send their CV to this email unless an opening has its own.</CardDescription></CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-1.5"><Label>Contact name</Label><Input value={s.contactName} onChange={(e) => set({ contactName: e.target.value })} /></div>
-            <div className="space-y-1.5"><Label>Application email</Label><Input type="email" value={s.contactEmail} onChange={(e) => set({ contactEmail: e.target.value })} /></div>
-            <div className="space-y-1.5"><Label>CC email <span className="font-normal text-muted-foreground">(optional)</span></Label><Input type="email" value={s.ccEmail ?? ""} onChange={(e) => set({ ccEmail: e.target.value })} placeholder="recruitment@wedison.co" /></div>
+            <div className="space-y-1.5">
+              <Label htmlFor="hr-to">Application email</Label>
+              <EmailChipsInput id="hr-to" value={s.contactEmails} onChange={(v) => set({ contactEmails: v })} exclude={s.ccEmails} excludeLabel="CC" placeholder="hr@wedison.co" invalid={!s.contactEmails.length} aria-describedby="hr-to-hint" />
+              <p id="hr-to-hint" className="text-xs text-muted-foreground">{s.contactEmails.length ? "Applications are sent to every address here. Press Enter or comma after each one." : "Add at least one address."}</p>
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="hr-cc">CC <span className="font-normal text-muted-foreground">(optional)</span></Label>
+              <EmailChipsInput id="hr-cc" value={s.ccEmails} onChange={(v) => set({ ccEmails: v })} exclude={s.contactEmails} excludeLabel="Application email" placeholder="recruitment@wedison.co" />
+            </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5"><Label>Phone <span className="font-normal text-muted-foreground">(optional)</span></Label><Input value={s.phone ?? ""} onChange={(e) => set({ phone: e.target.value })} placeholder="021 …" /></div>
               <div className="space-y-1.5"><Label>WhatsApp <span className="font-normal text-muted-foreground">(optional)</span></Label><Input value={s.whatsapp ?? ""} onChange={(e) => set({ whatsapp: e.target.value })} placeholder="62812…" /></div>

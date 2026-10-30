@@ -17,10 +17,11 @@ import { EmptyState } from "@/components/admin/empty-state";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { useUploadMedia } from "@/components/admin/media-picker";
 import { api, errorMessage } from "@/lib/admin/api";
-import { formatBytes, formatDateTime } from "@/lib/admin/format";
+import { formatBytes } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { cn } from "@/lib/utils";
 import type { Media, Paginated } from "@/lib/admin/types";
+import { AuditCell } from "@/components/admin/audit";
 
 type MediaPage = Paginated<Media> & { folders: { name: string; count: number }[] };
 
@@ -160,7 +161,7 @@ function MediaDetail({ media, onSave, saving, onDelete }: { media: Media; onSave
           <Label>Folder</Label>
           <Input value={folder} onChange={(e) => setFolder(e.target.value)} className="font-mono text-xs" />
         </div>
-        <p className="text-xs text-muted-foreground">Uploaded {formatDateTime(media.createdAt)}{media.uploadedBy ? ` by ${media.uploadedBy.name}` : ""}</p>
+        <AuditCell item={{ ...media, createdBy: media.createdBy ?? media.uploadedBy }} />
       </div>
       <SheetFooter className="flex-row justify-between">
         <Button variant="ghost" className="text-destructive" onClick={onDelete}><Trash2 /> Delete</Button>

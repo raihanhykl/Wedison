@@ -20,7 +20,8 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
-import { JobStatusBadge, LinesInput, formatSalary, locationLabel, useDepartments, useHrPermissions, useLocations } from "@/components/admin/hr/shared";
+import { AuditStamp, JobStatusBadge, LinesInput, formatSalary, locationLabel, useDepartments, useHrPermissions, useHrSettings, useLocations } from "@/components/admin/hr/shared";
+import { EmailChipsInput } from "@/components/admin/email-chips-input";
 import { api, errorMessage } from "@/lib/admin/api";
 import { slugify, toLocalInput } from "@/lib/admin/format";
 import { cn } from "@/lib/utils";
@@ -42,6 +43,7 @@ export function JobForm({ job }: { job?: Job }) {
   const router = useRouter();
   const qc = useQueryClient();
   const perm = useHrPermissions();
+  const { data: hrDefaults } = useHrSettings();
   const { data: departments } = useDepartments();
   const { data: locations } = useLocations();
   const isEdit = !!job;
@@ -65,7 +67,8 @@ export function JobForm({ job }: { job?: Job }) {
   const [showSalary, setShowSalary] = useState(job?.showSalary ?? false);
   const [isUrgent, setIsUrgent] = useState(job?.isUrgent ?? false);
   const [closesAt, setClosesAt] = useState(toLocalInput(job?.closesAt));
-  const [applyEmail, setApplyEmail] = useState(job?.applyEmail ?? "");
+  const [applyEmails, setApplyEmails] = useState<string[]>(job?.applyEmails ?? []);
+  const [ccEmails, setCcEmails] = useState<string[]>(job?.ccEmails ?? []);
   const [portals, setPortals] = useState<{ name: string; url: string }[]>(job?.portals ?? []);
   const [dirty, setDirty] = useState(false);
   const [confirm, setConfirm] = useState<"delete" | null>(null);
@@ -127,7 +130,8 @@ export function JobForm({ job }: { job?: Job }) {
       salaryMax: salaryMax ? Number(salaryMax) : null,
       showSalary,
       isUrgent,
-      applyEmail: applyEmail.trim() || null,
+      applyEmails,
+      ccEmails,
       portals: portals.filter((x) => x.name.trim() && x.url.trim()),
       closesAt: closesAt ? new Date(closesAt).toISOString() : null,
       translations,
@@ -260,12 +264,20 @@ export function JobForm({ job }: { job?: Job }) {
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base">How to apply</CardTitle>
-              <CardDescription>Applicants apply by email or through job portals. Leave the email empty to use the HR email from HR Contact & Settings.</CardDescription>
+              <CardDescription>Applicants apply by email or through job portals. Leave a field empty to use the default from HR Contact &amp; Settings; To and CC are overridden separately.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-1.5">
-                <Label>Application email for this opening <span className="font-normal text-muted-foreground">(optional)</span></Label>
-                <Input type="email" value={applyEmail} onChange={(e) => { setApplyEmail(e.target.value); touch(); }} placeholder="Default: HR email in settings" />
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-1.5">
+                  <Label htmlFor="job-to">Application email <span className="font-normal text-muted-foreground">(optional)</span></Label>
+                  <EmailChipsInput id="job-to" value={applyEmails} onChange={(v) => { setApplyEmails(v); touch(); }} exclude={ccEmails} excludeLabel="CC" placeholder={hrDefaults?.contactEmails.join(", ") || "Default from HR settings"} disabled={readOnly} />
+                  <p className="text-xs text-muted-foreground">{applyEmails.length ? "Overrides the default for this opening." : <>Default: {hrDefaults?.contactEmails.join(", ") || "HR settings"}</>}</p>
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="job-cc">CC <span className="font-normal text-muted-foreground">(optional)</span></Label>
+                  <EmailChipsInput id="job-cc" value={ccEmails} onChange={(v) => { setCcEmails(v); touch(); }} exclude={applyEmails} excludeLabel="Application email" placeholder={hrDefaults?.ccEmails.join(", ") || "Default from HR settings"} disabled={readOnly} />
+                  <p className="text-xs text-muted-foreground">{ccEmails.length ? "Overrides the default CC for this opening." : <>Default: {hrDefaults?.ccEmails.join(", ") || "no CC"}</>}</p>
+                </div>
               </div>
               <div className="space-y-2">
                 <Label>Job portal links for this opening</Label>
@@ -384,7 +396,11 @@ export function JobForm({ job }: { job?: Job }) {
           {isEdit && (
             <Card>
               <CardContent className="space-y-2 pt-6 text-xs text-muted-foreground">
-                <p>{job.viewCount} views · {job._count?.applyClicks ?? 0} apply clicks</p>
+                <dl className="space-y-1.5 text-foreground">
+                  <div><dt className="text-[11px] uppercase tracking-wide text-muted-foreground">Created</dt><dd><AuditStamp user={job.createdBy} at={job.createdAt} /></dd></div>
+                  <div><dt className="text-[11px] uppercase tracking-wide text-muted-foreground">Last updated</dt><dd><AuditStamp user={job.updatedBy} at={job.updatedAt} /></dd></div>
+                </dl>
+                <p className="pt-1">{job.viewCount} views · {job._count?.applyClicks ?? 0} apply clicks</p>
                 {live && <a className="flex items-center gap-1 text-primary underline underline-offset-4" href={`/id/career/${job.slug}/`} target="_blank" rel="noreferrer">View on site <ExternalLink className="size-3" /></a>}
                 <div className="flex flex-wrap gap-2 pt-2">
                   {p?.write && <Button variant="outline" size="sm" onClick={() => duplicate.mutate()} disabled={duplicate.isPending}><Copy /> Duplicate</Button>}

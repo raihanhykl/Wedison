@@ -24,9 +24,10 @@ import { EmptyState } from "@/components/admin/empty-state";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { useCan } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
-import { formatDate, timeAgo } from "@/lib/admin/format";
+import { formatDate } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import type { Article, Category, ContentStatus, Paginated } from "@/lib/admin/types";
+import { auditColumn } from "@/components/admin/audit";
 
 type Tab = "all" | ContentStatus | "trash";
 
@@ -100,7 +101,7 @@ export function ArticlesView() {
           const a = row.original;
           const t = a.translations.find((x) => x.locale === "id") ?? a.translations[0];
           return (
-            <div className="flex items-center gap-3 min-w-[260px]">
+            <div className="flex min-w-[220px] items-center gap-3 whitespace-normal">
               <div className="relative size-11 shrink-0 overflow-hidden rounded-md bg-muted">
                 {a.coverImage ? <Image src={a.coverImage.url} alt="" fill sizes="44px" className="object-cover" unoptimized /> : <FileText className="absolute inset-0 m-auto size-4 text-muted-foreground" />}
               </div>
@@ -121,7 +122,15 @@ export function ArticlesView() {
         },
       },
       { id: "category", header: "Topic", size: 130, cell: ({ row }) => <span className="text-sm">{row.original.category?.nameId ?? <span className="text-muted-foreground">—</span>}</span> },
-      { id: "status", header: "Status", size: 110, cell: ({ row }) => <StatusBadge status={row.original.status} /> },
+      {
+        id: "status", header: "Status", size: 120,
+        cell: ({ row }) => (
+          <div className="space-y-1">
+            <StatusBadge status={row.original.status} />
+            <div className="whitespace-nowrap text-[11px] text-muted-foreground">{row.original.publishedAt ? formatDate(row.original.publishedAt) : "not published"}</div>
+          </div>
+        ),
+      },
       {
         id: "health", header: "Health", size: 150,
         cell: ({ row }) => {
@@ -131,15 +140,7 @@ export function ArticlesView() {
       },
       { id: "author", header: "Author", size: 140, cell: ({ row }) => <span className="text-sm">{row.original.author?.name ?? "—"}</span> },
       { id: "views", header: "Reads", size: 80, cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount}</span> },
-      {
-        id: "date", header: "Date", size: 150,
-        cell: ({ row }) => (
-          <div className="text-xs">
-            <div>{row.original.publishedAt ? formatDate(row.original.publishedAt) : <span className="text-muted-foreground">not published</span>}</div>
-            <div className="text-muted-foreground">updated {timeAgo(row.original.updatedAt)}</div>
-          </div>
-        ),
-      },
+      auditColumn<Article>(),
       {
         id: "actions", size: 48,
         cell: ({ row }) => {

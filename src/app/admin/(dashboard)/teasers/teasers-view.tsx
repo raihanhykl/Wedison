@@ -22,11 +22,11 @@ import {
   TeaserStatusBadge, eventPhase, inquiriesUrl, liveUrl, previewUrl, scheduleLabel, useTeaserPermissions,
 } from "@/components/admin/teasers/shared";
 import { api, errorMessage } from "@/lib/admin/api";
-import { timeAgo, formatDateTime } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { cn } from "@/lib/utils";
 import type { AdminTeaser } from "@/lib/admin/types";
 import type { TeaserStatus } from "@/lib/teasers/teaser";
+import { auditColumn } from "@/components/admin/audit";
 
 type Action = "publish" | "unpublish" | "archive" | "restore";
 const ACTION_DONE: Record<Action, string> = { publish: "Teaser published", unpublish: "Moved back to draft", archive: "Teaser archived", restore: "Restored as draft" };
@@ -120,7 +120,7 @@ export function TeasersView() {
         </Link>
       ),
     },
-    { id: "updated", header: "Updated", size: 110, cell: ({ row }) => <span className="text-xs text-muted-foreground" title={formatDateTime(row.original.updatedAt)}>{timeAgo(row.original.updatedAt)}</span> },
+    auditColumn<AdminTeaser>(),
     {
       id: "actions", header: "", size: 48,
       cell: ({ row }) => {

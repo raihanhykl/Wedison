@@ -18,11 +18,23 @@ import { leadsRouter, publicLeadsRouter } from "../modules/leads/leads.routes.js
 import { teasersRouter, publicTeasersRouter } from "../modules/teasers/teasers.routes.js";
 import { showroomsRouter, publicShowroomsRouter } from "../modules/showrooms/showrooms.routes.js";
 import { env } from "../config/env.js";
+import { prisma } from "../lib/prisma.js";
+import { attachAuditUsers } from "../lib/audit.js";
 
 export const api = Router();
 
 // ── Admin (butuh login) ─────────────────────────────────────────────
 api.use("/auth", authRouter);
+// createdById / updatedById / deletedById di respons admin -> createdBy / updatedBy / deletedBy
+// ({ id, name, email, avatarUrl, deleted }), satu query per respons. Termasuk user terhapus.
+api.use(
+  "/admin",
+  attachAuditUsers(async (ids) =>
+    (await prisma.user.findMany({ where: { id: { in: ids } }, select: { id: true, name: true, email: true, avatarUrl: true, deletedAt: true } })).map(
+      ({ deletedAt, ...u }) => ({ ...u, deleted: !!deletedAt }),
+    ),
+  ),
+);
 api.use("/admin/users", usersRouter);
 api.use("/admin/roles", rolesRouter); // role kustom (izin per modul), butuh users.manage
 api.use("/admin/activity", activityRouter);
