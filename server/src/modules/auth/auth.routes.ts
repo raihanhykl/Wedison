@@ -27,14 +27,16 @@ authRouter.post("/login", loginLimiter, validate(loginSchema), async (req, res, 
   try {
     const { email, password } = getValidated<typeof loginSchema>(req);
     const user = await prisma.user.findUnique({ where: { email }, select: { ...authUserSelect, passwordHash: true } });
-    if (!user || !user.isActive) throw unauthorized("Incorrect email or password");
+    // Deleted / inactive / role-less accounts get the same message as a wrong password.
+    if (!user || !user.isActive || user.deletedAt || !user.role) throw unauthorized("Incorrect email or password");
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) throw unauthorized("Incorrect email or password");
 
-    await prisma.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } });
+    // Raw SQL so signing in does not touch updatedAt / updatedBy ("Updated" = profile changes).
+    await prisma.$executeRaw`UPDATE "User" SET "lastLoginAt" = NOW() WHERE "id" = ${user.id}`;
     const token = signToken(user);
     setAuthCookie(res, token);
-    req.user = toAuthUser(user);
+    req.user = toAuthUser({ ...user, role: user.role });
     logActivity(req, { action: "login", entity: "auth", entityId: user.id, summary: "Signed in" });
     res.json({
       ok: true,
@@ -90,7 +92,7 @@ authRouter.patch("/profile", requireAuth, validate(profileSchema), async (req, r
       data,
       select: authUserSelect,
     });
-    res.json({ ok: true, data: toAuthUser(user) });
+    res.json({ ok: true, data: toAuthUser({ ...user, role: user.role! }) });
   } catch (e) {
     next(e);
   }

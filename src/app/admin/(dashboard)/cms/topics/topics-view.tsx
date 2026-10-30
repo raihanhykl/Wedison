@@ -22,6 +22,7 @@ import { EmptyState } from "@/components/admin/empty-state";
 import { useCan } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
 import type { Category, Tag } from "@/lib/admin/types";
+import { AuditCell, auditText } from "@/components/admin/audit";
 
 const categorySchema = z.object({
   nameId: z.string().trim().min(2, "At least 2 characters").max(80),
@@ -92,12 +93,13 @@ function TopicsPanel() {
               <TableHead>Name (EN)</TableHead>
               <TableHead>Slug</TableHead>
               <TableHead className="text-right">Articles</TableHead>
+              <TableHead>Created · Updated</TableHead>
               <TableHead className="w-24" />
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
-              Array.from({ length: 4 }).map((_, i) => <TableRow key={i}>{Array.from({ length: 6 }).map((__, j) => <TableCell key={j}><Skeleton className="h-4" /></TableCell>)}</TableRow>)
+              Array.from({ length: 4 }).map((_, i) => <TableRow key={i}>{Array.from({ length: 7 }).map((__, j) => <TableCell key={j}><Skeleton className="h-4" /></TableCell>)}</TableRow>)
             ) : data?.length ? (
               data.map((c) => (
                 <TableRow key={c.id}>
@@ -106,6 +108,7 @@ function TopicsPanel() {
                   <TableCell className="text-muted-foreground">{c.nameEn ?? "—"}</TableCell>
                   <TableCell className="font-mono text-xs">{c.slug}</TableCell>
                   <TableCell className="text-right font-mono text-xs">{c._count?.articles ?? 0}</TableCell>
+                  <TableCell><AuditCell item={c} /></TableCell>
                   <TableCell>
                     <div className="flex justify-end gap-1">
                       <Button variant="ghost" size="icon" className="size-8" onClick={() => openForm(c)} aria-label="Edit"><Pencil /></Button>
@@ -115,7 +118,7 @@ function TopicsPanel() {
                 </TableRow>
               ))
             ) : (
-              <TableRow><TableCell colSpan={6} className="p-0"><EmptyState icon={Tags} title="No topics yet" /></TableCell></TableRow>
+              <TableRow><TableCell colSpan={7} className="p-0"><EmptyState icon={Tags} title="No topics yet" /></TableCell></TableRow>
             )}
           </TableBody>
         </Table>
@@ -183,7 +186,7 @@ function TagsPanel() {
       ) : data?.length ? (
         <div className="flex flex-wrap gap-2">
           {data.map((t) => (
-            <Badge key={t.id} variant="outline" className="h-8 gap-1.5 rounded-full pl-3 pr-1 text-sm font-normal">
+            <Badge key={t.id} variant="outline" className="h-8 gap-1.5 rounded-full pl-3 pr-1 text-sm font-normal" title={auditText(t)}>
               {t.name}
               <span className="font-mono text-[10px] text-muted-foreground">{t._count?.articles ?? 0}</span>
               <button type="button" className="rounded-full p-1 hover:bg-muted" onClick={() => { setEditing(t); setEditName(t.name); }} aria-label="Rename"><Pencil className="size-3" /></button>

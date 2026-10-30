@@ -121,14 +121,19 @@ data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fall
 - Lowongan: judul & isi dwibahasa (minimal satu bahasa; bahasa lain memakai fallback), ringkasan, tanggung jawab, kualifikasi, nilai tambah, benefit (satu poin per baris).
 - Klasifikasi: divisi, beberapa lokasi (kota/provinsi/negara), tipe kerja (penuh waktu, kontrak, magang, …), on-site/hybrid/remote, level, jumlah posisi, rentang gaji (tampil opsional), label "Dibutuhkan segera".
 - Alur status: Draft → Pending review → Published → Closed → Archived. Tanggal tutup otomatis menutup lowongan (scheduler tiap menit).
-- Melamar: email (per lowongan atau default HR, subjek otomatis dengan `{title}`/`{department}`, CC opsional) dan tautan portal (JobStreet, LinkedIn, Glints, Kalibrr, …).
-- Duplikat lowongan, metrik views & klik "lamar" per kanal (30 hari) di HR Overview, daftar "perlu perhatian" (menunggu review, tutup ≤ 7 hari).
-- Pengaturan HR: nama & email kontak, CC, telepon/WhatsApp, template subjek email ID/EN, catatan untuk pelamar, lamaran umum (talent pool), profil perusahaan di portal lowongan.
+- Melamar: email ke **beberapa penerima (To) dan beberapa CC** (maks. 10 per daftar), subjek otomatis dengan `{title}`/`{department}`, dan tautan portal (JobStreet, LinkedIn, Glints, Kalibrr, …). Default di HR Contact & Settings; tiap lowongan bisa menimpa To dan CC **secara terpisah** di "How to apply" (kosong = pakai default). Input berupa kapsul dengan tombol ×: Enter/koma/spasi/blur menambah, paste daftar dipecah otomatis, Backspace di field kosong menghapus kapsul terakhir, alamat tidak valid/duplikat/sudah ada di daftar lain ditolak (`src/components/admin/email-chips-input.tsx`, validasi server `server/src/lib/email-list.ts`).
+- Duplikat lowongan, daftar "perlu perhatian" (menunggu review, tutup ≤ 7 hari).
+- **HR Overview**: filter rentang tanggal + jam (preset Today/7/30/90 hari/bulan ini/bulan lalu/tahun ini/All time, atau kalender + jam mulai/selesai; `src/components/admin/date-range-filter.tsx`), divisi, lokasi, tipe kerja, on-site/hybrid/remote. Rentang berlaku untuk klik "lamar" (total, per kanal, per hari WIB) dan "lowongan baru/terbit"; views selalu all-time (hanya penghitung kumulatif). Tabel lowongan bisa diurutkan per kolom (posisi, status, divisi, views, klik, dibuat, diubah, tutup) dan dicari. API `GET /admin/hr/overview?from&to&allTime&departmentId&locationId&employmentType&workplaceType`.
+- **Job Openings**: kolom Created / Updated (tanggal + nama user), sort di server (`sort=createdAt|updatedAt|publishedAt|closesAt|viewCount|applyClicks|openings&order=asc|desc`), filter tanggal-jam pada kolom pilihan (`dateField=createdAt|updatedAt|publishedAt|closesAt&from&to`), filter on-site/hybrid/remote.
+- **Audit**: `Job.createdById` / `updatedById` kini relasi ke User (`createdBy` / `updatedBy`, `onDelete: SetNull`). Diisi saat buat, edit, transisi status, duplikat. Tampil di daftar, Overview, dan sidebar form ("unknown" untuk data sebelum pencatatan atau user yang sudah dihapus). Tidak pernah dikirim ke API publik.
+- Pengaturan HR: nama kontak, daftar email lamaran (To) & CC, telepon/WhatsApp, template subjek email ID/EN, catatan untuk pelamar, lamaran umum (talent pool), profil perusahaan di portal lowongan.
 - Publik: `/[locale]/career` (filter divisi, negara, lokasi, tipe; pencarian), `/[locale]/career/[slug]` dengan JSON-LD `JobPosting` (Google for Jobs) untuk lowongan yang dibuka; lowongan tertutup tetap bisa dibuka (noindex, tanpa JobPosting). Lowongan masuk sitemap.
 
 **Data & deploy** — migrasi `hr_jobs` (enum role HR_MANAGER/HR_STAFF, tabel Job/JobTranslation/JobDepartment/JobLocation/JobApplyClick).
 Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR default) hanya berjalan sekali per database
 (penanda Setting `hr_seeded`) dan otomatis dijalankan di deploy staging & produksi.
+
+Migrasi `hr_multi_email_audit` (2026-10-30): `Job.applyEmail` → `applyEmails[]` (nilai lama ikut dipindah), `ccEmails[]` baru, FK + indeks `createdById`/`updatedById` (id user yang sudah terhapus dikosongkan dulu). Pengaturan HR di tabel `Setting` tidak perlu dimigrasi: `contactEmail`/`ccEmail` lama dibaca otomatis sebagai daftar, dan pembacaan tidak pernah gagal (alamat ganda To/CC dibuang dari CC, field rusak kembali ke default). API publik tetap mengirim `contactEmail`/`ccEmail`/`applyEmail` lama (deprecated) agar halaman yang dirender build lama tetap jalan selama deploy. Tes: `server/test/hr-email-audit.*.test.ts`.
 
 ## Role kustom (System › Users & Roles)
 
@@ -158,6 +163,22 @@ Sejak migrasi `custom_roles` (2026-10-09) kolom enum `User.role` diganti relasi 
 **Tes**: `cd server && npm test` (vitest). `test/permissions.unit.test.ts` (katalog, normalisasi, helper) dan `test/roles.api.test.ts` (supertest ke app Express nyata dengan DB lokal dari `server/.env`; membuat data berawalan id run lalu menghapusnya). Butuh user seed super admin.
 
 **Frontend**: `AuthUser` = `{ role: { id, key, name, color, isSystem }, permissions: string[] }`; helper di `src/lib/admin/permissions.ts` (`hasPermission`, `canAccess`, `canWrite`, `canDelete`, `homeFor`) dan hook `useCan(modul)` (`write`, `deleteHard`, `manageUsers`, `viewActivity`, `has(key)`).
+
+## Audit "siapa" & soft delete user
+
+**createdBy / updatedBy di semua modul CRUD** — migrasi `audit_columns_user_soft_delete` (2026-10-30) menambah `createdById` / `updatedById` (dan `createdAt`/`updatedAt` yang belum ada) ke: Role, User, Category, Tag, Article, PressCoverage, SocialPost, Media, Station, PriceRegion, PricingScheme, PriceEntry, PricingTerms, Booking, ContactSubmission, JobDepartment, JobLocation, Showroom, ShowroomTeaser, Setting. Job memakai relasi `createdBy`/`updatedBy` sendiri. Backfill: pembuat artikel = author, pembuat media = pengunggah.
+- **Pengisian otomatis** (`server/src/lib/audit.ts`): `AsyncLocalStorage` per request diisi `requireAuth`; ekstensi Prisma menulis `createdById`/`updatedById` pada create/createMany/update/updateMany/upsert untuk model di `AUDITED_MODELS`. Nilai eksplisit di `data` selalu menang. Tanpa user (situs publik, scheduler, seed, tes) tidak ada yang ditulis. Pekerjaan otomatis yang dipicu dalam request admin dibungkus `asSystem()` (auto-publish artikel/liputan) agar tidak tercatat atas nama yang membuka halaman. Rute multer memakai konteks yang sama (teruji).
+- **Nama di respons**: middleware `attachAuditUsers` di `/admin/*` menambahkan `createdBy` / `updatedBy` / `deletedBy` (`{ id, name, email, avatarUrl, deleted }`) ke setiap objek yang punya `*ById`, satu query per respons.
+- **UI**: kolom "Created · Updated" (`auditColumn`, `src/components/admin/audit.tsx`) di Articles, Press, Bookings, Contact Messages, Stations, Showrooms, Teasers, Users, Topics, Divisions & Locations; baris ringkas (`AuditLine`) di kartu Social, Roles, Pricing (regions, schemes, harga per region/skema, terms, settings) dan HR settings; tooltip di chip tag; panel Media. "website" = kiriman form publik, "unknown" = data sebelum pencatatan.
+- Login tidak lagi mengubah `updatedAt` user (`lastLoginAt` lewat SQL langsung).
+
+**Soft delete user** — `DELETE /admin/users/:id` mengisi `deletedAt`, `deletedById`, `isActive=false`; user tidak bisa login, hilang dari daftar default, tapi namanya tetap tampil di semua jejak (author, created/updated by, activity log, ditandai "deleted"). Filter **Deleted** + aksi **Restore** (`POST /admin/users/:id/restore`, opsional `roleId`, `isActive`). Membuat user dengan email milik akun terhapus → 409 `USER_DELETED` dan UI menawarkan restore. Jumlah anggota role & aturan anti-lockout hanya menghitung user yang tidak terhapus. Role yang anggotanya tinggal user terhapus boleh dihapus; `roleId` user terhapus dikosongkan (kolom kini nullable khusus kasus ini) dan restore wajib memilih role.
+
+**Dashboard per role** — `GET /admin/dashboard/modules` mengembalikan angka ringkas hanya untuk modul yang bisa dibuka user; Dashboard menampilkan kartu "Your modules" (per grup menu: angka yang bisa diklik + tautan cepat). `/admin/dashboard/stats` kini menyaring angka modul yang tidak diizinkan; "Recent activity" hanya untuk izin `activity.view`, blok artikel/SEO hanya untuk `cms.view`, tombol "Write article" hanya untuk `cms.write`.
+
+**Sidebar & breadcrumb** — tiap grup menu bisa dilipat (Radix Collapsible, tersimpan di localStorage `wd-admin-nav-collapsed`; grup halaman aktif selalu terbuka; mode ikon menampilkan semua item). Breadcrumb memakai judul menu untuk path lengkap (`PATH_LABEL` di `nav-config.ts`) sebelum label segmen, sehingga `/admin/hr/settings` = "HR Contact & Settings".
+
+Tes: `server/test/audit.api.test.ts` (ekstensi untuk semua jenis operasi, HTTP lintas modul, multer, `asSystem`, soft delete/restore, dashboard per role).
 
 ## Form kontak (Leads › Contact Messages)
 

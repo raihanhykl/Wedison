@@ -27,6 +27,7 @@ import { api, errorMessage } from "@/lib/admin/api";
 import { formatDate, toLocalInput } from "@/lib/admin/format";
 import { useDebounce } from "@/hooks/use-debounce";
 import { STATUS_LABEL, type ContentStatus, type Paginated, type Press } from "@/lib/admin/types";
+import { auditColumn } from "@/components/admin/audit";
 
 const schema = z.object({
   url: z.string().url("Invalid URL"),
@@ -85,7 +86,7 @@ export function PressView() {
       cell: ({ row }) => {
         const p = row.original;
         return (
-          <div className="flex items-center gap-3 min-w-[280px]">
+          <div className="flex min-w-[240px] items-center gap-3 whitespace-normal">
             <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-md bg-muted">
               {p.imageUrl ? <Image src={p.imageUrl} alt="" fill sizes="64px" className="object-cover" unoptimized /> : <Newspaper className="absolute inset-0 m-auto size-4 text-muted-foreground" />}
             </div>
@@ -103,6 +104,7 @@ export function PressView() {
     { id: "status", header: "Status", size: 110, cell: ({ row }) => <StatusBadge status={row.original.status} /> },
     { id: "publishedAt", header: "Published", size: 120, cell: ({ row }) => <span className="text-xs">{formatDate(row.original.publishedAt)}</span> },
     { id: "fetched", header: "Metadata", size: 120, cell: ({ row }) => <span className="text-xs text-muted-foreground">{row.original.fetchedAt ? formatDate(row.original.fetchedAt) : "not fetched"}</span> },
+    auditColumn<Press>(),
     {
       id: "actions", size: 48,
       cell: ({ row }) => {

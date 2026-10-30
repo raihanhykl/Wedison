@@ -19,6 +19,7 @@ import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { useDepartments, useHrPermissions, useLocations } from "@/components/admin/hr/shared";
 import { api, errorMessage } from "@/lib/admin/api";
 import type { JobDepartment, JobLocation } from "@/lib/admin/types";
+import { AuditCell } from "@/components/admin/audit";
 
 export function StructureView() {
   const perm = useHrPermissions();
@@ -75,9 +76,9 @@ function Departments({ can }: { can: boolean }) {
       {can && <div className="flex justify-end"><Button onClick={() => open("new")}><Plus /> New division</Button></div>}
       <div className="overflow-hidden rounded-xl border border-border bg-card">
         <Table>
-          <TableHeader className="bg-muted/60"><TableRow><TableHead className="w-16">Order</TableHead><TableHead>Name (ID)</TableHead><TableHead>Name (EN)</TableHead><TableHead className="text-right">Openings</TableHead><TableHead className="w-24">Active</TableHead><TableHead className="w-24" /></TableRow></TableHeader>
+          <TableHeader className="bg-muted/60"><TableRow><TableHead className="w-16">Order</TableHead><TableHead>Name (ID)</TableHead><TableHead>Name (EN)</TableHead><TableHead className="text-right">Openings</TableHead><TableHead className="w-24">Active</TableHead><TableHead>Created · Updated</TableHead><TableHead className="w-24" /></TableRow></TableHeader>
           <TableBody>
-            {isLoading ? Array.from({ length: 4 }).map((_, i) => <TableRow key={i}>{Array.from({ length: 6 }).map((__, j) => <TableCell key={j}><Skeleton className="h-4" /></TableCell>)}</TableRow>)
+            {isLoading ? Array.from({ length: 4 }).map((_, i) => <TableRow key={i}>{Array.from({ length: 7 }).map((__, j) => <TableCell key={j}><Skeleton className="h-4" /></TableCell>)}</TableRow>)
               : data?.length ? data.map((d) => (
                 <TableRow key={d.id} className={d.isActive ? "" : "opacity-60"}>
                   <TableCell className="font-mono text-xs text-muted-foreground">{d.sortOrder}</TableCell>
@@ -85,9 +86,10 @@ function Departments({ can }: { can: boolean }) {
                   <TableCell className="text-muted-foreground">{d.nameEn ?? "—"}</TableCell>
                   <TableCell className="text-right font-mono text-xs">{d._count?.jobs ?? 0}</TableCell>
                   <TableCell><Switch checked={d.isActive} disabled={!can} onCheckedChange={() => toggle.mutate(d)} aria-label="Active" /></TableCell>
+                  <TableCell><AuditCell item={d} /></TableCell>
                   <TableCell>{can && <div className="flex justify-end gap-1"><Button variant="ghost" size="icon" className="size-8" onClick={() => open(d)} aria-label="Edit"><Pencil /></Button><Button variant="ghost" size="icon" className="size-8 text-destructive" onClick={() => setToDelete(d)} aria-label="Delete"><Trash2 /></Button></div>}</TableCell>
                 </TableRow>
-              )) : <TableRow><TableCell colSpan={6} className="p-0"><EmptyState icon={Building2} title="No divisions yet" /></TableCell></TableRow>}
+              )) : <TableRow><TableCell colSpan={7} className="p-0"><EmptyState icon={Building2} title="No divisions yet" /></TableCell></TableRow>}
           </TableBody>
         </Table>
       </div>
@@ -145,9 +147,9 @@ function Locations({ can }: { can: boolean }) {
       {can && <div className="flex justify-end"><Button onClick={() => open("new")}><Plus /> New location</Button></div>}
       <div className="overflow-hidden rounded-xl border border-border bg-card">
         <Table>
-          <TableHeader className="bg-muted/60"><TableRow><TableHead>City</TableHead><TableHead>Province / region</TableHead><TableHead>Country</TableHead><TableHead className="text-right">Openings</TableHead><TableHead className="w-24">Active</TableHead><TableHead className="w-24" /></TableRow></TableHeader>
+          <TableHeader className="bg-muted/60"><TableRow><TableHead>City</TableHead><TableHead>Province / region</TableHead><TableHead>Country</TableHead><TableHead className="text-right">Openings</TableHead><TableHead className="w-24">Active</TableHead><TableHead>Created · Updated</TableHead><TableHead className="w-24" /></TableRow></TableHeader>
           <TableBody>
-            {isLoading ? Array.from({ length: 4 }).map((_, i) => <TableRow key={i}>{Array.from({ length: 6 }).map((__, j) => <TableCell key={j}><Skeleton className="h-4" /></TableCell>)}</TableRow>)
+            {isLoading ? Array.from({ length: 4 }).map((_, i) => <TableRow key={i}>{Array.from({ length: 7 }).map((__, j) => <TableCell key={j}><Skeleton className="h-4" /></TableCell>)}</TableRow>)
               : data?.length ? data.map((l) => (
                 <TableRow key={l.id} className={l.isActive ? "" : "opacity-60"}>
                   <TableCell className="font-medium">{l.city}</TableCell>
@@ -155,9 +157,10 @@ function Locations({ can }: { can: boolean }) {
                   <TableCell>{l.country} <Badge variant="outline" className="ml-1 font-mono text-[10px]">{l.countryCode}</Badge></TableCell>
                   <TableCell className="text-right font-mono text-xs">{l._count?.jobs ?? 0}</TableCell>
                   <TableCell><Switch checked={l.isActive} disabled={!can} onCheckedChange={() => toggle.mutate(l)} aria-label="Active" /></TableCell>
+                  <TableCell><AuditCell item={l} /></TableCell>
                   <TableCell>{can && <div className="flex justify-end gap-1"><Button variant="ghost" size="icon" className="size-8" onClick={() => open(l)} aria-label="Edit"><Pencil /></Button><Button variant="ghost" size="icon" className="size-8 text-destructive" onClick={() => setToDelete(l)} aria-label="Delete"><Trash2 /></Button></div>}</TableCell>
                 </TableRow>
-              )) : <TableRow><TableCell colSpan={6} className="p-0"><EmptyState icon={MapPin} title="No locations yet" /></TableCell></TableRow>}
+              )) : <TableRow><TableCell colSpan={7} className="p-0"><EmptyState icon={MapPin} title="No locations yet" /></TableCell></TableRow>}
           </TableBody>
         </Table>
       </div>

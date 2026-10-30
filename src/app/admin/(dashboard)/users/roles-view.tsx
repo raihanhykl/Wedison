@@ -21,6 +21,7 @@ import { api, errorMessage } from "@/lib/admin/api";
 import { cn } from "@/lib/utils";
 import { ROLE_COLOR_CLASS, type PermissionCatalog, type Role, type RoleColor } from "@/lib/admin/types";
 import { RoleDot, dependentsOf, describePermissions, expandPermissions, useRoleCatalog, useRoles } from "./role-shared";
+import { AuditLine } from "@/components/admin/audit";
 
 const KEY_RE = /^[a-z][a-z0-9_]{1,39}$/;
 
@@ -110,7 +111,8 @@ export function RolesView({ onShowMembers }: { onShowMembers: (roleId: string) =
                 )) : <li className="text-muted-foreground">No permissions yet — members can only open My Account.</li>}
               </ul>
 
-              <div className="mt-auto flex items-center justify-between pt-4 text-xs text-muted-foreground">
+              <AuditLine item={role} className="mt-3" fallback="system" />
+              <div className="mt-auto flex items-center justify-between pt-3 text-xs text-muted-foreground">
                 <button type="button" onClick={() => onShowMembers(role.id)} className="flex items-center gap-1.5 rounded-md px-1.5 py-1 -ml-1.5 hover:bg-muted hover:text-foreground">
                   <Users className="size-3.5" /> {role._count.users} member{role._count.users === 1 ? "" : "s"}
                 </button>

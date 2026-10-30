@@ -19,6 +19,7 @@ import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { useCan } from "@/components/admin/providers";
 import { api, errorMessage } from "@/lib/admin/api";
 import { cn } from "@/lib/utils";
+import { AuditLine } from "@/components/admin/audit";
 import {
   PRICING_AUDIENCE_LABEL, PRICING_KIND_LABEL,
   type PriceRegion, type PricingAudience, type PricingData, type PricingKind, type PricingScheme,
@@ -72,6 +73,7 @@ export function RegionsPanel({ data }: { data: PricingData }) {
                 {!r.isActive && <Badge variant="outline">Hidden</Badge>}
               </div>
               <p className="text-xs text-muted-foreground">{r.priceLabelId || "—"} · {r.coverageId || "no coverage note"} · {rowCount(r.id)} price rows{r.salesWhatsapp ? ` · WA ${r.salesWhatsapp}` : ""}</p>
+              <AuditLine item={r} />
             </div>
             <span className="font-mono text-xs text-muted-foreground">#{r.sortOrder}</span>
             {can.write && <Button variant="ghost" size="sm" onClick={() => setEditing(r)}><Pencil /> Edit</Button>}
@@ -206,6 +208,7 @@ export function SchemesPanel({ data }: { data: PricingData }) {
                 {!s.isActive && <Badge variant="outline">Inactive</Badge>}
               </div>
               <p className="text-xs text-muted-foreground">{s.taglineId || "—"} · {rowCount(s.id)} price rows</p>
+              <AuditLine item={s} />
             </div>
             <span className="font-mono text-xs text-muted-foreground">#{s.sortOrder}</span>
             <label className="flex items-center gap-2 text-xs text-muted-foreground">

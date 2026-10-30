@@ -3,13 +3,19 @@ import { logger } from "./logger.js";
 import { invalidate, CacheTags } from "./cache.js";
 import { purgeOldConsentLogs } from "../modules/consent/consent.routes.js";
 import { autoCloseJobs } from "../modules/hr/hr.routes.js";
+import { asSystem } from "./audit.js";
 
 /**
  * Promote SCHEDULED content whose publish time has passed to PUBLISHED.
  * Runs every minute (see startScheduler) and on demand before admin listings,
  * so the status shown in the dashboard is never stale.
  */
-export async function promoteScheduled(): Promise<number> {
+export function promoteScheduled(): Promise<number> {
+  // System work: never attributed to the admin whose page load triggered it.
+  return asSystem(promoteScheduledNow);
+}
+
+async function promoteScheduledNow(): Promise<number> {
   const now = new Date();
   const [articles, press] = await Promise.all([
     prisma.article.updateMany({

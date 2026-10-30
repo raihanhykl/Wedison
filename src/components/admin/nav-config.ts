@@ -67,7 +67,19 @@ export const NAV: NavGroup[] = [
   },
 ];
 
-/** Breadcrumb label per path segment. */
+/**
+ * Breadcrumb label for a full path, taken from the menu so a crumb always matches the sidebar
+ * (e.g. /admin/hr/settings = "HR Contact & Settings", /admin/settings = "My Account").
+ * Group overview pages ("Overview") and the root keep their segment label (HR, Leads, Admin).
+ */
+export const PATH_LABEL: Record<string, string> = Object.fromEntries(
+  NAV.flatMap((g) => g.items)
+    .filter((i) => i.href !== "/admin" && i.title !== "Overview")
+    .map((i) => [i.href, i.title]),
+);
+PATH_LABEL["/admin/showrooms"] = "Showroom Locations"; // "Locations" alone is ambiguous with HR locations
+
+/** Breadcrumb label per path segment (fallback when the full path is not a menu item). */
 export const SEGMENT_LABEL: Record<string, string> = {
   admin: "Admin",
   cms: "CMS",
