@@ -42,6 +42,7 @@ export default function StationDetail({
       ref={panelRef}
       role="dialog"
       aria-labelledby={TITLE_ID}
+      data-chat-obstruct="below-lg"
       tabIndex={-1}
       // Elevasi via style inline: kelas shadow arbitrary bernilai negatif tidak ter-generate.
       style={{ boxShadow: "0 -10px 34px rgba(20,31,24,0.22)" }}

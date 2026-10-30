@@ -89,6 +89,7 @@ export default function CookieConsent() {
         <div
           role="region"
           aria-label={t("consent.title")}
+          data-chat-obstruct="below-sm"
           className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500 sm:left-6 sm:right-auto sm:mx-0"
         >
           <div className="rounded-2xl border border-border bg-background p-5 shadow-[0_24px_60px_-20px_rgba(10,40,25,0.35)] sm:p-6">
