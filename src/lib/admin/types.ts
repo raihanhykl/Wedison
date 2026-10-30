@@ -1,10 +1,15 @@
+import type { Audited } from "@/components/admin/audit";
+
+/** createdAt / updatedAt / createdById / updatedById + resolved createdBy / updatedBy (admin API). */
+export type AuditFields = Audited;
+
 // Types returned by the backend (server/prisma/schema.prisma). Kept in sync manually.
 // "Topics" in the UI map to the Category model in the database.
 import type { ModelKey, TeaserContent, TeaserImages, TeaserLocale, TeaserStatus } from "@/lib/teasers/teaser";
 /** Badge colors a role may use (mirrors server/src/lib/roles.ts). */
 export type RoleColor = "emerald" | "blue" | "violet" | "pink" | "amber" | "teal" | "cyan" | "rose" | "orange" | "indigo" | "lime" | "slate";
 export type RoleRef = { id: string; key: string; name: string; color: RoleColor | null; isSystem: boolean };
-export type Role = RoleRef & {
+export type Role = AuditFields & RoleRef & {
   description: string | null;
   permissions: string[];
   createdAt: string;
@@ -29,15 +34,20 @@ export type Paginated<T> = {
   meta: { page: number; limit: number; total: number; totalPages: number };
 };
 
-export type User = Omit<AuthUser, "permissions"> & {
+export type User = AuditFields & Omit<AuthUser, "permissions" | "role"> & {
+  /** null only for a deleted user whose role was removed afterwards. */
+  role: RoleRef | null;
   isActive: boolean;
+  deletedAt?: string | null;
+  deletedById?: string | null;
+  deletedBy?: import("@/components/admin/audit").AuditUserRef;
   lastLoginAt: string | null;
   createdAt: string;
   updatedAt: string;
   _count?: { articles: number };
 };
 
-export type Category = {
+export type Category = AuditFields & {
   id: string;
   slug: string;
   nameId: string;
@@ -48,9 +58,9 @@ export type Category = {
   _count?: { articles: number };
 };
 
-export type Tag = { id: string; slug: string; name: string; _count?: { articles: number } };
+export type Tag = AuditFields & { id: string; slug: string; name: string; _count?: { articles: number } };
 
-export type Media = {
+export type Media = AuditFields & {
   id: string;
   filename: string;
   originalName: string;
@@ -129,7 +139,7 @@ export const PILLAR_DESCRIPTION: Record<Pillar, string> = {
   geo: "Generative Engine Optimization — how likely ChatGPT, Gemini, Perplexity and similar cite this content.",
 };
 
-export type Article = {
+export type Article = AuditFields & {
   id: string;
   status: ContentStatus;
   isFeatured: boolean;
@@ -151,7 +161,7 @@ export type Article = {
   updatedAt: string;
 };
 
-export type Press = {
+export type Press = AuditFields & {
   id: string;
   slug: string;
   url: string;
@@ -169,7 +179,7 @@ export type Press = {
   updatedAt: string;
 };
 
-export type SocialPost = {
+export type SocialPost = AuditFields & {
   id: string;
   platform: SocialPlatform;
   url: string;
@@ -184,7 +194,7 @@ export type SocialPost = {
   updatedAt: string;
 };
 
-export type Station = {
+export type Station = AuditFields & {
   id: string;
   slug: string;
   name: string;
@@ -209,7 +219,7 @@ export type Station = {
 export type ActivityLog = {
   id: string;
   userId: string | null;
-  user: { id: string; name: string; email: string; avatarUrl: string | null } | null;
+  user: { id: string; name: string; email: string; avatarUrl: string | null; deletedAt?: string | null } | null;
   action: string;
   entity: string;
   entityId: string | null;
@@ -272,8 +282,8 @@ export type JobStatus = "DRAFT" | "PENDING_REVIEW" | "PUBLISHED" | "CLOSED" | "A
 export type EmploymentType = "FULL_TIME" | "PART_TIME" | "CONTRACT" | "INTERNSHIP" | "FREELANCE";
 export type WorkplaceType = "ONSITE" | "HYBRID" | "REMOTE";
 export type ExperienceLevel = "ENTRY" | "JUNIOR" | "MID" | "SENIOR" | "LEAD" | "MANAGER";
-export type JobDepartment = { id: string; slug: string; nameId: string; nameEn: string | null; sortOrder: number; isActive: boolean; _count?: { jobs: number } };
-export type JobLocation = { id: string; slug: string; city: string; province: string | null; country: string; countryCode: string; sortOrder: number; isActive: boolean; _count?: { jobs: number } };
+export type JobDepartment = AuditFields & { id: string; slug: string; nameId: string; nameEn: string | null; sortOrder: number; isActive: boolean; _count?: { jobs: number } };
+export type JobLocation = AuditFields & { id: string; slug: string; city: string; province: string | null; country: string; countryCode: string; sortOrder: number; isActive: boolean; _count?: { jobs: number } };
 export type JobTranslation = { id?: string; locale: Locale; title: string; summary: string; responsibilities: string[]; qualifications: string[]; niceToHave: string[]; benefits: string[] };
 export type Job = {
   id: string; slug: string; status: JobStatus; departmentId: string | null; department: JobDepartment | null; locations: JobLocation[];
@@ -343,23 +353,23 @@ export type PricingVariant = "SINGLE" | "REGULAR" | "EXTENDED";
 export type PricingKind = "PURCHASE" | "RENT_TO_OWN" | "RENTAL" | "B2B_CREDIT" | "BAAS";
 export type PricingAudience = "ALL" | "OJOL" | "B2B";
 
-export type PriceRegion = {
+export type PriceRegion = AuditFields & {
   id: string; slug: string; nameId: string; nameEn: string; priceLabelId: string; priceLabelEn: string;
   coverageId: string | null; coverageEn: string | null; salesWhatsapp: string | null;
   isDefault: boolean; isActive: boolean; sortOrder: number; createdAt: string; updatedAt: string;
 };
-export type PricingScheme = {
+export type PricingScheme = AuditFields & {
   id: string; slug: string; kind: PricingKind; nameId: string; nameEn: string;
   taglineId: string | null; taglineEn: string | null; descriptionId: string | null; descriptionEn: string | null;
   audience: PricingAudience; isPublic: boolean; isActive: boolean; sortOrder: number; createdAt: string; updatedAt: string;
 };
-export type PriceEntry = {
+export type PriceEntry = AuditFields & {
   id: string; regionId: string; schemeId: string; model: PricingModel; variant: PricingVariant;
   otrPrice: number | null; discount: number | null; netPrice: number | null; dailyFee: number | null; downPayment: number | null;
   termMonths: number | null; installment24: number | null; installment36: number | null; unitPrice: number | null; monthlyFee: number | null;
   noteId: string | null; noteEn: string | null; isActive: boolean; updatedAt: string;
 };
-export type PricingTerms = {
+export type PricingTerms = AuditFields & {
   id: string; regionId: string; schemeId: string; includedId: string[]; includedEn: string[]; termsId: string[]; termsEn: string[];
   partners: string[]; validFrom: string | null; validUntil: string | null; noteId: string | null; noteEn: string | null; updatedAt: string;
 };
@@ -368,7 +378,7 @@ export type PricingSettings = {
   supercharge: { enabled: boolean; unitId: string; unitEn: string; tariff: Record<"bees" | "athena" | "victory" | "edpower", number | null>; noteId: string | null; noteEn: string | null };
   referral: { enabled: boolean; amount: number; regionSlugs: string[]; titleId: string; titleEn: string; descriptionId: string; descriptionEn: string };
 };
-export type PricingData = { regions: PriceRegion[]; schemes: PricingScheme[]; entries: PriceEntry[]; terms: PricingTerms[]; settings: PricingSettings };
+export type PricingData = { regions: PriceRegion[]; schemes: PricingScheme[]; entries: PriceEntry[]; terms: PricingTerms[]; settings: PricingSettings; settingsMeta: AuditFields | null };
 
 export const PRICING_MODEL_LABEL: Record<PricingModel, string> = { BEES: "Bees", ATHENA: "Athena", VICTORY: "Victory", EDPOWER: "EdPower" };
 export const PRICING_VARIANT_LABEL: Record<PricingVariant, string> = { SINGLE: "Single variant", REGULAR: "Regular battery", EXTENDED: "Extended battery" };
@@ -398,7 +408,7 @@ export type BookingPurpose = "TEST_RIDE" | "CONSULTATION" | "FINANCING" | "SERVI
 export type BookingStatus = "NEW" | "CONTACTED" | "CONFIRMED" | "COMPLETED" | "CANCELLED" | "NO_SHOW";
 export type CalendarSyncStatus = "PENDING" | "SAVED" | "FAILED" | "SKIPPED";
 
-export type Booking = {
+export type Booking = AuditFields & {
   id: string;
   showroom: ShowroomId;
   purpose: BookingPurpose;
@@ -423,7 +433,7 @@ export type Booking = {
   updatedAt: string;
 };
 
-export type ContactSubmission = {
+export type ContactSubmission = AuditFields & {
   id: string;
   name: string;
   email: string;
@@ -507,7 +517,7 @@ export type ContactSourceOption = { value: string; label: string; count: number 
 export type TeaserIssue = { path: string; message: string };
 
 /** Showroom teaser seperti dikirim API admin (/admin/teasers). */
-export type AdminTeaser = {
+export type AdminTeaser = AuditFields & {
   id: string;
   slug: string;
   city: string;
@@ -553,7 +563,7 @@ export type DayHours = { open: string; close: string } | null;
 export type WeekHours = Record<DayKey | "holiday", DayHours>;
 export type ShowroomClosure = { from: string; to: string; note: string };
 
-export type AdminShowroom = {
+export type AdminShowroom = AuditFields & {
   id: string;
   name: string;
   city: string;

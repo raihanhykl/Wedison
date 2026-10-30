@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { api } from "@/lib/admin/api";
-import { JOB_STATUS_LABEL, type HrPermissions, type HrSettings, type JobAuditUser, type Job, type JobDepartment, type JobLocation, type JobStatus } from "@/lib/admin/types";
+import { JOB_STATUS_LABEL, type HrPermissions, type HrSettings, type Job, type JobDepartment, type JobLocation, type JobStatus } from "@/lib/admin/types";
 
 /** Permissions of the current user inside the HR module (from the backend). */
 export function useHrPermissions() {
@@ -21,27 +21,7 @@ export function useHrSettings() {
   return useQuery({ queryKey: ["hr-settings"], queryFn: () => api<{ data: HrSettings }>("/admin/hr/settings").then((r) => r.data), staleTime: 60_000 });
 }
 
-/** "date · name" line for created/updated audit fields. "unknown" covers records made before tracking and deleted users. */
-export function AuditStamp({ user, at, verb, stacked }: { user: JobAuditUser | { name: string } | null | undefined; at: string | null | undefined; verb?: string; stacked?: boolean }) {
-  if (!at) return <span className="text-muted-foreground">—</span>;
-  const d = new Date(at);
-  const date = d.toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
-  if (stacked) {
-    return (
-      <span className="flex flex-col leading-tight" title={d.toISOString()}>
-        <span className="whitespace-nowrap tabular-nums">{date}</span>
-        <span className="max-w-[160px] truncate text-muted-foreground">{user?.name ?? "unknown"}</span>
-      </span>
-    );
-  }
-  return (
-    <span title={d.toISOString()}>
-      {verb && <span className="text-muted-foreground">{verb} </span>}
-      <span className="tabular-nums">{date}</span>
-      <span className="text-muted-foreground"> · {user?.name ?? "unknown"}</span>
-    </span>
-  );
-}
+export { AuditStamp } from "@/components/admin/audit";
 
 export function useDepartments() {
   return useQuery({ queryKey: ["hr-departments"], queryFn: () => api<{ items: JobDepartment[] }>("/admin/hr/departments").then((r) => r.items) });

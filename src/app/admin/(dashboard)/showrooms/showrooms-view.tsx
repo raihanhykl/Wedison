@@ -24,9 +24,9 @@ import {
   SHOWROOM_STATUS_LABEL, ShowroomStatusBadge, useShowroomPermissions, visibilitySummary,
 } from "@/components/admin/showrooms/shared";
 import { ApiError, api, errorMessage } from "@/lib/admin/api";
-import { timeAgo, formatDateTime } from "@/lib/admin/format";
 import { cn } from "@/lib/utils";
 import type { AdminShowroom, ShowroomStatus } from "@/lib/admin/types";
+import { auditColumn } from "@/components/admin/audit";
 
 type Filter = "all" | ShowroomStatus;
 const STATUSES: ShowroomStatus[] = ["OPEN", "COMING_SOON", "TEMPORARILY_CLOSED", "CLOSED"];
@@ -118,7 +118,7 @@ export function ShowroomsView() {
         );
       },
     },
-    { id: "updated", header: "Updated", size: 110, cell: ({ row }) => <span className="text-xs text-muted-foreground" title={formatDateTime(row.original.updatedAt)}>{timeAgo(row.original.updatedAt)}</span> },
+    auditColumn<AdminShowroom>(),
     {
       id: "actions", header: "", size: 48,
       cell: ({ row }) => {

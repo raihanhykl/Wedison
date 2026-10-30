@@ -8,6 +8,7 @@ import { env, isProd } from "./config/env.js";
 import { logger } from "./lib/logger.js";
 import { api } from "./routes/index.js";
 import { errorHandler, notFoundHandler } from "./middleware/error-handler.js";
+import { auditContext } from "./lib/audit.js";
 
 export function createApp() {
   const app = express();
@@ -50,7 +51,8 @@ export function createApp() {
     }),
   );
 
-  app.use("/api/v1", api);
+  // Per-request audit store (who is writing); filled by requireAuth.
+  app.use("/api/v1", auditContext, api);
 
   app.use(notFoundHandler);
   app.use(errorHandler);

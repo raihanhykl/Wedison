@@ -19,7 +19,7 @@ const ENTITIES = ["article", "press", "social", "media", "topic", "user", "stati
 
 const columns: ColumnDef<ActivityLog, unknown>[] = [
   { accessorKey: "createdAt", header: "Time", cell: ({ row }) => <span className="font-mono text-xs whitespace-nowrap">{formatDateTime(row.original.createdAt)}</span>, size: 160 },
-  { accessorKey: "user", header: "User", cell: ({ row }) => <span className="font-medium">{row.original.user?.name ?? "System"}</span> },
+  { accessorKey: "user", header: "User", cell: ({ row }) => <span className="font-medium">{row.original.user?.name ?? "System"}{row.original.user?.deletedAt && <span className="ml-1 rounded bg-muted px-1 text-[10px] font-normal uppercase tracking-wide text-muted-foreground">deleted</span>}</span> },
   { accessorKey: "action", header: "Action", cell: ({ row }) => <Badge variant="outline" className="font-mono text-[11px]">{row.original.action}</Badge>, size: 110 },
   { accessorKey: "entity", header: "Entity", cell: ({ row }) => <span className="text-muted-foreground">{row.original.entity}</span>, size: 110 },
   { accessorKey: "summary", header: "Summary", cell: ({ row }) => <span>{row.original.summary ?? "—"}</span> },

@@ -26,6 +26,7 @@ import { waLink, type ContactSourceOption, type ContactSubmission, type Paginate
 import { sourceLabel, useContactSources } from "@/lib/admin/contact-sources";
 import { contactReplyMailto } from "@/lib/admin/contact-reply";
 import { cn } from "@/lib/utils";
+import { auditColumn } from "@/components/admin/audit";
 
 function HandledBadge({ c }: { c: ContactSubmission }) {
   return (
@@ -82,8 +83,9 @@ export function ContactsView() {
     },
     { id: "topic", header: "Topic", size: 190, cell: ({ row }) => <Badge variant="outline" className="max-w-[180px] truncate">{row.original.topic}</Badge> },
     { id: "source", header: "Source", size: 150, cell: ({ row }) => <span className="whitespace-nowrap text-sm text-muted-foreground">{sourceLabel(sources.data, row.original.source)}</span> },
-    { id: "message", header: "Message", cell: ({ row }) => <p className="line-clamp-2 max-w-[360px] text-sm text-muted-foreground">{row.original.message}</p> },
+    { id: "message", header: "Message", cell: ({ row }) => <p className="line-clamp-2 max-w-[300px] whitespace-normal text-sm text-muted-foreground">{row.original.message}</p> },
     { id: "status", header: "Status", size: 110, cell: ({ row }) => <HandledBadge c={row.original} /> },
+    auditColumn<ContactSubmission>({ createdFallback: "website", updatedFallback: "website" }),
     {
       id: "actions", header: "", size: 48,
       cell: ({ row }) => {

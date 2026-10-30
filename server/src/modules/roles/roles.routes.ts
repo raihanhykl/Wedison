@@ -132,7 +132,11 @@ rolesRouter.delete("/:id", async (req, res, next) => {
     if (!role) throw notFound("Role not found");
     assertNotSystem(role, "deleted");
     if (role._count.users > 0) throw conflict(`${role.name} still has ${role._count.users} member${role._count.users > 1 ? "s" : ""}. Move them to another role first.`);
-    await prisma.role.delete({ where: { id } });
+    // Deleted users may still point at this role: detach them (they must get a role when restored).
+    await prisma.$transaction(async (tx) => {
+      await tx.user.updateMany({ where: { roleId: id, deletedAt: { not: null } }, data: { roleId: null } });
+      await tx.role.delete({ where: { id } });
+    });
     logActivity(req, { action: "delete", entity: "role", entityId: id, summary: `Deleted role ${role.name}` });
     res.json({ ok: true });
   } catch (e) {

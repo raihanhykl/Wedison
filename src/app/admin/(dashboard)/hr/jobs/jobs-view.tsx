@@ -132,7 +132,7 @@ export function JobsView() {
     { id: "closes", header: () => <SortButton label="Closes" k="closesAt" sort={sort} onSort={onSort} />, size: 110, cell: ({ row }) => <span className="whitespace-nowrap text-xs">{row.original.closesAt ? formatDate(row.original.closesAt) : <span className="text-muted-foreground">—</span>}</span> },
     {
       id: "metrics", size: 130,
-      header: () => <span className="inline-flex items-center whitespace-nowrap"><SortButton label="Views" k="viewCount" sort={sort} onSort={onSort} /><span aria-hidden className="pl-1 pr-3">·</span><SortButton label="Apply" k="applyClicks" sort={sort} onSort={onSort} /></span>,
+      header: () => <span className="inline-flex items-center whitespace-nowrap"><SortButton label="Views" k="viewCount" sort={sort} onSort={onSort} /><span aria-hidden className="pl-0.5 pr-2.5">·</span><SortButton label="Apply" k="applyClicks" sort={sort} onSort={onSort} /></span>,
       cell: ({ row }) => <span className="font-mono text-xs">{row.original.viewCount} · {row.original._count?.applyClicks ?? 0}</span>,
     },
     {

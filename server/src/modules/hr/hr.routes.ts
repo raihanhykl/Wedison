@@ -7,6 +7,7 @@ import { validate, getValidated } from "../../middleware/validate.js";
 import { requireAuth, requireModule, requireHr } from "../../middleware/auth.js";
 import { canHr } from "../../lib/permissions.js";
 import { emailList, overlap } from "../../lib/email-list.js";
+import { settingMeta } from "../../lib/setting-meta.js";
 import { slugify, uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -62,7 +63,7 @@ const jobSchema = z
     if (both.length) ctx.addIssue({ code: "custom", path: ["ccEmails"], message: `${both.join(", ")} is already an application email; remove it from CC` });
   });
 
-const auditUser = { select: { id: true, name: true, email: true, avatarUrl: true } } as const;
+const auditUser = { select: { id: true, name: true, email: true, avatarUrl: true, deletedAt: true } } as const;
 
 const include = {
   department: true,
@@ -616,7 +617,7 @@ hrRouter.delete("/locations/:id", requireHr("taxonomy.write"), async (req, res, 
 // ── HR settings (contact & application) ──
 hrRouter.get("/settings", requireHr("jobs.read"), async (_req, res, next) => {
   try {
-    res.json({ ok: true, data: await getHrSettings() });
+    res.json({ ok: true, data: await getHrSettings(), meta: await settingMeta("hr_settings") });
   } catch (e) {
     next(e);
   }
@@ -626,7 +627,7 @@ hrRouter.put("/settings", requireHr("settings.write"), validate(hrSettingsSchema
     const data = await saveHrSettings(getValidated<typeof hrSettingsSchema>(req));
     bust();
     logActivity(req, { action: "update", entity: "hr-settings", summary: "Updated HR contact & application settings" });
-    res.json({ ok: true, data });
+    res.json({ ok: true, data, meta: await settingMeta("hr_settings") });
   } catch (e) {
     next(e);
   }

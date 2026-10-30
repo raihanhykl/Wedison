@@ -164,6 +164,22 @@ Sejak migrasi `custom_roles` (2026-10-09) kolom enum `User.role` diganti relasi 
 
 **Frontend**: `AuthUser` = `{ role: { id, key, name, color, isSystem }, permissions: string[] }`; helper di `src/lib/admin/permissions.ts` (`hasPermission`, `canAccess`, `canWrite`, `canDelete`, `homeFor`) dan hook `useCan(modul)` (`write`, `deleteHard`, `manageUsers`, `viewActivity`, `has(key)`).
 
+## Audit "siapa" & soft delete user
+
+**createdBy / updatedBy di semua modul CRUD** — migrasi `audit_columns_user_soft_delete` (2026-10-30) menambah `createdById` / `updatedById` (dan `createdAt`/`updatedAt` yang belum ada) ke: Role, User, Category, Tag, Article, PressCoverage, SocialPost, Media, Station, PriceRegion, PricingScheme, PriceEntry, PricingTerms, Booking, ContactSubmission, JobDepartment, JobLocation, Showroom, ShowroomTeaser, Setting. Job memakai relasi `createdBy`/`updatedBy` sendiri. Backfill: pembuat artikel = author, pembuat media = pengunggah.
+- **Pengisian otomatis** (`server/src/lib/audit.ts`): `AsyncLocalStorage` per request diisi `requireAuth`; ekstensi Prisma menulis `createdById`/`updatedById` pada create/createMany/update/updateMany/upsert untuk model di `AUDITED_MODELS`. Nilai eksplisit di `data` selalu menang. Tanpa user (situs publik, scheduler, seed, tes) tidak ada yang ditulis. Pekerjaan otomatis yang dipicu dalam request admin dibungkus `asSystem()` (auto-publish artikel/liputan) agar tidak tercatat atas nama yang membuka halaman. Rute multer memakai konteks yang sama (teruji).
+- **Nama di respons**: middleware `attachAuditUsers` di `/admin/*` menambahkan `createdBy` / `updatedBy` / `deletedBy` (`{ id, name, email, avatarUrl, deleted }`) ke setiap objek yang punya `*ById`, satu query per respons.
+- **UI**: kolom "Created · Updated" (`auditColumn`, `src/components/admin/audit.tsx`) di Articles, Press, Bookings, Contact Messages, Stations, Showrooms, Teasers, Users, Topics, Divisions & Locations; baris ringkas (`AuditLine`) di kartu Social, Roles, Pricing (regions, schemes, harga per region/skema, terms, settings) dan HR settings; tooltip di chip tag; panel Media. "website" = kiriman form publik, "unknown" = data sebelum pencatatan.
+- Login tidak lagi mengubah `updatedAt` user (`lastLoginAt` lewat SQL langsung).
+
+**Soft delete user** — `DELETE /admin/users/:id` mengisi `deletedAt`, `deletedById`, `isActive=false`; user tidak bisa login, hilang dari daftar default, tapi namanya tetap tampil di semua jejak (author, created/updated by, activity log, ditandai "deleted"). Filter **Deleted** + aksi **Restore** (`POST /admin/users/:id/restore`, opsional `roleId`, `isActive`). Membuat user dengan email milik akun terhapus → 409 `USER_DELETED` dan UI menawarkan restore. Jumlah anggota role & aturan anti-lockout hanya menghitung user yang tidak terhapus. Role yang anggotanya tinggal user terhapus boleh dihapus; `roleId` user terhapus dikosongkan (kolom kini nullable khusus kasus ini) dan restore wajib memilih role.
+
+**Dashboard per role** — `GET /admin/dashboard/modules` mengembalikan angka ringkas hanya untuk modul yang bisa dibuka user; Dashboard menampilkan kartu "Your modules" (per grup menu: angka yang bisa diklik + tautan cepat). `/admin/dashboard/stats` kini menyaring angka modul yang tidak diizinkan; "Recent activity" hanya untuk izin `activity.view`, blok artikel/SEO hanya untuk `cms.view`, tombol "Write article" hanya untuk `cms.write`.
+
+**Sidebar & breadcrumb** — tiap grup menu bisa dilipat (Radix Collapsible, tersimpan di localStorage `wd-admin-nav-collapsed`; grup halaman aktif selalu terbuka; mode ikon menampilkan semua item). Breadcrumb memakai judul menu untuk path lengkap (`PATH_LABEL` di `nav-config.ts`) sebelum label segmen, sehingga `/admin/hr/settings` = "HR Contact & Settings".
+
+Tes: `server/test/audit.api.test.ts` (ekstensi untuk semua jenis operasi, HTTP lintas modul, multer, `asSystem`, soft delete/restore, dashboard per role).
+
 ## Form kontak (Leads › Contact Messages)
 
 `POST /public/leads/contacts` adalah sumber kebenaran: form `/corporate/contact` menunggu respons ini sebelum menampilkan "terkirim"; notifikasi email via EmailJS dikirim setelahnya secara best-effort (gagal hanya dicatat di console). Server **idempoten**: email + isi pesan yang sama dalam 15 menit mengembalikan id yang sama (`duplicate: true`) sehingga klik ganda/kirim ulang tidak menggandakan pesan di admin. Tombol **Reply by email** membuka mailto berisi sapaan, topik, slot balasan, dan kutipan pesan asli (bahasa mengikuti locale form) — `src/lib/admin/contact-reply.ts`.

@@ -15,12 +15,15 @@ import { PageHeader } from "@/components/admin/page-header";
 import { EmailChipsInput } from "@/components/admin/email-chips-input";
 import { useHrPermissions } from "@/components/admin/hr/shared";
 import { api, errorMessage } from "@/lib/admin/api";
-import type { HrSettings } from "@/lib/admin/types";
+import type { AuditFields, HrSettings } from "@/lib/admin/types";
+import { AuditLine } from "@/components/admin/audit";
 
 export function HrSettingsView() {
   const qc = useQueryClient();
   const perm = useHrPermissions();
   const { data, isLoading } = useQuery({ queryKey: ["hr-settings"], queryFn: () => api<{ data: HrSettings }>("/admin/hr/settings").then((r) => r.data) });
+  // Who/when the settings were last changed (separate key: ["hr-settings"] holds only the values).
+  const meta = useQuery({ queryKey: ["hr-settings-meta"], queryFn: () => api<{ meta: AuditFields | null }>("/admin/hr/settings").then((r) => r.meta) });
   const [s, setS] = useState<HrSettings | null>(null);
   useEffect(() => { if (data) setS(data); }, [data]);
   const can = !!perm.data?.settings;
@@ -30,7 +33,7 @@ export function HrSettingsView() {
       method: "PUT",
       body: { ...s!, phone: s!.phone || null, whatsapp: s!.whatsapp || null, applicationNoteId: s!.applicationNoteId || null, applicationNoteEn: s!.applicationNoteEn || null, companyPortals: s!.companyPortals.filter((p) => p.name.trim() && p.url.trim()) },
     }).then((r) => r.data),
-    onSuccess: (d) => { qc.setQueryData(["hr-settings"], d); toast.success("HR settings saved. The careers page updates within a minute."); },
+    onSuccess: (d) => { qc.setQueryData(["hr-settings"], d); qc.invalidateQueries({ queryKey: ["hr-settings-meta"] }); toast.success("HR settings saved. The careers page updates within a minute."); },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -45,6 +48,7 @@ export function HrSettingsView() {
         description="Contact details applicants see on the careers page, and how application emails are prepared."
         actions={can && <Button onClick={() => save.mutate()} disabled={save.isPending || !s.contactEmails.length}>{save.isPending ? <Loader2 className="animate-spin" /> : <Save />} Save</Button>}
       />
+      {meta.data && <AuditLine item={meta.data} className="-mt-3" />}
       {!can && <p className="text-sm text-muted-foreground">You can view these settings. Only an HR Manager can change them.</p>}
       <fieldset disabled={!can} className="grid gap-6 lg:grid-cols-2">
         <Card>

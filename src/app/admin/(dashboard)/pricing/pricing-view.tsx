@@ -21,9 +21,9 @@ import { api, errorMessage } from "@/lib/admin/api";
 import { cn } from "@/lib/utils";
 import {
   PRICING_KIND_FIELDS, PRICING_KIND_LABEL, PRICING_MODEL_LABEL, PRICING_VARIANT_LABEL,
-  type PriceEntry, type PriceRegion, type PricingData, type PricingModel, type PricingSettings, type PricingVariant,
-} from "@/lib/admin/types";
+  type PriceEntry, type PriceRegion, type PricingData, type PricingModel, type PricingSettings, type PricingVariant, type AuditFields } from "@/lib/admin/types";
 import { RegionsPanel, SchemesPanel } from "./pricing-catalog";
+import { AuditLine } from "@/components/admin/audit";
 
 /** Baris tetap di tabel harga: model × varian yang ada di line-up. */
 const ROWS: { model: PricingModel; variant: PricingVariant }[] = [
@@ -67,7 +67,7 @@ export function PricingView() {
           <TabsContent value="terms" className="mt-4"><TermsPanel data={data} /></TabsContent>
           <TabsContent value="schemes" className="mt-4"><SchemesPanel data={data} /></TabsContent>
           <TabsContent value="regions" className="mt-4"><RegionsPanel data={data} /></TabsContent>
-          <TabsContent value="settings" className="mt-4"><SettingsPanel settings={data.settings} regions={data.regions} /></TabsContent>
+          <TabsContent value="settings" className="mt-4"><SettingsPanel settings={data.settings} regions={data.regions} meta={data.settingsMeta} /></TabsContent>
         </Tabs>
       )}
     </>
@@ -182,6 +182,11 @@ function PricesPanel({ data }: { data: PricingData }) {
         {scope.scheme.taglineId || PRICING_KIND_LABEL[scope.scheme.kind]} · amounts in Rupiah. Leave a row empty if the model is not offered in this region/scheme.
         {!scope.scheme.isPublic && <span className="ml-1 text-amber-700">This scheme is not public: prices are stored but not shown on the site.</span>}
       </p>
+      {(() => {
+        // Most recently changed row in this region/scheme = "last updated" for the price table.
+        const last = [...existing].sort((a, b) => new Date(b.updatedAt ?? 0).getTime() - new Date(a.updatedAt ?? 0).getTime())[0];
+        return last ? <AuditLine item={{ ...last, createdAt: undefined }} /> : null;
+      })()}
 
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full min-w-[760px] text-sm">
@@ -296,6 +301,7 @@ function TermsPanel({ data }: { data: PricingData }) {
     <div className="space-y-5">
       <ScopePicker data={data} scope={scope} />
       <p className="text-sm text-muted-foreground">Shown under the prices for {scope.region.nameId} · {scope.scheme.nameId}. Write both languages; EN falls back to ID when empty.</p>
+      {existing && <AuditLine item={existing} />}
 
       <div className="grid gap-5 lg:grid-cols-2">
         <Field label="Every unit includes (ID)"><LinesInput value={draft.includedId} onChange={(v) => set({ includedId: v })} placeholder="1x Adapter charging reguler (senilai Rp 1.700.000)" /></Field>
@@ -322,7 +328,7 @@ function TermsPanel({ data }: { data: PricingData }) {
 }
 
 // ─── Tab: SuperCharge tariff, referral, disclaimer ─────────────────────────
-function SettingsPanel({ settings, regions }: { settings: PricingSettings; regions: PriceRegion[] }) {
+function SettingsPanel({ settings, regions, meta }: { settings: PricingSettings; regions: PriceRegion[]; meta: AuditFields | null }) {
   const qc = useQueryClient();
   const can = useCan("pricing");
   const [draft, setDraft] = useState<PricingSettings>(settings);
@@ -344,6 +350,7 @@ function SettingsPanel({ settings, regions }: { settings: PricingSettings; regio
 
   return (
     <div className="space-y-8">
+      {meta && <AuditLine item={meta} className="-mb-4" />}
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-4">
           <div>

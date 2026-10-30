@@ -5,6 +5,7 @@ import { validate, getValidated } from "../../middleware/validate.js";
 import { requireAuth, requireModule, requireWrite, requireDelete } from "../../middleware/auth.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
+import { settingMeta } from "../../lib/setting-meta.js";
 import { notFound, conflict, badRequest } from "../../lib/errors.js";
 import { getPricingSettings, pricingSettingsSchema, savePricingSettings } from "./pricing.settings.js";
 
@@ -102,14 +103,15 @@ pricingRouter.use(requireAuth, requireModule("pricing"));
 // Semua data untuk halaman admin dalam satu panggilan.
 pricingRouter.get("/", async (_req, res, next) => {
   try {
-    const [regions, schemes, entries, terms, settings] = await Promise.all([
+    const [regions, schemes, entries, terms, settings, settingsMeta] = await Promise.all([
       prisma.priceRegion.findMany({ orderBy: [{ sortOrder: "asc" }, { nameId: "asc" }] }),
       prisma.pricingScheme.findMany({ orderBy: [{ sortOrder: "asc" }, { nameId: "asc" }] }),
       prisma.priceEntry.findMany({ orderBy: [{ model: "asc" }, { variant: "asc" }] }),
       prisma.pricingTerms.findMany(),
       getPricingSettings(),
+      settingMeta("pricing_settings"),
     ]);
-    res.json({ ok: true, data: { regions, schemes, entries, terms, settings } });
+    res.json({ ok: true, data: { regions, schemes, entries, terms, settings, settingsMeta } });
   } catch (e) {
     next(e);
   }
@@ -270,7 +272,7 @@ pricingRouter.put("/terms", requireWrite("pricing"), validate(termsSchema), asyn
 // ── Pengaturan: disclaimer, tarif SuperCharge, referral ──────────────────
 pricingRouter.get("/settings", async (_req, res, next) => {
   try {
-    res.json({ ok: true, data: await getPricingSettings() });
+    res.json({ ok: true, data: await getPricingSettings(), meta: await settingMeta("pricing_settings") });
   } catch (e) {
     next(e);
   }
@@ -281,7 +283,7 @@ pricingRouter.put("/settings", requireWrite("pricing"), validate(pricingSettings
     const value = await savePricingSettings(getValidated<typeof pricingSettingsSchema>(req));
     bust();
     logActivity(req, { action: "update", entity: "pricing_settings", summary: "Updated pricing settings (disclaimer / SuperCharge tariff / referral)" });
-    res.json({ ok: true, data: value });
+    res.json({ ok: true, data: value, meta: await settingMeta("pricing_settings") });
   } catch (e) {
     next(e);
   }

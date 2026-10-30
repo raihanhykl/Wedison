@@ -31,7 +31,8 @@ export const roleSelect = {
   isSystem: true,
   createdAt: true,
   updatedAt: true,
-  _count: { select: { users: true } },
+  // Members = users that are not deleted (deleted users keep their role for the record).
+  _count: { select: { users: { where: { deletedAt: null } } } },
 } as const;
 
 export const roleCreateSchema = z.object({
@@ -80,7 +81,7 @@ type Tx = Parameters<Parameters<typeof prisma.$transaction>[0]>[0];
  * transaction as the change so a violation rolls everything back.
  */
 export async function assertManagersRemain(tx: Tx) {
-  const n = await tx.user.count({ where: { isActive: true, role: { permissions: { hasSome: [WILDCARD, "users.manage"] } } } });
+  const n = await tx.user.count({ where: { isActive: true, deletedAt: null, role: { permissions: { hasSome: [WILDCARD, "users.manage"] } } } });
   if (n === 0) throw badRequest("This change would leave no active user who can manage users and roles");
 }
 
