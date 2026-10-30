@@ -491,3 +491,28 @@
 .article-prose mark { background: var(--on-forest-accent); padding: 0 0.15em; border-radius: 2px; }
 .article-prose figure { margin: 0; }
 .article-prose figcaption { margin-top: 0.5em; font-size: 0.875rem; color: var(--muted-foreground); text-align: center; }
+
+/* ── Cekat AI chat bubble (#iframe2-chat-container, injected by live.cekat.ai/widget.js) ──
+   Hidden while a bottom bar or sheet would sit underneath it, instead of covering its
+   buttons. Mark the element with data-chat-obstruct:
+     always    – any screen (e.g. admin preview bar)
+     below-lg  – phones & tablets (< 1024px), e.g. the station bottom sheet
+     below-sm  – phones (< 640px), e.g. the full-width cookie banner */
+body:has([data-chat-obstruct="always"]) #iframe2-chat-container,
+/* any open modal (cookie preferences, booking form, …) and the full-screen mobile menu */
+body:has([role="dialog"][data-state="open"]) #iframe2-chat-container,
+body:has([role="alertdialog"][data-state="open"]) #iframe2-chat-container,
+body:has(#nav-sheet[data-open="true"]) #iframe2-chat-container {
+  display: none !important;
+}
+@media (max-width: 1023.98px) {
+  body:has([data-chat-obstruct="below-lg"]) #iframe2-chat-container {
+    display: none !important;
+  }
+}
+@media (max-width: 639.98px) {
+  body:has([data-chat-obstruct="below-sm"]) #iframe2-chat-container {
+    display: none !important;
+  }
+}
+
