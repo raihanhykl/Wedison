@@ -19,7 +19,7 @@ const SERVER = process.env.NEXT_PUBLIC_CEKAT_SERVER || "https://live.cekat.ai/wi
 
 export function CekatChat() {
   if (!ACCESS_KEY) return null;
-  const config = { server: SERVER, iframeWidth: "400px", iframeHeight: "700px", accessKey: ACCESS_KEY, offsetX: 0, offsetY: 0 };
+  const config = { server: SERVER, iframeWidth: "400px", iframeHeight: "700px", accessKey: ACCESS_KEY, offsetX: 20, offsetY: 20 };
   return (
     <Script id="cekat-chat" strategy="lazyOnload">
       {`!function(c,e,k,a,t){c.mychat=c.mychat||${JSON.stringify(config).replace(/</g, "\\u003c")};var q=[];c.Cekat=function(){q.push(arguments)};c.Cekat.q=q;a=e.createElement(k);t=e.getElementsByTagName(k)[0];a.async=1;a.src=c.mychat.server;t.parentNode.insertBefore(a,t);}(window,document,"script");`}
