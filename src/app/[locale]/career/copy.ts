@@ -117,9 +117,29 @@ export function salaryText(s: PublicJob["salary"], locale: CareerLocale) {
   return null;
 }
 
-export function mailtoFor(email: string, subjectTpl: string, title: string, department?: string | null, cc?: string | null) {
+type LegacyRecipients = { contactEmails?: string[]; ccEmails?: string[]; contactEmail?: string | null; ccEmail?: string | null };
+type LegacyJobRecipients = { applyEmails?: string[]; ccEmails?: string[]; applyEmail?: string | null };
+const list = (v: string[] | string | null | undefined) => (Array.isArray(v) ? v : v ? v.split(/[\s,;]+/) : []).map((e) => e.trim()).filter(Boolean);
+
+/**
+ * Who receives an application: the job's own To/CC when set, otherwise the HR settings.
+ * To and CC fall back independently. Also reads the single-address fields of older API builds.
+ */
+export function applicationRecipients(settings: LegacyRecipients, job?: LegacyJobRecipients | null) {
+  const jobTo = list(job?.applyEmails ?? job?.applyEmail);
+  const jobCc = list(job?.ccEmails);
+  const to = jobTo.length ? jobTo : list(settings.contactEmails ?? settings.contactEmail);
+  const ccRaw = jobCc.length ? jobCc : list(settings.ccEmails ?? settings.ccEmail);
+  const cc = ccRaw.filter((e) => !to.includes(e));
+  return { to: to.length ? to : ["hr@wedison.co"], cc };
+}
+
+const addr = (e: string) => encodeURIComponent(e).replace(/%40/g, "@");
+
+/** mailto: link with several To and CC recipients (RFC 6068: comma-separated). */
+export function mailtoFor(to: string[], subjectTpl: string, title: string, department?: string | null, cc: string[] = []) {
   const subject = subjectTpl.replaceAll("{title}", title).replaceAll("{department}", department ?? "");
-  const q = new URLSearchParams({ subject });
-  if (cc) q.set("cc", cc);
-  return `mailto:${email}?${q.toString().replace(/\+/g, "%20")}`;
+  const q = [`subject=${encodeURIComponent(subject)}`];
+  if (cc.length) q.push(`cc=${cc.map(addr).join(",")}`);
+  return `mailto:${to.map(addr).join(",")}?${q.join("&")}`;
 }

@@ -121,14 +121,19 @@ data hardcode `src/app/[locale]/career/data-job.tsx` (tetap dipakai sebagai fall
 - Lowongan: judul & isi dwibahasa (minimal satu bahasa; bahasa lain memakai fallback), ringkasan, tanggung jawab, kualifikasi, nilai tambah, benefit (satu poin per baris).
 - Klasifikasi: divisi, beberapa lokasi (kota/provinsi/negara), tipe kerja (penuh waktu, kontrak, magang, …), on-site/hybrid/remote, level, jumlah posisi, rentang gaji (tampil opsional), label "Dibutuhkan segera".
 - Alur status: Draft → Pending review → Published → Closed → Archived. Tanggal tutup otomatis menutup lowongan (scheduler tiap menit).
-- Melamar: email (per lowongan atau default HR, subjek otomatis dengan `{title}`/`{department}`, CC opsional) dan tautan portal (JobStreet, LinkedIn, Glints, Kalibrr, …).
-- Duplikat lowongan, metrik views & klik "lamar" per kanal (30 hari) di HR Overview, daftar "perlu perhatian" (menunggu review, tutup ≤ 7 hari).
-- Pengaturan HR: nama & email kontak, CC, telepon/WhatsApp, template subjek email ID/EN, catatan untuk pelamar, lamaran umum (talent pool), profil perusahaan di portal lowongan.
+- Melamar: email ke **beberapa penerima (To) dan beberapa CC** (maks. 10 per daftar), subjek otomatis dengan `{title}`/`{department}`, dan tautan portal (JobStreet, LinkedIn, Glints, Kalibrr, …). Default di HR Contact & Settings; tiap lowongan bisa menimpa To dan CC **secara terpisah** di "How to apply" (kosong = pakai default). Input berupa kapsul dengan tombol ×: Enter/koma/spasi/blur menambah, paste daftar dipecah otomatis, Backspace di field kosong menghapus kapsul terakhir, alamat tidak valid/duplikat/sudah ada di daftar lain ditolak (`src/components/admin/email-chips-input.tsx`, validasi server `server/src/lib/email-list.ts`).
+- Duplikat lowongan, daftar "perlu perhatian" (menunggu review, tutup ≤ 7 hari).
+- **HR Overview**: filter rentang tanggal + jam (preset Today/7/30/90 hari/bulan ini/bulan lalu/tahun ini/All time, atau kalender + jam mulai/selesai; `src/components/admin/date-range-filter.tsx`), divisi, lokasi, tipe kerja, on-site/hybrid/remote. Rentang berlaku untuk klik "lamar" (total, per kanal, per hari WIB) dan "lowongan baru/terbit"; views selalu all-time (hanya penghitung kumulatif). Tabel lowongan bisa diurutkan per kolom (posisi, status, divisi, views, klik, dibuat, diubah, tutup) dan dicari. API `GET /admin/hr/overview?from&to&allTime&departmentId&locationId&employmentType&workplaceType`.
+- **Job Openings**: kolom Created / Updated (tanggal + nama user), sort di server (`sort=createdAt|updatedAt|publishedAt|closesAt|viewCount|applyClicks|openings&order=asc|desc`), filter tanggal-jam pada kolom pilihan (`dateField=createdAt|updatedAt|publishedAt|closesAt&from&to`), filter on-site/hybrid/remote.
+- **Audit**: `Job.createdById` / `updatedById` kini relasi ke User (`createdBy` / `updatedBy`, `onDelete: SetNull`). Diisi saat buat, edit, transisi status, duplikat. Tampil di daftar, Overview, dan sidebar form ("unknown" untuk data sebelum pencatatan atau user yang sudah dihapus). Tidak pernah dikirim ke API publik.
+- Pengaturan HR: nama kontak, daftar email lamaran (To) & CC, telepon/WhatsApp, template subjek email ID/EN, catatan untuk pelamar, lamaran umum (talent pool), profil perusahaan di portal lowongan.
 - Publik: `/[locale]/career` (filter divisi, negara, lokasi, tipe; pencarian), `/[locale]/career/[slug]` dengan JSON-LD `JobPosting` (Google for Jobs) untuk lowongan yang dibuka; lowongan tertutup tetap bisa dibuka (noindex, tanpa JobPosting). Lowongan masuk sitemap.
 
 **Data & deploy** — migrasi `hr_jobs` (enum role HR_MANAGER/HR_STAFF, tabel Job/JobTranslation/JobDepartment/JobLocation/JobApplyClick).
 Seed `npm run db:seed:hr` (8 divisi, 4 lokasi, 10 lowongan lama, kontak HR default) hanya berjalan sekali per database
 (penanda Setting `hr_seeded`) dan otomatis dijalankan di deploy staging & produksi.
+
+Migrasi `hr_multi_email_audit` (2026-10-30): `Job.applyEmail` → `applyEmails[]` (nilai lama ikut dipindah), `ccEmails[]` baru, FK + indeks `createdById`/`updatedById` (id user yang sudah terhapus dikosongkan dulu). Pengaturan HR di tabel `Setting` tidak perlu dimigrasi: `contactEmail`/`ccEmail` lama dibaca otomatis sebagai daftar, dan pembacaan tidak pernah gagal (alamat ganda To/CC dibuang dari CC, field rusak kembali ke default). API publik tetap mengirim `contactEmail`/`ccEmail`/`applyEmail` lama (deprecated) agar halaman yang dirender build lama tetap jalan selama deploy. Tes: `server/test/hr-email-audit.*.test.ts`.
 
 ## Role kustom (System › Users & Roles)
 

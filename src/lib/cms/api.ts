@@ -151,7 +151,9 @@ export type PublicJob = {
   openings: number;
   salary: { min: number | null; max: number | null; currency: string } | null;
   isUrgent: boolean;
-  applyEmail: string | null;
+  /** Empty = use the HR settings recipients. */
+  applyEmails: string[];
+  ccEmails: string[];
   portals: { name: string; url: string }[];
   publishedAt: string | null;
   closesAt: string | null;
@@ -160,8 +162,8 @@ export type PublicJob = {
 
 export type CareerSettings = {
   contactName: string;
-  contactEmail: string;
-  ccEmail: string | null;
+  contactEmails: string[];
+  ccEmails: string[];
   phone: string | null;
   whatsapp: string | null;
   emailSubject: string;

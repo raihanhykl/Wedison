@@ -279,21 +279,30 @@ export type Job = {
   id: string; slug: string; status: JobStatus; departmentId: string | null; department: JobDepartment | null; locations: JobLocation[];
   employmentType: EmploymentType; workplaceType: WorkplaceType; experienceLevel: ExperienceLevel | null; openings: number;
   salaryMin: number | null; salaryMax: number | null; salaryCurrency: string; showSalary: boolean; isUrgent: boolean;
-  applyEmail: string | null; portals: { name: string; url: string }[]; sortOrder: number;
+  applyEmails: string[]; ccEmails: string[]; portals: { name: string; url: string }[]; sortOrder: number;
   publishedAt: string | null; closesAt: string | null; closedAt: string | null; viewCount: number; reviewNote: string | null;
   translations: JobTranslation[]; createdAt: string; updatedAt: string; _count?: { applyClicks: number };
+  createdById: string | null; updatedById: string | null; createdBy: JobAuditUser | null; updatedBy: JobAuditUser | null;
 };
+export type JobAuditUser = { id: string; name: string; email: string; avatarUrl: string | null };
 export type HrPermissions = { role: string; write: boolean; publish: boolean; delete: boolean; settings: boolean; taxonomy: boolean };
 export type HrSettings = {
-  contactName: string; contactEmail: string; ccEmail?: string | null; phone?: string | null; whatsapp?: string | null;
+  contactName: string; contactEmails: string[]; ccEmails: string[]; phone?: string | null; whatsapp?: string | null;
   emailSubjectId: string; emailSubjectEn: string; applicationNoteId?: string | null; applicationNoteEn?: string | null;
   openApplicationEnabled: boolean; companyPortals: { name: string; url: string; enabled: boolean }[];
 };
+export type HrOverviewJob = {
+  id: string; title: string; status: JobStatus; department: string | null; openings: number; views: number; applyClicks: number;
+  createdAt: string; createdBy: string | null; updatedAt: string; updatedBy: string | null; publishedAt: string | null; closesAt: string | null;
+};
 export type HrOverview = {
-  counts: Partial<Record<JobStatus, number>>; openPositions: number; totalViews: number; applyClicks30d: number;
-  clicksByChannel30d: { channel: string; count: number }[]; byDepartment: { name: string; count: number }[];
+  range: { from: string; to: string };
+  counts: Partial<Record<JobStatus, number>>; openPositions: number; totalViews: number; applyClicks: number;
+  createdInRange: number; publishedInRange: number;
+  clicksByChannel: { channel: string; count: number }[]; clicksPerDay: { day: string; value: number }[];
+  byDepartment: { name: string; count: number }[];
   closingSoon: { id: string; title: string; closesAt: string }[]; pendingReview: { id: string; title: string; updatedAt: string }[];
-  topJobs: { id: string; title: string; views: number; applyClicks: number }[];
+  jobs: HrOverviewJob[];
 };
 export const JOB_STATUS_LABEL: Record<JobStatus, string> = { DRAFT: "Draft", PENDING_REVIEW: "Pending review", PUBLISHED: "Published", CLOSED: "Closed", ARCHIVED: "Archived" };
 export const EMPLOYMENT_LABEL: Record<EmploymentType, string> = { FULL_TIME: "Full-time", PART_TIME: "Part-time", CONTRACT: "Contract", INTERNSHIP: "Internship", FREELANCE: "Freelance" };

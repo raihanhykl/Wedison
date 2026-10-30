@@ -51,6 +51,8 @@ model User {
   articles     Article[]
   media        Media[]
   activityLogs ActivityLog[]
+  jobsCreated  Job[]         @relation("JobCreatedBy")
+  jobsUpdated  Job[]         @relation("JobUpdatedBy")
 
   @@index([roleId])
 }
@@ -599,8 +601,10 @@ model Job {
   salaryCurrency  String           @default("IDR")
   showSalary      Boolean          @default(false)
   isUrgent        Boolean          @default(false)
-  /// Override email lamaran per lowongan (kosong = email HR di pengaturan)
-  applyEmail      String?
+  /// Override penerima lamaran per lowongan (kosong = email lamaran di pengaturan HR)
+  applyEmails     String[]         @default([])
+  /// Override CC per lowongan (kosong = CC di pengaturan HR)
+  ccEmails        String[]         @default([])
   /// Tautan portal lowongan untuk lowongan ini: [{ name, url }]
   portals         Json             @default("[]")
   sortOrder       Int              @default(0)
@@ -611,7 +615,9 @@ model Job {
   /// Catatan HR_MANAGER saat mengembalikan pengajuan review
   reviewNote      String?
   createdById     String?
+  createdBy       User?            @relation("JobCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
   updatedById     String?
+  updatedBy       User?            @relation("JobUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
 
@@ -621,6 +627,10 @@ model Job {
   @@index([status, publishedAt])
   @@index([departmentId])
   @@index([closesAt])
+  @@index([createdAt])
+  @@index([updatedAt])
+  @@index([createdById])
+  @@index([updatedById])
 }
 
 model JobTranslation {

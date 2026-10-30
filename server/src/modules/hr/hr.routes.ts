@@ -6,6 +6,7 @@ import type { Prisma } from "../../lib/prisma.js";
 import { validate, getValidated } from "../../middleware/validate.js";
 import { requireAuth, requireModule, requireHr } from "../../middleware/auth.js";
 import { canHr } from "../../lib/permissions.js";
+import { emailList, overlap } from "../../lib/email-list.js";
 import { slugify, uniqueSlug } from "../../lib/slug.js";
 import { cached, invalidate, CacheTags } from "../../lib/cache.js";
 import { logActivity } from "../../lib/activity.js";
@@ -45,17 +46,28 @@ const jobSchema = z
     salaryCurrency: z.string().trim().length(3).default("IDR"),
     showSalary: z.boolean().default(false),
     isUrgent: z.boolean().default(false),
-    applyEmail: z.string().trim().email().nullable().optional().or(z.literal("").transform(() => null)),
+    /** Override penerima (To); kosong = email lamaran di pengaturan HR. */
+    applyEmails: emailList({ label: "Application email" }).default([]),
+    /** Override CC; kosong = CC di pengaturan HR. */
+    ccEmails: emailList({ label: "CC" }).default([]),
     portals: z.array(z.object({ name: z.string().trim().min(1).max(40), url: z.string().trim().url().max(500) })).max(10).default([]),
     closesAt: z.coerce.date().nullable().optional(),
     sortOrder: z.coerce.number().int().default(0),
     translations: z.array(translationSchema).min(1, "Write the job in at least one language"),
   })
   .refine((v) => new Set(v.translations.map((t) => t.locale)).size === v.translations.length, { message: "Duplicate language", path: ["translations"] })
-  .refine((v) => v.salaryMin == null || v.salaryMax == null || v.salaryMax >= v.salaryMin, { message: "Maximum salary must be greater than or equal to minimum", path: ["salaryMax"] });
+  .refine((v) => v.salaryMin == null || v.salaryMax == null || v.salaryMax >= v.salaryMin, { message: "Maximum salary must be greater than or equal to minimum", path: ["salaryMax"] })
+  .superRefine((v, ctx) => {
+    const both = overlap(v.applyEmails, v.ccEmails);
+    if (both.length) ctx.addIssue({ code: "custom", path: ["ccEmails"], message: `${both.join(", ")} is already an application email; remove it from CC` });
+  });
+
+const auditUser = { select: { id: true, name: true, email: true, avatarUrl: true } } as const;
 
 const include = {
   department: true,
+  createdBy: auditUser,
+  updatedBy: auditUser,
   locations: { orderBy: { sortOrder: "asc" } },
   translations: true,
   _count: { select: { applyClicks: true } },
@@ -109,52 +121,124 @@ hrRouter.get("/permissions", (req, res) => {
   });
 });
 
-// Overview metrics
-hrRouter.get("/overview", requireHr("jobs.read"), async (_req, res, next) => {
+// Overview metrics. Filters: date-time range (apply clicks and "created/published in range"),
+// division, location, employment and workplace type (all job-based numbers).
+const ADMIN_TZ = "Asia/Jakarta";
+const ymdJkt = (d: Date) => new Intl.DateTimeFormat("en-CA", { timeZone: ADMIN_TZ, year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+
+const overviewQuery = z
+  .object({
+    from: z.coerce.date().optional(),
+    to: z.coerce.date().optional(),
+    /** Ignore `from` and start at the first recorded apply click (or job). */
+    allTime: z.enum(["true", "false"]).optional(),
+    departmentId: z.string().optional(),
+    locationId: z.string().optional(),
+    employmentType: EMPLOYMENT.optional(),
+    workplaceType: WORKPLACE.optional(),
+  })
+  .refine((v) => !v.from || !v.to || v.from <= v.to, { message: "Start must be before end", path: ["from"] });
+
+hrRouter.get("/overview", requireHr("jobs.read"), validate(overviewQuery, "query"), async (req, res, next) => {
   try {
     await autoCloseJobs();
+    const q = getValidated<typeof overviewQuery>(req, "query");
     const now = new Date();
+    const to = q.to ?? now;
+    let from = q.from ?? new Date(to.getTime() - 30 * 86400000);
+    if (q.allTime === "true") {
+      const [firstClick, firstJob] = await Promise.all([
+        prisma.jobApplyClick.findFirst({ orderBy: { createdAt: "asc" }, select: { createdAt: true } }),
+        prisma.job.findFirst({ orderBy: { createdAt: "asc" }, select: { createdAt: true } }),
+      ]);
+      const first = [firstClick?.createdAt, firstJob?.createdAt].filter((d): d is Date => !!d).sort((a, b) => a.getTime() - b.getTime())[0];
+      from = first && first < to ? first : new Date(to.getTime() - 30 * 86400000);
+    }
     const in7 = new Date(now.getTime() + 7 * 86400000);
-    const since30 = new Date(now.getTime() - 30 * 86400000);
-    const [byStatus, closingSoon, openings, views, clicks30, byChannel, byDept, top] = await Promise.all([
-      prisma.job.groupBy({ by: ["status"], _count: true }),
+    const jobWhere: Prisma.JobWhereInput = {
+      ...(q.departmentId ? { departmentId: q.departmentId === "none" ? null : q.departmentId } : {}),
+      ...(q.locationId ? { locations: { some: { id: q.locationId } } } : {}),
+      ...(q.employmentType ? { employmentType: q.employmentType } : {}),
+      ...(q.workplaceType ? { workplaceType: q.workplaceType } : {}),
+    };
+    const live: Prisma.JobWhereInput = { ...jobWhere, status: "PUBLISHED" };
+    const clickWhere: Prisma.JobApplyClickWhereInput = { createdAt: { gte: from, lte: to }, job: jobWhere };
+    const titleSel = { translations: { select: { locale: true, title: true } } } as const;
+
+    const [byStatus, closingSoon, openings, views, clicks, byChannel, byDept, pending, createdInRange, publishedInRange, rows, clickRows] = await Promise.all([
+      prisma.job.groupBy({ by: ["status"], where: jobWhere, _count: true }),
+      prisma.job.findMany({ where: { ...live, closesAt: { gte: now, lte: in7 } }, select: { id: true, closesAt: true, ...titleSel }, orderBy: { closesAt: "asc" }, take: 10 }),
+      prisma.job.aggregate({ where: live, _sum: { openings: true } }),
+      prisma.job.aggregate({ where: live, _sum: { viewCount: true } }),
+      prisma.jobApplyClick.count({ where: clickWhere }),
+      prisma.jobApplyClick.groupBy({ by: ["channel"], where: clickWhere, _count: true }),
+      prisma.job.groupBy({ by: ["departmentId"], where: live, _count: true }),
+      prisma.job.findMany({ where: { ...jobWhere, status: "PENDING_REVIEW" }, select: { id: true, updatedAt: true, ...titleSel }, orderBy: { updatedAt: "asc" }, take: 10 }),
+      prisma.job.count({ where: { ...jobWhere, createdAt: { gte: from, lte: to } } }),
+      prisma.job.count({ where: { ...jobWhere, publishedAt: { gte: from, lte: to } } }),
       prisma.job.findMany({
-        where: { status: "PUBLISHED", closesAt: { gte: now, lte: in7 } },
-        select: { id: true, closesAt: true, translations: { select: { locale: true, title: true } } },
-        orderBy: { closesAt: "asc" },
-        take: 10,
+        where: { ...jobWhere, status: { not: "ARCHIVED" } },
+        select: {
+          id: true, status: true, viewCount: true, openings: true, createdAt: true, updatedAt: true, publishedAt: true, closesAt: true,
+          department: { select: { nameId: true } },
+          createdBy: { select: { name: true } },
+          updatedBy: { select: { name: true } },
+          ...titleSel,
+        },
+        orderBy: { updatedAt: "desc" },
+        take: 200,
       }),
-      prisma.job.aggregate({ where: { status: "PUBLISHED" }, _sum: { openings: true } }),
-      prisma.job.aggregate({ where: { status: "PUBLISHED" }, _sum: { viewCount: true } }),
-      prisma.jobApplyClick.count({ where: { createdAt: { gte: since30 } } }),
-      prisma.jobApplyClick.groupBy({ by: ["channel"], where: { createdAt: { gte: since30 } }, _count: true }),
-      prisma.job.groupBy({ by: ["departmentId"], where: { status: "PUBLISHED" }, _count: true }),
-      prisma.job.findMany({
-        where: { status: "PUBLISHED" },
-        select: { id: true, viewCount: true, translations: { select: { locale: true, title: true } }, _count: { select: { applyClicks: true } } },
-        orderBy: { viewCount: "desc" },
-        take: 6,
-      }),
+      prisma.jobApplyClick.findMany({ where: clickWhere, select: { jobId: true, createdAt: true }, take: 100_000 }),
     ]);
     const depts = await prisma.jobDepartment.findMany({ where: { id: { in: byDept.map((d) => d.departmentId).filter((x): x is string => !!x) } } });
-    const pending = await prisma.job.findMany({
-      where: { status: "PENDING_REVIEW" },
-      select: { id: true, updatedAt: true, translations: { select: { locale: true, title: true } } },
-      orderBy: { updatedAt: "asc" },
-      take: 10,
-    });
+
+    // Per-day series (WIB) over the range, at most 400 days (oldest days dropped).
+    const perDayMap = new Map<string, number>();
+    const clicksPerJob = new Map<string, number>();
+    for (const c of clickRows) {
+      const day = ymdJkt(c.createdAt);
+      perDayMap.set(day, (perDayMap.get(day) ?? 0) + 1);
+      clicksPerJob.set(c.jobId, (clicksPerJob.get(c.jobId) ?? 0) + 1);
+    }
+    const days: string[] = [];
+    const endDay = ymdJkt(to);
+    for (let d = new Date(`${ymdJkt(from)}T00:00:00Z`); ; d.setUTCDate(d.getUTCDate() + 1)) {
+      const k = d.toISOString().slice(0, 10);
+      days.push(k);
+      if (k >= endDay || days.length > 4000) break;
+    }
+    const perDay = days.slice(-400).map((day) => ({ day, value: perDayMap.get(day) ?? 0 }));
+
     res.json({
       ok: true,
       data: {
+        range: { from, to },
         counts: Object.fromEntries(byStatus.map((s) => [s.status, s._count])),
         openPositions: openings._sum.openings ?? 0,
         totalViews: views._sum.viewCount ?? 0,
-        applyClicks30d: clicks30,
-        clicksByChannel30d: byChannel.map((c) => ({ channel: c.channel, count: c._count })).sort((a, b) => b.count - a.count),
+        applyClicks: clicks,
+        createdInRange,
+        publishedInRange,
+        clicksByChannel: byChannel.map((c) => ({ channel: c.channel, count: c._count })).sort((a, b) => b.count - a.count),
+        clicksPerDay: perDay,
         byDepartment: byDept.map((d) => ({ name: depts.find((x) => x.id === d.departmentId)?.nameId ?? "No division", count: d._count })).sort((a, b) => b.count - a.count),
         closingSoon: closingSoon.map((j) => ({ id: j.id, title: titleOf(j), closesAt: j.closesAt })),
         pendingReview: pending.map((j) => ({ id: j.id, title: titleOf(j), updatedAt: j.updatedAt })),
-        topJobs: top.map((j) => ({ id: j.id, title: titleOf(j), views: j.viewCount, applyClicks: j._count.applyClicks })),
+        jobs: rows.map((j) => ({
+          id: j.id,
+          title: titleOf(j),
+          status: j.status,
+          department: j.department?.nameId ?? null,
+          openings: j.openings,
+          views: j.viewCount,
+          applyClicks: clicksPerJob.get(j.id) ?? 0,
+          createdAt: j.createdAt,
+          createdBy: j.createdBy?.name ?? null,
+          updatedAt: j.updatedAt,
+          updatedBy: j.updatedBy?.name ?? null,
+          publishedAt: j.publishedAt,
+          closesAt: j.closesAt,
+        })),
       },
     });
   } catch (e) {
@@ -163,12 +247,38 @@ hrRouter.get("/overview", requireHr("jobs.read"), async (_req, res, next) => {
 });
 
 // ── Jobs ──
-const listQuery = paginationQuery.extend({
-  status: STATUS.optional(),
-  departmentId: z.string().optional(),
-  locationId: z.string().optional(),
-  employmentType: EMPLOYMENT.optional(),
-});
+const SORTABLE = z.enum(["updatedAt", "createdAt", "publishedAt", "closesAt", "viewCount", "applyClicks", "openings"]);
+const DATE_FIELD = z.enum(["createdAt", "updatedAt", "publishedAt", "closesAt"]);
+const listQuery = paginationQuery
+  .extend({
+    status: STATUS.optional(),
+    departmentId: z.string().optional(),
+    locationId: z.string().optional(),
+    employmentType: EMPLOYMENT.optional(),
+    workplaceType: WORKPLACE.optional(),
+    createdById: z.string().optional(),
+    sort: SORTABLE.optional(),
+    order: z.enum(["asc", "desc"]).default("desc"),
+    /** Date-time range applied to `dateField` (default createdAt). */
+    dateField: DATE_FIELD.default("createdAt"),
+    from: z.coerce.date().optional(),
+    to: z.coerce.date().optional(),
+  })
+  .refine((v) => !v.from || !v.to || v.from <= v.to, { message: "Start must be before end", path: ["from"] });
+
+function jobOrderBy(sort: z.infer<typeof SORTABLE> | undefined, order: "asc" | "desc"): Prisma.JobOrderByWithRelationInput[] {
+  switch (sort) {
+    case undefined:
+      return [{ status: "asc" }, { updatedAt: "desc" }];
+    case "applyClicks":
+      return [{ applyClicks: { _count: order } }, { updatedAt: "desc" }];
+    case "publishedAt":
+    case "closesAt":
+      return [{ [sort]: { sort: order, nulls: "last" } }, { updatedAt: "desc" }];
+    default:
+      return [{ [sort]: order }, { id: "asc" }];
+  }
+}
 
 hrRouter.get("/jobs", requireHr("jobs.read"), validate(listQuery, "query"), async (req, res, next) => {
   try {
@@ -179,10 +289,13 @@ hrRouter.get("/jobs", requireHr("jobs.read"), validate(listQuery, "query"), asyn
       ...(q.departmentId ? { departmentId: q.departmentId } : {}),
       ...(q.locationId ? { locations: { some: { id: q.locationId } } } : {}),
       ...(q.employmentType ? { employmentType: q.employmentType } : {}),
+      ...(q.workplaceType ? { workplaceType: q.workplaceType } : {}),
+      ...(q.createdById ? { createdById: q.createdById } : {}),
+      ...(q.from || q.to ? { [q.dateField]: { ...(q.from ? { gte: q.from } : {}), ...(q.to ? { lte: q.to } : {}) } } : {}),
       ...(q.q ? { translations: { some: { title: { contains: q.q, mode: "insensitive" } } } } : {}),
     };
     const [items, total, counts] = await Promise.all([
-      prisma.job.findMany({ where, include, orderBy: [{ status: "asc" }, { updatedAt: "desc" }], ...skipTake(q) }),
+      prisma.job.findMany({ where, include, orderBy: jobOrderBy(q.sort, q.order), ...skipTake(q) }),
       prisma.job.count({ where }),
       prisma.job.groupBy({ by: ["status"], _count: true }),
     ]);
@@ -214,7 +327,8 @@ function jobData(d: z.infer<typeof jobSchema>) {
     salaryCurrency: d.salaryCurrency.toUpperCase(),
     showSalary: d.showSalary,
     isUrgent: d.isUrgent,
-    applyEmail: d.applyEmail ?? null,
+    applyEmails: d.applyEmails,
+    ccEmails: d.ccEmails,
     portals: d.portals as Prisma.InputJsonValue,
     closesAt: d.closesAt ?? null,
     sortOrder: d.sortOrder,
@@ -291,7 +405,7 @@ hrRouter.post("/jobs/:id/transition", requireHr("jobs.write"), validate(transiti
     if (needPublish && !canHr(req.user!, "jobs.publish")) throw forbidden("Only an HR manager can do this");
 
     const now = new Date();
-    let data: Prisma.JobUpdateInput;
+    let data: Prisma.JobUncheckedUpdateInput;
     switch (action) {
       case "submit":
         if (job.status !== "DRAFT") throw badRequest("Only drafts can be submitted for review");
@@ -354,7 +468,8 @@ hrRouter.post("/jobs/:id/duplicate", requireHr("jobs.write"), async (req, res, n
         salaryCurrency: src.salaryCurrency,
         showSalary: src.showSalary,
         isUrgent: false,
-        applyEmail: src.applyEmail,
+        applyEmails: src.applyEmails,
+        ccEmails: src.ccEmails,
         portals: src.portals as Prisma.InputJsonValue,
         createdById: req.user!.id,
         updatedById: req.user!.id,
@@ -541,7 +656,10 @@ function toPublic(j: JobWithRel, locale: "id" | "en") {
     openings: j.openings,
     salary: j.showSalary && (j.salaryMin || j.salaryMax) ? { min: j.salaryMin, max: j.salaryMax, currency: j.salaryCurrency } : null,
     isUrgent: j.isUrgent,
-    applyEmail: j.applyEmail,
+    applyEmails: j.applyEmails,
+    ccEmails: j.ccEmails,
+    /** @deprecated first of applyEmails; kept for pages rendered by an older frontend build. */
+    applyEmail: j.applyEmails[0] ?? null,
     portals: (j.portals as { name: string; url: string }[]) ?? [],
     publishedAt: j.publishedAt,
     closesAt: j.closesAt,
@@ -581,8 +699,11 @@ publicCareersRouter.get("/", async (req, res, next) => {
 function publicSettings(s: Awaited<ReturnType<typeof getHrSettings>>, locale: "id" | "en") {
   return {
     contactName: s.contactName,
-    contactEmail: s.contactEmail,
-    ccEmail: s.ccEmail ?? null,
+    contactEmails: s.contactEmails,
+    ccEmails: s.ccEmails,
+    /** @deprecated kept for pages rendered by an older frontend build. */
+    contactEmail: s.contactEmails[0],
+    ccEmail: s.ccEmails.join(",") || null,
     phone: s.phone ?? null,
     whatsapp: s.whatsapp ?? null,
     emailSubject: locale === "en" ? s.emailSubjectEn : s.emailSubjectId,

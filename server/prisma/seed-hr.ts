@@ -89,7 +89,8 @@ async function main() {
       key: "hr_settings",
       value: {
         contactName: "Tim HR Wedison",
-        contactEmail: "hr@wedison.co",
+        contactEmails: ["hr@wedison.co"],
+        ccEmails: [],
         emailSubjectId: "Lamaran Pekerjaan - {title}",
         emailSubjectEn: "Job Application - {title}",
         applicationNoteId: "Hanya kandidat yang lolos seleksi administrasi yang akan kami hubungi.",

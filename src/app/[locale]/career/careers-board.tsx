@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/app/lib/language-context";
 import { Reveal } from "@/components/motion/reveal";
 import type { CareersResponse, PublicJob } from "@/lib/cms/api";
-import { CAREER_COPY, EMPLOYMENT, WORKPLACE, jobLocations, mailtoFor, salaryText, type CareerLocale } from "./copy";
+import { CAREER_COPY, EMPLOYMENT, WORKPLACE, jobLocations, applicationRecipients, mailtoFor, salaryText, type CareerLocale } from "./copy";
 
 const selectCls = "h-10 rounded-md border border-border bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
@@ -130,7 +130,7 @@ export default function CareersBoard({ data, locale }: { data: CareersResponse; 
               <p className="mt-2 text-forest-muted">{c.openSub}</p>
             </div>
             <Button asChild size="lg" className="shrink-0 bg-on-forest-accent text-forest-deep hover:bg-on-forest-accent/90">
-              <a href={mailtoFor(s.contactEmail, c.openSubject, c.openSubject, null, s.ccEmail)}><Send /> {c.openCta}</a>
+              <a href={(() => { const r = applicationRecipients(s); return mailtoFor(r.to, c.openSubject, c.openSubject, null, r.cc); })()}><Send /> {c.openCta}</a>
             </Button>
           </div>
         )}
