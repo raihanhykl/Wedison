@@ -1581,6 +1581,9 @@ export const en = {
   "ojol.hero.tagline": "#MadeEasier",
   "ojol.hero.tryFree": "Try It Free!",
 
+  "ojol.benefits.1.imageAlt": "SuperCharge",
+  "ojol.benefits.2.imageAlt": "Lower costs",
+  "ojol.benefits.3.imageAlt": "Affordable servicing",
   "ojol.benefits.title": "More Trips, Lower Costs",
   "ojol.benefits.description":
     "Fuel queues and rising petrol prices take a real toll on daily earnings. An electric motorcycle costs considerably less to run, requires less maintenance, and returns the time otherwise spent at the pump.",
@@ -1827,7 +1830,7 @@ export const en = {
 
   // ===== BaaS (Battery as a Service) — /baas =====
   "nav.baas.description":
-    "Buy the bike, subscribe to the battery. Lifetime battery warranty.",
+    "Buy the bike, subscribe to the battery. Lifetime battery warranty while you subscribe.",
   "baas.hero.tag": "Battery as a Service",
   "baas.hero.title": "The battery is no longer",
   "baas.hero.titleHighlight": "your problem.",

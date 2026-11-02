@@ -22,7 +22,7 @@ import { addressLine } from "@/lib/showrooms/showroom";
 import type { FormTopic } from "@/lib/contact-schema";
 
 /** SEMENTARA: foto area resepsionis. Ganti dengan ASET-K01 (meja layanan/CS, 4:5). */
-const HERO_IMAGE = "/ShowRoom-Receptionist.webp";
+const HERO_IMAGE = "/showroom-receptionist.webp";
 
 const SOCIAL_LABEL: Record<string, string> = {
   instagram: "Instagram",

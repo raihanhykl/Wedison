@@ -36,7 +36,7 @@ export type PublicShowroom = {
   updatedAt: string;
 };
 
-export const DEFAULT_PHOTO = "/ShowRoom-Receptionist.webp";
+export const DEFAULT_PHOTO = "/showroom-receptionist.webp";
 
 export function addressLine(s: Pick<PublicShowroom, "address">) {
   const a = s.address;

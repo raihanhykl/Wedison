@@ -7,7 +7,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 /** SEMENTARA: foto pengendara. Ganti dengan ASET-S05 (band CTA penutup, 21:9 + 4:5). */
-const CTA_IMAGE = "/new-looks/Banner Footer.webp";
+const CTA_IMAGE = "/lifestyle/banner-riders-city.webp";
 
 export default function ShowroomClosingCta() {
   const { t } = useLanguage();

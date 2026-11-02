@@ -1595,6 +1595,9 @@ export const id = {
   "ojol.hero.tagline": "#JadiLebihMudah",
   "ojol.hero.tryFree": "Coba Gratis",
 
+  "ojol.benefits.1.imageAlt": "SuperCharge",
+  "ojol.benefits.2.imageAlt": "Hemat biaya",
+  "ojol.benefits.3.imageAlt": "Servis murah",
   "ojol.benefits.title": "Lebih Banyak Order, Lebih Sedikit Pengeluaran",
   "ojol.benefits.description":
     "Lelah mengantre di SPBU dan melihat harga bensin terus naik? Dengan motor listrik, biaya harian jauh lebih ringan, perawatan lebih sedikit, dan waktu yang biasanya habis di SPBU bisa dipakai untuk mengambil order.",
@@ -1846,7 +1849,7 @@ export const id = {
 
   // ===== BaaS (Battery as a Service) — /baas =====
   "nav.baas.description":
-    "Beli motornya, langganan baterainya. Garansi baterai seumur hidup.",
+    "Beli motornya, langganan baterainya. Garansi baterai seumur hidup selama berlangganan.",
   "baas.hero.tag": "Battery as a Service",
   "baas.hero.title": "Baterai bukan lagi",
   "baas.hero.titleHighlight": "urusan Anda.",
