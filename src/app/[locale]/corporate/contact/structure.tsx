@@ -194,7 +194,8 @@ export default function ContactPage() {
               <ContactRow label={t("contactPage.direct.hours")}>
                 {t("contact.page.business.hours")}
               </ContactRow>
-              <ContactRow label={t("contact.headquarters")}>{t("showroom.address")}</ContactRow>
+              <ContactRow label={t("contact.headquarters")}>{t("contact.headquartersAddress")}</ContactRow>
+              <ContactRow label={t("contact.mainOffice")}>{t("showroom.address")}</ContactRow>
               <ContactRow label={t("contact.followUs")}>
                 <span className="flex flex-wrap gap-x-4 gap-y-1">
                   {SOCIAL_PROFILES.map((url) => {

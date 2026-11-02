@@ -249,6 +249,9 @@ export const id = {
   "contact.messagePlaceholder": "Pesan Anda",
   "contact.send": "Kirim Pesan",
   "contact.headquarters": "Kantor Pusat",
+  "contact.headquartersAddress":
+    "203A Henderson Road, 12-02 Henderson Industrial Park, Singapura 159546",
+  "contact.mainOffice": "Kantor Utama Indonesia",
   "contact.phone": "Telepon",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "Kami balas secepatnya",
@@ -452,9 +455,9 @@ export const id = {
   "aboutPage.eco.werigo.cta": "Kunjungi Werigo",
   "aboutPage.place.title": "Tempat kami bekerja",
   "aboutPage.place.desc":
-    "Kantor pusat Wedison berada di Pondok Indah, Jakarta Selatan, satu gedung dengan showroom dan pusat servis kami. Silakan mampir.",
+    "Kantor utama Wedison di Indonesia berada di Pondok Indah, Jakarta Selatan, satu gedung dengan showroom dan pusat servis kami. Silakan mampir.",
   "aboutPage.place.cta": "Lihat semua showroom",
-  "aboutPage.place.imageMain": "Kantor pusat Wedison di Pondok Indah",
+  "aboutPage.place.imageMain": "Kantor utama Wedison Indonesia di Pondok Indah",
   "aboutPage.place.imageA": "Ruang kerja tim Wedison",
   "aboutPage.place.imageB": "Area tamu di kantor Wedison",
   "aboutPage.join.career": "Lihat Lowongan",
