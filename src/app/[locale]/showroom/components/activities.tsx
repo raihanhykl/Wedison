@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
  * per aktivitas: test ride, konsultasi, pembiayaan, servis).
  */
 const ITEMS = [
-  { key: "testRide", image: "/new-looks/test image.webp" },
-  { key: "consultation", image: "/new-looks/HERO 1.webp" },
+  { key: "testRide", image: "/lifestyle/hero-riding-park.webp" },
+  { key: "consultation", image: "/lifestyle/hero-lineup-city.webp" },
   { key: "financing", image: "/showroom-waitingroom.webp" },
   { key: "service", image: "/super-charge/supercharge-charging.webp" },
 ] as const;

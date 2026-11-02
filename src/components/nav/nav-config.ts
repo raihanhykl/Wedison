@@ -139,7 +139,7 @@ export function buildNav(t: Translate): NavItem[] {
         },
       ],
       feature: {
-        image: "/ShowRoom-Receptionist.webp",
+        image: "/showroom-receptionist.webp",
         alt: t("nav.feature.services.alt"),
         caption: t("nav.feature.services.caption"),
       },

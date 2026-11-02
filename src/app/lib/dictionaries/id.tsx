@@ -249,6 +249,9 @@ export const id = {
   "contact.messagePlaceholder": "Pesan Anda",
   "contact.send": "Kirim Pesan",
   "contact.headquarters": "Kantor Pusat",
+  "contact.headquartersAddress":
+    "203A Henderson Road, 12-02 Henderson Industrial Park, Singapura 159546",
+  "contact.mainOffice": "Kantor Utama Indonesia",
   "contact.phone": "Telepon",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "Kami balas secepatnya",
@@ -452,9 +455,9 @@ export const id = {
   "aboutPage.eco.werigo.cta": "Kunjungi Werigo",
   "aboutPage.place.title": "Tempat kami bekerja",
   "aboutPage.place.desc":
-    "Kantor pusat Wedison berada di Pondok Indah, Jakarta Selatan, satu gedung dengan showroom dan pusat servis kami. Silakan mampir.",
+    "Kantor utama Wedison di Indonesia berada di Pondok Indah, Jakarta Selatan, satu gedung dengan showroom dan pusat servis kami. Silakan mampir.",
   "aboutPage.place.cta": "Lihat semua showroom",
-  "aboutPage.place.imageMain": "Kantor pusat Wedison di Pondok Indah",
+  "aboutPage.place.imageMain": "Kantor utama Wedison Indonesia di Pondok Indah",
   "aboutPage.place.imageA": "Ruang kerja tim Wedison",
   "aboutPage.place.imageB": "Area tamu di kantor Wedison",
   "aboutPage.join.career": "Lihat Lowongan",
@@ -1595,6 +1598,9 @@ export const id = {
   "ojol.hero.tagline": "#JadiLebihMudah",
   "ojol.hero.tryFree": "Coba Gratis",
 
+  "ojol.benefits.1.imageAlt": "SuperCharge",
+  "ojol.benefits.2.imageAlt": "Hemat biaya",
+  "ojol.benefits.3.imageAlt": "Servis murah",
   "ojol.benefits.title": "Lebih Banyak Order, Lebih Sedikit Pengeluaran",
   "ojol.benefits.description":
     "Lelah mengantre di SPBU dan melihat harga bensin terus naik? Dengan motor listrik, biaya harian jauh lebih ringan, perawatan lebih sedikit, dan waktu yang biasanya habis di SPBU bisa dipakai untuk mengambil order.",
@@ -1846,7 +1852,7 @@ export const id = {
 
   // ===== BaaS (Battery as a Service) — /baas =====
   "nav.baas.description":
-    "Beli motornya, langganan baterainya. Garansi baterai seumur hidup.",
+    "Beli motornya, langganan baterainya. Garansi baterai seumur hidup selama berlangganan.",
   "baas.hero.tag": "Battery as a Service",
   "baas.hero.title": "Baterai bukan lagi",
   "baas.hero.titleHighlight": "urusan Anda.",

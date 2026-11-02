@@ -123,10 +123,32 @@ const nextConfig: NextConfig = {
       ["/super-charge/lokasi", "/super-charge/locations/"],
       ["/media-center/artikel/:slug", "/media-center/articles/:slug/"],
     ];
-    return moves.flatMap(([from, to]) => [
-      { source: `/:locale(id|en)${from}`, destination: `/:locale${to}`, permanent: true },
-      { source: from, destination: to, permanent: true },
-    ]);
+    // Aset statis yang di-rename ke penamaan produksi (kebab-case). Path lama tetap 301
+    // supaya indeks Google Images, link luar, dan data DB yang terlewat tidak rusak.
+    const imageMoves: [string, string][] = [
+      ["/new-looks/01-HERO%20CARD-LP.webp", "/lifestyle/model-card-athena.webp"],
+      ["/new-looks/02-HERO%20CARD-LP.webp", "/lifestyle/model-card-bees.webp"],
+      ["/new-looks/03-HERO%20CARD-LP.webp", "/lifestyle/model-card-edpower.webp"],
+      ["/new-looks/04-HERO%20CARD-LP.webp", "/lifestyle/model-card-victory.webp"],
+      ["/new-looks/HERO%201.webp", "/lifestyle/hero-lineup-city.webp"],
+      ["/new-looks/HERO%203.webp", "/lifestyle/hero-supercharge-app.webp"],
+      ["/new-looks/test%20image.webp", "/lifestyle/hero-riding-park.webp"],
+      ["/new-looks/SUPERCHARGE%20CARD-LP.webp", "/lifestyle/supercharge-pile-card.webp"],
+      ["/new-looks/Banner%20Footer.webp", "/lifestyle/banner-riders-city.webp"],
+      ["/advantages/Wedison%20Cost%20Savings.webp", "/advantages/cost-savings.webp"],
+      ["/advantages/Wedison%20SuperCharge%20and%20EdPower.webp", "/advantages/supercharge-edpower.webp"],
+      ["/advantages/Wedison%20X-Ray%20Battery%20Showcase.webp", "/advantages/battery-xray.webp"],
+      ["/advantages/Showroom%20Skuter%20Listrik%20WEDISON.webp", "/advantages/showroom-experience.webp"],
+      ["/super-charge/supercharge-testing.webp", "/super-charge/supercharge-pile-outdoor.webp"],
+      ["/Environtmental-Advantage.webp", "/environmental-advantage.webp"],
+    ];
+    return [
+      ...moves.flatMap(([from, to]) => [
+        { source: `/:locale(id|en)${from}`, destination: `/:locale${to}`, permanent: true },
+        { source: from, destination: to, permanent: true },
+      ]),
+      ...imageMoves.map(([source, destination]) => ({ source, destination, permanent: true })),
+    ];
   },
   // Backend Express (server/) diakses lewat origin yang sama: /api/* -> API_INTERNAL_URL.
   // Browser tidak perlu CORS/cookie lintas origin; di VPS nginx bisa mengambil alih rule ini.

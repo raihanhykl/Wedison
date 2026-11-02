@@ -48,32 +48,32 @@ const MODELS = [
     id: "athena",
     line: "Style",
     productImage: {
-      desktop: "/new-looks/01-HERO CARD-LP.webp",
-      mobile: "/new-looks/01-HERO CARD-LP.webp",
+      desktop: "/lifestyle/model-card-athena.webp",
+      mobile: "/lifestyle/model-card-athena.webp",
     },
   },
   {
     id: "bees",
     line: "Commute",
     productImage: {
-      desktop: "/new-looks/02-HERO CARD-LP.webp",
-      mobile: "/new-looks/02-HERO CARD-LP.webp",
+      desktop: "/lifestyle/model-card-bees.webp",
+      mobile: "/lifestyle/model-card-bees.webp",
     },
   },
   {
     id: "victory",
     line: "Fleet",
     productImage: {
-      desktop: "/new-looks/04-HERO CARD-LP.webp",
-      mobile: "/new-looks/04-HERO CARD-LP.webp",
+      desktop: "/lifestyle/model-card-victory.webp",
+      mobile: "/lifestyle/model-card-victory.webp",
     },
   },
   {
     id: "edpower",
     line: "Performance",
     productImage: {
-      desktop: "/new-looks/03-HERO CARD-LP.webp",
-      mobile: "/new-looks/03-HERO CARD-LP.webp",
+      desktop: "/lifestyle/model-card-edpower.webp",
+      mobile: "/lifestyle/model-card-edpower.webp",
     },
   },
 ] as const;
@@ -87,7 +87,7 @@ const HERO_SLIDES = [
   {
     // 4 motor + 4 orang di distrik perkantoran -> keluasan jajaran
     id: "lineup",
-    img: "/new-looks/HERO 1.webp",
+    img: "/lifestyle/hero-lineup-city.webp",
     pos: "object-center",
     href: "#lineup",
     logo: false,
@@ -95,7 +95,7 @@ const HERO_SLIDES = [
   {
     // Charging pile ber-brand + pengguna membuka aplikasi -> jaringan SuperCharge
     id: "charge",
-    img: "/new-looks/HERO 3.webp",
+    img: "/lifestyle/hero-supercharge-app.webp",
     pos: "object-[58%_center]",
     href: "/super-charge/locations/",
     logo: true,
@@ -103,7 +103,7 @@ const HERO_SLIDES = [
   {
     // Berboncengan di taman rimbun -> berkendara senyap & bersih
     id: "green",
-    img: "/new-looks/test image.webp",
+    img: "/lifestyle/hero-riding-park.webp",
     pos: "object-[28%_center]",
     // CTA "Jadwalkan Test Ride" membuka modal booking (bukan pindah halaman)
     href: "/showroom/",
@@ -115,18 +115,18 @@ const HERO_SLIDES = [
 // Kartu Keunggulan (ASET-H1a–d): 4:5, subjek di atas, 40% bawah tenang untuk overlay teks.
 const ADVANTAGE = [
   {
-    img: "/advantages/Wedison SuperCharge and EdPower.webp",
+    img: "/advantages/supercharge-edpower.webp",
     Icon: Zap,
     key: "charge",
   },
   {
-    img: "/advantages/Wedison X-Ray Battery Showcase.webp",
+    img: "/advantages/battery-xray.webp",
     Icon: BatteryCharging,
     key: "battery",
   },
-  { img: "/advantages/Wedison Cost Savings.webp", Icon: Wallet, key: "cost" },
+  { img: "/advantages/cost-savings.webp", Icon: Wallet, key: "cost" },
   {
-    img: "/advantages/Showroom Skuter Listrik WEDISON.webp",
+    img: "/advantages/showroom-experience.webp",
     Icon: Headphones,
     key: "service",
   },
@@ -136,6 +136,8 @@ const COPY: Record<Lang, Record<string, string>> = {
   id: {
     // ── Hero: 3 babak brand (kicker / judul / sub / CTA / running text) ──
     h_lineup_kicker: "Motor Listrik Wedison",
+    h_lineup_alt:
+      "Empat motor listrik Wedison bersama pengendaranya di kawasan perkantoran",
     h_lineup_title: "Satu motor listrik untuk setiap perjalanan Anda.",
     h_lineup_sub:
       "Untuk rutinitas harian di kota maupun kebutuhan armada, Wedison punya model yang tepat.",
@@ -143,6 +145,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_lineup_mq: "Athena|Bees|Victory|EdPower",
 
     h_charge_kicker: "Jaringan Pengisian",
+    h_charge_alt:
+      "Pengendara mengisi daya motor listrik Wedison di stasiun SuperCharge lewat aplikasi",
     h_charge_title: "Isi daya 15 menit di jaringan",
     h_charge_titleFull: "Isi daya 15 menit di jaringan SuperCharge",
     h_charge_sub:
@@ -151,6 +155,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_charge_mq: "Temukan stasiun di peta|Mulai dari aplikasi|Paket isi daya",
 
     h_green_kicker: "Nol Emisi",
+    h_green_alt:
+      "Pasangan berboncengan motor listrik Wedison Athena di taman yang rimbun",
     h_green_title: "Senyap di jalan. Bersih untuk kota.",
     h_green_sub:
       "Tanpa bensin, tanpa asap, dan nyaris tanpa perawatan. Perjalanan harian pun terasa jauh lebih tenang.",
@@ -179,7 +185,7 @@ const COPY: Record<Lang, Record<string, string>> = {
       "Dari 15% ke 95% dalam 15 menit, di jaringan yang terus bertambah.",
     adv_battery_t: "Garansi Baterai",
     adv_battery_d:
-      "Baterai, motor, dan rangka bergaransi 3 tahun atau 100.000 km.",
+      "Baterai, motor, dan rangka bergaransi 3 tahun atau 100.000 km. Dengan BaaS, garansi baterai seumur hidup.",
     adv_cost_t: "Biaya Harian Lebih Ringan",
     adv_cost_d:
       "Tanpa bensin dan dengan perawatan minimal, pengeluaran harian jauh lebih ringan.",
@@ -204,6 +210,8 @@ const COPY: Record<Lang, Record<string, string>> = {
   en: {
     // ── Hero: 3 brand beats (kicker / title / sub / CTA / running text) ──
     h_lineup_kicker: "Wedison Electric",
+    h_lineup_alt:
+      "Four Wedison electric motorcycles with their riders in a business district",
     h_lineup_title: "Electric motorcycles for the way you move.",
     h_lineup_sub:
       "From daily city commuting to fleet duty, there is a model built to suit you.",
@@ -211,6 +219,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     h_lineup_mq: "Athena|Bees|Victory|EdPower",
 
     h_charge_kicker: "Charging Network",
+    h_charge_alt:
+      "A rider charging a Wedison electric motorcycle at a SuperCharge station using the app",
     h_charge_title: "Fast charging, powered by",
     h_charge_titleFull: "Fast charging, powered by SuperCharge",
     h_charge_sub:
@@ -220,6 +230,8 @@ const COPY: Record<Lang, Record<string, string>> = {
       "Find stations on the map|Start from the app|Charging packages",
 
     h_green_kicker: "Zero Emission",
+    h_green_alt:
+      "A couple riding a Wedison Athena electric motorcycle through a leafy park",
     h_green_title: "Quiet on the road. Clean for the city.",
     h_green_sub:
       "No petrol, no fumes, and minimal servicing. Daily riding becomes considerably calmer.",
@@ -245,7 +257,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     adv_charge_d: "A 15-minute charge at a growing number of locations.",
     adv_battery_t: "Battery Warranty",
     adv_battery_d:
-      "Battery, motor, and frame covered for 3 years or 100,000 km.",
+      "Battery, motor, and frame covered for 3 years or 100,000 km. With BaaS, the battery warranty is lifetime.",
     adv_cost_t: "Lower Running Costs",
     adv_cost_d:
       "No petrol, fewer service visits, and a substantially lower cost per kilometer.",
@@ -319,8 +331,7 @@ export default function Landing({
                           tetap terlihat saat 16:9 di-crop jadi potret di mobile. */}
                       <Image
                         src={s.img}
-                        alt=""
-                        aria-hidden
+                        alt={c[`h_${s.id}_alt`]}
                         fill
                         priority={i === 0}
                         sizes="100vw"
@@ -379,7 +390,13 @@ export default function Landing({
                           )}
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45">
+                      {/* Ticker dekoratif: isinya diulang 6x demi loop visual, jadi disembunyikan
+                          dari pembaca layar dan cuplikan Google agar tidak terbaca sebagai teks ganda. */}
+                      <div
+                        aria-hidden
+                        data-nosnippet
+                        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45"
+                      >
                         <Marquee
                           repeat={6}
                           className="[--duration:34s] [--gap:0rem] py-3 select-none"
@@ -496,7 +513,7 @@ export default function Landing({
         <Reveal>
           <div className="relative min-h-[460px] overflow-hidden rounded-3xl bg-forest sm:min-h-[540px]">
             <Image
-              src="/new-looks/SUPERCHARGE CARD-LP.webp"
+              src="/lifestyle/supercharge-pile-card.webp"
               alt="SuperCharge"
               fill
               sizes="(max-width: 1280px) 100vw, 1280px"
@@ -588,7 +605,7 @@ export default function Landing({
         {/* GANTI src dengan aset CTA final dari desainer (spesifikasi ada di catatan).
             Sementara pakai foto showroom sebagai placeholder. */}
         <Image
-          src="/new-looks/Banner Footer.webp"
+          src="/lifestyle/banner-riders-city.webp"
           alt=""
           fill
           sizes="100vw"

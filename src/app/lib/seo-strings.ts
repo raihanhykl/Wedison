@@ -107,7 +107,7 @@ export const seoContent: Record<string, PageSEO> = {
     id: {
       title: "Hubungi Wedison – Kontak, Showroom & Layanan",
       description:
-        "Hubungi tim Wedison via WhatsApp, email, atau formulir kontak untuk info produk, layanan purna jual, dan kerja sama bisnis. Kantor pusat: Jakarta Selatan.",
+        "Hubungi tim Wedison via WhatsApp, email, atau formulir kontak untuk info produk, layanan purna jual, dan kerja sama bisnis. Kantor Indonesia: Jakarta Selatan.",
       keywords: [
         "wedison",
         "kontak wedison",
@@ -121,7 +121,7 @@ export const seoContent: Record<string, PageSEO> = {
     en: {
       title: "Contact Wedison – Sales, Support & Partnerships",
       description:
-        "Reach the Wedison team via WhatsApp, email or the contact form for product info, after-sales service and partnerships. Head office in South Jakarta.",
+        "Reach the Wedison team via WhatsApp, email or the contact form for product info, after-sales service and partnerships. Indonesia office in South Jakarta.",
       keywords: [
         "wedison",
         "contact wedison",

@@ -318,7 +318,7 @@ export default function OjolClient({ programs }: { programs?: OjolPrograms }) {
                   src={`/ojol/benefit-${num}.webp`}
                   width={1000}
                   height={1000}
-                  alt=""
+                  alt={t(`ojol.benefits.${num}.imageAlt`)}
                 />
               </StaggerItem>
             ))}

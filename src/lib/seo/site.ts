@@ -79,8 +79,16 @@ export const WERIGO_URL = "https://werigo.co";
 export const whatsappUrl = (text?: string) =>
   `https://wa.me/${CONTACT.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
-/** Kantor pusat = showroom Jakarta (Pondok Indah). */
+/** Kantor pusat (Headquarters) di Singapura. */
 export const HQ_ADDRESS = {
+  streetAddress: "203A Henderson Road, 12-02 Henderson Industrial Park",
+  addressLocality: "Singapore",
+  postalCode: "159546",
+  addressCountry: "SG",
+} as const;
+
+/** Kantor utama Indonesia = showroom Jakarta (Pondok Indah). */
+export const ID_MAIN_OFFICE_ADDRESS = {
   streetAddress: "Jl. Sultan Iskandar Muda No. 30 A-C, Kebayoran Lama",
   addressLocality: "Jakarta Selatan",
   addressRegion: "DKI Jakarta",

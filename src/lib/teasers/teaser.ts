@@ -36,7 +36,7 @@ export const IMAGE_SLOT_SPEC: Record<ImageSlot, { label: string; where: string; 
     label: "Hero · desktop",
     where: "Full-screen background at the top of the page (tablet & desktop).",
     ratio: 16 / 9, ratioLabel: "16:9", size: "2400 × 1350 px",
-    fallback: "/new-looks/HERO 1.webp",
+    fallback: "/lifestyle/hero-lineup-city.webp",
     hint: "Keep the left 55% and bottom 45% dark and calm: the headline sits there in white.",
   },
   heroMobile: {
@@ -50,14 +50,14 @@ export const IMAGE_SLOT_SPEC: Record<ImageSlot, { label: string; where: string; 
     label: "Event details",
     where: "Next to the date, time and address (“Save the date”).",
     ratio: 4 / 3, ratioLabel: "4:3", size: "1600 × 1200 px",
-    fallback: "/ShowRoom-Receptionist.webp",
+    fallback: "/showroom-receptionist.webp",
     hint: "Ideally the front of the new showroom. No text on the image.",
   },
   experienceMain: {
     label: "Showroom interior",
     where: "Tall image beside the “what you can do” list.",
     ratio: 4 / 5, ratioLabel: "4:5", size: "1080 × 1350 px",
-    fallback: "/advantages/Showroom Skuter Listrik WEDISON.webp",
+    fallback: "/advantages/showroom-experience.webp",
     hint: "Interior with the line-up of motorcycles.",
   },
   experienceLounge: {

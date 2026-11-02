@@ -264,6 +264,9 @@ export const en = {
   "contact.messagePlaceholder": "Your message",
   "contact.send": "Send Message",
   "contact.headquarters": "Headquarters",
+  "contact.headquartersAddress":
+    "203A Henderson Road, 12-02 Henderson Industrial Park, Singapore 159546",
+  "contact.mainOffice": "Indonesia Main Office",
   "contact.phone": "Phone",
   "contact.emailLabel": "Email",
   "contact.emailResponse": "We respond as soon as possible",
@@ -459,9 +462,9 @@ export const en = {
   "aboutPage.eco.werigo.cta": "Visit Werigo",
   "aboutPage.place.title": "Where we work",
   "aboutPage.place.desc":
-    "Wedison's head office is in Pondok Indah, South Jakarta, in the same building as our showroom and service centre. Feel free to drop by.",
+    "Wedison's Indonesia main office is in Pondok Indah, South Jakarta, in the same building as our showroom and service centre. Feel free to drop by.",
   "aboutPage.place.cta": "See all showrooms",
-  "aboutPage.place.imageMain": "Wedison head office in Pondok Indah",
+  "aboutPage.place.imageMain": "Wedison Indonesia main office in Pondok Indah",
   "aboutPage.place.imageA": "The Wedison team workspace",
   "aboutPage.place.imageB": "The guest area at the Wedison office",
   "aboutPage.join.career": "See Open Roles",
@@ -1581,6 +1584,9 @@ export const en = {
   "ojol.hero.tagline": "#MadeEasier",
   "ojol.hero.tryFree": "Try It Free!",
 
+  "ojol.benefits.1.imageAlt": "SuperCharge",
+  "ojol.benefits.2.imageAlt": "Lower costs",
+  "ojol.benefits.3.imageAlt": "Affordable servicing",
   "ojol.benefits.title": "More Trips, Lower Costs",
   "ojol.benefits.description":
     "Fuel queues and rising petrol prices take a real toll on daily earnings. An electric motorcycle costs considerably less to run, requires less maintenance, and returns the time otherwise spent at the pump.",
@@ -1827,7 +1833,7 @@ export const en = {
 
   // ===== BaaS (Battery as a Service) — /baas =====
   "nav.baas.description":
-    "Buy the bike, subscribe to the battery. Lifetime battery warranty.",
+    "Buy the bike, subscribe to the battery. Lifetime battery warranty while you subscribe.",
   "baas.hero.tag": "Battery as a Service",
   "baas.hero.title": "The battery is no longer",
   "baas.hero.titleHighlight": "your problem.",
