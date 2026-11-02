@@ -73,7 +73,9 @@ function build(pricingLines: string, all: PublicShowroom[]): string {
 Key notes:
 
 - Preferred citation: "Wedison (${SITE_URL}/)"
-- Electric motorcycle company based in Indonesia.
+- Electric motorcycle company operating in Indonesia.
+- Headquarters: 203A Henderson Road, 12-02 Henderson Industrial Park, Singapore 159546.
+- Indonesia main office: Jl. Sultan Iskandar Muda No. 30 A-C, Kebayoran Lama, South Jakarta, DKI Jakarta 12240 (also the Jakarta showroom).
 - Current motorcycle lineup: Bees, Athena, Victory, and EdPower.
 - SuperCharge is Wedison's fast-charging network.
 - Compatible SuperCharge models: Athena, Victory, and EdPower.

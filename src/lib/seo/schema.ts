@@ -7,6 +7,7 @@ import type { Locale } from "@/app/lib/locale";
 import {
   CONTACT,
   HQ_ADDRESS,
+  ID_MAIN_OFFICE_ADDRESS,
   LOGO_URL,
   ORG_DESCRIPTION,
   SITE_NAME,
@@ -39,7 +40,11 @@ export function organizationSchema(locale: Locale): JsonLdObject {
     description: ORG_DESCRIPTION[locale],
     email: CONTACT.email,
     telephone: CONTACT.phoneE164,
-    address: { "@type": "PostalAddress", ...HQ_ADDRESS },
+    // Kantor pusat Singapura lebih dulu, lalu kantor utama Indonesia.
+    address: [
+      { "@type": "PostalAddress", ...HQ_ADDRESS },
+      { "@type": "PostalAddress", ...ID_MAIN_OFFICE_ADDRESS },
+    ],
     areaServed: { "@type": "Country", name: "Indonesia" },
     sameAs: [...SOCIAL_PROFILES],
     // Werigo ditautkan di footer setiap halaman -> klaim ini terlihat di konten.

@@ -62,7 +62,7 @@ export const SHOWROOMS_FALLBACK: PublicShowroom[] = [
     "closures": [],
     "hasWorkshop": true,
     "hasSupercharge": true,
-    "photoUrl": "/ShowRoom-Receptionist.webp",
+    "photoUrl": "/showroom-receptionist.webp",
     "updatedAt": "2026-10-28T00:00:00.000Z"
   },
   {
@@ -245,7 +245,7 @@ export const SHOWROOMS_FALLBACK: PublicShowroom[] = [
     "closures": [],
     "hasWorkshop": true,
     "hasSupercharge": false,
-    "photoUrl": "/new-looks/test image.webp",
+    "photoUrl": "/lifestyle/hero-riding-park.webp",
     "updatedAt": "2026-10-28T00:00:00.000Z"
   }
 ];

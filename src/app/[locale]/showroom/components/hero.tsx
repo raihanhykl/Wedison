@@ -11,8 +11,8 @@ import { BookingTrigger } from "@/components/booking/booking-trigger";
  * 16:9 + mobile 9:16, area bawah 40% tenang untuk teks).
  */
 const HERO = {
-  desktop: "/new-looks/HERO 1.webp",
-  mobile: "/new-looks/HERO 1.webp",
+  desktop: "/lifestyle/hero-lineup-city.webp",
+  mobile: "/lifestyle/hero-lineup-city.webp",
 };
 
 export default function ShowroomHero() {

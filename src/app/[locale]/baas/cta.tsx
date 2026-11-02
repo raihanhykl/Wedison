@@ -15,7 +15,7 @@ export default function BaasCta() {
   return (
     <section className="relative isolate overflow-hidden bg-forest-deep">
       <Image
-        src="/new-looks/HERO 3.webp"
+        src="/lifestyle/hero-supercharge-app.webp"
         alt=""
         aria-hidden
         fill

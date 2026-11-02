@@ -15,10 +15,10 @@ import { cn } from "@/lib/utils";
  */
 const IMG = {
   hero: "/wedison-factory.webp", // ASET-A01 hero kantor/gedung (16:9 + 9:16)
-  intro: "/ShowRoom-Receptionist.webp", // ASET-A02 tim di kantor (4:5)
+  intro: "/showroom-receptionist.webp", // ASET-A02 tim di kantor (4:5)
   values: "/super-charge/supercharge-ojol.webp", // ASET-A03 orang & produk (4:5)
   officeMain: "/wedison-factory.webp", // ASET-A05a fasad kantor pusat (3:2)
-  officeA: "/ShowRoom-Receptionist.webp", // ASET-A05b ruang kerja (1:1)
+  officeA: "/showroom-receptionist.webp", // ASET-A05b ruang kerja (1:1)
   officeB: "/showroom-waitingroom.webp", // ASET-A05c area tamu (1:1)
 };
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
       desc: t("about.offers.motorcycles.description"),
       cta: t("aboutPage.eco.motorcycles.cta"),
       href: href("/products/"),
-      image: "/new-looks/01-HERO CARD-LP.webp", // ASET-A04a
+      image: "/lifestyle/model-card-athena.webp", // ASET-A04a
       external: false,
     },
     {
@@ -54,7 +54,7 @@ export default function AboutPage() {
       desc: t("supercharge.app.hero.description"),
       cta: t("aboutPage.eco.app.cta"),
       href: href("/super-charge/#app"),
-      image: "/new-looks/HERO 3.webp", // ASET-A04c
+      image: "/lifestyle/hero-supercharge-app.webp", // ASET-A04c
       external: false,
     },
     {
@@ -63,7 +63,7 @@ export default function AboutPage() {
       desc: t("aboutPage.eco.werigo.desc"),
       cta: t("aboutPage.eco.werigo.cta"),
       href: WERIGO,
-      image: "/new-looks/test image.webp", // ASET-A04d
+      image: "/lifestyle/hero-riding-park.webp", // ASET-A04d
       external: true,
     },
   ];
