@@ -17,6 +17,7 @@ import { BookingTrigger } from "@/components/booking/booking-trigger";
 import { LocaleLink } from "@/components/locale-link";
 import { ArtDirectedImage } from "@/components/art-directed-image";
 import { PricingSection } from "./pricing-section";
+import { ColorPicker } from "./color-picker";
 import type { PublicPricing } from "@/lib/pricing/types";
 import { isProductId } from "@/lib/pricing/select";
 
@@ -175,6 +176,9 @@ export default function ProductPageComponent({ motorType, pricing }: Props) {
           ))}
         </Stagger>
       </section>
+
+      {/* ============ PILIHAN WARNA ============ */}
+      {isProductId(motorType) && <ColorPicker model={motorType} />}
 
       {/* ============ HARGA & SKEMA (modul Pricing) ============ */}
       {pricing && isProductId(motorType) && <PricingSection model={motorType} pricing={pricing} />}

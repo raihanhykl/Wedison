@@ -10,10 +10,11 @@ import {
   Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { PATH_LABEL, SEGMENT_LABEL } from "./nav-config";
+import { PATH_LABEL, SEGMENT_LABEL, sitePathFor } from "./nav-config";
 
 export function AdminHeader() {
   const pathname = usePathname();
+  const siteHref = sitePathFor(pathname);
   const segments = pathname.split("/").filter(Boolean); // ["admin","cms","articles","abc"]
   const crumbs = segments.map((seg, i) => {
     const href = "/" + segments.slice(0, i + 1).join("/");
@@ -44,7 +45,7 @@ export function AdminHeader() {
       </Breadcrumb>
       <div className="ml-auto">
         <Button variant="ghost" size="sm" asChild>
-          <a href="/id/media-center/" target="_blank" rel="noreferrer">
+          <a href={siteHref} target="_blank" rel="noreferrer" title={`Open ${siteHref} in a new tab`}>
             <ExternalLink /> <span className="hidden sm:inline">View site</span>
           </a>
         </Button>

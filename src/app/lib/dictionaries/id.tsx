@@ -46,6 +46,18 @@ export const id = {
   "product.brochure.title": "Brosur {model}",
   "product.brochure.desc":
     "Spesifikasi lengkap dan fitur unggulan dalam satu PDF, praktis untuk disimpan atau dibagikan.",
+  "product.colors.title": "Pilih Warna {model} Anda",
+  "product.colors.desc":
+    "Tersedia {count} pilihan warna. Ketuk salah satu untuk melihat tampilannya.",
+  "product.colors.label": "Warna",
+  "product.colors.groupLabel": "Pilihan warna {model}",
+  "product.colors.finish.glossy": "Glossy",
+  "product.colors.finish.matte": "Doff",
+  "product.colors.swipeHint": "Geser untuk ganti warna",
+  "product.colors.imageAlt": "Wedison {model} warna {color}",
+  "product.colors.note":
+    "Warna di layar bisa sedikit berbeda dari aslinya, dan ketersediaannya dapat berbeda di tiap showroom.",
+  "product.colors.seeShowroom": "Lihat langsung di showroom",
   "btn.order.now": "Pesan Sekarang",
 
   // user manual
