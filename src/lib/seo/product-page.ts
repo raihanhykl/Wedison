@@ -8,6 +8,7 @@ import { dictText, loadDictionary } from "./dictionary";
 import { breadcrumbSchema, productSchema, type JsonLdObject } from "./schema";
 import type { PublicPricing } from "@/lib/pricing/types";
 import { purchaseRange, regionsWithPrices, pick } from "@/lib/pricing/select";
+import { paintNames } from "@/lib/product-paints";
 
 export const PRODUCT_IDS = ["bees", "athena", "victory", "edpower"] as const;
 export type ProductId = (typeof PRODUCT_IDS)[number];
@@ -68,6 +69,7 @@ export async function productPageJsonLd(locale: Locale, id: ProductId, pricing?:
       images: [`/og/${id}.jpg`, `/${id}/${id}-product-hero.webp`, `/navbar-product/${id}.webp`],
       specs,
       topSpeedKmh: Number.isFinite(topSpeed) ? topSpeed : undefined,
+      colors: paintNames(id, locale),
       offers,
     }),
     breadcrumbSchema(locale, [...productsBreadcrumb(locale), { name: PRODUCT_NAMES[id], path }]),

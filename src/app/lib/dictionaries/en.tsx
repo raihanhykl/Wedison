@@ -45,6 +45,17 @@ export const en = {
   "btn.findShowroom": "Find a Showroom",
   "product.brochure.title": "{model} Brochure",
   "product.brochure.desc": "Full specs and key features in one PDF, handy to save or share.",
+  "product.colors.title": "Choose Your {model} Color",
+  "product.colors.desc": "Available in {count} colors. Tap one to see how it looks.",
+  "product.colors.label": "Color",
+  "product.colors.groupLabel": "{model} colors",
+  "product.colors.finish.glossy": "Gloss",
+  "product.colors.finish.matte": "Matte",
+  "product.colors.swipeHint": "Swipe to change color",
+  "product.colors.imageAlt": "Wedison {model} in {color}",
+  "product.colors.note":
+    "On-screen colors may differ slightly from the real paint, and availability can vary by showroom.",
+  "product.colors.seeShowroom": "See it in person at a showroom",
   "btn.order.now": "Order Now",
 
   // user manual
