@@ -109,6 +109,8 @@ export type ProductSchemaInput = {
   topSpeedKmh?: number;
   /** Rentang harga net OTR (Rp) dari modul Pricing; tampil di section harga halaman produk. */
   offers?: { low: number; high: number; count: number; validUntil?: string | null; areas: string[] };
+  /** Nama warna cat yang tersedia (schema.org `color`). */
+  colors?: string[];
 };
 
 export function productSchema(p: ProductSchemaInput): JsonLdObject {
@@ -127,6 +129,7 @@ export function productSchema(p: ProductSchemaInput): JsonLdObject {
     manufacturer: { "@id": ORG_ID },
     category: p.locale === "en" ? "Electric motorcycle" : "Motor listrik",
     fuelType: "Electric",
+    ...(p.colors?.length ? { color: p.colors } : {}),
     vehicleEngine: { "@type": "EngineSpecification", engineType: "Brushless DC electric motor" },
     ...speed,
     ...(p.offers

@@ -29,6 +29,7 @@ export const BOOKING_SOURCES = [
   "contact-page",
   "baas-cta",
   "product-pricing",
+  "product-colors",
   "other",
 ] as const;
 export type BookingSource = (typeof BOOKING_SOURCES)[number];
