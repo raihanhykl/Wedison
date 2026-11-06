@@ -61,7 +61,8 @@ export function JobForm({ job }: { job?: Job }) {
   const [employmentType, setEmploymentType] = useState<EmploymentType>(job?.employmentType ?? "FULL_TIME");
   const [workplaceType, setWorkplaceType] = useState<WorkplaceType>(job?.workplaceType ?? "ONSITE");
   const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel | "none">(job?.experienceLevel ?? "none");
-  const [openings, setOpenings] = useState(String(job?.openings ?? 1));
+  // Kosong = tidak disebut (disimpan 1; situs publik hanya menampilkan jumlah bila > 1).
+  const [openings, setOpenings] = useState(job && job.openings > 1 ? String(job.openings) : "");
   const [salaryMin, setSalaryMin] = useState(job?.salaryMin ? String(job.salaryMin) : "");
   const [salaryMax, setSalaryMax] = useState(job?.salaryMax ? String(job.salaryMax) : "");
   const [showSalary, setShowSalary] = useState(job?.showSalary ?? false);
@@ -116,7 +117,6 @@ export function JobForm({ job }: { job?: Job }) {
     if (!translations.length) throw new Error("Write the job in at least one language");
     for (const t of translations) {
       if (t.title.length < 3) throw new Error(`Title (${t.locale.toUpperCase()}) must be at least 3 characters`);
-      if (t.summary.length < 10) throw new Error(`Summary (${t.locale.toUpperCase()}) must be at least 10 characters`);
     }
     return {
       slug: slug.trim() || undefined,
@@ -125,7 +125,7 @@ export function JobForm({ job }: { job?: Job }) {
       employmentType,
       workplaceType,
       experienceLevel: experienceLevel === "none" ? null : experienceLevel,
-      openings: Number(openings) || 1,
+      openings: Math.min(999, Math.max(1, Math.trunc(Number(openings)) || 1)),
       salaryMin: salaryMin ? Number(salaryMin) : null,
       salaryMax: salaryMax ? Number(salaryMax) : null,
       showSalary,
@@ -245,7 +245,7 @@ export function JobForm({ job }: { job?: Job }) {
                         <Input value={tr[l].title} onChange={(e) => update(l, { title: e.target.value })} placeholder={l === "id" ? "Contoh: Sales Executive Showroom Bandung" : "e.g. Showroom Sales Executive, Bandung"} className="text-base font-medium" />
                       </div>
                       <div className="space-y-1.5">
-                        <Label>Summary</Label>
+                        <Label>Summary <span className="font-normal text-muted-foreground">(optional)</span></Label>
                         <Textarea rows={4} value={tr[l].summary} onChange={(e) => update(l, { summary: e.target.value })} placeholder={l === "id" ? "2–4 kalimat: peran ini untuk apa, bekerja dengan siapa, dan dampaknya." : "2–4 sentences: what the role is for, who it works with, and its impact."} />
                       </div>
                       <div className="grid gap-5 md:grid-cols-2">
@@ -344,8 +344,8 @@ export function JobForm({ job }: { job?: Job }) {
                     </Select>
                   </div>
                   <div className="space-y-1.5">
-                    <Label>Positions</Label>
-                    <Input type="number" min={1} value={openings} onChange={(e) => { setOpenings(e.target.value); touch(); }} />
+                    <Label>Positions <span className="font-normal text-muted-foreground">(optional)</span></Label>
+                    <Input type="number" min={1} max={999} inputMode="numeric" value={openings} onChange={(e) => { setOpenings(e.target.value); touch(); }} placeholder="Not specified" />
                   </div>
                 </div>
               </CardContent>

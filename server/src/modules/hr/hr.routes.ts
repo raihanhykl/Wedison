@@ -26,7 +26,8 @@ const lines = z.array(z.string().trim().min(1).max(400)).max(30).default([]);
 const translationSchema = z.object({
   locale: LOCALE,
   title: z.string().trim().min(3, "Title must be at least 3 characters").max(150),
-  summary: z.string().trim().min(10, "Summary must be at least 10 characters").max(2000),
+  /** Opsional; kosong = "" (kolom DB non-null). Halaman publik punya fallback deskripsi. */
+  summary: z.string().trim().max(2000).default(""),
   responsibilities: lines,
   qualifications: lines,
   niceToHave: lines,

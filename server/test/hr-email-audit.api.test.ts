@@ -164,6 +164,23 @@ describe("job recipients + audit", () => {
   });
 });
 
+describe("optional job fields", () => {
+  it("creates a job without Summary and Positions", async () => {
+    const res = await createJob(admin, {
+      translations: [{ locale: "id", title: `${RUN} tanpa ringkasan`, summary: "", responsibilities: ["Tugas"], qualifications: [] }],
+    });
+    expect(res.status, JSON.stringify(res.body)).toBe(201);
+    const job = await prisma.job.findUniqueOrThrow({ where: { id: res.body.data.id }, include: { translations: true } });
+    expect(job.openings).toBe(1);
+    expect(job.translations[0].summary).toBe("");
+
+    const omitted = await createJob(admin, {
+      translations: [{ locale: "id", title: `${RUN} tanpa field`, responsibilities: [] }],
+    });
+    expect(omitted.status, JSON.stringify(omitted.body)).toBe(201);
+  });
+});
+
 describe("job list: sort and date filters", () => {
   const ids: string[] = [];
   beforeAll(async () => {

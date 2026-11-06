@@ -14,6 +14,17 @@ import { ApplyPanel } from "./apply-panel";
 type Params = Promise<{ locale: string; slug: string }>;
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const clip = (s: string, max: number) => (s.length > max ? `${s.slice(0, max - 3).trimEnd()}…` : s);
+
+/** Summary bila diisi; kalau kosong (opsional di admin) dirangkai dari judul, lokasi, dan tugas pertama. */
+function jobIntro(job: { title: string; summary: string; responsibilities: string[] }, loc: Locale, where: string) {
+  const summary = job.summary.trim();
+  if (summary) return summary;
+  const lead = loc === "en"
+    ? `Join Wedison as ${job.title}${where ? ` in ${where}` : ""}.`
+    : `Bergabung bersama Wedison sebagai ${job.title}${where ? ` di ${where}` : ""}.`;
+  return [lead, job.responsibilities[0]].filter(Boolean).join(" ");
+}
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -27,7 +38,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     locale: loc,
     path: `/career/${slug}`,
     title: title.length > 65 ? `${job.title} | Wedison` : title,
-    description: job.summary.length > 155 ? `${job.summary.slice(0, 152).trimEnd()}…` : job.summary,
+    description: clip(jobIntro(job, loc, where), 155),
     image: "/og/career.jpg",
     noIndex: job.status !== "PUBLISHED",
   });
@@ -50,8 +61,10 @@ export default async function JobPage({ params }: { params: Params }) {
     [c.benefits, job.benefits],
   ];
 
+  // JobPosting.description wajib terisi: Summary opsional, jadi pakai kalimat pembuka bila kosong.
+  const intro = jobIntro(job, loc, jobLocations(job));
   const descriptionHtml = [
-    `<p>${esc(job.summary).replace(/\n\n/g, "</p><p>")}</p>`,
+    `<p>${esc(intro).replace(/\n\n/g, "</p><p>")}</p>`,
     ...sections.filter(([, l]) => l.length).map(([h, l]) => `<h3>${esc(h)}</h3><ul>${l.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`),
   ].join("");
 
@@ -116,10 +129,12 @@ export default async function JobPage({ params }: { params: Params }) {
               {salary && <p className="mt-4 text-lg font-semibold text-foreground">{salary}</p>}
             </header>
 
-            <section className="mb-10">
-              <h2 className="mb-3 font-display text-xl font-bold tracking-tight">{c.about}</h2>
-              {job.summary.split(/\n{2,}/).map((p, i) => <p key={i} className="mb-3 leading-relaxed text-foreground/90">{p}</p>)}
-            </section>
+            {job.summary.trim() && (
+              <section className="mb-10">
+                <h2 className="mb-3 font-display text-xl font-bold tracking-tight">{c.about}</h2>
+                {job.summary.split(/\n{2,}/).map((p, i) => <p key={i} className="mb-3 leading-relaxed text-foreground/90">{p}</p>)}
+              </section>
+            )}
 
             {sections.filter(([, list]) => list.length > 0).map(([heading, list]) => (
               <section key={heading} className="mb-10">
