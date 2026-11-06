@@ -107,3 +107,28 @@ export const SEGMENT_LABEL: Record<string, string> = {
   teasers: "Opening Teasers",
   showrooms: "Showroom Locations",
 };
+
+/**
+ * Public page behind each admin module, used by the header's "View site" button.
+ * Matched by longest prefix, so a detail page (e.g. /admin/hr/jobs/abc) opens its module's page.
+ * Modules without a public page of their own (users, activity, account) fall back to the homepage.
+ */
+const SITE_PATHS: [adminPrefix: string, sitePath: string][] = [
+  ["/admin/cms", "/media-center/"],
+  ["/admin/seo", "/media-center/"],
+  ["/admin/supercharge", "/super-charge/locations/"],
+  ["/admin/pricing", "/products/"],
+  ["/admin/leads/contacts", "/corporate/contact/"],
+  ["/admin/leads", "/showroom/"],
+  ["/admin/showrooms", "/showroom/"],
+  ["/admin/teasers", "/showroom/"],
+  ["/admin/hr", "/career/"],
+];
+
+export const SITE_LOCALE = "id";
+
+export function sitePathFor(adminPath: string): string {
+  const match = SITE_PATHS.filter(([prefix]) => adminPath === prefix || adminPath.startsWith(`${prefix}/`))
+    .sort((a, b) => b[0].length - a[0].length)[0];
+  return `/${SITE_LOCALE}${match?.[1] ?? "/"}`;
+}
