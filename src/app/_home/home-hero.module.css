@@ -120,6 +120,37 @@
   background: rgb(255 255 255 / 22%);
 }
 
+@media (orientation: portrait), (max-width: 39.99rem) {
+  .scene[data-placement="left"] .artwork::after {
+    height: 44%;
+    background: linear-gradient(to bottom, rgb(255 252 246 / 33%), rgb(255 252 246 / 65%) 68%, transparent);
+  }
+
+  .scene[data-placement="left"] .copy {
+    inset-block-end: 56%;
+  }
+}
+
+@media (max-width: 23rem) {
+  .scene[data-placement="left"] .copy {
+    justify-content: flex-start;
+    gap: 0.25rem;
+  }
+
+  .scene[data-placement="left"] .title {
+    font-size: 1.375rem;
+  }
+
+  .scene[data-placement="left"] .wordmark {
+    width: min(90%, 18rem);
+    margin-top: 0.2rem;
+  }
+
+  .scene[data-placement="left"] .description {
+    line-height: 1.32;
+  }
+}
+
 /* Match HERO_DESKTOP_MEDIA so the overlay and the chosen artwork share a layout. */
 @media (min-width: 40rem) and (orientation: landscape) {
   .artwork {

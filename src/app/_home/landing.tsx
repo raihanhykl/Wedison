@@ -87,7 +87,7 @@ const HERO_SLIDES = [
   {
     id: "lineup",
     desktop: "/lifestyle/hero-lineup-daylight.webp",
-    mobile: "/lifestyle/hero-lineup-daylight-mobile.webp",
+    mobile: "/lifestyle/hero-lineup-perspective-mobile.webp",
     placement: "top",
     href: "#lineup",
     logo: false,
@@ -95,7 +95,7 @@ const HERO_SLIDES = [
   {
     id: "charge",
     desktop: "/lifestyle/hero-edpower-supercharge.webp",
-    mobile: "/lifestyle/hero-edpower-supercharge-portrait.webp",
+    mobile: "/lifestyle/hero-edpower-supercharge-reframed-mobile.webp",
     placement: "left",
     href: "/super-charge/locations/",
     logo: true,
@@ -103,7 +103,7 @@ const HERO_SLIDES = [
   {
     id: "green",
     desktop: "/lifestyle/hero-victory-country-lane.webp",
-    mobile: "/lifestyle/hero-victory-country-lane-mobile.webp",
+    mobile: "/lifestyle/hero-victory-country-lane-reframed-mobile.webp",
     placement: "right",
     href: "/showroom/",
     booking: true,
