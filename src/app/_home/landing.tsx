@@ -79,6 +79,10 @@ const MODELS = [
   },
 ] as const;
 
+// Keep the photo selection in sync with the overlay layout in home-hero.module.css.
+const HERO_DESKTOP_MEDIA =
+  "(min-width: 72rem) and (min-height: 42rem) and (min-aspect-ratio: 4/3)";
+
 const HERO_SLIDES = [
   {
     id: "lineup",
@@ -90,16 +94,16 @@ const HERO_SLIDES = [
   },
   {
     id: "charge",
-    desktop: "/lifestyle/hero-supercharge-daylight.webp",
-    mobile: "/lifestyle/hero-supercharge-daylight-mobile.webp",
+    desktop: "/lifestyle/hero-victory-supercharge.webp",
+    mobile: "/lifestyle/hero-victory-supercharge-mobile.webp",
     placement: "left",
     href: "/super-charge/locations/",
     logo: true,
   },
   {
     id: "green",
-    desktop: "/lifestyle/hero-ride-daylight.webp",
-    mobile: "/lifestyle/hero-ride-daylight-mobile.webp",
+    desktop: "/lifestyle/hero-victory-parkway.webp",
+    mobile: "/lifestyle/hero-victory-parkway-mobile.webp",
     placement: "right",
     href: "/showroom/",
     booking: true,
@@ -141,7 +145,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_charge_kicker: "Jaringan Pengisian",
     h_charge_alt:
-      "Motor listrik Wedison EdPower tersambung ke charging pile SuperCharge",
+      "Wedison Victory terhubung ke SuperCharge, dengan detail konektor pada panel depan motor",
     h_charge_title: "Isi daya 15 menit di jaringan",
     h_charge_titleFull: "Isi daya 15 menit di jaringan SuperCharge",
     h_charge_sub:
@@ -151,7 +155,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_green_kicker: "Nol Emisi",
     h_green_alt:
-      "Pengendara berhelm mengendarai motor listrik Wedison Athena kuning di taman yang hijau",
+      "Pengendara berhelm mengendarai Wedison Victory merah di jalan berpohon",
     h_green_title: "Senyap di jalan. Bersih untuk kota.",
     h_green_sub:
       "Tanpa bensin, tanpa asap, dan nyaris tanpa perawatan. Perjalanan harian pun terasa jauh lebih tenang.",
@@ -215,7 +219,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_charge_kicker: "Charging Network",
     h_charge_alt:
-      "A Wedison EdPower electric motorcycle plugged into a SuperCharge charging pile",
+      "A Wedison Victory connected to a SuperCharge station, with a close-up of the plug in its front panel",
     h_charge_title: "Fast charging, powered by",
     h_charge_titleFull: "Fast charging, powered by SuperCharge",
     h_charge_sub:
@@ -226,7 +230,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_green_kicker: "Zero Emission",
     h_green_alt:
-      "A rider in a helmet riding a yellow Wedison Athena electric motorcycle through a leafy park",
+      "A helmeted rider on a red Wedison Victory riding down a tree-lined road",
     h_green_title: "Quiet on the road. Clean for the city.",
     h_green_sub:
       "No petrol, no fumes, and minimal servicing. Daily riding becomes considerably calmer.",
@@ -340,9 +344,10 @@ export default function Landing({
                         <ArtDirectedImage
                           desktop={s.desktop}
                           mobile={s.mobile}
+                          desktopMedia={HERO_DESKTOP_MEDIA}
                           alt={c[`h_${s.id}_alt`]}
                           priority={i === 0}
-                          sizes="(min-width: 1152px) and (min-height: 672px) and (min-aspect-ratio: 4/3) min(100vw, max(1152px, calc((100svh - 48px) * 1.7778)), 1920px), (min-width: 640px) and (orientation: landscape) 55vw, 100vw"
+                          sizes={`${HERO_DESKTOP_MEDIA} min(100vw, max(1152px, calc((100svh - 48px) * 1.7778)), 1920px), (min-width: 640px) and (orientation: landscape) 55vw, 100vw`}
                           className="object-contain"
                         />
                       </div>

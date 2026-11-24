@@ -100,10 +100,8 @@
   background: #e4eee6;
 }
 
-@media (max-width: 639px) {
-  .scene:not([data-placement="top"]) .artwork {
-    aspect-ratio: 3 / 2;
-  }
+.scene:not([data-placement="top"]) .artwork {
+  aspect-ratio: 1;
 }
 
 @media (min-width: 48rem) {
@@ -118,6 +116,10 @@
     display: grid;
     grid-template-columns: 55% 45%;
     align-items: center;
+  }
+
+  .artwork {
+    max-height: clamp(14rem, calc(100svh - 8rem), 32rem);
   }
 
   .title {
@@ -140,6 +142,12 @@
     position: relative;
     display: block;
     container-type: inline-size;
+  }
+
+  .scene .artwork,
+  .scene:not([data-placement="top"]) .artwork {
+    aspect-ratio: 16 / 9;
+    max-height: none;
   }
 
   .copy {
