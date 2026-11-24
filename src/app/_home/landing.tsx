@@ -82,7 +82,7 @@ const MODELS = [
 const HERO_SLIDES = [
   {
     id: "lineup",
-    desktop: "/lifestyle/hero-lineup-daylight.webp",
+    desktop: "/lifestyle/hero-lineup-catalog-plaza.webp",
     mobile: undefined,
     placement: "top",
     href: "#lineup",
