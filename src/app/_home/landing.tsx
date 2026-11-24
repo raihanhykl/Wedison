@@ -94,8 +94,8 @@ const HERO_SLIDES = [
   },
   {
     id: "charge",
-    desktop: "/lifestyle/hero-victory-supercharge.webp",
-    mobile: "/lifestyle/hero-victory-supercharge-mobile.webp",
+    desktop: "/lifestyle/hero-edpower-supercharge.webp",
+    mobile: "/lifestyle/hero-edpower-supercharge-mobile.webp",
     placement: "left",
     href: "/super-charge/locations/",
     logo: true,
@@ -145,7 +145,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_charge_kicker: "Jaringan Pengisian",
     h_charge_alt:
-      "Wedison Victory terhubung ke SuperCharge, dengan detail konektor pada panel depan motor",
+      "Wedison EdPower biru navy sedang mengisi daya di stasiun SuperCharge",
     h_charge_title: "Isi daya 15 menit di jaringan",
     h_charge_titleFull: "Isi daya 15 menit di jaringan SuperCharge",
     h_charge_sub:
@@ -219,7 +219,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_charge_kicker: "Charging Network",
     h_charge_alt:
-      "A Wedison Victory connected to a SuperCharge station, with a close-up of the plug in its front panel",
+      "A navy blue Wedison EdPower charging at a SuperCharge station",
     h_charge_title: "Fast charging, powered by",
     h_charge_titleFull: "Fast charging, powered by SuperCharge",
     h_charge_sub:

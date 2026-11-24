@@ -13,18 +13,16 @@ Empat motor berasal dari cutout pemilih warna halaman produk. Komposisi memperta
 
 Pada layar sempit empat model disusun dua baris. Pada master WebP lossless, semua 243.304 piksel desktop dan 279.401 piksel compact dengan alpha sumber di atas nol cocok dengan komposisi referensi katalog yang diskalakan pada latar yang sama.
 
-## Victory dan SuperCharge
+## EdPower dan SuperCharge
 
-Foto utama memakai frame 397 (13,23 detik) dari demonstrasi Wedison. Foto pendamping memakai close-up dari 13,2 detik. Crop utama memakai seluruh lebar 1080 px dan rentang vertikal 120 hingga 1700 px pada sumber 1080 × 1920. Framing kamera memperlihatkan sebagian kabinet dan sebagian motor. [Rekaman demonstrasi](https://www.youtube.com/shorts/IUwp7sxIPSA)
+Adegan desktop dan ponsel dibuat ulang dengan ImageGen. Foto `IMG_9287.JPG`, `IMG_9292.JPG`, dan `IMG_9295.JPG` dari folder `EdPower x SuperCharge` menjadi referensi pose, bentuk, dan sambungan. Warna Biru Navy Glossy mengikuti pemilih warna halaman EdPower. [Halaman produk EdPower](https://wedison.co/id/products/edpower/)
 
-Soket berada pada panel depan yang menghadap pengendara, di depan jok. Foto kartu pengisian memperlihatkan orientasi gun. Foto detail konektor memperlihatkan soketnya. [Foto pengisian pada halaman Victory](https://wedison.co/victory/victory-charging-card1-mobile.webp) · [Foto detail port Victory](https://wedison.co/victory/victory-product-card3.webp)
+Kabel aktif keluar dari bawah kabinet, melengkung rendah di atas paving, lalu naik ke konektor putih yang terpasang tegak pada port di atas terowongan tengah, tepat di depan jok. Kabel cadangan mengikuti foto `IMG_9283.JPG`. Kabel keluar dari bawah kabinet, melewati kait atas, turun di belakang konektor putih, lalu melengkung kembali ke ujung konektor yang terparkir.
 
-Kabel yang aktif keluar dari bawah kabinet terdekat di kiri. Kabel turun di sisi pedestal, melengkung dekat standar motor, lalu naik hingga strain relief dan konektor putih. Kedua ujung dan seluruh lengkungan terlihat dalam frame yang sama. Foto pendamping menunjukkan ujung yang masuk ke port. Kabinet dan kabel di latar belakang adalah unit lain di lokasi itu.
+Koreksi terakhir memakai masker lokal di sekitar kabel cadangan. Perbandingan kedua master WebP lossless dengan pratinjau sebelumnya menunjukkan nol perubahan piksel di luar area yang diedit.
 
 ## Victory di jalan berpohon
 
 Pengendara, motor dan jalan berasal dari rekaman GIIAS Wedison pada detik 29,9. Bidang foto asli mempertahankan helm, kedua tangan, spion, tuas, ujung setang, pijakan dan roda yang terlihat dari sudut kamera. Foto dikoreksi warna dan diskalakan secara proporsional. Di desktop, transisi ke latar hijau hasil imagegen dimulai di luar siluet subjek. [Rekaman berkendara](https://www.youtube.com/shorts/DL2uNE9sICg)
 
-## Perbandingan
-
-Pemeriksaan membandingkan RGB master dengan hasil crop, skala, dan koreksi warna yang sama pada frame sumber. Pemeriksaan independen mencakup 3.042.069 piksel pada bidang foto pengisian, close-up port, dan pengendara dalam varian desktop serta mobile. Seluruh piksel yang diperiksa cocok. Pemeriksaan visual tambahan mencakup siluet motor, anatomi dan posisi tangan, kontak ban dengan jalan, kontinuitas kabel, serta latar sekeliling. Angka perbandingan piksel berlaku pada master WebP, sebelum optimasi ukuran gambar oleh Next.js.
+Pemeriksaan independen membandingkan bidang foto pengendara di kedua master dengan frame sumber setelah penyesuaian potongan gambar, ukuran, dan warna. Pemeriksaan visual mencakup siluet motor, posisi tangan, kontak ban dengan jalan, dan latar sekitar.
