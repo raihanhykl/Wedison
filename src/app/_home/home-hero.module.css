@@ -1,63 +1,72 @@
 .section {
   --hero-ink: #15352c;
   background: #f8f8f2;
-  padding-top: 4rem;
+}
+
+.carousel {
+  width: 100%;
 }
 
 .scene {
-  display: flex;
+  position: relative;
   width: 100%;
-  flex-direction: column;
-  background: #eaf4f9;
   color: var(--hero-ink);
-}
-
-.scene[data-placement="left"] {
-  background: #faf1e5;
-}
-
-.scene[data-placement="right"] {
   background: #eef4e6;
+  container-type: inline-size;
 }
 
 .artwork {
   position: relative;
-  flex: none;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 18 / 35;
+}
+
+/* Keep the transparent navbar readable without placing a surface over it. */
+.artwork::after {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(var(--nav-h) + 1rem);
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 52%), transparent);
+  content: "";
+}
+
+.scene[data-placement="right"] .artwork::after {
+  height: 100%;
+  background: linear-gradient(to bottom, rgb(245 250 242 / 42%), rgb(245 250 242 / 64%) 22%, rgb(245 250 242 / 47%) 40%, transparent 54%);
 }
 
 .copy {
+  position: absolute;
+  inset: max(calc(var(--nav-h) + 0.65rem), 9%) 5% 50%;
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
-  padding: 1.5rem 1.5rem 1.75rem;
+  gap: clamp(0.3rem, 1.4cqw, 0.65rem);
   text-align: center;
 }
 
 .title {
   position: relative;
   max-width: 23ch;
-  font-size: clamp(1.75rem, 5.6vw, 3.125rem);
+  font-size: clamp(1.5rem, 6cqw, 3.35rem);
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
-.wordmark {
-  width: min(100%, 21rem);
-  height: auto;
-  margin: 0.5rem auto 0;
-}
-
 .description {
   max-width: 49ch;
-  font-size: 0.9375rem;
-  line-height: 1.45;
+  font-size: clamp(0.8125rem, 3.3cqw, 1rem);
+  line-height: 1.43;
+}
+
+.wordmark {
+  width: min(100%, 20rem);
+  height: auto;
+  margin: 0.375rem auto 0;
 }
 
 .cta {
@@ -65,18 +74,23 @@
 }
 
 .controls {
+  --controls-inset: max(1rem, calc((100vw - 1340px) / 2 + 1rem));
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
   display: flex;
   height: 3rem;
   align-items: center;
   gap: 0.75rem;
-  padding-inline: clamp(1rem, 3vw, 2.25rem);
-  background: #f8f8f2;
-  color: var(--hero-ink);
+  padding-inline: var(--controls-inset);
+  background: rgb(11 26 20 / 48%);
+  color: #fff;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 40%);
 }
 
-/* Keep the carousel buttons clear of the fixed chat launcher. */
+/* Keep the buttons inside the shrinking outline and clear of the fixed chat launcher. */
 :global(body:has(#iframe2-chat-container)) .controls {
-  padding-inline-end: max(clamp(1rem, 3vw, 2.25rem), calc(7.25rem - (100vw - 100%) / 2));
+  padding-inline-end: max(var(--controls-inset), 7.25rem);
 }
 
 .dot {
@@ -91,88 +105,45 @@
 .dot::after {
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 1rem;
-  background: #6a8275;
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 69%);
   content: "";
 }
 
 .dot[aria-current="true"]::after {
   width: 1.25rem;
-  background: var(--hero-ink);
+  background: #fff;
 }
 
 .dot:hover,
 .dot:focus-visible {
-  background: #e4eee6;
+  background: rgb(255 255 255 / 22%);
 }
 
-@media (max-width: 39.99rem) and (max-height: 43rem) {
-  .artwork {
-    max-height: 42svh;
-  }
-
-  .copy {
-    gap: 0.45rem;
-    padding: 1rem;
-  }
-}
-
-@media (min-width: 48rem) {
-  .section {
-    padding-top: 5rem;
-  }
-}
-
-/* A side-by-side layout keeps the CTA within reach on smaller landscape screens. */
+/* Match HERO_DESKTOP_MEDIA so the overlay and the chosen artwork share a layout. */
 @media (min-width: 40rem) and (orientation: landscape) {
-  .scene {
-    display: grid;
-    grid-template-columns: 55% 45%;
-    align-items: center;
-  }
-
-  .artwork {
-    max-height: clamp(14rem, calc(100svh - 8rem), 32rem);
-  }
-
-  .title {
-    font-size: clamp(1.5rem, 3.3vw, 2.5rem);
-  }
-}
-
-/* Preserve the full frame so the copy and the subjects stay in their original positions. */
-@media (min-width: 72rem) and (min-height: 42rem) and (min-aspect-ratio: 4/3) {
-  .carousel {
-    /* Leave room for the 5rem navbar and 3rem carousel controls. */
-    width: min(100%, calc((100svh - 8rem) * 16 / 9), 120rem);
-    margin-inline: auto;
-  }
-
-  .scene {
-    position: relative;
-    display: block;
-    container-type: inline-size;
-  }
-
   .artwork {
     aspect-ratio: 16 / 9;
-    max-height: none;
+  }
+
+  .scene[data-placement="right"] .artwork::after {
+    background:
+      linear-gradient(to bottom, rgb(255 255 255 / 45%), transparent) top / 100% calc(var(--nav-h) + 1rem) no-repeat,
+      linear-gradient(to right, transparent 43%, rgb(244 249 234 / 57%) 56%, rgb(244 249 234 / 69%) 80%, rgb(244 249 234 / 32%));
   }
 
   .copy {
-    position: absolute;
     align-items: flex-start;
-    gap: 0.625rem;
-    padding: 0;
+    gap: clamp(0.3rem, 0.7cqw, 0.65rem);
     text-align: left;
   }
 
   .title {
-    font-size: clamp(2rem, 4.05cqw, 4.5rem);
+    font-size: clamp(1.4rem, 4.05cqw, 4.5rem);
   }
 
   .description {
-    font-size: clamp(0.9375rem, 1.22cqw, 1.125rem);
+    font-size: clamp(0.8125rem, 1.2cqw, 1.125rem);
   }
 
   .wordmark {
@@ -180,30 +151,49 @@
   }
 
   .scene[data-placement="top"] .copy {
-    inset: max(2.75rem, 10%) 18% auto;
+    inset: max(calc(var(--nav-h) + 0.2rem), 12%) 12% auto;
     align-items: center;
-    gap: 0.375rem;
     text-align: center;
   }
 
   .scene[data-placement="top"] .title {
     max-width: 25ch;
-    font-size: clamp(2rem, 3.45cqw, 4rem);
+    font-size: clamp(1.4rem, 3.45cqw, 4rem);
   }
 
+  .scene[data-placement="top"] .description {
+    max-width: 52ch;
+  }
+
+  .scene[data-placement="left"] .copy {
+    inset: max(calc(var(--nav-h) + 0.35rem), 18%) 61% 14% 5.5%;
+  }
+
+  .scene[data-placement="left"] .title {
+    font-size: clamp(1.4rem, 3.55cqw, 4rem);
+  }
+
+  .scene[data-placement="right"] .copy {
+    inset: max(calc(var(--nav-h) + 0.35rem), 18%) 6% 14% 55%;
+  }
+}
+
+@media (min-width: 40rem) and (max-width: 47.99rem) and (orientation: landscape) {
+  .artwork {
+    aspect-ratio: 5 / 3;
+  }
+
+  .scene[data-placement="top"] .copy {
+    inset-inline: 5%;
+    gap: 0.25rem;
+  }
+
+  .scene[data-placement="top"] .title,
   .scene[data-placement="top"] .description {
     max-width: 100%;
   }
 
-  .scene[data-placement="left"] .copy {
-    inset: 18% 60% 14% 5.5%;
-  }
-
-  .scene[data-placement="left"] .title {
-    font-size: clamp(2rem, 3.55cqw, 4rem);
-  }
-
-  .scene[data-placement="right"] .copy {
-    inset: 18% 6% 14% 54%;
+  .scene[data-placement="top"] .title {
+    font-size: clamp(1.2rem, 3cqw, 1.5rem);
   }
 }

@@ -81,13 +81,13 @@ const MODELS = [
 
 // Keep the photo selection in sync with the overlay layout in home-hero.module.css.
 const HERO_DESKTOP_MEDIA =
-  "(min-width: 72rem) and (min-height: 42rem) and (min-aspect-ratio: 4/3)";
+  "(min-width: 40rem) and (orientation: landscape)";
 
 const HERO_SLIDES = [
   {
     id: "lineup",
-    desktop: "/lifestyle/hero-lineup-showroom.webp",
-    mobile: "/lifestyle/hero-lineup-showroom-mobile.webp",
+    desktop: "/lifestyle/hero-lineup-daylight.webp",
+    mobile: "/lifestyle/hero-lineup-daylight-mobile.webp",
     placement: "top",
     href: "#lineup",
     logo: false,
@@ -95,15 +95,15 @@ const HERO_SLIDES = [
   {
     id: "charge",
     desktop: "/lifestyle/hero-edpower-supercharge.webp",
-    mobile: "/lifestyle/hero-edpower-supercharge-mobile.webp",
+    mobile: "/lifestyle/hero-edpower-supercharge-portrait.webp",
     placement: "left",
     href: "/super-charge/locations/",
     logo: true,
   },
   {
     id: "green",
-    desktop: "/lifestyle/hero-victory-park-road.webp",
-    mobile: "/lifestyle/hero-victory-park-road-mobile.webp",
+    desktop: "/lifestyle/hero-victory-country-lane.webp",
+    mobile: "/lifestyle/hero-victory-country-lane-mobile.webp",
     placement: "right",
     href: "/showroom/",
     booking: true,
@@ -136,7 +136,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     // ── Hero: 3 babak brand (kicker / judul / sub / CTA / running text) ──
     h_lineup_kicker: "Motor Listrik Wedison",
     h_lineup_alt:
-      "Motor listrik Wedison Athena, Bees, Victory, dan EdPower di pelataran showroom",
+      "Motor listrik Wedison Athena, Bees, Victory, dan EdPower di pelataran bengkel bata",
     h_lineup_title: "Satu motor listrik untuk setiap perjalanan Anda.",
     h_lineup_sub:
       "Untuk rutinitas harian di kota maupun kebutuhan armada, Wedison punya model yang tepat.",
@@ -210,7 +210,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     // ── Hero: 3 brand beats (kicker / title / sub / CTA / running text) ──
     h_lineup_kicker: "Wedison Electric",
     h_lineup_alt:
-      "Wedison Athena, Bees, Victory, and EdPower electric motorcycles outside a showroom",
+      "Wedison Athena, Bees, Victory, and EdPower electric motorcycles outside a brick workshop",
     h_lineup_title: "Electric motorcycles for the way you move.",
     h_lineup_sub:
       "From daily city commuting to fleet duty, there is a model built to suit you.",
@@ -321,7 +321,7 @@ export default function Landing({
   return (
     <>
       {/* ============ HERO (scroll-linked shrink + per-slide running text) ============ */}
-      <section className={hero.section}>
+      <section className={hero.section} data-nav-tone="light">
         <ShrinkHero>
           <Carousel
             aria-label={lang === "id" ? "Sorotan Wedison" : "Wedison highlights"}
@@ -347,7 +347,7 @@ export default function Landing({
                           desktopMedia={HERO_DESKTOP_MEDIA}
                           alt={c[`h_${s.id}_alt`]}
                           priority={i === 0}
-                          sizes={`${HERO_DESKTOP_MEDIA} min(100vw, calc((100svh - 8rem) * 1.7778), 120rem), (min-width: 640px) and (orientation: landscape) 55vw, 100vw`}
+                          sizes="100vw"
                           className="object-contain"
                         />
                       </div>

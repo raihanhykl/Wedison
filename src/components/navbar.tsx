@@ -40,7 +40,7 @@ export default function Navbar() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const { condensed, hidden, lightSurface } = useNavChrome(pathname);
 
-  const solid = path === "/" || condensed || openKey !== null || sheetOpen;
+  const solid = condensed || openKey !== null || sheetOpen;
   const tone = solid || lightSurface ? "ink" : "bone";
   const markerKey = hoverKey ?? openKey;
 
