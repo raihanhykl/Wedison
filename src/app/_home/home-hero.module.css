@@ -74,6 +74,11 @@
   color: var(--hero-ink);
 }
 
+/* Keep the carousel buttons clear of the fixed chat launcher. */
+:global(body:has(#iframe2-chat-container)) .controls {
+  padding-inline-end: max(clamp(1rem, 3vw, 2.25rem), calc(7.25rem - (100vw - 100%) / 2));
+}
+
 .dot {
   display: grid;
   width: 2rem;
