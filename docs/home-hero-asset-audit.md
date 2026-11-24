@@ -2,16 +2,16 @@
 
 ## Jajaran model
 
-Empat motor berasal dari cutout pemilih warna halaman produk. Komposisi mempertahankan orientasi foto dan rasio aspek setiap motor. Latar plaza dibuat dengan imagegen.
+Adegan showroom dibuat ulang dengan ImageGen. Foto dari pemilih warna halaman produk menjadi acuan bentuk dan warna. Cahaya datang dari kiri atas dan bayangan keempat motor jatuh ke kanan.
 
-| Model | Berkas sumber di `public/paints/` | Lebar di master |
-| --- | --- | ---: |
-| Athena | `athena-yellow-glossy.webp` | 363 px |
-| Bees | `bees-red-glossy.webp` | 325 px |
-| Victory | `victory-silver-glossy.webp` | 358 px |
-| EdPower | `edpower-navy-glossy.webp` | 412 px |
+| Model | Foto referensi di `public/paints/` |
+| --- | --- |
+| Athena | `athena-yellow-glossy.webp` |
+| Bees | `bees-red-glossy.webp` |
+| Victory | `victory-silver-glossy.webp` |
+| EdPower | `edpower-navy-glossy.webp` |
 
-Pada layar sempit empat model disusun dua baris. Pada master WebP lossless, semua 243.304 piksel desktop dan 279.401 piksel compact dengan alpha sumber di atas nol cocok dengan komposisi referensi katalog yang diskalakan pada latar yang sama.
+Varian desktop menyisakan langit di atas jajaran motor untuk teks. Varian ponsel menampilkan keempat model dalam dua baris.
 
 ## EdPower dan SuperCharge
 
@@ -23,6 +23,6 @@ Koreksi terakhir memakai masker lokal di sekitar kabel cadangan. Perbandingan ke
 
 ## Victory di jalan berpohon
 
-Pengendara, motor dan jalan berasal dari rekaman GIIAS Wedison pada detik 29,9. Bidang foto asli mempertahankan helm, kedua tangan, spion, tuas, ujung setang, pijakan dan roda yang terlihat dari sudut kamera. Foto dikoreksi warna dan diskalakan secara proporsional. Di desktop, transisi ke latar hijau hasil imagegen dimulai di luar siluet subjek. [Rekaman berkendara](https://www.youtube.com/shorts/DL2uNE9sICg)
+Adegan dibuat ulang dengan ImageGen dari referensi Victory Merah Glossy dan pose pengendara pada rekaman GIIAS. Varian desktop menempatkan motor dan pengendara di kiri dengan ruang untuk teks di kanan. Varian ponsel memakai potongan persegi dari adegan yang sama. [Rekaman referensi pose](https://www.youtube.com/shorts/DL2uNE9sICg)
 
-Pemeriksaan independen membandingkan bidang foto pengendara di kedua master dengan frame sumber setelah penyesuaian potongan gambar, ukuran, dan warna. Pemeriksaan visual mencakup siluet motor, posisi tangan, kontak ban dengan jalan, dan latar sekitar.
+Pemeriksaan visual mencakup siluet motor, posisi tangan, kontak ban dengan jalan, dan latar sekitar. Pada desktop, carousel mulai di bawah navbar agar seluruh helm terlihat.
