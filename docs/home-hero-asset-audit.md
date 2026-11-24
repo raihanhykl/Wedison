@@ -11,7 +11,7 @@ Empat motor berasal dari cutout pemilih warna halaman produk. Komposisi memperta
 | Victory | `victory-silver-glossy.webp` | 358 px |
 | EdPower | `edpower-navy-glossy.webp` | 412 px |
 
-Pada master WebP lossless, semua 243.304 piksel dengan alpha sumber di atas nol cocok dengan komposisi referensi katalog yang diskalakan pada latar yang sama.
+Pada layar sempit empat model disusun dua baris. Pada master WebP lossless, semua 243.304 piksel desktop dan 279.401 piksel compact dengan alpha sumber di atas nol cocok dengan komposisi referensi katalog yang diskalakan pada latar yang sama.
 
 ## Victory dan SuperCharge
 

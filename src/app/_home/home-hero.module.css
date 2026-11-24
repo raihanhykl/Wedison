@@ -24,7 +24,7 @@
   position: relative;
   flex: none;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1;
 }
 
 .copy {
@@ -100,8 +100,15 @@
   background: #e4eee6;
 }
 
-.scene:not([data-placement="top"]) .artwork {
-  aspect-ratio: 1;
+@media (max-width: 39.99rem) and (max-height: 43rem) {
+  .artwork {
+    max-height: 42svh;
+  }
+
+  .copy {
+    gap: 0.45rem;
+    padding: 1rem;
+  }
 }
 
 @media (min-width: 48rem) {
@@ -144,8 +151,7 @@
     container-type: inline-size;
   }
 
-  .scene .artwork,
-  .scene:not([data-placement="top"]) .artwork {
+  .artwork {
     aspect-ratio: 16 / 9;
     max-height: none;
   }
