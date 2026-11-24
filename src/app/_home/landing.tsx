@@ -87,7 +87,7 @@ const HERO_SLIDES = [
   {
     id: "lineup",
     desktop: "/lifestyle/hero-lineup-daylight.webp",
-    mobile: "/lifestyle/hero-lineup-perspective-mobile.webp",
+    mobile: "/lifestyle/hero-lineup-scale-mobile.webp",
     placement: "top",
     href: "#lineup",
     logo: false,

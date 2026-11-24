@@ -11,7 +11,7 @@ Adegan pelataran bengkel bata dibuat ulang dengan ImageGen. Foto dari pemilih wa
 | Victory | `victory-silver-glossy.webp` |
 | EdPower | `edpower-navy-glossy.webp` |
 
-Varian desktop menyisakan langit untuk teks. Varian ponsel menempatkan Athena dan Bees di baris belakang serta Victory dan EdPower yang tampak lebih besar di baris depan. Ruang aspal memisahkan ban depan dari running text.
+Varian desktop menyisakan langit untuk teks. Pada varian ponsel, Athena dan Bees berada lebih dekat ke Victory dan EdPower. Lebar yang tampak pada foto untuk dua motor belakang sekitar 83% dari lebar motor di depan. Pintu pejalan kaki pada bengkel satu lantai menjadi acuan visual skala. Ruang aspal memisahkan ban depan dari running text.
 
 ## EdPower dan SuperCharge
 
