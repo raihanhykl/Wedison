@@ -31,6 +31,7 @@ import type { ProductId } from "@/lib/pricing/types";
 import { whatsappUrl } from "@/lib/seo/site";
 import SuperChargeMapSection from "./supercharge-map-section";
 import type { Site } from "@/app/[locale]/super-charge/locations/types";
+import hero from "./home-hero.module.css";
 
 type Lang = "id" | "en";
 
@@ -78,34 +79,32 @@ const MODELS = [
   },
 ] as const;
 
-/**
- * Hero = 3 babak BRAND (bukan per-model — jajaran model punya section `#lineup` sendiri).
- * Copy diturunkan dari isi gambar, satu CTA per slide dengan tujuan yang berbeda.
- * `pos` = object-position agar subjek selamat saat gambar 16:9 di-crop jadi potret di mobile.
- */
+// Keep the photo selection in sync with the overlay layout in home-hero.module.css.
+const HERO_DESKTOP_MEDIA =
+  "(min-width: 40rem) and (orientation: landscape)";
+
 const HERO_SLIDES = [
   {
-    // 4 motor + 4 orang di distrik perkantoran -> keluasan jajaran
     id: "lineup",
-    img: "/lifestyle/hero-lineup-city.webp",
-    pos: "object-center",
+    desktop: "/lifestyle/hero-lineup-daylight.webp",
+    mobile: "/lifestyle/hero-lineup-scale-mobile.webp",
+    placement: "top",
     href: "#lineup",
     logo: false,
   },
   {
-    // Charging pile ber-brand + pengguna membuka aplikasi -> jaringan SuperCharge
     id: "charge",
-    img: "/lifestyle/hero-supercharge-app.webp",
-    pos: "object-[58%_center]",
+    desktop: "/lifestyle/hero-edpower-supercharge.webp",
+    mobile: "/lifestyle/hero-edpower-supercharge-reframed-mobile.webp",
+    placement: "left",
     href: "/super-charge/locations/",
     logo: true,
   },
   {
-    // Berboncengan di taman rimbun -> berkendara senyap & bersih
     id: "green",
-    img: "/lifestyle/hero-riding-park.webp",
-    pos: "object-[28%_center]",
-    // CTA "Jadwalkan Test Ride" membuka modal booking (bukan pindah halaman)
+    desktop: "/lifestyle/hero-victory-country-lane.webp",
+    mobile: "/lifestyle/hero-victory-country-lane-reframed-mobile.webp",
+    placement: "right",
     href: "/showroom/",
     booking: true,
     logo: false,
@@ -137,7 +136,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     // ── Hero: 3 babak brand (kicker / judul / sub / CTA / running text) ──
     h_lineup_kicker: "Motor Listrik Wedison",
     h_lineup_alt:
-      "Empat motor listrik Wedison bersama pengendaranya di kawasan perkantoran",
+      "Motor listrik Wedison Athena, Bees, Victory, dan EdPower di pelataran bengkel bata",
     h_lineup_title: "Satu motor listrik untuk setiap perjalanan Anda.",
     h_lineup_sub:
       "Untuk rutinitas harian di kota maupun kebutuhan armada, Wedison punya model yang tepat.",
@@ -146,7 +145,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_charge_kicker: "Jaringan Pengisian",
     h_charge_alt:
-      "Pengendara mengisi daya motor listrik Wedison di stasiun SuperCharge lewat aplikasi",
+      "Wedison EdPower biru navy sedang mengisi daya di stasiun SuperCharge",
     h_charge_title: "Isi daya 15 menit di jaringan",
     h_charge_titleFull: "Isi daya 15 menit di jaringan SuperCharge",
     h_charge_sub:
@@ -156,7 +155,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_green_kicker: "Nol Emisi",
     h_green_alt:
-      "Pasangan berboncengan motor listrik Wedison Athena di taman yang rimbun",
+      "Pengendara berhelm mengendarai Wedison Victory merah di jalan berpohon",
     h_green_title: "Senyap di jalan. Bersih untuk kota.",
     h_green_sub:
       "Tanpa bensin, tanpa asap, dan nyaris tanpa perawatan. Perjalanan harian pun terasa jauh lebih tenang.",
@@ -211,7 +210,7 @@ const COPY: Record<Lang, Record<string, string>> = {
     // ── Hero: 3 brand beats (kicker / title / sub / CTA / running text) ──
     h_lineup_kicker: "Wedison Electric",
     h_lineup_alt:
-      "Four Wedison electric motorcycles with their riders in a business district",
+      "Wedison Athena, Bees, Victory, and EdPower electric motorcycles outside a brick workshop",
     h_lineup_title: "Electric motorcycles for the way you move.",
     h_lineup_sub:
       "From daily city commuting to fleet duty, there is a model built to suit you.",
@@ -220,7 +219,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_charge_kicker: "Charging Network",
     h_charge_alt:
-      "A rider charging a Wedison electric motorcycle at a SuperCharge station using the app",
+      "A navy blue Wedison EdPower charging at a SuperCharge station",
     h_charge_title: "Fast charging, powered by",
     h_charge_titleFull: "Fast charging, powered by SuperCharge",
     h_charge_sub:
@@ -231,7 +230,7 @@ const COPY: Record<Lang, Record<string, string>> = {
 
     h_green_kicker: "Zero Emission",
     h_green_alt:
-      "A couple riding a Wedison Athena electric motorcycle through a leafy park",
+      "A helmeted rider on a red Wedison Victory riding down a tree-lined road",
     h_green_title: "Quiet on the road. Clean for the city.",
     h_green_sub:
       "No petrol, no fumes, and minimal servicing. Daily riding becomes considerably calmer.",
@@ -299,6 +298,14 @@ export default function Landing({
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [selected, setSelected] = React.useState(0);
+  const [autoplay] = React.useState(() =>
+    Autoplay({
+      delay: 5500,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+      breakpoints: { "(prefers-reduced-motion: reduce)": { active: false } },
+    }),
+  );
   React.useEffect(() => {
     if (!api) return;
     const onSelect = () => setSelected(api.selectedScrollSnap());
@@ -309,70 +316,70 @@ export default function Landing({
     };
   }, [api]);
 
+  const ticker = c[`h_${HERO_SLIDES[selected].id}_mq`].split("|");
+
   return (
     <>
       {/* ============ HERO (scroll-linked shrink + per-slide running text) ============ */}
-      <section className="relative">
+      <section className={hero.section} data-nav-tone="light">
         <ShrinkHero>
           <Carousel
+            aria-label={lang === "id" ? "Sorotan Wedison" : "Wedison highlights"}
+            className={hero.carousel}
             setApi={setApi}
-            opts={{ loop: true }}
-            plugins={[Autoplay({ delay: 5500, stopOnInteraction: false })]}
+            opts={{
+              loop: true,
+              breakpoints: { "(prefers-reduced-motion: reduce)": { duration: 0 } },
+            }}
+            plugins={[autoplay]}
           >
             <CarouselContent className="ml-0">
               {HERO_SLIDES.map((s, i) => {
-                const ph = c[`h_${s.id}_mq`].split("|");
                 // Satu <h1> per halaman (slide pertama); slide lain = <h2> dengan gaya sama.
                 const Heading = i === 0 ? "h1" : "h2";
                 return (
-                  <CarouselItem key={s.id} className="pl-0">
-                    <div className="relative h-[100svh] w-full overflow-hidden">
-                      {/* Satu sumber gambar untuk semua breakpoint; `pos` menjaga subjek
-                          tetap terlihat saat 16:9 di-crop jadi potret di mobile. */}
-                      <Image
-                        src={s.img}
-                        alt={c[`h_${s.id}_alt`]}
-                        fill
-                        priority={i === 0}
-                        sizes="100vw"
-                        className={`object-cover ${s.pos}`}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/45" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center *:select-none">
-                        <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/80">
+                  <CarouselItem key={s.id} className="flex pl-0" inert={selected !== i}>
+                    <div className={hero.scene} data-placement={s.placement}>
+                      <div className={hero.artwork}>
+                        <ArtDirectedImage
+                          desktop={s.desktop}
+                          mobile={s.mobile}
+                          desktopMedia={HERO_DESKTOP_MEDIA}
+                          alt={c[`h_${s.id}_alt`]}
+                          priority={i === 0}
+                          sizes="100vw"
+                          className="object-contain"
+                        />
+                      </div>
+                      <div className={hero.copy}>
+                        <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em]">
                           {c[`h_${s.id}_kicker`]}
                         </p>
                         {s.logo ? (
-                          // Sebutan SuperCharge dibawakan oleh wordmark-nya sendiri, bukan teks.
-                          <Heading className="mt-4 flex flex-col items-center">
+                          <Heading className={hero.title}>
                             <span className="sr-only">
                               {c.h_charge_titleFull}
                             </span>
-                            <span
-                              aria-hidden
-                              className="max-w-[26ch] text-balance text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
-                            >
-                              {c.h_charge_title}
-                            </span>
+                            <span aria-hidden>{c.h_charge_title}</span>
                             <Image
                               src="/super-charge/supercharge-typo-nobg.webp"
                               alt=""
                               aria-hidden
                               width={1920}
                               height={143}
-                              priority={i === 0}
-                              className="mt-4 h-auto w-[min(84vw,340px)] sm:mt-5 sm:w-[500px] lg:w-[640px]"
+                              sizes="360px"
+                              className={hero.wordmark}
                             />
                           </Heading>
                         ) : (
-                          <Heading className="mt-4 max-w-[18ch] text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                          <Heading className={hero.title}>
                             {c[`h_${s.id}_title`]}
                           </Heading>
                         )}
-                        <p className="mt-5 max-w-[46ch] text-base text-white/85 sm:text-lg">
+                        <p className={hero.description}>
                           {c[`h_${s.id}_sub`]}
                         </p>
-                        <div className="mt-8">
+                        <div className={hero.cta}>
                           {"booking" in s && s.booking ? (
                             <BookingTrigger
                               asChild
@@ -390,48 +397,38 @@ export default function Landing({
                           )}
                         </div>
                       </div>
-                      {/* Ticker dekoratif: isinya diulang 6x demi loop visual, jadi disembunyikan
-                          dari pembaca layar dan cuplikan Google agar tidak terbaca sebagai teks ganda. */}
-                      <div
-                        aria-hidden
-                        data-nosnippet
-                        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/45"
-                      >
-                        <Marquee
-                          repeat={6}
-                          className="[--duration:34s] [--gap:0rem] py-3 select-none"
-                        >
-                          {ph.map((p, idx) => (
-                            <span
-                              key={idx}
-                              className="flex items-center font-mono text-[11px] uppercase tracking-[0.18em] text-white/85"
-                            >
-                              {p}
-                              <span className="mx-6 text-on-forest-accent">
-                                /
-                              </span>
-                            </span>
-                          ))}
-                        </Marquee>
-                      </div>
                     </div>
                   </CarouselItem>
                 );
               })}
             </CarouselContent>
-            <div className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 gap-2.5">
-              {HERO_SLIDES.map((s, i) => (
-                <button
-                  key={s.id}
-                  onClick={() => api?.scrollTo(i)}
-                  aria-label={c[`h_${s.id}_kicker`]}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    selected === i
-                      ? "w-7 bg-white"
-                      : "w-2 bg-white/45 hover:bg-white/70"
-                  }`}
-                />
-              ))}
+            <div className={hero.controls}>
+              <div aria-hidden data-nosnippet className="min-w-0 flex-1 select-none">
+                <Marquee
+                  key={selected}
+                  repeat={6}
+                  className="[--duration:34s] [--gap:0rem] motion-reduce:[&>*]:[animation-play-state:paused]"
+                >
+                  {ticker.map((label) => (
+                    <span key={label} className="flex items-center font-mono text-[11px] uppercase tracking-[0.15em]">
+                      {label}
+                      <span className="mx-5">/</span>
+                    </span>
+                  ))}
+                </Marquee>
+              </div>
+              <div className="flex shrink-0 gap-1">
+                {HERO_SLIDES.map((s, i) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => api?.scrollTo(i)}
+                    aria-label={c[`h_${s.id}_kicker`]}
+                    aria-current={selected === i ? "true" : undefined}
+                    className={hero.dot}
+                  />
+                ))}
+              </div>
             </div>
           </Carousel>
         </ShrinkHero>
