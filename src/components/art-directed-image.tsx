@@ -8,6 +8,7 @@ import { getImageProps } from "next/image";
 export function ArtDirectedImage({
   desktop,
   mobile,
+  desktopMedia,
   alt,
   className,
   priority = false,
@@ -15,6 +16,7 @@ export function ArtDirectedImage({
 }: {
   desktop: string;
   mobile?: string;
+  desktopMedia?: string;
   alt: string;
   className?: string;
   priority?: boolean;
@@ -26,7 +28,7 @@ export function ArtDirectedImage({
     mobile && mobile !== desktop
       ? getImageProps({ ...common, src: mobile })
       : null;
-  const MOBILE = "(max-width: 639px)";
+  const mobileMedia = desktopMedia ? `not all and ${desktopMedia}` : "(max-width: 639px)";
   // getImageProps TIDAK menyetel fetchpriority/loading dan tidak membuat <link rel=preload>
   // seperti <Image priority>; keduanya dipasang manual. React 19 menghoist <link> ke <head>,
   // dan atribut `media` membuat browser hanya memuat varian yang sesuai viewport.
@@ -39,7 +41,7 @@ export function ArtDirectedImage({
           href={m.props.src}
           imageSrcSet={m.props.srcSet}
           imageSizes={m.props.sizes}
-          media={MOBILE}
+          media={mobileMedia}
           fetchPriority="high"
         />
       )}
@@ -50,12 +52,12 @@ export function ArtDirectedImage({
           href={d.props.src}
           imageSrcSet={d.props.srcSet}
           imageSizes={d.props.sizes}
-          media={m ? "(min-width: 640px)" : undefined}
+          media={m ? desktopMedia ?? "(min-width: 640px)" : undefined}
           fetchPriority="high"
         />
       )}
       {m && (
-        <source media={MOBILE} srcSet={m.props.srcSet} sizes={m.props.sizes} />
+        <source media={mobileMedia} srcSet={m.props.srcSet} sizes={m.props.sizes} />
       )}
       <img
         {...d.props}
